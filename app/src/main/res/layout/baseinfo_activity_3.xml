@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:gravity="center_horizontal"
+    android:layoutAnimation="@anim/layout_from_bottom"
+    android:orientation="vertical"
+    tools:context="com.tntlinking.tntdev.ui.activity.LoginActivity"
+    tools:layoutAnimation="@null">
+
+    <com.hjq.bar.TitleBar
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_50"
+        app:barStyle="transparent"
+        app:leftIcon="@null"
+        app:rightBackground="@null"
+        app:rightTitleColor="@color/common_accent_color"
+        app:rightTitleSize="@dimen/sp_14"
+        app:title="" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+        android:paddingStart="@dimen/dp_12"
+        android:text="3/3过往经历"
+        android:textColor="@color/black"
+        android:textSize="@dimen/sp_24"
+        android:textStyle="bold" />
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_home_tab"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        tools:itemCount="2"
+        tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:listitem="@layout/item_tab_add_education" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="@dimen/dp_10"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/dp_6"
+        android:paddingRight="@dimen/dp_6">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_back"
+            style="@style/ButtonStyleNo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/dp_20"
+            android:layout_weight="1"
+            android:text="上一步" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_commit"
+            style="@style/ButtonStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="提交" />
+    </LinearLayout>
+
+</LinearLayout>

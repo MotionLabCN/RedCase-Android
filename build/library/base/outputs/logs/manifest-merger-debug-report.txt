@@ -1,0 +1,37 @@
+-- Merging decision tree log ---
+manifest
+ADDED from /Users/danwanli/motion/RedCase-Android/library/base/src/main/AndroidManifest.xml:1:1-36
+INJECTED from /Users/danwanli/motion/RedCase-Android/library/base/src/main/AndroidManifest.xml:1:1-36
+INJECTED from /Users/danwanli/motion/RedCase-Android/library/base/src/main/AndroidManifest.xml:1:1-36
+INJECTED from /Users/danwanli/motion/RedCase-Android/library/base/src/main/AndroidManifest.xml:1:1-36
+INJECTED from /Users/danwanli/motion/RedCase-Android/library/base/src/main/AndroidManifest.xml:1:1-36
+INJECTED from /Users/danwanli/motion/RedCase-Android/library/base/src/main/AndroidManifest.xml:1:1-36
+INJECTED from /Users/danwanli/motion/RedCase-Android/library/base/src/main/AndroidManifest.xml:1:1-36
+	package
+		ADDED from /Users/danwanli/motion/RedCase-Android/library/base/src/main/AndroidManifest.xml:1:11-33
+		INJECTED from /Users/danwanli/motion/RedCase-Android/library/base/src/main/AndroidManifest.xml
+		INJECTED from /Users/danwanli/motion/RedCase-Android/library/base/src/main/AndroidManifest.xml
+	android:versionName
+		INJECTED from /Users/danwanli/motion/RedCase-Android/library/base/src/main/AndroidManifest.xml
+		ADDED from /Users/danwanli/motion/RedCase-Android/library/base/src/main/AndroidManifest.xml:1:1-36
+		INJECTED from /Users/danwanli/motion/RedCase-Android/library/base/src/main/AndroidManifest.xml
+	xmlns:android
+		ADDED from /Users/danwanli/motion/RedCase-Android/library/base/src/main/AndroidManifest.xml:1:1-36
+	android:versionCode
+		INJECTED from /Users/danwanli/motion/RedCase-Android/library/base/src/main/AndroidManifest.xml
+		ADDED from /Users/danwanli/motion/RedCase-Android/library/base/src/main/AndroidManifest.xml:1:1-36
+		INJECTED from /Users/danwanli/motion/RedCase-Android/library/base/src/main/AndroidManifest.xml
+uses-sdk
+INJECTED from /Users/danwanli/motion/RedCase-Android/library/base/src/main/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /Users/danwanli/motion/RedCase-Android/library/base/src/main/AndroidManifest.xml
+INJECTED from /Users/danwanli/motion/RedCase-Android/library/base/src/main/AndroidManifest.xml
+INJECTED from /Users/danwanli/motion/RedCase-Android/library/base/src/main/AndroidManifest.xml
+INJECTED from /Users/danwanli/motion/RedCase-Android/library/base/src/main/AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from /Users/danwanli/motion/RedCase-Android/library/base/src/main/AndroidManifest.xml
+		ADDED from /Users/danwanli/motion/RedCase-Android/library/base/src/main/AndroidManifest.xml
+		INJECTED from /Users/danwanli/motion/RedCase-Android/library/base/src/main/AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from /Users/danwanli/motion/RedCase-Android/library/base/src/main/AndroidManifest.xml
+		ADDED from /Users/danwanli/motion/RedCase-Android/library/base/src/main/AndroidManifest.xml
+		INJECTED from /Users/danwanli/motion/RedCase-Android/library/base/src/main/AndroidManifest.xml
