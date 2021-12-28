@@ -271,10 +271,16 @@
         <activity
             android:name="com.tntlinking.tntdev.ui.activity.AddProjectActivity"
             android:launchMode="singleTop"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"
             android:screenOrientation="portrait" />
         <!-- 标签选择页面-->
         <activity
             android:name="com.tntlinking.tntdev.ui.activity.AddProjectTagActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <!-- 标签选择搜索页面-->
+        <activity
+            android:name="com.tntlinking.tntdev.ui.activity.AddTagSearchActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
         <!-- 用户信息页面 -->

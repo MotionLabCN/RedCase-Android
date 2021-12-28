@@ -45,10 +45,10 @@ public final class IncomeAdapter extends AppAdapter<developerBillListApi.Bean.Li
         public void onBindView(int position) {
             developerBillListApi.Bean.ListBean item = getItem(position);
             tv_create_time.setText(Utils.getYearFromDate(item.getCreateDate()));
-            tv_serviceMoney.setText("¥ "+item.getServiceMoney());
-            tv_deductMoney.setText("¥ "+item.getDeductMoney());
-            tv_personalTax.setText("¥ "+item.getPersonalTax());
-            tv_actualMoney.setText("¥ "+item.getActualMoney());
+            tv_serviceMoney.setText("¥"+item.getServiceMoney());
+            tv_deductMoney.setText("¥"+item.getDeductMoney());
+            tv_personalTax.setText("¥"+item.getPersonalTax());
+            tv_actualMoney.setText("¥"+item.getActualMoney());
         }
     }
 }

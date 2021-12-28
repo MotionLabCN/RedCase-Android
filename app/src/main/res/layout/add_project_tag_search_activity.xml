@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:gravity="center_horizontal"
+    android:layoutAnimation="@anim/layout_from_bottom"
+    android:orientation="vertical"
+    tools:layoutAnimation="@null">
+
+    <com.hjq.bar.TitleBar
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_50"
+        app:leftIcon="@drawable/close_icon"
+        app:rightTitleColor="@color/white"
+        app:rightTitleSize="@dimen/sp_14"
+        app:title="选择技能标签" />
+
+
+    <com.hjq.widget.view.ClearEditText
+        android:id="@+id/et_search"
+        style="@style/EditTextStyleNew"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_20"
+        android:paddingLeft="@dimen/dp_15"
+        android:paddingTop="@dimen/dp_15"
+        android:paddingBottom="@dimen/dp_15"
+        android:singleLine="true" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_skill_tag"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            tools:itemCount="1"
+            tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/item_skill_tag" />
+
+</LinearLayout>

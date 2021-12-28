@@ -9,6 +9,7 @@ import com.tntlinking.tntdev.app.AppActivity;
 import com.tntlinking.tntdev.http.api.SendDeveloperApi;
 import com.tntlinking.tntdev.http.model.HttpData;
 import com.tntlinking.tntdev.manager.ActivityManager;
+import com.tntlinking.tntdev.other.TimeUtil;
 import com.tntlinking.tntdev.ui.adapter.AddExperienceAdapter;
 import com.tntlinking.tntdev.ui.bean.ExperienceBean;
 import com.tntlinking.tntdev.ui.bean.SendDeveloperBean;
@@ -61,11 +62,11 @@ public final class BaseInfoActivity3 extends AppActivity {
         mAdapter.setOnItemClickListener(new BaseAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(RecyclerView recyclerView, View itemView, int position) {
-                if (mList.get(position).getType() == 1) {
+                if (mList.get(position).getType() == 1) { //
                     Intent intent = new Intent(BaseInfoActivity3.this, AddEducationActivity.class);
                     getActivity().startActivityForResult(intent, 10001);
 
-                } else if (mList.get(position).getType() == 3) {
+                } else if (mList.get(position).getType() == 3) { //
                     Intent intent = new Intent(BaseInfoActivity3.this, AddEducationActivity.class);
 
                     ExperienceBean bean = mAdapter.getData().get(position);
@@ -148,11 +149,11 @@ public final class BaseInfoActivity3 extends AppActivity {
                 }
             }
 
-            if (educationList.size()==0){
+            if (educationList.size() == 0) {
                 toast("你还没有添加教育经历");
                 return;
             }
-            if (projectList.size()==0){
+            if (projectList.size() == 0) {
                 toast("你还没有添加工作经历");
                 return;
             }
@@ -207,6 +208,27 @@ public final class BaseInfoActivity3 extends AppActivity {
         return listInAppxList;
     }
 
+
+    public static List<ExperienceBean> sortListForDate(List<ExperienceBean> listInAppxList) {
+        Comparator<ExperienceBean> comparator = new Comparator<ExperienceBean>() {
+            @Override
+            public int compare(ExperienceBean o1, ExperienceBean o2) {
+
+                if (o1.getType() == 4 && o2.getType() == 4) {
+                    if (TimeUtil.getTimeLong("yyyy-MM", o1.getProjectStartDate()) < TimeUtil.getTimeLong("yyyy-MM", o2.getProjectStartDate()))
+                        return 1;
+                    else {
+                        return -1;
+                    }
+                }
+                return 1;
+            }
+        };
+        //这里就会自动根据规则进行排序
+        Collections.sort(listInAppxList, comparator);
+        return listInAppxList;
+    }
+
     /**
      * @param type
      * @param list
@@ -243,10 +265,13 @@ public final class BaseInfoActivity3 extends AppActivity {
                 int index = getPosition(2, mAdapter.getData());
                 mAdapter.addItem(index + 1, bean);
 
+
+                mAdapter.setData(sortListForDate(mAdapter.getData()));
             } else if (requestCode == 10005) {// 删除工作经历
                 int position = data.getIntExtra("position", 0);
                 mAdapter.removeItem(position);
 
+                mAdapter.setData(sortListForDate(mAdapter.getData()));
             }
         } else if (resultCode == 10003) {// 修改教育经历
             ExperienceBean bean = (ExperienceBean) data.getSerializableExtra(INTENT_KEY_EDUCATION);
@@ -262,6 +287,8 @@ public final class BaseInfoActivity3 extends AppActivity {
             int position = data.getIntExtra("position", 0);
             mAdapter.removeItem(position);
             mAdapter.addItem(position, bean);
+
+            mAdapter.setData(sortListForDate(mAdapter.getData()));
 
         }
     }

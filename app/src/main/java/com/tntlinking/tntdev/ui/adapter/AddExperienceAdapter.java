@@ -19,6 +19,11 @@ public final class AddExperienceAdapter extends AppAdapter<ExperienceBean> {
     public static final int ADD_EDUCATION = 3;
     public static final int ADD_PROJECT = 4;
 
+
+//    public static final int ADD_EDUCATION_TAB = 1;
+//    public static final int ADD_EDUCATION = 2;
+//    public static final int ADD_PROJECT_TAB = 3;
+//    public static final int ADD_PROJECT = 4;
     /**
      * 当前选中条目位置
      */

@@ -50,38 +50,12 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="服务期"
+            android:text="实际服务期"
             android:textColor="@color/gray"
             android:textSize="@dimen/sp_14" />
 
         <TextView
             android:id="@+id/tv_service_time"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="xxxx"
-            android:textColor="@color/black"
-            android:textSize="@dimen/sp_14" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingLeft="@dimen/dp_15"
-        android:paddingTop="@dimen/dp_10"
-        android:paddingRight="@dimen/dp_15"
-        android:paddingBottom="@dimen/dp_10">
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="预计计算"
-            android:textColor="@color/gray"
-            android:textSize="@dimen/sp_14" />
-
-        <TextView
-            android:id="@+id/tv_service_account"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="xxxx"
@@ -128,7 +102,34 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="扣款金额"
+            android:text="预计结算(元)"
+            android:textColor="@color/gray"
+            android:textSize="@dimen/sp_14" />
+
+        <TextView
+            android:id="@+id/tv_service_account"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="xxxx"
+            android:textColor="@color/black"
+            android:textSize="@dimen/sp_14" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/dp_15"
+        android:paddingTop="@dimen/dp_10"
+        android:paddingRight="@dimen/dp_15"
+        android:paddingBottom="@dimen/dp_10">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="调整费用(元)"
             android:textColor="@color/gray"
             android:textSize="@dimen/sp_14" />
 
@@ -154,7 +155,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="扣款原因"
+            android:text="调整原因"
             android:textColor="@color/gray"
             android:textSize="@dimen/sp_14" />
 

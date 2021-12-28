@@ -54,15 +54,15 @@ public final class IncomeDetailAdapter extends AppAdapter<developerBillDetailApi
             developerBillDetailApi.Bean.ListBean item = getItem(position);
             tv_order_id.setText(item.getId());
             tv_service_time.setText(Utils.getYearFromDate(item.getWorkStartDate()) + " —— " + Utils.getYearFromDate(item.getFinishDate()));
-            tv_service_days.setText(item.getDays() + "天");
-            tv_service_account.setText("¥ "+item.getTotalAmount());
-            tv_withhold_amount.setText("¥ "+item.getRefundMoney());
+            tv_service_days.setText(item.getDays() + "个工作日");
+            tv_service_account.setText("¥"+item.getTotalAmount());
+            tv_withhold_amount.setText("-¥"+item.getRefundMoney());
             if (TextUtils.isEmpty(item.getRefundReason())) {
-                tv_withhold_reason.setText("无");
+                tv_withhold_reason.setText("-");
             } else {
                 tv_withhold_reason.setText(item.getRefundReason());
             }
-            tv_actual_money.setText("¥ "+item.getActualMoney());
+            tv_actual_money.setText("¥"+item.getActualMoney());
         }
     }
 

@@ -6,13 +6,17 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
 
+import com.blankj.utilcode.util.GsonUtils;
+import com.blankj.utilcode.util.SPUtils;
 import com.hjq.base.BaseDialog;
+import com.hjq.http.EasyLog;
 import com.tntlinking.tntdev.R;
 import com.tntlinking.tntdev.aop.SingleClick;
 import com.tntlinking.tntdev.app.AppActivity;
 import com.tntlinking.tntdev.http.api.GetDictionaryApi;
 import com.tntlinking.tntdev.http.api.GetTagListApi;
 import com.tntlinking.tntdev.http.model.HttpData;
+import com.tntlinking.tntdev.other.TimeUtil;
 import com.tntlinking.tntdev.other.Utils;
 import com.tntlinking.tntdev.ui.bean.ExperienceBean;
 import com.tntlinking.tntdev.ui.dialog.DateSelectDialog;
@@ -21,6 +25,7 @@ import com.hjq.http.EasyHttp;
 import com.hjq.http.listener.HttpCallback;
 import com.hjq.widget.layout.SettingBar;
 import com.hjq.widget.view.ClearEditText;
+import com.tntlinking.tntdev.ui.dialog.IndustrySelectDialog;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -51,15 +56,16 @@ public final class AddProjectActivity extends AppActivity {
     private int workMode;//职业状态id
     private int industryId;//行业id
 
-    private String project_name="";
-    private String in_time="";
-    private String end_time="";
-    private String project_position="";
-    private String work_mode="";
-    private String company_name="";
-    private String industry="";
-    private String project_skill="";
-    private String description="";
+    private String project_name = "";
+    private String in_time = "";
+    private String end_time = "";
+    private String project_position = "";
+    private String work_mode = "";
+    private String company_name = "";
+    private String industry = "";
+    private String project_skill = "";
+    private String description = "";
+
     @Override
     protected int getLayoutId() {
         return R.layout.add_project_activity;
@@ -159,6 +165,8 @@ public final class AddProjectActivity extends AppActivity {
 
                         info_project_in_time.setText(mInTime);
                         in_time = mInTime;
+                        Long timeLong = TimeUtil.getTimeLong("yyyy-MM", mInTime);
+                        EasyLog.print("===timeLong=="+timeLong);
                     }
 
                 }).show();
@@ -177,18 +185,29 @@ public final class AddProjectActivity extends AppActivity {
                 break;
 
             case R.id.info_project_industry:
-                new DictionarySelectDialog.Builder(this)
-                        .setTitle("选择所在行业")
-                        .setList(mCompanyList).setListener(new DictionarySelectDialog.OnListener() {
-                    @Override
-                    public void onSelected(BaseDialog dialog, int type) {
+//                new DictionarySelectDialog.Builder(this)
+//                        .setTitle("选择所在行业")
+//                        .setList(mCompanyList).setListener(new DictionarySelectDialog.OnListener() {
+//                    @Override
+//                    public void onSelected(BaseDialog dialog, int type) {
+//
+//                        info_project_industry.setLeftText(mCompanyList.get(type).getName());
+//
+//                        industryId = mCompanyList.get(type).getId();
+//                        industry = mCompanyList.get(type).getName();
+//                    }
+//                }).show();
 
-                        info_project_industry.setLeftText(mCompanyList.get(type).getName());
+                new IndustrySelectDialog.Builder(this).setTitle("选择所在行业")
+                        .setListener(new IndustrySelectDialog.OnListener() {
+                            @Override
+                            public void onSelected(BaseDialog dialog, GetDictionaryApi.DictionaryBean bean, GetDictionaryApi.ChildrenBean childrenBean) {
 
-                        industryId = mCompanyList.get(type).getId();
-                        industry =mCompanyList.get(type).getName();
-                    }
-                }).show();
+                                info_project_industry.setLeftText(bean.getName() + "-" + childrenBean.getName());
+                                industryId = childrenBean.getId();
+                                industry = bean.getName() + "-" + childrenBean.getName();
+                            }
+                        }).show();
                 break;
             case R.id.info_project_skill:
                 Intent intents = new Intent(AddProjectActivity.this, AddProjectTagActivity.class);
@@ -292,6 +311,9 @@ public final class AddProjectActivity extends AppActivity {
                     public void onSucceed(HttpData<List<GetDictionaryApi.DictionaryBean>> data) {
                         if (!data.getData().isEmpty()) {
                             mList.addAll(data.getData());
+                            if (parentId.equals("1")) {
+                                SPUtils.getInstance().put("industry", GsonUtils.toJson(data.getData()));
+                            }
 
                         }
                     }

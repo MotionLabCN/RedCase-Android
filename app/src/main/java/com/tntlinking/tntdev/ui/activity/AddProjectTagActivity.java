@@ -7,6 +7,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.android.material.snackbar.Snackbar;
+import com.hjq.http.EasyLog;
 import com.tntlinking.tntdev.R;
 import com.tntlinking.tntdev.aop.SingleClick;
 import com.tntlinking.tntdev.app.AppActivity;
@@ -25,6 +26,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -58,6 +60,7 @@ public final class AddProjectTagActivity extends AppActivity {
     private LinearLayout ll_skill_tag_3;
     private LinearLayout ll_skill_tag_4;
     private LinearLayout ll_skill_tag_5;
+    private LinearLayout ll_search;
 
     private SkillTagAdapter mAdapter;
     private RecyclerView mTagRV;
@@ -71,6 +74,7 @@ public final class AddProjectTagActivity extends AppActivity {
 
     @Override
     protected void initView() {
+        ll_search = findViewById(R.id.ll_search);
         tv_skill_tag_1 = findViewById(R.id.tv_skill_tag_1);
         tv_skill_tag_2 = findViewById(R.id.tv_skill_tag_2);
         tv_skill_tag_3 = findViewById(R.id.tv_skill_tag_3);
@@ -91,7 +95,7 @@ public final class AddProjectTagActivity extends AppActivity {
         ll_skill_tag_5 = findViewById(R.id.ll_skill_tag_5);
         btn_next = findViewById(R.id.btn_next);
 
-        setOnClickListener(btn_next);
+        setOnClickListener(btn_next, ll_search);
 //        mTagRV = findViewById(R.id.rv_skill_tag);
 //        mAdapter = new SkillTagAdapter(this);
 //        mTagRV.setAdapter(mAdapter);
@@ -296,8 +300,16 @@ public final class AddProjectTagActivity extends AppActivity {
 //                        addTag(type);
 //                    }
 //                }).show();
+                if (mSelectList.size()==0){
+                    toast("你还没有选择标签");
+                    return;
+                }
                 setResult(RESULT_OK, new Intent().putExtra("list", (Serializable) mSelectList));
                 finish();
+                break;
+            case R.id.ll_search:
+                Intent intents = new Intent(AddProjectTagActivity.this, AddTagSearchActivity.class);
+                getActivity().startActivityForResult(intents, 1001);
                 break;
 
 
@@ -335,7 +347,7 @@ public final class AddProjectTagActivity extends AppActivity {
                                         for (int j = 0; j < dataBean.get(0).getChildren().size(); j++) {
                                             if (mSelectList.get(i).getSkillName().equals(dataBean.get(0).getChildren().get(j).getSkillName())) {
                                                 fl_skill_tag_1.getChildAt(j).setSelected(true);
-                                                GetTagListApi.Bean.ChildrenBean childrenBean =dataBean.get(0).getChildren().get(j);
+                                                GetTagListApi.Bean.ChildrenBean childrenBean = dataBean.get(0).getChildren().get(j);
                                                 childrenBean.setType(1);
                                                 mList1.add(childrenBean);
                                                 continue;
@@ -366,7 +378,7 @@ public final class AddProjectTagActivity extends AppActivity {
                                         for (int j = 0; j < dataBean.get(0).getChildren().size(); j++) {
                                             if (mSelectList.get(i).getSkillName().equals(dataBean.get(0).getChildren().get(j).getSkillName())) {
                                                 fl_skill_tag_1.getChildAt(j).setSelected(true);
-                                                GetTagListApi.Bean.ChildrenBean childrenBean =dataBean.get(0).getChildren().get(j);
+                                                GetTagListApi.Bean.ChildrenBean childrenBean = dataBean.get(0).getChildren().get(j);
                                                 childrenBean.setType(1);
                                                 mList1.add(childrenBean);
                                                 continue;
@@ -376,7 +388,7 @@ public final class AddProjectTagActivity extends AppActivity {
                                         for (int j = 0; j < dataBean.get(1).getChildren().size(); j++) {
                                             if (mSelectList.get(i).getSkillName().equals(dataBean.get(1).getChildren().get(j).getSkillName())) {
                                                 fl_skill_tag_2.getChildAt(j).setSelected(true);
-                                                GetTagListApi.Bean.ChildrenBean childrenBean =dataBean.get(1).getChildren().get(j);
+                                                GetTagListApi.Bean.ChildrenBean childrenBean = dataBean.get(1).getChildren().get(j);
                                                 childrenBean.setType(2);
                                                 mList1.add(childrenBean);
                                                 continue;
@@ -409,7 +421,7 @@ public final class AddProjectTagActivity extends AppActivity {
                                         for (int j = 0; j < dataBean.get(0).getChildren().size(); j++) {
                                             if (mSelectList.get(i).getSkillName().equals(dataBean.get(0).getChildren().get(j).getSkillName())) {
                                                 fl_skill_tag_1.getChildAt(j).setSelected(true);
-                                                GetTagListApi.Bean.ChildrenBean childrenBean =dataBean.get(0).getChildren().get(j);
+                                                GetTagListApi.Bean.ChildrenBean childrenBean = dataBean.get(0).getChildren().get(j);
                                                 childrenBean.setType(1);
                                                 mList1.add(childrenBean);
                                                 continue;
@@ -419,7 +431,7 @@ public final class AddProjectTagActivity extends AppActivity {
                                         for (int j = 0; j < dataBean.get(1).getChildren().size(); j++) {
                                             if (mSelectList.get(i).getSkillName().equals(dataBean.get(1).getChildren().get(j).getSkillName())) {
                                                 fl_skill_tag_2.getChildAt(j).setSelected(true);
-                                                GetTagListApi.Bean.ChildrenBean childrenBean =dataBean.get(1).getChildren().get(j);
+                                                GetTagListApi.Bean.ChildrenBean childrenBean = dataBean.get(1).getChildren().get(j);
                                                 childrenBean.setType(2);
                                                 mList1.add(childrenBean);
                                                 continue;
@@ -429,7 +441,7 @@ public final class AddProjectTagActivity extends AppActivity {
                                         for (int j = 0; j < dataBean.get(2).getChildren().size(); j++) {
                                             if (mSelectList.get(i).getSkillName().equals(dataBean.get(2).getChildren().get(j).getSkillName())) {
                                                 fl_skill_tag_3.getChildAt(j).setSelected(true);
-                                                GetTagListApi.Bean.ChildrenBean childrenBean =dataBean.get(2).getChildren().get(j);
+                                                GetTagListApi.Bean.ChildrenBean childrenBean = dataBean.get(2).getChildren().get(j);
                                                 childrenBean.setType(3);
                                                 mList1.add(childrenBean);
                                                 continue;
@@ -465,7 +477,7 @@ public final class AddProjectTagActivity extends AppActivity {
                                         for (int j = 0; j < dataBean.get(0).getChildren().size(); j++) {
                                             if (mSelectList.get(i).getSkillName().equals(dataBean.get(0).getChildren().get(j).getSkillName())) {
                                                 fl_skill_tag_1.getChildAt(j).setSelected(true);
-                                                GetTagListApi.Bean.ChildrenBean childrenBean =dataBean.get(0).getChildren().get(j);
+                                                GetTagListApi.Bean.ChildrenBean childrenBean = dataBean.get(0).getChildren().get(j);
                                                 childrenBean.setType(1);
                                                 mList1.add(childrenBean);
                                                 continue;
@@ -475,7 +487,7 @@ public final class AddProjectTagActivity extends AppActivity {
                                         for (int j = 0; j < dataBean.get(1).getChildren().size(); j++) {
                                             if (mSelectList.get(i).getSkillName().equals(dataBean.get(1).getChildren().get(j).getSkillName())) {
                                                 fl_skill_tag_2.getChildAt(j).setSelected(true);
-                                                GetTagListApi.Bean.ChildrenBean childrenBean =dataBean.get(1).getChildren().get(j);
+                                                GetTagListApi.Bean.ChildrenBean childrenBean = dataBean.get(1).getChildren().get(j);
                                                 childrenBean.setType(2);
                                                 mList1.add(childrenBean);
                                                 continue;
@@ -485,7 +497,7 @@ public final class AddProjectTagActivity extends AppActivity {
                                         for (int j = 0; j < dataBean.get(2).getChildren().size(); j++) {
                                             if (mSelectList.get(i).getSkillName().equals(dataBean.get(2).getChildren().get(j).getSkillName())) {
                                                 fl_skill_tag_3.getChildAt(j).setSelected(true);
-                                                GetTagListApi.Bean.ChildrenBean childrenBean =dataBean.get(2).getChildren().get(j);
+                                                GetTagListApi.Bean.ChildrenBean childrenBean = dataBean.get(2).getChildren().get(j);
                                                 childrenBean.setType(3);
                                                 mList1.add(childrenBean);
                                                 continue;
@@ -495,7 +507,7 @@ public final class AddProjectTagActivity extends AppActivity {
                                         for (int j = 0; j < dataBean.get(3).getChildren().size(); j++) {
                                             if (mSelectList.get(i).getSkillName().equals(dataBean.get(3).getChildren().get(j).getSkillName())) {
                                                 fl_skill_tag_4.getChildAt(j).setSelected(true);
-                                                GetTagListApi.Bean.ChildrenBean childrenBean =dataBean.get(3).getChildren().get(j);
+                                                GetTagListApi.Bean.ChildrenBean childrenBean = dataBean.get(3).getChildren().get(j);
                                                 childrenBean.setType(4);
                                                 mList1.add(childrenBean);
                                                 continue;
@@ -556,6 +568,21 @@ public final class AddProjectTagActivity extends AppActivity {
         void onSucceed(List<GetTagListApi.Bean.ChildrenBean> mSelectList);
 
         default void onCancel() {
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            if (requestCode == 1001) {
+                GetTagListApi.Bean.ChildrenBean bean = (GetTagListApi.Bean.ChildrenBean) data.getSerializableExtra("list");
+                EasyLog.print("1===="+bean.getSkillName());
+                EasyLog.print("2===="+bean.getParentId());
+                EasyLog.print("3===="+bean.getId());
+
+
+            }
         }
     }
 }

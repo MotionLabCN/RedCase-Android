@@ -5,6 +5,9 @@ import android.animation.AnimatorListenerAdapter;
 import android.content.Intent;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.ScaleAnimation;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 
@@ -30,6 +33,7 @@ public final class SplashActivity extends AppActivity {
 
     private LottieAnimationView mLottieView;
     private SlantedTextView mDebugView;
+    private ImageView iv_logo;
 
     @Override
     protected int getLayoutId() {
@@ -40,6 +44,7 @@ public final class SplashActivity extends AppActivity {
     protected void initView() {
         mLottieView = findViewById(R.id.lav_splash_lottie);
         mDebugView = findViewById(R.id.iv_splash_debug);
+        iv_logo = findViewById(R.id.iv_logo);
         // 设置动画监听
         mLottieView.addAnimatorListener(new AnimatorListenerAdapter() {
 
@@ -52,6 +57,16 @@ public final class SplashActivity extends AppActivity {
 //                finish();
             }
         });
+
+        ScaleAnimation animation = new ScaleAnimation(0, 1, 0, 1,
+                Animation.RELATIVE_TO_SELF, 0.5f, 1, 0.5f);
+        animation.setDuration(2000);
+        //设置持续时间
+        animation.setFillAfter(true);
+        //设置动画结束之后的状态是否是动画的最终状态，true，表示是保持动画结束时的最终状态
+        animation.setRepeatCount(0);
+        //设置循环次数，0为1次
+        iv_logo.startAnimation(animation);
     }
 
     @Override
@@ -64,23 +79,27 @@ public final class SplashActivity extends AppActivity {
         }
 //        startActivity(BaseInfoActivity3.class);
 
-        if (TextUtils.isEmpty(SPUtils.getInstance().getString(AppConfig.ACCESS_TOKEN))) {
-            if (SPUtils.getInstance().getBoolean(AppConfig.HAS_LOGIN, false)) {
-                if (SPUtils.getInstance().getString(AppConfig.DEVELOP_STATUS, "1").equals("1")) {
-                    startActivity(LoginActivityView.class);
-                } else if (SPUtils.getInstance().getString(AppConfig.DEVELOP_STATUS, "1").equals("3")) {
-                    startActivity(HomeWorkActivity.class);
-                } else if (SPUtils.getInstance().getString(AppConfig.DEVELOP_STATUS, "1").equals("2")) {
-                    startActivity(CheckDeveloperActivity.class);
+
+        postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (TextUtils.isEmpty(SPUtils.getInstance().getString(AppConfig.ACCESS_TOKEN))) {
+                    if (SPUtils.getInstance().getBoolean(AppConfig.HAS_LOGIN, false)) {
+                        if (SPUtils.getInstance().getString(AppConfig.DEVELOP_STATUS, "1").equals("1")) {
+                            startActivity(LoginActivityView.class);
+                        } else if (SPUtils.getInstance().getString(AppConfig.DEVELOP_STATUS, "1").equals("3")) {
+                            startActivity(HomeWorkActivity.class);
+                        } else if (SPUtils.getInstance().getString(AppConfig.DEVELOP_STATUS, "1").equals("2")) {
+                            startActivity(CheckDeveloperActivity.class);
+                        } else {
+                            startActivity(CheckDeveloperFailActivity.class);
+                        }
+                    } else {
+                        startActivity(LoginActivity1.class);
+                    }
+                    finish();
                 } else {
-                    startActivity(CheckDeveloperFailActivity.class);
-                }
-            } else {
-                startActivity(LoginActivity1.class);
-            }
-            finish();
-        } else {
-//            startActivity(HomeWorkActivity.class);
+//                    startActivity(BaseInfoActivity3.class);
             EasyHttp.get(SplashActivity.this)
                     .api(new GetDeveloperStatusApi())
                     .request(new HttpCallback<HttpData<GetDeveloperStatusApi.Bean>>(SplashActivity.this) {
@@ -102,8 +121,10 @@ public final class SplashActivity extends AppActivity {
                             finish();
                         }
                     });
-        }
+                }
 
+            }
+        }, 2000);
 
     }
 
