@@ -152,17 +152,18 @@
         android:paddingBottom="@dimen/dp_10">
 
         <TextView
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:text="调整原因"
             android:textColor="@color/gray"
             android:textSize="@dimen/sp_14" />
 
         <TextView
             android:id="@+id/tv_withhold_reason"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="right"
             android:text="xxxx"
             android:textColor="@color/black"
             android:textSize="@dimen/sp_14" />

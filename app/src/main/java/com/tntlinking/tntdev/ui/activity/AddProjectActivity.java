@@ -145,6 +145,9 @@ public final class AddProjectActivity extends AppActivity {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.info_project_work_mode:
+                if (mWorkStatusList.size()==0){
+                    return;
+                }
                 new DictionarySelectDialog.Builder(this)
                         .setTitle("选择职业状态")
                         .setList(mWorkStatusList).setListener(new DictionarySelectDialog.OnListener() {

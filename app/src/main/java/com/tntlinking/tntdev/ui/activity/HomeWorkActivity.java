@@ -37,8 +37,9 @@ public final class HomeWorkActivity extends AppActivity {
     private RecyclerView rv_app_list;
     private LinearLayout ll_empty;
     private TextView tv_refresh;
-    private int appSize = 0;
-    private int interSize = 0;
+    private int appSize = 0; //工作请求列表size
+    private int interSize = 0; //面试请求列表size
+    private int historySize = 0;//历史记录列表size
 
     @Override
     protected int getLayoutId() {
@@ -104,6 +105,12 @@ public final class HomeWorkActivity extends AppActivity {
             startActivity(PersonDataActivity.class);
         } else if (view == tv_refresh) {
             getAppList();
+            postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    toast("刷新成功");
+                }
+            }, 600);
         }
 
     }
@@ -163,11 +170,7 @@ public final class HomeWorkActivity extends AppActivity {
                         }
                         getHistoryList();
                         interSize = data.getData().size();
-                        if (appSize + interSize == 0) {
-                            ll_empty.setVisibility(View.VISIBLE);
-                        } else {
-                            ll_empty.setVisibility(View.GONE);
-                        }
+
                     }
 
                     @Override
@@ -203,9 +206,16 @@ public final class HomeWorkActivity extends AppActivity {
                                 mList.add(bean);
                             }
                         } else { //历史记录空白页面
-                            AppListApi.Bean appBean = new AppListApi.Bean();
-                            appBean.setType(4);
-                            mList.add(appBean);
+
+                            if (appSize + interSize != 0) {
+                                AppListApi.Bean appBean = new AppListApi.Bean();
+                                appBean.setType(4);
+                                mList.add(appBean);
+                            } else if (appSize + interSize == 0) {
+                                ll_empty.setVisibility(View.VISIBLE);
+                            } else {
+                                ll_empty.setVisibility(View.GONE);
+                            }
                         }
 
                         mAdapter.setData(mList);

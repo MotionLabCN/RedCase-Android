@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_50"
         app:barStyle="transparent"
-        app:leftIcon="@drawable/close_icon"
+        app:leftIcon="@drawable/icon_close"
         app:rightTitleColor="@color/white"
         app:rightTitleSize="@dimen/sp_14"
         app:title="" />

@@ -213,8 +213,13 @@ public final class BaseInfoActivity3 extends AppActivity {
         Comparator<ExperienceBean> comparator = new Comparator<ExperienceBean>() {
             @Override
             public int compare(ExperienceBean o1, ExperienceBean o2) {
-
-                if (o1.getType() == 4 && o2.getType() == 4) {
+                if (o1.getType() == 3 && o2.getType() == 3) {
+                    if (TimeUtil.getTimeLong("yyyy-MM", o1.getInSchoolStartTime()) < TimeUtil.getTimeLong("yyyy-MM", o2.getInSchoolStartTime()))
+                        return 1;
+                    else {
+                        return -1;
+                    }
+                }else if (o1.getType() == 4 && o2.getType() == 4) {
                     if (TimeUtil.getTimeLong("yyyy-MM", o1.getProjectStartDate()) < TimeUtil.getTimeLong("yyyy-MM", o2.getProjectStartDate()))
                         return 1;
                     else {
@@ -222,6 +227,16 @@ public final class BaseInfoActivity3 extends AppActivity {
                     }
                 }
                 return 1;
+
+
+//                if (o1.getType() == 4 && o2.getType() == 4) {
+//                    if (TimeUtil.getTimeLong("yyyy-MM", o1.getProjectStartDate()) < TimeUtil.getTimeLong("yyyy-MM", o2.getProjectStartDate()))
+//                        return 1;
+//                    else {
+//                        return -1;
+//                    }
+//                }
+//                return 1;
             }
         };
         //这里就会自动根据规则进行排序
@@ -254,11 +269,12 @@ public final class BaseInfoActivity3 extends AppActivity {
                 int index = getPosition(1, mAdapter.getData());
                 mAdapter.addItem(index + 1, bean);
 
-
+                mAdapter.setData(sortListForDate(mAdapter.getData()));
             } else if (requestCode == 10002) {// 删除教育经历
                 int position = data.getIntExtra("position", 0);
                 mAdapter.removeItem(position);
 
+                mAdapter.setData(sortListForDate(mAdapter.getData()));
             } else if (requestCode == 10004) {// 添加工作经历
                 ExperienceBean bean = (ExperienceBean) data.getSerializableExtra(INTENT_KEY_PROJECT);
                 bean.setType(4);
@@ -280,6 +296,8 @@ public final class BaseInfoActivity3 extends AppActivity {
             int position = data.getIntExtra("position", 0);
             mAdapter.removeItem(position);
             mAdapter.addItem(position, bean);
+
+            mAdapter.setData(sortListForDate(mAdapter.getData()));
         } else if (resultCode == 10006) {//修改工作经历
             ExperienceBean bean = (ExperienceBean) data.getSerializableExtra(INTENT_KEY_PROJECT);
             bean.setType(4);

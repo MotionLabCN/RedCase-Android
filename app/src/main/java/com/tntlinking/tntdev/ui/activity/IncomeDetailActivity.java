@@ -83,7 +83,7 @@ public final class IncomeDetailActivity extends AppActivity {
                         if (data.getData() != null) {
 
                             developerBillDetailApi.Bean bean = data.getData();
-                            tv_work_time.setText(bean.getTimeStart() + " —— " + bean.getTimeEnd());
+                            tv_work_time.setText(bean.getTimeStart() + " — " + bean.getTimeEnd());
                             tv_pay_time.setText(Utils.getYearFromDate(bean.getCreateDate()));
                             tv_service_money.setText("¥"+bean.getActualMoney());
                             tv_personalTax.setText("¥"+bean.getPersonalTax());

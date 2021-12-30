@@ -5,6 +5,7 @@ import android.os.Build;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.hjq.bar.TitleBar;
@@ -40,12 +41,15 @@ public final class AddScheduleActivity extends AppActivity {
     private SwitchButton sb_find_switch;
     private AppCompatButton btn_delete;
     private AppCompatButton btn_commit;
+    private LinearLayout ll_time;
 
     private String mInTime;
     private String mEndTime;
-    private boolean isFullDay = false;
+    private boolean isFullDay = false; //默认半日
     private String mScheduleDate = "";
     private AppScheduleApi.Bean bean;
+    private int inTimeData = 0;
+    private int endTimeData = 0;
 
     @Override
     protected int getLayoutId() {
@@ -59,17 +63,23 @@ public final class AddScheduleActivity extends AppActivity {
         title_bar = findViewById(R.id.title_bar);
         et_schedule = findViewById(R.id.et_schedule);
         sb_find_switch = findViewById(R.id.sb_find_switch);
+        ll_time = findViewById(R.id.ll_time);
         schedule_in_time = findViewById(R.id.schedule_in_time);
         schedule_end_time = findViewById(R.id.schedule_end_time);
         btn_delete = findViewById(R.id.btn_delete);
         btn_commit = findViewById(R.id.btn_commit);
 
         setOnClickListener(schedule_in_time, schedule_end_time, btn_delete, btn_commit);
-        sb_find_switch.setColor(getColor(R.color.main_color),getColor(R.color.main_color));
+        sb_find_switch.setColor(getColor(R.color.main_color), getColor(R.color.main_color));
         sb_find_switch.setOnCheckedChangeListener(new SwitchButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(SwitchButton button, boolean checked) {
                 isFullDay = checked;
+                if (isFullDay) {
+                    ll_time.setVisibility(View.GONE);
+                } else {
+                    ll_time.setVisibility(View.VISIBLE);
+                }
             }
         });
     }
@@ -89,12 +99,18 @@ public final class AddScheduleActivity extends AppActivity {
                 btn_delete.setVisibility(View.VISIBLE);
                 et_schedule.setText(bean.getTitle());
                 sb_find_switch.setChecked(bean.isFullDay());
-                schedule_in_time.setText(Utils.getTimeFromDate(bean.getStartDate()));
-                schedule_end_time.setText(Utils.getTimeFromDate(bean.getEndDate()));
+                schedule_in_time.setText(Utils.getHoursAndMin(bean.getStartDate()));
+                schedule_end_time.setText(Utils.getHoursAndMin(bean.getEndDate()));
 
                 isFullDay = bean.isFullDay();
                 mInTime = Utils.getHoursAndMin(bean.getStartDate());
-                mEndTime =Utils.getHoursAndMin(bean.getEndDate());
+                mEndTime = Utils.getHoursAndMin(bean.getEndDate());
+
+                if (isFullDay) {
+                    ll_time.setVisibility(View.GONE);
+                } else {
+                    ll_time.setVisibility(View.VISIBLE);
+                }
             }
         }
 
@@ -109,8 +125,9 @@ public final class AddScheduleActivity extends AppActivity {
                 new TimeSelectDialog.Builder(this).setTitle("选择时间").setIgnoreSecond().setListener(new TimeSelectDialog.OnListener() {
                     @Override
                     public void onSelected(BaseDialog dialog, int hours, int minute, int second) {
+                        inTimeData = hours + minute;
+
                         mInTime = Utils.formatDate(hours) + ":" + Utils.formatDate(minute);
-//
                         schedule_in_time.setText(hours + ":" + minute);
 
                     }
@@ -121,8 +138,12 @@ public final class AddScheduleActivity extends AppActivity {
                 new TimeSelectDialog.Builder(this).setTitle("选择时间").setIgnoreSecond().setListener(new TimeSelectDialog.OnListener() {
                     @Override
                     public void onSelected(BaseDialog dialog, int hours, int minute, int second) {
+                        endTimeData = hours + minute;
+                        if (endTimeData < inTimeData) {
+                            toast("结束时间不能小于开始时间");
+                            return;
+                        }
                         mEndTime = Utils.formatDate(hours) + ":" + Utils.formatDate(minute);
-
                         schedule_end_time.setText(hours + ":" + minute);
 
                     }
@@ -139,14 +160,18 @@ public final class AddScheduleActivity extends AppActivity {
                     toast("没有输入项目名称");
                     return;
                 }
-                if (!in_time.contains(":")) {
-                    toast("没有选择开始时间");
-                    return;
+
+                if (!isFullDay) {
+                    if (!in_time.contains(":")) {
+                        toast("没有选择开始时间");
+                        return;
+                    }
+                    if (!end_time.contains(":")) {
+                        toast("没有选择结束时间");
+                        return;
+                    }
                 }
-                if (!end_time.contains(":")) {
-                    toast("没有选择结束时间");
-                    return;
-                }
+
                 if (btn_delete.getVisibility() == View.GONE) {
                     addSchedule();
                 } else {
@@ -159,37 +184,26 @@ public final class AddScheduleActivity extends AppActivity {
 
 
     /**
-     * s删除日程
-     */
-    public void deleteSchedule() {
-        EasyHttp.post(this)
-                .api(new DeleteScheduleApi()
-                        .setScheduleId(bean.getId()))
-                .request(new HttpCallback<HttpData<Void>>(this) {
-
-                    @Override
-                    public void onSucceed(HttpData<Void> data) {
-                        setResult(RESULT_OK);
-                        finish();
-
-                    }
-                });
-    }
-
-
-    /**
      * 新增日程
      */
     public void addSchedule() {
         if (!TextUtils.isEmpty(mScheduleDate)) {
+            AddScheduleApi addScheduleApi;
+            if (isFullDay) {
+                addScheduleApi = new AddScheduleApi()
+                        .setTitle(et_schedule.getText().toString())
+                        .setFullDay(isFullDay)
+                        .setScheduleDate(mScheduleDate);
+            } else {
+                addScheduleApi = new AddScheduleApi()
+                        .setStartDate(mScheduleDate + " " + mInTime + ":00")
+                        .setEndDate(mScheduleDate + " " + mEndTime + ":00")
+                        .setTitle(et_schedule.getText().toString())
+                        .setFullDay(isFullDay)
+                        .setScheduleDate(mScheduleDate);
+            }
             EasyHttp.post(this)
-                    .api(new AddScheduleApi()
-                            .setStartDate(mScheduleDate + " " + mInTime + ":00")
-                            .setEndDate(mScheduleDate + " " + mEndTime + ":00")
-                            .setTitle(et_schedule.getText().toString())
-                            .setFullDay(isFullDay)
-                            .setScheduleDate(mScheduleDate)
-                    )
+                    .api(addScheduleApi)
                     .request(new HttpCallback<HttpData<Void>>(this) {
                         @Override
                         public void onSucceed(HttpData<Void> data) {
@@ -208,6 +222,7 @@ public final class AddScheduleActivity extends AppActivity {
     public void updateSchedule() {
         EasyHttp.post(this)
                 .api(new UpdateScheduleApi()
+                        .setId(bean.getId())
                         .setStartDate(mScheduleDate + " " + mInTime + ":00")
                         .setEndDate(mScheduleDate + " " + mEndTime + ":00")
                         .setTitle(et_schedule.getText().toString())
@@ -220,6 +235,24 @@ public final class AddScheduleActivity extends AppActivity {
                     public void onSucceed(HttpData<Void> data) {
                         setResult(RESULT_OK);
                         finish();
+                    }
+                });
+    }
+
+    /**
+     * s删除日程
+     */
+    public void deleteSchedule() {
+        EasyHttp.post(this)
+                .api(new DeleteScheduleApi()
+                        .setScheduleId(bean.getId()))
+                .request(new HttpCallback<HttpData<Void>>(this) {
+
+                    @Override
+                    public void onSucceed(HttpData<Void> data) {
+                        setResult(RESULT_OK);
+                        finish();
+
                     }
                 });
     }

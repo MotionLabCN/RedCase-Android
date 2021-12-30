@@ -63,7 +63,8 @@
             android:layout_marginRight="40dp"
             android:layout_marginBottom="40dp"
             android:gravity="top"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:visibility="gone">
 
 
             <androidx.appcompat.widget.AppCompatCheckBox

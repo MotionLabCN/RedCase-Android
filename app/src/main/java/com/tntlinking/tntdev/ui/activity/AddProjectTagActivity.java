@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.blankj.utilcode.util.GsonUtils;
 import com.google.android.material.snackbar.Snackbar;
 import com.hjq.http.EasyLog;
 import com.tntlinking.tntdev.R;
@@ -300,7 +301,7 @@ public final class AddProjectTagActivity extends AppActivity {
 //                        addTag(type);
 //                    }
 //                }).show();
-                if (mSelectList.size()==0){
+                if (mSelectList.size() == 0) {
                     toast("你还没有选择标签");
                     return;
                 }
@@ -308,7 +309,14 @@ public final class AddProjectTagActivity extends AppActivity {
                 finish();
                 break;
             case R.id.ll_search:
+
+//                mallList.addAll(mTagAdapter1.getData());
+//                mallList.addAll(mTagAdapter2.getData());
+//                mallList.addAll(mTagAdapter3.getData());
+//                mallList.addAll(mTagAdapter4.getData());
+//                mallList.addAll(mTagAdapter5.getData());
                 Intent intents = new Intent(AddProjectTagActivity.this, AddTagSearchActivity.class);
+                intents.putExtra("searchList", (Serializable) mallList);
                 getActivity().startActivityForResult(intents, 1001);
                 break;
 
@@ -317,6 +325,7 @@ public final class AddProjectTagActivity extends AppActivity {
     }
 
     private List<GetTagListApi.Bean.ChildrenBean> mList1 = new ArrayList<>();
+    private List<GetTagListApi.Bean.ChildrenBean> mallList = new ArrayList<>();
 
     private void getTagList(String careerId) {
         List<GetTagListApi.Bean.ChildrenBean> list = getSerializable("list");
@@ -332,6 +341,9 @@ public final class AddProjectTagActivity extends AppActivity {
                     @Override
                     public void onSucceed(HttpData<List<GetTagListApi.Bean>> data) {
                         List<GetTagListApi.Bean> dataBean = data.getData();
+                        for (GetTagListApi.Bean i : dataBean) {
+                            mallList.addAll(i.getChildren());
+                        }
                         if (dataBean.size() == 1) {
                             ll_skill_tag_1.setVisibility(View.VISIBLE);
                             ll_skill_tag_2.setVisibility(View.GONE);
@@ -355,6 +367,12 @@ public final class AddProjectTagActivity extends AppActivity {
                                         }
                                     }
 
+                                }
+
+                                for (int i = 0; i < mSelectList.size(); i++) {
+                                    if (!isInList(mallList, mSelectList.get(i))) {
+                                        mList1.add(mSelectList.get(i));
+                                    }
                                 }
 
                                 mSelectList.clear();
@@ -396,6 +414,12 @@ public final class AddProjectTagActivity extends AppActivity {
                                         }
                                     }
 
+                                }
+
+                                for (int i = 0; i < mSelectList.size(); i++) {
+                                    if (!isInList(mallList, mSelectList.get(i))) {
+                                        mList1.add(mSelectList.get(i));
+                                    }
                                 }
 
                                 mSelectList.clear();
@@ -449,6 +473,11 @@ public final class AddProjectTagActivity extends AppActivity {
                                         }
                                     }
 
+                                }
+                                for (int i = 0; i < mSelectList.size(); i++) {
+                                    if (!isInList(mallList, mSelectList.get(i))) {
+                                        mList1.add(mSelectList.get(i));
+                                    }
                                 }
 
                                 mSelectList.clear();
@@ -517,6 +546,11 @@ public final class AddProjectTagActivity extends AppActivity {
 
                                 }
 
+                                for (int i = 0; i < mSelectList.size(); i++) {
+                                    if (!isInList(mallList, mSelectList.get(i))) {
+                                        mList1.add(mSelectList.get(i));
+                                    }
+                                }
                                 mSelectList.clear();
                                 mSelectList.addAll(mList1);
                                 mTagAdapterSelect.onlyAddAll(mSelectList);
@@ -577,12 +611,105 @@ public final class AddProjectTagActivity extends AppActivity {
         if (resultCode == RESULT_OK) {
             if (requestCode == 1001) {
                 GetTagListApi.Bean.ChildrenBean bean = (GetTagListApi.Bean.ChildrenBean) data.getSerializableExtra("list");
-                EasyLog.print("1===="+bean.getSkillName());
-                EasyLog.print("2===="+bean.getParentId());
-                EasyLog.print("3===="+bean.getId());
+                EasyLog.print("1====" + bean.getSkillName());
+                EasyLog.print("2====" + bean.getParentId());
+                EasyLog.print("3====" + bean.getId());
 
+                for (int i = 0; i < mSelectList.size(); i++) {
+                    if (mSelectList.get(i).getId() == bean.getId()) {
+                        return;
+                    }
+                }
+                if (bean.getParentId().equals(mTagAdapter1.getData().get(0).getParentId())) {
+                    for (int j = 0; j < mTagAdapter1.getData().size(); j++) {
+                        if (bean.getSkillName().equals(mTagAdapter1.getData().get(j).getSkillName())) {
+                            if (!fl_skill_tag_1.getChildAt(j).isSelected()) {
+                                fl_skill_tag_1.getChildAt(j).setSelected(true);
+                                GetTagListApi.Bean.ChildrenBean childrenBean = mTagAdapter1.getData().get(j);
+                                childrenBean.setType(1);
+//                            mList1.add(childrenBean);
+                                mSelectList.add(childrenBean);
+                                EasyLog.print("4====" + bean.getId());
+                                break;
+                            }
+                        }
+                    }
+                } else if (bean.getParentId().equals(mTagAdapter2.getData().get(0).getParentId())) {
+                    for (int j = 0; j < mTagAdapter2.getData().size(); j++) {
+                        if (bean.getSkillName().equals(mTagAdapter2.getData().get(j).getSkillName())) {
+                            if (!fl_skill_tag_2.getChildAt(j).isSelected()) {
+                                fl_skill_tag_2.getChildAt(j).setSelected(true);
+                                GetTagListApi.Bean.ChildrenBean childrenBean = mTagAdapter2.getData().get(j);
+                                childrenBean.setType(2);
+//                            mList1.add(childrenBean);
+                                mSelectList.add(childrenBean);
+                                break;
+                            }
 
+                        }
+
+                    }
+
+                } else if (bean.getParentId().equals(mTagAdapter3.getData().get(0).getParentId())) {
+                    for (int j = 0; j < mTagAdapter3.getData().size(); j++) {
+                        if (bean.getSkillName().equals(mTagAdapter3.getData().get(j).getSkillName())) {
+                            if (!fl_skill_tag_3.getChildAt(j).isSelected()) {
+                                fl_skill_tag_3.getChildAt(j).setSelected(true);
+                                GetTagListApi.Bean.ChildrenBean childrenBean = mTagAdapter3.getData().get(j);
+                                childrenBean.setType(3);
+//                            mList1.add(childrenBean);
+                                mSelectList.add(childrenBean);
+                                break;
+                            }
+                        }
+                    }
+                } else if (bean.getParentId().equals(mTagAdapter4.getData().get(0).getParentId())) {
+                    for (int j = 0; j < mTagAdapter4.getData().size(); j++) {
+                        if (bean.getSkillName().equals(mTagAdapter4.getData().get(j).getSkillName())) {
+                            if (!fl_skill_tag_4.getChildAt(j).isSelected()) {
+                                fl_skill_tag_4.getChildAt(j).setSelected(true);
+                                GetTagListApi.Bean.ChildrenBean childrenBean = mTagAdapter4.getData().get(j);
+                                childrenBean.setType(4);
+//                            mList1.add(childrenBean);
+                                mSelectList.add(childrenBean);
+                                break;
+                            }
+
+                        }
+                    }
+                } else if (bean.getParentId().equals(mTagAdapter5.getData().get(0).getParentId())) {
+                    for (int j = 0; j < mTagAdapter5.getData().size(); j++) {
+                        if (bean.getSkillName().equals(mTagAdapter5.getData().get(j).getSkillName())) {
+                            if (!fl_skill_tag_5.getChildAt(j).isSelected()) {
+                                fl_skill_tag_5.getChildAt(j).setSelected(true);
+                                GetTagListApi.Bean.ChildrenBean childrenBean = mTagAdapter5.getData().get(j);
+                                childrenBean.setType(5);
+//                            mList1.add(childrenBean);
+                                mSelectList.add(childrenBean);
+                                break;
+                            }
+
+                        }
+                    }
+                }
+
+                boolean inList = isInList(mallList, bean);
+                if (!inList) {
+                    mSelectList.add(bean);
+                }
+//                mSelectList.addAll(mList1);
+                mTagAdapterSelect.onlyAddAll(mSelectList);
             }
         }
+    }
+
+    //判断值是否在list中
+    private boolean isInList(List<GetTagListApi.Bean.ChildrenBean> list, GetTagListApi.Bean.ChildrenBean bean) {
+        for (int i = 0; i < list.size(); i++) {
+            if (bean.getSkillName().equals(list.get(i).getSkillName())) {
+                return true;
+            }
+        }
+        return false;
     }
 }

@@ -15,7 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_50"
         app:barStyle="transparent"
-        app:leftIcon="@drawable/close_icon"
+        app:leftIcon="@drawable/icon_close"
         app:rightBackground="@null"
         app:rightTitleColor="@color/common_accent_color"
         app:rightTitleSize="@dimen/sp_14"

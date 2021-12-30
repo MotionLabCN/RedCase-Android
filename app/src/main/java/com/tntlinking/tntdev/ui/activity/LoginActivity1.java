@@ -60,10 +60,10 @@ public final class LoginActivity1 extends AppActivity {
     @Override
     public void onClick(View view) {
         if (view == mCommitView) {
-            if (!hasChecked) {
-                toast("你还没有勾选协议");
-                return;
-            }
+//            if (!hasChecked) {
+//                toast("你还没有勾选协议");
+//                return;
+//            }
             startActivity(LoginActivity2.class);
 
         }

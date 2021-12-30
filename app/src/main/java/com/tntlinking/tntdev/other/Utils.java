@@ -213,7 +213,12 @@ public class Utils {
             return date;
         }
     }
-
+    /**
+     * 从给到的时间数据 切割只要年月份 2022-10-30 00:00:00 -> 00:00:00
+     *
+     * @param date
+     * @return
+     */
     public static String getTimeFromDate(String date) {
         if (!TextUtils.isEmpty(date) && date.contains(" ")) {
             String time = date.split(" ")[1];

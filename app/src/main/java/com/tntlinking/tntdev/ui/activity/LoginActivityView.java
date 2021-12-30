@@ -8,6 +8,7 @@ import android.widget.LinearLayout;
 import com.tntlinking.tntdev.R;
 import com.tntlinking.tntdev.aop.SingleClick;
 import com.tntlinking.tntdev.app.AppActivity;
+import com.tntlinking.tntdev.manager.ActivityManager;
 
 import androidx.appcompat.widget.AppCompatButton;
 
@@ -65,6 +66,8 @@ public final class LoginActivityView extends AppActivity {
             mLogoView.setImageResource(R.drawable.bg_view_3);
         } else if (view == btn_commit_3) {
             startActivity(BaseInfoActivity1.class);
+
+            ActivityManager.getInstance().finishAllActivities(BaseInfoActivity1.class);
         }
 
     }

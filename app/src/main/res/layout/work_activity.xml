@@ -31,16 +31,16 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="工作"
+            android:text="服务项目"
             android:textColor="@color/black"
-            android:textSize="@dimen/sp_30"
+            android:textSize="@dimen/sp_25"
             android:textStyle="bold" />
 
 
         <TextView
             android:id="@+id/tv_avatar"
-            android:layout_width="@dimen/dp_40"
-            android:layout_height="@dimen/dp_40"
+            android:layout_width="@dimen/dp_36"
+            android:layout_height="@dimen/dp_36"
             android:layout_gravity="center"
             android:background="@drawable/avatar_oval_black"
             android:gravity="center"
@@ -56,9 +56,10 @@
     <LinearLayout
         android:id="@+id/ll_empty"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
+        android:layout_height="match_parent"
+        android:gravity="center|top"
         android:background="@color/white"
+        android:paddingTop="@dimen/dp_20"
         android:visibility="gone"
         android:orientation="vertical">
 

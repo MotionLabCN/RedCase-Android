@@ -1,5 +1,6 @@
 package com.tntlinking.tntdev.ui.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.text.TextUtils;
 import android.view.View;
@@ -78,6 +79,7 @@ public final class AppListAdapter extends AppAdapter<AppListApi.Bean> {
 
         }
 
+        @SuppressLint("SetTextI18n")
         @Override
         public void onBindView(int position) {
             AppListApi.Bean item = getItem(position);
@@ -102,7 +104,7 @@ public final class AppListAdapter extends AppAdapter<AppListApi.Bean> {
             } else {// 面试邀约
                 tv_position_name.setText(item.getPositionName());
                 tv_company_name.setText(item.getCompanyName());
-                tv_work_info.setText(item.getWorkDaysModeName() + " | " + item.getInterviewStartDate() + "—" + Utils.getTimeFromDate(item.getInterviewEndDate()));
+                tv_work_info.setText(item.getWorkDaysModeName() + " | " + Utils.getYearFromDate(item.getInterviewStartDate()) + " " + Utils.getHoursAndMin(item.getInterviewStartDate()) + "—" + Utils.getHoursAndMin(item.getInterviewEndDate()));
                 tv_type.setText("详情");
                 if (item.getInterviewTimeType().equals("今日面试")) {
                     tv_status.setText(item.getInterviewTimeType());
@@ -135,6 +137,7 @@ public final class AppListAdapter extends AppAdapter<AppListApi.Bean> {
 
         }
 
+        @SuppressLint("SetTextI18n")
         @Override
         public void onBindView(int position) {
 
@@ -163,6 +166,7 @@ public final class AppListAdapter extends AppAdapter<AppListApi.Bean> {
         }
 
     }
+
     /**
      * 主页历史工作tab 空白页面
      */

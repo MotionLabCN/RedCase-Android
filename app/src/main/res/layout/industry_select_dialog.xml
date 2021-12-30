@@ -31,8 +31,8 @@
             android:id="@+id/iv_close"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="right|center_vertical"
-            android:src="@drawable/close_icon"/>
+            android:layout_gravity="right"
+            android:src="@drawable/icon_close"/>
 
     </FrameLayout>
 

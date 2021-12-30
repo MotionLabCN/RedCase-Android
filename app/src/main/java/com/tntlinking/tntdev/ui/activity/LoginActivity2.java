@@ -184,7 +184,7 @@ public final class LoginActivity2 extends AppActivity implements TextView.OnEdit
                         } else {
                             startActivity(CheckDeveloperFailActivity.class);
                         }
-                        ActivityManager.getInstance().finishAllActivities(LoginActivity.class);
+                        ActivityManager.getInstance().finishAllActivities();
                     }
                 });
 

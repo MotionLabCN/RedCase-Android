@@ -126,6 +126,7 @@ public final class InterviewSettingActivity extends AppActivity {
      * 获取日历列表
      */
     private void getBillList() {
+        mList.clear();
         EasyHttp.get(this)
                 .api(new InterviewListApi())
                 .request(new HttpCallback<HttpData<List<InterviewListApi.Bean>>>(this) {
@@ -190,5 +191,6 @@ public final class InterviewSettingActivity extends AppActivity {
 
             }
         }
+        getBillList();
     }
 }

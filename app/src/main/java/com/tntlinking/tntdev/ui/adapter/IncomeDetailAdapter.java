@@ -52,11 +52,17 @@ public final class IncomeDetailAdapter extends AppAdapter<developerBillDetailApi
         @Override
         public void onBindView(int position) {
             developerBillDetailApi.Bean.ListBean item = getItem(position);
-            tv_order_id.setText(item.getId());
-            tv_service_time.setText(Utils.getYearFromDate(item.getWorkStartDate()) + " —— " + Utils.getYearFromDate(item.getFinishDate()));
+            tv_order_id.setText(item.getOrderNo());
+            tv_service_time.setText(Utils.getYearFromDate(item.getWorkStartDate()) + " — " + Utils.getYearFromDate(item.getFinishDate()));
             tv_service_days.setText(item.getDays() + "个工作日");
             tv_service_account.setText("¥"+item.getTotalAmount());
-            tv_withhold_amount.setText("-¥"+item.getRefundMoney());
+            int money = Integer.parseInt(item.getRefundMoney());
+            if (money>0){
+                tv_withhold_amount.setText("+¥"+item.getRefundMoney());
+            }else {
+                tv_withhold_amount.setText("-¥"+item.getRefundMoney());
+            }
+
             if (TextUtils.isEmpty(item.getRefundReason())) {
                 tv_withhold_reason.setText("-");
             } else {

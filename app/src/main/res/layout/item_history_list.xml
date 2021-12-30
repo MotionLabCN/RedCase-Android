@@ -33,7 +33,7 @@
                 android:layout_height="wrap_content"
                 android:text="大数据开发工程师"
                 android:textColor="@color/black"
-                android:textSize="@dimen/sp_20"
+                android:textSize="@dimen/sp_15"
                 android:textStyle="bold" />
         </LinearLayout>
 
@@ -44,7 +44,7 @@
             android:layout_marginTop="@dimen/dp_6"
             android:text="上海xxx公司"
             android:textColor="@color/gray"
-            android:textSize="@dimen/sp_16" />
+            android:textSize="@dimen/sp_12" />
 
         <TextView
             android:id="@+id/tv_work_info"
@@ -53,6 +53,6 @@
             android:layout_marginTop="@dimen/dp_6"
             android:text="全日制|2021-2021-2"
             android:textColor="@color/gray"
-            android:textSize="@dimen/sp_16" />
+            android:textSize="@dimen/sp_12" />
     </LinearLayout>
 </LinearLayout>
