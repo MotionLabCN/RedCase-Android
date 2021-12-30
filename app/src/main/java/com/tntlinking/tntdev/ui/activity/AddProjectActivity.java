@@ -161,7 +161,7 @@ public final class AddProjectActivity extends AppActivity {
                 }).show();
                 break;
             case R.id.info_project_in_time:
-                new DateSelectDialog.Builder(this).setIgnoreDay().setListener(new DateSelectDialog.OnListener() {
+                new DateSelectDialog.Builder(this).setTitle("选择日期").setIgnoreDay().setListener(new DateSelectDialog.OnListener() {
                     @Override
                     public void onSelected(BaseDialog dialog, int year, int month, int day) {
                         String mInTime = year + "-" + Utils.formatDate(month);
@@ -175,7 +175,7 @@ public final class AddProjectActivity extends AppActivity {
                 }).show();
                 break;
             case R.id.info_project_end_time:
-                new DateSelectDialog.Builder(this).setIgnoreDay().setListener(new DateSelectDialog.OnListener() {
+                new DateSelectDialog.Builder(this).setTitle("选择日期").setIgnoreDay().setListener(new DateSelectDialog.OnListener() {
                     @Override
                     public void onSelected(BaseDialog dialog, int year, int month, int day) {
                         String mEndTime = year + "-" + Utils.formatDate(month);
