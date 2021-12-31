@@ -79,7 +79,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="工作方式"
+            android:text="服务方式"
             android:textSize="@dimen/sp_15" />
 
         <LinearLayout
@@ -135,7 +135,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:hint="期望最低薪资(元/月)"
+            android:hint="最低服务价格(元/月)"
             android:inputType="number"
             android:singleLine="true" />
 
@@ -152,7 +152,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:hint="期望最高薪资(元/月)"
+            android:hint="最高服务价格(元/月)"
             android:inputType="number"
             android:singleLine="true" />
     </LinearLayout>

@@ -71,7 +71,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_20"
-            android:text="为了保证工作者的服务质量符合平台要求，我们将通过入驻环节来审核筛选出满足我们要求的开发者"
+            android:text="为了保证开发者的服务质量符合平台要求，我们将通过入驻环节来审核筛选出满足我们要求的开发者"
             android:textColor="#C1C6D2"
             android:textSize="@dimen/sp_12" />
     </LinearLayout>
@@ -122,7 +122,7 @@
             android:drawableStart="@drawable/icon_vector"
             android:drawablePadding="@dimen/dp_4"
             android:gravity="center"
-            android:text="每个工作日可以提供4小时以上工作时间"
+            android:text="每个工作日可以提供4小时以上服务时间"
             android:textColor="#444E64"
             android:textSize="@dimen/sp_13" />
 
@@ -172,7 +172,7 @@
             android:drawableStart="@drawable/icon_vector"
             android:drawablePadding="@dimen/dp_4"
             android:gravity="center"
-            android:text="参加入驻面试"
+            android:text="参加入驻审核"
             android:textColor="#444E64"
             android:textSize="@dimen/sp_14" />
 
@@ -183,7 +183,7 @@
             android:drawableStart="@drawable/icon_vector"
             android:drawablePadding="@dimen/dp_4"
             android:gravity="center"
-            android:text="签订服务协议"
+            android:text="等待审核结果"
             android:textColor="#444E64"
             android:textSize="@dimen/sp_14" />
 

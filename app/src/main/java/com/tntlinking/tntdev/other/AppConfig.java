@@ -85,4 +85,7 @@ public final class AppConfig {
     public static String MOBILE = "mobile";
 
     public static String DEVELOP_NAME = "develop_name";
+
+    public static String  URL_AGREEMENT = "https://talent.tntlinking.com/#/page/agreement";
+    public static String  URL_PRIVATE = "https://talent.tntlinking.com/#/page/privacy";
 }

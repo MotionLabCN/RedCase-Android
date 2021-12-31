@@ -17,7 +17,6 @@
         app:title="" />
 
 
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -43,10 +42,10 @@
             android:layout_height="@dimen/dp_36"
             android:layout_gravity="center"
             android:background="@drawable/avatar_oval_black"
-            android:gravity="center"
-            android:text="xxx"
-            android:singleLine="true"
             android:ellipsize="end"
+            android:gravity="center"
+            android:singleLine="true"
+            android:text="xxx"
             android:textColor="@color/white"
             android:textSize="@dimen/sp_12" />
 
@@ -57,11 +56,11 @@
         android:id="@+id/ll_empty"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/common_window_background_color"
         android:gravity="center|top"
-        android:background="@color/white"
+        android:orientation="vertical"
         android:paddingTop="@dimen/dp_20"
-        android:visibility="gone"
-        android:orientation="vertical">
+        android:visibility="gone">
 
         <ImageView
             android:layout_width="wrap_content"
@@ -88,12 +87,12 @@
             android:id="@+id/tv_refresh"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_10"
             android:background="@drawable/btn_blue_radius_10"
             android:paddingLeft="@dimen/dp_20"
             android:paddingTop="@dimen/dp_8"
             android:paddingRight="@dimen/dp_20"
             android:paddingBottom="@dimen/dp_8"
-            android:layout_marginTop="@dimen/dp_10"
             android:text="刷新"
             android:textColor="@color/white"
             android:textSize="@dimen/sp_12" />
@@ -105,6 +104,7 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:orientation="vertical"
+        android:paddingTop="@dimen/dp_10"
         tools:itemCount="2"
         tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:listitem="@layout/item_app_list" />

@@ -43,7 +43,10 @@ public final class BaseInfoActivity3 extends AppActivity {
     private AddExperienceAdapter mAdapter;
     private RecyclerView mRecyclerview;
 
-
+    public static final int ADD_EDUCATION_TAB = 1; // 添加教育tab
+    public static final int ADD_PROJECT_TAB = 2;// 添加工作经历tab
+    public static final int ADD_EDUCATION = 3;// 教育item
+    public static final int ADD_PROJECT = 4;// 工作经历item
     @Override
     protected int getLayoutId() {
         return R.layout.baseinfo_activity_3;
@@ -62,11 +65,11 @@ public final class BaseInfoActivity3 extends AppActivity {
         mAdapter.setOnItemClickListener(new BaseAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(RecyclerView recyclerView, View itemView, int position) {
-                if (mList.get(position).getType() == 1) { //
+                if (mList.get(position).getType() == ADD_EDUCATION_TAB) { //
                     Intent intent = new Intent(BaseInfoActivity3.this, AddEducationActivity.class);
                     getActivity().startActivityForResult(intent, 10001);
 
-                } else if (mList.get(position).getType() == 3) { //
+                } else if (mList.get(position).getType() == ADD_EDUCATION) { //
                     Intent intent = new Intent(BaseInfoActivity3.this, AddEducationActivity.class);
 
                     ExperienceBean bean = mAdapter.getData().get(position);
@@ -74,11 +77,11 @@ public final class BaseInfoActivity3 extends AppActivity {
                     intent.putExtra("position", position);
                     getActivity().startActivityForResult(intent, 10002);
 
-                } else if (mList.get(position).getType() == 2) {
+                } else if (mList.get(position).getType() == ADD_PROJECT_TAB) {
                     Intent intent = new Intent(BaseInfoActivity3.this, AddProjectActivity.class);
                     getActivity().startActivityForResult(intent, 10004);
 
-                } else if (mList.get(position).getType() == 4) {
+                } else if (mList.get(position).getType() == ADD_PROJECT) {
                     Intent intent = new Intent(BaseInfoActivity3.this, AddProjectActivity.class);
 
                     ExperienceBean bean = mAdapter.getData().get(position);
@@ -100,8 +103,8 @@ public final class BaseInfoActivity3 extends AppActivity {
 
     @Override
     protected void initData() {
-        mList.add(new ExperienceBean(1));
-        mList.add(new ExperienceBean(2));
+        mList.add(new ExperienceBean(ADD_EDUCATION_TAB));
+        mList.add(new ExperienceBean(ADD_PROJECT_TAB));
 
         mAdapter.setData(mList);
 //        mAdapter.setData(sortList(mList));

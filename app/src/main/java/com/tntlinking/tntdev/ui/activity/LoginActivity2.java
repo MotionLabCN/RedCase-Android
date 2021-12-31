@@ -70,14 +70,14 @@ public final class LoginActivity2 extends AppActivity implements TextView.OnEdit
 
             @Override
             public void onClick(@NonNull View widget) {
-                BrowserActivity.start(getActivity(), "https://fuchsia-athlete-f65.notion.site/9f0df9c1265e4d00a99ac0591d390ac3");
+                BrowserActivity.start(getActivity(), AppConfig.URL_PRIVATE);
             }
         }).setForegroundColor(getColor(R.color.color_text_color)).append("和")
                 .setForegroundColor(getColor(R.color.color_hint_color)).append("《用户协议》").setClickSpan(new ClickableSpan() {
 
             @Override
             public void onClick(@NonNull View widget) {
-                BrowserActivity.start(getActivity(), "https://fuchsia-athlete-f65.notion.site/cfcae78c7aa643228502af8e9c6a0d17");
+                BrowserActivity.start(getActivity(), AppConfig.URL_AGREEMENT);
             }
         })
                 .setForegroundColor(getColor(R.color.color_text_color)).create();
