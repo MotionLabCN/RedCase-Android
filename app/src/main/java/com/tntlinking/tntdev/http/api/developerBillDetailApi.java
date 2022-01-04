@@ -40,7 +40,7 @@ public final class developerBillDetailApi implements IRequestApi {
             private String finishDate;
             private String createDate;
             private String totalAmount;
-            private String refundMoney;
+            private double refundMoney;
             private String actualMoney;
             private String refundReason;
             private String days;
@@ -94,11 +94,11 @@ public final class developerBillDetailApi implements IRequestApi {
                 this.totalAmount = totalAmount;
             }
 
-            public String getRefundMoney() {
+            public double getRefundMoney() {
                 return refundMoney;
             }
 
-            public void setRefundMoney(String refundMoney) {
+            public void setRefundMoney(double refundMoney) {
                 this.refundMoney = refundMoney;
             }
 

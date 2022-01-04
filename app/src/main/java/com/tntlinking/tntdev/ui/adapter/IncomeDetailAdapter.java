@@ -56,11 +56,10 @@ public final class IncomeDetailAdapter extends AppAdapter<developerBillDetailApi
             tv_service_time.setText(Utils.getYearFromDate(item.getWorkStartDate()) + " — " + Utils.getYearFromDate(item.getFinishDate()));
             tv_service_days.setText(item.getDays() + "个工作日");
             tv_service_account.setText("¥"+item.getTotalAmount());
-            int money = Integer.parseInt(item.getRefundMoney());
-            if (money>0){
+            if (item.getRefundMoney()>0){
                 tv_withhold_amount.setText("+¥"+item.getRefundMoney());
             }else {
-                tv_withhold_amount.setText("-¥"+item.getRefundMoney());
+                tv_withhold_amount.setText("-¥"+Math.abs(item.getRefundMoney()));
             }
 
             if (TextUtils.isEmpty(item.getRefundReason())) {

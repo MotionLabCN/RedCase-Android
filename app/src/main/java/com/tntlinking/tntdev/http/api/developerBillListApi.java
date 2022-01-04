@@ -36,7 +36,7 @@ public final class developerBillListApi implements IRequestApi {
             private String orderId;
             private String developerId;
             private String serviceMoney;
-            private String deductMoney;
+            private double deductMoney;
             private String personalTax;
             private String actualMoney;
             private String createDate;
@@ -75,11 +75,11 @@ public final class developerBillListApi implements IRequestApi {
                 this.serviceMoney = serviceMoney;
             }
 
-            public String getDeductMoney() {
+            public double getDeductMoney() {
                 return deductMoney;
             }
 
-            public void setDeductMoney(String deductMoney) {
+            public void setDeductMoney(double deductMoney) {
                 this.deductMoney = deductMoney;
             }
 

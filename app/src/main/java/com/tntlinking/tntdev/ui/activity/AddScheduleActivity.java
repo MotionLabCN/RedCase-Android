@@ -220,15 +220,26 @@ public final class AddScheduleActivity extends AppActivity {
      * 修改日程
      */
     public void updateSchedule() {
+        UpdateScheduleApi updateScheduleApi;
+        if (isFullDay) {
+            updateScheduleApi = new UpdateScheduleApi()
+                    .setId(bean.getId())
+                    .setDeveloperId(bean.getDeveloperId())
+                    .setTitle(et_schedule.getText().toString())
+                    .setFullDay(isFullDay)
+                    .setScheduleDate(mScheduleDate);
+        } else {
+            updateScheduleApi = new UpdateScheduleApi()
+                    .setId(bean.getId())
+                    .setDeveloperId(bean.getDeveloperId())
+                    .setStartDate(mScheduleDate + " " + mInTime + ":00")
+                    .setEndDate(mScheduleDate + " " + mEndTime + ":00")
+                    .setTitle(et_schedule.getText().toString())
+                    .setFullDay(isFullDay)
+                    .setScheduleDate(mScheduleDate);
+        }
         EasyHttp.post(this)
-                .api(new UpdateScheduleApi()
-                        .setId(bean.getId())
-                        .setStartDate(mScheduleDate + " " + mInTime + ":00")
-                        .setEndDate(mScheduleDate + " " + mEndTime + ":00")
-                        .setTitle(et_schedule.getText().toString())
-                        .setFullDay(isFullDay)
-                        .setScheduleDate(mScheduleDate)
-                )
+                .api(updateScheduleApi)
                 .request(new HttpCallback<HttpData<Void>>(this) {
 
                     @Override
