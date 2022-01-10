@@ -139,6 +139,14 @@ public final class RequestHandler implements IRequestHandler {
 //            showError(model.getCode());
             if (model.isTokenFailure()) {
                 // 代表登录失效，需要重新登录
+                Application application = ActivityManager.getInstance().getApplication();
+                SPUtils.getInstance().put(AppConfig.ACCESS_TOKEN, "");
+                Intent intent = new Intent(application, LoginActivity1.class);
+//                Intent intent = new Intent(application, LoginActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                application.startActivity(intent);
+                // 销毁除了登录页之外的 Activity
+                ActivityManager.getInstance().finishAllActivities(LoginActivity1.class);
                 throw new TokenException(mApplication.getString(R.string.http_token_error));
             }
 
@@ -164,7 +172,7 @@ public final class RequestHandler implements IRequestHandler {
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 application.startActivity(intent);
                 // 销毁除了登录页之外的 Activity
-                ActivityManager.getInstance().finishAllActivities(LoginActivity.class);
+                ActivityManager.getInstance().finishAllActivities(LoginActivity1.class);
             }
             return e;
         }

@@ -5,7 +5,7 @@
     <corners android:radius="@dimen/dp_10" />
 
     <gradient
-        android:angle="0"
-        android:endColor="@color/main_color"
-        android:startColor="@color/common_confirm_text_color" />
+        android:angle="180"
+        android:endColor="#7583FF"
+        android:startColor="#142BFE" />
 </shape>

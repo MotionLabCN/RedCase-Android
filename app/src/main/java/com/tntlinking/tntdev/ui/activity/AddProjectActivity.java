@@ -33,6 +33,7 @@ import java.util.List;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatButton;
+import androidx.appcompat.widget.AppCompatTextView;
 
 
 /**
@@ -40,6 +41,7 @@ import androidx.appcompat.widget.AppCompatButton;
  */
 public final class AddProjectActivity extends AppActivity {
 
+    private AppCompatTextView tv_title;
     private ClearEditText et_project_name;//项目名称
     private TextView info_project_in_time;//
     private TextView info_project_end_time;//
@@ -74,6 +76,7 @@ public final class AddProjectActivity extends AppActivity {
 
     @Override
     protected void initView() {
+        tv_title = findViewById(R.id.tv_title);
         et_project_name = findViewById(R.id.et_project_name);
         info_project_in_time = findViewById(R.id.info_project_in_time);
         info_project_end_time = findViewById(R.id.info_project_end_time);
@@ -106,8 +109,10 @@ public final class AddProjectActivity extends AppActivity {
         if (bean != null) {
             if (TextUtils.isEmpty(bean.getProjectName())) {
                 btn_delete.setVisibility(View.GONE);
+                tv_title.setText("添加项目经历");
             } else {
                 btn_delete.setVisibility(View.VISIBLE);
+                tv_title.setText("编辑项目经历");
             }
             et_project_name.setText(bean.getProjectName());
             info_project_in_time.setText(bean.getProjectStartDate());

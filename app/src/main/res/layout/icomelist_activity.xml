@@ -10,6 +10,7 @@
     <com.hjq.bar.TitleBar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:leftIcon="@drawable/icon_back_black"
         app:title="收益账单" />
 
     <LinearLayout
@@ -47,7 +48,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             tools:listCount="10"
-            tools:listitem="@layout/picker_item" />
+            tools:listitem="@layout/income_item" />
     </com.scwang.smart.refresh.layout.SmartRefreshLayout>
 
 </LinearLayout>

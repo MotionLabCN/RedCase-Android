@@ -1,5 +1,6 @@
 package com.tntlinking.tntdev.ui.activity;
 
+import android.content.Intent;
 import android.os.Build;
 import android.text.style.ClickableSpan;
 import android.view.KeyEvent;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.SpanUtils;
 import com.gyf.immersionbar.ImmersionBar;
+import com.tntlinking.tntdev.BuildConfig;
 import com.tntlinking.tntdev.R;
 import com.tntlinking.tntdev.aop.SingleClick;
 import com.tntlinking.tntdev.app.AppActivity;
@@ -70,14 +72,14 @@ public final class LoginActivity2 extends AppActivity implements TextView.OnEdit
 
             @Override
             public void onClick(@NonNull View widget) {
-                BrowserActivity.start(getActivity(), AppConfig.URL_PRIVATE);
+                BrowserActivity.start(getActivity(), BuildConfig.PRIVATE_URL);
             }
         }).setForegroundColor(getColor(R.color.color_text_color)).append("和")
                 .setForegroundColor(getColor(R.color.color_hint_color)).append("《用户协议》").setClickSpan(new ClickableSpan() {
 
             @Override
             public void onClick(@NonNull View widget) {
-                BrowserActivity.start(getActivity(), AppConfig.URL_AGREEMENT);
+                BrowserActivity.start(getActivity(),  BuildConfig.AGREEMENT_URL);
             }
         })
                 .setForegroundColor(getColor(R.color.color_text_color)).create();
@@ -180,7 +182,10 @@ public final class LoginActivity2 extends AppActivity implements TextView.OnEdit
                         } else if (data.getData().getStatus().equals("3")) {
                             startActivity(HomeWorkActivity.class);
                         } else if (data.getData().getStatus().equals("2")) {
-                            startActivity(CheckDeveloperActivity.class);
+//                            startActivity(CheckDeveloperActivity.class);
+                            Intent intent = new Intent(LoginActivity2.this, HomeWorkActivity.class);
+                            intent.putExtra(AppConfig.DEVELOP_STATUS, 2);
+                            startActivity(intent);
                         } else {
                             startActivity(CheckDeveloperFailActivity.class);
                         }

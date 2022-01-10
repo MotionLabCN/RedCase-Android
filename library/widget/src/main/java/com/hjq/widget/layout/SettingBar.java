@@ -92,13 +92,13 @@ public final class SettingBar extends FrameLayout {
         mLeftView.setLineSpacing(getResources().getDimension(R.dimen.dp_5), mLeftView.getLineSpacingMultiplier());
         mRightView.setLineSpacing(getResources().getDimension(R.dimen.dp_5), mRightView.getLineSpacingMultiplier());
 
-        mLeftView.setPaddingRelative((int) getResources().getDimension(R.dimen.dp_15),
+        mLeftView.setPaddingRelative((int) getResources().getDimension(R.dimen.dp_14),
                 (int) getResources().getDimension(R.dimen.dp_12),
                 (int) getResources().getDimension(R.dimen.dp_15),
                 (int) getResources().getDimension(R.dimen.dp_12));
         mRightView.setPaddingRelative((int) getResources().getDimension(R.dimen.dp_15),
                 (int) getResources().getDimension(R.dimen.dp_12),
-                (int) getResources().getDimension(R.dimen.dp_15),
+                (int) getResources().getDimension(R.dimen.dp_10),
                 (int) getResources().getDimension(R.dimen.dp_12));
 
         final TypedArray array = getContext().obtainStyledAttributes(attrs, R.styleable.SettingBar);

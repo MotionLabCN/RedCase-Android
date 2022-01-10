@@ -11,6 +11,8 @@
     <com.hjq.bar.TitleBar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:lineVisible="false"
+        app:leftIcon="@drawable/icon_back_black"
         app:title="面试设置" />
 
 
@@ -35,7 +37,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text=""
+                android:text="xxxxx"
+                android:textStyle="bold"
                 android:textColor="@color/black"
                 android:textSize="@dimen/sp_28" />
 
@@ -72,7 +75,7 @@
         <GridView
             android:id="@+id/grid_view"
             android:layout_width="match_parent"
-            android:layout_height="130dp"
+            android:layout_height="150dp"
             android:layout_marginTop="@dimen/dp_20"
             android:gravity="center"
             android:horizontalSpacing="16dp"

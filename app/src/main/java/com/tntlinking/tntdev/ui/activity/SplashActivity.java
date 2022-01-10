@@ -90,7 +90,8 @@ public final class SplashActivity extends AppActivity {
                         } else if (SPUtils.getInstance().getString(AppConfig.DEVELOP_STATUS, "1").equals("3")) {
                             startActivity(HomeWorkActivity.class);
                         } else if (SPUtils.getInstance().getString(AppConfig.DEVELOP_STATUS, "1").equals("2")) {
-                            startActivity(CheckDeveloperActivity.class);
+//                            startActivity(CheckDeveloperActivity.class);
+                            startActivity(HomeWorkActivity.class);
                         } else {
                             startActivity(CheckDeveloperFailActivity.class);
                         }
@@ -114,7 +115,10 @@ public final class SplashActivity extends AppActivity {
                             } else if (data.getData().getStatus().equals("3")) {
                                 startActivity(HomeWorkActivity.class);
                             }else if (data.getData().getStatus().equals("2")) {
-                                startActivity(CheckDeveloperActivity.class);
+//                                startActivity(CheckDeveloperActivity.class);
+                                Intent intent = new Intent(SplashActivity.this, HomeWorkActivity.class);
+                                intent.putExtra(AppConfig.DEVELOP_STATUS, 2);
+                                startActivity(intent);
                             } else {
                                 startActivity(CheckDeveloperFailActivity.class);
                             }

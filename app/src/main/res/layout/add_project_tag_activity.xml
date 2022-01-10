@@ -12,7 +12,7 @@
     <com.hjq.bar.TitleBar
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_50"
-        app:leftIcon="@drawable/icon_close"
+        app:leftIcon="@drawable/icon_close_black"
         app:rightTitleColor="@color/white"
         app:rightTitleSize="@dimen/sp_14"
         app:title="选择技能标签" />

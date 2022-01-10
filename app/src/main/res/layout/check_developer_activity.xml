@@ -71,7 +71,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_20"
-            android:text="长按二维码识别添加专属英才顾问"
+            android:text="截屏保存到相册 扫码添加专属顾问"
             android:textColor="@color/black"
             android:textSize="@dimen/sp_13" />
 
@@ -83,5 +83,18 @@
             android:textColor="#7E89A3"
             android:textSize="@dimen/sp_13" />
 
+        <TextView
+            android:id="@+id/tv_enter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_10"
+            android:background="@drawable/btn_blue_radius_10"
+            android:paddingLeft="@dimen/dp_20"
+            android:paddingTop="@dimen/dp_8"
+            android:paddingRight="@dimen/dp_20"
+            android:paddingBottom="@dimen/dp_8"
+            android:text="点击进入"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp_12" />
     </LinearLayout>
 </LinearLayout>

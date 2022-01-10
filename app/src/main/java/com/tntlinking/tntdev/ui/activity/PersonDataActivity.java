@@ -6,6 +6,7 @@ import android.widget.TextView;
 
 import com.blankj.utilcode.util.SPUtils;
 import com.gyf.immersionbar.ImmersionBar;
+import com.tntlinking.tntdev.BuildConfig;
 import com.tntlinking.tntdev.R;
 import com.tntlinking.tntdev.aop.SingleClick;
 import com.tntlinking.tntdev.app.AppActivity;
@@ -54,12 +55,12 @@ public final class PersonDataActivity extends AppActivity {
 
         setOnClickListener(mPersonDataIncome, mPersonDataSetting, mPersonDataInterview, person_data_private, person_data_deal);
 
-        String name = SPUtils.getInstance().getString(AppConfig.DEVELOP_NAME);
-        if (!TextUtils.isEmpty(name)) {
-            tv_avatar.setText(name);
-        } else {
-            tv_avatar.setBackground(getResources().getDrawable(R.drawable.dot_oval_blue));
-        }
+//        String name = SPUtils.getInstance().getString(AppConfig.DEVELOP_NAME);
+//        if (!TextUtils.isEmpty(name)) {
+//            tv_avatar.setText(name);
+//        } else {
+//            tv_avatar.setBackground(getResources().getDrawable(R.drawable.dot_oval_blue));
+//        }
     }
 
     @Override
@@ -78,9 +79,9 @@ public final class PersonDataActivity extends AppActivity {
         } else if (view == mPersonDataSetting) {
             startActivity(PersonSettingActivity.class);
         } else if (view == person_data_private) {
-            BrowserActivity.start(getActivity(), "https://fuchsia-athlete-f65.notion.site/9f0df9c1265e4d00a99ac0591d390ac3");
+            BrowserActivity.start(getActivity(), BuildConfig.PRIVATE_URL);
         } else if (view == person_data_deal) {
-            BrowserActivity.start(getActivity(), "https://fuchsia-athlete-f65.notion.site/cfcae78c7aa643228502af8e9c6a0d17");
+            BrowserActivity.start(getActivity(), BuildConfig.AGREEMENT_URL);
         }
 
     }
@@ -101,6 +102,7 @@ public final class PersonDataActivity extends AppActivity {
 
                     @Override
                     public void onSucceed(HttpData<GetDeveloperStatusApi.Bean> data) {
+                        tv_avatar.setText(data.getData().getRealName());
                         tv_name.setText(data.getData().getRealName());
                         tv_position.setText(data.getData().getCareerDirection());
                         tv_sign_num.setText(data.getData().getSignContractNum() + "次");

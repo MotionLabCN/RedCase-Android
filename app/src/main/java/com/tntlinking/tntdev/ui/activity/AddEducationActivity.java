@@ -26,13 +26,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import androidx.appcompat.widget.AppCompatButton;
+import androidx.appcompat.widget.AppCompatTextView;
 
 
 /**
  * 添加教育经历
  */
 public final class AddEducationActivity extends AppActivity {
-
+    private AppCompatTextView tv_title;
     private ClearEditText et_info_school_name;
     private SettingBar info_education;
     private ClearEditText et_info_major;//专业
@@ -65,6 +66,7 @@ public final class AddEducationActivity extends AppActivity {
     @Override
     protected void initView() {
 
+        tv_title = findViewById(R.id.tv_title);
         et_info_school_name = findViewById(R.id.et_info_school_name);
         info_education = findViewById(R.id.info_education);
         et_info_major = findViewById(R.id.et_info_major);
@@ -91,8 +93,10 @@ public final class AddEducationActivity extends AppActivity {
         if (bean != null) {
             if (TextUtils.isEmpty(bean.getCollegeName())) {
                 btn_delete.setVisibility(View.GONE);
+                tv_title.setText("添加教育经历");
             } else {
                 btn_delete.setVisibility(View.VISIBLE);
+                tv_title.setText("编辑教育经历");
 
                 et_info_school_name.setText(bean.getCollegeName());
                 info_education.setLeftText(bean.getEducation());
@@ -109,7 +113,6 @@ public final class AddEducationActivity extends AppActivity {
                 end_time= bean.getInSchoolEndTime();
                 training = bean.getmTrainingMode();
             }
-        } else {
         }
 
     }

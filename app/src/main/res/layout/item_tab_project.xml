@@ -53,11 +53,15 @@
                         android:id="@+id/tv_project_time"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:drawableRight="@drawable/icon_arrow_right"
                         android:gravity="center"
                         android:text="2020-2021"
                         android:textColor="@color/gray"
                         android:textSize="@dimen/sp_12" />
+                    <ImageView
+                        android:layout_width="@dimen/dp_16"
+                        android:layout_height="@dimen/dp_16"
+                        android:layout_gravity="center"
+                        android:src="@drawable/icon_arrow_right"/>
                 </LinearLayout>
 
 
@@ -92,7 +96,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="新开发是用于解决远程分布式协作问题的一站式云开发协作平台。"
-            android:textColor="@color/gray"
+            android:textColor="@color/black"
             android:textSize="@dimen/sp_13" />
 
         <LinearLayout
@@ -103,7 +107,7 @@
 
             <com.tntlinking.tntdev.widget.FlowTagLayout
                 android:id="@+id/tag_flow_layout"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </LinearLayout>
     </LinearLayout>

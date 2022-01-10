@@ -89,9 +89,55 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_10"
             android:background="@drawable/btn_blue_radius_10"
-            android:paddingLeft="@dimen/dp_20"
+            android:paddingLeft="@dimen/dp_40"
             android:paddingTop="@dimen/dp_8"
-            android:paddingRight="@dimen/dp_20"
+            android:paddingRight="@dimen/dp_40"
+            android:paddingBottom="@dimen/dp_8"
+            android:text="刷新"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp_12" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_status"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/common_window_background_color"
+        android:gravity="center|top"
+        android:orientation="vertical"
+        android:paddingTop="@dimen/dp_20"
+        android:visibility="gone">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/bg_check_status" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_10"
+            android:text="尚未通过审核"
+            android:textColor="@color/black"
+            android:textSize="@dimen/sp_15" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_10"
+            android:text="专属顾问将在1-3个工作日内完成审核"
+            android:textColor="#7E89A3"
+            android:textSize="@dimen/sp_12" />
+
+        <TextView
+            android:id="@+id/tv_status_refresh"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_10"
+            android:background="@drawable/btn_blue_radius_10"
+            android:paddingLeft="@dimen/dp_40"
+            android:paddingTop="@dimen/dp_8"
+            android:paddingRight="@dimen/dp_40"
             android:paddingBottom="@dimen/dp_8"
             android:text="刷新"
             android:textColor="@color/white"

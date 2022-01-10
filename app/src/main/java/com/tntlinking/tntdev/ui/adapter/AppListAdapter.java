@@ -94,12 +94,13 @@ public final class AppListAdapter extends AppAdapter<AppListApi.Bean> {
                     ll_status.setBackground(mContext.getDrawable(R.drawable.bg_orange_radius_3));
                     tv_type.setTextColor(mContext.getResources().getColor(R.color.white));
                     tv_type.setBackground(mContext.getDrawable(R.drawable.btn_blue_radius_10));
+                    tv_status.setTextColor(mContext.getResources().getColor(R.color.color_fb839));
                 } else { // 待服务
                     view_dot.setBackground(mContext.getDrawable(R.drawable.dot_oval_gray));
                     ll_status.setBackground(mContext.getDrawable(R.drawable.bg_gray_radius_3));
                     tv_type.setTextColor(mContext.getResources().getColor(R.color.color_C1C6D2));
                     tv_type.setBackground(mContext.getDrawable(R.drawable.btn_gray_radius_10));
-
+                    tv_status.setTextColor(mContext.getResources().getColor(R.color.gray));
                 }
             } else {// 面试邀约
                 tv_position_name.setText(item.getPositionName());
@@ -111,6 +112,7 @@ public final class AppListAdapter extends AppAdapter<AppListApi.Bean> {
                     tv_interview.setVisibility(View.VISIBLE);
                     view_dot.setBackground(mContext.getDrawable(R.drawable.dot_oval_blue));
                     ll_status.setBackground(mContext.getDrawable(R.drawable.bg_blue_radius_3));
+                    tv_status.setTextColor(mContext.getResources().getColor(R.color.main_color));
                 } else {
                     tv_interview.setVisibility(View.GONE);
                     ll_status.setVisibility(View.GONE);

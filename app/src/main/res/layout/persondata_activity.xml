@@ -13,6 +13,7 @@
         android:layout_height="@dimen/dp_50"
         android:background="@color/main_color"
         app:barStyle="transparent"
+        app:leftIcon="@drawable/icon_back_white"
         app:rightBackground="@null"
         app:title="" />
 
@@ -46,6 +47,7 @@
             android:layout_marginTop="@dimen/dp_10"
             android:text="xxxxx"
             android:textColor="@color/white"
+            android:textStyle="bold"
             android:textSize="@dimen/sp_20" />
 
         <TextView
@@ -61,9 +63,9 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/dp_20"
+            android:layout_marginLeft="@dimen/dp_16"
             android:layout_marginTop="@dimen/dp_20"
-            android:layout_marginRight="@dimen/dp_20"
+            android:layout_marginRight="@dimen/dp_16"
             android:layout_marginBottom="@dimen/dp_10"
             android:background="@drawable/bg_blue_bottom_radius_6"
             android:gravity="center"
@@ -83,6 +85,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="xx次"
+                    android:textStyle="bold"
                     android:textColor="@color/white"
                     android:textSize="@dimen/sp_15" />
 
@@ -112,6 +115,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="xxxxxx"
+                    android:textStyle="bold"
                     android:textColor="@color/white"
                     android:textSize="@dimen/sp_15" />
 
@@ -136,6 +140,7 @@
         app:bar_leftText="收益账单"
         app:bar_leftTextSize="@dimen/sp_13"
         app:bar_lineVisible="false"
+        app:bar_rightDrawableSize="@dimen/dp_16"
         app:bar_rightDrawable="@drawable/icon_arrow_right" />
 
     <com.hjq.widget.layout.SettingBar
@@ -146,6 +151,7 @@
         app:bar_leftText="面试设置"
         app:bar_leftTextSize="@dimen/sp_13"
         app:bar_lineVisible="false"
+        app:bar_rightDrawableSize="@dimen/dp_16"
         app:bar_rightDrawable="@drawable/icon_arrow_right" />
 
     <com.hjq.widget.layout.SettingBar
@@ -156,6 +162,7 @@
         app:bar_leftText="隐私政策"
         app:bar_leftTextSize="@dimen/sp_13"
         app:bar_lineVisible="false"
+        app:bar_rightDrawableSize="@dimen/dp_16"
         app:bar_rightDrawable="@drawable/icon_arrow_right" />
 
     <com.hjq.widget.layout.SettingBar
@@ -166,6 +173,7 @@
         app:bar_leftText="用户协议"
         app:bar_leftTextSize="@dimen/sp_13"
         app:bar_lineVisible="false"
+        app:bar_rightDrawableSize="@dimen/dp_16"
         app:bar_rightDrawable="@drawable/icon_arrow_right" />
 
     <com.hjq.widget.layout.SettingBar
@@ -176,6 +184,7 @@
         app:bar_leftText="账户设置"
         app:bar_leftTextSize="@dimen/sp_13"
         app:bar_lineVisible="false"
+        app:bar_rightDrawableSize="@dimen/dp_16"
         app:bar_rightDrawable="@drawable/icon_arrow_right" />
 
 </LinearLayout>

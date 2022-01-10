@@ -1,13 +1,16 @@
 package com.tntlinking.tntdev.ui.activity;
 
+import android.content.Intent;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.blankj.utilcode.util.TimeUtils;
 import com.gyf.immersionbar.ImmersionBar;
 import com.tntlinking.tntdev.R;
 import com.tntlinking.tntdev.aop.SingleClick;
 import com.tntlinking.tntdev.app.AppActivity;
+import com.tntlinking.tntdev.other.AppConfig;
 import com.tntlinking.tntdev.other.ImageSaveUtil;
 import com.tntlinking.tntdev.other.PermissionCallback;
 
@@ -26,7 +29,7 @@ public final class CheckDeveloperActivity extends AppActivity {
 
     private ImageView iv_avatar;
     private ImageView iv_qr;
-
+    private TextView tv_enter;
 
     @Override
     protected int getLayoutId() {
@@ -37,9 +40,10 @@ public final class CheckDeveloperActivity extends AppActivity {
     protected void initView() {
         iv_avatar = findViewById(R.id.iv_avatar);
         iv_qr = findViewById(R.id.iv_qr);
+        tv_enter = findViewById(R.id.tv_enter);
 
 
-        setOnClickListener(iv_qr);
+        setOnClickListener(iv_qr, tv_enter);
     }
 
     @Override
@@ -78,6 +82,12 @@ public final class CheckDeveloperActivity extends AppActivity {
 
                         }
                     });
+        } else if (view == tv_enter) {
+
+            Intent intent = new Intent(this, HomeWorkActivity.class);
+            intent.putExtra(AppConfig.DEVELOP_STATUS, 2); //是否认证  1->待认证  2->待审核   3->审核成功 4->审核失败
+            startActivity(intent);
+            finish();
         }
 
     }

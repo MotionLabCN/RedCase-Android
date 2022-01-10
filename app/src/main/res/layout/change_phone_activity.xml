@@ -14,10 +14,11 @@
     <com.hjq.bar.TitleBar
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_50"
-        app:leftIcon="@drawable/arrows_left_ic"
+        app:leftIcon="@drawable/icon_back_black"
         app:rightBackground="@null"
         app:rightTitleColor="@color/common_accent_color"
         app:rightTitleSize="@dimen/sp_14"
+        app:lineVisible="false"
         app:title="更换手机号" />
 
     <LinearLayout
@@ -42,7 +43,7 @@
 
         <View
             style="@style/HorizontalLineStyle"
-            android:layout_marginHorizontal="@dimen/dp_20" />
+            android:layout_marginHorizontal="@dimen/dp_16" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -76,7 +77,9 @@
 
         </LinearLayout>
 
-
+        <View
+            style="@style/HorizontalLineStyle"
+            android:layout_marginHorizontal="@dimen/dp_16" />
     </LinearLayout>
 
     <View
@@ -89,7 +92,7 @@
         style="@style/ButtonStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/dp_40"
+        android:layout_marginHorizontal="@dimen/dp_16"
         android:layout_marginVertical="@dimen/dp_30"
         android:text="保存" />
 

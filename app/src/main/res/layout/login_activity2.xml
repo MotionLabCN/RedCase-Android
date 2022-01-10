@@ -15,7 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_50"
         app:barStyle="transparent"
-        app:leftIcon="@drawable/icon_close"
+        app:leftIcon="@drawable/icon_close_black"
         app:rightBackground="@null"
         app:rightTitleColor="@color/common_accent_color"
         app:rightTitleSize="@dimen/sp_14"
@@ -97,7 +97,7 @@
             style="@style/ButtonStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/dp_40"
+            android:layout_marginHorizontal="@dimen/dp_16"
             android:layout_marginTop="@dimen/dp_30"
             android:text="@string/login_text" />
 

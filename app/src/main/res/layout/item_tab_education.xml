@@ -35,11 +35,14 @@
                 android:id="@+id/tv_school_time"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:drawableRight="@drawable/icon_arrow_right"
                 android:gravity="center"
                 android:text="xxxxxx-xxxxxx"
                 android:textColor="@color/gray"
                 android:textSize="@dimen/sp_12" />
+            <ImageView
+                android:layout_width="@dimen/dp_16"
+                android:layout_height="@dimen/dp_16"
+                android:src="@drawable/icon_arrow_right"/>
         </LinearLayout>
 
 

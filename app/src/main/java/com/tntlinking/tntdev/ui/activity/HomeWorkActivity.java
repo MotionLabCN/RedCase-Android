@@ -15,6 +15,7 @@ import com.tntlinking.tntdev.aop.SingleClick;
 import com.tntlinking.tntdev.app.AppActivity;
 import com.tntlinking.tntdev.http.api.AppListApi;
 import com.tntlinking.tntdev.http.api.AppListInterviewApi;
+import com.tntlinking.tntdev.http.api.GetDeveloperStatusApi;
 import com.tntlinking.tntdev.http.api.HistoryListApi;
 import com.tntlinking.tntdev.http.model.HttpData;
 import com.tntlinking.tntdev.other.AppConfig;
@@ -37,6 +38,8 @@ public final class HomeWorkActivity extends AppActivity {
     private RecyclerView rv_app_list;
     private LinearLayout ll_empty;
     private TextView tv_refresh;
+    private LinearLayout ll_status;
+    private TextView tv_status_refresh;
     private int appSize = 0; //工作请求列表size
     private int interSize = 0; //面试请求列表size
     private int historySize = 0;//历史记录列表size
@@ -52,13 +55,16 @@ public final class HomeWorkActivity extends AppActivity {
         rv_app_list = findViewById(R.id.rv_app_list);
         ll_empty = findViewById(R.id.ll_empty);
         tv_refresh = findViewById(R.id.tv_refresh);
+        ll_status = findViewById(R.id.ll_status);
+        tv_status_refresh = findViewById(R.id.tv_status_refresh);
         String name = SPUtils.getInstance().getString(AppConfig.DEVELOP_NAME);
-        if (!TextUtils.isEmpty(name)) {
-            tv_avatar.setText(name);
-        } else {
-            tv_avatar.setBackground(getResources().getDrawable(R.drawable.dot_oval_blue));
-        }
-        setOnClickListener(tv_avatar, tv_refresh);
+        tv_avatar.setText(name);
+//        if (!TextUtils.isEmpty(name)) {
+//            tv_avatar.setText(name);
+//        } else {
+//            tv_avatar.setBackground(getResources().getDrawable(R.drawable.dot_oval_blue));
+//        }
+        setOnClickListener(tv_avatar, tv_refresh, tv_status_refresh);
 
         mAdapter = new AppListAdapter(this);
         mAdapter.setOnItemClickListener(new BaseAdapter.OnItemClickListener() {  // 要在setapder之前设置监听事件
@@ -88,15 +94,18 @@ public final class HomeWorkActivity extends AppActivity {
     @Override
     protected void initData() {
 //        getHistoryList();
-        getAppList();
+
+        int status = getInt(AppConfig.DEVELOP_STATUS, 0);
+        if (status == 2) {
+            ll_status.setVisibility(View.VISIBLE);
+        } else {
+            ll_status.setVisibility(View.GONE);
+            getAppList();
+        }
+
 
     }
 
-
-    @Override
-    public void onRightClick(View view) {
-
-    }
 
     @SingleClick
     @Override
@@ -111,6 +120,9 @@ public final class HomeWorkActivity extends AppActivity {
                     toast("刷新成功");
                 }
             }, 600);
+        } else if (view == tv_status_refresh) {
+
+            getStatus();
         }
 
     }
@@ -223,5 +235,33 @@ public final class HomeWorkActivity extends AppActivity {
                 });
     }
 
+
+    public void getStatus() {
+        EasyHttp.get(HomeWorkActivity.this)
+                .api(new GetDeveloperStatusApi())
+                .request(new HttpCallback<HttpData<GetDeveloperStatusApi.Bean>>(HomeWorkActivity.this) {
+
+                    @Override
+                    public void onSucceed(HttpData<GetDeveloperStatusApi.Bean> data) {
+                        // 1->待认证  2->待审核   3->审核成功 4->审核失败
+                        SPUtils.getInstance().put(AppConfig.DEVELOP_STATUS, data.getData().getStatus());
+                        SPUtils.getInstance().put(AppConfig.DEVELOP_NAME, data.getData().getRealName());
+                        tv_avatar.setText(data.getData().getRealName());
+                        if (data.getData().getStatus().equals("1")) {
+                            startActivity(LoginActivityView.class);
+                            finish();
+                        } else if (data.getData().getStatus().equals("3")) {
+                            ll_status.setVisibility(View.GONE);
+                            getAppList();
+                        } else if (data.getData().getStatus().equals("2")) {
+//                            startActivity(CheckDeveloperActivity.class);
+                        } else {
+                            startActivity(CheckDeveloperFailActivity.class);
+                            finish();
+                        }
+
+                    }
+                });
+    }
 
 }

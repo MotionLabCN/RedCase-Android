@@ -80,7 +80,7 @@ public class InterviewSettingAdapter extends BaseAdapter {
                 holder.view_dot.setVisibility(View.VISIBLE);
                 holder.view_dot.setBackground(mContext.getDrawable(R.drawable.bg_green_radius_100));
             }else {
-                holder.view_dot.setVisibility(View.GONE);
+                holder.view_dot.setVisibility(View.INVISIBLE);
             }
 
             if (bean.isSelect()){

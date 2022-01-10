@@ -49,8 +49,8 @@
         android:layout_marginVertical="@dimen/dp_10"
         android:gravity="center"
         android:orientation="horizontal"
-        android:paddingLeft="@dimen/dp_6"
-        android:paddingRight="@dimen/dp_6">
+        android:layout_marginRight="@dimen/dp_16"
+        android:layout_marginLeft="@dimen/dp_16">
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_back"

@@ -15,6 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_50"
         app:rightBackground="@null"
+        app:leftIcon="@drawable/icon_back_black"
         app:rightTitleColor="@color/common_accent_color"
         app:rightTitleSize="@dimen/sp_14"
         app:title="写日报" />
