@@ -118,17 +118,20 @@ public final class BaseInfoActivity1 extends AppActivity {
                 new ProvinceSelectDialog.Builder(this).setTitle("选择所在地").setListener(new ProvinceSelectDialog.OnListener() {
                     @Override
                     public void onSelected(BaseDialog dialog, GetProvinceApi.ProvinceBean province,
-                                           GetProvinceApi.AreaBean area, GetProvinceApi.CityBean city) {
-
+                                           GetProvinceApi.AreaBean city, GetProvinceApi.CityBean area) {
+                        // 省 市 区
                         postBean.setProvinceId(province.getId());
-                        postBean.setAreasId(area.getId());
                         postBean.setCityId(city.getId());
+                        postBean.setAreasId(area.getId());
+
 
                         postBean.setmProvince(province.getRegionName());
-                        postBean.setmArea(area.getRegionName());
                         postBean.setmCity(city.getRegionName());
+                        postBean.setmArea(area.getRegionName());
 
-                        mInfoAddress.setLeftText(province.getRegionName() + "-" + area.getRegionName() + "-" + city.getRegionName());
+
+                        mInfoAddress.setLeftText(province.getRegionName() + "-" + city.getRegionName() + "-" + area.getRegionName());
+
                     }
                 }).show();
 

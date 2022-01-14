@@ -146,7 +146,7 @@ public final class BaseInfoActivity3 extends AppActivity {
                     project.setProjectEndDate(bean.getProjectEndDate() + "-01");
                     project.setProjectName(bean.getProjectName());
                     project.setSkillIdList(bean.getSkillIdList());
-                    project.setWorkMode(bean.getWorkMode());
+                    project.setWorkModeId(bean.getWorkModeId());
 
                     projectList.add(project);
                 }

@@ -189,7 +189,7 @@ public final class SendDeveloperApi implements IRequestApi , IRequestType {
         private String projectStartDate;//项目开始时间
         private String projectName;//项目名称
         private List<Integer> skillIdList;//技能id
-        private int workMode;//职业状态id
+        private int workModeId;//职业状态id
 
 
 
@@ -258,12 +258,12 @@ public final class SendDeveloperApi implements IRequestApi , IRequestType {
             this.skillIdList = skillIdList;
         }
 
-        public int getWorkMode() {
-            return workMode;
+        public int getWorkModeId() {
+            return workModeId;
         }
 
-        public void setWorkMode(int workMode) {
-            this.workMode = workMode;
+        public void setWorkModeId(int workModeId) {
+            this.workModeId = workModeId;
         }
 
 

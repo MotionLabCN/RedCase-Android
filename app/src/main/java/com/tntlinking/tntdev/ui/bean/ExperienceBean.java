@@ -30,7 +30,7 @@ public class ExperienceBean implements Serializable {
     private String projectEndDate;//项目结束时间
     private String projectStartDate;//项目开始时间
     private String projectName;//项目名称
-    private int workMode;//职业状态id
+    private int workModeId;//职业状态id
     private String industry;//行业
     private String mWorkMode;//职业状态
     private List<GetTagListApi.Bean.ChildrenBean> skillList;//技能
@@ -164,12 +164,12 @@ public class ExperienceBean implements Serializable {
         this.projectName = projectName;
     }
 
-    public int getWorkMode() {
-        return workMode;
+    public int getWorkModeId() {
+        return workModeId;
     }
 
-    public void setWorkMode(int workMode) {
-        this.workMode = workMode;
+    public void setWorkModeId(int workModeId) {
+        this.workModeId = workModeId;
     }
 
     public String getIndustry() {

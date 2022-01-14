@@ -55,7 +55,7 @@ public final class AddProjectActivity extends AppActivity {
     private AppCompatButton btn_commit;
 
     private static final String INTENT_KEY_PROJECT = "key_project";
-    private int workMode;//职业状态id
+    private int workModeId;//职业状态id
     private int industryId;//行业id
 
     private String project_name = "";
@@ -160,7 +160,7 @@ public final class AddProjectActivity extends AppActivity {
                     public void onSelected(BaseDialog dialog, int type) {
 
                         info_project_work_mode.setLeftText(mWorkStatusList.get(type).getName());
-                        workMode = mWorkStatusList.get(type).getId();
+                        workModeId = mWorkStatusList.get(type).getId();
                         work_mode = mWorkStatusList.get(type).getName();
                     }
                 }).show();
@@ -282,7 +282,7 @@ public final class AddProjectActivity extends AppActivity {
                 bean.setProjectEndDate(info_project_end_time.getText().toString());
                 bean.setPosition(et_project_position.getText().toString());
                 bean.setmWorkMode(info_project_work_mode.getLeftText().toString());
-                bean.setWorkMode(workMode);
+                bean.setWorkModeId(workModeId);
                 bean.setCompanyName(et_project_company_name.getText().toString());
                 bean.setIndustry(info_project_industry.getLeftText().toString());
                 bean.setIndustryId(industryId);
