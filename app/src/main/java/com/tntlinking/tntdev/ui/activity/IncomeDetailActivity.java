@@ -47,7 +47,7 @@ public final class IncomeDetailActivity extends AppActivity {
         tv_service_money = headerView.findViewById(R.id.tv_service_money);
         tv_personalTax = headerView.findViewById(R.id.tv_personalTax);
         tv_order_count = headerView.findViewById(R.id.tv_order_count);
-        headerView.setOnClickListener(v -> toast("点击了头部"));
+//        headerView.setOnClickListener(v -> toast("点击了头部"));
 //
 //        TextView footerView = mRecyclerView.addFooterView(R.layout.picker_item);
 //        footerView.setText("我是尾部");

@@ -39,7 +39,7 @@ public final class BaseInfoActivity2 extends AppActivity {
     private ClearEditText et_expect_salary_low;
     private ClearEditText et_expect_salary_high;
 
-    private AppCompatButton mBack;
+
     private AppCompatButton mNext;
 
     private int mCareerDirectionId = 1;    //职业方向id
@@ -65,10 +65,9 @@ public final class BaseInfoActivity2 extends AppActivity {
         et_salary = findViewById(R.id.et_salary);
         et_expect_salary_low = findViewById(R.id.et_expect_salary_low);
         et_expect_salary_high = findViewById(R.id.et_expect_salary_high);
-        mBack = findViewById(R.id.btn_back);
         mNext = findViewById(R.id.btn_next);
 
-        setOnClickListener(info_specialisations, info_work_experience, tv_all_day, tv_half_day, mBack, mNext);
+        setOnClickListener(info_specialisations, info_work_experience, tv_all_day, tv_half_day, mNext);
 
 
     }
@@ -153,9 +152,7 @@ public final class BaseInfoActivity2 extends AppActivity {
                 tv_half_day.setTextColor(getColor(R.color.white));
                 postBean.setWorkDayMode(2);
                 break;
-            case R.id.btn_back:
-                finish();
-                break;
+
             case R.id.btn_next:
 
 

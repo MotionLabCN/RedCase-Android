@@ -12,11 +12,11 @@
     <com.hjq.bar.TitleBar
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_50"
-        app:barStyle="transparent"
-        app:leftIcon="@drawable/icon_close_black"
-        app:rightTitleColor="@color/white"
-        app:rightTitleSize="@dimen/sp_14"
+        app:leftIcon="@drawable/icon_back_black"
+        app:lineVisible="false"
+        app:rightBackground="@null"
         app:title="" />
+
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_title"
@@ -170,7 +170,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginVertical="@dimen/dp_30"
+        android:layout_marginVertical="@dimen/dp_20"
         android:gravity="center"
         android:orientation="horizontal"
         android:paddingLeft="@dimen/dp_6"

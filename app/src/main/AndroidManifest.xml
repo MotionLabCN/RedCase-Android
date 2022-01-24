@@ -267,15 +267,37 @@
             android:name="com.tntlinking.tntdev.ui.activity.AddEducationActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
+        <!-- 添加教育经历页面 -->
+        <activity
+            android:name="com.tntlinking.tntdev.ui.activity.AddEducationActivityNew"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <!-- 添加项目经验 -->
+        <activity
+            android:name="com.tntlinking.tntdev.ui.activity.AddWorkActivity"
+            android:launchMode="singleTop"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"
+            android:screenOrientation="portrait" />
         <!-- 添加项目经验 -->
         <activity
             android:name="com.tntlinking.tntdev.ui.activity.AddProjectActivity"
             android:launchMode="singleTop"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan"
             android:screenOrientation="portrait" />
+        <!-- 添加项目经验 -->
+        <activity
+            android:name="com.tntlinking.tntdev.ui.activity.AddProjectActivityNew"
+            android:launchMode="singleTop"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"
+            android:screenOrientation="portrait" />
         <!-- 标签选择页面-->
         <activity
             android:name="com.tntlinking.tntdev.ui.activity.AddProjectTagActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <!-- 标签选择页面-->
+        <activity
+            android:name="com.tntlinking.tntdev.ui.activity.AddProjectTagActivityNew"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
         <!-- 标签选择搜索页面-->
@@ -302,6 +324,16 @@
         <!-- 工作主页 页面 -->
         <activity
             android:name="com.tntlinking.tntdev.ui.activity.HomeWorkActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <!-- 工作主页 页面 -->
+        <activity
+            android:name="com.tntlinking.tntdev.ui.activity.InterviewActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <!-- 工作主页 页面 -->
+        <activity
+            android:name="com.tntlinking.tntdev.ui.activity.HomeStatusActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
         <!-- 面试详情页面 -->
@@ -344,7 +376,30 @@
             android:name="com.tntlinking.tntdev.ui.activity.WriteDailyActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
-
+        <!-- 写日报页面-->
+        <activity
+            android:name="com.tntlinking.tntdev.ui.activity.AboutAppActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <!-- 写日报页面-->
+        <activity
+            android:name="com.tntlinking.tntdev.ui.activity.AddBaseInfoActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <!-- 写日报页面-->
+        <activity
+            android:name="com.tntlinking.tntdev.ui.activity.AddCareerActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.tntlinking.tntdev.ui.activity.EnterDeveloperActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <!-- 写日报页面-->
+        <activity
+            android:name="com.tntlinking.tntdev.ui.activity.SaveQRActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
         <!-- 微信回调（请注意这个 Activity 放置的包名要和当前项目的包名保持一致，否则将不能正常回调） -->
         <activity
             android:name="com.tntlinking.tntdev.wxapi.WXEntryActivity"

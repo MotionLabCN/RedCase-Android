@@ -177,6 +177,7 @@ public final class LoginActivity2 extends AppActivity implements TextView.OnEdit
                         SPUtils.getInstance().put(AppConfig.HAS_LOGIN, true);
                         SPUtils.getInstance().put(AppConfig.DEVELOP_STATUS, data.getData().getStatus());
                         SPUtils.getInstance().put(AppConfig.DEVELOP_NAME, data.getData().getRealName());
+                        SPUtils.getInstance().put(AppConfig.DEVELOPER_ID, data.getData().getId());
                         if (data.getData().getStatus().equals("1")) { //
                             startActivity(LoginActivityView.class);
                         } else if (data.getData().getStatus().equals("3")) {

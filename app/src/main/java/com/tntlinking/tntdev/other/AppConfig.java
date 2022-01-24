@@ -71,7 +71,7 @@ public final class AppConfig {
     /**
      *
      */
-    private static String DEVELOPER_ID = "developer_id";
+    public static String DEVELOPER_ID = "developer_id";
     /**
      * 是否登陆
      */

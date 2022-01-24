@@ -100,7 +100,7 @@ public final class SplashActivity extends AppActivity {
                     }
                     finish();
                 } else {
-//                    startActivity(BaseInfoActivity3.class);
+//                    startActivity(HomeWorkActivity.class);
             EasyHttp.get(SplashActivity.this)
                     .api(new GetDeveloperStatusApi())
                     .request(new HttpCallback<HttpData<GetDeveloperStatusApi.Bean>>(SplashActivity.this) {
@@ -110,6 +110,7 @@ public final class SplashActivity extends AppActivity {
                             // 1->待认证  2->待审核   3->审核成功 4->审核失败
                             SPUtils.getInstance().put(AppConfig.DEVELOP_STATUS, data.getData().getStatus());
                             SPUtils.getInstance().put(AppConfig.DEVELOP_NAME, data.getData().getRealName());
+                            SPUtils.getInstance().put(AppConfig.DEVELOPER_ID, data.getData().getId());
                             if (data.getData().getStatus().equals("1")) { //
                                 startActivity(LoginActivityView.class);
                             } else if (data.getData().getStatus().equals("3")) {

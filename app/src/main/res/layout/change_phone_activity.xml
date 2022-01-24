@@ -19,6 +19,7 @@
         app:rightTitleColor="@color/common_accent_color"
         app:rightTitleSize="@dimen/sp_14"
         app:lineVisible="false"
+        app:titleStyle="bold"
         app:title="更换手机号" />
 
     <LinearLayout

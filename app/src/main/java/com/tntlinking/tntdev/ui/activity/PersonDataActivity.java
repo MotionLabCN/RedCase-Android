@@ -27,6 +27,8 @@ public final class PersonDataActivity extends AppActivity {
     private SettingBar mPersonDataSetting;
     private SettingBar person_data_private;
     private SettingBar person_data_deal;
+    private SettingBar person_data_dev;
+    private SettingBar person_data_about;
     private TextView tv_avatar;
     private TextView tv_name;
     private TextView tv_position;
@@ -47,13 +49,16 @@ public final class PersonDataActivity extends AppActivity {
         mPersonDataSetting = findViewById(R.id.person_data_setting);
         person_data_private = findViewById(R.id.person_data_private);
         person_data_deal = findViewById(R.id.person_data_deal);
+        person_data_dev = findViewById(R.id.person_data_dev);
+        person_data_about = findViewById(R.id.person_data_about);
         tv_avatar = findViewById(R.id.tv_avatar);
         tv_name = findViewById(R.id.tv_name);
         tv_position = findViewById(R.id.tv_position);
         tv_sign_num = findViewById(R.id.tv_sign_num);
         tv_profit_total = findViewById(R.id.tv_profit_total);
 
-        setOnClickListener(mPersonDataIncome, mPersonDataSetting, mPersonDataInterview, person_data_private, person_data_deal);
+        setOnClickListener(mPersonDataIncome, mPersonDataSetting, mPersonDataInterview,
+                person_data_private, person_data_deal,person_data_dev,person_data_about);
 
 //        String name = SPUtils.getInstance().getString(AppConfig.DEVELOP_NAME);
 //        if (!TextUtils.isEmpty(name)) {
@@ -82,6 +87,11 @@ public final class PersonDataActivity extends AppActivity {
             BrowserActivity.start(getActivity(), BuildConfig.PRIVATE_URL);
         } else if (view == person_data_deal) {
             BrowserActivity.start(getActivity(), BuildConfig.AGREEMENT_URL);
+        }else if (view == person_data_dev) {
+            startActivity(EnterDeveloperActivity.class);
+        }else if (view == person_data_about) {
+//            startActivity(HomeStatusActivity.class);
+            startActivity(AboutAppActivity.class);
         }
 
     }

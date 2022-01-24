@@ -11,6 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:leftIcon="@drawable/icon_back_black"
+        app:titleStyle="bold"
         app:title="收益账单" />
 
     <LinearLayout

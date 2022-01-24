@@ -332,7 +332,10 @@ public final class AddProjectTagActivity extends AppActivity {
         if (list != null) {
             mSelectList.addAll(list);
 //            mTagAdapterSelect.onlyAddAll(mSelectList);
+            EasyLog.print("===mSelectList===");
         }
+
+        EasyLog.print("===mSelectList==="+GsonUtils.toJson(list));
 
         EasyHttp.get(this)
                 .api(new GetTagListApi().setCareerDirectionId(careerId))
@@ -540,6 +543,12 @@ public final class AddProjectTagActivity extends AppActivity {
                                                 childrenBean.setType(4);
                                                 mList1.add(childrenBean);
                                                 continue;
+                                            }
+                                        }
+                                    }else if (mSelectList.get(i).getType() == 0){
+                                        for (int d = 0; i < mSelectList.size(); d++) {
+                                            if (!isInList(mallList, mSelectList.get(d))) {
+                                                mList1.add(mSelectList.get(d));
                                             }
                                         }
                                     }

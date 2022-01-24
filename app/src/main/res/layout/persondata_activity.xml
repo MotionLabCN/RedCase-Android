@@ -131,11 +131,24 @@
     </LinearLayout>
 
 
+
+    <com.hjq.widget.layout.SettingBar
+        android:id="@+id/person_data_dev"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_20"
+        app:bar_leftDrawable="@drawable/icon_income"
+        app:bar_leftText="入住资料"
+        app:bar_leftTextSize="@dimen/sp_13"
+        app:bar_lineVisible="false"
+        app:bar_rightDrawableSize="@dimen/dp_16"
+        app:bar_rightDrawable="@drawable/icon_arrow_right" />
+
     <com.hjq.widget.layout.SettingBar
         android:id="@+id/person_data_income"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dp_20"
+
         app:bar_leftDrawable="@drawable/icon_income"
         app:bar_leftText="收益账单"
         app:bar_leftTextSize="@dimen/sp_13"
@@ -187,4 +200,15 @@
         app:bar_rightDrawableSize="@dimen/dp_16"
         app:bar_rightDrawable="@drawable/icon_arrow_right" />
 
+    <com.hjq.widget.layout.SettingBar
+        android:id="@+id/person_data_about"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        app:bar_leftDrawable="@drawable/icon_income"
+        app:bar_leftText="关于APP"
+        app:bar_leftTextSize="@dimen/sp_13"
+        app:bar_lineVisible="false"
+        app:bar_rightDrawableSize="@dimen/dp_16"
+        app:bar_rightDrawable="@drawable/icon_arrow_right" />
 </LinearLayout>

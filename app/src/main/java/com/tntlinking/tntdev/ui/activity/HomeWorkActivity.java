@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -33,6 +34,7 @@ import androidx.recyclerview.widget.RecyclerView;
  * 工作主页面
  */
 public final class HomeWorkActivity extends AppActivity {
+    private LinearLayout ll_title;
     private TextView tv_avatar;
     private AppListAdapter mAdapter;
     private RecyclerView rv_app_list;
@@ -43,6 +45,11 @@ public final class HomeWorkActivity extends AppActivity {
     private int appSize = 0; //工作请求列表size
     private int interSize = 0; //面试请求列表size
     private int historySize = 0;//历史记录列表size
+    private ImageView iv_interview;
+    private LinearLayout ll_cooperation;
+    private LinearLayout ll_service;
+    private LinearLayout ll_question;
+    private LinearLayout ll_contact;
 
     @Override
     protected int getLayoutId() {
@@ -51,12 +58,18 @@ public final class HomeWorkActivity extends AppActivity {
 
     @Override
     protected void initView() {
+        ll_title = findViewById(R.id.ll_title);
         tv_avatar = findViewById(R.id.tv_avatar);
         rv_app_list = findViewById(R.id.rv_app_list);
         ll_empty = findViewById(R.id.ll_empty);
         tv_refresh = findViewById(R.id.tv_refresh);
         ll_status = findViewById(R.id.ll_status);
         tv_status_refresh = findViewById(R.id.tv_status_refresh);
+        iv_interview = findViewById(R.id.iv_interview);
+        ll_cooperation = findViewById(R.id.ll_cooperation);
+        ll_service = findViewById(R.id.ll_service);
+        ll_question = findViewById(R.id.ll_question);
+        ll_contact = findViewById(R.id.ll_contact);
         String name = SPUtils.getInstance().getString(AppConfig.DEVELOP_NAME);
         tv_avatar.setText(name);
 //        if (!TextUtils.isEmpty(name)) {
@@ -64,7 +77,8 @@ public final class HomeWorkActivity extends AppActivity {
 //        } else {
 //            tv_avatar.setBackground(getResources().getDrawable(R.drawable.dot_oval_blue));
 //        }
-        setOnClickListener(tv_avatar, tv_refresh, tv_status_refresh);
+        ImmersionBar.setTitleBar(this, ll_title);
+        setOnClickListener(tv_avatar, iv_interview, tv_refresh, tv_status_refresh, ll_cooperation, ll_service, ll_question, ll_contact);
 
         mAdapter = new AppListAdapter(this);
         mAdapter.setOnItemClickListener(new BaseAdapter.OnItemClickListener() {  // 要在setapder之前设置监听事件
@@ -110,21 +124,36 @@ public final class HomeWorkActivity extends AppActivity {
     @SingleClick
     @Override
     public void onClick(View view) {
-        if (view == tv_avatar) {
-            startActivity(PersonDataActivity.class);
-        } else if (view == tv_refresh) {
-            getAppList();
-            postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    toast("刷新成功");
-                }
-            }, 600);
-        } else if (view == tv_status_refresh) {
+        switch (view.getId()) {
+            case R.id.tv_avatar:
+                startActivity(PersonDataActivity.class);
+                break;
+            case R.id.iv_interview:
+                startActivity(InterviewActivity.class);
+                break;
+            case R.id.ll_cooperation:
+                break;
+            case R.id.ll_service:
+                break;
+            case R.id.ll_question:
+                break;
+            case R.id.ll_contact:
+                break;
+            case R.id.tv_refresh:
+                getAppList();
+                postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        toast("刷新成功");
+                    }
+                }, 600);
+                break;
+            case R.id.tv_status_refresh:
+//                getStatus();
+                break;
 
-            getStatus();
+
         }
-
     }
 
 
