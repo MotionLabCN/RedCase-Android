@@ -2,38 +2,29 @@ package com.tntlinking.tntdev.ui.activity;
 
 
 import android.view.View;
-
-import com.hjq.base.BaseDialog;
+import android.widget.LinearLayout;
+import android.widget.ListView;
 import com.hjq.http.EasyHttp;
 import com.hjq.http.listener.HttpCallback;
-import com.hjq.widget.layout.SettingBar;
-import com.hjq.widget.view.ClearEditText;
 import com.tntlinking.tntdev.R;
 import com.tntlinking.tntdev.aop.SingleClick;
 import com.tntlinking.tntdev.app.AppActivity;
-import com.tntlinking.tntdev.http.api.GetDictionaryApi;
+import com.tntlinking.tntdev.http.api.InvitationListApi;
 import com.tntlinking.tntdev.http.model.HttpData;
-import com.tntlinking.tntdev.ui.bean.SendDeveloperBean;
-import com.tntlinking.tntdev.ui.dialog.DictionarySelectDialog;
-
-import java.util.ArrayList;
+import com.tntlinking.tntdev.ui.adapter.InvitationAdapter;
 import java.util.List;
-
 import androidx.appcompat.widget.AppCompatButton;
 
 
 /**
- * 用户信息填写页面1
+ * 邀请记录页面
  */
 public final class InterviewActivity extends AppActivity {
-    private ClearEditText mInfoName;
-    private SettingBar mInfoGender;
-    private SettingBar mInfoBirth;
-    private SettingBar mInfoAddress;
-    private SettingBar mInfoReason;
-    private AppCompatButton btn_next;
 
-    private SendDeveloperBean postBean = SendDeveloperBean.getSingleton();
+    private AppCompatButton btn_next;
+    private LinearLayout ll_list_empty;
+    private ListView list_item;
+    private InvitationAdapter mAdapter;
 
     @Override
     protected int getLayoutId() {
@@ -42,9 +33,8 @@ public final class InterviewActivity extends AppActivity {
 
     @Override
     protected void initView() {
-//        mInfoName = findViewById(R.id.et_name);
-//        mInfoGender = findViewById(R.id.info_gender);
-//        mInfoBirth = findViewById(R.id.info_birth);
+        list_item = findViewById(R.id.list_item);
+        ll_list_empty = findViewById(R.id.ll_list_empty);
         btn_next = findViewById(R.id.btn_next);
 
 
@@ -54,8 +44,7 @@ public final class InterviewActivity extends AppActivity {
 
     @Override
     protected void initData() {
-//        mDictionaryList = getDictionaryList("8");//获取远程办公原因list
-
+        getInvitationList();
     }
 
 
@@ -64,32 +53,31 @@ public final class InterviewActivity extends AppActivity {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_next:
-                startActivity(SaveQRActivity.class);
+                startActivity(PosterActivity.class);
                 break;
 
         }
     }
 
-    /**
-     * (1->行业 || 2->人员规模 || 3->常用协作工具 || 4->经验要求 || 5->学历要求 6->职业方向
-     * || 7->培养方式 || 8->远程工作原因 || 9->职业状态 || 10->工作方式 || 11 ->面试方式)
-     */
-    public List<GetDictionaryApi.DictionaryBean> getDictionaryList(String parentId) {
-        List<GetDictionaryApi.DictionaryBean> mList = new ArrayList();
-        EasyHttp.get(this)
-                .api(new GetDictionaryApi().setParentId(parentId))
-                .request(new HttpCallback<HttpData<List<GetDictionaryApi.DictionaryBean>>>(this) {
+
+    public void getInvitationList() {
+        EasyHttp.post(this)
+                .api(new InvitationListApi())
+                .request(new HttpCallback<HttpData<List<InvitationListApi.Bean>>>(this) {
 
                     @Override
-                    public void onSucceed(HttpData<List<GetDictionaryApi.DictionaryBean>> data) {
-                        if (!data.getData().isEmpty()) {
-                            mList.addAll(data.getData());
-
+                    public void onSucceed(HttpData<List<InvitationListApi.Bean>> data) {
+                        if (data.getData().size() != 0) {
+                            ll_list_empty.setVisibility(View.GONE);
+                            mAdapter = new InvitationAdapter(InterviewActivity.this, data.getData());
+                            list_item.setAdapter(mAdapter);
+                        } else {
+                            ll_list_empty.setVisibility(View.VISIBLE);
                         }
                     }
                 });
 
-        return mList;
+
     }
 
 

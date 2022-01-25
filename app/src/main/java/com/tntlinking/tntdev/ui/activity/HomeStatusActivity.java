@@ -1,9 +1,11 @@
 package com.tntlinking.tntdev.ui.activity;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -16,21 +18,17 @@ import com.hjq.base.BaseAdapter;
 import com.hjq.http.EasyHttp;
 import com.hjq.http.listener.HttpCallback;
 import com.tntlinking.tntdev.R;
-import com.tntlinking.tntdev.aop.SingleClick;
 import com.tntlinking.tntdev.app.AppActivity;
 import com.tntlinking.tntdev.http.api.AppListApi;
-import com.tntlinking.tntdev.http.api.AppListInterviewApi;
 import com.tntlinking.tntdev.http.api.GetDeveloperStatusApi;
-import com.tntlinking.tntdev.http.api.HistoryListApi;
 import com.tntlinking.tntdev.http.model.HttpData;
 import com.tntlinking.tntdev.other.AppConfig;
-import com.tntlinking.tntdev.ui.adapter.AppListAdapter;
+import com.tntlinking.tntdev.ui.bean.BannerBean;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
@@ -40,6 +38,8 @@ import androidx.viewpager.widget.ViewPager;
 public final class HomeStatusActivity extends AppActivity {
     private TextView tv_avatar;
     private TextView tv_name;
+    private TextView tv_status;
+    private TextView tv_do_task;
     private ImageView iv_interview;
     private LinearLayout ll_cooperation;
     private LinearLayout ll_service;
@@ -47,6 +47,7 @@ public final class HomeStatusActivity extends AppActivity {
     private LinearLayout ll_contact;
     private ViewPager viewPager;
     private LinearLayout ll_title;
+    String name = SPUtils.getInstance().getString(AppConfig.DEVELOP_NAME);
 
     @Override
     protected int getLayoutId() {
@@ -57,6 +58,8 @@ public final class HomeStatusActivity extends AppActivity {
     protected void initView() {
         tv_avatar = findViewById(R.id.tv_avatar);
         tv_name = findViewById(R.id.tv_name);
+        tv_status = findViewById(R.id.tv_status);
+        tv_do_task = findViewById(R.id.tv_do_task);
         iv_interview = findViewById(R.id.iv_interview);
         ll_cooperation = findViewById(R.id.ll_cooperation);
         ll_service = findViewById(R.id.ll_service);
@@ -64,49 +67,40 @@ public final class HomeStatusActivity extends AppActivity {
         ll_contact = findViewById(R.id.ll_contact);
         viewPager = findViewById(R.id.viewpager);
         ll_title = findViewById(R.id.ll_title);
-        String name = SPUtils.getInstance().getString(AppConfig.DEVELOP_NAME);
+
         tv_avatar.setText(name);
         ImmersionBar.setTitleBar(this, ll_title);
-        setOnClickListener(iv_interview, tv_avatar, ll_cooperation, ll_service, ll_question, ll_contact);
+        setOnClickListener(iv_interview, tv_avatar, ll_cooperation, ll_service, ll_question, ll_contact, tv_do_task);
 
-        View v1 = new View(this);
-        View v2 = new View(this);
-        View v3 = new View(this);
-        View v4 = new View(this);
-        View v5 = new View(this);
 
-        v1.setBackgroundResource(R.drawable.bg_view_1);
-        v2.setBackgroundResource(R.drawable.bg_view_2);
-        v3.setBackgroundResource(R.drawable.bg_view_3);
-        v4.setBackgroundResource(R.drawable.bg_view_1);
-        v5.setBackgroundResource(R.drawable.bg_view_2);
+        BannerBean banner1 = new BannerBean();
+        banner1.setImgRes(R.drawable.bg_img_1);
+        banner1.setStar("4.6");
+        banner1.setPosition("小影/哈尔滨市/后端开发");
+        banner1.setDescription("享受远程办公工作模式，提高工作效率");
+        BannerBean banner2 = new BannerBean();
+        banner2.setImgRes(R.drawable.bg_img_2);
+        banner2.setStar("4.8");
+        banner2.setPosition("婷婷/随州市/前端开发");
+        banner2.setDescription("陪伴孩子，抵抗变迁，远程让我自在安心");
+        BannerBean banner3 = new BannerBean();
+        banner3.setImgRes(R.drawable.bg_img_3);
+        banner3.setStar("4.5");
+        banner3.setPosition("阿炳/运城市/后端开发");
+        banner3.setDescription("为我远程链接客户，帮我重新平衡了工作与生活");
 
-        List<View> views = new ArrayList<View>();
-        views.add(v1);
-        views.add(v2);
-        views.add(v3);
-        views.add(v4);
+        List<BannerBean> list = new ArrayList<>();
+        list.add(banner1);
+        list.add(banner2);
+        list.add(banner3);
 
-        viewPager.setAdapter(new AZPagerAdapter(views));
-        viewPager.setPageTransformer(true, new ScrollOffsetTransformer());
-        viewPager.setOffscreenPageLimit(2);
-    }
 
-    public class ScrollOffsetTransformer implements ViewPager.PageTransformer {
-        /**
-         * position参数指明给定页面相对于屏幕中心的位置。它是一个动态属性，会随着页面的滚动而改变。
-         * 当一个页面（page)填充整个屏幕时，positoin值为0；
-         * 当一个页面（page)刚刚离开屏幕右(左）侧时，position值为1（-1）；
-         * 当两个页面分别滚动到一半时，其中一个页面是-0.5，另一个页面是0.5。
-         * 基于屏幕上页面的位置，通过诸如setAlpha()、setTranslationX()或setScaleY()方法来设置页面的属性，创建自定义的滑动动画。
-         */
-        @Override
-        public void transformPage(View page, float position) {
-            if (position > 0) {
-                //右侧的缓存页往左偏移100
-                page.setTranslationX(-100 * position);
-            }
-        }
+        viewPager.setPageMargin(getResources().getDimensionPixelSize(R.dimen.dp_16)); //显示viewpager间距
+        viewPager.setOffscreenPageLimit(3);
+        MyViewPagerAdapter adapter = new MyViewPagerAdapter(this, list);
+        viewPager.setAdapter(adapter);
+
+
     }
 
     @Override
@@ -114,7 +108,14 @@ public final class HomeStatusActivity extends AppActivity {
 //        getHistoryList();
 
         int status = getInt(AppConfig.DEVELOP_STATUS, 0);
-
+        if (status == 3) {
+            tv_status.setVisibility(View.VISIBLE);
+            tv_status.setText("已认证");
+            tv_name.setText("你好," + name);
+        } else {
+            tv_status.setVisibility(View.GONE);
+            tv_name.setText("你好,新朋友");
+        }
     }
 
 
@@ -123,112 +124,32 @@ public final class HomeStatusActivity extends AppActivity {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.tv_avatar:
+                startActivity(PersonDataActivity.class);
                 break;
             case R.id.iv_interview:
                 startActivity(InterviewActivity.class);
                 break;
             case R.id.ll_cooperation:
+                BrowserActivity.start(getActivity(), "https://stage-ttchain.tntlinking.com/api/minio/manpower-pages/recruit_guide.pdf");
                 break;
             case R.id.ll_service:
+                BrowserActivity.start(getActivity(), "https://stage-ttchain.tntlinking.com/api/minio/manpower-pages/service_guide.md");
                 break;
             case R.id.ll_question:
+                BrowserActivity.start(getActivity(), "https://stage-ttchain.tntlinking.com/api/minio/manpower-pages/faq_guide.md");
                 break;
             case R.id.ll_contact:
+                Intent intent = new Intent();
+                intent.setClass(this, SaveQRActivity.class);
+                intent.putExtra("contact", "contact");
+                startActivity(intent);
+                break;
+            case R.id.tv_do_task:
+                startActivity(EnterDeveloperActivity.class);
                 break;
 
         }
 
-    }
-
-
-    @NonNull
-    @Override
-    protected ImmersionBar createStatusBarConfig() {
-        return super.createStatusBarConfig()
-                // 指定导航栏背景颜色
-                .navigationBarColor(R.color.white);
-    }
-
-    private List<AppListApi.Bean> mList = new ArrayList<>();
-
-    private void getAppList() {
-        EasyHttp.get(this)
-                .api(new AppListApi())
-                .request(new HttpCallback<HttpData<List<AppListApi.Bean>>>(this) {
-
-                    @Override
-                    public void onSucceed(HttpData<List<AppListApi.Bean>> data) {
-                        if (data.getData().size() > 0) {
-                            for (AppListApi.Bean bean : data.getData()) {
-                                bean.setType(1);
-                                mList.add(bean);
-                            }
-//                            getHistoryList();
-                        }
-
-                    }
-
-                    @Override
-                    public void onFail(Exception e) {
-                        super.onFail(e);
-
-                    }
-                });
-    }
-
-    @SuppressLint("CheckResult")
-    private void getInterviewAppList() {
-        EasyHttp.get(this)
-                .api(new AppListInterviewApi())
-                .request(new HttpCallback<HttpData<List<AppListApi.Bean>>>(this) {
-
-                    @Override
-                    public void onSucceed(HttpData<List<AppListApi.Bean>> data) {
-                        if (data.getData().size() > 0) {
-                            for (AppListApi.Bean bean : data.getData()) {
-                                bean.setType(1);
-                                mList.add(bean);
-                            }
-
-                        }
-
-
-                    }
-
-                    @Override
-                    public void onFail(Exception e) {
-                        super.onFail(e);
-                        getHistoryList();
-
-                    }
-                });
-
-
-    }
-
-    private void getHistoryList() {
-        EasyHttp.get(this)
-                .api(new HistoryListApi().setOrderData("2018-10-10"))
-                .request(new HttpCallback<HttpData<List<AppListApi.Bean>>>(this) {
-
-                    @Override
-                    public void onSucceed(HttpData<List<AppListApi.Bean>> data) {
-                        if (data.getData().size() > 0) {
-                            AppListApi.Bean appBean = new AppListApi.Bean();
-                            appBean.setType(3);
-                            mList.add(appBean);
-
-                            for (AppListApi.Bean bean : data.getData()) {
-                                bean.setType(2);
-                                mList.add(bean);
-                            }
-                        } else { //历史记录空白页面
-
-                        }
-
-
-                    }
-                });
     }
 
 
@@ -259,34 +180,54 @@ public final class HomeStatusActivity extends AppActivity {
                 });
     }
 
-    public class AZPagerAdapter extends PagerAdapter {
 
-        protected List<View> views;
+    public class MyViewPagerAdapter extends PagerAdapter {
+        private Context mContext;
+        private List<BannerBean> mList;
 
-        public AZPagerAdapter(List<View> viewList) {
-            views = viewList;
+        public MyViewPagerAdapter(Context context, List<BannerBean> list) {
+            this.mContext = context;
+            this.mList = list;
         }
 
         @Override
         public int getCount() {
-            return views.size();
+            return mList.size();
         }
 
         @Override
-        public boolean isViewFromObject(View view, Object o) {
-            return view == o;
-        }
-
-        @Override
-        public void destroyItem(ViewGroup container, int position, Object object) {
-            container.removeView(views.get(position));
+        public boolean isViewFromObject(View view, Object object) {
+            return view == object;
         }
 
         @Override
         public Object instantiateItem(ViewGroup container, int position) {
-            container.addView(views.get(position));
-            return views.get(position);
+            View view = LayoutInflater.from(mContext).inflate(R.layout.item_my_viewpager, null);
+
+            BannerBean bean = mList.get(position);
+            ImageView ivViewPager = view.findViewById(R.id.iv_viewpager);
+            TextView tv_star = view.findViewById(R.id.tv_star);
+            TextView tv_position = view.findViewById(R.id.tv_position);
+            TextView tv_description = view.findViewById(R.id.tv_description);
+
+            ivViewPager.setImageResource(bean.getImgRes());
+            tv_star.setText(bean.getStar());
+            tv_position.setText(bean.getPosition());
+            tv_description.setText(bean.getDescription());
+            container.addView(view);  //这一步很关键 把当前的imageview添加到适配器上
+            return view;
+        }
+
+        @Override
+        public void destroyItem(ViewGroup container, int position, Object object) {
+            super.destroyItem(container, position, object);
+        }
+
+        @Override
+        public float getPageWidth(int position) {
+            return (float) 0.9;
         }
     }
+
 
 }

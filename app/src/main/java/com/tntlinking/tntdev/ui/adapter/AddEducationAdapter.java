@@ -62,8 +62,8 @@ public final class AddEducationAdapter extends BaseAdapter {
         }
         DeveloperInfoBean.DeveloperEducation bean = mList.get(position);
         holder.tv_school_name.setText(bean.getCollegeName());
-        holder.tv_school_info.setText(bean.getEducationName()+" | "+bean.getTrainingModeName()+"|"+bean.getMajor());
-        holder.tv_school_time.setText(bean.getInSchoolStartTime()+"-"+bean.getInSchoolEndTime());
+        holder.tv_school_info.setText(bean.getEducationName()+" | "+bean.getTrainingModeName()+" | "+bean.getMajor());
+        holder.tv_school_time.setText(bean.getInSchoolStartTime()+" - "+bean.getInSchoolEndTime());
 
         return convertView;
     }

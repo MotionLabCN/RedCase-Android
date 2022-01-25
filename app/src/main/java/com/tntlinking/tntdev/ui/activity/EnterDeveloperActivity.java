@@ -5,8 +5,10 @@ import android.content.Intent;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -63,7 +65,10 @@ public final class EnterDeveloperActivity extends AppActivity {
     private TextView tv_career_info_work_year;
     private TextView tv_career_info_work_mode;
     private LinearLayout ll_add_education, ll_add_work, ll_add_project;
-
+    private LinearLayout ll_progress;
+    private TextView tv_progress;
+    private ImageView iv_progress;
+    private ProgressBar progress_bar;
 
     public static final String INTENT_KEY_DEVELOPER_INFO = "DeveloperInfoBean";
 
@@ -99,6 +104,10 @@ public final class EnterDeveloperActivity extends AppActivity {
         ll_add_education = findViewById(R.id.ll_add_education);
         ll_add_work = findViewById(R.id.ll_add_work);
         ll_add_project = findViewById(R.id.ll_add_project);
+        ll_progress = findViewById(R.id.ll_progress);
+        tv_progress = findViewById(R.id.tv_progress);
+        iv_progress = findViewById(R.id.iv_progress);
+        progress_bar = findViewById(R.id.progress_bar);
 
         mCommit = findViewById(R.id.btn_commit);
         setOnClickListener(mCommit, ll_add_base_info, ll_base_info, ll_add_career_info, ll_career_info,
@@ -181,23 +190,23 @@ public final class EnterDeveloperActivity extends AppActivity {
                 getActivity().startActivityForResult(intent, 10005);
                 break;
             case R.id.btn_commit:
-                if (TextUtils.isEmpty(tv_edit_name.getText())){
+                if (TextUtils.isEmpty(tv_edit_name.getText())) {
                     toast("您还没有请填写基本信息");
                     return;
                 }
-                if (TextUtils.isEmpty(tv_career_info.getText())){
+                if (TextUtils.isEmpty(tv_career_info.getText())) {
                     toast("您还没有请填写职业信息");
                     return;
                 }
-                if (addEducationAdapter.getCount()==0){
+                if (addEducationAdapter.getCount() == 0) {
                     toast("您还没有请填写教育经历");
                     return;
                 }
-                if (addWorkAdapter.getCount()==0){
+                if (addWorkAdapter.getCount() == 0) {
                     toast("您还没有请填写工作经历");
                     return;
                 }
-                if (addProjectAdapter.getCount()==0){
+                if (addProjectAdapter.getCount() == 0) {
                     toast("您还没有请填写项目经历");
                     return;
                 }
@@ -291,15 +300,19 @@ public final class EnterDeveloperActivity extends AppActivity {
         }
     }
 
+    private int progress = 0;
     private DeveloperInfoBean bean;
 
     @SuppressLint("SetTextI18n")
     public void getDeveloperDetail(int parentId) {
+
+
         EasyHttp.get(this)
                 .api(new GetDeveloperDetailApi().setParentId(parentId))
                 .request(new HttpCallback<HttpData<DeveloperInfoBean>>(this) {
                     @Override
                     public void onSucceed(HttpData<DeveloperInfoBean> data) {
+                        progress = 0;
                         bean = data.getData();
                         String realName = bean.getRealName();
                         int sex = bean.getSex();
@@ -309,16 +322,20 @@ public final class EnterDeveloperActivity extends AppActivity {
                             String mSex = sex == 0 ? "男" : "女";
                             tv_edit_info.setText(mSex + " | " + bean.getBirthday() + " | " + bean.getProvinceName() + bean.getCityName() + bean.getAreasName());
                             tv_edit_reason.setText(bean.getRemoteWorkReasonStr());
+
+                            progress++;
                         }
                         DeveloperInfoBean.DeveloperCareer careerDto = bean.getCareerDto();
                         List<DeveloperInfoBean.WorkMode> workModeDtoList = bean.getWorkModeDtoList();
-                        if (!TextUtils.isEmpty(careerDto.getCareerDirectionName())) {
-                            ll_career_info.setVisibility(View.VISIBLE);
-
-                            tv_career_info.setText(careerDto.getCareerDirectionName());
-                            tv_career_info_work_year.setText(careerDto.getWorkYearsName() + " | 当前薪资：" + careerDto.getCurSalary());
-                            tv_career_info_work_mode.setText(workModeDtoList.get(0).getWorkDayModeName() + " | 期望薪资：" + workModeDtoList.get(0).getLowestSalary()
-                                    + "-" + workModeDtoList.get(0).getHighestSalary());
+                        if (workModeDtoList.size() != 0) {
+                            if (!TextUtils.isEmpty(careerDto.getCareerDirectionName())) {
+                                ll_career_info.setVisibility(View.VISIBLE);
+                                tv_career_info.setText(careerDto.getCareerDirectionName());
+                                tv_career_info_work_year.setText(careerDto.getWorkYearsName() + " | 当前薪资：" + careerDto.getCurSalary());
+                                tv_career_info_work_mode.setText(workModeDtoList.get(0).getWorkDayModeName() + " | 期望薪资：" + workModeDtoList.get(0).getLowestSalary()
+                                        + "-" + workModeDtoList.get(0).getHighestSalary());
+                                progress++;
+                            }
                         }
 
                         List<DeveloperInfoBean.DeveloperEducation> educationDtoList = bean.getEducationDtoList();
@@ -327,18 +344,48 @@ public final class EnterDeveloperActivity extends AppActivity {
                         if (educationDtoList.size() != 0) {
                             addEducationAdapter = new AddEducationAdapter(EnterDeveloperActivity.this, educationDtoList);
                             lv1.setAdapter(addEducationAdapter);
+                            progress++;
                         }
                         if (workExperienceDtoList.size() != 0) {
                             addWorkAdapter = new AddWorkAdapter(EnterDeveloperActivity.this, workExperienceDtoList);
                             lv2.setAdapter(addWorkAdapter);
+                            progress++;
                         }
 
                         if (projectDtoList.size() != 0) {
                             addProjectAdapter = new AddProjectAdapter(EnterDeveloperActivity.this, projectDtoList);
                             lv3.setAdapter(addProjectAdapter);
+                            progress++;
                         }
                         sv.smoothScrollTo(0, 0);
 
+                        ll_progress.setVisibility(View.VISIBLE);
+                        if (progress == 0) {
+                            ll_progress.setVisibility(View.GONE);
+                        } else if (progress == 1) {
+                            tv_progress.setText("\"完成度超过2%的用户，仍需努力哦~\"");
+                            progress_bar.setProgress(2);
+                        } else if (progress == 2) {
+                            tv_progress.setText("\"完成度超过5%的用户，加油~\"");
+                            progress_bar.setProgress(5);
+                        } else if (progress == 3) {
+                            tv_progress.setText("\"完成度超过10%的用户，继续加油~\"");
+                            progress_bar.setProgress(10);
+                        } else if (progress == 4) {
+                            tv_progress.setText("\"完成度超过30%的用户，继续完善让履历更风采~\"");
+                            progress_bar.setProgress(30);
+                        } else if (progress == 5) {
+                            tv_progress.setText("\"恭喜你！完成度超过60%的用户，全面的工作和项目经历可以进一步提升竞争力~\"");
+                            progress_bar.setProgress(60);
+                        }
+
+                        if (bean.getStatus() == 2) {
+                            tv_progress.setText("\"审核中，专属顾问将在1-3个工作日内完成审核\"");
+                            progress_bar.setVisibility(View.GONE);
+                        } else if (bean.getStatus() == 3) {
+                            ll_progress.setVisibility(View.GONE);
+                            mCommit.setVisibility(View.GONE);
+                        }
                     }
                 });
     }
@@ -350,6 +397,7 @@ public final class EnterDeveloperActivity extends AppActivity {
 
                     @Override
                     public void onSucceed(HttpData<List<GetProvinceApi.ProvinceBean>> data) {
+                        startActivity(SaveQRActivity.class);
                         finish();
                     }
                 });

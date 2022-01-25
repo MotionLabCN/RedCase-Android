@@ -65,7 +65,7 @@ public final class LoginActivityView extends AppActivity {
             btn_commit_3.setVisibility(View.VISIBLE);
             mLogoView.setImageResource(R.drawable.bg_view_3);
         } else if (view == btn_commit_3) {
-            startActivity(BaseInfoActivity1.class);
+            startActivity(HomeStatusActivity.class);
 
             ActivityManager.getInstance().finishAllActivities(BaseInfoActivity1.class);
         }

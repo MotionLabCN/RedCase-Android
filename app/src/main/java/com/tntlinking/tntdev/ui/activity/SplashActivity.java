@@ -100,7 +100,7 @@ public final class SplashActivity extends AppActivity {
                     }
                     finish();
                 } else {
-//                    startActivity(HomeWorkActivity.class);
+//                    startActivity(HomeStatusActivity.class);
             EasyHttp.get(SplashActivity.this)
                     .api(new GetDeveloperStatusApi())
                     .request(new HttpCallback<HttpData<GetDeveloperStatusApi.Bean>>(SplashActivity.this) {
@@ -114,10 +114,12 @@ public final class SplashActivity extends AppActivity {
                             if (data.getData().getStatus().equals("1")) { //
                                 startActivity(LoginActivityView.class);
                             } else if (data.getData().getStatus().equals("3")) {
-                                startActivity(HomeWorkActivity.class);
+                                Intent intent = new Intent(SplashActivity.this, HomeWorkActivity.class);
+                                intent.putExtra(AppConfig.DEVELOP_STATUS, 3);
+                                startActivity(intent);
                             }else if (data.getData().getStatus().equals("2")) {
 //                                startActivity(CheckDeveloperActivity.class);
-                                Intent intent = new Intent(SplashActivity.this, HomeWorkActivity.class);
+                                Intent intent = new Intent(SplashActivity.this, HomeStatusActivity.class);
                                 intent.putExtra(AppConfig.DEVELOP_STATUS, 2);
                                 startActivity(intent);
                             } else {

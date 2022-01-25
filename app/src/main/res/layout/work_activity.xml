@@ -7,24 +7,24 @@
     android:gravity="center_horizontal"
     android:orientation="vertical">
 
-<!--    <com.hjq.bar.TitleBar-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        app:barStyle="transparent"-->
-<!--        app:leftIcon="@null"-->
-<!--        app:rightBackground="@null"-->
-<!--        app:rightTitle=""-->
-<!--        app:title="" />-->
+    <!--    <com.hjq.bar.TitleBar-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        app:barStyle="transparent"-->
+    <!--        app:leftIcon="@null"-->
+    <!--        app:rightBackground="@null"-->
+    <!--        app:rightTitle=""-->
+    <!--        app:title="" />-->
 
     <LinearLayout
         android:id="@+id/ll_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingLeft="@dimen/dp_16"
-        android:paddingRight="@dimen/dp_16"
-        android:paddingTop="@dimen/dp_16"
         android:gravity="center_vertical"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/dp_16"
+        android:paddingTop="@dimen/dp_16"
+        android:paddingRight="@dimen/dp_16">
 
 
         <TextView
@@ -42,14 +42,32 @@
 
         <TextView
             android:id="@+id/tv_name"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/dp_6"
-            android:layout_weight="1"
             android:text="你好，新朋友"
             android:textColor="@color/black"
-            android:textSize="@dimen/sp_18"
+            android:textSize="@dimen/sp_15"
             android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_6"
+            android:background="@drawable/bg_yellow_stroke"
+            android:paddingLeft="@dimen/dp_4"
+            android:paddingTop="@dimen/dp_2"
+            android:paddingRight="@dimen/dp_4"
+            android:paddingBottom="@dimen/dp_2"
+            android:text="已认证"
+            android:textColor="@color/color_FFC560"
+            android:textSize="@dimen/sp_10" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dp_1"
+            android:layout_weight="1" />
 
 
         <ImageView

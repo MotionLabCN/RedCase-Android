@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.blankj.utilcode.util.SPUtils;
 import com.gyf.immersionbar.ImmersionBar;
 import com.hjq.base.BaseAdapter;
+import com.hjq.http.EasyLog;
 import com.tntlinking.tntdev.R;
 import com.tntlinking.tntdev.aop.SingleClick;
 import com.tntlinking.tntdev.app.AppActivity;
@@ -36,6 +37,8 @@ import androidx.recyclerview.widget.RecyclerView;
 public final class HomeWorkActivity extends AppActivity {
     private LinearLayout ll_title;
     private TextView tv_avatar;
+    private TextView tv_name;
+    private TextView tv_status;
     private AppListAdapter mAdapter;
     private RecyclerView rv_app_list;
     private LinearLayout ll_empty;
@@ -51,6 +54,7 @@ public final class HomeWorkActivity extends AppActivity {
     private LinearLayout ll_question;
     private LinearLayout ll_contact;
 
+    String name = SPUtils.getInstance().getString(AppConfig.DEVELOP_NAME);
     @Override
     protected int getLayoutId() {
         return R.layout.work_activity;
@@ -60,6 +64,8 @@ public final class HomeWorkActivity extends AppActivity {
     protected void initView() {
         ll_title = findViewById(R.id.ll_title);
         tv_avatar = findViewById(R.id.tv_avatar);
+        tv_name = findViewById(R.id.tv_name);
+        tv_status = findViewById(R.id.tv_status);
         rv_app_list = findViewById(R.id.rv_app_list);
         ll_empty = findViewById(R.id.ll_empty);
         tv_refresh = findViewById(R.id.tv_refresh);
@@ -70,7 +76,7 @@ public final class HomeWorkActivity extends AppActivity {
         ll_service = findViewById(R.id.ll_service);
         ll_question = findViewById(R.id.ll_question);
         ll_contact = findViewById(R.id.ll_contact);
-        String name = SPUtils.getInstance().getString(AppConfig.DEVELOP_NAME);
+
         tv_avatar.setText(name);
 //        if (!TextUtils.isEmpty(name)) {
 //            tv_avatar.setText(name);
@@ -111,13 +117,20 @@ public final class HomeWorkActivity extends AppActivity {
 
         int status = getInt(AppConfig.DEVELOP_STATUS, 0);
         if (status == 2) {
-            ll_status.setVisibility(View.VISIBLE);
+//            ll_status.setVisibility(View.VISIBLE);
         } else {
             ll_status.setVisibility(View.GONE);
             getAppList();
         }
 
-
+        if (status == 3) {
+            tv_status.setVisibility(View.VISIBLE);
+            tv_status.setText("已认证");
+            tv_name.setText("你好," + name);
+        } else {
+            tv_status.setVisibility(View.GONE);
+            tv_name.setText("你好,新朋友");
+        }
     }
 
 
@@ -132,12 +145,19 @@ public final class HomeWorkActivity extends AppActivity {
                 startActivity(InterviewActivity.class);
                 break;
             case R.id.ll_cooperation:
+                BrowserActivity.start(getActivity(), "https://stage-ttchain.tntlinking.com/api/minio/manpower-pages/recruit_guide.pdf");
                 break;
             case R.id.ll_service:
+                BrowserActivity.start(getActivity(), "https://stage-ttchain.tntlinking.com/api/minio/manpower-pages/service_guide.md");
                 break;
             case R.id.ll_question:
+                BrowserActivity.start(getActivity(), "https://stage-ttchain.tntlinking.com/api/minio/manpower-pages/faq_guide.md");
                 break;
             case R.id.ll_contact:
+                Intent intent = new Intent();
+                intent.setClass(this,SaveQRActivity.class);
+                intent.putExtra("contact", "contact");
+                startActivity(intent);
                 break;
             case R.id.tv_refresh:
                 getAppList();
@@ -218,9 +238,11 @@ public final class HomeWorkActivity extends AppActivity {
                     public void onFail(Exception e) {
                         super.onFail(e);
                         getHistoryList();
+                        EasyLog.print("=======222222=====");
                         interSize = 0;
                         if (appSize + interSize == 0) {
                             ll_empty.setVisibility(View.VISIBLE);
+                            EasyLog.print("=======33333=====");
                         } else {
                             ll_empty.setVisibility(View.GONE);
                         }
@@ -252,8 +274,10 @@ public final class HomeWorkActivity extends AppActivity {
                                 AppListApi.Bean appBean = new AppListApi.Bean();
                                 appBean.setType(4);
                                 mList.add(appBean);
+                                EasyLog.print("=======44444=====");
                             } else if (appSize + interSize == 0) {
                                 ll_empty.setVisibility(View.VISIBLE);
+                                EasyLog.print("=======5555=====");
                             } else {
                                 ll_empty.setVisibility(View.GONE);
                             }

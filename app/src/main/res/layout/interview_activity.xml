@@ -87,13 +87,39 @@
                     android:layout_gravity="center"
                     android:src="@drawable/icon_interview_list" />
 
+                <LinearLayout
+                    android:id="@+id/ll_list_empty"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/bg_interview_empty" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_10"
+                        android:text="暂无邀请记录"
+                        android:textColor="@color/color_9A3528"
+                        android:textSize="@dimen/sp_13"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+
                 <ListView
+                    android:id="@+id/list_item"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_10"
+                    android:divider="@null"
                     tools:itemCount="2"
-                    tools:listitem="@layout/item_add_interview" />
-
+                    tools:listitem="@layout/item_invitation" />
             </LinearLayout>
 
 

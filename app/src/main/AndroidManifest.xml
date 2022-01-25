@@ -400,6 +400,11 @@
             android:name="com.tntlinking.tntdev.ui.activity.SaveQRActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
+        <!-- 写日报页面-->
+        <activity
+            android:name="com.tntlinking.tntdev.ui.activity.PosterActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
         <!-- 微信回调（请注意这个 Activity 放置的包名要和当前项目的包名保持一致，否则将不能正常回调） -->
         <activity
             android:name="com.tntlinking.tntdev.wxapi.WXEntryActivity"

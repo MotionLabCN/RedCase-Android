@@ -181,10 +181,12 @@ public final class LoginActivity2 extends AppActivity implements TextView.OnEdit
                         if (data.getData().getStatus().equals("1")) { //
                             startActivity(LoginActivityView.class);
                         } else if (data.getData().getStatus().equals("3")) {
-                            startActivity(HomeWorkActivity.class);
-                        } else if (data.getData().getStatus().equals("2")) {
-//                            startActivity(CheckDeveloperActivity.class);
                             Intent intent = new Intent(LoginActivity2.this, HomeWorkActivity.class);
+                            intent.putExtra(AppConfig.DEVELOP_STATUS, 3);
+                            startActivity(intent);
+                        }else if (data.getData().getStatus().equals("2")) {
+//                                startActivity(CheckDeveloperActivity.class);
+                            Intent intent = new Intent(LoginActivity2.this, HomeStatusActivity.class);
                             intent.putExtra(AppConfig.DEVELOP_STATUS, 2);
                             startActivity(intent);
                         } else {
