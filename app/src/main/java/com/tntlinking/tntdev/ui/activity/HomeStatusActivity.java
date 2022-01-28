@@ -40,6 +40,8 @@ public final class HomeStatusActivity extends AppActivity {
     private TextView tv_name;
     private TextView tv_status;
     private TextView tv_do_task;
+    private View view_dot;
+    private TextView tv_remain_day;
     private ImageView iv_interview;
     private LinearLayout ll_cooperation;
     private LinearLayout ll_service;
@@ -60,6 +62,8 @@ public final class HomeStatusActivity extends AppActivity {
         tv_name = findViewById(R.id.tv_name);
         tv_status = findViewById(R.id.tv_status);
         tv_do_task = findViewById(R.id.tv_do_task);
+        view_dot = findViewById(R.id.view_dot);
+        tv_remain_day = findViewById(R.id.tv_remain_day);
         iv_interview = findViewById(R.id.iv_interview);
         ll_cooperation = findViewById(R.id.ll_cooperation);
         ll_service = findViewById(R.id.ll_service);
@@ -108,14 +112,34 @@ public final class HomeStatusActivity extends AppActivity {
 //        getHistoryList();
 
         int status = getInt(AppConfig.DEVELOP_STATUS, 0);
+        long createTime = getLong(AppConfig.CREATE_TIME, 0);
         if (status == 3) {
             tv_status.setVisibility(View.VISIBLE);
             tv_status.setText("已认证");
             tv_name.setText("你好," + name);
+
+            tv_do_task.setText("领红包");
+            view_dot.setVisibility(View.GONE);
+            tv_remain_day.setVisibility(View.GONE);
         } else {
             tv_status.setVisibility(View.GONE);
             tv_name.setText("你好,新朋友");
+            if (createTime >= 30) {
+                tv_do_task.setText("已失效");
+                tv_do_task.setTextColor(getResources().getColor(R.color.color_hint_color));
+                tv_do_task.setBackground(getResources().getDrawable(R.drawable.btn_gray_radius_20));
+                tv_do_task.setClickable(false);
+
+                view_dot.setVisibility(View.GONE);
+                tv_remain_day.setVisibility(View.GONE);
+            } else {
+                tv_do_task.setText("做任务");
+                view_dot.setVisibility(View.VISIBLE);
+                tv_remain_day.setVisibility(View.VISIBLE);
+                tv_remain_day.setText("距失效剩余" + (30 - createTime) + "天");
+            }
         }
+
     }
 
 
@@ -130,13 +154,14 @@ public final class HomeStatusActivity extends AppActivity {
                 startActivity(InterviewActivity.class);
                 break;
             case R.id.ll_cooperation:
-                BrowserActivity.start(getActivity(), "https://stage-ttchain.tntlinking.com/api/minio/manpower-pages/recruit_guide.pdf");
+//                BrowserActivity.start(getActivity(), "https://stage-ttchain.tntlinking.com/api/minio/manpower-pages/recruit_guide.pdf","合作模式");
+                startActivity(PDFViewActivity.class);
                 break;
             case R.id.ll_service:
-                BrowserActivity.start(getActivity(), "https://stage-ttchain.tntlinking.com/api/minio/manpower-pages/service_guide.md");
+                BrowserActivity.start(getActivity(), "https://stage-ttchain.tntlinking.com/api/minio/manpower-pages/service_guide.md", "服务手册");
                 break;
             case R.id.ll_question:
-                BrowserActivity.start(getActivity(), "https://stage-ttchain.tntlinking.com/api/minio/manpower-pages/faq_guide.md");
+                BrowserActivity.start(getActivity(), "https://stage-ttchain.tntlinking.com/api/minio/manpower-pages/faq_guide.md", "常见问题");
                 break;
             case R.id.ll_contact:
                 Intent intent = new Intent();
@@ -145,7 +170,13 @@ public final class HomeStatusActivity extends AppActivity {
                 startActivity(intent);
                 break;
             case R.id.tv_do_task:
-                startActivity(EnterDeveloperActivity.class);
+                int status = getInt(AppConfig.DEVELOP_STATUS, 0);
+                if (status == 3) {
+                    startActivity(SaveQRActivity.class);
+                } else {
+                    startActivity(EnterDeveloperActivity.class);
+                }
+
                 break;
 
         }

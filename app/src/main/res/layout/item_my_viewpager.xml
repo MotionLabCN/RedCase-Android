@@ -21,25 +21,27 @@
 
 
     <LinearLayout
-        android:layout_width="@dimen/dp_46"
-        android:layout_height="@dimen/dp_20"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_gravity="right"
         android:layout_marginTop="@dimen/dp_10"
         android:layout_marginRight="@dimen/dp_10"
         android:background="@drawable/bg_banner_radius"
         android:gravity="center"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/dp_4"
+        android:paddingRight="@dimen/dp_6">
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/dp_20"
+            android:layout_height="@dimen/dp_20"
             android:src="@drawable/icon_star" />
 
         <TextView
             android:id="@+id/tv_star"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/dp_2"
+            android:layout_width="@dimen/dp_20"
+            android:layout_height="@dimen/dp_20"
+            android:gravity="center"
             android:text="4.6"
             android:textColor="@color/black"
             android:textSize="@dimen/sp_13" />
@@ -47,12 +49,12 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:layout_marginLeft="@dimen/dp_10"
-        android:layout_marginBottom="@dimen/dp_10"
-        android:orientation="vertical">
+        android:background="@drawable/bg_blue_gradient_radius_10"
+        android:orientation="vertical"
+        android:padding="@dimen/dp_16">
 
         <LinearLayout
             android:layout_width="wrap_content"

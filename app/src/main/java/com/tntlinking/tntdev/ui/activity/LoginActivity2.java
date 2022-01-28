@@ -10,8 +10,10 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.blankj.utilcode.constant.TimeConstants;
 import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.SpanUtils;
+import com.blankj.utilcode.util.TimeUtils;
 import com.gyf.immersionbar.ImmersionBar;
 import com.tntlinking.tntdev.BuildConfig;
 import com.tntlinking.tntdev.R;
@@ -178,6 +180,8 @@ public final class LoginActivity2 extends AppActivity implements TextView.OnEdit
                         SPUtils.getInstance().put(AppConfig.DEVELOP_STATUS, data.getData().getStatus());
                         SPUtils.getInstance().put(AppConfig.DEVELOP_NAME, data.getData().getRealName());
                         SPUtils.getInstance().put(AppConfig.DEVELOPER_ID, data.getData().getId());
+
+                        String createDate = data.getData().getCreateDate();
                         if (data.getData().getStatus().equals("1")) { //
                             startActivity(LoginActivityView.class);
                         } else if (data.getData().getStatus().equals("3")) {
@@ -188,6 +192,14 @@ public final class LoginActivity2 extends AppActivity implements TextView.OnEdit
 //                                startActivity(CheckDeveloperActivity.class);
                             Intent intent = new Intent(LoginActivity2.this, HomeStatusActivity.class);
                             intent.putExtra(AppConfig.DEVELOP_STATUS, 2);
+                            if (createDate.contains("T")) {
+                                String replace = createDate.replace("T", " ");
+                                long timeSpanByNow = TimeUtils.getTimeSpanByNow(replace, TimeConstants.DAY);
+                                intent.putExtra(AppConfig.CREATE_TIME, Math.abs(timeSpanByNow));
+                            } else if (createDate.contains(" ")) {
+                                long timeSpanByNow = TimeUtils.getTimeSpanByNow(createDate, TimeConstants.DAY);
+                                intent.putExtra(AppConfig.CREATE_TIME, Math.abs(timeSpanByNow));
+                            }
                             startActivity(intent);
                         } else {
                             startActivity(CheckDeveloperFailActivity.class);

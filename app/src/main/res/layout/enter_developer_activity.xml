@@ -19,6 +19,7 @@
         app:rightTitleColor="@color/common_accent_color"
         app:rightTitleSize="@dimen/sp_14"
         app:title="入驻资料"
+        app:lineVisible="false"
         app:titleStyle="bold" />
 
 

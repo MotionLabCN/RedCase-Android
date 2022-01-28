@@ -118,6 +118,7 @@ public final class HomeWorkActivity extends AppActivity {
         int status = getInt(AppConfig.DEVELOP_STATUS, 0);
         if (status == 2) {
 //            ll_status.setVisibility(View.VISIBLE);
+            ll_empty.setVisibility(View.VISIBLE);
         } else {
             ll_status.setVisibility(View.GONE);
             getAppList();

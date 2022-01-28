@@ -24,7 +24,6 @@ import com.tntlinking.tntdev.http.api.UpdateEducationApi;
 import com.tntlinking.tntdev.http.model.HttpData;
 import com.tntlinking.tntdev.other.Utils;
 import com.tntlinking.tntdev.ui.bean.DeveloperInfoBean;
-import com.tntlinking.tntdev.ui.bean.ExperienceBean;
 import com.tntlinking.tntdev.ui.dialog.DateSelectDialog;
 import com.tntlinking.tntdev.ui.dialog.DictionarySelectDialog;
 
@@ -62,7 +61,7 @@ public final class AddEducationActivityNew extends AppActivity {
     private String training = "";
 
     private int position = 0;
-    private int id = 0;
+    private int mId = 0;// 教育条目 id
 
     @Override
     protected int getLayoutId() {
@@ -101,11 +100,15 @@ public final class AddEducationActivityNew extends AppActivity {
             DeveloperInfoBean.DeveloperEducation developerEducation = bean.getEducationDtoList().get(position);
             if (bean.getEducationDtoList().size() != 0) {
                 if (TextUtils.isEmpty(developerEducation.getCollegeName())) {
-                    btn_delete.setVisibility(View.GONE);
+//                    btn_delete.setVisibility(View.GONE);
                     tv_title.setText("添加教育经历");
+                    btn_delete.setText("保存");
+                    btn_commit.setText("保存并添加下一条");
                 } else {
-                    btn_delete.setVisibility(View.VISIBLE);
+//                    btn_delete.setVisibility(View.VISIBLE);
                     tv_title.setText("编辑教育经历");
+                    btn_delete.setText("删除");
+                    btn_commit.setText("保存");
 
                     et_info_school_name.setText(developerEducation.getCollegeName());
                     info_education.setLeftText(developerEducation.getEducationName());
@@ -121,7 +124,7 @@ public final class AddEducationActivityNew extends AppActivity {
                     in_time = developerEducation.getInSchoolStartTime();
                     end_time = developerEducation.getInSchoolEndTime();
                     training = developerEducation.getTrainingModeName();
-                    id = developerEducation.getId();
+                    mId = developerEducation.getId();
                 }
             }
         }
@@ -190,7 +193,39 @@ public final class AddEducationActivityNew extends AppActivity {
             case R.id.btn_delete:
 //                setResult(RESULT_OK, new Intent().putExtra("position", position));
 //                finish();
-                deleteEducation(id);
+
+                if (mId == 0) { // 0 添加教育  不等于0 是编辑教育
+                    school_name = et_info_school_name.getText().toString();
+                    major = et_info_major.getText().toString();
+
+                    if (TextUtils.isEmpty(school_name)) {
+                        toast("没有输入院校名称");
+                        return;
+                    }
+                    if (TextUtils.isEmpty(education)) {
+                        toast("没选择学历");
+                        return;
+                    }
+                    if (TextUtils.isEmpty(major)) {
+                        toast("没有输入专业");
+                        return;
+                    }
+                    if (TextUtils.isEmpty(in_time)) {
+                        toast("没有选择入学时间");
+                        return;
+                    }
+                    if (TextUtils.isEmpty(end_time)) {
+                        toast("没有选择毕业时间");
+                        return;
+                    }
+                    if (TextUtils.isEmpty(training)) {
+                        toast("没选择培养方式");
+                        return;
+                    }
+                    addEducation(true);
+                } else {
+                    deleteEducation(mId);
+                }
                 break;
             case R.id.btn_commit:
                 school_name = et_info_school_name.getText().toString();
@@ -221,12 +256,11 @@ public final class AddEducationActivityNew extends AppActivity {
                     return;
                 }
 
-                if (btn_delete.getVisibility() == View.VISIBLE) {
-                    updateEducation(id);
+                if (mId == 0) { // 0 添加教育  不等于0 是编辑教育
+                    addEducation(false);
                 } else {
-                    addEducation();
+                    updateEducation(mId);
                 }
-
                 break;
 
         }
@@ -255,7 +289,7 @@ public final class AddEducationActivityNew extends AppActivity {
         return mList;
     }
 
-    public void addEducation() {
+    public void addEducation(boolean isBack) {
         EasyHttp.post(this)
                 .api(new AddEducationApi()
                         .setCollegeName(school_name)
@@ -268,8 +302,31 @@ public final class AddEducationActivityNew extends AppActivity {
 
                     @Override
                     public void onSucceed(HttpData<List<GetProvinceApi.ProvinceBean>> data) {
-                        setResult(RESULT_OK);
-                        finish();
+                        if (isBack) {
+                            setResult(RESULT_OK);
+                            finish();
+                        } else {
+                            et_info_school_name.setText("");
+                            et_info_school_name.setHint("院校名称");
+                            info_education.setLeftText("学历");
+                            info_school_in_time.setText("选择入学时间");
+                            info_school_end_time.setText("选择毕业时间");
+                            et_info_major.setText("");
+                            et_info_major.setHint("专业");
+                            info_training_method.setLeftText("培养方式");
+
+
+                            school_name = "";
+                            education = "";
+                            major = "";
+                            in_time = "";
+                            end_time = "";
+                            training = "";
+                            mId = 0;
+                        }
+
+                        toast("保存成功");
+
                     }
                 });
     }

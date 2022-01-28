@@ -62,7 +62,7 @@ public final class AddWorkActivity extends AppActivity {
     private String company_name = "";
     private String industry = "";
 
-    private int id = 0;
+    private int mId = 0;
 
     @Override
     protected int getLayoutId() {
@@ -103,11 +103,15 @@ public final class AddWorkActivity extends AppActivity {
             DeveloperInfoBean.DeveloperWork developerWork = bean.getWorkExperienceDtoList().get(position);
             if (bean.getWorkExperienceDtoList().size() != 0) {
                 if (TextUtils.isEmpty(developerWork.getCompanyName())) {
-                    btn_delete.setVisibility(View.GONE);
+//                    btn_delete.setVisibility(View.GONE);
+                    btn_delete.setText("保存");
+                    btn_commit.setText("保存并添加下一条");
                     tv_title.setText("添加项目经历");
                 } else {
-                    btn_delete.setVisibility(View.VISIBLE);
+//                    btn_delete.setVisibility(View.VISIBLE);
                     tv_title.setText("编辑项目经历");
+                    btn_delete.setText("删除");
+                    btn_commit.setText("保存");
 
                     et_work_company_name.setText(developerWork.getCompanyName());
                     info_work_industry.setLeftText(developerWork.getIndustryName());
@@ -121,7 +125,7 @@ public final class AddWorkActivity extends AppActivity {
                     end_time = developerWork.getWorkEndTime();
                     industry = developerWork.getIndustryName();
                     industryId = developerWork.getIndustryId();
-                    id = developerWork.getId();
+                    mId = developerWork.getId();
                 }
             }
         }
@@ -178,9 +182,38 @@ public final class AddWorkActivity extends AppActivity {
                 break;
 
             case R.id.btn_delete:
-//                setResult(RESULT_OK, new Intent().putExtra("position", position));
-//                finish();
-                deleteWork(id);
+
+                if (mId == 0) { // 0 添加教育  不等于0 是编辑教育
+                    project_position = et_work_position.getText().toString();
+                    company_name = et_work_company_name.getText().toString();
+
+                    if (TextUtils.isEmpty(in_time)) {
+                        toast("没有选择开始时间");
+                        return;
+                    }
+                    if (TextUtils.isEmpty(end_time)) {
+                        toast("没有选择结束时间");
+                        return;
+                    }
+                    if (TextUtils.isEmpty(project_position)) {
+                        toast("没有输入担任角色");
+                        return;
+                    }
+
+                    if (TextUtils.isEmpty(company_name)) {
+                        toast("没有输入所属公司");
+                        return;
+                    }
+
+                    if (TextUtils.isEmpty(industry)) {
+                        toast("没选择所在行业");
+                        return;
+                    }
+
+                    addWork(true);
+                } else {
+                    deleteWork(mId);
+                }
                 break;
             case R.id.btn_commit:
                 project_position = et_work_position.getText().toString();
@@ -210,10 +243,10 @@ public final class AddWorkActivity extends AppActivity {
                     return;
                 }
 
-                if (btn_delete.getVisibility() == View.VISIBLE) {
-                    updateWork(id);
+                if (mId == 0) { // 0 添加教育  不等于0 是编辑教育
+                    addWork(false);
                 } else {
-                    addWork();
+                    updateWork(mId);
                 }
                 break;
         }
@@ -270,7 +303,7 @@ public final class AddWorkActivity extends AppActivity {
         }
     }
 
-    public void addWork() {
+    public void addWork(boolean isBack) {
         EasyHttp.post(this)
                 .api(new AddWorkApi()
                         .setDeveloperId(89)
@@ -284,8 +317,27 @@ public final class AddWorkActivity extends AppActivity {
                     @Override
                     public void onSucceed(HttpData<List<GetProvinceApi.ProvinceBean>> data) {
                         EasyLog.print("====addCareer===");
-                        setResult(RESULT_OK);
-                        finish();
+                        if (isBack){
+                            setResult(RESULT_OK);
+                            finish();
+                        }else {
+                            et_work_company_name.setText("");
+                            et_work_company_name.setHint("公司名称");
+                            info_work_industry.setLeftText("所在行业");
+                            et_work_position.setText("职位名称");
+                            info_work_in_time.setText("选择入职时间");
+                            info_work_end_time.setText("选择离职时间");
+
+                            company_name = "";
+                            project_position = "";
+                            in_time = "";
+                            end_time = "";
+                            industry = "";
+                            industryId = 0;
+                            mId = 0;
+                        }
+
+                        toast(R.string.sava_success);
                     }
                 });
     }

@@ -31,6 +31,7 @@ public final class BrowserActivity extends AppActivity
         implements StatusAction, OnRefreshListener {
 
     private static final String INTENT_KEY_IN_URL = "url";
+    private static final String INTENT_TITLE_URL = "title";
 
     @CheckNet
     @Log
@@ -45,7 +46,18 @@ public final class BrowserActivity extends AppActivity
         }
         context.startActivity(intent);
     }
-
+    public static void start(Context context, String url,String title) {
+        if (TextUtils.isEmpty(url)) {
+            return;
+        }
+        Intent intent = new Intent(context, BrowserActivity.class);
+        intent.putExtra(INTENT_KEY_IN_URL, url);
+        intent.putExtra(INTENT_TITLE_URL, title);
+        if (!(context instanceof Activity)) {
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        }
+        context.startActivity(intent);
+    }
     private StatusLayout mStatusLayout;
     private ProgressBar mProgressBar;
     private SmartRefreshLayout mRefreshLayout;
@@ -159,7 +171,11 @@ public final class BrowserActivity extends AppActivity
             if (title == null) {
                 return;
             }
-            setTitle(title);
+            if (TextUtils.isEmpty(getString(INTENT_TITLE_URL))){
+                setTitle(title);
+            }else {
+                setTitle(getString(INTENT_TITLE_URL));
+            }
         }
 
         @Override

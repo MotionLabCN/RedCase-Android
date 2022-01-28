@@ -142,9 +142,9 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_3"
+                        android:layout_marginTop="@dimen/dp_5"
                         android:text="合作模式"
-                        android:textColor="@color/gray"
+                        android:textColor="@color/color_text_color"
                         android:textSize="@dimen/sp_12" />
                 </LinearLayout>
 
@@ -165,9 +165,9 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_3"
+                        android:layout_marginTop="@dimen/dp_5"
                         android:text="服务手册"
-                        android:textColor="@color/gray"
+                        android:textColor="@color/color_text_color"
                         android:textSize="@dimen/sp_12" />
                 </LinearLayout>
 
@@ -188,9 +188,9 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_3"
+                        android:layout_marginTop="@dimen/dp_5"
                         android:text="常见问题"
-                        android:textColor="@color/gray"
+                        android:textColor="@color/color_text_color"
                         android:textSize="@dimen/sp_12" />
                 </LinearLayout>
 
@@ -211,9 +211,9 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_3"
+                        android:layout_marginTop="@dimen/dp_5"
                         android:text="联系顾问"
-                        android:textColor="@color/gray"
+                        android:textColor="@color/color_text_color"
                         android:textSize="@dimen/sp_12" />
                 </LinearLayout>
 
@@ -260,12 +260,14 @@
                         android:textStyle="bold" />
 
                     <View
+                        android:id="@+id/view_dot"
                         android:layout_width="@dimen/dp_5"
                         android:layout_height="@dimen/dp_5"
                         android:layout_gravity="center"
                         android:background="@drawable/dot_oval_red" />
 
                     <TextView
+                        android:id="@+id/tv_remain_day"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -318,10 +320,10 @@
                         android:background="@drawable/btn_red_radius_20"
                         android:ellipsize="end"
                         android:gravity="center"
-                        android:paddingLeft="@dimen/dp_12"
-                        android:paddingTop="@dimen/dp_4"
-                        android:paddingRight="@dimen/dp_12"
-                        android:paddingBottom="@dimen/dp_4"
+                        android:paddingLeft="@dimen/dp_13"
+                        android:paddingTop="@dimen/dp_6"
+                        android:paddingRight="@dimen/dp_13"
+                        android:paddingBottom="@dimen/dp_6"
                         android:singleLine="true"
                         android:text="做任务"
                         android:textColor="@color/white"

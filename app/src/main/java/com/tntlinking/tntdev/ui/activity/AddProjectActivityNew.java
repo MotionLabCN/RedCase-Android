@@ -75,7 +75,7 @@ public final class AddProjectActivityNew extends AppActivity {
     private String industry = "";
     private String project_skill = "";
     private String description = "";
-    private int id = 0;
+    private int mId = 0;
 
     @Override
     protected int getLayoutId() {
@@ -120,11 +120,15 @@ public final class AddProjectActivityNew extends AppActivity {
             DeveloperInfoBean.DeveloperProject developerProject = bean.getProjectDtoList().get(position);
             if (bean.getWorkExperienceDtoList().size() != 0) {
                 if (TextUtils.isEmpty(developerProject.getCompanyName())) {
-                    btn_delete.setVisibility(View.GONE);
+//                    btn_delete.setVisibility(View.GONE);
                     tv_title.setText("添加项目经历");
+                    btn_delete.setText("保存");
+                    btn_commit.setText("保存并添加下一条");
                 } else {
-                    btn_delete.setVisibility(View.VISIBLE);
+//                    btn_delete.setVisibility(View.VISIBLE);
                     tv_title.setText("编辑项目经历");
+                    btn_delete.setText("删除");
+                    btn_commit.setText("保存");
 
                     et_project_name.setText(developerProject.getProjectName());
                     info_project_in_time.setText(developerProject.getProjectStartDate());
@@ -158,7 +162,7 @@ public final class AddProjectActivityNew extends AppActivity {
                     industry = developerProject.getIndustryName();
                     industryId = developerProject.getIndustryId();
                     description = developerProject.getDescription();
-                    id = developerProject.getId();
+                    mId = developerProject.getId();
                 }
             }
         }
@@ -240,7 +244,55 @@ public final class AddProjectActivityNew extends AppActivity {
                 getActivity().startActivityForResult(intents, 1001);
                 break;
             case R.id.btn_delete:
-                deleteProject(id);
+
+                if (mId == 0) { // 0 添加教育  不等于0 是编辑教育
+                    project_name = et_project_name.getText().toString();
+                    project_position = et_project_position.getText().toString();
+                    company_name = et_project_company_name.getText().toString();
+                    description = et_project_description.getText().toString();
+                    project_skill = info_project_skill.getLeftText().toString();
+
+                    if (TextUtils.isEmpty(project_name)) {
+                        toast("没有输入项目名称");
+                        return;
+                    }
+                    if (TextUtils.isEmpty(in_time)) {
+                        toast("没有选择开始时间");
+                        return;
+                    }
+                    if (TextUtils.isEmpty(end_time)) {
+                        toast("没有选择结束时间");
+                        return;
+                    }
+                    if (TextUtils.isEmpty(project_position)) {
+                        toast("没有输入担任角色");
+                        return;
+                    }
+                    if (TextUtils.isEmpty(work_mode)) {
+                        toast("没选职业状态");
+                        return;
+                    }
+                    if (TextUtils.isEmpty(company_name)) {
+                        toast("没有输入所属公司");
+                        return;
+                    }
+
+                    if (TextUtils.isEmpty(industry)) {
+                        toast("没选择所在行业");
+                        return;
+                    }
+                    if (!project_skill.contains(",")) {
+                        toast("没选择使用技能");
+                        return;
+                    }
+                    if (TextUtils.isEmpty(description)) {
+                        toast("没有输入项目描述");
+                        return;
+                    }
+                    addProject(true);
+                } else {
+                    deleteProject(mId);
+                }
                 break;
             case R.id.btn_commit:
                 project_name = et_project_name.getText().toString();
@@ -286,10 +338,11 @@ public final class AddProjectActivityNew extends AppActivity {
                     toast("没有输入项目描述");
                     return;
                 }
-                if (btn_delete.getVisibility() == View.VISIBLE) {
-                    updateProject(id);
+
+                if (mId == 0) { // 0 添加教育  不等于0 是编辑教育
+                    addProject(false);
                 } else {
-                    addProject();
+                    updateProject(mId);
                 }
                 break;
         }
@@ -348,7 +401,7 @@ public final class AddProjectActivityNew extends AppActivity {
     }
 
 
-    public void addProject() {
+    public void addProject(boolean isBack) {
         EasyHttp.post(this)
                 .api(new AddProjectApi()
                         .setProjectName(project_name)
@@ -364,8 +417,42 @@ public final class AddProjectActivityNew extends AppActivity {
 
                     @Override
                     public void onSucceed(HttpData<List<GetProvinceApi.ProvinceBean>> data) {
-                        setResult(RESULT_OK);
-                        finish();
+                        if (isBack){
+                            setResult(RESULT_OK);
+                            finish();
+                        }else {
+                            et_project_name.setText("");
+                            et_project_name.setHint("项目名称");
+                            info_project_in_time.setText("选择开始时间");
+                            info_project_end_time.setText("选择结束时间");
+                            et_project_position.setText("");
+                            et_project_position.setHint("担任角色");
+                            info_project_work_mode.setLeftText("职业状态");
+                            et_project_company_name.setText("");
+                            et_project_position.setHint("所属公司");
+                            info_project_industry.setLeftText("所在行业");
+                            et_project_description.setText("");
+                            et_project_description.setHint("项目描述");
+                            info_project_skill.setLeftText("使用技能");
+
+                            mTagIntList.clear();
+                            mSelectList.clear();
+
+                            project_name = "";
+                            in_time = "";
+                            end_time = "";
+                            project_position = "";
+                            work_mode = "";
+                            workModeId = 0;
+                            company_name = "";
+                            industry = "";
+                            industryId = 0;
+                            description = "";
+                            mId = 0;
+                        }
+
+                        toast("保存成功");
+
                     }
                 });
     }

@@ -155,6 +155,13 @@ public final class EnterDeveloperActivity extends AppActivity {
         getDeveloperDetail(developId);
     }
 
+    @Override
+    protected void onResume() {
+        int developId = SPUtils.getInstance().getInt(AppConfig.DEVELOPER_ID);
+        getDeveloperDetail(developId);
+        super.onResume();
+
+    }
 
     @SingleClick
     @Override
@@ -381,6 +388,7 @@ public final class EnterDeveloperActivity extends AppActivity {
 
                         if (bean.getStatus() == 2) {
                             tv_progress.setText("\"审核中，专属顾问将在1-3个工作日内完成审核\"");
+                            iv_progress.setImageResource(R.drawable.icon_warning);
                             progress_bar.setVisibility(View.GONE);
                         } else if (bean.getStatus() == 3) {
                             ll_progress.setVisibility(View.GONE);

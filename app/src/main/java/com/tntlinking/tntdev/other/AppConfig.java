@@ -86,6 +86,8 @@ public final class AppConfig {
 
     public static String DEVELOP_NAME = "develop_name";
 
+    public static String CREATE_TIME = "create_time";
+
     public static String  URL_AGREEMENT = "https://talent.tntlinking.com/#/page/agreement";
     public static String  URL_PRIVATE = "https://talent.tntlinking.com/#/page/privacy";
 }

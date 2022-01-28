@@ -12,9 +12,12 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 
 import com.airbnb.lottie.LottieAnimationView;
+import com.blankj.utilcode.constant.TimeConstants;
 import com.blankj.utilcode.util.SPUtils;
+import com.blankj.utilcode.util.TimeUtils;
 import com.gyf.immersionbar.BarHide;
 import com.gyf.immersionbar.ImmersionBar;
+import com.hjq.http.EasyLog;
 import com.tntlinking.tntdev.R;
 import com.tntlinking.tntdev.app.AppActivity;
 import com.tntlinking.tntdev.http.api.GetDeveloperStatusApi;
@@ -23,6 +26,8 @@ import com.tntlinking.tntdev.other.AppConfig;
 import com.hjq.http.EasyHttp;
 import com.hjq.http.listener.HttpCallback;
 import com.hjq.widget.view.SlantedTextView;
+import com.tntlinking.tntdev.other.TimeUtil;
+import com.umeng.commonsdk.debug.E;
 
 import java.util.logging.Handler;
 
@@ -77,7 +82,6 @@ public final class SplashActivity extends AppActivity {
         } else {
             mDebugView.setVisibility(View.INVISIBLE);
         }
-//        startActivity(BaseInfoActivity3.class);
 
 
         postDelayed(new Runnable() {
@@ -101,33 +105,46 @@ public final class SplashActivity extends AppActivity {
                     finish();
                 } else {
 //                    startActivity(HomeStatusActivity.class);
-            EasyHttp.get(SplashActivity.this)
-                    .api(new GetDeveloperStatusApi())
-                    .request(new HttpCallback<HttpData<GetDeveloperStatusApi.Bean>>(SplashActivity.this) {
+                    EasyHttp.get(SplashActivity.this)
+                            .api(new GetDeveloperStatusApi())
+                            .request(new HttpCallback<HttpData<GetDeveloperStatusApi.Bean>>(SplashActivity.this) {
 
-                        @Override
-                        public void onSucceed(HttpData<GetDeveloperStatusApi.Bean> data) {
-                            // 1->待认证  2->待审核   3->审核成功 4->审核失败
-                            SPUtils.getInstance().put(AppConfig.DEVELOP_STATUS, data.getData().getStatus());
-                            SPUtils.getInstance().put(AppConfig.DEVELOP_NAME, data.getData().getRealName());
-                            SPUtils.getInstance().put(AppConfig.DEVELOPER_ID, data.getData().getId());
-                            if (data.getData().getStatus().equals("1")) { //
-                                startActivity(LoginActivityView.class);
-                            } else if (data.getData().getStatus().equals("3")) {
-                                Intent intent = new Intent(SplashActivity.this, HomeWorkActivity.class);
-                                intent.putExtra(AppConfig.DEVELOP_STATUS, 3);
-                                startActivity(intent);
-                            }else if (data.getData().getStatus().equals("2")) {
+                                @Override
+                                public void onSucceed(HttpData<GetDeveloperStatusApi.Bean> data) {
+                                    // 1->待认证  2->待审核   3->审核成功 4->审核失败
+                                    SPUtils.getInstance().put(AppConfig.DEVELOP_STATUS, data.getData().getStatus());
+                                    SPUtils.getInstance().put(AppConfig.DEVELOP_NAME, data.getData().getRealName());
+                                    SPUtils.getInstance().put(AppConfig.DEVELOPER_ID, data.getData().getId());
+
+                                    String createDate = data.getData().getCreateDate();
+
+                                    if (data.getData().getStatus().equals("1")) { //
+                                        startActivity(LoginActivityView.class);
+                                    } else if (data.getData().getStatus().equals("3")) {
+                                        Intent intent = new Intent(SplashActivity.this, HomeWorkActivity.class);
+                                        intent.putExtra(AppConfig.DEVELOP_STATUS, 3);
+                                        startActivity(intent);
+                                    } else if (data.getData().getStatus().equals("2")) {
 //                                startActivity(CheckDeveloperActivity.class);
-                                Intent intent = new Intent(SplashActivity.this, HomeStatusActivity.class);
-                                intent.putExtra(AppConfig.DEVELOP_STATUS, 2);
-                                startActivity(intent);
-                            } else {
-                                startActivity(CheckDeveloperFailActivity.class);
-                            }
-                            finish();
-                        }
-                    });
+
+                                        Intent intent = new Intent(SplashActivity.this, HomeStatusActivity.class);
+                                        intent.putExtra(AppConfig.DEVELOP_STATUS, 2);
+                                        if (createDate.contains("T")) {
+                                            String replace = createDate.replace("T", " ");
+                                            long timeSpanByNow = TimeUtils.getTimeSpanByNow(replace, TimeConstants.DAY);
+                                            intent.putExtra(AppConfig.CREATE_TIME, Math.abs(timeSpanByNow));
+                                        } else if (createDate.contains(" ")) {
+                                            long timeSpanByNow = TimeUtils.getTimeSpanByNow(createDate, TimeConstants.DAY);
+                                            intent.putExtra(AppConfig.CREATE_TIME, Math.abs(timeSpanByNow));
+                                        }
+
+                                        startActivity(intent);
+                                    } else {
+                                        startActivity(CheckDeveloperFailActivity.class);
+                                    }
+                                    finish();
+                                }
+                            });
                 }
 
             }

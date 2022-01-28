@@ -25,7 +25,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/bg_bottom_blue_radius_6"
                 android:orientation="vertical"
-                android:paddingTop="@dimen/dp_60"
+                android:paddingTop="@dimen/dp_70"
                 android:paddingBottom="@dimen/dp_20">
 
 
@@ -92,7 +92,6 @@
                     android:layout_marginLeft="@dimen/dp_16"
                     android:layout_marginTop="@dimen/dp_10"
                     android:layout_marginRight="@dimen/dp_16"
-                    android:layout_marginBottom="@dimen/dp_10"
                     android:background="@drawable/bg_blue_bottom_radius_6"
                     android:gravity="center"
                     android:orientation="horizontal"
