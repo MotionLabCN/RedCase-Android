@@ -9,5 +9,16 @@ public final class InvitationUrlApi implements IRequestApi {
     public String getApi() {
         return "developer/invitation/url";
     }
-    
+
+    public final static class Bean {
+        private String data;
+
+        public String getData() {
+            return data;
+        }
+
+        public void setData(String data) {
+            this.data = data;
+        }
+    }
 }

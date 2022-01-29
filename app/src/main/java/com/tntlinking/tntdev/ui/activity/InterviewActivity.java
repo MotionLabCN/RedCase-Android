@@ -12,6 +12,7 @@ import com.tntlinking.tntdev.app.AppActivity;
 import com.tntlinking.tntdev.http.api.InvitationListApi;
 import com.tntlinking.tntdev.http.model.HttpData;
 import com.tntlinking.tntdev.ui.adapter.InvitationAdapter;
+import com.tntlinking.tntdev.widget.MyListView;
 import java.util.List;
 import androidx.appcompat.widget.AppCompatButton;
 
@@ -23,7 +24,7 @@ public final class InterviewActivity extends AppActivity {
 
     private AppCompatButton btn_next;
     private LinearLayout ll_list_empty;
-    private ListView list_item;
+    private MyListView list_item;
     private InvitationAdapter mAdapter;
 
     @Override
@@ -76,7 +77,6 @@ public final class InterviewActivity extends AppActivity {
                         }
                     }
                 });
-
 
     }
 

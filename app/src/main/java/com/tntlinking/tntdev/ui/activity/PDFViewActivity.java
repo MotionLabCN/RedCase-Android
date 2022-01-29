@@ -15,8 +15,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 
-public final class PDFViewActivity extends AppActivity{
+public final class PDFViewActivity extends AppActivity {
     private PDFView pdfView;
+    private String PDFUrl = "https://talent-operation.stage-ttchain.tntlinking.com/api/manpower_operate/minio/files/recruit_guide.pdf";
 
     @Override
     protected int getLayoutId() {
@@ -27,7 +28,8 @@ public final class PDFViewActivity extends AppActivity{
     protected void initView() {
         pdfView = findViewById(R.id.pdfView);
 
-        getPdf("https://talent-operation.stage-ttchain.tntlinking.com/api/manpower_operate/minio/files/recruit_guide.pdf");
+        getPdf(PDFUrl);
+
     }
 
     @Override
@@ -35,14 +37,14 @@ public final class PDFViewActivity extends AppActivity{
     }
 
 
-
+    @SuppressLint({"WrongThread", "StaticFieldLeak"})
     private void getPdf(String url) {
-
         final InputStream[] input = new InputStream[1];
         new AsyncTask<Void, Void, Void>() {
-            @SuppressLint({"WrongThread", "StaticFieldLeak"})
+
             @Override
             protected Void doInBackground(Void... voids) {
+                showDialog();
                 try {
                     input[0] = new URL(url).openStream();
                 } catch (IOException e) {
@@ -50,11 +52,18 @@ public final class PDFViewActivity extends AppActivity{
                 }
                 return null;
             }
+
             @Override
             protected void onPostExecute(Void aVoid) {
                 super.onPostExecute(aVoid);
-                pdfView.fromStream(input[0])
+                pdfView.fromStream(input[0]).onLoad(new OnLoadCompleteListener() {
+                    @Override
+                    public void loadComplete(int nbPages) {
+                        hideDialog();
+                    }
+                })
                         .load();
+
             }
         }.execute();
     }
