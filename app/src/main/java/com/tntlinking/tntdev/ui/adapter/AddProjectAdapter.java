@@ -8,6 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.tntlinking.tntdev.R;
+import com.tntlinking.tntdev.other.Utils;
 import com.tntlinking.tntdev.ui.bean.DeveloperInfoBean;
 import com.tntlinking.tntdev.widget.FlowTagLayout;
 
@@ -68,8 +69,8 @@ public final class AddProjectAdapter extends BaseAdapter {
         }
         DeveloperInfoBean.DeveloperProject bean = mList.get(position);
         holder.tv_project_name.setText(bean.getProjectName());
-        holder.tv_project_time.setText(bean.getProjectStartDate() + " - " + bean.getProjectEndDate());
-        holder.tv_character.setText(bean.getPosition()  + " | " + bean.getWorkModeName());
+        holder.tv_project_time.setText( Utils.ChangeDate(bean.getProjectStartDate()) + " - " + Utils.ChangeDate(bean.getProjectEndDate()));
+        holder.tv_character.setText(bean.getPosition() );
         holder.tv_company_name.setText(bean.getCompanyName() + " | " + bean.getIndustryName());
         holder.tv_description.setText(bean.getDescription());
 

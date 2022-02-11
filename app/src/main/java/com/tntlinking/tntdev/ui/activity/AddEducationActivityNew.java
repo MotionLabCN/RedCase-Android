@@ -5,6 +5,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.hjq.base.BaseDialog;
@@ -120,10 +121,12 @@ public final class AddEducationActivityNew extends AppActivity {
 
                     school_name = developerEducation.getCollegeName();
                     education = developerEducation.getEducationName();
+                    educationId = developerEducation.getEducationId();
                     major = developerEducation.getMajor();
                     in_time = developerEducation.getInSchoolStartTime();
                     end_time = developerEducation.getInSchoolEndTime();
                     training = developerEducation.getTrainingModeName();
+                    training_methodId = developerEducation.getTrainingMode();
                     mId = developerEducation.getId();
                 }
             }
@@ -224,7 +227,17 @@ public final class AddEducationActivityNew extends AppActivity {
                     }
                     addEducation(true);
                 } else {
-                    deleteEducation(mId);
+                    new BaseDialog.Builder<>(this)
+                            .setContentView(R.layout.write_daily_delete_dialog)
+                            .setAnimStyle(BaseDialog.ANIM_SCALE)
+                            .setText(R.id.tv_title, "是否确认删除？")
+                            .setOnClickListener(R.id.btn_dialog_custom_cancel, (BaseDialog.OnClickListener<Button>) (dialog, button) -> dialog.dismiss())
+                            .setOnClickListener(R.id.btn_dialog_custom_ok, (dialog, views) -> {
+
+                                deleteEducation(mId, dialog);
+                            })
+                            .show();
+
                 }
                 break;
             case R.id.btn_commit:
@@ -361,8 +374,9 @@ public final class AddEducationActivityNew extends AppActivity {
      * 删除教育信息
      *
      * @param id
+     * @param dialog
      */
-    public void deleteEducation(int id) {
+    public void deleteEducation(int id, BaseDialog dialog) {
         EasyHttp.delete(this)
                 .api(new DeleteEducationApi()
                         .setEducationId(id))
@@ -370,6 +384,7 @@ public final class AddEducationActivityNew extends AppActivity {
 
                     @Override
                     public void onSucceed(HttpData<List<GetProvinceApi.ProvinceBean>> data) {
+                        dialog.dismiss();
                         setResult(RESULT_OK);
                         finish();
                     }

@@ -29,6 +29,7 @@ public final class PersonDataActivity extends AppActivity {
     private SettingBar person_data_deal;
     private SettingBar person_data_dev;
     private SettingBar person_data_about;
+    private SettingBar person_data_recommend;
     private TextView tv_avatar;
     private TextView tv_name;
     private TextView tv_position;
@@ -53,6 +54,7 @@ public final class PersonDataActivity extends AppActivity {
         person_data_deal = findViewById(R.id.person_data_deal);
         person_data_dev = findViewById(R.id.person_data_dev);
         person_data_about = findViewById(R.id.person_data_about);
+        person_data_recommend = findViewById(R.id.person_data_recommend);
         tv_avatar = findViewById(R.id.tv_avatar);
         tv_name = findViewById(R.id.tv_name);
         tv_position = findViewById(R.id.tv_position);
@@ -60,7 +62,7 @@ public final class PersonDataActivity extends AppActivity {
         tv_profit_total = findViewById(R.id.tv_profit_total);
 
         setOnClickListener(mPersonDataIncome, mPersonDataSetting, mPersonDataInterview,
-                person_data_private, person_data_deal, person_data_dev, person_data_about);
+                person_data_private, person_data_deal, person_data_dev, person_data_about,person_data_recommend);
 
 //        String name = SPUtils.getInstance().getString(AppConfig.DEVELOP_NAME);
 //        if (!TextUtils.isEmpty(name)) {
@@ -94,6 +96,8 @@ public final class PersonDataActivity extends AppActivity {
         } else if (view == person_data_about) {
 //            startActivity(HomeStatusActivity.class);
             startActivity(AboutAppActivity.class);
+        }else if (view == person_data_recommend) {
+            startActivity(InterviewActivity.class);
         }
 
     }

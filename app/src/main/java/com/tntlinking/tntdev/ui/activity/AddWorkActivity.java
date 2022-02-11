@@ -4,6 +4,7 @@ package com.tntlinking.tntdev.ui.activity;
 import android.content.Intent;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.blankj.utilcode.util.GsonUtils;
@@ -106,10 +107,10 @@ public final class AddWorkActivity extends AppActivity {
 //                    btn_delete.setVisibility(View.GONE);
                     btn_delete.setText("保存");
                     btn_commit.setText("保存并添加下一条");
-                    tv_title.setText("添加项目经历");
+                    tv_title.setText("添加工作经历");
                 } else {
 //                    btn_delete.setVisibility(View.VISIBLE);
-                    tv_title.setText("编辑项目经历");
+                    tv_title.setText("编辑工作经历");
                     btn_delete.setText("删除");
                     btn_commit.setText("保存");
 
@@ -177,6 +178,8 @@ public final class AddWorkActivity extends AppActivity {
                                 info_work_industry.setLeftText(bean.getName() + "-" + childrenBean.getName());
                                 industryId = childrenBean.getId();
                                 industry = bean.getName() + "-" + childrenBean.getName();
+
+                                EasyLog.print("===industryId==" + industryId+"======"+childrenBean.getName());
                             }
                         }).show();
                 break;
@@ -212,7 +215,17 @@ public final class AddWorkActivity extends AppActivity {
 
                     addWork(true);
                 } else {
-                    deleteWork(mId);
+
+                    new BaseDialog.Builder<>(this)
+                            .setContentView(R.layout.write_daily_delete_dialog)
+                            .setAnimStyle(BaseDialog.ANIM_SCALE)
+                            .setText(R.id.tv_title, "是否确认删除？")
+                            .setOnClickListener(R.id.btn_dialog_custom_cancel, (BaseDialog.OnClickListener<Button>) (dialog, button) -> dialog.dismiss())
+                            .setOnClickListener(R.id.btn_dialog_custom_ok, (dialog, views) -> {
+
+                                deleteWork(mId,dialog);
+                            })
+                            .show();
                 }
                 break;
             case R.id.btn_commit:
@@ -363,7 +376,7 @@ public final class AddWorkActivity extends AppActivity {
                 });
     }
 
-    public void deleteWork(int id) {
+    public void deleteWork(int id, BaseDialog dialog) {
         EasyHttp.delete(this)
                 .api(new DeleteWorkApi()
                         .setWorkExperienceId(id))
@@ -371,7 +384,7 @@ public final class AddWorkActivity extends AppActivity {
 
                     @Override
                     public void onSucceed(HttpData<List<GetProvinceApi.ProvinceBean>> data) {
-                        EasyLog.print("====deleteCareer===");
+                        dialog.dismiss();
                         setResult(RESULT_OK);
                         finish();
                     }

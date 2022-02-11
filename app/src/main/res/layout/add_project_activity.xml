@@ -153,12 +153,14 @@
                 android:layout_marginTop="@dimen/dp_20"
                 app:bar_leftText="职业状态"
                 app:bar_rightDrawable="@drawable/icon_arrow_right"
-                app:bar_rightDrawableSize="@dimen/dp_16" />
+                app:bar_rightDrawableSize="@dimen/dp_16"
+                android:visibility="gone"/>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/line_size"
-                android:background="#FFECECEC" />
+                android:background="#FFECECEC"
+                android:visibility="gone"/>
 
             <com.hjq.widget.view.ClearEditText
                 android:id="@+id/et_project_company_name"
@@ -213,8 +215,7 @@
                 android:hint="项目描述"
                 android:paddingLeft="@dimen/dp_15"
                 android:paddingTop="@dimen/dp_15"
-                android:paddingBottom="@dimen/dp_15"
-                android:singleLine="true" />
+                android:paddingBottom="@dimen/dp_15" />
 
             <View
                 android:layout_width="match_parent"

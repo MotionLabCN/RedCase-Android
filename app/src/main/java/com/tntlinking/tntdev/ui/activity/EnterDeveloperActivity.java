@@ -12,7 +12,9 @@ import android.widget.ProgressBar;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import com.blankj.utilcode.constant.TimeConstants;
 import com.blankj.utilcode.util.SPUtils;
+import com.blankj.utilcode.util.TimeUtils;
 import com.hjq.base.BaseAdapter;
 import com.hjq.http.EasyHttp;
 import com.hjq.http.EasyLog;
@@ -31,6 +33,7 @@ import com.tntlinking.tntdev.http.model.HttpData;
 import com.tntlinking.tntdev.manager.ActivityManager;
 import com.tntlinking.tntdev.other.AppConfig;
 import com.tntlinking.tntdev.other.TimeUtil;
+import com.tntlinking.tntdev.other.Utils;
 import com.tntlinking.tntdev.ui.adapter.AddDevelopAdapter;
 import com.tntlinking.tntdev.ui.adapter.AddEducationAdapter;
 import com.tntlinking.tntdev.ui.adapter.AddExperienceAdapter;
@@ -66,6 +69,7 @@ public final class EnterDeveloperActivity extends AppActivity {
     private TextView tv_career_info_work_mode;
     private LinearLayout ll_add_education, ll_add_work, ll_add_project;
     private LinearLayout ll_progress;
+    private TextView tv_welcome;
     private TextView tv_progress;
     private ImageView iv_progress;
     private ProgressBar progress_bar;
@@ -105,6 +109,7 @@ public final class EnterDeveloperActivity extends AppActivity {
         ll_add_work = findViewById(R.id.ll_add_work);
         ll_add_project = findViewById(R.id.ll_add_project);
         ll_progress = findViewById(R.id.ll_progress);
+        tv_welcome = findViewById(R.id.tv_welcome);
         tv_progress = findViewById(R.id.tv_progress);
         iv_progress = findViewById(R.id.iv_progress);
         progress_bar = findViewById(R.id.progress_bar);
@@ -327,7 +332,10 @@ public final class EnterDeveloperActivity extends AppActivity {
                             ll_base_info.setVisibility(View.VISIBLE);
                             tv_edit_name.setText(realName);
                             String mSex = sex == 0 ? "男" : "女";
-                            tv_edit_info.setText(mSex + " | " + bean.getBirthday() + " | " + bean.getProvinceName() + bean.getCityName() + bean.getAreasName());
+
+                            String nowTime = TimeUtil.getTimeString("yyyy-MM-dd");
+                            int age = Utils.getIntYear(nowTime)-Utils.getIntYear(bean.getBirthday());
+                            tv_edit_info.setText(mSex + " | " + age + "岁 | " + bean.getProvinceName() + bean.getCityName() + bean.getAreasName());
                             tv_edit_reason.setText(bean.getRemoteWorkReasonStr());
 
                             progress++;
@@ -338,9 +346,10 @@ public final class EnterDeveloperActivity extends AppActivity {
                             if (!TextUtils.isEmpty(careerDto.getCareerDirectionName())) {
                                 ll_career_info.setVisibility(View.VISIBLE);
                                 tv_career_info.setText(careerDto.getCareerDirectionName());
-                                tv_career_info_work_year.setText(careerDto.getWorkYearsName() + " | 当前薪资：" + careerDto.getCurSalary());
-                                tv_career_info_work_mode.setText(workModeDtoList.get(0).getWorkDayModeName() + " | 期望薪资：" + workModeDtoList.get(0).getLowestSalary()
-                                        + "-" + workModeDtoList.get(0).getHighestSalary());
+                                tv_career_info_work_year.setText(careerDto.getWorkYearsName() + " | 当前薪资：" + (Double.parseDouble(careerDto.getCurSalary()) / 1000) + "K");
+                                tv_career_info_work_mode.setText(workModeDtoList.get(0).getWorkDayModeName() + " | 期望薪资：" +
+                                        (Double.parseDouble(workModeDtoList.get(0).getLowestSalary()) / 1000) + "K"
+                                        + "-" + (Double.parseDouble(workModeDtoList.get(0).getHighestSalary()) / 1000) + "K");
                                 progress++;
                             }
                         }
@@ -364,7 +373,7 @@ public final class EnterDeveloperActivity extends AppActivity {
                             lv3.setAdapter(addProjectAdapter);
                             progress++;
                         }
-                        sv.smoothScrollTo(0, 0);
+
 
                         ll_progress.setVisibility(View.VISIBLE);
                         if (progress == 0) {
@@ -391,9 +400,11 @@ public final class EnterDeveloperActivity extends AppActivity {
                             iv_progress.setImageResource(R.drawable.icon_warning);
                             progress_bar.setVisibility(View.GONE);
                         } else if (bean.getStatus() == 3) {
+                            tv_welcome.setVisibility(View.GONE);
                             ll_progress.setVisibility(View.GONE);
                             mCommit.setVisibility(View.GONE);
                         }
+                        sv.smoothScrollTo(0, 0);
                     }
                 });
     }

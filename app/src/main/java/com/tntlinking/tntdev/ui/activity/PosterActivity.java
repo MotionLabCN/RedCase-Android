@@ -2,6 +2,7 @@ package com.tntlinking.tntdev.ui.activity;
 
 import android.text.TextUtils;
 import android.view.View;
+
 import com.hjq.http.EasyHttp;
 import com.hjq.http.listener.HttpCallback;
 import com.hjq.umeng.Platform;
@@ -14,6 +15,7 @@ import com.tntlinking.tntdev.http.model.HttpData;
 import com.tntlinking.tntdev.ui.dialog.ShareAppDialog;
 import com.umeng.socialize.media.UMImage;
 import com.umeng.socialize.media.UMWeb;
+
 import androidx.appcompat.widget.AppCompatButton;
 
 /**
@@ -22,7 +24,7 @@ import androidx.appcompat.widget.AppCompatButton;
 public final class PosterActivity extends AppActivity {
 
     private AppCompatButton btn_next;
-    private String shareUrl = "";
+    private String shareUrl = "https://stage-ttchain.tntlinking.com";
 
     @Override
     protected int getLayoutId() {

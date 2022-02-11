@@ -131,6 +131,33 @@ public class Utils {
         return date1;
     }
 
+
+    // 格式化月份去前面的0  2020-02-09   的到 2020
+    public static String getYear(String date) {
+        if (date.contains("-")) {
+            int index1 = date.indexOf("-");
+            int year;
+            String[] split = date.split("-");
+
+            year = Integer.parseInt(split[0]);
+            return split[0];
+        } else {
+            return date;
+        }
+
+    }
+
+    // 格式化月份去前面的0  2020-02-09   的到 2020
+    public static int getIntYear(String date) {
+        if (date.contains("-")) {
+            String[] split = date.split("-");
+            return Integer.parseInt(split[0]);
+        } else {
+            return 2001;
+        }
+
+    }
+
     // 格式化月份去前面的0  2020-02-09   的到 2
     public static String getMonth(String date) {
         if (date.contains("-")) {
@@ -213,6 +240,7 @@ public class Utils {
             return date;
         }
     }
+
     /**
      * 从给到的时间数据 切割只要年月份 2022-10-30 00:00:00 -> 00:00:00
      *
@@ -222,6 +250,25 @@ public class Utils {
     public static String getTimeFromDate(String date) {
         if (!TextUtils.isEmpty(date) && date.contains(" ")) {
             String time = date.split(" ")[1];
+            return time;
+        } else {
+            return date;
+        }
+    }
+
+
+    /**
+     * 从给到的时间数据 切割只要年月份 2022-10-30 00:00:00 -> 00:00:00
+     *
+     * @param date
+     * @return
+     */
+    public static String ChangeDate(String date) {
+        if (date.contains("-0")) {
+            String time = date.replace("-0", ".0");
+            return time;
+        } else if (date.contains("-")) {
+            String time = date.replace("-", ".");
             return time;
         } else {
             return date;

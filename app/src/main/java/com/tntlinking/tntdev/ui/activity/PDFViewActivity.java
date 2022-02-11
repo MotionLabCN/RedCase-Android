@@ -17,7 +17,8 @@ import java.net.URL;
 
 public final class PDFViewActivity extends AppActivity {
     private PDFView pdfView;
-    private String PDFUrl = "https://talent-operation.stage-ttchain.tntlinking.com/api/manpower_operate/minio/files/recruit_guide.pdf";
+    private String PDFUrl = "https://stage-ttchain.tntlinking.com/api/minio/pdf/manpower-pages/recruit_guide.pdf";
+
 
     @Override
     protected int getLayoutId() {

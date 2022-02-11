@@ -123,14 +123,33 @@
             </LinearLayout>
 
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btn_next"
-                style="@style/ButtonStyle"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/dp_16"
-                android:layout_marginVertical="@dimen/dp_20"
-                android:text="生成邀请海报" />
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_next"
+                    style="@style/ButtonStyleBlack"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/dp_16"
+                    android:layout_marginVertical="@dimen/dp_20"
+                    android:layout_weight="1"
+                    android:text="生成邀请海报" />
+
+                <androidx.appcompat.widget.AppCompatButton
+
+                    android:id="@+id/btn_contact"
+                    style="@style/ButtonStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/dp_16"
+                    android:layout_marginVertical="@dimen/dp_20"
+                    android:layout_weight="1"
+                    android:text="加顾问领奖金" />
+            </LinearLayout>
+
 
         </LinearLayout>
     </ScrollView>

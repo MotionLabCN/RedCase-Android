@@ -8,6 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.tntlinking.tntdev.R;
+import com.tntlinking.tntdev.other.Utils;
 import com.tntlinking.tntdev.ui.bean.DeveloperInfoBean;
 
 import java.util.List;
@@ -18,7 +19,7 @@ public final class AddEducationAdapter extends BaseAdapter {
     private List<DeveloperInfoBean.DeveloperEducation> mList;
     private LayoutInflater layoutInflater;
 
-    public AddEducationAdapter(Context context,List<DeveloperInfoBean.DeveloperEducation> list) {
+    public AddEducationAdapter(Context context, List<DeveloperInfoBean.DeveloperEducation> list) {
         this.mList = list;
         layoutInflater = LayoutInflater.from(context);
     }
@@ -62,8 +63,8 @@ public final class AddEducationAdapter extends BaseAdapter {
         }
         DeveloperInfoBean.DeveloperEducation bean = mList.get(position);
         holder.tv_school_name.setText(bean.getCollegeName());
-        holder.tv_school_info.setText(bean.getEducationName()+" | "+bean.getTrainingModeName()+" | "+bean.getMajor());
-        holder.tv_school_time.setText(bean.getInSchoolStartTime()+" - "+bean.getInSchoolEndTime());
+        holder.tv_school_info.setText(bean.getEducationName() + " | " + bean.getTrainingModeName() + " | " + bean.getMajor());
+        holder.tv_school_time.setText(Utils.ChangeDate(bean.getInSchoolStartTime()) + " - " + Utils.ChangeDate(bean.getInSchoolEndTime()));
 
         return convertView;
     }

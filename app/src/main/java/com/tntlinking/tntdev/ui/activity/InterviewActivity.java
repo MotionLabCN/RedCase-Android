@@ -1,6 +1,7 @@
 package com.tntlinking.tntdev.ui.activity;
 
 
+import android.content.Intent;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -23,6 +24,7 @@ import androidx.appcompat.widget.AppCompatButton;
 public final class InterviewActivity extends AppActivity {
 
     private AppCompatButton btn_next;
+    private AppCompatButton btn_contact;
     private LinearLayout ll_list_empty;
     private MyListView list_item;
     private InvitationAdapter mAdapter;
@@ -37,9 +39,10 @@ public final class InterviewActivity extends AppActivity {
         list_item = findViewById(R.id.list_item);
         ll_list_empty = findViewById(R.id.ll_list_empty);
         btn_next = findViewById(R.id.btn_next);
+        btn_contact = findViewById(R.id.btn_contact);
 
 
-        setOnClickListener(btn_next);
+        setOnClickListener(btn_next,btn_contact);
     }
 
 
@@ -55,6 +58,12 @@ public final class InterviewActivity extends AppActivity {
         switch (view.getId()) {
             case R.id.btn_next:
                 startActivity(PosterActivity.class);
+                break;
+            case R.id.btn_contact:
+                Intent intent = new Intent();
+                intent.setClass(this, SaveQRActivity.class);
+                intent.putExtra("contact", "contact");
+                startActivity(intent);
                 break;
 
         }

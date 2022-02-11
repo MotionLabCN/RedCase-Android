@@ -4,6 +4,7 @@ package com.tntlinking.tntdev.ui.activity;
 import android.content.Intent;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.blankj.utilcode.util.GsonUtils;
@@ -134,7 +135,7 @@ public final class AddProjectActivityNew extends AppActivity {
                     info_project_in_time.setText(developerProject.getProjectStartDate());
                     info_project_end_time.setText(developerProject.getProjectEndDate());
                     et_project_position.setText(developerProject.getPosition());
-                    info_project_work_mode.setLeftText(developerProject.getWorkModeName());
+//                    info_project_work_mode.setLeftText(developerProject.getWorkModeName());
                     et_project_company_name.setText(developerProject.getCompanyName());
                     info_project_industry.setLeftText(developerProject.getIndustryName());
                     et_project_description.setText(developerProject.getDescription());
@@ -227,6 +228,8 @@ public final class AddProjectActivityNew extends AppActivity {
                                 info_project_industry.setLeftText(bean.getName() + "-" + childrenBean.getName());
                                 industryId = childrenBean.getId();
                                 industry = bean.getName() + "-" + childrenBean.getName();
+
+                                EasyLog.print("===industryId==" + industryId+"======"+childrenBean.getName());
                             }
                         }).show();
                 break;
@@ -291,7 +294,16 @@ public final class AddProjectActivityNew extends AppActivity {
                     }
                     addProject(true);
                 } else {
-                    deleteProject(mId);
+                    new BaseDialog.Builder<>(this)
+                            .setContentView(R.layout.write_daily_delete_dialog)
+                            .setAnimStyle(BaseDialog.ANIM_SCALE)
+                            .setText(R.id.tv_title, "是否确认删除？")
+                            .setOnClickListener(R.id.btn_dialog_custom_cancel, (BaseDialog.OnClickListener<Button>) (dialog, button) -> dialog.dismiss())
+                            .setOnClickListener(R.id.btn_dialog_custom_ok, (dialog, views) -> {
+
+                                deleteProject(mId, dialog);
+                            })
+                            .show();
                 }
                 break;
             case R.id.btn_commit:
@@ -317,10 +329,10 @@ public final class AddProjectActivityNew extends AppActivity {
                     toast("没有输入担任角色");
                     return;
                 }
-                if (TextUtils.isEmpty(work_mode)) {
-                    toast("没选职业状态");
-                    return;
-                }
+//                if (TextUtils.isEmpty(work_mode)) {
+//                    toast("没选职业状态");
+//                    return;
+//                }
                 if (TextUtils.isEmpty(company_name)) {
                     toast("没有输入所属公司");
                     return;
@@ -417,17 +429,17 @@ public final class AddProjectActivityNew extends AppActivity {
 
                     @Override
                     public void onSucceed(HttpData<List<GetProvinceApi.ProvinceBean>> data) {
-                        if (isBack){
+                        if (isBack) {
                             setResult(RESULT_OK);
                             finish();
-                        }else {
+                        } else {
                             et_project_name.setText("");
                             et_project_name.setHint("项目名称");
                             info_project_in_time.setText("选择开始时间");
                             info_project_end_time.setText("选择结束时间");
                             et_project_position.setText("");
                             et_project_position.setHint("担任角色");
-                            info_project_work_mode.setLeftText("职业状态");
+//                            info_project_work_mode.setLeftText("职业状态");
                             et_project_company_name.setText("");
                             et_project_position.setHint("所属公司");
                             info_project_industry.setLeftText("所在行业");
@@ -456,6 +468,7 @@ public final class AddProjectActivityNew extends AppActivity {
                     }
                 });
     }
+
     public void updateProject(int id) {
         EasyHttp.put(this)
                 .api(new UpdateProjectApi()
@@ -479,7 +492,8 @@ public final class AddProjectActivityNew extends AppActivity {
                     }
                 });
     }
-    public void deleteProject(int id) {
+
+    public void deleteProject(int id, BaseDialog dialog) {
         EasyHttp.delete(this)
                 .api(new DeleteProjectApi()
                         .setProjectId(id))
@@ -487,7 +501,7 @@ public final class AddProjectActivityNew extends AppActivity {
 
                     @Override
                     public void onSucceed(HttpData<List<GetProvinceApi.ProvinceBean>> data) {
-                        EasyLog.print("====deleteProject===");
+                        dialog.dismiss();
                         setResult(RESULT_OK);
                         finish();
                     }

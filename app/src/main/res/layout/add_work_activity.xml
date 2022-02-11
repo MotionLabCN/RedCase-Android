@@ -157,6 +157,10 @@
 
             </LinearLayout>
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/line_size"
+                android:background="#FFECECEC" />
         </LinearLayout>
 
     </ScrollView>

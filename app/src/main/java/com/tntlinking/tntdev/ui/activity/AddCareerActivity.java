@@ -7,6 +7,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
 
+import com.blankj.utilcode.util.SPUtils;
 import com.hjq.base.BaseDialog;
 import com.hjq.http.EasyHttp;
 import com.hjq.http.listener.HttpCallback;
@@ -20,6 +21,7 @@ import com.tntlinking.tntdev.http.api.GetProvinceApi;
 import com.tntlinking.tntdev.http.api.UpdateBasicInfoApi;
 import com.tntlinking.tntdev.http.api.UpdateCareerApi;
 import com.tntlinking.tntdev.http.model.HttpData;
+import com.tntlinking.tntdev.other.AppConfig;
 import com.tntlinking.tntdev.ui.bean.DeveloperInfoBean;
 import com.tntlinking.tntdev.ui.bean.SendDeveloperBean;
 import com.tntlinking.tntdev.ui.dialog.DictionarySelectDialog;
@@ -176,30 +178,32 @@ public final class AddCareerActivity extends AppActivity {
 
             case R.id.btn_next:
 
-
-                if (careerDirectionId==0) {
+                curSalary = et_salary.getText().toString();
+                lowestSalary = et_expect_salary_low.getText().toString();
+                highestSalary = et_expect_salary_high.getText().toString();
+                if (careerDirectionId == 0) {
                     toast("没选择专业方向");
                     return;
                 }
-                if (workYearsId==0) {
+                if (workYearsId == 0) {
                     toast("没选择工作经验");
                     return;
                 }
-                if (TextUtils.isEmpty(et_salary.getText().toString())) {
+                if (TextUtils.isEmpty(curSalary)) {
                     toast("没有输入当前薪资");
                     return;
                 }
-                if (TextUtils.isEmpty(et_expect_salary_low.getText().toString())) {
+                if (TextUtils.isEmpty(lowestSalary)) {
                     toast("没有输入期望最低薪资");
                     return;
                 }
-                if (TextUtils.isEmpty(et_expect_salary_high.getText().toString())) {
+                if (TextUtils.isEmpty(highestSalary)) {
                     toast("没有输入期望最高薪资");
                     return;
                 }
 
-                Integer low = Integer.valueOf(et_expect_salary_low.getText().toString());
-                Integer high = Integer.valueOf(et_expect_salary_high.getText().toString());
+                Integer low = Integer.valueOf(lowestSalary);
+                Integer high = Integer.valueOf(highestSalary);
                 if (high < low) {
                     et_expect_salary_high.setText("");
                     toast("期望最高薪资不能低于最低薪资");
@@ -226,6 +230,7 @@ public final class AddCareerActivity extends AppActivity {
 
                     @Override
                     public void onSucceed(HttpData<List<GetProvinceApi.ProvinceBean>> data) {
+                        SPUtils.getInstance().put(AppConfig.CAREER_ID,careerDirectionId);//保存职业方向 后面获取标签需要用到
                         Intent intent = new Intent();
                         setResult(RESULT_OK, intent);
                         finish();

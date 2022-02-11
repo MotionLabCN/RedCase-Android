@@ -7,6 +7,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.blankj.utilcode.util.GsonUtils;
+import com.blankj.utilcode.util.SPUtils;
 import com.google.android.material.snackbar.Snackbar;
 import com.hjq.http.EasyHttp;
 import com.hjq.http.EasyLog;
@@ -17,6 +18,7 @@ import com.tntlinking.tntdev.app.AppActivity;
 import com.tntlinking.tntdev.http.api.AddTagApi;
 import com.tntlinking.tntdev.http.api.GetTagListApi;
 import com.tntlinking.tntdev.http.model.HttpData;
+import com.tntlinking.tntdev.other.AppConfig;
 import com.tntlinking.tntdev.ui.adapter.SkillTagAdapter;
 import com.tntlinking.tntdev.ui.adapter.TagAdapter;
 import com.tntlinking.tntdev.ui.adapter.TagSelectedAdapter;
@@ -289,7 +291,8 @@ public final class AddProjectTagActivityNew extends AppActivity {
 
     @Override
     protected void initData() {
-        int careerDirectionId = SendDeveloperBean.getSingleton().getCareerDirectionId();
+//        int careerDirectionId = SendDeveloperBean.getSingleton().getCareerDirectionId();
+        int careerDirectionId = SPUtils.getInstance().getInt(AppConfig.CAREER_ID, 163);
         getTagList(careerDirectionId + "");
 
 
@@ -551,7 +554,7 @@ public final class AddProjectTagActivityNew extends AppActivity {
                                                 continue;
                                             }
                                         }
-                                    }else if (mSelectList.get(i).getType() == 0){
+                                    } else if (mSelectList.get(i).getType() == 0) {
                                         int position1 = positionList(dataBean.get(0).getChildren(), mSelectList.get(i));
                                         if (position1 != -1) {
                                             fl_skill_tag_1.getChildAt(position1).setSelected(true);
@@ -581,7 +584,6 @@ public final class AddProjectTagActivityNew extends AppActivity {
                                     }
 
                                 }
-
 
 
                                 for (int i = 0; i < mSelectList.size(); i++) {

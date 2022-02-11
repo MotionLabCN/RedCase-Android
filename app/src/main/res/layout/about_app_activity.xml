@@ -50,8 +50,7 @@
             android:layout_marginTop="@dimen/dp_6"
             android:text="Tiantian Digital Chain ©️ 2022"
             android:textColor="@color/black"
-            android:textSize="@dimen/sp_15"
-            android:textStyle="bold" />
+            android:textSize="@dimen/sp_15" />
     </LinearLayout>
 
 
