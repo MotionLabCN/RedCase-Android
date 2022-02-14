@@ -54,7 +54,7 @@ public final class HomeWorkActivity extends AppActivity {
     private LinearLayout ll_question;
     private LinearLayout ll_contact;
 
-    String name = SPUtils.getInstance().getString(AppConfig.DEVELOP_NAME);
+    String name = SPUtils.getInstance().getString(AppConfig.DEVELOP_NAME, "朋友");
     @Override
     protected int getLayoutId() {
         return R.layout.work_activity;

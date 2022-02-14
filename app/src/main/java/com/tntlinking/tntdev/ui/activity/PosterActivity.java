@@ -1,8 +1,13 @@
 package com.tntlinking.tntdev.ui.activity;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.ImageView;
 
+import com.github.barteksc.pdfviewer.util.Util;
 import com.hjq.http.EasyHttp;
 import com.hjq.http.listener.HttpCallback;
 import com.hjq.umeng.Platform;
@@ -12,6 +17,7 @@ import com.tntlinking.tntdev.aop.SingleClick;
 import com.tntlinking.tntdev.app.AppActivity;
 import com.tntlinking.tntdev.http.api.InvitationUrlApi;
 import com.tntlinking.tntdev.http.model.HttpData;
+import com.tntlinking.tntdev.other.Utils;
 import com.tntlinking.tntdev.ui.dialog.ShareAppDialog;
 import com.umeng.socialize.media.UMImage;
 import com.umeng.socialize.media.UMWeb;
@@ -25,6 +31,7 @@ public final class PosterActivity extends AppActivity {
 
     private AppCompatButton btn_next;
     private String shareUrl = "https://stage-ttchain.tntlinking.com";
+    private ImageView iv_qr;
 
     @Override
     protected int getLayoutId() {
@@ -34,6 +41,7 @@ public final class PosterActivity extends AppActivity {
     @Override
     protected void initView() {
         btn_next = findViewById(R.id.btn_next);
+        iv_qr = findViewById(R.id.iv_qr);
 
         setOnClickListener(btn_next);
     }
@@ -41,6 +49,7 @@ public final class PosterActivity extends AppActivity {
     @Override
     protected void initData() {
         getInvitationUrl();
+
     }
 
 
@@ -88,6 +97,10 @@ public final class PosterActivity extends AppActivity {
                     @Override
                     public void onSucceed(HttpData<String> data) {
                         shareUrl = data.getData();
+
+                        Bitmap logoBitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.app_logo);
+                        Bitmap qrCodeBitmap = Utils.createQRCodeBitmap(shareUrl, 800, 800, "UTF-8", "H", "1", Color.BLACK, Color.WHITE, logoBitmap, 0.2F);
+                        iv_qr.setImageBitmap(qrCodeBitmap);
                     }
                 });
 

@@ -159,6 +159,12 @@
             android:label="@string/about_title"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
+        <!-- 关于我们 -->
+        <activity
+            android:name="com.tntlinking.tntdev.ui.activity.MDViewActivity"
+            android:label="@string/about_title"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
 
         <!-- 个人资料 -->
         <activity

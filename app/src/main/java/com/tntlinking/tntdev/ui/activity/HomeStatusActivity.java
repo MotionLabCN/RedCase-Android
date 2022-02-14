@@ -12,7 +12,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.blankj.utilcode.constant.TimeConstants;
 import com.blankj.utilcode.util.SPUtils;
+import com.blankj.utilcode.util.TimeUtils;
 import com.gyf.immersionbar.ImmersionBar;
 import com.hjq.base.BaseAdapter;
 import com.hjq.http.EasyHttp;
@@ -49,7 +51,7 @@ public final class HomeStatusActivity extends AppActivity {
     private LinearLayout ll_contact;
     private ViewPager viewPager;
     private LinearLayout ll_title;
-    String name = SPUtils.getInstance().getString(AppConfig.DEVELOP_NAME);
+    String name = SPUtils.getInstance().getString(AppConfig.DEVELOP_NAME, "朋友");
 
     @Override
     protected int getLayoutId() {
@@ -72,7 +74,7 @@ public final class HomeStatusActivity extends AppActivity {
         viewPager = findViewById(R.id.viewpager);
         ll_title = findViewById(R.id.ll_title);
 
-        tv_avatar.setText(name);
+//        tv_avatar.setText(name);
         ImmersionBar.setTitleBar(this, ll_title);
         setOnClickListener(iv_interview, tv_avatar, ll_cooperation, ll_service, ll_question, ll_contact, tv_do_task);
 
@@ -107,38 +109,45 @@ public final class HomeStatusActivity extends AppActivity {
 
     }
 
+//    @Override
+//    protected void onResume() {
+//        getStatus();
+//        super.onResume();
+//
+//    }
+
     @Override
     protected void initData() {
-//        getHistoryList();
+        getStatus();
 
-        int status = getInt(AppConfig.DEVELOP_STATUS, 0);
-        long createTime = getLong(AppConfig.CREATE_TIME, 0);
-        if (status == 3) {
-            tv_status.setVisibility(View.VISIBLE);
-            tv_status.setText("已认证");
-            tv_name.setText("你好," + name);
-
-            tv_do_task.setText("领红包");
-            view_dot.setVisibility(View.GONE);
-            tv_remain_day.setVisibility(View.GONE);
-        } else {
-            tv_status.setVisibility(View.GONE);
-            tv_name.setText("你好,新朋友");
-            if (createTime >= 30) {
-                tv_do_task.setText("已失效");
-                tv_do_task.setTextColor(getResources().getColor(R.color.color_hint_color));
-                tv_do_task.setBackground(getResources().getDrawable(R.drawable.btn_gray_radius_20));
-                tv_do_task.setClickable(false);
-
-                view_dot.setVisibility(View.GONE);
-                tv_remain_day.setVisibility(View.GONE);
-            } else {
-                tv_do_task.setText("做任务");
-                view_dot.setVisibility(View.VISIBLE);
-                tv_remain_day.setVisibility(View.VISIBLE);
-                tv_remain_day.setText("距失效剩余" + (30 - createTime) + "天");
-            }
-        }
+//        int status = getInt(AppConfig.DEVELOP_STATUS, 0);
+//        long createTime = getLong(AppConfig.CREATE_TIME, 0);
+//        if (status == 3) {
+//            tv_status.setVisibility(View.VISIBLE);
+//            tv_status.setText("已认证");
+//            tv_name.setText("你好," + name);
+//
+//            tv_do_task.setText("领红包");
+//            view_dot.setVisibility(View.GONE);
+//            tv_remain_day.setVisibility(View.GONE);
+//        } else {
+//            tv_status.setVisibility(View.GONE);
+//            tv_name.setText("你好,新朋友");
+//            if (createTime >= 30) {
+//                tv_do_task.setText("已失效");
+//                tv_do_task.setTextColor(getResources().getColor(R.color.color_hint_color));
+//                tv_do_task.setBackground(getResources().getDrawable(R.drawable.btn_gray_radius_20));
+//                tv_do_task.setClickable(false);
+//
+//                view_dot.setVisibility(View.GONE);
+//                tv_remain_day.setVisibility(View.GONE);
+//            } else {
+//                tv_do_task.setText("做任务");
+//                view_dot.setVisibility(View.VISIBLE);
+//                tv_remain_day.setVisibility(View.VISIBLE);
+//                tv_remain_day.setText("距失效剩余" + (30 - createTime) + "天");
+//            }
+//        }
 
     }
 
@@ -146,6 +155,7 @@ public final class HomeStatusActivity extends AppActivity {
     @SuppressLint("NonConstantResourceId")
     @Override
     public void onClick(View view) {
+        Intent intent = new Intent();
         switch (view.getId()) {
             case R.id.tv_avatar:
                 startActivity(PersonDataActivity.class);
@@ -158,13 +168,21 @@ public final class HomeStatusActivity extends AppActivity {
                 startActivity(PDFViewActivity.class);
                 break;
             case R.id.ll_service:
-                BrowserActivity.start(getActivity(), "https://stage-ttchain.tntlinking.com/api/minio/manpower-pages/service_guide.md", "服务手册");
+                String service_guide = "https://stage-ttchain.tntlinking.com/api/minio/manpower-pages/service_guide.md";
+                intent.setClass(this, MDViewActivity.class);
+                intent.putExtra("md_url", service_guide);
+                intent.putExtra("title", "服务手册");
+                startActivity(intent);
                 break;
             case R.id.ll_question:
-                BrowserActivity.start(getActivity(), "https://stage-ttchain.tntlinking.com/api/minio/manpower-pages/faq_guide.md", "常见问题");
+                String faq_guide = "https://stage-ttchain.tntlinking.com/api/minio/manpower-pages/faq_guide.md";
+                intent.setClass(this, MDViewActivity.class);
+                intent.putExtra("md_url", faq_guide);
+                intent.putExtra("title", "常见问题");
+                startActivity(intent);
+
                 break;
             case R.id.ll_contact:
-                Intent intent = new Intent();
                 intent.setClass(this, SaveQRActivity.class);
                 intent.putExtra("contact", "contact");
                 startActivity(intent);
@@ -177,6 +195,7 @@ public final class HomeStatusActivity extends AppActivity {
                     startActivity(EnterDeveloperActivity.class);
                 }
 
+//                startActivity(SaveQRActivity.class);
                 break;
 
         }
@@ -194,17 +213,42 @@ public final class HomeStatusActivity extends AppActivity {
                         // 1->待认证  2->待审核   3->审核成功 4->审核失败
                         SPUtils.getInstance().put(AppConfig.DEVELOP_STATUS, data.getData().getStatus());
                         SPUtils.getInstance().put(AppConfig.DEVELOP_NAME, data.getData().getRealName());
-                        tv_avatar.setText(data.getData().getRealName());
-                        if (data.getData().getStatus().equals("1")) {
-                            startActivity(LoginActivityView.class);
-                            finish();
-                        } else if (data.getData().getStatus().equals("3")) {
+                        String name = SPUtils.getInstance().getString(AppConfig.DEVELOP_NAME, "朋友");
+                        tv_avatar.setText(name);
+                        String createDate = data.getData().getCreateDate();
+                        long createTime = 0;
+                        if (createDate.contains("T")) {
+                            String replace = createDate.replace("T", " ");
+                             createTime = TimeUtils.getTimeSpanByNow(replace, TimeConstants.DAY);
+                        } else if (createDate.contains(" ")) {
+                            createTime = TimeUtils.getTimeSpanByNow(createDate, TimeConstants.DAY);
+                        }
+                        int status = Integer.parseInt(data.getData().getStatus());
+                        if (status == 3) {
+                            tv_status.setVisibility(View.VISIBLE);
+                            tv_status.setText("已认证");
+                            tv_name.setText("你好," + name);
 
-                        } else if (data.getData().getStatus().equals("2")) {
-//                            startActivity(CheckDeveloperActivity.class);
+                            tv_do_task.setText("领红包");
+                            view_dot.setVisibility(View.GONE);
+                            tv_remain_day.setVisibility(View.GONE);
                         } else {
-                            startActivity(CheckDeveloperFailActivity.class);
-                            finish();
+                            tv_status.setVisibility(View.GONE);
+                            tv_name.setText("你好,新朋友");
+                            if (Math.abs(createTime) >= 30) {
+                                tv_do_task.setText("已失效");
+                                tv_do_task.setTextColor(getResources().getColor(R.color.color_hint_color));
+                                tv_do_task.setBackground(getResources().getDrawable(R.drawable.btn_gray_radius_20));
+                                tv_do_task.setClickable(false);
+
+                                view_dot.setVisibility(View.GONE);
+                                tv_remain_day.setVisibility(View.GONE);
+                            } else {
+                                tv_do_task.setText("做任务");
+                                view_dot.setVisibility(View.VISIBLE);
+                                tv_remain_day.setVisibility(View.VISIBLE);
+                                tv_remain_day.setText("距失效剩余" + (30 - createTime) + "天");
+                            }
                         }
 
                     }

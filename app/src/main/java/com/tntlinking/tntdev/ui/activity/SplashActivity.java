@@ -90,7 +90,8 @@ public final class SplashActivity extends AppActivity {
                 if (TextUtils.isEmpty(SPUtils.getInstance().getString(AppConfig.ACCESS_TOKEN))) {
                     if (SPUtils.getInstance().getBoolean(AppConfig.HAS_LOGIN, false)) {
                         if (SPUtils.getInstance().getString(AppConfig.DEVELOP_STATUS, "1").equals("1")) {
-                            startActivity(LoginActivityView.class);
+                            startActivity(HomeStatusActivity.class);
+//                            startActivity(LoginActivityView.class);
                         } else if (SPUtils.getInstance().getString(AppConfig.DEVELOP_STATUS, "1").equals("3")) {
                             startActivity(HomeWorkActivity.class);
                         } else if (SPUtils.getInstance().getString(AppConfig.DEVELOP_STATUS, "1").equals("2")) {
@@ -119,7 +120,8 @@ public final class SplashActivity extends AppActivity {
                                     String createDate = data.getData().getCreateDate();
 
                                     if (data.getData().getStatus().equals("1")) { //
-                                        startActivity(LoginActivityView.class);
+                                        startActivity(HomeStatusActivity.class);
+//                                        startActivity(LoginActivityView.class);
                                     } else if (data.getData().getStatus().equals("3")) {
                                         Intent intent = new Intent(SplashActivity.this, HomeWorkActivity.class);
                                         intent.putExtra(AppConfig.DEVELOP_STATUS, 3);

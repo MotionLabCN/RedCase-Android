@@ -158,12 +158,14 @@ public final class EnterDeveloperActivity extends AppActivity {
     protected void initData() {
         int developId = SPUtils.getInstance().getInt(AppConfig.DEVELOPER_ID);
         getDeveloperDetail(developId);
+        EasyLog.print("=====initData=======");
     }
 
     @Override
     protected void onResume() {
         int developId = SPUtils.getInstance().getInt(AppConfig.DEVELOPER_ID);
         getDeveloperDetail(developId);
+        EasyLog.print("=====initData====111===");
         super.onResume();
 
     }
@@ -334,7 +336,7 @@ public final class EnterDeveloperActivity extends AppActivity {
                             String mSex = sex == 0 ? "男" : "女";
 
                             String nowTime = TimeUtil.getTimeString("yyyy-MM-dd");
-                            int age = Utils.getIntYear(nowTime)-Utils.getIntYear(bean.getBirthday());
+                            int age = Utils.getIntYear(nowTime) - Utils.getIntYear(bean.getBirthday());
                             tv_edit_info.setText(mSex + " | " + age + "岁 | " + bean.getProvinceName() + bean.getCityName() + bean.getAreasName());
                             tv_edit_reason.setText(bean.getRemoteWorkReasonStr());
 
@@ -368,13 +370,32 @@ public final class EnterDeveloperActivity extends AppActivity {
                             progress++;
                         }
 
-                        if (projectDtoList.size() != 0) {
+                        if (projectDtoList.size() >= 1) {
                             addProjectAdapter = new AddProjectAdapter(EnterDeveloperActivity.this, projectDtoList);
                             lv3.setAdapter(addProjectAdapter);
                             progress++;
                         }
+                        if (projectDtoList.size() >= 2) {
+                            progress++;
+                        }
+                        if (projectDtoList.size() >= 3) {
+                            progress++;
+                        }
+                        if (projectDtoList.size() >= 4) {
+                            progress++;
+                        }
+                        if (projectDtoList.size() >= 5) {
+                            progress++;
+                        }
+                        if (projectDtoList.size() >= 6) {
+                            progress++;
+                        }
+                        if (projectDtoList.size() >= 7) {
+                            progress++;
+                        }
 
 
+                        EasyLog.print("=====progress==" + progress);
                         ll_progress.setVisibility(View.VISIBLE);
                         if (progress == 0) {
                             ll_progress.setVisibility(View.GONE);
@@ -393,6 +414,24 @@ public final class EnterDeveloperActivity extends AppActivity {
                         } else if (progress == 5) {
                             tv_progress.setText("\"恭喜你！完成度超过60%的用户，全面的工作和项目经历可以进一步提升竞争力~\"");
                             progress_bar.setProgress(60);
+                        } else if (progress == 6) {
+                            tv_progress.setText("\"恭喜你！完成度超过65%的用户，全面的工作和项目经历可以进一步提升竞争力~\"");
+                            progress_bar.setProgress(65);
+                        } else if (progress == 7) {
+                            tv_progress.setText("\"恭喜你！完成度超过70%的用户，全面的工作和项目经历可以进一步提升竞争力~\"");
+                            progress_bar.setProgress(70);
+                        } else if (progress == 8) {
+                            tv_progress.setText("\"恭喜你！完成度超过75%的用户，全面的工作和项目经历可以进一步提升竞争力~\"");
+                            progress_bar.setProgress(75);
+                        } else if (progress == 9) {
+                            tv_progress.setText("\"恭喜你！完成度超过80%的用户，全面的工作和项目经历可以进一步提升竞争力~\"");
+                            progress_bar.setProgress(80);
+                        } else if (progress == 10) {
+                            tv_progress.setText("\"恭喜你！完成度超过85%的用户，全面的工作和项目经历可以进一步提升竞争力~\"");
+                            progress_bar.setProgress(85);
+                        } else {
+                            tv_progress.setText("\"恭喜你！完成度超过90%以上的用户，未来可期～\"");
+                            progress_bar.setProgress(90);
                         }
 
                         if (bean.getStatus() == 2) {
@@ -416,8 +455,9 @@ public final class EnterDeveloperActivity extends AppActivity {
 
                     @Override
                     public void onSucceed(HttpData<List<GetProvinceApi.ProvinceBean>> data) {
-                        startActivity(SaveQRActivity.class);
-                        finish();
+//                        startActivity(SaveQRActivity.class);
+//                        finish();
+                        onResume();
                     }
                 });
     }

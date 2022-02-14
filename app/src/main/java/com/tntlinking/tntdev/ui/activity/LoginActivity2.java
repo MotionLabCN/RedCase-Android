@@ -183,7 +183,8 @@ public final class LoginActivity2 extends AppActivity implements TextView.OnEdit
 
                         String createDate = data.getData().getCreateDate();
                         if (data.getData().getStatus().equals("1")) { //
-                            startActivity(LoginActivityView.class);
+//                            startActivity(LoginActivityView.class);
+                            startActivity(HomeStatusActivity.class);
                         } else if (data.getData().getStatus().equals("3")) {
                             Intent intent = new Intent(LoginActivity2.this, HomeWorkActivity.class);
                             intent.putExtra(AppConfig.DEVELOP_STATUS, 3);
