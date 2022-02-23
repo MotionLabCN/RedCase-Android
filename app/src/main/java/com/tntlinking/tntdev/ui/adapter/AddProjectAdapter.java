@@ -74,7 +74,7 @@ public final class AddProjectAdapter extends BaseAdapter {
         holder.tv_company_name.setText(bean.getCompanyName() + " | " + bean.getIndustryName());
         holder.tv_description.setText(bean.getDescription());
 
-        TagAdapter adapter = new TagAdapter(mContext);
+        TagAdapter adapter = new TagAdapter(mContext,2);
         holder.tag_flow_layout.setAdapter(adapter);
         adapter.onlyAddAll(bean.getProjectSkillList());
         return convertView;

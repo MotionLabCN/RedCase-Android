@@ -14,6 +14,7 @@ import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
 
 import java.lang.reflect.Type;
+import java.math.BigDecimal;
 import java.util.Hashtable;
 
 
@@ -114,20 +115,20 @@ public class Utils {
     /**
      * 向二维码中间添加logo图片(图片合成)
      *
-     * @param srcBitmap 原图片（生成的简单二维码图片）
-     * @param logoBitmap logo图片
+     * @param srcBitmap   原图片（生成的简单二维码图片）
+     * @param logoBitmap  logo图片
      * @param logoPercent 百分比 (用于调整logo图片在原图片中的显示大小, 取值范围[0,1] )
      * @return
      */
-    private static Bitmap addLogo(Bitmap srcBitmap,  Bitmap logoBitmap, float logoPercent){
-        if(srcBitmap == null){
+    private static Bitmap addLogo(Bitmap srcBitmap, Bitmap logoBitmap, float logoPercent) {
+        if (srcBitmap == null) {
             return null;
         }
-        if(logoBitmap == null){
+        if (logoBitmap == null) {
             return srcBitmap;
         }
         //传值不合法时使用0.2F
-        if(logoPercent < 0F || logoPercent > 1F){
+        if (logoPercent < 0F || logoPercent > 1F) {
             logoPercent = 0.2F;
         }
 
@@ -145,13 +146,13 @@ public class Utils {
         Bitmap bitmap = Bitmap.createBitmap(srcWidth, srcHeight, Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(bitmap);
         canvas.drawBitmap(srcBitmap, 0, 0, null);
-        canvas.scale(scaleWidth, scaleHeight, srcWidth/2, srcHeight/2);
-        canvas.drawBitmap(logoBitmap, srcWidth/2 - logoWidth/2, srcHeight/2 - logoHeight/2, null);
+        canvas.scale(scaleWidth, scaleHeight, srcWidth / 2, srcHeight / 2);
+        canvas.drawBitmap(logoBitmap, srcWidth / 2 - logoWidth / 2, srcHeight / 2 - logoHeight / 2, null);
 
         return bitmap;
     }
+
     /**
-     *
      * @param content                字符串内容
      * @param width                  二维码宽度
      * @param height                 二维码高度
@@ -165,8 +166,8 @@ public class Utils {
      * @return
      */
     public static Bitmap createQRCodeBitmap(String content, int width, int height, String character_set,
-                                            String error_correction_level,String margin, int color_black,
-                                            int color_white,Bitmap logoBitmap, float logoPercent) {
+                                            String error_correction_level, String margin, int color_black,
+                                            int color_white, Bitmap logoBitmap, float logoPercent) {
         // 字符串内容判空
         if (TextUtils.isEmpty(content)) {
             return null;
@@ -211,7 +212,7 @@ public class Utils {
             bitmap.setPixels(pixels, 0, width, 0, 0, width, height);
 
             /** 5.为二维码添加logo图标 */
-            if(logoBitmap != null){
+            if (logoBitmap != null) {
                 return addLogo(bitmap, logoBitmap, logoPercent);
             }
             return bitmap;
@@ -221,7 +222,9 @@ public class Utils {
         }
     }
 
-/** ---------------------------生成简单二维码------------------------------------------------------*/
+    /**
+     * ---------------------------生成简单二维码------------------------------------------------------
+     */
     //格式化年月份去掉前面的0  2020-09-08  得到 2020-9-8
     private String getSimpleDate(String date) {
         int index1 = date.indexOf("-");
@@ -366,11 +369,12 @@ public class Utils {
         } else {
             return date;
         }
+
     }
 
 
     /**
-     * 从给到的时间数据 切割只要年月份 2022-10-30 00:00:00 -> 00:00:00
+     * 从给到的时间数据 切割只要年月份 2022-01-02  -> 00:00:00
      *
      * @param date
      * @return
@@ -385,6 +389,16 @@ public class Utils {
         } else {
             return date;
         }
+    }
+
+    public static String StripZeros(String str) {
+        //若是String类型，也可以先转为BigDecimal
+        BigDecimal value = new BigDecimal(str);
+        //去除多余0
+        BigDecimal noZeros = value.stripTrailingZeros();
+        //BigDecimal => String
+        return noZeros.toPlainString();
+
     }
 
     /**
@@ -408,6 +422,20 @@ public class Utils {
             return "";
         }
 
+    }
+
+    public static String formatName(String name) {
+        String mName = "朋友";
+        if (!TextUtils.isEmpty(name)) {
+            if (name.length() > 2) {
+                 mName = name.substring(name.length() - 2);
+            } else {
+                return name;
+            }
+        } else {
+            return mName;
+        }
+        return mName;
     }
 
 }

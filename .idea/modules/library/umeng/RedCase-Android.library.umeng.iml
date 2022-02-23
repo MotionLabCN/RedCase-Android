@@ -34,7 +34,6 @@
     <content url="file://$MODULE_DIR$/../../../../build/library/umeng/generated/aidl_source_output_dir/debugAndroidTest/out" />
     <content url="file://$MODULE_DIR$/../../../../build/library/umeng/generated/ap_generated_sources/debug/out">
       <sourceFolder url="file://$MODULE_DIR$/../../../../build/library/umeng/generated/ap_generated_sources/debug/out" isTestSource="false" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/../../../../build/library/umeng/generated/ap_generated_sources/debug/out" isTestSource="false" generated="true" />
     </content>
     <content url="file://$MODULE_DIR$/../../../../build/library/umeng/generated/ap_generated_sources/debugAndroidTest/out" />
     <content url="file://$MODULE_DIR$/../../../../build/library/umeng/generated/ap_generated_sources/debugUnitTest/out" />
@@ -48,7 +47,6 @@
     <content url="file://$MODULE_DIR$/../../../../build/library/umeng/generated/res/rs/debug" />
     <content url="file://$MODULE_DIR$/../../../../build/library/umeng/generated/source/buildConfig/androidTest/debug" />
     <content url="file://$MODULE_DIR$/../../../../build/library/umeng/generated/source/buildConfig/debug">
-      <sourceFolder url="file://$MODULE_DIR$/../../../../build/library/umeng/generated/source/buildConfig/debug" isTestSource="false" generated="true" />
       <sourceFolder url="file://$MODULE_DIR$/../../../../build/library/umeng/generated/source/buildConfig/debug" isTestSource="false" generated="true" />
     </content>
     <content url="file://$MODULE_DIR$/../../../../library/umeng">

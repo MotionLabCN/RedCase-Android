@@ -15,6 +15,7 @@ import com.tntlinking.tntdev.R;
 import com.tntlinking.tntdev.http.api.GetTagListApi;
 import com.tntlinking.tntdev.widget.FlowTagLayout;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,9 +28,16 @@ public class TagAdapter<T> extends BaseAdapter implements FlowTagLayout.OnInitSe
 
     private final Context mContext;
     private List<GetTagListApi.Bean.ChildrenBean> mDataList;
+    private int mType = 1; //1 标签选择页面的样式 2 是入驻资料项目经验显示的样式
 
     public TagAdapter(Context context) {
         this.mContext = context;
+        mDataList = new ArrayList<>();
+    }
+
+    public TagAdapter(Context context, int type) {
+        this.mContext = context;
+        this.mType = type;
         mDataList = new ArrayList<>();
     }
 
@@ -47,6 +55,7 @@ public class TagAdapter<T> extends BaseAdapter implements FlowTagLayout.OnInitSe
     public List<GetTagListApi.Bean.ChildrenBean> getData() {
         return mDataList;
     }
+
     @Override
     public long getItemId(int position) {
         return position;
@@ -59,7 +68,10 @@ public class TagAdapter<T> extends BaseAdapter implements FlowTagLayout.OnInitSe
 
         TextView textView = (TextView) view.findViewById(R.id.tv_tag);
         GetTagListApi.Bean.ChildrenBean t = mDataList.get(position);
-
+        if (mType != 1) {
+            textView.setTextColor(mContext.getResources().getColor(R.color.color_444E64));
+            textView.setBackgroundColor(mContext.getResources().getColor(R.color.color_F3F5FB));
+        }
 //        if (t instanceof String) {
 //            textView.setText((String) t);
 //        }
@@ -68,9 +80,8 @@ public class TagAdapter<T> extends BaseAdapter implements FlowTagLayout.OnInitSe
     }
 
 
-
     public void onlyAddAll(List<GetTagListApi.Bean.ChildrenBean> datas) {
-        if (datas !=null){
+        if (datas != null) {
             mDataList.clear();
             mDataList.addAll(datas);
             notifyDataSetChanged();
@@ -82,7 +93,7 @@ public class TagAdapter<T> extends BaseAdapter implements FlowTagLayout.OnInitSe
         onlyAddAll(datas);
     }
 
-    public void remove(int position){
+    public void remove(int position) {
         mDataList.remove(position);
         notifyDataSetChanged();
     }

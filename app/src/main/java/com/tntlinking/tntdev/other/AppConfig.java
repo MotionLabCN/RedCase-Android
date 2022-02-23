@@ -60,8 +60,48 @@ public final class AppConfig {
      * 获取服务器主机地址
      */
     public static String getHostUrl() {
-        return BuildConfig.HOST_URL;
+        return HOST_URL;
     }
+
+    /**
+     * 请求地址
+     */
+    public static String HOST_URL = BuildConfig.HOST_URL + "/api/new_manpower/";
+
+    /**
+     * 用户协议
+     */
+    public static String AGREEMENT_URL = BuildConfig.HOST_URL + "/#/page/agreement";
+    /**
+     * 隐私权限
+     */
+    public static String PRIVATE_URL = BuildConfig.HOST_URL + "/#/page/privacy";
+
+    /**
+     *
+     * 测试环境：https://stage-ttchain.tntlinking.com/
+     * 生产环境：https://www.tntlinking.com/
+     * 合作模式 ，服务手册，常见问题，活动介绍
+     * https://stage-ttchain.tntlinking.com/api/minio/manpower-pages/service_guide.md";
+     */
+
+    /**
+     * 服务手册
+     */
+    public static String SERVICE_GUIDE_URL = BuildConfig.SERVICE_URL + "/api/minio/manpower-pages/service_guide.md";
+
+    /**
+     * 常见问题
+     */
+    public static String FAQ_GUIDE_URL = BuildConfig.SERVICE_URL + "/api/minio/manpower-pages/service_guide.md";
+    /**
+     * 合作模式
+     */
+    public static String RECRUIT_GUIDE_URL = BuildConfig.SERVICE_URL + "/api/minio/pdf/manpower-pages/recruit_guide.pdf";
+    /**
+     * 活动规则
+     */
+    public static String RECOMMEND_GUIDE_URL = BuildConfig.SERVICE_URL + "/api/minio/manpower-pages/recommend_guide.md";
 
     /**
      * access_token
@@ -88,7 +128,8 @@ public final class AppConfig {
 
     public static String CREATE_TIME = "create_time";
     public static String CAREER_ID = "career_id";
+    public static String GUIDE_VIEW = "guide_view";
 
-    public static String  URL_AGREEMENT = "https://talent.tntlinking.com/#/page/agreement";
-    public static String  URL_PRIVATE = "https://talent.tntlinking.com/#/page/privacy";
+    public static String URL_AGREEMENT = "https://talent.tntlinking.com/#/page/agreement";
+    public static String URL_PRIVATE = "https://talent.tntlinking.com/#/page/privacy";
 }

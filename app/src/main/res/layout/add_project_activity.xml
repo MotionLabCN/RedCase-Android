@@ -55,6 +55,8 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/line_size"
+                android:layout_marginLeft="@dimen/dp_16"
+                android:layout_marginRight="@dimen/dp_16"
                 android:background="#FFECECEC" />
 
 
@@ -124,9 +126,12 @@
 
             </LinearLayout>
 
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/line_size"
+                android:layout_marginLeft="@dimen/dp_16"
+                android:layout_marginRight="@dimen/dp_16"
                 android:background="#FFECECEC" />
 
             <com.hjq.widget.view.ClearEditText
@@ -141,9 +146,12 @@
                 android:paddingBottom="@dimen/dp_15"
                 android:singleLine="true" />
 
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/line_size"
+                android:layout_marginLeft="@dimen/dp_16"
+                android:layout_marginRight="@dimen/dp_16"
                 android:background="#FFECECEC" />
 
             <com.hjq.widget.layout.SettingBar
@@ -151,16 +159,19 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_20"
+                android:visibility="gone"
                 app:bar_leftText="职业状态"
+                app:bar_lineVisible="false"
                 app:bar_rightDrawable="@drawable/icon_arrow_right"
-                app:bar_rightDrawableSize="@dimen/dp_16"
-                android:visibility="gone"/>
+                app:bar_rightDrawableSize="@dimen/dp_16" />
+
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/line_size"
-                android:background="#FFECECEC"
-                android:visibility="gone"/>
+                android:layout_marginLeft="@dimen/dp_16"
+                android:layout_marginRight="@dimen/dp_16"
+                android:background="#FFECECEC" />
 
             <com.hjq.widget.view.ClearEditText
                 android:id="@+id/et_project_company_name"
@@ -174,9 +185,12 @@
                 android:paddingBottom="@dimen/dp_15"
                 android:singleLine="true" />
 
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/line_size"
+                android:layout_marginLeft="@dimen/dp_16"
+                android:layout_marginRight="@dimen/dp_16"
                 android:background="#FFECECEC" />
 
 
@@ -186,8 +200,16 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_20"
                 app:bar_leftText="所在行业"
+                app:bar_lineVisible="false"
                 app:bar_rightDrawable="@drawable/icon_arrow_right"
                 app:bar_rightDrawableSize="@dimen/dp_16" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/line_size"
+                android:layout_marginLeft="@dimen/dp_16"
+                android:layout_marginRight="@dimen/dp_16"
+                android:background="#FFECECEC" />
 
             <com.hjq.widget.layout.SettingBar
                 android:id="@+id/info_project_skill"
@@ -195,12 +217,21 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_20"
                 app:bar_leftText="使用技能"
+                app:bar_lineVisible="false"
                 app:bar_rightDrawable="@drawable/icon_arrow_right"
                 app:bar_rightDrawableSize="@dimen/dp_16" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/line_size"
+                android:layout_marginLeft="@dimen/dp_16"
+                android:layout_marginRight="@dimen/dp_16"
+                android:background="#FFECECEC" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_8"
                 android:paddingLeft="@dimen/dp_15"
                 android:text="为了提高你的竞争力，请尽量丰富你的技能标签"
                 android:textColor="@color/color_hint_color"
@@ -217,9 +248,12 @@
                 android:paddingTop="@dimen/dp_15"
                 android:paddingBottom="@dimen/dp_15" />
 
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/line_size"
+                android:layout_marginLeft="@dimen/dp_16"
+                android:layout_marginRight="@dimen/dp_16"
                 android:background="#FFECECEC" />
 
 

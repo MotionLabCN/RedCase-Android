@@ -74,14 +74,14 @@ public final class LoginActivity2 extends AppActivity implements TextView.OnEdit
 
             @Override
             public void onClick(@NonNull View widget) {
-                BrowserActivity.start(getActivity(), BuildConfig.PRIVATE_URL);
+                BrowserActivity.start(getActivity(), AppConfig.PRIVATE_URL);
             }
         }).setForegroundColor(getColor(R.color.color_text_color)).append("和")
                 .setForegroundColor(getColor(R.color.color_hint_color)).append("《用户协议》").setClickSpan(new ClickableSpan() {
 
             @Override
             public void onClick(@NonNull View widget) {
-                BrowserActivity.start(getActivity(),  BuildConfig.AGREEMENT_URL);
+                BrowserActivity.start(getActivity(), AppConfig.AGREEMENT_URL);
             }
         })
                 .setForegroundColor(getColor(R.color.color_text_color)).create();
@@ -181,30 +181,23 @@ public final class LoginActivity2 extends AppActivity implements TextView.OnEdit
                         SPUtils.getInstance().put(AppConfig.DEVELOP_NAME, data.getData().getRealName());
                         SPUtils.getInstance().put(AppConfig.DEVELOPER_ID, data.getData().getId());
 
-                        String createDate = data.getData().getCreateDate();
-                        if (data.getData().getStatus().equals("1")) { //
-//                            startActivity(LoginActivityView.class);
-                            startActivity(HomeStatusActivity.class);
-                        } else if (data.getData().getStatus().equals("3")) {
-                            Intent intent = new Intent(LoginActivity2.this, HomeWorkActivity.class);
-                            intent.putExtra(AppConfig.DEVELOP_STATUS, 3);
-                            startActivity(intent);
-                        }else if (data.getData().getStatus().equals("2")) {
-//                                startActivity(CheckDeveloperActivity.class);
-                            Intent intent = new Intent(LoginActivity2.this, HomeStatusActivity.class);
-                            intent.putExtra(AppConfig.DEVELOP_STATUS, 2);
-                            if (createDate.contains("T")) {
-                                String replace = createDate.replace("T", " ");
-                                long timeSpanByNow = TimeUtils.getTimeSpanByNow(replace, TimeConstants.DAY);
-                                intent.putExtra(AppConfig.CREATE_TIME, Math.abs(timeSpanByNow));
-                            } else if (createDate.contains(" ")) {
-                                long timeSpanByNow = TimeUtils.getTimeSpanByNow(createDate, TimeConstants.DAY);
-                                intent.putExtra(AppConfig.CREATE_TIME, Math.abs(timeSpanByNow));
-                            }
-                            startActivity(intent);
-                        } else {
-                            startActivity(CheckDeveloperFailActivity.class);
-                        }
+
+//                        String createDate = data.getData().getCreateDate();
+//                        int status = Integer.parseInt(data.getData().getStatus());
+//                        Intent intent = new Intent(LoginActivity2.this, HomeStatusActivity.class);
+//                        intent.putExtra(AppConfig.DEVELOP_STATUS, status);
+//                        if (createDate.contains("T")) {
+//                            String replace = createDate.replace("T", " ");
+//                            long timeSpanByNow = TimeUtils.getTimeSpanByNow(replace, TimeConstants.DAY);
+//                            intent.putExtra(AppConfig.CREATE_TIME, Math.abs(timeSpanByNow));
+//                        } else if (createDate.contains(" ")) {
+//                            long timeSpanByNow = TimeUtils.getTimeSpanByNow(createDate, TimeConstants.DAY);
+//                            intent.putExtra(AppConfig.CREATE_TIME, Math.abs(timeSpanByNow));
+//                        }
+//                        startActivity(intent);
+                        SPUtils.getInstance().getBoolean(AppConfig.GUIDE_VIEW, true);
+                        startActivity(LoginActivityView.class);
+                        SPUtils.getInstance().put(AppConfig.GUIDE_VIEW, false);
                         ActivityManager.getInstance().finishAllActivities();
                     }
                 });

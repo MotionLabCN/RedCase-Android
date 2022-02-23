@@ -1,5 +1,7 @@
 R_DEF: Internal format may change without notice
 local
+anim activity_bottom_in
+anim activity_bottom_out
 anim layout_fall_down
 anim layout_fall_down_item
 anim layout_from_bottom

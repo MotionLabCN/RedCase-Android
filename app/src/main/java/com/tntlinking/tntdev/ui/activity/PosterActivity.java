@@ -2,25 +2,35 @@ package com.tntlinking.tntdev.ui.activity;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
 import android.graphics.Color;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.ScrollView;
 
 import com.github.barteksc.pdfviewer.util.Util;
 import com.hjq.http.EasyHttp;
+import com.hjq.http.EasyLog;
 import com.hjq.http.listener.HttpCallback;
 import com.hjq.umeng.Platform;
 import com.hjq.umeng.UmengShare;
+import com.tntlinking.tntdev.BuildConfig;
 import com.tntlinking.tntdev.R;
 import com.tntlinking.tntdev.aop.SingleClick;
 import com.tntlinking.tntdev.app.AppActivity;
+import com.tntlinking.tntdev.http.api.GetAppUpdateApi;
 import com.tntlinking.tntdev.http.api.InvitationUrlApi;
 import com.tntlinking.tntdev.http.model.HttpData;
+import com.tntlinking.tntdev.other.AppConfig;
 import com.tntlinking.tntdev.other.Utils;
+import com.tntlinking.tntdev.ui.dialog.AppUpdateDialog;
 import com.tntlinking.tntdev.ui.dialog.ShareAppDialog;
+import com.tntlinking.tntdev.ui.dialog.UpdateDialog;
 import com.umeng.socialize.media.UMImage;
-import com.umeng.socialize.media.UMWeb;
+
+import java.net.URLDecoder;
 
 import androidx.appcompat.widget.AppCompatButton;
 
@@ -32,6 +42,7 @@ public final class PosterActivity extends AppActivity {
     private AppCompatButton btn_next;
     private String shareUrl = "https://stage-ttchain.tntlinking.com";
     private ImageView iv_qr;
+    private FrameLayout fl_qr;
 
     @Override
     protected int getLayoutId() {
@@ -42,6 +53,7 @@ public final class PosterActivity extends AppActivity {
     protected void initView() {
         btn_next = findViewById(R.id.btn_next);
         iv_qr = findViewById(R.id.iv_qr);
+        fl_qr = findViewById(R.id.fl_qr);
 
         setOnClickListener(btn_next);
     }
@@ -50,6 +62,7 @@ public final class PosterActivity extends AppActivity {
     protected void initData() {
         getInvitationUrl();
 
+        getAppUpdate();
     }
 
 
@@ -58,13 +71,19 @@ public final class PosterActivity extends AppActivity {
     public void onClick(View view) {
 
         if (!TextUtils.isEmpty(shareUrl)) {
-            UMWeb content = new UMWeb(shareUrl);
-            content.setTitle(getString(R.string.app_name));
-            content.setThumb(new UMImage(this, R.mipmap.app_logo));
-            content.setDescription(getString(R.string.app_name));
+            Bitmap bitmap = createBitmap(fl_qr);
+//            UMImage content = new UMImage(this, R.mipmap.app_logo);//资源文件
+            UMImage content = new UMImage(this, bitmap);//bitmap文件
+            content.setThumb(content);
+
+//            UMWeb content = new UMWeb(shareUrl);
+//            content.setTitle(getString(R.string.app_name));
+//            content.setThumb(new UMImage(this, R.mipmap.app_logo));
+//            content.setDescription(getString(R.string.app_name));
             // 分享对话框
             new ShareAppDialog.Builder(this)
-                    .setShareLink(content)
+//                    .setShareLink(content)
+                    .setShareImage(content)
                     .setListener(new UmengShare.OnShareListener() {
 
                         @Override
@@ -83,8 +102,8 @@ public final class PosterActivity extends AppActivity {
                         }
                     })
                     .show();
-        }
 
+        }
 
     }
 
@@ -96,14 +115,71 @@ public final class PosterActivity extends AppActivity {
 
                     @Override
                     public void onSucceed(HttpData<String> data) {
-                        shareUrl = data.getData();
+//                        String url="http%3A%2F%2F192.168.0.19%3A8888%2Fcas%2Flogin";
+//                        String urlDecode= URLDecoder.decode(url);
+//                        System.out.println(urlDecode);
 
+                        shareUrl = URLDecoder.decode(data.getData());
                         Bitmap logoBitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.app_logo);
-                        Bitmap qrCodeBitmap = Utils.createQRCodeBitmap(shareUrl, 800, 800, "UTF-8", "H", "1", Color.BLACK, Color.WHITE, logoBitmap, 0.2F);
+                        Bitmap qrCodeBitmap = Utils.createQRCodeBitmap(shareUrl, 800, 800,
+                                "UTF-8", "H", "1", Color.BLACK, Color.WHITE, logoBitmap, 0.2F);
                         iv_qr.setImageBitmap(qrCodeBitmap);
                     }
                 });
 
+    }
+
+    // 将view 转化成bitmap
+    private static Bitmap createBitmap(View view) {
+        int height = view.getHeight();
+        if (view instanceof ScrollView) {
+            height = ((ScrollView) view).getChildAt(0).getHeight();
+        }
+        Bitmap bitmap = Bitmap.createBitmap(view.getWidth(), height, Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmap);
+        view.draw(canvas);
+        return bitmap;
+    }
+
+    public void getAppUpdate() {
+        EasyHttp.get(this)
+                .api(new GetAppUpdateApi()
+                        .setOsType(2)//1 ios   2 android
+                        .setCurrVersion(AppConfig.getVersionName()))
+                .request(new HttpCallback<HttpData<GetAppUpdateApi.Bean>>(this) {
+
+                    @Override
+                    public void onSucceed(HttpData<GetAppUpdateApi.Bean> data) {
+                        if (data.getData() != null) {
+                            GetAppUpdateApi.Bean bean = data.getData();
+                            if (AppConfig.getVersionName().equals(bean.getVersion())) {
+
+                            } else {
+
+                                String description = bean.getDescription();
+                                if (description.contains("\\n")) {
+                                    description = description.replace("\\n", "\n");
+                                }
+
+                                if (bean.getForceUpdate() == 1) {// 1 强制更新
+                                    // 升级对话框
+                                    new AppUpdateDialog.Builder(PosterActivity.this)
+                                            // 版本名
+                                            .setVersionName("最新版本："+bean.getVersion())
+                                            // 是否强制更新
+                                            .setForceUpdate(true)
+                                            // 更新日志
+                                            .setUpdateLog(description)
+                                            // 下载 URL
+                                            .setDownloadUrl(bean.getDownloadUrl())
+                                            // 文件 MD5
+//                                            .setFileMd5("df2f045dfa854d8461d9cefe08b813a8")
+                                            .show();
+                                }
+                            }
+                        }
+                    }
+                });
 
     }
 }

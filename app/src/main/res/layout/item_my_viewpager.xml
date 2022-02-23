@@ -68,6 +68,7 @@
                 android:layout_height="wrap_content"
                 android:text="小影/哈尔滨市/后端开发"
                 android:textColor="@color/white"
+                android:textStyle="bold"
                 android:textSize="@dimen/sp_15" />
 
             <TextView

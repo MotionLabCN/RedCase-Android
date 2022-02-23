@@ -138,6 +138,7 @@ public final class HomeWorkActivity extends AppActivity {
     @SingleClick
     @Override
     public void onClick(View view) {
+        Intent intent = new Intent();
         switch (view.getId()) {
             case R.id.tv_avatar:
                 startActivity(PersonDataActivity.class);
@@ -146,16 +147,25 @@ public final class HomeWorkActivity extends AppActivity {
                 startActivity(InterviewActivity.class);
                 break;
             case R.id.ll_cooperation:
-                BrowserActivity.start(getActivity(), "https://stage-ttchain.tntlinking.com/api/minio/manpower-pages/recruit_guide.pdf");
+//                BrowserActivity.start(getActivity(), "https://stage-ttchain.tntlinking.com/api/minio/manpower-pages/recruit_guide.pdf","合作模式");
+                startActivity(PDFViewActivity.class);
                 break;
             case R.id.ll_service:
-                BrowserActivity.start(getActivity(), "https://stage-ttchain.tntlinking.com/api/minio/manpower-pages/service_guide.md");
+                String service_guide = "https://stage-ttchain.tntlinking.com/api/minio/manpower-pages/service_guide.md";
+                intent.setClass(this, MDViewActivity.class);
+                intent.putExtra("md_url", service_guide);
+                intent.putExtra("title", "服务手册");
+                startActivity(intent);
                 break;
             case R.id.ll_question:
-                BrowserActivity.start(getActivity(), "https://stage-ttchain.tntlinking.com/api/minio/manpower-pages/faq_guide.md");
+                String faq_guide = "https://stage-ttchain.tntlinking.com/api/minio/manpower-pages/faq_guide.md";
+                intent.setClass(this, MDViewActivity.class);
+                intent.putExtra("md_url", faq_guide);
+                intent.putExtra("title", "常见问题");
+                startActivity(intent);
                 break;
             case R.id.ll_contact:
-                Intent intent = new Intent();
+
                 intent.setClass(this,SaveQRActivity.class);
                 intent.putExtra("contact", "contact");
                 startActivity(intent);

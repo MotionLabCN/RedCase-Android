@@ -26,6 +26,7 @@
         android:text="添加工作经历"
         android:textColor="@color/black"
         android:textSize="@dimen/sp_24"
+        android:paddingTop="@dimen/dp_16"
         android:textStyle="bold" />
 
     <ScrollView
@@ -54,6 +55,8 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/line_size"
+                android:layout_marginLeft="@dimen/dp_16"
+                android:layout_marginRight="@dimen/dp_16"
                 android:background="#FFECECEC" />
 
 
@@ -69,6 +72,8 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/line_size"
+                android:layout_marginLeft="@dimen/dp_16"
+                android:layout_marginRight="@dimen/dp_16"
                 android:background="#FFECECEC" />
 
 
@@ -88,6 +93,8 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/line_size"
+                android:layout_marginLeft="@dimen/dp_16"
+                android:layout_marginRight="@dimen/dp_16"
                 android:background="#FFECECEC" />
 
 
@@ -160,6 +167,8 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/line_size"
+                android:layout_marginLeft="@dimen/dp_16"
+                android:layout_marginRight="@dimen/dp_16"
                 android:background="#FFECECEC" />
         </LinearLayout>
 

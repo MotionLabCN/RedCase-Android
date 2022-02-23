@@ -335,11 +335,11 @@ public final class AddWorkActivity extends AppActivity {
                             finish();
                         }else {
                             et_work_company_name.setText("");
-                            et_work_company_name.setHint("公司名称");
+                            et_work_company_name.setHint("所属公司");
                             info_work_industry.setLeftText("所在行业");
-                            et_work_position.setText("职位名称");
-                            info_work_in_time.setText("选择入职时间");
-                            info_work_end_time.setText("选择离职时间");
+                            et_work_position.setText("担任角色");
+                            info_work_in_time.setText("选择开始时间");
+                            info_work_end_time.setText("选择结束时间");
 
                             company_name = "";
                             project_position = "";

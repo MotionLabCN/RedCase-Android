@@ -2,8 +2,8 @@
 2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
 3    xmlns:tools="http://schemas.android.com/tools"
 4    package="com.hjq.umeng"
-5    android:versionCode="10"
-6    android:versionName="1.0" >
+5    android:versionCode="11"
+6    android:versionName="1.0.1" >
 7
 8    <uses-sdk
 9        android:minSdkVersion="21"
@@ -56,7 +56,7 @@
 36        <meta-data
 37            android:name="UM_KEY"
 37-->/Users/danwanli/motion/RedCase-Android/library/umeng/src/main/AndroidManifest.xml:21:13-34
-38            android:value="5cb16d93570df399fd0014e2" />
+38            android:value="61e8b19ee014255fcbf77477" />
 38-->/Users/danwanli/motion/RedCase-Android/library/umeng/src/main/AndroidManifest.xml:22:13-38
 39
 40        <!-- QQ AppId（请在 Gradle 中配置，请不要在此处修改） -->
@@ -76,13 +76,13 @@
 50        <meta-data
 51            android:name="WX_ID"
 51-->/Users/danwanli/motion/RedCase-Android/library/umeng/src/main/AndroidManifest.xml:35:13-33
-52            android:value="wxd35706cc9f46114c" />
+52            android:value="wx1e91399d09c1cd9a" />
 52-->/Users/danwanli/motion/RedCase-Android/library/umeng/src/main/AndroidManifest.xml:36:13-37
 53        <!-- 微信 Secret（请在 Gradle 中配置，请不要在此处修改） -->
 54        <meta-data
 55            android:name="WX_SECRET"
 55-->/Users/danwanli/motion/RedCase-Android/library/umeng/src/main/AndroidManifest.xml:39:13-37
-56            android:value="0c8c7cf831dd135a32b3e395ea459b5a" />
+56            android:value="9932a78c15dcdaa61f72fe58ad3e6b8c" />
 56-->/Users/danwanli/motion/RedCase-Android/library/umeng/src/main/AndroidManifest.xml:40:13-41
 57
 58        <!-- 友盟社会化 -->

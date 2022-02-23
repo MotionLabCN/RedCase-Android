@@ -271,10 +271,10 @@ public final class AddProjectActivityNew extends AppActivity {
                         toast("没有输入担任角色");
                         return;
                     }
-                    if (TextUtils.isEmpty(work_mode)) {
-                        toast("没选职业状态");
-                        return;
-                    }
+//                    if (TextUtils.isEmpty(work_mode)) {
+//                        toast("没选职业状态");
+//                        return;
+//                    }
                     if (TextUtils.isEmpty(company_name)) {
                         toast("没有输入所属公司");
                         return;
@@ -441,7 +441,7 @@ public final class AddProjectActivityNew extends AppActivity {
                             et_project_position.setHint("担任角色");
 //                            info_project_work_mode.setLeftText("职业状态");
                             et_project_company_name.setText("");
-                            et_project_position.setHint("所属公司");
+                            et_project_company_name.setHint("所属公司");
                             info_project_industry.setLeftText("所在行业");
                             et_project_description.setText("");
                             et_project_description.setHint("项目描述");

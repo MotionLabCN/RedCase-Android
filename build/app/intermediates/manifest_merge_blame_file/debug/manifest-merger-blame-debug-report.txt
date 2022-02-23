@@ -2,8 +2,8 @@
 2<!-- 清单文件合并指引：https://developer.android.google.cn/studio/build/manifest-merge?hl=zh-cn -->
 3<manifest xmlns:android="http://schemas.android.com/apk/res/android"
 4    package="com.tntlinking.tntdev.debug"
-5    android:versionCode="10"
-6    android:versionName="1.0" >
+5    android:versionCode="11"
+6    android:versionName="1.0.1" >
 7
 8    <uses-sdk
 9        android:minSdkVersion="21"
@@ -50,62 +50,62 @@
 30
 31    <!-- Android 11 软件包可见性适配：https://www.jianshu.com/p/d1ccd425c4ce -->
 32    <queries>
-32-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:352:5-387:15
+32-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:430:5-465:15
 33
 34        <!-- 拍照意图：MediaStore.ACTION_IMAGE_CAPTURE -->
 35        <intent>
-35-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:354:9-356:18
+35-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:432:9-434:18
 36            <action android:name="android.media.action.IMAGE_CAPTURE" />
-36-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:355:13-73
-36-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:355:21-70
+36-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:433:13-73
+36-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:433:21-70
 37        </intent>
 38
 39        <!-- 拍摄意图：MediaStore.ACTION_VIDEO_CAPTURE -->
 40        <intent>
-40-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:359:9-361:18
+40-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:437:9-439:18
 41            <action android:name="android.media.action.VIDEO_CAPTURE" />
-41-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:360:13-73
-41-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:360:21-70
+41-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:438:13-73
+41-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:438:21-70
 42        </intent>
 43
 44        <!-- 图片裁剪意图 -->
 45        <intent>
-45-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:364:9-366:18
+45-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:442:9-444:18
 46            <action android:name="com.android.camera.action.CROP" />
-46-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:365:13-69
-46-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:365:21-66
+46-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:443:13-69
+46-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:443:21-66
 47        </intent>
 48
 49        <!-- 打电话意图：Intent.ACTION_DIAL -->
 50        <intent>
-50-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:369:9-371:18
+50-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:447:9-449:18
 51            <action android:name="android.intent.action.DIAL" />
-51-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:370:13-65
-51-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:370:21-62
+51-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:448:13-65
+51-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:448:21-62
 52        </intent>
 53
 54        <!-- 调起分享意图：Intent.ACTION_SEND -->
 55        <intent>
-55-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:374:9-376:18
+55-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:452:9-454:18
 56            <action android:name="android.intent.action.SEND" />
-56-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:375:13-65
-56-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:375:21-62
+56-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:453:13-65
+56-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:453:21-62
 57        </intent>
 58
 59        <!-- 调起其他页面意图：Intent.ACTION_VIEW -->
 60        <intent>
-60-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:379:9-381:18
+60-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:457:9-459:18
 61            <action android:name="android.intent.action.VIEW" />
-61-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:380:13-65
-61-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:380:21-62
+61-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:458:13-65
+61-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:458:21-62
 62        </intent>
 63
 64        <!-- 调起系统文件选择器：Intent.ACTION_GET_CONTENT -->
 65        <intent>
-65-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:384:9-386:18
+65-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:462:9-464:18
 66            <action android:name="android.intent.action.GET_CONTENT" />
-66-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:385:13-72
-66-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:385:21-69
+66-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:463:13-72
+66-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:463:21-69
 67        </intent>
 68        <!-- 手机 QQ 的包名 -->
 69        <package android:name="com.tencent.mobileqq" /> <!-- 微信的包名 -->
@@ -197,8 +197,8 @@
 118-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:71:17-69
 118-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:71:25-66
 119                <action android:name="android.intent.action.VIEW" />
-119-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:380:13-65
-119-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:380:21-62
+119-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:458:13-65
+119-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:458:21-62
 120
 121                <category android:name="android.intent.category.LAUNCHER" />
 121-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:74:17-77
@@ -339,583 +339,726 @@
 200-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:154:13-43
 201            android:screenOrientation="portrait" />
 201-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:155:13-49
-202
-203        <!-- 个人资料 -->
-204        <activity
-204-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:158:9-162:52
-205            android:name="com.tntlinking.tntdev.ui.activity.PersonalDataActivity"
-205-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:159:13-82
-206            android:label="@string/personal_data_title"
-206-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:160:13-56
-207            android:launchMode="singleTop"
-207-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:161:13-43
-208            android:screenOrientation="portrait" />
-208-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:162:13-49
-209
-210        <!-- 网页浏览 -->
-211        <activity
-211-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:165:9-169:52
-212            android:name="com.tntlinking.tntdev.ui.activity.BrowserActivity"
-212-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:166:13-77
-213            android:label="@string/web_title"
-213-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:167:13-46
-214            android:launchMode="singleTop"
-214-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:168:13-43
-215            android:screenOrientation="portrait" />
-215-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:169:13-49
-216
-217        <!-- 拍照选择 -->
-218        <activity
-218-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:172:9-175:52
-219            android:name="com.tntlinking.tntdev.ui.activity.CameraActivity"
-219-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:173:13-76
-220            android:launchMode="singleTop"
-220-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:174:13-43
-221            android:screenOrientation="portrait" />
-221-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:175:13-49
-222
-223        <!-- 图片裁剪 -->
-224        <activity
-224-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:178:9-181:52
-225            android:name="com.tntlinking.tntdev.ui.activity.ImageCropActivity"
-225-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:179:13-79
+202        <!-- 关于我们 -->
+203        <activity
+203-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:157:9-161:52
+204            android:name="com.tntlinking.tntdev.ui.activity.PDFViewActivity"
+204-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:158:13-77
+205            android:label="@string/about_title"
+205-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:159:13-48
+206            android:launchMode="singleTop"
+206-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:160:13-43
+207            android:screenOrientation="portrait" />
+207-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:161:13-49
+208        <!-- 关于我们 -->
+209        <activity
+209-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:163:9-167:52
+210            android:name="com.tntlinking.tntdev.ui.activity.MDViewActivity"
+210-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:164:13-76
+211            android:label="@string/about_title"
+211-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:165:13-48
+212            android:launchMode="singleTop"
+212-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:166:13-43
+213            android:screenOrientation="portrait" />
+213-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:167:13-49
+214
+215        <!-- 个人资料 -->
+216        <activity
+216-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:170:9-174:52
+217            android:name="com.tntlinking.tntdev.ui.activity.PersonalDataActivity"
+217-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:171:13-82
+218            android:label="@string/personal_data_title"
+218-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:172:13-56
+219            android:launchMode="singleTop"
+219-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:173:13-43
+220            android:screenOrientation="portrait" />
+220-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:174:13-49
+221
+222        <!-- 网页浏览 -->
+223        <activity
+223-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:177:9-181:52
+224            android:name="com.tntlinking.tntdev.ui.activity.BrowserActivity"
+224-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:178:13-77
+225            android:label="@string/web_title"
+225-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:179:13-46
 226            android:launchMode="singleTop"
 226-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:180:13-43
 227            android:screenOrientation="portrait" />
 227-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:181:13-49
 228
-229        <!-- 图片选择 -->
+229        <!-- 拍照选择 -->
 230        <activity
-230-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:184:9-188:52
-231            android:name="com.tntlinking.tntdev.ui.activity.ImageSelectActivity"
-231-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:185:13-81
-232            android:label="@string/image_select_title"
-232-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:186:13-55
-233            android:launchMode="singleTop"
-233-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:187:13-43
-234            android:screenOrientation="portrait" />
-234-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:188:13-49
-235
-236        <!-- 查看大图 -->
-237        <activity
-237-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:191:9-194:52
-238            android:name="com.tntlinking.tntdev.ui.activity.ImagePreviewActivity"
-238-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:192:13-82
-239            android:launchMode="singleTop"
-239-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:193:13-43
-240            android:screenOrientation="portrait" />
-240-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:194:13-49
-241
-242        <!-- 播放视频（自适应方向） -->
-243        <activity
-243-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:197:9-200:54
-244            android:name="com.tntlinking.tntdev.ui.activity.VideoPlayActivity"
-244-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:198:13-79
+230-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:184:9-187:52
+231            android:name="com.tntlinking.tntdev.ui.activity.CameraActivity"
+231-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:185:13-76
+232            android:launchMode="singleTop"
+232-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:186:13-43
+233            android:screenOrientation="portrait" />
+233-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:187:13-49
+234
+235        <!-- 图片裁剪 -->
+236        <activity
+236-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:190:9-193:52
+237            android:name="com.tntlinking.tntdev.ui.activity.ImageCropActivity"
+237-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:191:13-79
+238            android:launchMode="singleTop"
+238-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:192:13-43
+239            android:screenOrientation="portrait" />
+239-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:193:13-49
+240
+241        <!-- 图片选择 -->
+242        <activity
+242-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:196:9-200:52
+243            android:name="com.tntlinking.tntdev.ui.activity.ImageSelectActivity"
+243-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:197:13-81
+244            android:label="@string/image_select_title"
+244-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:198:13-55
 245            android:launchMode="singleTop"
 245-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:199:13-43
-246            android:theme="@style/FullScreenTheme" />
-246-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:200:13-51
+246            android:screenOrientation="portrait" />
+246-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:200:13-49
 247
-248        <!-- 播放视频（竖屏方向） -->
+248        <!-- 查看大图 -->
 249        <activity
-249-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:203:9-207:54
-250            android:name="com.tntlinking.tntdev.ui.activity.VideoPlayActivity$Portrait"
-250-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:204:13-88
+249-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:203:9-206:52
+250            android:name="com.tntlinking.tntdev.ui.activity.ImagePreviewActivity"
+250-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:204:13-82
 251            android:launchMode="singleTop"
 251-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:205:13-43
-252            android:screenOrientation="portrait"
+252            android:screenOrientation="portrait" />
 252-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:206:13-49
-253            android:theme="@style/FullScreenTheme" />
-253-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:207:13-51
-254
-255        <!-- 播放视频（横屏方向） -->
-256        <activity
-256-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:210:9-214:54
-257            android:name="com.tntlinking.tntdev.ui.activity.VideoPlayActivity$Landscape"
-257-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:211:13-89
-258            android:launchMode="singleTop"
-258-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:212:13-43
-259            android:screenOrientation="landscape"
-259-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:213:13-50
-260            android:theme="@style/FullScreenTheme" />
-260-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:214:13-51
-261
-262        <!-- 选择视频 -->
-263        <activity
-263-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:217:9-220:52
-264            android:name="com.tntlinking.tntdev.ui.activity.VideoSelectActivity"
-264-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:218:13-81
-265            android:launchMode="singleTop"
-265-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:219:13-43
-266            android:screenOrientation="portrait" />
-266-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:220:13-49
-267
-268        <!-- 对话框案例 -->
-269        <activity
-269-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:223:9-226:52
-270            android:name="com.tntlinking.tntdev.ui.activity.DialogActivity"
-270-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:224:13-76
-271            android:launchMode="singleTop"
-271-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:225:13-43
-272            android:screenOrientation="portrait" />
-272-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:226:13-49
+253
+254        <!-- 播放视频（自适应方向） -->
+255        <activity
+255-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:209:9-212:54
+256            android:name="com.tntlinking.tntdev.ui.activity.VideoPlayActivity"
+256-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:210:13-79
+257            android:launchMode="singleTop"
+257-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:211:13-43
+258            android:theme="@style/FullScreenTheme" />
+258-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:212:13-51
+259
+260        <!-- 播放视频（竖屏方向） -->
+261        <activity
+261-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:215:9-219:54
+262            android:name="com.tntlinking.tntdev.ui.activity.VideoPlayActivity$Portrait"
+262-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:216:13-88
+263            android:launchMode="singleTop"
+263-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:217:13-43
+264            android:screenOrientation="portrait"
+264-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:218:13-49
+265            android:theme="@style/FullScreenTheme" />
+265-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:219:13-51
+266
+267        <!-- 播放视频（横屏方向） -->
+268        <activity
+268-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:222:9-226:54
+269            android:name="com.tntlinking.tntdev.ui.activity.VideoPlayActivity$Landscape"
+269-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:223:13-89
+270            android:launchMode="singleTop"
+270-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:224:13-43
+271            android:screenOrientation="landscape"
+271-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:225:13-50
+272            android:theme="@style/FullScreenTheme" />
+272-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:226:13-51
 273
-274        <!-- 状态案例 -->
+274        <!-- 选择视频 -->
 275        <activity
 275-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:229:9-232:52
-276            android:name="com.tntlinking.tntdev.ui.activity.StatusActivity"
-276-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:230:13-76
+276            android:name="com.tntlinking.tntdev.ui.activity.VideoSelectActivity"
+276-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:230:13-81
 277            android:launchMode="singleTop"
 277-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:231:13-43
 278            android:screenOrientation="portrait" />
 278-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:232:13-49
 279
-280        <!-- 登陆页面1 -->
+280        <!-- 对话框案例 -->
 281        <activity
-281-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:236:9-239:52
-282            android:name="com.tntlinking.tntdev.ui.activity.LoginActivity1"
-282-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:237:13-76
+281-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:235:9-238:52
+282            android:name="com.tntlinking.tntdev.ui.activity.DialogActivity"
+282-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:236:13-76
 283            android:launchMode="singleTop"
-283-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:238:13-43
+283-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:237:13-43
 284            android:screenOrientation="portrait" />
-284-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:239:13-49
-285        <!-- 登陆页面3 -->
-286        <activity
-286-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:241:9-244:52
-287            android:name="com.tntlinking.tntdev.ui.activity.LoginActivity2"
-287-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:242:13-76
-288            android:launchMode="singleTop"
-288-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:243:13-43
-289            android:screenOrientation="portrait" />
-289-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:244:13-49
-290        <!-- 登陆页面3 -->
-291        <activity
-291-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:246:9-249:52
-292            android:name="com.tntlinking.tntdev.ui.activity.LoginActivityView"
-292-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:247:13-79
-293            android:launchMode="singleTop"
-293-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:248:13-43
-294            android:screenOrientation="portrait" />
-294-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:249:13-49
-295        <!-- 基本信息页面1 -->
-296        <activity
-296-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:251:9-254:52
-297            android:name="com.tntlinking.tntdev.ui.activity.BaseInfoActivity1"
-297-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:252:13-79
-298            android:launchMode="singleTop"
-298-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:253:13-43
-299            android:screenOrientation="portrait" />
-299-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:254:13-49
-300        <!-- 基本信息页面2 -->
-301        <activity
-301-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:256:9-259:52
-302            android:name="com.tntlinking.tntdev.ui.activity.BaseInfoActivity2"
-302-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:257:13-79
-303            android:launchMode="singleTop"
-303-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:258:13-43
-304            android:screenOrientation="portrait" />
-304-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:259:13-49
-305        <!-- 基本信息页面3 -->
-306        <activity
-306-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:261:9-264:52
-307            android:name="com.tntlinking.tntdev.ui.activity.BaseInfoActivity3"
-307-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:262:13-79
-308            android:launchMode="singleTop"
-308-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:263:13-43
-309            android:screenOrientation="portrait" />
-309-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:264:13-49
-310        <!-- 添加教育经历页面 -->
-311        <activity
-311-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:266:9-269:52
-312            android:name="com.tntlinking.tntdev.ui.activity.AddEducationActivity"
-312-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:267:13-82
-313            android:launchMode="singleTop"
-313-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:268:13-43
-314            android:screenOrientation="portrait" />
-314-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:269:13-49
-315        <!-- 添加项目经验 -->
-316        <activity
-316-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:271:9-274:52
-317            android:name="com.tntlinking.tntdev.ui.activity.AddProjectActivity"
-317-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:272:13-80
-318            android:launchMode="singleTop"
-318-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:273:13-43
-319            android:screenOrientation="portrait" />
-319-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:274:13-49
-320        <!-- 标签选择页面 -->
-321        <activity
-321-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:276:9-279:52
-322            android:name="com.tntlinking.tntdev.ui.activity.AddProjectTagActivity"
-322-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:277:13-83
-323            android:launchMode="singleTop"
-323-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:278:13-43
-324            android:screenOrientation="portrait" />
-324-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:279:13-49
-325        <!-- 用户信息页面 -->
-326        <activity
-326-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:281:9-284:52
-327            android:name="com.tntlinking.tntdev.ui.activity.PersonDataActivity"
-327-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:282:13-80
-328            android:launchMode="singleTop"
-328-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:283:13-43
-329            android:screenOrientation="portrait" />
-329-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:284:13-49
-330
-331        <!-- 收益列表页面 -->
-332        <activity
-332-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:287:9-290:52
-333            android:name="com.tntlinking.tntdev.ui.activity.IncomeListActivity"
-333-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:288:13-80
-334            android:launchMode="singleTop"
-334-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:289:13-43
-335            android:screenOrientation="portrait" />
-335-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:290:13-49
-336        <!-- 收益详情页面 -->
-337        <activity
-337-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:292:9-295:52
-338            android:name="com.tntlinking.tntdev.ui.activity.IncomeDetailActivity"
-338-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:293:13-82
-339            android:launchMode="singleTop"
-339-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:294:13-43
-340            android:screenOrientation="portrait" />
-340-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:295:13-49
-341        <!-- 工作主页 页面 -->
-342        <activity
-342-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:297:9-300:52
-343            android:name="com.tntlinking.tntdev.ui.activity.HomeWorkActivity"
-343-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:298:13-78
-344            android:launchMode="singleTop"
-344-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:299:13-43
-345            android:screenOrientation="portrait" />
-345-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:300:13-49
-346        <!-- 面试详情页面 -->
-347        <activity
-347-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:302:9-305:52
-348            android:name="com.tntlinking.tntdev.ui.activity.InterviewDetailActivity"
-348-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:303:13-85
-349            android:launchMode="singleTop"
-349-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:304:13-43
-350            android:screenOrientation="portrait" />
-350-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:305:13-49
-351        <!-- 待审核 页面 -->
-352        <activity
-352-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:307:9-310:52
-353            android:name="com.tntlinking.tntdev.ui.activity.CheckDeveloperActivity"
-353-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:308:13-84
-354            android:launchMode="singleTop"
-354-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:309:13-43
-355            android:screenOrientation="portrait" />
-355-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:310:13-49
-356        <!-- 审核失败 页面 -->
-357        <activity
-357-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:312:9-315:52
-358            android:name="com.tntlinking.tntdev.ui.activity.CheckDeveloperFailActivity"
-358-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:313:13-88
-359            android:launchMode="singleTop"
-359-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:314:13-43
-360            android:screenOrientation="portrait" />
-360-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:315:13-49
-361        <!-- 个人设置页面 -->
-362        <activity
-362-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:317:9-320:52
-363            android:name="com.tntlinking.tntdev.ui.activity.PersonSettingActivity"
-363-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:318:13-83
-364            android:launchMode="singleTop"
-364-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:319:13-43
-365            android:screenOrientation="portrait" />
-365-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:320:13-49
-366        <!-- 更换手机号页面 -->
-367        <activity
-367-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:322:9-325:52
-368            android:name="com.tntlinking.tntdev.ui.activity.ChangePhoneActivity"
-368-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:323:13-81
-369            android:launchMode="singleTop"
-369-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:324:13-43
-370            android:screenOrientation="portrait" />
-370-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:325:13-49
-371        <!-- 日程页面 -->
+284-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:238:13-49
+285
+286        <!-- 状态案例 -->
+287        <activity
+287-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:241:9-244:52
+288            android:name="com.tntlinking.tntdev.ui.activity.StatusActivity"
+288-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:242:13-76
+289            android:launchMode="singleTop"
+289-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:243:13-43
+290            android:screenOrientation="portrait" />
+290-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:244:13-49
+291
+292        <!-- 登陆页面1 -->
+293        <activity
+293-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:248:9-251:52
+294            android:name="com.tntlinking.tntdev.ui.activity.LoginActivity1"
+294-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:249:13-76
+295            android:launchMode="singleTop"
+295-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:250:13-43
+296            android:screenOrientation="portrait" />
+296-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:251:13-49
+297        <!-- 登陆页面3 -->
+298        <activity
+298-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:253:9-256:52
+299            android:name="com.tntlinking.tntdev.ui.activity.LoginActivity2"
+299-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:254:13-76
+300            android:launchMode="singleTop"
+300-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:255:13-43
+301            android:screenOrientation="portrait" />
+301-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:256:13-49
+302        <!-- 登陆页面3 -->
+303        <activity
+303-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:258:9-261:52
+304            android:name="com.tntlinking.tntdev.ui.activity.LoginActivityView"
+304-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:259:13-79
+305            android:launchMode="singleTop"
+305-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:260:13-43
+306            android:screenOrientation="portrait" />
+306-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:261:13-49
+307        <!-- 基本信息页面1 -->
+308        <activity
+308-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:263:9-266:52
+309            android:name="com.tntlinking.tntdev.ui.activity.BaseInfoActivity1"
+309-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:264:13-79
+310            android:launchMode="singleTop"
+310-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:265:13-43
+311            android:screenOrientation="portrait" />
+311-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:266:13-49
+312        <!-- 基本信息页面2 -->
+313        <activity
+313-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:268:9-271:52
+314            android:name="com.tntlinking.tntdev.ui.activity.BaseInfoActivity2"
+314-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:269:13-79
+315            android:launchMode="singleTop"
+315-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:270:13-43
+316            android:screenOrientation="portrait" />
+316-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:271:13-49
+317        <!-- 基本信息页面3 -->
+318        <activity
+318-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:273:9-276:52
+319            android:name="com.tntlinking.tntdev.ui.activity.BaseInfoActivity3"
+319-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:274:13-79
+320            android:launchMode="singleTop"
+320-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:275:13-43
+321            android:screenOrientation="portrait" />
+321-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:276:13-49
+322        <!-- 添加教育经历页面 -->
+323        <activity
+323-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:278:9-281:52
+324            android:name="com.tntlinking.tntdev.ui.activity.AddEducationActivity"
+324-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:279:13-82
+325            android:launchMode="singleTop"
+325-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:280:13-43
+326            android:screenOrientation="portrait" />
+326-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:281:13-49
+327        <!-- 添加教育经历页面 -->
+328        <activity
+328-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:283:9-286:52
+329            android:name="com.tntlinking.tntdev.ui.activity.AddEducationActivityNew"
+329-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:284:13-85
+330            android:launchMode="singleTop"
+330-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:285:13-43
+331            android:screenOrientation="portrait" />
+331-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:286:13-49
+332        <!-- 添加项目经验 -->
+333        <activity
+333-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:288:9-292:52
+334            android:name="com.tntlinking.tntdev.ui.activity.AddWorkActivity"
+334-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:289:13-77
+335            android:launchMode="singleTop"
+335-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:290:13-43
+336            android:screenOrientation="portrait"
+336-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:292:13-49
+337            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
+337-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:291:13-70
+338        <!-- 添加项目经验 -->
+339        <activity
+339-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:294:9-298:52
+340            android:name="com.tntlinking.tntdev.ui.activity.AddProjectActivity"
+340-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:295:13-80
+341            android:launchMode="singleTop"
+341-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:296:13-43
+342            android:screenOrientation="portrait"
+342-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:298:13-49
+343            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
+343-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:297:13-70
+344        <!-- 添加项目经验 -->
+345        <activity
+345-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:300:9-304:52
+346            android:name="com.tntlinking.tntdev.ui.activity.AddProjectActivityNew"
+346-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:301:13-83
+347            android:launchMode="singleTop"
+347-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:302:13-43
+348            android:screenOrientation="portrait"
+348-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:304:13-49
+349            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
+349-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:303:13-70
+350        <!-- 标签选择页面 -->
+351        <activity
+351-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:306:9-309:52
+352            android:name="com.tntlinking.tntdev.ui.activity.AddProjectTagActivity"
+352-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:307:13-83
+353            android:launchMode="singleTop"
+353-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:308:13-43
+354            android:screenOrientation="portrait" />
+354-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:309:13-49
+355        <!-- 标签选择页面 -->
+356        <activity
+356-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:311:9-314:52
+357            android:name="com.tntlinking.tntdev.ui.activity.AddProjectTagActivityNew"
+357-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:312:13-86
+358            android:launchMode="singleTop"
+358-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:313:13-43
+359            android:screenOrientation="portrait" />
+359-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:314:13-49
+360        <!-- 标签选择搜索页面 -->
+361        <activity
+361-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:316:9-319:52
+362            android:name="com.tntlinking.tntdev.ui.activity.AddTagSearchActivity"
+362-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:317:13-82
+363            android:launchMode="singleTop"
+363-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:318:13-43
+364            android:screenOrientation="portrait" />
+364-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:319:13-49
+365        <!-- 用户信息页面 -->
+366        <activity
+366-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:321:9-324:52
+367            android:name="com.tntlinking.tntdev.ui.activity.PersonDataActivity"
+367-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:322:13-80
+368            android:launchMode="singleTop"
+368-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:323:13-43
+369            android:screenOrientation="portrait" />
+369-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:324:13-49
+370
+371        <!-- 收益列表页面 -->
 372        <activity
 372-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:327:9-330:52
-373            android:name="com.tntlinking.tntdev.ui.activity.InterviewSettingActivity"
-373-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:328:13-86
+373            android:name="com.tntlinking.tntdev.ui.activity.IncomeListActivity"
+373-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:328:13-80
 374            android:launchMode="singleTop"
 374-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:329:13-43
 375            android:screenOrientation="portrait" />
 375-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:330:13-49
-376        <!-- 添加日程页面 -->
+376        <!-- 收益详情页面 -->
 377        <activity
 377-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:332:9-335:52
-378            android:name="com.tntlinking.tntdev.ui.activity.AddScheduleActivity"
-378-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:333:13-81
+378            android:name="com.tntlinking.tntdev.ui.activity.IncomeDetailActivity"
+378-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:333:13-82
 379            android:launchMode="singleTop"
 379-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:334:13-43
 380            android:screenOrientation="portrait" />
 380-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:335:13-49
-381        <!-- 写日报页面 -->
+381        <!-- 工作主页 页面 -->
 382        <activity
 382-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:337:9-340:52
-383            android:name="com.tntlinking.tntdev.ui.activity.WriteDailyActivity"
-383-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:338:13-80
+383            android:name="com.tntlinking.tntdev.ui.activity.HomeWorkActivity"
+383-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:338:13-78
 384            android:launchMode="singleTop"
 384-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:339:13-43
 385            android:screenOrientation="portrait" />
 385-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:340:13-49
-386
-387        <!-- 微信回调（请注意这个 Activity 放置的包名要和当前项目的包名保持一致，否则将不能正常回调） -->
-388        <activity
-388-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:343:9-347:75
-389            android:name="com.tntlinking.tntdev.wxapi.WXEntryActivity"
-389-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:344:13-71
-390            android:configChanges="keyboardHidden|orientation|screenSize"
-390-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:345:13-74
-391            android:exported="true"
-391-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:346:13-36
-392            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-392-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:347:13-72
-393
-394        <service
-394-->[com.squareup.leakcanary:leakcanary-android:2.7] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/4e968efa94381bf0c699d4b0878d09da/jetified-leakcanary-android-2.7/AndroidManifest.xml:23:9-25:40
-395            android:name="leakcanary.internal.HeapAnalyzerService"
-395-->[com.squareup.leakcanary:leakcanary-android:2.7] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/4e968efa94381bf0c699d4b0878d09da/jetified-leakcanary-android-2.7/AndroidManifest.xml:24:13-67
-396            android:exported="false" /> <!-- 友盟 Key（请在 Gradle 中配置，请不要在此处修改） -->
-396-->[com.squareup.leakcanary:leakcanary-android:2.7] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/4e968efa94381bf0c699d4b0878d09da/jetified-leakcanary-android-2.7/AndroidManifest.xml:25:13-37
-397        <meta-data
-397-->[:library:umeng] /Users/danwanli/motion/RedCase-Android/build/library/umeng/intermediates/library_manifest/debug/AndroidManifest.xml:36:9-38:56
-398            android:name="UM_KEY"
-398-->[:library:umeng] /Users/danwanli/motion/RedCase-Android/build/library/umeng/intermediates/library_manifest/debug/AndroidManifest.xml:37:13-34
-399            android:value="5cb16d93570df399fd0014e2" /> <!-- QQ AppId（请在 Gradle 中配置，请不要在此处修改） -->
-399-->[:library:umeng] /Users/danwanli/motion/RedCase-Android/build/library/umeng/intermediates/library_manifest/debug/AndroidManifest.xml:38:13-53
-400        <meta-data
-400-->[:library:umeng] /Users/danwanli/motion/RedCase-Android/build/library/umeng/intermediates/library_manifest/debug/AndroidManifest.xml:41:9-43:41
-401            android:name="QQ_ID"
-401-->[:library:umeng] /Users/danwanli/motion/RedCase-Android/build/library/umeng/intermediates/library_manifest/debug/AndroidManifest.xml:42:13-33
-402            android:value="101828096" /> <!-- QQ Secret（请在 Gradle 中配置，请不要在此处修改） -->
-402-->[:library:umeng] /Users/danwanli/motion/RedCase-Android/build/library/umeng/intermediates/library_manifest/debug/AndroidManifest.xml:43:13-38
-403        <meta-data
-403-->[:library:umeng] /Users/danwanli/motion/RedCase-Android/build/library/umeng/intermediates/library_manifest/debug/AndroidManifest.xml:45:9-47:64
-404            android:name="QQ_SECRET"
-404-->[:library:umeng] /Users/danwanli/motion/RedCase-Android/build/library/umeng/intermediates/library_manifest/debug/AndroidManifest.xml:46:13-37
-405            android:value="9dfd3300c3aa3c4596a07796c64914b2" /> <!-- 微信 AppId（请在 Gradle 中配置，请不要在此处修改） -->
-405-->[:library:umeng] /Users/danwanli/motion/RedCase-Android/build/library/umeng/intermediates/library_manifest/debug/AndroidManifest.xml:47:13-61
-406        <meta-data
-406-->[:library:umeng] /Users/danwanli/motion/RedCase-Android/build/library/umeng/intermediates/library_manifest/debug/AndroidManifest.xml:50:9-52:50
-407            android:name="WX_ID"
-407-->[:library:umeng] /Users/danwanli/motion/RedCase-Android/build/library/umeng/intermediates/library_manifest/debug/AndroidManifest.xml:51:13-33
-408            android:value="wxd35706cc9f46114c" /> <!-- 微信 Secret（请在 Gradle 中配置，请不要在此处修改） -->
-408-->[:library:umeng] /Users/danwanli/motion/RedCase-Android/build/library/umeng/intermediates/library_manifest/debug/AndroidManifest.xml:52:13-47
-409        <meta-data
-409-->[:library:umeng] /Users/danwanli/motion/RedCase-Android/build/library/umeng/intermediates/library_manifest/debug/AndroidManifest.xml:54:9-56:64
-410            android:name="WX_SECRET"
-410-->[:library:umeng] /Users/danwanli/motion/RedCase-Android/build/library/umeng/intermediates/library_manifest/debug/AndroidManifest.xml:55:13-37
-411            android:value="0c8c7cf831dd135a32b3e395ea459b5a" /> <!-- 友盟社会化 -->
-411-->[:library:umeng] /Users/danwanli/motion/RedCase-Android/build/library/umeng/intermediates/library_manifest/debug/AndroidManifest.xml:56:13-61
-412        <!-- QQ 回调 -->
-413        <activity
-413-->[:library:umeng] /Users/danwanli/motion/RedCase-Android/build/library/umeng/intermediates/library_manifest/debug/AndroidManifest.xml:62:9-75:20
-414            android:name="com.tencent.tauth.AuthActivity"
-414-->[:library:umeng] /Users/danwanli/motion/RedCase-Android/build/library/umeng/intermediates/library_manifest/debug/AndroidManifest.xml:63:13-58
-415            android:launchMode="singleTask"
-415-->[:library:umeng] /Users/danwanli/motion/RedCase-Android/build/library/umeng/intermediates/library_manifest/debug/AndroidManifest.xml:64:13-44
-416            android:noHistory="true" >
-416-->[:library:umeng] /Users/danwanli/motion/RedCase-Android/build/library/umeng/intermediates/library_manifest/debug/AndroidManifest.xml:65:13-37
-417            <intent-filter>
-417-->[:library:umeng] /Users/danwanli/motion/RedCase-Android/build/library/umeng/intermediates/library_manifest/debug/AndroidManifest.xml:67:13-74:29
-418                <action android:name="android.intent.action.VIEW" />
-418-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:380:13-65
-418-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:380:21-62
-419
-420                <category android:name="android.intent.category.DEFAULT" />
-420-->[:library:umeng] /Users/danwanli/motion/RedCase-Android/build/library/umeng/intermediates/library_manifest/debug/AndroidManifest.xml:70:17-76
-420-->[:library:umeng] /Users/danwanli/motion/RedCase-Android/build/library/umeng/intermediates/library_manifest/debug/AndroidManifest.xml:70:27-73
-421                <category android:name="android.intent.category.BROWSABLE" />
-421-->[:library:umeng] /Users/danwanli/motion/RedCase-Android/build/library/umeng/intermediates/library_manifest/debug/AndroidManifest.xml:71:17-78
-421-->[:library:umeng] /Users/danwanli/motion/RedCase-Android/build/library/umeng/intermediates/library_manifest/debug/AndroidManifest.xml:71:27-75
-422
-423                <data android:scheme="tencent101828096" />
-423-->[:library:umeng] /Users/danwanli/motion/RedCase-Android/build/library/umeng/intermediates/library_manifest/debug/AndroidManifest.xml:73:17-59
-423-->[:library:umeng] /Users/danwanli/motion/RedCase-Android/build/library/umeng/intermediates/library_manifest/debug/AndroidManifest.xml:73:23-56
-424            </intent-filter>
-425        </activity>
-426        <activity
-426-->[:library:umeng] /Users/danwanli/motion/RedCase-Android/build/library/umeng/intermediates/library_manifest/debug/AndroidManifest.xml:76:9-80:36
-427            android:name="com.tencent.connect.common.AssistActivity"
-427-->[:library:umeng] /Users/danwanli/motion/RedCase-Android/build/library/umeng/intermediates/library_manifest/debug/AndroidManifest.xml:77:13-69
-428            android:configChanges="orientation|keyboardHidden"
-428-->[:library:umeng] /Users/danwanli/motion/RedCase-Android/build/library/umeng/intermediates/library_manifest/debug/AndroidManifest.xml:78:13-63
-429            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-429-->[:library:umeng] /Users/danwanli/motion/RedCase-Android/build/library/umeng/intermediates/library_manifest/debug/AndroidManifest.xml:79:13-72
-430        <activity
-430-->[com.blankj:utilcodex:1.30.6] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/2be558487594920d28ec18ec1b4fef8e/jetified-utilcodex-1.30.6/AndroidManifest.xml:10:9-14:75
-431            android:name="com.blankj.utilcode.util.UtilsTransActivity4MainProcess"
-431-->[com.blankj:utilcodex:1.30.6] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/2be558487594920d28ec18ec1b4fef8e/jetified-utilcodex-1.30.6/AndroidManifest.xml:11:13-83
-432            android:configChanges="orientation|keyboardHidden|screenSize"
-432-->[com.blankj:utilcodex:1.30.6] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/2be558487594920d28ec18ec1b4fef8e/jetified-utilcodex-1.30.6/AndroidManifest.xml:12:13-74
-433            android:theme="@style/ActivityTranslucent"
-433-->[com.blankj:utilcodex:1.30.6] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/2be558487594920d28ec18ec1b4fef8e/jetified-utilcodex-1.30.6/AndroidManifest.xml:13:13-55
-434            android:windowSoftInputMode="stateHidden|stateAlwaysHidden" />
-434-->[com.blankj:utilcodex:1.30.6] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/2be558487594920d28ec18ec1b4fef8e/jetified-utilcodex-1.30.6/AndroidManifest.xml:14:13-72
-435        <activity
-435-->[com.blankj:utilcodex:1.30.6] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/2be558487594920d28ec18ec1b4fef8e/jetified-utilcodex-1.30.6/AndroidManifest.xml:15:9-20:75
-436            android:name="com.blankj.utilcode.util.UtilsTransActivity"
-436-->[com.blankj:utilcodex:1.30.6] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/2be558487594920d28ec18ec1b4fef8e/jetified-utilcodex-1.30.6/AndroidManifest.xml:16:13-71
-437            android:configChanges="orientation|keyboardHidden|screenSize"
-437-->[com.blankj:utilcodex:1.30.6] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/2be558487594920d28ec18ec1b4fef8e/jetified-utilcodex-1.30.6/AndroidManifest.xml:17:13-74
-438            android:multiprocess="true"
-438-->[com.blankj:utilcodex:1.30.6] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/2be558487594920d28ec18ec1b4fef8e/jetified-utilcodex-1.30.6/AndroidManifest.xml:18:13-40
-439            android:theme="@style/ActivityTranslucent"
-439-->[com.blankj:utilcodex:1.30.6] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/2be558487594920d28ec18ec1b4fef8e/jetified-utilcodex-1.30.6/AndroidManifest.xml:19:13-55
-440            android:windowSoftInputMode="stateHidden|stateAlwaysHidden" />
-440-->[com.blankj:utilcodex:1.30.6] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/2be558487594920d28ec18ec1b4fef8e/jetified-utilcodex-1.30.6/AndroidManifest.xml:20:13-72
-441
-442        <provider
-442-->[com.blankj:utilcodex:1.30.6] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/2be558487594920d28ec18ec1b4fef8e/jetified-utilcodex-1.30.6/AndroidManifest.xml:22:9-30:20
-443            android:name="com.blankj.utilcode.util.UtilsFileProvider"
-443-->[com.blankj:utilcodex:1.30.6] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/2be558487594920d28ec18ec1b4fef8e/jetified-utilcodex-1.30.6/AndroidManifest.xml:23:13-70
-444            android:authorities="com.tntlinking.tntdev.debug.utilcode.fileprovider"
-444-->[com.blankj:utilcodex:1.30.6] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/2be558487594920d28ec18ec1b4fef8e/jetified-utilcodex-1.30.6/AndroidManifest.xml:24:13-73
-445            android:exported="false"
-445-->[com.blankj:utilcodex:1.30.6] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/2be558487594920d28ec18ec1b4fef8e/jetified-utilcodex-1.30.6/AndroidManifest.xml:25:13-37
-446            android:grantUriPermissions="true" >
-446-->[com.blankj:utilcodex:1.30.6] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/2be558487594920d28ec18ec1b4fef8e/jetified-utilcodex-1.30.6/AndroidManifest.xml:26:13-47
-447            <meta-data
-447-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:57:13-59:54
-448                android:name="android.support.FILE_PROVIDER_PATHS"
-448-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:58:17-67
-449                android:resource="@xml/util_code_provider_paths" />
-449-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:59:17-51
-450        </provider>
-451
-452        <service
-452-->[com.blankj:utilcodex:1.30.6] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/2be558487594920d28ec18ec1b4fef8e/jetified-utilcodex-1.30.6/AndroidManifest.xml:32:9-38:19
-453            android:name="com.blankj.utilcode.util.MessengerUtils$ServerService"
-453-->[com.blankj:utilcodex:1.30.6] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/2be558487594920d28ec18ec1b4fef8e/jetified-utilcodex-1.30.6/AndroidManifest.xml:33:13-81
-454            android:exported="false" >
-454-->[com.blankj:utilcodex:1.30.6] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/2be558487594920d28ec18ec1b4fef8e/jetified-utilcodex-1.30.6/AndroidManifest.xml:34:13-37
-455            <intent-filter>
-455-->[com.blankj:utilcodex:1.30.6] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/2be558487594920d28ec18ec1b4fef8e/jetified-utilcodex-1.30.6/AndroidManifest.xml:35:13-37:29
-456                <action android:name="com.tntlinking.tntdev.debug.messenger" />
-456-->[com.blankj:utilcodex:1.30.6] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/2be558487594920d28ec18ec1b4fef8e/jetified-utilcodex-1.30.6/AndroidManifest.xml:36:17-69
-456-->[com.blankj:utilcodex:1.30.6] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/2be558487594920d28ec18ec1b4fef8e/jetified-utilcodex-1.30.6/AndroidManifest.xml:36:25-66
-457            </intent-filter>
-458        </service>
-459
-460        <provider
-460-->[com.squareup.leakcanary:leakcanary-android-core:2.7] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/211067c2645a010a442bee614db37349/jetified-leakcanary-android-core-2.7/AndroidManifest.xml:29:9-37:20
-461            android:name="leakcanary.internal.LeakCanaryFileProvider"
-461-->[com.squareup.leakcanary:leakcanary-android-core:2.7] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/211067c2645a010a442bee614db37349/jetified-leakcanary-android-core-2.7/AndroidManifest.xml:30:13-70
-462            android:authorities="com.squareup.leakcanary.fileprovider.com.tntlinking.tntdev.debug"
-462-->[com.squareup.leakcanary:leakcanary-android-core:2.7] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/211067c2645a010a442bee614db37349/jetified-leakcanary-android-core-2.7/AndroidManifest.xml:31:13-88
-463            android:exported="false"
-463-->[com.squareup.leakcanary:leakcanary-android-core:2.7] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/211067c2645a010a442bee614db37349/jetified-leakcanary-android-core-2.7/AndroidManifest.xml:32:13-37
-464            android:grantUriPermissions="true" >
-464-->[com.squareup.leakcanary:leakcanary-android-core:2.7] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/211067c2645a010a442bee614db37349/jetified-leakcanary-android-core-2.7/AndroidManifest.xml:33:13-47
-465            <meta-data
-465-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:57:13-59:54
-466                android:name="android.support.FILE_PROVIDER_PATHS"
-466-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:58:17-67
-467                android:resource="@xml/leak_canary_file_paths" />
-467-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:59:17-51
-468        </provider>
-469
-470        <activity
-470-->[com.squareup.leakcanary:leakcanary-android-core:2.7] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/211067c2645a010a442bee614db37349/jetified-leakcanary-android-core-2.7/AndroidManifest.xml:39:9-44:66
-471            android:name="leakcanary.internal.activity.LeakActivity"
-471-->[com.squareup.leakcanary:leakcanary-android-core:2.7] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/211067c2645a010a442bee614db37349/jetified-leakcanary-android-core-2.7/AndroidManifest.xml:40:13-69
-472            android:icon="@mipmap/leak_canary_icon"
-472-->[com.squareup.leakcanary:leakcanary-android-core:2.7] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/211067c2645a010a442bee614db37349/jetified-leakcanary-android-core-2.7/AndroidManifest.xml:41:13-52
-473            android:label="@string/leak_canary_display_activity_label"
-473-->[com.squareup.leakcanary:leakcanary-android-core:2.7] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/211067c2645a010a442bee614db37349/jetified-leakcanary-android-core-2.7/AndroidManifest.xml:42:13-71
-474            android:taskAffinity="com.squareup.leakcanary.com.tntlinking.tntdev.debug"
-474-->[com.squareup.leakcanary:leakcanary-android-core:2.7] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/211067c2645a010a442bee614db37349/jetified-leakcanary-android-core-2.7/AndroidManifest.xml:43:13-76
-475            android:theme="@style/leak_canary_LeakCanary.Base" />
-475-->[com.squareup.leakcanary:leakcanary-android-core:2.7] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/211067c2645a010a442bee614db37349/jetified-leakcanary-android-core-2.7/AndroidManifest.xml:44:13-63
-476
-477        <activity-alias
-477-->[com.squareup.leakcanary:leakcanary-android-core:2.7] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/211067c2645a010a442bee614db37349/jetified-leakcanary-android-core-2.7/AndroidManifest.xml:46:9-63:26
-478            android:name="leakcanary.internal.activity.LeakLauncherActivity"
-478-->[com.squareup.leakcanary:leakcanary-android-core:2.7] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/211067c2645a010a442bee614db37349/jetified-leakcanary-android-core-2.7/AndroidManifest.xml:47:13-77
-479            android:banner="@drawable/leak_canary_tv_icon"
-479-->[com.squareup.leakcanary:leakcanary-android-core:2.7] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/211067c2645a010a442bee614db37349/jetified-leakcanary-android-core-2.7/AndroidManifest.xml:48:13-59
-480            android:enabled="@bool/leak_canary_add_launcher_icon"
-480-->[com.squareup.leakcanary:leakcanary-android-core:2.7] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/211067c2645a010a442bee614db37349/jetified-leakcanary-android-core-2.7/AndroidManifest.xml:49:13-66
-481            android:exported="true"
-481-->[com.squareup.leakcanary:leakcanary-android-core:2.7] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/211067c2645a010a442bee614db37349/jetified-leakcanary-android-core-2.7/AndroidManifest.xml:50:13-36
-482            android:icon="@mipmap/leak_canary_icon"
-482-->[com.squareup.leakcanary:leakcanary-android-core:2.7] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/211067c2645a010a442bee614db37349/jetified-leakcanary-android-core-2.7/AndroidManifest.xml:51:13-52
-483            android:label="@string/leak_canary_display_activity_label"
-483-->[com.squareup.leakcanary:leakcanary-android-core:2.7] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/211067c2645a010a442bee614db37349/jetified-leakcanary-android-core-2.7/AndroidManifest.xml:52:13-71
-484            android:targetActivity="leakcanary.internal.activity.LeakActivity"
-484-->[com.squareup.leakcanary:leakcanary-android-core:2.7] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/211067c2645a010a442bee614db37349/jetified-leakcanary-android-core-2.7/AndroidManifest.xml:53:13-79
-485            android:taskAffinity="com.squareup.leakcanary.com.tntlinking.tntdev.debug"
-485-->[com.squareup.leakcanary:leakcanary-android-core:2.7] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/211067c2645a010a442bee614db37349/jetified-leakcanary-android-core-2.7/AndroidManifest.xml:54:13-76
-486            android:theme="@style/leak_canary_LeakCanary.Base" >
-486-->[com.squareup.leakcanary:leakcanary-android-core:2.7] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/211067c2645a010a442bee614db37349/jetified-leakcanary-android-core-2.7/AndroidManifest.xml:55:13-63
-487            <intent-filter>
-487-->[com.squareup.leakcanary:leakcanary-android-core:2.7] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/211067c2645a010a442bee614db37349/jetified-leakcanary-android-core-2.7/AndroidManifest.xml:56:13-62:29
-488                <action android:name="android.intent.action.MAIN" />
-488-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:71:17-69
-488-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:71:25-66
-489
-490                <category android:name="android.intent.category.LAUNCHER" />
-490-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:74:17-77
-490-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:74:27-74
-491                <!-- Android TV launcher intent -->
-492                <category android:name="android.intent.category.LEANBACK_LAUNCHER" />
-492-->[com.squareup.leakcanary:leakcanary-android-core:2.7] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/211067c2645a010a442bee614db37349/jetified-leakcanary-android-core-2.7/AndroidManifest.xml:61:17-86
-492-->[com.squareup.leakcanary:leakcanary-android-core:2.7] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/211067c2645a010a442bee614db37349/jetified-leakcanary-android-core-2.7/AndroidManifest.xml:61:27-83
-493            </intent-filter>
-494        </activity-alias>
-495
-496        <activity
-496-->[com.squareup.leakcanary:leakcanary-android-core:2.7] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/211067c2645a010a442bee614db37349/jetified-leakcanary-android-core-2.7/AndroidManifest.xml:65:9-71:68
-497            android:name="leakcanary.internal.RequestStoragePermissionActivity"
-497-->[com.squareup.leakcanary:leakcanary-android-core:2.7] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/211067c2645a010a442bee614db37349/jetified-leakcanary-android-core-2.7/AndroidManifest.xml:66:13-80
-498            android:excludeFromRecents="true"
-498-->[com.squareup.leakcanary:leakcanary-android-core:2.7] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/211067c2645a010a442bee614db37349/jetified-leakcanary-android-core-2.7/AndroidManifest.xml:67:13-46
-499            android:icon="@mipmap/leak_canary_icon"
-499-->[com.squareup.leakcanary:leakcanary-android-core:2.7] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/211067c2645a010a442bee614db37349/jetified-leakcanary-android-core-2.7/AndroidManifest.xml:68:13-52
-500            android:label="@string/leak_canary_storage_permission_activity_label"
-500-->[com.squareup.leakcanary:leakcanary-android-core:2.7] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/211067c2645a010a442bee614db37349/jetified-leakcanary-android-core-2.7/AndroidManifest.xml:69:13-82
-501            android:taskAffinity="com.squareup.leakcanary.com.tntlinking.tntdev.debug"
-501-->[com.squareup.leakcanary:leakcanary-android-core:2.7] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/211067c2645a010a442bee614db37349/jetified-leakcanary-android-core-2.7/AndroidManifest.xml:70:13-76
-502            android:theme="@style/leak_canary_Theme.Transparent" />
-502-->[com.squareup.leakcanary:leakcanary-android-core:2.7] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/211067c2645a010a442bee614db37349/jetified-leakcanary-android-core-2.7/AndroidManifest.xml:71:13-65
-503
-504        <receiver android:name="leakcanary.internal.NotificationReceiver" />
-504-->[com.squareup.leakcanary:leakcanary-android-core:2.7] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/211067c2645a010a442bee614db37349/jetified-leakcanary-android-core-2.7/AndroidManifest.xml:73:9-77
-504-->[com.squareup.leakcanary:leakcanary-android-core:2.7] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/211067c2645a010a442bee614db37349/jetified-leakcanary-android-core-2.7/AndroidManifest.xml:73:19-74
-505
-506        <provider
-506-->[com.squareup.leakcanary:leakcanary-object-watcher-android:2.7] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/bfc2c7ca61394a699b5a7fe3c005482e/jetified-leakcanary-object-watcher-android-2.7/AndroidManifest.xml:8:9-12:40
-507            android:name="leakcanary.internal.AppWatcherInstaller$MainProcess"
-507-->[com.squareup.leakcanary:leakcanary-object-watcher-android:2.7] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/bfc2c7ca61394a699b5a7fe3c005482e/jetified-leakcanary-object-watcher-android-2.7/AndroidManifest.xml:9:13-79
-508            android:authorities="com.tntlinking.tntdev.debug.leakcanary-installer"
-508-->[com.squareup.leakcanary:leakcanary-object-watcher-android:2.7] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/bfc2c7ca61394a699b5a7fe3c005482e/jetified-leakcanary-object-watcher-android-2.7/AndroidManifest.xml:10:13-72
-509            android:enabled="@bool/leak_canary_watcher_auto_install"
-509-->[com.squareup.leakcanary:leakcanary-object-watcher-android:2.7] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/bfc2c7ca61394a699b5a7fe3c005482e/jetified-leakcanary-object-watcher-android-2.7/AndroidManifest.xml:11:13-69
-510            android:exported="false" />
-510-->[com.squareup.leakcanary:leakcanary-object-watcher-android:2.7] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/bfc2c7ca61394a699b5a7fe3c005482e/jetified-leakcanary-object-watcher-android-2.7/AndroidManifest.xml:12:13-37
-511        <provider
-511-->[com.squareup.leakcanary:plumber-android:2.7] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/88600037fea94161ce8a820935bffed6/jetified-plumber-android-2.7/AndroidManifest.xml:8:9-12:40
-512            android:name="leakcanary.internal.PlumberInstaller"
-512-->[com.squareup.leakcanary:plumber-android:2.7] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/88600037fea94161ce8a820935bffed6/jetified-plumber-android-2.7/AndroidManifest.xml:9:13-64
-513            android:authorities="com.tntlinking.tntdev.debug.plumber-installer"
-513-->[com.squareup.leakcanary:plumber-android:2.7] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/88600037fea94161ce8a820935bffed6/jetified-plumber-android-2.7/AndroidManifest.xml:10:13-69
-514            android:enabled="@bool/leak_canary_plumber_auto_install"
-514-->[com.squareup.leakcanary:plumber-android:2.7] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/88600037fea94161ce8a820935bffed6/jetified-plumber-android-2.7/AndroidManifest.xml:11:13-69
-515            android:exported="false" />
-515-->[com.squareup.leakcanary:plumber-android:2.7] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/88600037fea94161ce8a820935bffed6/jetified-plumber-android-2.7/AndroidManifest.xml:12:13-37
-516
-517        <activity
-517-->[com.umeng.umsdk:share-wx:7.1.5] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/0d64d5343346c023fdaf43c75097624c/jetified-share-wx-7.1.5/AndroidManifest.xml:12:9-16:75
-518            android:name="com.tntlinking.tntdev.debug.wxapi.WXEntryActivity"
-518-->[com.umeng.umsdk:share-wx:7.1.5] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/0d64d5343346c023fdaf43c75097624c/jetified-share-wx-7.1.5/AndroidManifest.xml:13:13-66
-519            android:configChanges="keyboardHidden|orientation|screenSize"
-519-->[com.umeng.umsdk:share-wx:7.1.5] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/0d64d5343346c023fdaf43c75097624c/jetified-share-wx-7.1.5/AndroidManifest.xml:14:13-74
-520            android:exported="true"
-520-->[com.umeng.umsdk:share-wx:7.1.5] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/0d64d5343346c023fdaf43c75097624c/jetified-share-wx-7.1.5/AndroidManifest.xml:15:13-36
-521            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-521-->[com.umeng.umsdk:share-wx:7.1.5] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/0d64d5343346c023fdaf43c75097624c/jetified-share-wx-7.1.5/AndroidManifest.xml:16:13-72
-522    </application>
-523
-524</manifest>
+386        <!-- 工作主页 页面 -->
+387        <activity
+387-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:342:9-345:52
+388            android:name="com.tntlinking.tntdev.ui.activity.InterviewActivity"
+388-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:343:13-79
+389            android:launchMode="singleTop"
+389-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:344:13-43
+390            android:screenOrientation="portrait" />
+390-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:345:13-49
+391        <!-- 工作主页 页面 -->
+392        <activity
+392-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:347:9-350:52
+393            android:name="com.tntlinking.tntdev.ui.activity.HomeStatusActivity"
+393-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:348:13-80
+394            android:launchMode="singleTop"
+394-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:349:13-43
+395            android:screenOrientation="portrait" />
+395-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:350:13-49
+396        <!-- 面试详情页面 -->
+397        <activity
+397-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:352:9-355:52
+398            android:name="com.tntlinking.tntdev.ui.activity.InterviewDetailActivity"
+398-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:353:13-85
+399            android:launchMode="singleTop"
+399-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:354:13-43
+400            android:screenOrientation="portrait" />
+400-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:355:13-49
+401        <!-- 待审核 页面 -->
+402        <activity
+402-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:357:9-360:52
+403            android:name="com.tntlinking.tntdev.ui.activity.CheckDeveloperActivity"
+403-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:358:13-84
+404            android:launchMode="singleTop"
+404-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:359:13-43
+405            android:screenOrientation="portrait" />
+405-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:360:13-49
+406        <!-- 审核失败 页面 -->
+407        <activity
+407-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:362:9-365:52
+408            android:name="com.tntlinking.tntdev.ui.activity.CheckDeveloperFailActivity"
+408-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:363:13-88
+409            android:launchMode="singleTop"
+409-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:364:13-43
+410            android:screenOrientation="portrait" />
+410-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:365:13-49
+411        <!-- 个人设置页面 -->
+412        <activity
+412-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:367:9-370:52
+413            android:name="com.tntlinking.tntdev.ui.activity.PersonSettingActivity"
+413-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:368:13-83
+414            android:launchMode="singleTop"
+414-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:369:13-43
+415            android:screenOrientation="portrait" />
+415-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:370:13-49
+416        <!-- 更换手机号页面 -->
+417        <activity
+417-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:372:9-375:52
+418            android:name="com.tntlinking.tntdev.ui.activity.ChangePhoneActivity"
+418-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:373:13-81
+419            android:launchMode="singleTop"
+419-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:374:13-43
+420            android:screenOrientation="portrait" />
+420-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:375:13-49
+421        <!-- 日程页面 -->
+422        <activity
+422-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:377:9-380:52
+423            android:name="com.tntlinking.tntdev.ui.activity.InterviewSettingActivity"
+423-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:378:13-86
+424            android:launchMode="singleTop"
+424-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:379:13-43
+425            android:screenOrientation="portrait" />
+425-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:380:13-49
+426        <!-- 添加日程页面 -->
+427        <activity
+427-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:382:9-385:52
+428            android:name="com.tntlinking.tntdev.ui.activity.AddScheduleActivity"
+428-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:383:13-81
+429            android:launchMode="singleTop"
+429-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:384:13-43
+430            android:screenOrientation="portrait" />
+430-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:385:13-49
+431        <!-- 写日报页面 -->
+432        <activity
+432-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:387:9-390:52
+433            android:name="com.tntlinking.tntdev.ui.activity.WriteDailyActivity"
+433-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:388:13-80
+434            android:launchMode="singleTop"
+434-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:389:13-43
+435            android:screenOrientation="portrait" />
+435-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:390:13-49
+436        <!-- 写日报页面 -->
+437        <activity
+437-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:392:9-395:52
+438            android:name="com.tntlinking.tntdev.ui.activity.AboutAppActivity"
+438-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:393:13-78
+439            android:launchMode="singleTop"
+439-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:394:13-43
+440            android:screenOrientation="portrait" />
+440-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:395:13-49
+441        <!-- 写日报页面 -->
+442        <activity
+442-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:397:9-400:52
+443            android:name="com.tntlinking.tntdev.ui.activity.AddBaseInfoActivity"
+443-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:398:13-81
+444            android:launchMode="singleTop"
+444-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:399:13-43
+445            android:screenOrientation="portrait" />
+445-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:400:13-49
+446        <!-- 写日报页面 -->
+447        <activity
+447-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:402:9-405:52
+448            android:name="com.tntlinking.tntdev.ui.activity.AddCareerActivity"
+448-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:403:13-79
+449            android:launchMode="singleTop"
+449-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:404:13-43
+450            android:screenOrientation="portrait" />
+450-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:405:13-49
+451        <activity
+451-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:406:9-409:52
+452            android:name="com.tntlinking.tntdev.ui.activity.EnterDeveloperActivity"
+452-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:407:13-84
+453            android:launchMode="singleTop"
+453-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:408:13-43
+454            android:screenOrientation="portrait" />
+454-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:409:13-49
+455        <!-- 写日报页面 -->
+456        <activity
+456-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:411:9-414:52
+457            android:name="com.tntlinking.tntdev.ui.activity.SaveQRActivity"
+457-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:412:13-76
+458            android:launchMode="singleTop"
+458-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:413:13-43
+459            android:screenOrientation="portrait" />
+459-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:414:13-49
+460        <!-- 写日报页面 -->
+461        <activity
+461-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:416:9-419:52
+462            android:name="com.tntlinking.tntdev.ui.activity.PosterActivity"
+462-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:417:13-76
+463            android:launchMode="singleTop"
+463-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:418:13-43
+464            android:screenOrientation="portrait" />
+464-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:419:13-49
+465        <!-- 微信回调（请注意这个 Activity 放置的包名要和当前项目的包名保持一致，否则将不能正常回调） -->
+466        <activity
+466-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:421:9-425:75
+467            android:name="com.tntlinking.tntdev.wxapi.WXEntryActivity"
+467-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:422:13-71
+468            android:configChanges="keyboardHidden|orientation|screenSize"
+468-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:423:13-74
+469            android:exported="true"
+469-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:424:13-36
+470            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+470-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:425:13-72
+471
+472        <service
+472-->[com.squareup.leakcanary:leakcanary-android:2.7] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/4e968efa94381bf0c699d4b0878d09da/jetified-leakcanary-android-2.7/AndroidManifest.xml:23:9-25:40
+473            android:name="leakcanary.internal.HeapAnalyzerService"
+473-->[com.squareup.leakcanary:leakcanary-android:2.7] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/4e968efa94381bf0c699d4b0878d09da/jetified-leakcanary-android-2.7/AndroidManifest.xml:24:13-67
+474            android:exported="false" /> <!-- 友盟 Key（请在 Gradle 中配置，请不要在此处修改） -->
+474-->[com.squareup.leakcanary:leakcanary-android:2.7] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/4e968efa94381bf0c699d4b0878d09da/jetified-leakcanary-android-2.7/AndroidManifest.xml:25:13-37
+475        <meta-data
+475-->[:library:umeng] /Users/danwanli/motion/RedCase-Android/build/library/umeng/intermediates/library_manifest/debug/AndroidManifest.xml:36:9-38:56
+476            android:name="UM_KEY"
+476-->[:library:umeng] /Users/danwanli/motion/RedCase-Android/build/library/umeng/intermediates/library_manifest/debug/AndroidManifest.xml:37:13-34
+477            android:value="61e8b19ee014255fcbf77477" /> <!-- QQ AppId（请在 Gradle 中配置，请不要在此处修改） -->
+477-->[:library:umeng] /Users/danwanli/motion/RedCase-Android/build/library/umeng/intermediates/library_manifest/debug/AndroidManifest.xml:38:13-53
+478        <meta-data
+478-->[:library:umeng] /Users/danwanli/motion/RedCase-Android/build/library/umeng/intermediates/library_manifest/debug/AndroidManifest.xml:41:9-43:41
+479            android:name="QQ_ID"
+479-->[:library:umeng] /Users/danwanli/motion/RedCase-Android/build/library/umeng/intermediates/library_manifest/debug/AndroidManifest.xml:42:13-33
+480            android:value="101828096" /> <!-- QQ Secret（请在 Gradle 中配置，请不要在此处修改） -->
+480-->[:library:umeng] /Users/danwanli/motion/RedCase-Android/build/library/umeng/intermediates/library_manifest/debug/AndroidManifest.xml:43:13-38
+481        <meta-data
+481-->[:library:umeng] /Users/danwanli/motion/RedCase-Android/build/library/umeng/intermediates/library_manifest/debug/AndroidManifest.xml:45:9-47:64
+482            android:name="QQ_SECRET"
+482-->[:library:umeng] /Users/danwanli/motion/RedCase-Android/build/library/umeng/intermediates/library_manifest/debug/AndroidManifest.xml:46:13-37
+483            android:value="9dfd3300c3aa3c4596a07796c64914b2" /> <!-- 微信 AppId（请在 Gradle 中配置，请不要在此处修改） -->
+483-->[:library:umeng] /Users/danwanli/motion/RedCase-Android/build/library/umeng/intermediates/library_manifest/debug/AndroidManifest.xml:47:13-61
+484        <meta-data
+484-->[:library:umeng] /Users/danwanli/motion/RedCase-Android/build/library/umeng/intermediates/library_manifest/debug/AndroidManifest.xml:50:9-52:50
+485            android:name="WX_ID"
+485-->[:library:umeng] /Users/danwanli/motion/RedCase-Android/build/library/umeng/intermediates/library_manifest/debug/AndroidManifest.xml:51:13-33
+486            android:value="wx1e91399d09c1cd9a" /> <!-- 微信 Secret（请在 Gradle 中配置，请不要在此处修改） -->
+486-->[:library:umeng] /Users/danwanli/motion/RedCase-Android/build/library/umeng/intermediates/library_manifest/debug/AndroidManifest.xml:52:13-47
+487        <meta-data
+487-->[:library:umeng] /Users/danwanli/motion/RedCase-Android/build/library/umeng/intermediates/library_manifest/debug/AndroidManifest.xml:54:9-56:64
+488            android:name="WX_SECRET"
+488-->[:library:umeng] /Users/danwanli/motion/RedCase-Android/build/library/umeng/intermediates/library_manifest/debug/AndroidManifest.xml:55:13-37
+489            android:value="9932a78c15dcdaa61f72fe58ad3e6b8c" /> <!-- 友盟社会化 -->
+489-->[:library:umeng] /Users/danwanli/motion/RedCase-Android/build/library/umeng/intermediates/library_manifest/debug/AndroidManifest.xml:56:13-61
+490        <!-- QQ 回调 -->
+491        <activity
+491-->[:library:umeng] /Users/danwanli/motion/RedCase-Android/build/library/umeng/intermediates/library_manifest/debug/AndroidManifest.xml:62:9-75:20
+492            android:name="com.tencent.tauth.AuthActivity"
+492-->[:library:umeng] /Users/danwanli/motion/RedCase-Android/build/library/umeng/intermediates/library_manifest/debug/AndroidManifest.xml:63:13-58
+493            android:launchMode="singleTask"
+493-->[:library:umeng] /Users/danwanli/motion/RedCase-Android/build/library/umeng/intermediates/library_manifest/debug/AndroidManifest.xml:64:13-44
+494            android:noHistory="true" >
+494-->[:library:umeng] /Users/danwanli/motion/RedCase-Android/build/library/umeng/intermediates/library_manifest/debug/AndroidManifest.xml:65:13-37
+495            <intent-filter>
+495-->[:library:umeng] /Users/danwanli/motion/RedCase-Android/build/library/umeng/intermediates/library_manifest/debug/AndroidManifest.xml:67:13-74:29
+496                <action android:name="android.intent.action.VIEW" />
+496-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:458:13-65
+496-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:458:21-62
+497
+498                <category android:name="android.intent.category.DEFAULT" />
+498-->[:library:umeng] /Users/danwanli/motion/RedCase-Android/build/library/umeng/intermediates/library_manifest/debug/AndroidManifest.xml:70:17-76
+498-->[:library:umeng] /Users/danwanli/motion/RedCase-Android/build/library/umeng/intermediates/library_manifest/debug/AndroidManifest.xml:70:27-73
+499                <category android:name="android.intent.category.BROWSABLE" />
+499-->[:library:umeng] /Users/danwanli/motion/RedCase-Android/build/library/umeng/intermediates/library_manifest/debug/AndroidManifest.xml:71:17-78
+499-->[:library:umeng] /Users/danwanli/motion/RedCase-Android/build/library/umeng/intermediates/library_manifest/debug/AndroidManifest.xml:71:27-75
+500
+501                <data android:scheme="tencent101828096" />
+501-->[:library:umeng] /Users/danwanli/motion/RedCase-Android/build/library/umeng/intermediates/library_manifest/debug/AndroidManifest.xml:73:17-59
+501-->[:library:umeng] /Users/danwanli/motion/RedCase-Android/build/library/umeng/intermediates/library_manifest/debug/AndroidManifest.xml:73:23-56
+502            </intent-filter>
+503        </activity>
+504        <activity
+504-->[:library:umeng] /Users/danwanli/motion/RedCase-Android/build/library/umeng/intermediates/library_manifest/debug/AndroidManifest.xml:76:9-80:36
+505            android:name="com.tencent.connect.common.AssistActivity"
+505-->[:library:umeng] /Users/danwanli/motion/RedCase-Android/build/library/umeng/intermediates/library_manifest/debug/AndroidManifest.xml:77:13-69
+506            android:configChanges="orientation|keyboardHidden"
+506-->[:library:umeng] /Users/danwanli/motion/RedCase-Android/build/library/umeng/intermediates/library_manifest/debug/AndroidManifest.xml:78:13-63
+507            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+507-->[:library:umeng] /Users/danwanli/motion/RedCase-Android/build/library/umeng/intermediates/library_manifest/debug/AndroidManifest.xml:79:13-72
+508        <activity
+508-->[com.blankj:utilcodex:1.30.6] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/2be558487594920d28ec18ec1b4fef8e/jetified-utilcodex-1.30.6/AndroidManifest.xml:10:9-14:75
+509            android:name="com.blankj.utilcode.util.UtilsTransActivity4MainProcess"
+509-->[com.blankj:utilcodex:1.30.6] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/2be558487594920d28ec18ec1b4fef8e/jetified-utilcodex-1.30.6/AndroidManifest.xml:11:13-83
+510            android:configChanges="orientation|keyboardHidden|screenSize"
+510-->[com.blankj:utilcodex:1.30.6] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/2be558487594920d28ec18ec1b4fef8e/jetified-utilcodex-1.30.6/AndroidManifest.xml:12:13-74
+511            android:theme="@style/ActivityTranslucent"
+511-->[com.blankj:utilcodex:1.30.6] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/2be558487594920d28ec18ec1b4fef8e/jetified-utilcodex-1.30.6/AndroidManifest.xml:13:13-55
+512            android:windowSoftInputMode="stateHidden|stateAlwaysHidden" />
+512-->[com.blankj:utilcodex:1.30.6] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/2be558487594920d28ec18ec1b4fef8e/jetified-utilcodex-1.30.6/AndroidManifest.xml:14:13-72
+513        <activity
+513-->[com.blankj:utilcodex:1.30.6] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/2be558487594920d28ec18ec1b4fef8e/jetified-utilcodex-1.30.6/AndroidManifest.xml:15:9-20:75
+514            android:name="com.blankj.utilcode.util.UtilsTransActivity"
+514-->[com.blankj:utilcodex:1.30.6] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/2be558487594920d28ec18ec1b4fef8e/jetified-utilcodex-1.30.6/AndroidManifest.xml:16:13-71
+515            android:configChanges="orientation|keyboardHidden|screenSize"
+515-->[com.blankj:utilcodex:1.30.6] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/2be558487594920d28ec18ec1b4fef8e/jetified-utilcodex-1.30.6/AndroidManifest.xml:17:13-74
+516            android:multiprocess="true"
+516-->[com.blankj:utilcodex:1.30.6] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/2be558487594920d28ec18ec1b4fef8e/jetified-utilcodex-1.30.6/AndroidManifest.xml:18:13-40
+517            android:theme="@style/ActivityTranslucent"
+517-->[com.blankj:utilcodex:1.30.6] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/2be558487594920d28ec18ec1b4fef8e/jetified-utilcodex-1.30.6/AndroidManifest.xml:19:13-55
+518            android:windowSoftInputMode="stateHidden|stateAlwaysHidden" />
+518-->[com.blankj:utilcodex:1.30.6] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/2be558487594920d28ec18ec1b4fef8e/jetified-utilcodex-1.30.6/AndroidManifest.xml:20:13-72
+519
+520        <provider
+520-->[com.blankj:utilcodex:1.30.6] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/2be558487594920d28ec18ec1b4fef8e/jetified-utilcodex-1.30.6/AndroidManifest.xml:22:9-30:20
+521            android:name="com.blankj.utilcode.util.UtilsFileProvider"
+521-->[com.blankj:utilcodex:1.30.6] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/2be558487594920d28ec18ec1b4fef8e/jetified-utilcodex-1.30.6/AndroidManifest.xml:23:13-70
+522            android:authorities="com.tntlinking.tntdev.debug.utilcode.fileprovider"
+522-->[com.blankj:utilcodex:1.30.6] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/2be558487594920d28ec18ec1b4fef8e/jetified-utilcodex-1.30.6/AndroidManifest.xml:24:13-73
+523            android:exported="false"
+523-->[com.blankj:utilcodex:1.30.6] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/2be558487594920d28ec18ec1b4fef8e/jetified-utilcodex-1.30.6/AndroidManifest.xml:25:13-37
+524            android:grantUriPermissions="true" >
+524-->[com.blankj:utilcodex:1.30.6] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/2be558487594920d28ec18ec1b4fef8e/jetified-utilcodex-1.30.6/AndroidManifest.xml:26:13-47
+525            <meta-data
+525-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:57:13-59:54
+526                android:name="android.support.FILE_PROVIDER_PATHS"
+526-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:58:17-67
+527                android:resource="@xml/util_code_provider_paths" />
+527-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:59:17-51
+528        </provider>
+529
+530        <service
+530-->[com.blankj:utilcodex:1.30.6] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/2be558487594920d28ec18ec1b4fef8e/jetified-utilcodex-1.30.6/AndroidManifest.xml:32:9-38:19
+531            android:name="com.blankj.utilcode.util.MessengerUtils$ServerService"
+531-->[com.blankj:utilcodex:1.30.6] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/2be558487594920d28ec18ec1b4fef8e/jetified-utilcodex-1.30.6/AndroidManifest.xml:33:13-81
+532            android:exported="false" >
+532-->[com.blankj:utilcodex:1.30.6] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/2be558487594920d28ec18ec1b4fef8e/jetified-utilcodex-1.30.6/AndroidManifest.xml:34:13-37
+533            <intent-filter>
+533-->[com.blankj:utilcodex:1.30.6] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/2be558487594920d28ec18ec1b4fef8e/jetified-utilcodex-1.30.6/AndroidManifest.xml:35:13-37:29
+534                <action android:name="com.tntlinking.tntdev.debug.messenger" />
+534-->[com.blankj:utilcodex:1.30.6] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/2be558487594920d28ec18ec1b4fef8e/jetified-utilcodex-1.30.6/AndroidManifest.xml:36:17-69
+534-->[com.blankj:utilcodex:1.30.6] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/2be558487594920d28ec18ec1b4fef8e/jetified-utilcodex-1.30.6/AndroidManifest.xml:36:25-66
+535            </intent-filter>
+536        </service>
+537
+538        <provider
+538-->[com.squareup.leakcanary:leakcanary-android-core:2.7] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/211067c2645a010a442bee614db37349/jetified-leakcanary-android-core-2.7/AndroidManifest.xml:29:9-37:20
+539            android:name="leakcanary.internal.LeakCanaryFileProvider"
+539-->[com.squareup.leakcanary:leakcanary-android-core:2.7] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/211067c2645a010a442bee614db37349/jetified-leakcanary-android-core-2.7/AndroidManifest.xml:30:13-70
+540            android:authorities="com.squareup.leakcanary.fileprovider.com.tntlinking.tntdev.debug"
+540-->[com.squareup.leakcanary:leakcanary-android-core:2.7] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/211067c2645a010a442bee614db37349/jetified-leakcanary-android-core-2.7/AndroidManifest.xml:31:13-88
+541            android:exported="false"
+541-->[com.squareup.leakcanary:leakcanary-android-core:2.7] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/211067c2645a010a442bee614db37349/jetified-leakcanary-android-core-2.7/AndroidManifest.xml:32:13-37
+542            android:grantUriPermissions="true" >
+542-->[com.squareup.leakcanary:leakcanary-android-core:2.7] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/211067c2645a010a442bee614db37349/jetified-leakcanary-android-core-2.7/AndroidManifest.xml:33:13-47
+543            <meta-data
+543-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:57:13-59:54
+544                android:name="android.support.FILE_PROVIDER_PATHS"
+544-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:58:17-67
+545                android:resource="@xml/leak_canary_file_paths" />
+545-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:59:17-51
+546        </provider>
+547
+548        <activity
+548-->[com.squareup.leakcanary:leakcanary-android-core:2.7] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/211067c2645a010a442bee614db37349/jetified-leakcanary-android-core-2.7/AndroidManifest.xml:39:9-44:66
+549            android:name="leakcanary.internal.activity.LeakActivity"
+549-->[com.squareup.leakcanary:leakcanary-android-core:2.7] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/211067c2645a010a442bee614db37349/jetified-leakcanary-android-core-2.7/AndroidManifest.xml:40:13-69
+550            android:icon="@mipmap/leak_canary_icon"
+550-->[com.squareup.leakcanary:leakcanary-android-core:2.7] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/211067c2645a010a442bee614db37349/jetified-leakcanary-android-core-2.7/AndroidManifest.xml:41:13-52
+551            android:label="@string/leak_canary_display_activity_label"
+551-->[com.squareup.leakcanary:leakcanary-android-core:2.7] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/211067c2645a010a442bee614db37349/jetified-leakcanary-android-core-2.7/AndroidManifest.xml:42:13-71
+552            android:taskAffinity="com.squareup.leakcanary.com.tntlinking.tntdev.debug"
+552-->[com.squareup.leakcanary:leakcanary-android-core:2.7] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/211067c2645a010a442bee614db37349/jetified-leakcanary-android-core-2.7/AndroidManifest.xml:43:13-76
+553            android:theme="@style/leak_canary_LeakCanary.Base" />
+553-->[com.squareup.leakcanary:leakcanary-android-core:2.7] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/211067c2645a010a442bee614db37349/jetified-leakcanary-android-core-2.7/AndroidManifest.xml:44:13-63
+554
+555        <activity-alias
+555-->[com.squareup.leakcanary:leakcanary-android-core:2.7] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/211067c2645a010a442bee614db37349/jetified-leakcanary-android-core-2.7/AndroidManifest.xml:46:9-63:26
+556            android:name="leakcanary.internal.activity.LeakLauncherActivity"
+556-->[com.squareup.leakcanary:leakcanary-android-core:2.7] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/211067c2645a010a442bee614db37349/jetified-leakcanary-android-core-2.7/AndroidManifest.xml:47:13-77
+557            android:banner="@drawable/leak_canary_tv_icon"
+557-->[com.squareup.leakcanary:leakcanary-android-core:2.7] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/211067c2645a010a442bee614db37349/jetified-leakcanary-android-core-2.7/AndroidManifest.xml:48:13-59
+558            android:enabled="@bool/leak_canary_add_launcher_icon"
+558-->[com.squareup.leakcanary:leakcanary-android-core:2.7] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/211067c2645a010a442bee614db37349/jetified-leakcanary-android-core-2.7/AndroidManifest.xml:49:13-66
+559            android:exported="true"
+559-->[com.squareup.leakcanary:leakcanary-android-core:2.7] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/211067c2645a010a442bee614db37349/jetified-leakcanary-android-core-2.7/AndroidManifest.xml:50:13-36
+560            android:icon="@mipmap/leak_canary_icon"
+560-->[com.squareup.leakcanary:leakcanary-android-core:2.7] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/211067c2645a010a442bee614db37349/jetified-leakcanary-android-core-2.7/AndroidManifest.xml:51:13-52
+561            android:label="@string/leak_canary_display_activity_label"
+561-->[com.squareup.leakcanary:leakcanary-android-core:2.7] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/211067c2645a010a442bee614db37349/jetified-leakcanary-android-core-2.7/AndroidManifest.xml:52:13-71
+562            android:targetActivity="leakcanary.internal.activity.LeakActivity"
+562-->[com.squareup.leakcanary:leakcanary-android-core:2.7] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/211067c2645a010a442bee614db37349/jetified-leakcanary-android-core-2.7/AndroidManifest.xml:53:13-79
+563            android:taskAffinity="com.squareup.leakcanary.com.tntlinking.tntdev.debug"
+563-->[com.squareup.leakcanary:leakcanary-android-core:2.7] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/211067c2645a010a442bee614db37349/jetified-leakcanary-android-core-2.7/AndroidManifest.xml:54:13-76
+564            android:theme="@style/leak_canary_LeakCanary.Base" >
+564-->[com.squareup.leakcanary:leakcanary-android-core:2.7] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/211067c2645a010a442bee614db37349/jetified-leakcanary-android-core-2.7/AndroidManifest.xml:55:13-63
+565            <intent-filter>
+565-->[com.squareup.leakcanary:leakcanary-android-core:2.7] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/211067c2645a010a442bee614db37349/jetified-leakcanary-android-core-2.7/AndroidManifest.xml:56:13-62:29
+566                <action android:name="android.intent.action.MAIN" />
+566-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:71:17-69
+566-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:71:25-66
+567
+568                <category android:name="android.intent.category.LAUNCHER" />
+568-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:74:17-77
+568-->/Users/danwanli/motion/RedCase-Android/app/src/main/AndroidManifest.xml:74:27-74
+569                <!-- Android TV launcher intent -->
+570                <category android:name="android.intent.category.LEANBACK_LAUNCHER" />
+570-->[com.squareup.leakcanary:leakcanary-android-core:2.7] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/211067c2645a010a442bee614db37349/jetified-leakcanary-android-core-2.7/AndroidManifest.xml:61:17-86
+570-->[com.squareup.leakcanary:leakcanary-android-core:2.7] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/211067c2645a010a442bee614db37349/jetified-leakcanary-android-core-2.7/AndroidManifest.xml:61:27-83
+571            </intent-filter>
+572        </activity-alias>
+573
+574        <activity
+574-->[com.squareup.leakcanary:leakcanary-android-core:2.7] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/211067c2645a010a442bee614db37349/jetified-leakcanary-android-core-2.7/AndroidManifest.xml:65:9-71:68
+575            android:name="leakcanary.internal.RequestStoragePermissionActivity"
+575-->[com.squareup.leakcanary:leakcanary-android-core:2.7] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/211067c2645a010a442bee614db37349/jetified-leakcanary-android-core-2.7/AndroidManifest.xml:66:13-80
+576            android:excludeFromRecents="true"
+576-->[com.squareup.leakcanary:leakcanary-android-core:2.7] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/211067c2645a010a442bee614db37349/jetified-leakcanary-android-core-2.7/AndroidManifest.xml:67:13-46
+577            android:icon="@mipmap/leak_canary_icon"
+577-->[com.squareup.leakcanary:leakcanary-android-core:2.7] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/211067c2645a010a442bee614db37349/jetified-leakcanary-android-core-2.7/AndroidManifest.xml:68:13-52
+578            android:label="@string/leak_canary_storage_permission_activity_label"
+578-->[com.squareup.leakcanary:leakcanary-android-core:2.7] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/211067c2645a010a442bee614db37349/jetified-leakcanary-android-core-2.7/AndroidManifest.xml:69:13-82
+579            android:taskAffinity="com.squareup.leakcanary.com.tntlinking.tntdev.debug"
+579-->[com.squareup.leakcanary:leakcanary-android-core:2.7] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/211067c2645a010a442bee614db37349/jetified-leakcanary-android-core-2.7/AndroidManifest.xml:70:13-76
+580            android:theme="@style/leak_canary_Theme.Transparent" />
+580-->[com.squareup.leakcanary:leakcanary-android-core:2.7] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/211067c2645a010a442bee614db37349/jetified-leakcanary-android-core-2.7/AndroidManifest.xml:71:13-65
+581
+582        <receiver android:name="leakcanary.internal.NotificationReceiver" />
+582-->[com.squareup.leakcanary:leakcanary-android-core:2.7] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/211067c2645a010a442bee614db37349/jetified-leakcanary-android-core-2.7/AndroidManifest.xml:73:9-77
+582-->[com.squareup.leakcanary:leakcanary-android-core:2.7] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/211067c2645a010a442bee614db37349/jetified-leakcanary-android-core-2.7/AndroidManifest.xml:73:19-74
+583
+584        <provider
+584-->[com.squareup.leakcanary:leakcanary-object-watcher-android:2.7] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/bfc2c7ca61394a699b5a7fe3c005482e/jetified-leakcanary-object-watcher-android-2.7/AndroidManifest.xml:8:9-12:40
+585            android:name="leakcanary.internal.AppWatcherInstaller$MainProcess"
+585-->[com.squareup.leakcanary:leakcanary-object-watcher-android:2.7] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/bfc2c7ca61394a699b5a7fe3c005482e/jetified-leakcanary-object-watcher-android-2.7/AndroidManifest.xml:9:13-79
+586            android:authorities="com.tntlinking.tntdev.debug.leakcanary-installer"
+586-->[com.squareup.leakcanary:leakcanary-object-watcher-android:2.7] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/bfc2c7ca61394a699b5a7fe3c005482e/jetified-leakcanary-object-watcher-android-2.7/AndroidManifest.xml:10:13-72
+587            android:enabled="@bool/leak_canary_watcher_auto_install"
+587-->[com.squareup.leakcanary:leakcanary-object-watcher-android:2.7] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/bfc2c7ca61394a699b5a7fe3c005482e/jetified-leakcanary-object-watcher-android-2.7/AndroidManifest.xml:11:13-69
+588            android:exported="false" />
+588-->[com.squareup.leakcanary:leakcanary-object-watcher-android:2.7] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/bfc2c7ca61394a699b5a7fe3c005482e/jetified-leakcanary-object-watcher-android-2.7/AndroidManifest.xml:12:13-37
+589        <provider
+589-->[com.squareup.leakcanary:plumber-android:2.7] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/88600037fea94161ce8a820935bffed6/jetified-plumber-android-2.7/AndroidManifest.xml:8:9-12:40
+590            android:name="leakcanary.internal.PlumberInstaller"
+590-->[com.squareup.leakcanary:plumber-android:2.7] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/88600037fea94161ce8a820935bffed6/jetified-plumber-android-2.7/AndroidManifest.xml:9:13-64
+591            android:authorities="com.tntlinking.tntdev.debug.plumber-installer"
+591-->[com.squareup.leakcanary:plumber-android:2.7] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/88600037fea94161ce8a820935bffed6/jetified-plumber-android-2.7/AndroidManifest.xml:10:13-69
+592            android:enabled="@bool/leak_canary_plumber_auto_install"
+592-->[com.squareup.leakcanary:plumber-android:2.7] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/88600037fea94161ce8a820935bffed6/jetified-plumber-android-2.7/AndroidManifest.xml:11:13-69
+593            android:exported="false" />
+593-->[com.squareup.leakcanary:plumber-android:2.7] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/88600037fea94161ce8a820935bffed6/jetified-plumber-android-2.7/AndroidManifest.xml:12:13-37
+594
+595        <activity
+595-->[com.umeng.umsdk:share-wx:7.1.5] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/0d64d5343346c023fdaf43c75097624c/jetified-share-wx-7.1.5/AndroidManifest.xml:12:9-16:75
+596            android:name="com.tntlinking.tntdev.debug.wxapi.WXEntryActivity"
+596-->[com.umeng.umsdk:share-wx:7.1.5] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/0d64d5343346c023fdaf43c75097624c/jetified-share-wx-7.1.5/AndroidManifest.xml:13:13-66
+597            android:configChanges="keyboardHidden|orientation|screenSize"
+597-->[com.umeng.umsdk:share-wx:7.1.5] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/0d64d5343346c023fdaf43c75097624c/jetified-share-wx-7.1.5/AndroidManifest.xml:14:13-74
+598            android:exported="true"
+598-->[com.umeng.umsdk:share-wx:7.1.5] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/0d64d5343346c023fdaf43c75097624c/jetified-share-wx-7.1.5/AndroidManifest.xml:15:13-36
+599            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+599-->[com.umeng.umsdk:share-wx:7.1.5] /Users/danwanli/.gradle/caches/transforms-2/files-2.1/0d64d5343346c023fdaf43c75097624c/jetified-share-wx-7.1.5/AndroidManifest.xml:16:13-72
+600    </application>
+601
+602</manifest>

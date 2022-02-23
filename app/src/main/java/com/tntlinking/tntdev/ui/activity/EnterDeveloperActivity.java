@@ -360,21 +360,21 @@ public final class EnterDeveloperActivity extends AppActivity {
                         List<DeveloperInfoBean.DeveloperWork> workExperienceDtoList = bean.getWorkExperienceDtoList();
                         List<DeveloperInfoBean.DeveloperProject> projectDtoList = bean.getProjectDtoList();
                         if (educationDtoList.size() != 0) {
-                            addEducationAdapter = new AddEducationAdapter(EnterDeveloperActivity.this, educationDtoList);
-                            lv1.setAdapter(addEducationAdapter);
                             progress++;
                         }
-                        if (workExperienceDtoList.size() != 0) {
-                            addWorkAdapter = new AddWorkAdapter(EnterDeveloperActivity.this, workExperienceDtoList);
-                            lv2.setAdapter(addWorkAdapter);
-                            progress++;
-                        }
+                        addEducationAdapter = new AddEducationAdapter(EnterDeveloperActivity.this, educationDtoList);
+                        lv1.setAdapter(addEducationAdapter);
 
-                        if (projectDtoList.size() >= 1) {
-                            addProjectAdapter = new AddProjectAdapter(EnterDeveloperActivity.this, projectDtoList);
-                            lv3.setAdapter(addProjectAdapter);
+                        if (workExperienceDtoList.size() != 0) {
                             progress++;
                         }
+                        addWorkAdapter = new AddWorkAdapter(EnterDeveloperActivity.this, workExperienceDtoList);
+                        lv2.setAdapter(addWorkAdapter);
+                        if (projectDtoList.size() >= 1) {
+                            progress++;
+                        }
+                        addProjectAdapter = new AddProjectAdapter(EnterDeveloperActivity.this, projectDtoList);
+                        lv3.setAdapter(addProjectAdapter);
                         if (projectDtoList.size() >= 2) {
                             progress++;
                         }

@@ -1,5 +1,9 @@
 [
     {
+        "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/drawable-xxhdpi_bg_poster.png.flat",
+        "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/drawable-xxhdpi/bg_poster.png"
+    },
+    {
         "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/layout_image_preview_activity.xml.flat",
         "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/layout/image_preview_activity.xml"
     },
@@ -10,6 +14,10 @@
     {
         "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/layout_tag_item.xml.flat",
         "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/layout/tag_item.xml"
+    },
+    {
+        "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/drawable-xxhdpi_icon_about.png.flat",
+        "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/drawable-xxhdpi/icon_about.png"
     },
     {
         "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/drawable_arrows_right_ic.xml.flat",
@@ -36,12 +44,12 @@
         "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/drawable-xxhdpi/bg_qr_logo.png"
     },
     {
-        "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/layout_album_dialog.xml.flat",
-        "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/layout/album_dialog.xml"
-    },
-    {
         "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/drawable_countdown_selector.xml.flat",
         "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/drawable/countdown_selector.xml"
+    },
+    {
+        "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/layout_album_dialog.xml.flat",
+        "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/layout/album_dialog.xml"
     },
     {
         "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/drawable_dot_oval_orange.xml.flat",
@@ -52,12 +60,20 @@
         "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/raw/loading.json"
     },
     {
+        "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/drawable-xxhdpi_icon_back_black.png.flat",
+        "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/drawable-xxhdpi/icon_back_black.png"
+    },
+    {
         "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/drawable_share_link_ic.xml.flat",
         "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/drawable/share_link_ic.xml"
     },
     {
         "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/layout_copy_dialog.xml.flat",
         "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/layout/copy_dialog.xml"
+    },
+    {
+        "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/mipmap-xhdpi_ic_launcher.png.flat",
+        "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/mipmap-xhdpi/ic_launcher.png"
     },
     {
         "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/layout_home_navigation_item.xml.flat",
@@ -136,6 +152,10 @@
         "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/drawable/tips_warning_ic.xml"
     },
     {
+        "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/drawable-xxhdpi_icon_task_1.png.flat",
+        "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/drawable-xxhdpi/icon_task_1.png"
+    },
+    {
         "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/drawable_bg_gray_radius_3.xml.flat",
         "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/drawable/bg_gray_radius_3.xml"
     },
@@ -160,12 +180,20 @@
         "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/drawable-xxhdpi/icon_qr.png"
     },
     {
+        "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/layout_interview_activity.xml.flat",
+        "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/layout/interview_activity.xml"
+    },
+    {
         "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/drawable-xxhdpi_logo_big_ic.webp.flat",
         "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/drawable-xxhdpi/logo_big_ic.webp"
     },
     {
         "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/drawable_tips_error_ic.xml.flat",
         "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/drawable/tips_error_ic.xml"
+    },
+    {
+        "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/drawable-xxhdpi_bg_app_update.png.flat",
+        "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/drawable-xxhdpi/bg_app_update.png"
     },
     {
         "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/drawable-xxhdpi_icon_white_logo.png.flat",
@@ -180,6 +208,10 @@
         "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/drawable/camera_ic.xml"
     },
     {
+        "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/drawable-xxhdpi_bg_img_3.png.flat",
+        "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/drawable-xxhdpi/bg_img_3.png"
+    },
+    {
         "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/layout_share_item.xml.flat",
         "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/layout/share_item.xml"
     },
@@ -188,12 +220,40 @@
         "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/drawable/reboot_ic.xml"
     },
     {
+        "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/drawable_button_black_circle_selector.xml.flat",
+        "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/drawable/button_black_circle_selector.xml"
+    },
+    {
         "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/drawable_video_lock_open_ic.xml.flat",
         "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/drawable/video_lock_open_ic.xml"
     },
     {
+        "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/drawable-xxhdpi_icon_slide.png.flat",
+        "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/drawable-xxhdpi/icon_slide.png"
+    },
+    {
+        "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/layout_item_invitation.xml.flat",
+        "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/layout/item_invitation.xml"
+    },
+    {
+        "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/layout_poster_activity.xml.flat",
+        "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/layout/poster_activity.xml"
+    },
+    {
+        "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/drawable-xxhdpi_icon_task_2.png.flat",
+        "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/drawable-xxhdpi/icon_task_2.png"
+    },
+    {
         "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/drawable_btn_gray_radius_10.xml.flat",
         "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/drawable/btn_gray_radius_10.xml"
+    },
+    {
+        "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/layout_add_project_tag_search_activity.xml.flat",
+        "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/layout/add_project_tag_search_activity.xml"
+    },
+    {
+        "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/layout_md_view_activity.xml.flat",
+        "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/layout/md_view_activity.xml"
     },
     {
         "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/layout_income_detail_item.xml.flat",
@@ -224,6 +284,10 @@
         "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/drawable/image_preview_indicator.xml"
     },
     {
+        "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/drawable-xxhdpi_bg_circle_save_qr.png.flat",
+        "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/drawable-xxhdpi/bg_circle_save_qr.png"
+    },
+    {
         "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/layout_select_item.xml.flat",
         "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/layout/select_item.xml"
     },
@@ -236,8 +300,16 @@
         "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/drawable-xxhdpi/bg_view_2.png"
     },
     {
+        "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/layout_add_work_activity.xml.flat",
+        "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/layout/add_work_activity.xml"
+    },
+    {
         "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/layout_menu_item.xml.flat",
         "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/layout/menu_item.xml"
+    },
+    {
+        "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/drawable-xxhdpi_icon_cup.png.flat",
+        "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/drawable-xxhdpi/icon_cup.png"
     },
     {
         "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/drawable_search_ic.xml.flat",
@@ -248,8 +320,16 @@
         "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/drawable-xxhdpi/bg_empty_income.png"
     },
     {
+        "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/layout_item_home_task_list.xml.flat",
+        "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/layout/item_home_task_list.xml"
+    },
+    {
         "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/layout_copy_fragment.xml.flat",
         "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/layout/copy_fragment.xml"
+    },
+    {
+        "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/layout_share_app_dialog.xml.flat",
+        "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/layout/share_app_dialog.xml"
     },
     {
         "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/layout_date_dialog.xml.flat",
@@ -264,12 +344,20 @@
         "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/drawable/bg_blue_right_radius_4.xml"
     },
     {
+        "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/drawable_bg_gray_stroke.xml.flat",
+        "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/drawable/bg_gray_stroke.xml"
+    },
+    {
         "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/drawable_roll_accent_bg.xml.flat",
         "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/drawable/roll_accent_bg.xml"
     },
     {
         "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/drawable_bg_bottom_blue_radius_6.xml.flat",
         "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/drawable/bg_bottom_blue_radius_6.xml"
+    },
+    {
+        "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/layout_about_app_activity.xml.flat",
+        "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/layout/about_app_activity.xml"
     },
     {
         "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/drawable_home_message_selector.xml.flat",
@@ -286,6 +374,10 @@
     {
         "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/layout_browser_fragment.xml.flat",
         "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/layout/browser_fragment.xml"
+    },
+    {
+        "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/drawable-xxhdpi_icon_search.png.flat",
+        "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/drawable-xxhdpi/icon_search.png"
     },
     {
         "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/drawable_video_brightness_high_ic.xml.flat",
@@ -306,6 +398,10 @@
     {
         "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/drawable_status_empty_ic.xml.flat",
         "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/drawable/status_empty_ic.xml"
+    },
+    {
+        "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/mipmap-xxhdpi_ic_launcher.png.flat",
+        "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/mipmap-xxhdpi/ic_launcher.png"
     },
     {
         "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/drawable-xxhdpi_icon_add.png.flat",
@@ -348,8 +444,16 @@
         "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/layout/login_activity2.xml"
     },
     {
+        "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/drawable_bg_yellow_stroke.xml.flat",
+        "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/drawable/bg_yellow_stroke.xml"
+    },
+    {
         "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/layout_item_add_interview.xml.flat",
         "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/layout/item_add_interview.xml"
+    },
+    {
+        "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/drawable-xxhdpi_bg_interview_header.png.flat",
+        "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/drawable-xxhdpi/bg_interview_header.png"
     },
     {
         "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/layout_add_project_activity.xml.flat",
@@ -358,6 +462,10 @@
     {
         "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/drawable-xxhdpi_bg_check_fail.png.flat",
         "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/drawable-xxhdpi/bg_check_fail.png"
+    },
+    {
+        "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/drawable_bg_blue_gradient_radius_10.xml.flat",
+        "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/drawable/bg_blue_gradient_radius_10.xml"
     },
     {
         "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/drawable_share_wechat_ic.xml.flat",
@@ -370,6 +478,10 @@
     {
         "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/layout_item_income_detail_header.xml.flat",
         "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/layout/item_income_detail_header.xml"
+    },
+    {
+        "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/drawable-xxhdpi_icon_cooperation.png.flat",
+        "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/drawable-xxhdpi/icon_cooperation.png"
     },
     {
         "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/layout_image_select_item.xml.flat",
@@ -404,6 +516,10 @@
         "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/drawable/checkbox_selector.xml"
     },
     {
+        "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/drawable_bg_banner_radius.xml.flat",
+        "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/drawable/bg_banner_radius.xml"
+    },
+    {
         "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/drawable-xxhdpi_icon_person_avatar.png.flat",
         "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/drawable-xxhdpi/icon_person_avatar.png"
     },
@@ -414,6 +530,10 @@
     {
         "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/anim_right_out_activity.xml.flat",
         "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/anim/right_out_activity.xml"
+    },
+    {
+        "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/layout_industry_select_dialog.xml.flat",
+        "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/layout/industry_select_dialog.xml"
     },
     {
         "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/drawable-xxhdpi_icon_running.png.flat",
@@ -428,12 +548,24 @@
         "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/anim/shake_anim.xml"
     },
     {
+        "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/drawable-xxhdpi_icon_red_delete.png.flat",
+        "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/drawable-xxhdpi/icon_red_delete.png"
+    },
+    {
         "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/layout_time_dialog.xml.flat",
         "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/layout/time_dialog.xml"
     },
     {
         "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/drawable_home_message_on_ic.xml.flat",
         "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/drawable/home_message_on_ic.xml"
+    },
+    {
+        "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/mipmap-xxhdpi_ic_launcher_round.png.flat",
+        "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/mipmap-xxhdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/layout_app_update_dialog.xml.flat",
+        "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/layout/app_update_dialog.xml"
     },
     {
         "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/layout_ui_dialog.xml.flat",
@@ -450,6 +582,10 @@
     {
         "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/layout_password_forget_activity.xml.flat",
         "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/layout/password_forget_activity.xml"
+    },
+    {
+        "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/drawable-xxhdpi_icon_star.png.flat",
+        "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/drawable-xxhdpi/icon_star.png"
     },
     {
         "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/drawable-xxhdpi_bg_view_1.png.flat",
@@ -512,6 +648,10 @@
         "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/layout/item_tab_add_education.xml"
     },
     {
+        "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/drawable-xxhdpi_icon_contact.png.flat",
+        "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/drawable-xxhdpi/icon_contact.png"
+    },
+    {
         "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/layout_select_dialog.xml.flat",
         "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/layout/select_dialog.xml"
     },
@@ -540,6 +680,10 @@
         "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/drawable/videocam_ic.xml"
     },
     {
+        "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/drawable-xxhdpi_icon_gif_interview.gif.flat",
+        "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/drawable-xxhdpi/icon_gif_interview.gif"
+    },
+    {
         "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/layout_menu_dialog.xml.flat",
         "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/layout/menu_dialog.xml"
     },
@@ -560,6 +704,10 @@
         "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/drawable/video_brightness_low_ic.xml"
     },
     {
+        "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/layout_item_enter_developer_header.xml.flat",
+        "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/layout/item_enter_developer_header.xml"
+    },
+    {
         "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/layout_status_fragment.xml.flat",
         "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/layout/status_fragment.xml"
     },
@@ -576,16 +724,32 @@
         "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/layout/icome_detail_activity.xml"
     },
     {
+        "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/drawable_progressbar.xml.flat",
+        "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/drawable/progressbar.xml"
+    },
+    {
         "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/drawable_button_white_circle_selector.xml.flat",
         "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/drawable/button_white_circle_selector.xml"
+    },
+    {
+        "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/drawable-xxhdpi_icon_commit_tips.png.flat",
+        "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/drawable-xxhdpi/icon_commit_tips.png"
     },
     {
         "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/layout_persondata_activity.xml.flat",
         "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/layout/persondata_activity.xml"
     },
     {
+        "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/drawable-xxhdpi_icon_red_packet_open.png.flat",
+        "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/drawable-xxhdpi/icon_red_packet_open.png"
+    },
+    {
         "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/drawable_bg_gray_radius_bottom_10.xml.flat",
         "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/drawable/bg_gray_radius_bottom_10.xml"
+    },
+    {
+        "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/layout_save_qr_activity.xml.flat",
+        "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/layout/save_qr_activity.xml"
     },
     {
         "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/drawable_normal_text_color.xml.flat",
@@ -598,6 +762,10 @@
     {
         "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/drawable_home_home_on_ic.xml.flat",
         "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/drawable/home_home_on_ic.xml"
+    },
+    {
+        "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/drawable-xxhdpi_bg_save_qr.png.flat",
+        "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/drawable-xxhdpi/bg_save_qr.png"
     },
     {
         "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/drawable_add_ic.xml.flat",
@@ -648,8 +816,24 @@
         "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/layout/write_daily_delete_dialog.xml"
     },
     {
+        "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/drawable-xxhdpi_icon_enter_develoer.png.flat",
+        "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/drawable-xxhdpi/icon_enter_develoer.png"
+    },
+    {
+        "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/drawable-xxhdpi_icon_close_black.png.flat",
+        "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/drawable-xxhdpi/icon_close_black.png"
+    },
+    {
+        "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/drawable_bg_yellow_stroke_radius_6.xml.flat",
+        "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/drawable/bg_yellow_stroke_radius_6.xml"
+    },
+    {
         "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/layout_update_dialog.xml.flat",
         "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/layout/update_dialog.xml"
+    },
+    {
+        "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/mipmap-xxxhdpi_ic_launcher_round.png.flat",
+        "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.png"
     },
     {
         "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/drawable_share_moment_ic.xml.flat",
@@ -660,6 +844,10 @@
         "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/layout/baseinfo_activity_2.xml"
     },
     {
+        "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/drawable-xxhdpi_icon_edit.png.flat",
+        "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/drawable-xxhdpi/icon_edit.png"
+    },
+    {
         "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/layout_icomelist_activity.xml.flat",
         "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/layout/icomelist_activity.xml"
     },
@@ -668,12 +856,20 @@
         "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/drawable/arrows_top_ic.xml"
     },
     {
+        "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/layout_career_activity.xml.flat",
+        "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/layout/career_activity.xml"
+    },
+    {
         "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/layout_copy_item.xml.flat",
         "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/layout/copy_item.xml"
     },
     {
         "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/drawable_home_message_off_ic.xml.flat",
         "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/drawable/home_message_off_ic.xml"
+    },
+    {
+        "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/drawable-xxhdpi_bg_interview_empty.png.flat",
+        "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/drawable-xxhdpi/bg_interview_empty.png"
     },
     {
         "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/layout_guide_activity.xml.flat",
@@ -686,6 +882,10 @@
     {
         "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/drawable_status_order_ic.xml.flat",
         "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/drawable/status_order_ic.xml"
+    },
+    {
+        "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/drawable_bg_golden_radius_3.xml.flat",
+        "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/drawable/bg_golden_radius_3.xml"
     },
     {
         "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/layout_home_activity.xml.flat",
@@ -748,12 +948,24 @@
         "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/layout/tab_item_sliding.xml"
     },
     {
+        "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/layout_pdf_view_activity.xml.flat",
+        "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/layout/pdf_view_activity.xml"
+    },
+    {
         "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/layout_baseinfo_activity_3.xml.flat",
         "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/layout/baseinfo_activity_3.xml"
     },
     {
         "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/layout_item_app_list.xml.flat",
         "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/layout/item_app_list.xml"
+    },
+    {
+        "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/drawable-xxhdpi_icon_back_white.png.flat",
+        "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/drawable-xxhdpi/icon_back_white.png"
+    },
+    {
+        "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/mipmap-xxxhdpi_ic_launcher.png.flat",
+        "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png"
     },
     {
         "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/drawable-xxhdpi_icon_blue_company_log.png.flat",
@@ -776,6 +988,10 @@
         "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/layout/write_daily_activity.xml"
     },
     {
+        "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/drawable-xxhdpi_icon_red_packet.png.flat",
+        "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/drawable-xxhdpi/icon_red_packet.png"
+    },
+    {
         "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/layout_check_developer_activity.xml.flat",
         "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/layout/check_developer_activity.xml"
     },
@@ -796,8 +1012,24 @@
         "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/drawable-xxhdpi/icon_blue_close.png"
     },
     {
+        "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/drawable_btn_gray_radius_20.xml.flat",
+        "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/drawable/btn_gray_radius_20.xml"
+    },
+    {
         "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/layout_copy_popup.xml.flat",
         "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/layout/copy_popup.xml"
+    },
+    {
+        "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/drawable-xxhdpi_icon_task_arrow.png.flat",
+        "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/drawable-xxhdpi/icon_task_arrow.png"
+    },
+    {
+        "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/drawable-xxhdpi_icon_progress.png.flat",
+        "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/drawable-xxhdpi/icon_progress.png"
+    },
+    {
+        "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/layout_item_my_viewpager.xml.flat",
+        "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/layout/item_my_viewpager.xml"
     },
     {
         "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/drawable-xxhdpi_app_logo.png.flat",
@@ -818,6 +1050,10 @@
     {
         "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/drawable_bg_blue_bottom_radius_6.xml.flat",
         "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/drawable/bg_blue_bottom_radius_6.xml"
+    },
+    {
+        "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/drawable_btn_red_radius_20.xml.flat",
+        "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/drawable/btn_red_radius_20.xml"
     },
     {
         "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/layout_login_activity1.xml.flat",
@@ -848,6 +1084,14 @@
         "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/layout/image_preview_item.xml"
     },
     {
+        "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/layout_enter_developer_activity.xml.flat",
+        "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/layout/enter_developer_activity.xml"
+    },
+    {
+        "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/drawable_dot_oval_red.xml.flat",
+        "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/drawable/dot_oval_red.xml"
+    },
+    {
         "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/drawable_bg_white_left_radius_4.xml.flat",
         "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/drawable/bg_white_left_radius_4.xml"
     },
@@ -860,6 +1104,14 @@
         "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/layout/item_write_daily.xml"
     },
     {
+        "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/drawable-xxhdpi_icon_warning.png.flat",
+        "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/drawable-xxhdpi/icon_warning.png"
+    },
+    {
+        "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/drawable-xxhdpi_icon_slide_up.png.flat",
+        "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/drawable-xxhdpi/icon_slide_up.png"
+    },
+    {
         "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/drawable-xxhdpi_icon_account.png.flat",
         "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/drawable-xxhdpi/icon_account.png"
     },
@@ -870,6 +1122,14 @@
     {
         "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/drawable_video_lock_close_ic.xml.flat",
         "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/drawable/video_lock_close_ic.xml"
+    },
+    {
+        "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/mipmap-xhdpi_ic_launcher_round.png.flat",
+        "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/mipmap-xhdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/drawable-xxhdpi_bg_img_1.png.flat",
+        "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/drawable-xxhdpi/bg_img_1.png"
     },
     {
         "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/drawable_avatar_placeholder_ic.xml.flat",
@@ -904,6 +1164,10 @@
         "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/drawable/guide_indicator_selected.xml"
     },
     {
+        "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/drawable-xxhdpi_bg_check_status.png.flat",
+        "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/drawable-xxhdpi/bg_check_status.png"
+    },
+    {
         "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/layout_check_developer_fail_activity.xml.flat",
         "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/layout/check_developer_fail_activity.xml"
     },
@@ -936,8 +1200,24 @@
         "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/layout/splash_activity.xml"
     },
     {
+        "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/drawable_bg_interview_gradient_radius_10.xml.flat",
+        "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/drawable/bg_interview_gradient_radius_10.xml"
+    },
+    {
         "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/layout_add_tag_dialog.xml.flat",
         "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/layout/add_tag_dialog.xml"
+    },
+    {
+        "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/drawable-xxhdpi_icon_interview.png.flat",
+        "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/drawable-xxhdpi/icon_interview.png"
+    },
+    {
+        "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/drawable-xxhdpi_gif_slide.gif.flat",
+        "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/drawable-xxhdpi/gif_slide.gif"
+    },
+    {
+        "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/layout_baseinfo_activity.xml.flat",
+        "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/layout/baseinfo_activity.xml"
     },
     {
         "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/drawable_home_search_bar_transparent_bg.xml.flat",
@@ -984,8 +1264,20 @@
         "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/drawable-xxhdpi/bg_person_setting.png"
     },
     {
+        "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/drawable-xxhdpi_icon_interview_list.png.flat",
+        "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/drawable-xxhdpi/icon_interview_list.png"
+    },
+    {
+        "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/drawable-xxhdpi_icon_recommend.png.flat",
+        "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/drawable-xxhdpi/icon_recommend.png"
+    },
+    {
         "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/layout_copy_activity.xml.flat",
         "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/layout/copy_activity.xml"
+    },
+    {
+        "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/drawable_btn_white_radius_20.xml.flat",
+        "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/drawable/btn_white_radius_20.xml"
     },
     {
         "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/drawable-xxhdpi_icon_copy.png.flat",
@@ -1004,16 +1296,20 @@
         "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/layout/income_item.xml"
     },
     {
-        "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/mipmap-xhdpi_app_logo.png.flat",
-        "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/mipmap-xhdpi/app_logo.png"
-    },
-    {
         "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/layout_crash_activity.xml.flat",
         "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/layout/crash_activity.xml"
     },
     {
+        "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/mipmap-xhdpi_app_logo.png.flat",
+        "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/mipmap-xhdpi/app_logo.png"
+    },
+    {
         "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/drawable_radiobutton_checked_ic.xml.flat",
         "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/drawable/radiobutton_checked_ic.xml"
+    },
+    {
+        "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/drawable-xxhdpi_icon_question.png.flat",
+        "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/drawable-xxhdpi/icon_question.png"
     },
     {
         "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/drawable-xxhdpi_bg_qr.png.flat",
@@ -1022,6 +1318,10 @@
     {
         "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/drawable-xxhdpi_icon_select.png.flat",
         "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/drawable-xxhdpi/icon_select.png"
+    },
+    {
+        "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/drawable_btn_yellow_radius_4.xml.flat",
+        "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/drawable/btn_yellow_radius_4.xml"
     },
     {
         "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/drawable_progress_gradient_bg.xml.flat",
@@ -1044,6 +1344,10 @@
         "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/layout/add_schedule_activity.xml"
     },
     {
+        "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/drawable-xxhdpi_icon_service.png.flat",
+        "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/drawable-xxhdpi/icon_service.png"
+    },
+    {
         "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/drawable_safe_ic.xml.flat",
         "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/drawable/safe_ic.xml"
     },
@@ -1064,12 +1368,12 @@
         "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/layout/item_history_list.xml"
     },
     {
-        "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/drawable_button_circle_selector.xml.flat",
-        "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/drawable/button_circle_selector.xml"
+        "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/layout_item_tab_work.xml.flat",
+        "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/layout/item_tab_work.xml"
     },
     {
-        "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/drawable_ic_launcher_background.xml.flat",
-        "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/drawable/ic_launcher_background.xml"
+        "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/drawable_button_circle_selector.xml.flat",
+        "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/drawable/button_circle_selector.xml"
     },
     {
         "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/layout_pay_password_dialog.xml.flat",
@@ -1084,6 +1388,10 @@
         "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/drawable/arrows_left_ic.xml"
     },
     {
+        "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/drawable-xxhdpi_bg_img_2.png.flat",
+        "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/drawable-xxhdpi/bg_img_2.png"
+    },
+    {
         "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/drawable_video_volume_low_ic.xml.flat",
         "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/drawable/video_volume_low_ic.xml"
     },
@@ -1096,12 +1404,16 @@
         "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/layout/interview_setting_activity.xml"
     },
     {
-        "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/drawable_video_progress_ball_bg.xml.flat",
-        "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/drawable/video_progress_ball_bg.xml"
-    },
-    {
         "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/drawable_video_volume_medium_ic.xml.flat",
         "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/drawable/video_volume_medium_ic.xml"
+    },
+    {
+        "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/drawable-xxhdpi_icon_task_3.png.flat",
+        "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/drawable-xxhdpi/icon_task_3.png"
+    },
+    {
+        "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/drawable_video_progress_ball_bg.xml.flat",
+        "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/drawable/video_progress_ball_bg.xml"
     },
     {
         "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/drawable_image_error_ic.xml.flat",
@@ -1120,8 +1432,16 @@
         "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/drawable/bg_red_radius_100.xml"
     },
     {
+        "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/layout_home_status_activity.xml.flat",
+        "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/layout/home_status_activity.xml"
+    },
+    {
         "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/drawable_countdown_color_selector.xml.flat",
         "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/drawable/countdown_color_selector.xml"
+    },
+    {
+        "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/drawable-xxhdpi_icon_wechat_qr.png.flat",
+        "source": "/Users/danwanli/motion/RedCase-Android/app/src/main/res/drawable-xxhdpi/icon_wechat_qr.png"
     },
     {
         "merged": "/Users/danwanli/motion/RedCase-Android/build/app/intermediates/res/merged/debug/drawable_home_me_on_ic.xml.flat",

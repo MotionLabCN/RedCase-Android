@@ -73,7 +73,7 @@ public final class PersonSettingActivity extends AppActivity {
             new BaseDialog.Builder<>(PersonSettingActivity.this)
                     .setContentView(R.layout.write_daily_delete_dialog)
                     .setAnimStyle(BaseDialog.ANIM_SCALE)
-                    .setText(R.id.tv_title ,"是否退出登录？")
+                    .setText(R.id.tv_title, "是否退出登录？")
                     .setOnClickListener(R.id.btn_dialog_custom_cancel, (BaseDialog.OnClickListener<Button>) (dialog, button) -> dialog.dismiss())
                     .setOnClickListener(R.id.btn_dialog_custom_ok, (dialog, views) -> {
                         loginOut(dialog);

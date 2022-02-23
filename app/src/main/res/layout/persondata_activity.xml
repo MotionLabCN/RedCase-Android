@@ -26,7 +26,7 @@
                 android:background="@drawable/bg_bottom_blue_radius_6"
                 android:orientation="vertical"
                 android:paddingTop="@dimen/dp_70"
-                android:paddingBottom="@dimen/dp_20">
+                android:paddingBottom="@dimen/dp_16">
 
 
                 <FrameLayout
@@ -44,6 +44,7 @@
                         android:gravity="center"
                         android:singleLine="true"
                         android:text="xxx"
+                        android:textStyle="bold"
                         android:textColor="@color/white"
                         android:textSize="@dimen/sp_12" />
 

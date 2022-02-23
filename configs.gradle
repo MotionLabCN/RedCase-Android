@@ -30,31 +30,40 @@ ext {
     println "GradleLog ServerTypeOutput " + serverType
 
     // 友盟 AppKey
-    UMENG_APP_KEY = "5cb16d93570df399fd0014e2"
+    UMENG_APP_KEY = "61e8b19ee014255fcbf77477"
     // QQ AppId
     QQ_APP_ID = "101828096"
     // QQ Secret
     QQ_APP_SECRET = "9dfd3300c3aa3c4596a07796c64914b2"
     // 微信 AppId
-    WX_APP_ID = "wxd35706cc9f46114c"
+    WX_APP_ID = "wx1e91399d09c1cd9a"
     // 微信 Secret
-    WX_APP_SECRET = "0c8c7cf831dd135a32b3e395ea459b5a"
+    WX_APP_SECRET = "9932a78c15dcdaa61f72fe58ad3e6b8c"
 
     switch(serverType) {
         case SERVER_TYPE_TEST:
         case SERVER_TYPE_PREVIEW:
             LOG_ENABLE = true
             BUGLY_ID = "请自行替换 Bugly 上面的 AppID"
-            if (serverType == SERVER_TYPE_PREVIEW) {
-                HOST_URL = "http://183.66.65.207:9999/manpower/rest-api/"
-            } else {
-                HOST_URL = "http://183.66.65.207:9999/manpower/rest-api/"
-            }
+//            if (serverType == SERVER_TYPE_PREVIEW) {
+//                HOST_URL = "https://talent.stage-ttchain.tntlinking.com/api/new_manpower/"
+//            } else {
+//                HOST_URL = "https://talent.stage-ttchain.tntlinking.com/api/new_manpower/"
+//            }
+            HOST_URL = "https://talent.stage-ttchain.tntlinking.com"
+            SERVICE_URL = "https://stage-ttchain.tntlinking.com"
+//            AGREEMENT_URL = "https://talent.stage-ttchain.tntlinking.com/#/page/agreement"
+//            PRIVATE_URL ="https://talent.stage-ttchain.tntlinking.com/#/page/privacy"
             break
         case SERVER_TYPE_PRODUCT:
             LOG_ENABLE = false
             BUGLY_ID = "请自行替换 Bugly 上面的 AppID"
-            HOST_URL = "https://www.baidu.com/"
+            HOST_URL = "https://talent.tntlinking.com"
+            SERVICE_URL = "https://www.tntlinking.com"
+//            AGREEMENT_URL = "https://talent.tntlinking.com/#/page/agreement"
+//            PRIVATE_URL ="https://talent.tntlinking.com/#/page/privacy"
+
             break
     }
+
 }

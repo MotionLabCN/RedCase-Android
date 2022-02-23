@@ -16,6 +16,7 @@ import com.tntlinking.tntdev.other.AppConfig;
 import com.hjq.http.EasyHttp;
 import com.hjq.http.listener.HttpCallback;
 import com.hjq.widget.layout.SettingBar;
+import com.tntlinking.tntdev.other.Utils;
 
 import androidx.annotation.NonNull;
 
@@ -88,9 +89,9 @@ public final class PersonDataActivity extends AppActivity {
         } else if (view == mPersonDataSetting) {
             startActivity(PersonSettingActivity.class);
         } else if (view == person_data_private) {
-            BrowserActivity.start(getActivity(), BuildConfig.PRIVATE_URL);
+            BrowserActivity.start(getActivity(), AppConfig.PRIVATE_URL);
         } else if (view == person_data_deal) {
-            BrowserActivity.start(getActivity(), BuildConfig.AGREEMENT_URL);
+            BrowserActivity.start(getActivity(), AppConfig.AGREEMENT_URL);
         } else if (view == person_data_dev) {
             startActivity(EnterDeveloperActivity.class);
         } else if (view == person_data_about) {
@@ -118,7 +119,11 @@ public final class PersonDataActivity extends AppActivity {
 
                     @Override
                     public void onSucceed(HttpData<GetDeveloperStatusApi.Bean> data) {
-                        tv_avatar.setText(data.getData().getRealName());
+                        if (TextUtils.isEmpty(data.getData().getRealName())){
+                            tv_avatar.setText("朋友");
+                        }else {
+                            tv_avatar.setText(Utils.formatName(data.getData().getRealName()));
+                        }
                         tv_name.setText(data.getData().getRealName());
                         tv_position.setText(data.getData().getCareerDirection());
                         tv_sign_num.setText(data.getData().getSignContractNum() + "次");

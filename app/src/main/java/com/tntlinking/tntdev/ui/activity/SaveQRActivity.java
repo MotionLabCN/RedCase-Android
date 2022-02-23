@@ -5,14 +5,17 @@ import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.gyf.immersionbar.BarHide;
 import com.gyf.immersionbar.ImmersionBar;
 import com.hjq.bar.TitleBar;
 import com.tntlinking.tntdev.R;
 import com.tntlinking.tntdev.aop.SingleClick;
 import com.tntlinking.tntdev.app.AppActivity;
+import com.tntlinking.tntdev.http.glide.GlideApp;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatButton;
@@ -26,6 +29,8 @@ public final class SaveQRActivity extends AppActivity {
     private TextView tv_tips_1;
     private TextView tv_tips_2;
     private LinearLayout ll_slide;
+    private LinearLayout ll_slide_bottom;
+    private ImageView iv_interview;
     private GestureDetector detector = null;// 声明一个手势监听器
 
     @Override
@@ -40,14 +45,25 @@ public final class SaveQRActivity extends AppActivity {
         tv_tips_1 = findViewById(R.id.tv_tips_1);
         tv_tips_2 = findViewById(R.id.tv_tips_2);
         ll_slide = findViewById(R.id.ll_slide);
+        ll_slide_bottom = findViewById(R.id.ll_slide_bottom);
+        iv_interview = findViewById(R.id.iv_interview);
+
+
+        GlideApp.with(this)
+                .load(R.drawable.gif_slide)
+                .into(iv_interview);
 
         ll_slide.setClickable(true);
-        ll_slide.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                return detector.onTouchEvent(event);
-            }
-        });
+
+        String contact = getString("contact");
+        if (TextUtils.isEmpty(contact)) {
+            ll_slide.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
+                    return detector.onTouchEvent(event);
+                }
+            });
+        }
 
         detector = new GestureDetector(this, new GestureDetector.OnGestureListener() {
 
@@ -120,10 +136,12 @@ public final class SaveQRActivity extends AppActivity {
     protected void initData() {
         String contact = getString("contact");
         if (TextUtils.isEmpty(contact)) {
-
+            ll_slide_bottom.setVisibility(View.VISIBLE);
+            ll_commit_tips.setVisibility(View.VISIBLE);
         } else {
             title_bar.setTitle("联系顾问");
-            ll_commit_tips.setVisibility(View.GONE);
+            ll_commit_tips.setVisibility(View.INVISIBLE);
+            ll_slide_bottom.setVisibility(View.GONE);
             tv_tips_2.setVisibility(View.GONE);
             tv_tips_1.setText("添加顾问");
         }
@@ -146,6 +164,5 @@ public final class SaveQRActivity extends AppActivity {
                 // 指定导航栏背景颜色
                 .navigationBarColor(R.color.white);
     }
-
 
 }

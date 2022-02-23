@@ -155,6 +155,7 @@
                 android:layout_marginRight="@dimen/dp_16"
                 android:background="@drawable/bg_yellow_stroke_radius_6"
                 android:orientation="vertical"
+                android:layout_marginBottom="@dimen/dp_76"
                 android:paddingBottom="@dimen/dp_14">
 
                 <ImageView
@@ -167,6 +168,7 @@
                     android:id="@+id/ll_list_empty"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_marginTop="@dimen/dp_10"
                     android:gravity="center"
                     android:orientation="vertical"
                     android:visibility="gone">
@@ -192,38 +194,10 @@
                     android:id="@+id/list_item"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_10"
+                    android:layout_marginTop="@dimen/dp_8"
                     android:divider="@null"
                     tools:itemCount="2"
                     tools:listitem="@layout/item_invitation" />
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/btn_next"
-                    style="@style/ButtonStyleBlack"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/dp_16"
-                    android:layout_marginVertical="@dimen/dp_20"
-                    android:layout_weight="1"
-                    android:text="生成邀请海报" />
-
-                <androidx.appcompat.widget.AppCompatButton
-
-                    android:id="@+id/btn_contact"
-                    style="@style/ButtonStyle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/dp_16"
-                    android:layout_marginVertical="@dimen/dp_20"
-                    android:layout_weight="1"
-                    android:text="加顾问领奖金" />
             </LinearLayout>
 
 
@@ -231,10 +205,39 @@
     </ScrollView>
 
     <com.hjq.bar.TitleBar
+        android:id="@+id/title_bar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_50"
         android:background="@color/transparent"
         app:leftIcon="@drawable/icon_back_white"
         app:lineVisible="false"
+        app:rightTitle="活动规则"
+        app:rightTitleColor="@color/white"
         app:title="" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:orientation="horizontal"
+        android:background="@color/white"
+        android:padding="@dimen/dp_16">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_next"
+            style="@style/ButtonStyleBlack"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="生成邀请海报" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_contact"
+            style="@style/ButtonStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_16"
+            android:layout_weight="1"
+            android:text="加顾问领奖金" />
+    </LinearLayout>
 </FrameLayout>

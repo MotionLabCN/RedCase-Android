@@ -20,8 +20,10 @@ public final class InvitationAdapter extends BaseAdapter {
 
     private List<InvitationListApi.Bean> mList;
     private LayoutInflater layoutInflater;
+    private Context mContext;
 
     public InvitationAdapter(Context context, List<InvitationListApi.Bean> list) {
+        this.mContext = context;
         this.mList = list;
         layoutInflater = LayoutInflater.from(context);
     }
@@ -74,6 +76,12 @@ public final class InvitationAdapter extends BaseAdapter {
         } else if (bean.getDeveloperStatus() == 3) {
             holder.tv_phone.setText(bean.getDeveloperName() + "(已入驻)");
             holder.iv_red_packet.setVisibility(View.VISIBLE);
+            if (bean.getRewardStatus() == 1) {// 0 不满足 1 待发放 1已发放
+                holder.iv_red_packet.setImageResource(R.drawable.icon_red_packet);
+            } else if (bean.getRewardStatus() == 2) {
+                holder.iv_red_packet.setImageResource(R.drawable.icon_red_packet_open);
+            }
+
         } else if (bean.getDeveloperStatus() == 4) {
             holder.tv_phone.setText(bean.getDeveloperName() + "(未通过)");
         }

@@ -15,6 +15,7 @@ public final class InvitationListApi implements IRequestApi {
         private String developerName;
         private int developerStatus;
         private String createDate;
+        private int rewardStatus;// 0 不满足 1 待发放 1已发放
 
         public String getDeveloperName() {
             return developerName;
@@ -38,6 +39,14 @@ public final class InvitationListApi implements IRequestApi {
 
         public void setCreateDate(String createDate) {
             this.createDate = createDate;
+        }
+
+        public int getRewardStatus() {
+            return rewardStatus;
+        }
+
+        public void setRewardStatus(int rewardStatus) {
+            this.rewardStatus = rewardStatus;
         }
     }
 }

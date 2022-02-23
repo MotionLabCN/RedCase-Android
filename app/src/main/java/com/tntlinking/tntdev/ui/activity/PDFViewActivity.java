@@ -9,15 +9,20 @@ import com.github.barteksc.pdfviewer.listener.OnLoadCompleteListener;
 import com.github.barteksc.pdfviewer.listener.OnPageChangeListener;
 import com.tntlinking.tntdev.R;
 import com.tntlinking.tntdev.app.AppActivity;
+import com.tntlinking.tntdev.other.AppConfig;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 
+/**
+ * 合作模式
+ */
 public final class PDFViewActivity extends AppActivity {
     private PDFView pdfView;
-    private String PDFUrl = "https://stage-ttchain.tntlinking.com/api/minio/pdf/manpower-pages/recruit_guide.pdf";
+    //    private String PDFUrl = "https://stage-ttchain.tntlinking.com/api/minio/pdf/manpower-pages/recruit_guide.pdf";
+    private String PDFUrl = AppConfig.RECRUIT_GUIDE_URL;
 
 
     @Override
@@ -62,8 +67,7 @@ public final class PDFViewActivity extends AppActivity {
                     public void loadComplete(int nbPages) {
                         hideDialog();
                     }
-                })
-                        .load();
+                }).load();
 
             }
         }.execute();
