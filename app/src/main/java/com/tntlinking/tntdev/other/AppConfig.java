@@ -86,16 +86,16 @@ public final class AppConfig {
      */
 
     /**
-     * 服务手册
+     * 服务手册  /api/minio/manpower-pages/service_guide.md
      */
     public static String SERVICE_GUIDE_URL = BuildConfig.SERVICE_URL + "/api/minio/manpower-pages/service_guide.md";
 
     /**
-     * 常见问题
+     * 常见问题  /api/minio/manpower-pages/faq_guide.md
      */
-    public static String FAQ_GUIDE_URL = BuildConfig.SERVICE_URL + "/api/minio/manpower-pages/service_guide.md";
+    public static String FAQ_GUIDE_URL = BuildConfig.SERVICE_URL + "/api/minio/manpower-pages/faq_guide.md";
     /**
-     * 合作模式
+     * 合作模式   https://stage-ttchain.tntlinking.com/api/minio/manpower-pages/recruit_guide.pdf
      */
     public static String RECRUIT_GUIDE_URL = BuildConfig.SERVICE_URL + "/api/minio/pdf/manpower-pages/recruit_guide.pdf";
     /**

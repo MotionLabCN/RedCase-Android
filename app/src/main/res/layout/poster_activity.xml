@@ -87,5 +87,5 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/dp_16"
         android:layout_marginVertical="@dimen/dp_10"
-        android:text="分享海报至朋友圈" />
+        android:text="分享" />
 </LinearLayout>

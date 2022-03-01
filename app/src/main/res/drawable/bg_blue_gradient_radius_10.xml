@@ -7,7 +7,12 @@
         android:bottomRightRadius="@dimen/sp_10" />
     <gradient
         android:angle="90"
-        android:endColor="#0C15286F"
-        android:startColor="#14245B" />
+        android:type="linear"
+        android:startX="77.5"
+        android:startY="37"
+        android:endX="232.5"
+        android:endY="37"
+        android:endColor="#0014245B"
+        android:startColor="#B315286F" />
 
 </shape>

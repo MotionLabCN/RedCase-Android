@@ -27,8 +27,9 @@ android {
         // 测试服务器的主机地址
         buildConfigField('String', 'HOST_URL', '"' + HOST_URL + '"')
 
-        buildConfigField('String', 'AGREEMENT_URL', '"' + AGREEMENT_URL + '"')
-        buildConfigField('String', 'PRIVATE_URL', '"' + PRIVATE_URL + '"')
+        buildConfigField('String', 'SERVICE_URL', '"' + SERVICE_URL + '"')
+//        buildConfigField('String', 'AGREEMENT_URL', '"' + AGREEMENT_URL + '"')
+//        buildConfigField('String', 'PRIVATE_URL', '"' + PRIVATE_URL + '"')
     }
 
     // Apk 签名的那些事：https://www.jianshu.com/p/a1f8e5896aa2

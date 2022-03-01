@@ -23,6 +23,7 @@ import com.tntlinking.tntdev.R;
 import com.tntlinking.tntdev.app.AppActivity;
 import com.tntlinking.tntdev.http.api.AppListApi;
 import com.tntlinking.tntdev.http.api.AppListInterviewApi;
+import com.tntlinking.tntdev.http.api.GetAppUpdateApi;
 import com.tntlinking.tntdev.http.api.GetCodeApi;
 import com.tntlinking.tntdev.http.api.GetDeveloperStatusApi;
 import com.tntlinking.tntdev.http.api.GetNewbieApi;
@@ -35,6 +36,7 @@ import com.tntlinking.tntdev.ui.adapter.HistoryProjectAdapter;
 import com.tntlinking.tntdev.ui.adapter.HomeTaskAdapter;
 import com.tntlinking.tntdev.ui.adapter.ServiceProjectAdapter;
 import com.tntlinking.tntdev.ui.bean.BannerBean;
+import com.tntlinking.tntdev.ui.dialog.AppUpdateDialog;
 import com.tntlinking.tntdev.widget.MyListView;
 
 import java.util.ArrayList;
@@ -70,6 +72,7 @@ public final class HomeStatusActivity extends AppActivity {
     private LinearLayout ll_empty;
     private LinearLayout ll_status;// 平台介绍页面
     private LinearLayout ll_work;// 工作服务列表页面
+    private LinearLayout ll_task_empty;//
     private MyListView lv_task;
     private MyListView lv_1;
     private MyListView lv_2;
@@ -115,6 +118,7 @@ public final class HomeStatusActivity extends AppActivity {
         ll_empty = findViewById(R.id.ll_empty);
         ll_status = findViewById(R.id.ll_status);
         ll_work = findViewById(R.id.ll_work);
+        ll_task_empty = findViewById(R.id.ll_task_empty);
 
         tv_avatar.setText(Utils.formatName(name));
         tv_name.setText("你好," + name);
@@ -199,10 +203,9 @@ public final class HomeStatusActivity extends AppActivity {
     protected void initData() {
 //        getStatus();
         getNewbie();
-        int status = getInt(AppConfig.DEVELOP_STATUS, 0);
-        long createTime = getLong(AppConfig.CREATE_TIME, 0);
+        String status = SPUtils.getInstance().getString(AppConfig.DEVELOP_STATUS, "1");
 
-        if (status == 3) {
+        if (status.equals("3")) {
             tv_status.setVisibility(View.VISIBLE);
             tv_status.setText("已认证");
 //            tv_name.setText("你好," + name);
@@ -210,7 +213,6 @@ public final class HomeStatusActivity extends AppActivity {
 //            tv_do_task.setText("领红包");
 //            view_dot.setVisibility(View.GONE);
 //            tv_remain_day.setVisibility(View.GONE);
-
             getAppList();
         } else {
             ll_status.setVisibility(View.VISIBLE); //1、2、4 状态下显示平台介绍和新手任务
@@ -221,7 +223,7 @@ public final class HomeStatusActivity extends AppActivity {
 
         }
 
-
+        getAppUpdate();
     }
 
 
@@ -381,50 +383,24 @@ public final class HomeStatusActivity extends AppActivity {
                 });
     }
 
+    /**
+     * 获取任务状态
+     */
     public void getNewbie() {
         EasyHttp.get(this)
                 .api(new GetNewbieApi())
                 .request(new HttpCallback<HttpData<List<GetNewbieApi.Bean>>>(this) {
                     @Override
                     public void onSucceed(HttpData<List<GetNewbieApi.Bean>> data) {
-                        if (data.getData() != null || data.getData().size() != 0) {
+                        if (data.getData() != null && data.getData().size() != 0) {
+                            ll_task_empty.setVisibility(View.GONE);
                             mTaskList.clear();
                             mTaskList.addAll(data.getData());
                             mTaskAdapter.setData(mTaskList);
+                        } else {
+                            ll_task_empty.setVisibility(View.VISIBLE);
                         }
 
-//                        tv_task_name.setText(data.getData().getTaskName());
-//                        tv_task_description.setText(data.getData().getTaskDescription());
-//                        tv_rewardNum.setText(Utils.StripZeros(data.getData().getRewardNum()) + "元");
-//
-//                        if (taskStatus == 0 || taskStatus == 1) { //做任务
-//                            tv_do_task.setText("做任务");
-//                            view_dot.setVisibility(View.VISIBLE);
-//                            tv_remain_day.setVisibility(View.VISIBLE);
-//                            tv_remain_day.setText("距失效剩余" + remainingDays + "天");
-//                        } else if (taskStatus == 2) {
-//                            if (rewardStatus == 0 || taskStatus == 1) {// 已完成
-//                                tv_do_task.setText("领红包");
-//
-//                            } else { //已领取
-//                                tv_do_task.setText("已领取");
-//                                tv_do_task.setTextColor(getResources().getColor(R.color.color_hint_color));
-//                                tv_do_task.setBackground(getResources().getDrawable(R.drawable.btn_gray_radius_20));
-//                                tv_do_task.setClickable(false);
-//
-//                            }
-//                            view_dot.setVisibility(View.GONE);
-//                            tv_remain_day.setVisibility(View.GONE);
-//                        } else {// 已失效
-//
-//                            tv_do_task.setText("已失效");
-//                            tv_do_task.setTextColor(getResources().getColor(R.color.color_hint_color));
-//                            tv_do_task.setBackground(getResources().getDrawable(R.drawable.btn_gray_radius_20));
-//                            tv_do_task.setClickable(false);
-//
-//                            view_dot.setVisibility(View.GONE);
-//                            tv_remain_day.setVisibility(View.GONE);
-//                        }
                     }
                 });
     }
@@ -455,6 +431,48 @@ public final class HomeStatusActivity extends AppActivity {
                 });
     }
 
+    /**
+     * 检查更新
+     */
+    public void getAppUpdate() {
+        EasyHttp.get(this)
+                .api(new GetAppUpdateApi()
+                        .setOsType(2)//1 ios   2 android
+                        .setCurrVersion(AppConfig.getVersionName()))
+                .request(new HttpCallback<HttpData<GetAppUpdateApi.Bean>>(this) {
+
+                    @Override
+                    public void onSucceed(HttpData<GetAppUpdateApi.Bean> data) {
+                        if (data.getData() != null) {
+                            GetAppUpdateApi.Bean bean = data.getData();
+                            if (AppConfig.getVersionName().equals(bean.getVersion())) {
+
+                            } else {
+
+                                String description = bean.getDescription();
+                                if (description.contains("\\n")) {
+                                    description = description.replace("\\n", "\n");
+                                }
+                                boolean isForce = bean.getForceUpdate() == 1;
+                                // 升级对话框
+                                new AppUpdateDialog.Builder(HomeStatusActivity.this)
+                                        // 版本名
+                                        .setVersionName("最新版本：" + bean.getVersion())
+                                        // 是否强制更新
+                                        .setForceUpdate(isForce)
+                                        // 更新日志
+                                        .setUpdateLog(description)
+                                        // 下载 URL
+                                        .setDownloadUrl(bean.getDownloadUrl())
+                                        // 文件 MD5
+//                                            .setFileMd5("df2f045dfa854d8461d9cefe08b813a8")
+                                        .show();
+                            }
+                        }
+                    }
+                });
+
+    }
 
     public class MyViewPagerAdapter extends PagerAdapter {
         private Context mContext;
