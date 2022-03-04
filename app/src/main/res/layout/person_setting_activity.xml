@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <com.hjq.bar.TitleBar
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_50"
+        app:rightBackground="@null"
+        app:rightTitle=""
+        app:leftIcon="@drawable/icon_back_black"
+        app:lineVisible="false"
+        app:rightTitleColor="@color/common_accent_color"
+        app:rightTitleSize="@dimen/sp_14"
+        app:title="账户设置" />
+
+
+    <com.hjq.widget.layout.SettingBar
+        android:id="@+id/setting_phone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_20"
+        app:bar_leftText="手机号"
+        app:bar_lineVisible="false"
+        app:bar_rightDrawableSize="@dimen/dp_16"
+        app:bar_rightDrawable="@drawable/icon_arrow_right"
+        app:bar_rightText="xxxxx" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_out_login"
+        style="@style/ButtonStyleNo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/dp_16"
+        android:layout_marginVertical="@dimen/dp_30"
+        android:textColor="@color/color_hint_color"
+        android:text="退出登录" />
+</LinearLayout>

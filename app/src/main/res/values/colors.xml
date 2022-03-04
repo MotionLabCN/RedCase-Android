@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- App 样式中引用的颜色 -->
+    <color name="common_primary_color">@color/white</color>
+    <color name="common_primary_dark_color">@color/black</color>
+    <color name="common_accent_color">@color/main_color</color>
+    <color name="common_window_background_color">#F4F4F4</color>
+    <color name="common_text_color">#333333</color>
+    <color name="common_text_hint_color">@color/panda</color>
+
+    <!-- 按钮按压时的颜色 -->
+    <color name="common_button_pressed_color">#AA5A8DDF</color>
+    <!-- 按钮禁用时的颜色 -->
+    <color name="common_button_disable_color">#BBBBBB</color>
+    <!-- 分割线的颜色 -->
+    <color name="common_line_color">#ECECEC</color>
+    <!-- 矢量图标的颜色 -->
+    <color name="common_icon_color">#7C7C7C</color>
+
+    <!-- 对话框确认按钮的文本颜色 -->
+    <color name="common_confirm_text_color">#007AFF</color>
+    <!-- 对话框取消按钮的文本颜色 -->
+    <color name="common_cancel_text_color">#F44336</color>
+
+    <color name="main_color">#4850FF</color>
+    <color name="color_f4f4ff">#F4F4FF</color>
+    <color name="color_fffbef">#FFFBEF</color>
+    <color name="color_f0f2f6">#F0F2F6</color>
+
+    <color name="color_fb839">#FB8B39</color>
+    <color name="color_b5bed3">#B5BED3</color>
+    <color name="color_EDEFF1">#EDEFF1</color>
+    <color name="color_C1C6D2">#C1C6D2</color>
+    <color name="color_4850FF">#4850FF</color>
+    <color name="color_F6F6FC">#F6F6FC</color>
+    <color name="color_5CE28A">#5CE28A</color>
+    <color name="color_text_color">#202839</color>
+    <color name="color_hint_color">#7E89A3</color>
+    <color name="color_d9d9d9">#D9D9D9</color>
+    <color name="color_FFF9F0">#FFF9F0</color>
+    <color name="color_F5313D">#F5313D</color>
+    <color name="color_444E64">#444E64</color>
+    <color name="color_F5CA74">#F5CA74</color>
+    <color name="color_FFFAEF">#FFFAEF</color>
+    <color name="color_FFC560">#FFC560</color>
+    <color name="color_9A3528">#9A3528</color>
+    <color name="color_FB8B39">#FB8B39</color>
+    <color name="color_DFE2FF">#7FDFE2FF</color>
+    <color name="color_F3F5FB">#F3F5FB</color>
+
+
+</resources>
