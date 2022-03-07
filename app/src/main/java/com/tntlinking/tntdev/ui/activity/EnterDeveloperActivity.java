@@ -2,9 +2,12 @@ package com.tntlinking.tntdev.ui.activity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.net.Uri;
+import android.os.Build;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -15,43 +18,42 @@ import android.widget.TextView;
 import com.blankj.utilcode.constant.TimeConstants;
 import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.TimeUtils;
+import com.bumptech.glide.load.MultiTransformation;
+import com.bumptech.glide.load.resource.bitmap.CenterCrop;
+import com.bumptech.glide.load.resource.bitmap.CircleCrop;
 import com.hjq.base.BaseAdapter;
 import com.hjq.http.EasyHttp;
 import com.hjq.http.EasyLog;
 import com.hjq.http.listener.HttpCallback;
-import com.hjq.widget.layout.WrapRecyclerView;
+import com.hjq.http.model.FileContentResolver;
 import com.tntlinking.tntdev.R;
 import com.tntlinking.tntdev.aop.SingleClick;
 import com.tntlinking.tntdev.app.AppActivity;
-import com.tntlinking.tntdev.http.api.AddWorkApi;
 import com.tntlinking.tntdev.http.api.GetDeveloperDetailApi;
-import com.tntlinking.tntdev.http.api.GetDictionaryApi;
 import com.tntlinking.tntdev.http.api.GetProvinceApi;
-import com.tntlinking.tntdev.http.api.SendDeveloperApi;
 import com.tntlinking.tntdev.http.api.SubmitDeveloperApi;
+import com.tntlinking.tntdev.http.api.UpdateAvatarApi;
+import com.tntlinking.tntdev.http.api.UpdateImageApi;
+import com.tntlinking.tntdev.http.glide.GlideApp;
 import com.tntlinking.tntdev.http.model.HttpData;
-import com.tntlinking.tntdev.manager.ActivityManager;
 import com.tntlinking.tntdev.other.AppConfig;
 import com.tntlinking.tntdev.other.TimeUtil;
 import com.tntlinking.tntdev.other.Utils;
-import com.tntlinking.tntdev.ui.adapter.AddDevelopAdapter;
 import com.tntlinking.tntdev.ui.adapter.AddEducationAdapter;
-import com.tntlinking.tntdev.ui.adapter.AddExperienceAdapter;
 import com.tntlinking.tntdev.ui.adapter.AddProjectAdapter;
 import com.tntlinking.tntdev.ui.adapter.AddWorkAdapter;
 import com.tntlinking.tntdev.ui.bean.DeveloperInfoBean;
 import com.tntlinking.tntdev.ui.bean.ExperienceBean;
-import com.tntlinking.tntdev.ui.bean.SendDeveloperBean;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.io.File;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatButton;
-import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * 用户信息填写页面3
@@ -69,6 +71,10 @@ public final class EnterDeveloperActivity extends AppActivity {
     private TextView tv_career_info_work_mode;
     private LinearLayout ll_add_education, ll_add_work, ll_add_project;
     private LinearLayout ll_progress;
+    private LinearLayout ll_add_photo;
+    private FrameLayout fl_add_photo;
+    private TextView tv_photo_skills;
+    private ImageView iv_photo_avatar;
     private TextView tv_welcome;
     private TextView tv_progress;
     private ImageView iv_progress;
@@ -109,6 +115,10 @@ public final class EnterDeveloperActivity extends AppActivity {
         ll_add_work = findViewById(R.id.ll_add_work);
         ll_add_project = findViewById(R.id.ll_add_project);
         ll_progress = findViewById(R.id.ll_progress);
+        ll_add_photo = findViewById(R.id.ll_add_photo);
+        fl_add_photo = findViewById(R.id.fl_add_photo);
+        iv_photo_avatar = findViewById(R.id.iv_photo_avatar);
+        tv_photo_skills = findViewById(R.id.tv_photo_skills);
         tv_welcome = findViewById(R.id.tv_welcome);
         tv_progress = findViewById(R.id.tv_progress);
         iv_progress = findViewById(R.id.iv_progress);
@@ -116,7 +126,7 @@ public final class EnterDeveloperActivity extends AppActivity {
 
         mCommit = findViewById(R.id.btn_commit);
         setOnClickListener(mCommit, ll_add_base_info, ll_base_info, ll_add_career_info, ll_career_info,
-                ll_add_education, ll_add_work, ll_add_project);
+                ll_add_education, ll_add_work, ll_add_project, ll_add_photo, fl_add_photo, tv_photo_skills);
 
         lv1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -158,14 +168,14 @@ public final class EnterDeveloperActivity extends AppActivity {
     protected void initData() {
         int developId = SPUtils.getInstance().getInt(AppConfig.DEVELOPER_ID);
         getDeveloperDetail(developId);
-        EasyLog.print("=====initData=======");
+
     }
 
     @Override
     protected void onResume() {
         int developId = SPUtils.getInstance().getInt(AppConfig.DEVELOPER_ID);
         getDeveloperDetail(developId);
-        EasyLog.print("=====initData====111===");
+
         super.onResume();
 
     }
@@ -175,6 +185,18 @@ public final class EnterDeveloperActivity extends AppActivity {
     public void onClick(View view) {
         Intent intent = new Intent();
         switch (view.getId()) {
+            case R.id.ll_add_photo:
+//                ImageSelectActivity.start(this, data -> {
+//                    // 裁剪头像
+//                    cropImageFile(new File(data.get(0)));
+//                });
+                break;
+            case R.id.fl_add_photo:
+
+                break;
+            case R.id.tv_photo_skills:
+                startActivity(PhotoSkillsActivity.class);
+                break;
             case R.id.ll_add_base_info:
             case R.id.ll_base_info:
                 intent.setClass(EnterDeveloperActivity.this, AddBaseInfoActivity.class);
@@ -458,6 +480,63 @@ public final class EnterDeveloperActivity extends AppActivity {
 //                        startActivity(SaveQRActivity.class);
 //                        finish();
                         onResume();
+                    }
+                });
+    }
+
+    /**
+     * 裁剪图片
+     */
+    private void cropImageFile(File sourceFile) {
+        ImageCropActivity.start(this, sourceFile, 1, 1, new ImageCropActivity.OnCropListener() {
+
+            @Override
+            public void onSucceed(Uri fileUri, String fileName) {
+                File outputFile;
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                    outputFile = new FileContentResolver(getActivity(), fileUri, fileName);
+                } else {
+                    try {
+                        outputFile = new File(new URI(fileUri.toString()));
+                    } catch (URISyntaxException e) {
+                        e.printStackTrace();
+                        outputFile = new File(fileUri.toString());
+                    }
+                }
+                updateCropImage(outputFile, true);
+            }
+
+            @Override
+            public void onError(String details) {
+                // 没有的话就不裁剪，直接上传原图片
+                // 但是这种情况极其少见，可以忽略不计
+                updateCropImage(sourceFile, false);
+            }
+        });
+    }
+    /** 头像地址 */
+    private Uri mAvatarUrl;
+    /**
+     * 上传裁剪后的图片
+     */
+    private void updateCropImage(File file, boolean deleteFile) {
+        ll_add_photo.setVisibility(View.GONE);
+        fl_add_photo.setVisibility(View.VISIBLE);
+        EasyHttp.post(this)
+                .api(new UpdateAvatarApi()
+                        .setFiles(file))
+                .request(new HttpCallback<HttpData<String>>(this) {
+
+                    @Override
+                    public void onSucceed(HttpData<String> data) {
+                        mAvatarUrl = Uri.parse(data.getData());
+                        GlideApp.with(getActivity())
+                                .load(mAvatarUrl)
+                                .transform(new MultiTransformation<>(new CenterCrop(), new CircleCrop()))
+                                .into(iv_photo_avatar);
+                        if (deleteFile) {
+                            file.delete();
+                        }
                     }
                 });
     }

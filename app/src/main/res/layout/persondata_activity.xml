@@ -23,75 +23,100 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/bg_bottom_blue_radius_6"
+                android:background="@drawable/bg_top_person_setting"
                 android:orientation="vertical"
-                android:paddingTop="@dimen/dp_70"
+                android:paddingTop="@dimen/dp_80"
                 android:paddingBottom="@dimen/dp_16">
 
 
-                <FrameLayout
-                    android:layout_width="@dimen/dp_60"
-                    android:layout_height="@dimen/dp_60"
-                    android:layout_gravity="center">
+                <!--                <FrameLayout-->
+                <!--                    android:layout_width="@dimen/dp_60"-->
+                <!--                    android:layout_height="@dimen/dp_60"-->
+                <!--                    android:layout_gravity="center">-->
+
+                <!--                    <TextView-->
+                <!--                        android:id="@+id/tv_avatar"-->
+                <!--                        android:layout_width="@dimen/dp_48"-->
+                <!--                        android:layout_height="@dimen/dp_48"-->
+                <!--                        android:layout_gravity="center"-->
+                <!--                        android:background="@drawable/avatar_oval_black"-->
+                <!--                        android:ellipsize="end"-->
+                <!--                        android:gravity="center"-->
+                <!--                        android:singleLine="true"-->
+                <!--                        android:text="xxx"-->
+                <!--                        android:textColor="@color/white"-->
+                <!--                        android:textSize="@dimen/sp_12"-->
+                <!--                        android:textStyle="bold" />-->
+
+                <!--                    <TextView-->
+                <!--                        android:id="@+id/tv_status"-->
+                <!--                        android:layout_width="wrap_content"-->
+                <!--                        android:layout_height="wrap_content"-->
+                <!--                        android:layout_gravity="bottom|center"-->
+                <!--                        android:background="@drawable/bg_golden_radius_3"-->
+                <!--                        android:paddingLeft="@dimen/dp_4"-->
+                <!--                        android:paddingTop="@dimen/dp_2"-->
+                <!--                        android:paddingRight="@dimen/dp_4"-->
+                <!--                        android:paddingBottom="@dimen/dp_2"-->
+                <!--                        android:text="已认证"-->
+                <!--                        android:textColor="@color/black"-->
+                <!--                        android:textSize="@dimen/sp_10"-->
+                <!--                        android:visibility="gone" />-->
+
+                <!--                </FrameLayout>-->
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
 
                     <TextView
                         android:id="@+id/tv_avatar"
                         android:layout_width="@dimen/dp_48"
                         android:layout_height="@dimen/dp_48"
-                        android:layout_gravity="center"
+                        android:layout_marginLeft="@dimen/dp_16"
                         android:background="@drawable/avatar_oval_black"
                         android:ellipsize="end"
                         android:gravity="center"
                         android:singleLine="true"
                         android:text="xxx"
-                        android:textStyle="bold"
                         android:textColor="@color/white"
-                        android:textSize="@dimen/sp_12" />
+                        android:textSize="@dimen/sp_12"
+                        android:textStyle="bold" />
 
-                    <TextView
-                        android:id="@+id/tv_status"
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="bottom|center"
-                        android:background="@drawable/bg_golden_radius_3"
-                        android:paddingLeft="@dimen/dp_4"
-                        android:paddingTop="@dimen/dp_2"
-                        android:paddingRight="@dimen/dp_4"
-                        android:paddingBottom="@dimen/dp_2"
-                        android:text="已认证"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/sp_10"
-                        android:visibility="gone" />
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="@dimen/dp_12"
+                        android:orientation="vertical">
 
-                </FrameLayout>
+                        <TextView
+                            android:id="@+id/tv_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="xxxxx"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/sp_20"
+                            android:textStyle="bold" />
 
+                        <TextView
+                            android:id="@+id/tv_position"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="xxxxx"
+                            android:textColor="@color/color_hint_color"
+                            android:textSize="@dimen/sp_12" />
+                    </LinearLayout>
 
-                <TextView
-                    android:id="@+id/tv_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="@dimen/dp_10"
-                    android:text="xxxxx"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/sp_20"
-                    android:textStyle="bold" />
+                </LinearLayout>
 
-                <TextView
-                    android:id="@+id/tv_position"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="@dimen/dp_4"
-                    android:text="xxxxx"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/sp_12" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/dp_16"
-                    android:layout_marginTop="@dimen/dp_10"
+                    android:layout_marginTop="@dimen/dp_24"
                     android:layout_marginRight="@dimen/dp_16"
                     android:background="@drawable/bg_blue_bottom_radius_6"
                     android:gravity="center"
@@ -156,18 +181,65 @@
                 </LinearLayout>
             </LinearLayout>
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_15"
+                android:layout_marginTop="@dimen/dp_10"
+                android:drawableLeft="@drawable/icon_platform"
+                android:drawablePadding="@dimen/dp_4"
+                android:gravity="center"
+                android:text="平台"
+                android:textColor="@color/color_hint_color"
+                android:textSize="@dimen/sp_13" />
 
             <com.hjq.widget.layout.SettingBar
                 android:id="@+id/person_data_dev"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_20"
                 app:bar_leftDrawable="@drawable/icon_enter_develoer"
                 app:bar_leftText="入驻资料"
                 app:bar_leftTextSize="@dimen/sp_13"
                 app:bar_lineVisible="false"
                 app:bar_rightDrawable="@drawable/icon_arrow_right"
+                app:bar_rightDrawableSize="@dimen/dp_16"
+                app:bar_rightText="待完善"
+                app:bar_rightTextSize="@dimen/sp_13" />
+
+            <com.hjq.widget.layout.SettingBar
+                android:id="@+id/person_data_service"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:bar_leftDrawable="@drawable/icon_interview_setting"
+                app:bar_leftText="服务协议"
+                app:bar_leftTextSize="@dimen/sp_13"
+                app:bar_lineVisible="false"
+                app:bar_rightDrawable="@drawable/icon_arrow_right"
+                app:bar_rightDrawableSize="@dimen/dp_16"
+                app:bar_rightText="未签约"
+                app:bar_rightTextSize="@dimen/sp_13" />
+
+            <com.hjq.widget.layout.SettingBar
+                android:id="@+id/person_data_interview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:bar_leftDrawable="@drawable/icon_interview_setting"
+                app:bar_leftText="面试设置"
+                app:bar_leftTextSize="@dimen/sp_13"
+                app:bar_lineVisible="false"
+                app:bar_rightDrawable="@drawable/icon_arrow_right"
                 app:bar_rightDrawableSize="@dimen/dp_16" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_15"
+                android:layout_marginTop="@dimen/dp_60"
+                android:drawableLeft="@drawable/icon_funds"
+                android:drawablePadding="@dimen/dp_4"
+                android:gravity="center"
+                android:text="资金"
+                android:textColor="@color/color_hint_color" />
 
             <com.hjq.widget.layout.SettingBar
                 android:id="@+id/person_data_income"
@@ -191,16 +263,16 @@
                 app:bar_rightDrawable="@drawable/icon_arrow_right"
                 app:bar_rightDrawableSize="@dimen/dp_16" />
 
-            <com.hjq.widget.layout.SettingBar
-                android:id="@+id/person_data_interview"
-                android:layout_width="match_parent"
+            <TextView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:bar_leftDrawable="@drawable/icon_interview_setting"
-                app:bar_leftText="面试设置"
-                app:bar_leftTextSize="@dimen/sp_13"
-                app:bar_lineVisible="false"
-                app:bar_rightDrawable="@drawable/icon_arrow_right"
-                app:bar_rightDrawableSize="@dimen/dp_16" />
+                android:layout_marginLeft="@dimen/dp_15"
+                android:layout_marginTop="@dimen/dp_60"
+                android:drawableLeft="@drawable/icon_others"
+                android:drawablePadding="@dimen/dp_4"
+                android:gravity="center"
+                android:text="其他"
+                android:textColor="@color/color_hint_color" />
 
             <com.hjq.widget.layout.SettingBar
                 android:id="@+id/person_data_private"
@@ -253,7 +325,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_50"
         android:background="@color/transparent"
-        app:leftIcon="@drawable/icon_back_white"
+        app:leftIcon="@drawable/icon_back_black"
         app:lineVisible="false"
         app:title="" />
 </FrameLayout>

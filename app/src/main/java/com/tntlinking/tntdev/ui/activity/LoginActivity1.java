@@ -1,5 +1,6 @@
 package com.tntlinking.tntdev.ui.activity;
 
+import android.net.Uri;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -7,6 +8,7 @@ import com.gyf.immersionbar.ImmersionBar;
 import com.tntlinking.tntdev.R;
 import com.tntlinking.tntdev.aop.SingleClick;
 import com.tntlinking.tntdev.app.AppActivity;
+import com.tntlinking.tntdev.widget.CustomVideoView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatButton;
@@ -22,6 +24,7 @@ public final class LoginActivity1 extends AppActivity {
 
 
     private AppCompatButton mCommitView;
+    private CustomVideoView customVideoView;
 
 
     @Override
@@ -34,10 +37,11 @@ public final class LoginActivity1 extends AppActivity {
         mLogoView = findViewById(R.id.iv_login_logo);
         mCommitView = findViewById(R.id.btn_login_commit);
         cb_deal = findViewById(R.id.cb_deal);
+        customVideoView = findViewById(R.id.customVideoView);
 
         setOnClickListener(mCommitView);
-
-
+        Uri uri = Uri.parse("android.resource://" + getActivity().getPackageName() + "/" + R.raw.guide_video);
+        customVideoView.playVideo(uri);
         cb_deal.setOnCheckedChangeListener((buttonView, isChecked) -> {
             hasChecked = isChecked;
         });
@@ -49,6 +53,14 @@ public final class LoginActivity1 extends AppActivity {
     protected void initData() {
 
 
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (customVideoView != null) {
+            customVideoView.stopPlayback();
+        }
     }
 
     @Override

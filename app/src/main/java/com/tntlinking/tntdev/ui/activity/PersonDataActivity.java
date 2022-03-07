@@ -31,12 +31,13 @@ public final class PersonDataActivity extends AppActivity {
     private SettingBar person_data_dev;
     private SettingBar person_data_about;
     private SettingBar person_data_recommend;
+    private SettingBar person_data_service;
     private TextView tv_avatar;
     private TextView tv_name;
     private TextView tv_position;
     private TextView tv_sign_num;
     private TextView tv_profit_total;
-    private TextView tv_status;
+//    private TextView tv_status;
     //https://fuchsia-athlete-f65.notion.site/9f0df9c1265e4d00a99ac0591d390ac3
     //https://fuchsia-athlete-f65.notion.site/cfcae78c7aa643228502af8e9c6a0d17
 
@@ -47,7 +48,7 @@ public final class PersonDataActivity extends AppActivity {
 
     @Override
     protected void initView() {
-        tv_status = findViewById(R.id.tv_status);
+//        tv_status = findViewById(R.id.tv_status);
         mPersonDataIncome = findViewById(R.id.person_data_income);
         mPersonDataInterview = findViewById(R.id.person_data_interview);
         mPersonDataSetting = findViewById(R.id.person_data_setting);
@@ -56,6 +57,7 @@ public final class PersonDataActivity extends AppActivity {
         person_data_dev = findViewById(R.id.person_data_dev);
         person_data_about = findViewById(R.id.person_data_about);
         person_data_recommend = findViewById(R.id.person_data_recommend);
+        person_data_service = findViewById(R.id.person_data_service);
         tv_avatar = findViewById(R.id.tv_avatar);
         tv_name = findViewById(R.id.tv_name);
         tv_position = findViewById(R.id.tv_position);
@@ -63,7 +65,7 @@ public final class PersonDataActivity extends AppActivity {
         tv_profit_total = findViewById(R.id.tv_profit_total);
 
         setOnClickListener(mPersonDataIncome, mPersonDataSetting, mPersonDataInterview,
-                person_data_private, person_data_deal, person_data_dev, person_data_about,person_data_recommend);
+                person_data_private, person_data_deal, person_data_dev, person_data_about,person_data_recommend,person_data_service);
 
 //        String name = SPUtils.getInstance().getString(AppConfig.DEVELOP_NAME);
 //        if (!TextUtils.isEmpty(name)) {
@@ -84,6 +86,7 @@ public final class PersonDataActivity extends AppActivity {
     public void onClick(View view) { //interview
         if (view == mPersonDataIncome) {
             startActivity(IncomeListActivity.class);
+
         } else if (view == mPersonDataInterview) {
             startActivity(InterviewSettingActivity.class);
         } else if (view == mPersonDataSetting) {
@@ -95,10 +98,12 @@ public final class PersonDataActivity extends AppActivity {
         } else if (view == person_data_dev) {
             startActivity(EnterDeveloperActivity.class);
         } else if (view == person_data_about) {
-//            startActivity(HomeStatusActivity.class);
-            startActivity(AboutAppActivity.class);
+            startActivity(LoginActivity1.class);
+//            startActivity(AboutAppActivity.class);
         }else if (view == person_data_recommend) {
             startActivity(InterviewActivity.class);
+        }else if (view == person_data_service) {
+            startActivity(SignContactActivity.class);
         }
 
     }
@@ -128,20 +133,20 @@ public final class PersonDataActivity extends AppActivity {
                         tv_position.setText(data.getData().getCareerDirection());
                         tv_sign_num.setText(data.getData().getSignContractNum() + "次");
                         tv_profit_total.setText("¥" + data.getData().getProfitTotal());
-                        String status = data.getData().getStatus();
-                        if (status.equals("1")) {
-                            tv_status.setVisibility(View.VISIBLE);
-                            tv_status.setText("未入驻");
-                        } else if (status.equals("2")) {
-                            tv_status.setVisibility(View.VISIBLE);
-                            tv_status.setText("审核中");
-                        } else if (status.equals("3")) {
-                            tv_status.setVisibility(View.VISIBLE);
-                            tv_status.setText("已认证");
-                        } else if (status.equals("4")) {
-                            tv_status.setVisibility(View.VISIBLE);
-                            tv_status.setText("未通过");
-                        }
+//                        String status = data.getData().getStatus();
+//                        if (status.equals("1")) {
+//                            tv_status.setVisibility(View.VISIBLE);
+//                            tv_status.setText("未入驻");
+//                        } else if (status.equals("2")) {
+//                            tv_status.setVisibility(View.VISIBLE);
+//                            tv_status.setText("审核中");
+//                        } else if (status.equals("3")) {
+//                            tv_status.setVisibility(View.VISIBLE);
+//                            tv_status.setText("已认证");
+//                        } else if (status.equals("4")) {
+//                            tv_status.setVisibility(View.VISIBLE);
+//                            tv_status.setText("未通过");
+//                        }
                     }
                 });
     }
