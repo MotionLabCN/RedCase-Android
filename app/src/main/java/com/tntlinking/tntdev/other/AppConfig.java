@@ -104,6 +104,11 @@ public final class AppConfig {
     public static String RECOMMEND_GUIDE_URL = BuildConfig.SERVICE_URL + "/api/minio/manpower-pages/recommend_guide.md";
 
     /**
+     * 拍照技巧  https://stage-ttchain.tntlinking.com/api/minio/manpower-pages/photography.md
+     */
+    public static String PHOTO_GUIDE_URL = BuildConfig.SERVICE_URL + "/api/minio/manpower-pages/photography.md";
+
+    /**
      * access_token
      */
     public static String ACCESS_TOKEN = "access_token";

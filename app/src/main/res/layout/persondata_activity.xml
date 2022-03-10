@@ -210,7 +210,7 @@
                 android:id="@+id/person_data_service"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:bar_leftDrawable="@drawable/icon_interview_setting"
+                app:bar_leftDrawable="@drawable/icon_service_deal"
                 app:bar_leftText="服务协议"
                 app:bar_leftTextSize="@dimen/sp_13"
                 app:bar_lineVisible="false"
@@ -229,12 +229,18 @@
                 app:bar_lineVisible="false"
                 app:bar_rightDrawable="@drawable/icon_arrow_right"
                 app:bar_rightDrawableSize="@dimen/dp_16" />
-
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/line_size"
+                android:layout_marginTop="@dimen/dp_30"
+                android:layout_marginRight="@dimen/dp_15"
+                android:layout_marginLeft="@dimen/dp_15"
+                android:background="@color/common_line_color" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/dp_15"
-                android:layout_marginTop="@dimen/dp_60"
+                android:layout_marginTop="@dimen/dp_30"
                 android:drawableLeft="@drawable/icon_funds"
                 android:drawablePadding="@dimen/dp_4"
                 android:gravity="center"
@@ -262,12 +268,18 @@
                 app:bar_lineVisible="false"
                 app:bar_rightDrawable="@drawable/icon_arrow_right"
                 app:bar_rightDrawableSize="@dimen/dp_16" />
-
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/line_size"
+                android:layout_marginTop="@dimen/dp_30"
+                android:layout_marginRight="@dimen/dp_15"
+                android:layout_marginLeft="@dimen/dp_15"
+                android:background="@color/common_line_color" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/dp_15"
-                android:layout_marginTop="@dimen/dp_60"
+                android:layout_marginTop="@dimen/dp_30"
                 android:drawableLeft="@drawable/icon_others"
                 android:drawablePadding="@dimen/dp_4"
                 android:gravity="center"

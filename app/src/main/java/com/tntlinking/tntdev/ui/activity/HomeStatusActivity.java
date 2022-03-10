@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -16,6 +17,7 @@ import com.blankj.utilcode.constant.TimeConstants;
 import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.TimeUtils;
 import com.gyf.immersionbar.ImmersionBar;
+import com.hjq.base.BaseDialog;
 import com.hjq.http.EasyHttp;
 import com.hjq.http.EasyLog;
 import com.hjq.http.listener.HttpCallback;
@@ -52,7 +54,7 @@ public final class HomeStatusActivity extends AppActivity {
     private TextView tv_avatar;
     private TextView tv_name;
     private TextView tv_status;
-//    private TextView tv_do_task;
+    //    private TextView tv_do_task;
 //    private TextView tv_task_name;
 //    private TextView tv_task_description;
 //    private TextView tv_rewardNum;
@@ -185,13 +187,28 @@ public final class HomeStatusActivity extends AppActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 GetNewbieApi.Bean item = mTaskAdapter.getItem(position);
-                if (item.getTaskStatus() == 0 || item.getTaskStatus() == 1) { //做任务
-                    startActivity(EnterDeveloperActivity.class);
-                } else if (item.getTaskStatus() == 2) {
-                    if (item.getRewardStatus() == 0 || item.getRewardStatus() == 1) {// 已完成
-                        startActivity(SaveQRActivity.class);
+                if (item.getTaskId() == 2) {
+                    if (item.getTaskStatus() == 0 || item.getTaskStatus() == 1) { //做任务
+                        startActivity(EnterDeveloperActivity.class);
+                    } else if (item.getTaskStatus() == 2) {
+                        if (item.getRewardStatus() == 0 || item.getRewardStatus() == 1) {// 已完成
+                            startActivity(SaveQRActivity.class);
+                        }
                     }
+                } else if (item.getTaskId() == 3) {
+                    new BaseDialog.Builder<>(HomeStatusActivity.this)
+                            .setContentView(R.layout.write_daily_delete_dialog)
+                            .setAnimStyle(BaseDialog.ANIM_SCALE)
+                            .setText(R.id.tv_title, "请先完成“完善入驻信息”任务")
+                            .setText(R.id.btn_dialog_custom_cancel, "取消")
+                            .setText(R.id.btn_dialog_custom_ok, "做任务")
+                            .setOnClickListener(R.id.btn_dialog_custom_cancel, (BaseDialog.OnClickListener<Button>) (dialog, button) -> dialog.dismiss())
+                            .setOnClickListener(R.id.btn_dialog_custom_ok, (dialog, views) -> {
 
+                                startActivity(EnterDeveloperActivity.class);
+                                dialog.dismiss();
+                            })
+                            .show();
                 }
             }
         });
@@ -236,7 +253,8 @@ public final class HomeStatusActivity extends AppActivity {
                 startActivity(PersonDataActivity.class);
                 break;
             case R.id.iv_interview:
-                startActivity(InterviewActivity.class);
+//                startActivity(InterviewActivity.class);
+                startActivity(LoginActivity1.class);
                 break;
             case R.id.ll_cooperation:
             case R.id.ll_cooperation_1:

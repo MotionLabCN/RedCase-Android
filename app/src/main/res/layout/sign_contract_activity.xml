@@ -27,6 +27,7 @@
         android:id="@+id/sv"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:paddingBottom="@dimen/dp_20"
         android:layout_weight="1">
 
         <LinearLayout
@@ -39,19 +40,25 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@drawable/bg_yellow_top_radius_6"
                 android:gravity="center|left"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/dp_14"
+                android:paddingTop="@dimen/dp_12"
+                android:paddingRight="@dimen/dp_14"
+                android:paddingBottom="@dimen/dp_12">
 
                 <ImageView
                     android:id="@+id/iv_progress"
-                    android:layout_width="@dimen/dp_26"
-                    android:layout_height="@dimen/dp_26"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:src="@drawable/icon_sign_v" />
 
                 <TextView
                     android:id="@+id/tv_progress"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp_6"
                     android:text="恭喜您已经通过入驻审核，现在需要您签署一份灵活用工协议，用于结算服务费，完成签署后即可开启接单。"
                     android:textColor="@color/color_FB8B39"
                     android:textSize="@dimen/sp_12" />
@@ -60,7 +67,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_14"
+                android:layout_marginTop="@dimen/dp_24"
                 android:text="如何签约？"
                 android:textColor="@color/black"
                 android:textSize="@dimen/sp_15" />
@@ -89,7 +96,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_6"
+                        android:layout_marginTop="@dimen/dp_8"
                         android:text="填写签约信息"
                         android:textColor="@color/color_text_color"
                         android:textSize="@dimen/sp_12" />
@@ -117,7 +124,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_6"
+                        android:layout_marginTop="@dimen/dp_8"
                         android:text="签署合作协议"
                         android:textColor="@color/color_text_color"
                         android:textSize="@dimen/sp_12" />
@@ -144,7 +151,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_6"
+                        android:layout_marginTop="@dimen/dp_8"
                         android:text="完成实名认证"
                         android:textColor="@color/color_text_color"
                         android:textSize="@dimen/sp_12" />
@@ -158,13 +165,15 @@
                 android:layout_height="@dimen/line_size"
                 android:layout_marginTop="@dimen/dp_24"
                 android:background="@color/common_line_color" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_24"
                 android:text="Step1 填写签约信息 "
                 android:textColor="@color/color_text_color"
-                android:textSize="@dimen/sp_13" />
+                android:textSize="@dimen/sp_13"
+                android:textStyle="bold" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -186,7 +195,8 @@
                 android:layout_marginTop="@dimen/dp_24"
                 android:text="Step2 签署合作协议 "
                 android:textColor="@color/color_text_color"
-                android:textSize="@dimen/sp_13" />
+                android:textSize="@dimen/sp_13"
+                android:textStyle="bold" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -194,19 +204,22 @@
                 android:layout_marginTop="@dimen/dp_5"
                 android:text="合作协议是由湖南迅基与您签订，湖南迅基是一家人力资源公司，平台委托该公司办理灵活用工协议并统一结算服务费，请您仔细确认协议条款，并完成手写签署。"
                 android:textColor="@color/color_hint_color"
-                android:textSize="@dimen/sp_12" />
+                android:textSize="@dimen/sp_12"
+                android:textStyle="bold" />
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/line_size"
                 android:layout_marginTop="@dimen/dp_24"
                 android:background="@color/common_line_color" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_24"
                 android:text="Step3 完成实名认证 "
                 android:textColor="@color/color_text_color"
+                android:textStyle="bold"
                 android:textSize="@dimen/sp_13" />
 
             <TextView

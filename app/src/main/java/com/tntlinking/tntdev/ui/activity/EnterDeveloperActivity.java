@@ -19,8 +19,10 @@ import com.blankj.utilcode.constant.TimeConstants;
 import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.TimeUtils;
 import com.bumptech.glide.load.MultiTransformation;
+import com.bumptech.glide.load.model.GlideUrl;
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.bumptech.glide.load.resource.bitmap.CircleCrop;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.hjq.base.BaseAdapter;
 import com.hjq.http.EasyHttp;
 import com.hjq.http.EasyLog;
@@ -186,16 +188,21 @@ public final class EnterDeveloperActivity extends AppActivity {
         Intent intent = new Intent();
         switch (view.getId()) {
             case R.id.ll_add_photo:
-//                ImageSelectActivity.start(this, data -> {
-//                    // 裁剪头像
-//                    cropImageFile(new File(data.get(0)));
-//                });
-                break;
             case R.id.fl_add_photo:
 
+                ImageSelectActivity.start(this, data -> {
+                    // 裁剪头像
+                    cropImageFile(new File(data.get(0)));
+                });
                 break;
-            case R.id.tv_photo_skills:
-                startActivity(PhotoSkillsActivity.class);
+
+            case R.id.tv_photo_skills: // https://stage-ttchain.tntlinking.com/api/minio/manpower-pages/photography.md
+//                startActivity(PhotoSkillsActivity.class);
+                String service_guide = AppConfig.PHOTO_GUIDE_URL;
+                intent.setClass(this, MDViewActivity.class);
+                intent.putExtra("md_url", service_guide);
+                intent.putExtra("title", "拍照技巧");
+                startActivity(intent);
                 break;
             case R.id.ll_add_base_info:
             case R.id.ll_base_info:
@@ -352,6 +359,17 @@ public final class EnterDeveloperActivity extends AppActivity {
                         bean = data.getData();
                         String realName = bean.getRealName();
                         int sex = bean.getSex();
+                        if (!TextUtils.isEmpty(bean.getAvatarUrl())) {
+                            ll_add_photo.setVisibility(View.GONE);
+                            fl_add_photo.setVisibility(View.VISIBLE);
+                            GlideApp.with(EnterDeveloperActivity.this)
+                                    .load(bean.getAvatarUrl())
+                                    .transform(new MultiTransformation<>(new CenterCrop(), new RoundedCorners((int) getResources().getDimension(R.dimen.dp_8))))
+                                    .into(iv_photo_avatar);
+                        } else {
+                            ll_add_photo.setVisibility(View.VISIBLE);
+                            fl_add_photo.setVisibility(View.GONE);
+                        }
                         if (!TextUtils.isEmpty(realName)) {
                             ll_base_info.setVisibility(View.VISIBLE);
                             tv_edit_name.setText(realName);
@@ -514,8 +532,12 @@ public final class EnterDeveloperActivity extends AppActivity {
             }
         });
     }
-    /** 头像地址 */
+
+    /**
+     * 头像地址
+     */
     private Uri mAvatarUrl;
+
     /**
      * 上传裁剪后的图片
      */
@@ -532,7 +554,7 @@ public final class EnterDeveloperActivity extends AppActivity {
                         mAvatarUrl = Uri.parse(data.getData());
                         GlideApp.with(getActivity())
                                 .load(mAvatarUrl)
-                                .transform(new MultiTransformation<>(new CenterCrop(), new CircleCrop()))
+                                .transform(new MultiTransformation<>(new CenterCrop(), new RoundedCorners((int) getResources().getDimension(R.dimen.dp_8))))
                                 .into(iv_photo_avatar);
                         if (deleteFile) {
                             file.delete();

@@ -17,6 +17,7 @@ public class DeveloperInfoBean implements Serializable {
     private int sex = 0; //性别 0->男 1->女
     private String mSex = "";
     private String birthday = "";
+    private String avatarUrl = "";
     private int provinceId = 1;// 省
     private int cityId = 1;// 城市
     private int areasId = 1;// 区
@@ -565,6 +566,14 @@ public class DeveloperInfoBean implements Serializable {
 
     public void setBirthday(String birthday) {
         this.birthday = birthday;
+    }
+
+    public String getAvatarUrl() {
+        return avatarUrl;
+    }
+
+    public void setAvatarUrl(String avatarUrl) {
+        this.avatarUrl = avatarUrl;
     }
 
     public int getProvinceId() {

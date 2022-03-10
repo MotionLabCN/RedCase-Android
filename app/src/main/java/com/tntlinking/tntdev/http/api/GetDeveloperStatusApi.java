@@ -33,6 +33,7 @@ public final class GetDeveloperStatusApi implements IRequestApi {
         private String careerDirection;
         private String signContractNum;
         private String profitTotal;
+        private int contractStatus;//签约状态 0 未签约，1 签约成功
 
 
         public int getId() {
@@ -199,6 +200,16 @@ public final class GetDeveloperStatusApi implements IRequestApi {
             this.profitTotal = profitTotal;
         }
 
-        public String getStatus() { return status; }
+        public String getStatus() {
+            return status;
+        }
+
+        public int getContractStatus() {
+            return contractStatus;
+        }
+
+        public void setContractStatus(int contractStatus) {
+            this.contractStatus = contractStatus;
+        }
     }
 }
