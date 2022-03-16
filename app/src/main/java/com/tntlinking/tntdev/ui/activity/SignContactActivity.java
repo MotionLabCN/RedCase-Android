@@ -2,13 +2,13 @@ package com.tntlinking.tntdev.ui.activity;
 
 import android.view.View;
 import android.widget.Button;
-
+import com.blankj.utilcode.util.SPUtils;
 import com.gyf.immersionbar.ImmersionBar;
 import com.hjq.base.BaseDialog;
 import com.tntlinking.tntdev.R;
 import com.tntlinking.tntdev.aop.SingleClick;
 import com.tntlinking.tntdev.app.AppActivity;
-
+import com.tntlinking.tntdev.other.AppConfig;
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatButton;
 
@@ -32,17 +32,13 @@ public final class SignContactActivity extends AppActivity {
 
 
         setOnClickListener(btn_commit);
-        ;
-
 
     }
 
     @Override
     protected void initData() {
 
-
     }
-
 
     @Override
     public void onRightClick(View view) {
@@ -53,20 +49,26 @@ public final class SignContactActivity extends AppActivity {
     @Override
     public void onClick(View view) {
         if (view == btn_commit) {
+            boolean mBoolean = SPUtils.getInstance().getBoolean(AppConfig.SERVICE_DIALOG, false);
+            if (!mBoolean) {
+                new BaseDialog.Builder<>(SignContactActivity.this)
+                        .setContentView(R.layout.write_daily_delete_dialog)
+                        .setAnimStyle(BaseDialog.ANIM_SCALE)
+                        .setText(R.id.tv_title, sign_text)
+                        .setText(R.id.btn_dialog_custom_cancel, "不同意")
+                        .setText(R.id.btn_dialog_custom_ok, "同意")
+                        .setOnClickListener(R.id.btn_dialog_custom_cancel, (BaseDialog.OnClickListener<Button>) (dialog, button) -> dialog.dismiss())
+                        .setOnClickListener(R.id.btn_dialog_custom_ok, (dialog, views) -> {
 
-            new BaseDialog.Builder<>(SignContactActivity.this)
-                    .setContentView(R.layout.write_daily_delete_dialog)
-                    .setAnimStyle(BaseDialog.ANIM_SCALE)
-                    .setText(R.id.tv_title, sign_text)
-                    .setText(R.id.btn_dialog_custom_cancel, "不同意")
-                    .setText(R.id.btn_dialog_custom_ok, "同意")
-                    .setOnClickListener(R.id.btn_dialog_custom_cancel, (BaseDialog.OnClickListener<Button>) (dialog, button) -> dialog.dismiss())
-                    .setOnClickListener(R.id.btn_dialog_custom_ok, (dialog, views) -> {
+                            startActivity(SignInfoActivity.class);
+                            dialog.dismiss();
+                            SPUtils.getInstance().put(AppConfig.SERVICE_DIALOG, true);
+                        })
+                        .show();
+            } else {
+                startActivity(SignInfoActivity.class);
+            }
 
-                        startActivity(SignInfoActivity.class);
-                        dialog.dismiss();
-                    })
-                    .show();
         }
 
     }

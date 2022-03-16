@@ -1,5 +1,6 @@
 package com.tntlinking.tntdev.ui.activity;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -8,6 +9,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
+import android.webkit.JavascriptInterface;
 import android.webkit.WebView;
 import android.widget.ProgressBar;
 
@@ -25,7 +27,7 @@ import com.scwang.smart.refresh.layout.api.RefreshLayout;
 import com.scwang.smart.refresh.layout.listener.OnRefreshListener;
 
 /**
- *    desc   : 浏览器界面
+ * desc   : 浏览器界面
  */
 public final class BrowserActivity extends AppActivity
         implements StatusAction, OnRefreshListener {
@@ -46,7 +48,8 @@ public final class BrowserActivity extends AppActivity
         }
         context.startActivity(intent);
     }
-    public static void start(Context context, String url,String title) {
+
+    public static void start(Context context, String url, String title) {
         if (TextUtils.isEmpty(url)) {
             return;
         }
@@ -81,6 +84,7 @@ public final class BrowserActivity extends AppActivity
         mRefreshLayout.setOnRefreshListener(this);
     }
 
+    @SuppressLint({"JavascriptInterface", "SetJavaScriptEnabled"})
     @Override
     protected void initData() {
         showLoading();
@@ -88,7 +92,24 @@ public final class BrowserActivity extends AppActivity
         mBrowserView.setBrowserViewClient(new AppBrowserViewClient());
         mBrowserView.setBrowserChromeClient(new AppBrowserChromeClient(mBrowserView));
         mBrowserView.loadUrl(getString(INTENT_KEY_IN_URL));
+
+        mBrowserView.getSettings().setJavaScriptEnabled(true);
+        mBrowserView.addJavascriptInterface(new JavascriptCall(), "android");//添加js监听 这样html就能调用客户端
     }
+
+    private class JavascriptCall {
+        @JavascriptInterface //js接口声明
+        public void openService() {
+            startActivity(SaveQRActivity.class);
+            finish();
+        }
+
+        @JavascriptInterface //js接口声明
+        public void goBack() {
+            finish();
+        }
+    }
+
 
     @Override
     public StatusLayout getStatusLayout() {
@@ -171,9 +192,9 @@ public final class BrowserActivity extends AppActivity
             if (title == null) {
                 return;
             }
-            if (TextUtils.isEmpty(getString(INTENT_TITLE_URL))){
+            if (TextUtils.isEmpty(getString(INTENT_TITLE_URL))) {
                 setTitle(title);
-            }else {
+            } else {
                 setTitle(getString(INTENT_TITLE_URL));
             }
         }

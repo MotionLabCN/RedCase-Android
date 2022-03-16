@@ -196,19 +196,26 @@ public final class HomeStatusActivity extends AppActivity {
                         }
                     }
                 } else if (item.getTaskId() == 3) {
-                    new BaseDialog.Builder<>(HomeStatusActivity.this)
-                            .setContentView(R.layout.write_daily_delete_dialog)
-                            .setAnimStyle(BaseDialog.ANIM_SCALE)
-                            .setText(R.id.tv_title, "请先完成“完善入驻信息”任务")
-                            .setText(R.id.btn_dialog_custom_cancel, "取消")
-                            .setText(R.id.btn_dialog_custom_ok, "做任务")
-                            .setOnClickListener(R.id.btn_dialog_custom_cancel, (BaseDialog.OnClickListener<Button>) (dialog, button) -> dialog.dismiss())
-                            .setOnClickListener(R.id.btn_dialog_custom_ok, (dialog, views) -> {
 
-                                startActivity(EnterDeveloperActivity.class);
-                                dialog.dismiss();
-                            })
-                            .show();
+                    String status = SPUtils.getInstance().getString(AppConfig.DEVELOP_STATUS, "1");
+                    if (status.equals("3")){
+                        startActivity(SignContactActivity.class);
+                    }else {
+                        new BaseDialog.Builder<>(HomeStatusActivity.this)
+                                .setContentView(R.layout.write_daily_delete_dialog)
+                                .setAnimStyle(BaseDialog.ANIM_SCALE)
+                                .setText(R.id.tv_title, "请先完成“完善入驻信息”任务")
+                                .setText(R.id.btn_dialog_custom_cancel, "取消")
+                                .setText(R.id.btn_dialog_custom_ok, "做任务")
+                                .setOnClickListener(R.id.btn_dialog_custom_cancel, (BaseDialog.OnClickListener<Button>) (dialog, button) -> dialog.dismiss())
+                                .setOnClickListener(R.id.btn_dialog_custom_ok, (dialog, views) -> {
+
+                                    startActivity(EnterDeveloperActivity.class);
+                                    dialog.dismiss();
+                                })
+                                .show();
+                    }
+
                 }
             }
         });
@@ -259,7 +266,11 @@ public final class HomeStatusActivity extends AppActivity {
             case R.id.ll_cooperation:
             case R.id.ll_cooperation_1:
 //                BrowserActivity.start(getActivity(), "https://stage-ttchain.tntlinking.com/api/minio/manpower-pages/recruit_guide.pdf","合作模式");
-                startActivity(PDFViewActivity.class);
+                String PDFUrl = AppConfig.RECRUIT_GUIDE_URL;
+                intent.setClass(this, PDFViewActivity.class);
+                intent.putExtra("pdf_url", PDFUrl);
+                intent.putExtra("title", "合作模式");
+                startActivity(intent);
                 break;
             case R.id.ll_service:
             case R.id.ll_service_1:

@@ -48,7 +48,6 @@ public final class LoginActivity2 extends AppActivity implements TextView.OnEdit
     private AppCompatCheckBox cb_deal;
     private TextView tv_deal;
     private boolean hasChecked = false;
-    private final static String LOGIN_AUTHORIZATION = "Basic dG50bGlua2luZzptYW5wb3dlcg==";
 
     @Override
     protected int getLayoutId() {
@@ -145,7 +144,7 @@ public final class LoginActivity2 extends AppActivity implements TextView.OnEdit
 
             EasyHttp.post(this)
                     .api(new LoginApi2()
-                            .setAuthorization(LOGIN_AUTHORIZATION)
+                            .setAuthorization(AppConfig.LOGIN_AUTHORIZATION)
                             .setGrant_type("sms_code")
                             .setScope("all")
                             .setLoginChannel("Developer_APP")
@@ -155,7 +154,6 @@ public final class LoginActivity2 extends AppActivity implements TextView.OnEdit
 
                         @Override
                         public void onSucceed(HttpData<LoginApi2.Bean> data) {
-                            SPUtils.getInstance().put(AppConfig.MOBILE, mPhoneView.getText().toString());
                             SPUtils.getInstance().put(AppConfig.ACCESS_TOKEN, "Bearer " + data.getData().getAccessToken());
                             EasyConfig.getInstance().addHeader("Authorization", "Bearer " + data.getData().getAccessToken());
 
@@ -177,6 +175,7 @@ public final class LoginActivity2 extends AppActivity implements TextView.OnEdit
                     public void onSucceed(HttpData<GetDeveloperStatusApi.Bean> data) {
                         // 1->待认证  2->待审核   3->审核成功 4->审核失败
                         SPUtils.getInstance().put(AppConfig.HAS_LOGIN, true);
+                        SPUtils.getInstance().put(AppConfig.DEVELOP_MOBILE, data.getData().getMobile());
                         SPUtils.getInstance().put(AppConfig.DEVELOP_STATUS, data.getData().getStatus());
                         SPUtils.getInstance().put(AppConfig.DEVELOP_NAME, data.getData().getRealName());
                         SPUtils.getInstance().put(AppConfig.DEVELOPER_ID, data.getData().getId());

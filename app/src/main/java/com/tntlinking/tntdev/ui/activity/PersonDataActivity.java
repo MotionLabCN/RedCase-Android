@@ -1,16 +1,19 @@
 package com.tntlinking.tntdev.ui.activity;
 
+import android.content.Intent;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.blankj.utilcode.util.SPUtils;
 import com.gyf.immersionbar.ImmersionBar;
 import com.hjq.base.BaseDialog;
 import com.tntlinking.tntdev.R;
 import com.tntlinking.tntdev.aop.SingleClick;
 import com.tntlinking.tntdev.app.AppActivity;
 import com.tntlinking.tntdev.http.api.GetDeveloperStatusApi;
+import com.tntlinking.tntdev.http.api.GetSignContractPDFApi;
 import com.tntlinking.tntdev.http.model.HttpData;
 import com.tntlinking.tntdev.other.AppConfig;
 import com.hjq.http.EasyHttp;
@@ -91,11 +94,7 @@ public final class PersonDataActivity extends AppActivity {
         if (view == person_data_dev) { // 入驻资料
             startActivity(EnterDeveloperActivity.class);
         } else if (view == person_data_service) {// 服务协议
-//            showServiceDialog();
-            if (mContractStatus == 0) {// 没有签约 才能点进去，签约了不能 点进去了
-                startActivity(SignContactActivity.class);
-            }
-
+            showServiceDialog();
         } else if (view == mPersonDataIncome) {// 收益账单
             startActivity(IncomeListActivity.class);
         } else if (view == mPersonDataInterview) {// 面试设置
@@ -123,8 +122,8 @@ public final class PersonDataActivity extends AppActivity {
                 .navigationBarColor(R.color.white);
     }
 
-    private String mStatus = "1"; //1  待完善 2  待审核 3  审核成功 4  审核失败
-    private int mContractStatus = 0; //0  未签约 1 签约成功
+    private String mStatus = "1"; //入驻状态 1  待完善 2  待审核 3  审核成功 4  审核失败
+    private int mContractStatus = 0; //签约状态 0, "待签约"，1, "签约中" 2, "签约成功" 3, "签约失败"
 
     public void getData() {
         EasyHttp.get(this)
@@ -144,8 +143,17 @@ public final class PersonDataActivity extends AppActivity {
                         tv_profit_total.setText("¥" + data.getData().getProfitTotal());
                         mStatus = data.getData().getStatus();
                         mContractStatus = data.getData().getContractStatus();
+                        if (mContractStatus == 0) {
+                            person_data_service.setRightText("待签约");
+                        } else if (mContractStatus == 1) {
+                            person_data_service.setRightText("签约中");
+                        } else if (mContractStatus == 2) {
+                            person_data_service.setRightText("签约成功");
+                            getContactPDF();
+                        } else if (mContractStatus == 3) {
+                            person_data_service.setRightText("签约失败");
+                        }
 
-                        person_data_service.setRightText(mContractStatus == 0 ? "未签约" : "已签约");
                         if (mStatus.equals("1")) {
 //                            tv_status.setVisibility(View.VISIBLE);
 //                            tv_status.setText("未入驻");
@@ -171,7 +179,7 @@ public final class PersonDataActivity extends AppActivity {
      * 不同的状态点进服务协议的弹框
      */
     public void showServiceDialog() {
-        if (mStatus.equals("1")) {
+        if (mStatus.equals("1")) { // 入驻资料1  待完善 2  待审核 3  审核成功 4  审核失败
             new BaseDialog.Builder<>(PersonDataActivity.this)
                     .setContentView(R.layout.write_daily_delete_dialog)
                     .setAnimStyle(BaseDialog.ANIM_SCALE)
@@ -185,7 +193,7 @@ public final class PersonDataActivity extends AppActivity {
                         dialog.dismiss();
                     })
                     .show();
-        } else if (mStatus.equals("2")) {
+        } else if (mStatus.equals("2")) {// 入驻资料 2  待审核
             new BaseDialog.Builder<>(PersonDataActivity.this)
                     .setContentView(R.layout.write_daily_delete_dialog)
                     .setAnimStyle(BaseDialog.ANIM_SCALE)
@@ -195,13 +203,27 @@ public final class PersonDataActivity extends AppActivity {
                     .setOnClickListener(R.id.btn_dialog_custom_cancel, (BaseDialog.OnClickListener<Button>) (dialog, button) -> dialog.dismiss())
                     .setOnClickListener(R.id.btn_dialog_custom_ok, (dialog, views) -> {
 
-
                         dialog.dismiss();
                     })
                     .show();
-        } else if (mStatus.equals("3")) {
-            startActivity(SignContactActivity.class);
-        } else if (mStatus.equals("4")) {
+        } else if (mStatus.equals("3")) {// 入驻资料3  审核成功
+            if (mContractStatus == 0) {//待签约
+                startActivity(SignContactActivity.class);
+            } else if (mContractStatus == 1) {//签约中
+                BrowserActivity.start(this, AppConfig.SIGN_CONTRACT_URL + "?developerId="
+                        + SPUtils.getInstance().getInt(AppConfig.DEVELOPER_ID), "签约中");
+
+            } else if (mContractStatus == 2) {//签约成功
+                Intent intent = new Intent();
+                intent.setClass(this, PDFViewActivity.class);
+                intent.putExtra("pdf_url", PDFUrl);
+                intent.putExtra("title", "合作协议");
+                startActivity(intent);
+            } else {//签约失败
+                BrowserActivity.start(this, AppConfig.SIGN_CONTRACT_URL + "?developerId="
+                        + SPUtils.getInstance().getInt(AppConfig.DEVELOPER_ID), "签约失败");
+            }
+        } else if (mStatus.equals("4")) {// 4  审核失败
             new BaseDialog.Builder<>(PersonDataActivity.this)
                     .setContentView(R.layout.write_daily_delete_dialog)
                     .setAnimStyle(BaseDialog.ANIM_SCALE)
@@ -216,5 +238,24 @@ public final class PersonDataActivity extends AppActivity {
                     })
                     .show();
         }
+    }
+
+    private String PDFUrl = "";
+
+    public void getContactPDF() {
+        EasyHttp.get(this)
+                .api(new GetSignContractPDFApi())
+                .request(new HttpCallback<HttpData<GetSignContractPDFApi.Bean>>(this) {
+
+                    @Override
+                    public void onSucceed(HttpData<GetSignContractPDFApi.Bean> data) {
+                        if (data.getData() != null) {
+                            if (!TextUtils.isEmpty(data.getData().getPdfUrl())) {
+                                PDFUrl = data.getData().getPdfUrl();
+                            }
+                        }
+
+                    }
+                });
     }
 }

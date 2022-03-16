@@ -33,7 +33,7 @@ public final class GetDeveloperStatusApi implements IRequestApi {
         private String careerDirection;
         private String signContractNum;
         private String profitTotal;
-        private int contractStatus;//签约状态 0 未签约，1 签约成功
+        private int contractStatus;//签约状态 0, "待签约"，1, "签约中" 2, "签约成功" 3, "签约失败"
 
 
         public int getId() {

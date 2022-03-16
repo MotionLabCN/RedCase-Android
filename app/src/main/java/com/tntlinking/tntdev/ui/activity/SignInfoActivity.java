@@ -4,27 +4,21 @@ package com.tntlinking.tntdev.ui.activity;
 import android.text.TextUtils;
 import android.view.View;
 
-import com.blankj.utilcode.util.GsonUtils;
-import com.blankj.utilcode.util.SPUtils;
 import com.hjq.http.EasyHttp;
 import com.hjq.http.listener.HttpCallback;
 import com.hjq.widget.view.ClearEditText;
 import com.tntlinking.tntdev.R;
 import com.tntlinking.tntdev.aop.SingleClick;
 import com.tntlinking.tntdev.app.AppActivity;
-import com.tntlinking.tntdev.http.api.GetProvinceApi;
 import com.tntlinking.tntdev.http.api.GetSignParamApi;
 import com.tntlinking.tntdev.http.api.ToSignApi;
 import com.tntlinking.tntdev.http.model.HttpData;
-import com.tntlinking.tntdev.other.AppConfig;
-
-import java.util.List;
 
 import androidx.appcompat.widget.AppCompatButton;
 
 
 /**
- * 用户信息填写页面1
+ * 去签约页面
  */
 public final class SignInfoActivity extends AppActivity {
     private ClearEditText et_sign_info_name;
@@ -137,6 +131,8 @@ public final class SignInfoActivity extends AppActivity {
                             if (!TextUtils.isEmpty(data.getData().getContractUrl())) {
                                 BrowserActivity.start(getActivity(), data.getData().getContractUrl());
                             }
+                        } else {
+                            toast(data.getMessage());
                         }
                     }
                 });

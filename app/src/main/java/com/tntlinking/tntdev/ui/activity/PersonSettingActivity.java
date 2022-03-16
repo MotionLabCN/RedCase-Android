@@ -56,8 +56,8 @@ public final class PersonSettingActivity extends AppActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        if (!TextUtils.isEmpty(SPUtils.getInstance().getString(AppConfig.MOBILE, ""))) {
-            String mobile = Utils.changPhoneNumber(SPUtils.getInstance().getString(AppConfig.MOBILE));
+        if (!TextUtils.isEmpty(SPUtils.getInstance().getString(AppConfig.DEVELOP_MOBILE, ""))) {
+            String mobile = Utils.changPhoneNumber(SPUtils.getInstance().getString(AppConfig.DEVELOP_MOBILE));
             mSettingPhone.setRightText(mobile);
         }
     }

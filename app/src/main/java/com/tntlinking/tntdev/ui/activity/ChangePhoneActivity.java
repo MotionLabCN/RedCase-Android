@@ -111,7 +111,7 @@ public final class ChangePhoneActivity extends AppActivity
                         @Override
                         public void onSucceed(HttpData<Void> data) {
 
-                            SPUtils.getInstance().put(AppConfig.MOBILE, mPhoneView.getText().toString());
+                            SPUtils.getInstance().put(AppConfig.DEVELOP_MOBILE, mPhoneView.getText().toString());
 
                             finish();
                         }

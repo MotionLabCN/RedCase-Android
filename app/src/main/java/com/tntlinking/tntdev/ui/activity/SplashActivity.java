@@ -130,29 +130,6 @@ public final class SplashActivity extends AppActivity {
                                     startActivity(intent);
                                     finish();
 
-//                                    if (data.getData().getStatus().equals("1")) {
-//                                        startActivity(HomeStatusActivity.class);
-//                                    } else if (data.getData().getStatus().equals("3")) {
-//                                        Intent intent = new Intent(SplashActivity.this, HomeStatusActivity.class);
-//                                        intent.putExtra(AppConfig.DEVELOP_STATUS, 3);
-//                                        startActivity(intent);
-//                                    } else if (data.getData().getStatus().equals("2")) {
-//
-//                                        Intent intent = new Intent(SplashActivity.this, HomeStatusActivity.class);
-//                                        intent.putExtra(AppConfig.DEVELOP_STATUS, 2);
-//                                        if (createDate.contains("T")) {
-//                                            String replace = createDate.replace("T", " ");
-//                                            long timeSpanByNow = TimeUtils.getTimeSpanByNow(replace, TimeConstants.DAY);
-//                                            intent.putExtra(AppConfig.CREATE_TIME, Math.abs(timeSpanByNow));
-//                                        } else if (createDate.contains(" ")) {
-//                                            long timeSpanByNow = TimeUtils.getTimeSpanByNow(createDate, TimeConstants.DAY);
-//                                            intent.putExtra(AppConfig.CREATE_TIME, Math.abs(timeSpanByNow));
-//                                        }
-//
-//                                        startActivity(intent);
-//                                    } else {
-//                                        startActivity(CheckDeveloperFailActivity.class);
-//                                    }
 
                                 }
                             });

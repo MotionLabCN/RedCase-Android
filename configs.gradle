@@ -30,7 +30,7 @@ ext {
     println "GradleLog ServerTypeOutput " + serverType
 
     // 友盟 AppKey
-    UMENG_APP_KEY = "61e8b19ee014255fcbf77477"
+    UMENG_APP_KEY = "622ee2c92b8de26e11f85471"
     // QQ AppId
     QQ_APP_ID = "101828096"
     // QQ Secret
@@ -60,6 +60,8 @@ ext {
             BUGLY_ID = "请自行替换 Bugly 上面的 AppID"
             HOST_URL = "https://talent.tntlinking.com"
             SERVICE_URL = "https://www.tntlinking.com"
+//            HOST_URL = "https://talent.stage-ttchain.tntlinking.com"
+//            SERVICE_URL = "https://stage-ttchain.tntlinking.com"
 //            AGREEMENT_URL = "https://talent.tntlinking.com/#/page/agreement"
 //            PRIVATE_URL ="https://talent.tntlinking.com/#/page/privacy"
 

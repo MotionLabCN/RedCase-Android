@@ -25,7 +25,7 @@ public final class AppConfig {
      * 当前是否要开启日志打印功能
      */
     public static boolean isLogEnable() {
-        return BuildConfig.LOG_ENABLE;
+        return BuildConfig.DEBUG;
     }
 
     /**
@@ -108,13 +108,24 @@ public final class AppConfig {
      */
     public static String PHOTO_GUIDE_URL = BuildConfig.SERVICE_URL + "/api/minio/manpower-pages/photography.md";
 
+
     /**
-     * access_token
+     * 签约失败签约成功  https://talent.stage-ttchain.tntlinking.com/#/page/sign_contract
+     */
+    public static String SIGN_CONTRACT_URL = BuildConfig.SERVICE_URL + "/#/page/sign_contract  ";
+
+    /**
+     * 登陆时候需要的 请求头 写死的
+     */
+    public static String LOGIN_AUTHORIZATION = "Basic dG50bGlua2luZzptYW5wb3dlcg==";
+
+    /**
+     * access_token  登陆成功返回的token
      */
     public static String ACCESS_TOKEN = "access_token";
 
     /**
-     *
+     * 开发者的id
      */
     public static String DEVELOPER_ID = "developer_id";
     /**
@@ -127,14 +138,30 @@ public final class AppConfig {
      */
     public static String DEVELOP_STATUS = "develop_status";
 
-    public static String MOBILE = "mobile";
-
+    /**
+     * 开发者的手机号码
+     */
+    public static String DEVELOP_MOBILE = "mobile";
+    /**
+     * 开发者的名字
+     */
     public static String DEVELOP_NAME = "develop_name";
 
     public static String CREATE_TIME = "create_time";
     public static String CAREER_ID = "career_id";
     public static String GUIDE_VIEW = "guide_view";
 
-    public static String URL_AGREEMENT = "https://talent.tntlinking.com/#/page/agreement";
-    public static String URL_PRIVATE = "https://talent.tntlinking.com/#/page/privacy";
+    /**
+     * 友盟一键登录秘钥
+     */
+    public static String APP_SECRET = "zsiyoIhID4V/zG7ep9TMDRFlYwg/sHdC4Xj851YQplYTu7l3QNohhBoE5iDWBaMi" +
+            "KxbLRquqkY5wdcTuIOZ4oPOjnX3SOyZJ+zGIrFojZjx5IIfD0lrXnPnEnKy/rwcnE1Vy+KMCGEYC43balOmA2fZzxyq8dUeK" +
+            "eHOn0szVw3pWh5Ndx69KTAyU5pFyNM0sGdVL+vwrtrrv/BN7vFvRatDjfylsDDkLEwnMR4H/dZWvKt5ysUXigSW2wa0YXGWI/" +
+            "FURiw+UMKN2t1r2rp6zdleCGti/D3FbKUIji0tKiLvlEzGUpwcd2YVUDQPffLup";
+
+    /**
+     * 签约服务弹框，只弹一次
+     */
+    public static String SERVICE_DIALOG = "service_dialog";
+
 }
