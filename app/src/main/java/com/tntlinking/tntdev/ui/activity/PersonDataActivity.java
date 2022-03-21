@@ -95,6 +95,7 @@ public final class PersonDataActivity extends AppActivity {
             startActivity(EnterDeveloperActivity.class);
         } else if (view == person_data_service) {// 服务协议
             showServiceDialog();
+//            startActivity(SignContactActivity.class);
         } else if (view == mPersonDataIncome) {// 收益账单
             startActivity(IncomeListActivity.class);
         } else if (view == mPersonDataInterview) {// 面试设置
@@ -155,21 +156,17 @@ public final class PersonDataActivity extends AppActivity {
                         }
 
                         if (mStatus.equals("1")) {
-//                            tv_status.setVisibility(View.VISIBLE);
-//                            tv_status.setText("未入驻");
                             person_data_dev.setRightText("待完善");
+                            person_data_dev.setRightTextColor(getResources().getColor(R.color.color_hint_color));
                         } else if (mStatus.equals("2")) {
-//                            tv_status.setVisibility(View.VISIBLE);
-//                            tv_status.setText("审核中");
                             person_data_dev.setRightText("待审核");
+                            person_data_dev.setRightTextColor(getResources().getColor(R.color.color_FB8B39));
                         } else if (mStatus.equals("3")) {
-//                            tv_status.setVisibility(View.VISIBLE);
-//                            tv_status.setText("已认证");
                             person_data_dev.setRightText("审核成功");
+                            person_data_dev.setRightTextColor(getResources().getColor(R.color.color_hint_color));
                         } else if (mStatus.equals("4")) {
-//                            tv_status.setVisibility(View.VISIBLE);
-//                            tv_status.setText("未通过");
                             person_data_dev.setRightText("审核失败");
+                            person_data_dev.setRightTextColor(getResources().getColor(R.color.color_F5313D));
                         }
                     }
                 });

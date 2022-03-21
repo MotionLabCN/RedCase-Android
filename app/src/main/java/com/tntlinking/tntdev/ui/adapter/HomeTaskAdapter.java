@@ -75,7 +75,7 @@ public final class HomeTaskAdapter extends BaseAdapter {
         int taskStatus = item.getTaskStatus(); // 任务状态 0-未开始 1-进行中 2-已完成 3-已失效
         int rewardStatus = item.getRewardStatus();//	奖励发放状态：0-不满足 1-待发放 2-已发放
         holder.tv_task_name.setText(item.getTaskName());
-        holder.tv_task_description.setText(item.getTaskDescription());
+        holder.tv_task_description.setText(item.getTaskShortDesc());
         holder.tv_rewardNum.setText(Utils.StripZeros(item.getRewardNum()) + "元");
 
         if (taskStatus == 0 || taskStatus == 1) { //做任务

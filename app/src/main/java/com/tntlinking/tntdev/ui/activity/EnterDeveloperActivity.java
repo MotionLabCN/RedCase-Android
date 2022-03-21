@@ -506,31 +506,33 @@ public final class EnterDeveloperActivity extends AppActivity {
      * 裁剪图片
      */
     private void cropImageFile(File sourceFile) {
-        ImageCropActivity.start(this, sourceFile, 1, 1, new ImageCropActivity.OnCropListener() {
+//        ImageCropActivity.start(this, sourceFile, 1, 1, new ImageCropActivity.OnCropListener() {
+//
+//            @Override
+//            public void onSucceed(Uri fileUri, String fileName) {
+//                File outputFile;
+//                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+//                    outputFile = new FileContentResolver(getActivity(), fileUri, fileName);
+//                } else {
+//                    try {
+//                        outputFile = new File(new URI(fileUri.toString()));
+//                    } catch (URISyntaxException e) {
+//                        e.printStackTrace();
+//                        outputFile = new File(fileUri.toString());
+//                    }
+//                }
+//                updateCropImage(outputFile, true);
+//            }
+//
+//            @Override
+//            public void onError(String details) {
+//                // 没有的话就不裁剪，直接上传原图片
+//                // 但是这种情况极其少见，可以忽略不计
+//                updateCropImage(sourceFile, false);
+//            }
+//        });
 
-            @Override
-            public void onSucceed(Uri fileUri, String fileName) {
-                File outputFile;
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                    outputFile = new FileContentResolver(getActivity(), fileUri, fileName);
-                } else {
-                    try {
-                        outputFile = new File(new URI(fileUri.toString()));
-                    } catch (URISyntaxException e) {
-                        e.printStackTrace();
-                        outputFile = new File(fileUri.toString());
-                    }
-                }
-                updateCropImage(outputFile, true);
-            }
-
-            @Override
-            public void onError(String details) {
-                // 没有的话就不裁剪，直接上传原图片
-                // 但是这种情况极其少见，可以忽略不计
-                updateCropImage(sourceFile, false);
-            }
-        });
+        updateCropImage(sourceFile, false); // 不裁剪，直接上传
     }
 
     /**

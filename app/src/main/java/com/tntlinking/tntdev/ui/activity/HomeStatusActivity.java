@@ -54,7 +54,7 @@ public final class HomeStatusActivity extends AppActivity {
     private TextView tv_avatar;
     private TextView tv_name;
     private TextView tv_status;
-    //    private TextView tv_do_task;
+//    private TextView tv_do_task;
 //    private TextView tv_task_name;
 //    private TextView tv_task_description;
 //    private TextView tv_rewardNum;
@@ -187,7 +187,7 @@ public final class HomeStatusActivity extends AppActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 GetNewbieApi.Bean item = mTaskAdapter.getItem(position);
-                if (item.getTaskId() == 2) {
+                if (item.getTaskId() == 2) { //入驻任务
                     if (item.getTaskStatus() == 0 || item.getTaskStatus() == 1) { //做任务
                         startActivity(EnterDeveloperActivity.class);
                     } else if (item.getTaskStatus() == 2) {
@@ -195,11 +195,17 @@ public final class HomeStatusActivity extends AppActivity {
                             startActivity(SaveQRActivity.class);
                         }
                     }
-                } else if (item.getTaskId() == 3) {
+                } else if (item.getTaskId() == 3) {//签订协议任务
 
                     String status = SPUtils.getInstance().getString(AppConfig.DEVELOP_STATUS, "1");
                     if (status.equals("3")){
-                        startActivity(SignContactActivity.class);
+                        if (item.getTaskStatus() == 0 || item.getTaskStatus() == 1) { //做任务
+                            startActivity(SignContactActivity.class);
+                        } else if (item.getTaskStatus() == 2) {
+                            if (item.getRewardStatus() == 0 || item.getRewardStatus() == 1) {// 已完成
+                                startActivity(SaveQRActivity.class);
+                            }
+                        }
                     }else {
                         new BaseDialog.Builder<>(HomeStatusActivity.this)
                                 .setContentView(R.layout.write_daily_delete_dialog)
@@ -260,8 +266,8 @@ public final class HomeStatusActivity extends AppActivity {
                 startActivity(PersonDataActivity.class);
                 break;
             case R.id.iv_interview:
-//                startActivity(InterviewActivity.class);
-                startActivity(LoginActivity1.class);
+                startActivity(InterviewActivity.class);
+//                startActivity(LoginActivity1.class);
                 break;
             case R.id.ll_cooperation:
             case R.id.ll_cooperation_1:

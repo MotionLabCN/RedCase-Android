@@ -19,6 +19,7 @@ public final class GetNewbieApi implements IRequestApi {
         private String taskName;
         private String rewardNum;
         private String taskDescription;
+        private String taskShortDesc;
         private int taskStatus;  //任务状态 0-未开始 1-进行中 2-已完成 3-已失效
         private int rewardStatus;  //	奖励发放状态：0-不满足 1-待发放 2-已发放
         private int taskId;// 2 是完善信息 3 是签订服务协议
@@ -69,6 +70,14 @@ public final class GetNewbieApi implements IRequestApi {
 
         public void setTaskDescription(String taskDescription) {
             this.taskDescription = taskDescription;
+        }
+
+        public String getTaskShortDesc() {
+            return taskShortDesc;
+        }
+
+        public void setTaskShortDesc(String taskShortDesc) {
+            this.taskShortDesc = taskShortDesc;
         }
 
         public int getTaskStatus() {

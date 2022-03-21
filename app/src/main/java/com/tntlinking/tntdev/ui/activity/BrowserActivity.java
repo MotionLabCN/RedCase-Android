@@ -108,6 +108,11 @@ public final class BrowserActivity extends AppActivity
         public void goBack() {
             finish();
         }
+
+//        @JavascriptInterface //js接口声明
+//        public void getTitle(String title) {
+//
+//        }
     }
 
 

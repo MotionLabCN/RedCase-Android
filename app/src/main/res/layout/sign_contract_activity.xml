@@ -69,6 +69,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_24"
                 android:text="如何签约？"
+                android:textStyle="bold"
                 android:textColor="@color/black"
                 android:textSize="@dimen/sp_15" />
 
@@ -204,8 +205,7 @@
                 android:layout_marginTop="@dimen/dp_5"
                 android:text="合作协议是由湖南迅基与您签订，湖南迅基是一家人力资源公司，平台委托该公司办理灵活用工协议并统一结算服务费，请您仔细确认协议条款，并完成手写签署。"
                 android:textColor="@color/color_hint_color"
-                android:textSize="@dimen/sp_12"
-                android:textStyle="bold" />
+                android:textSize="@dimen/sp_12" />
 
             <View
                 android:layout_width="match_parent"

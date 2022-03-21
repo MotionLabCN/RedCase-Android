@@ -166,6 +166,8 @@ public final class LoginActivity1 extends AppActivity {
                 }
                 umVerifyHelper.quitLoginPage();
                 mUIConfig.release();
+                //终端环境检查失败之后 跳转到其他号码校验方式
+                startActivity(LoginActivity2.class);
             }
         };
         umVerifyHelper.setAuthListener(mTokenResultListener);
