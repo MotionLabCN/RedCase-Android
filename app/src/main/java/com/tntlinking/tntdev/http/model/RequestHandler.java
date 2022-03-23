@@ -16,7 +16,6 @@ import com.tntlinking.tntdev.manager.ActivityManager;
 import com.tntlinking.tntdev.other.AppConfig;
 import com.tntlinking.tntdev.ui.activity.LoginActivity;
 import com.tntlinking.tntdev.ui.activity.LoginActivity1;
-import com.tntlinking.tntdev.ui.bean.ErrorBean;
 import com.hjq.gson.factory.GsonFactory;
 import com.hjq.http.EasyLog;
 import com.hjq.http.config.IRequestApi;

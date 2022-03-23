@@ -112,7 +112,7 @@ public final class AppConfig {
     /**
      * 签约失败签约成功  https://talent.stage-ttchain.tntlinking.com/#/page/sign_contract
      */
-    public static String SIGN_CONTRACT_URL = BuildConfig.SERVICE_URL + "/#/page/sign_contract  ";
+    public static String SIGN_CONTRACT_URL = BuildConfig.HOST_URL + "/#/page/sign_contract";
 
     /**
      * 登陆时候需要的 请求头 写死的

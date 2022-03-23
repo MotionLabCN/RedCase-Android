@@ -181,22 +181,12 @@ public final class LoginActivity2 extends AppActivity implements TextView.OnEdit
                         SPUtils.getInstance().put(AppConfig.DEVELOPER_ID, data.getData().getId());
 
 
-//                        String createDate = data.getData().getCreateDate();
-//                        int status = Integer.parseInt(data.getData().getStatus());
-//                        Intent intent = new Intent(LoginActivity2.this, HomeStatusActivity.class);
-//                        intent.putExtra(AppConfig.DEVELOP_STATUS, status);
-//                        if (createDate.contains("T")) {
-//                            String replace = createDate.replace("T", " ");
-//                            long timeSpanByNow = TimeUtils.getTimeSpanByNow(replace, TimeConstants.DAY);
-//                            intent.putExtra(AppConfig.CREATE_TIME, Math.abs(timeSpanByNow));
-//                        } else if (createDate.contains(" ")) {
-//                            long timeSpanByNow = TimeUtils.getTimeSpanByNow(createDate, TimeConstants.DAY);
-//                            intent.putExtra(AppConfig.CREATE_TIME, Math.abs(timeSpanByNow));
-//                        }
-//                        startActivity(intent);
-                        SPUtils.getInstance().getBoolean(AppConfig.GUIDE_VIEW, true);
-                        startActivity(LoginActivityView.class);
-                        SPUtils.getInstance().put(AppConfig.GUIDE_VIEW, false);
+//                        SPUtils.getInstance().getBoolean(AppConfig.GUIDE_VIEW, true);
+//                        startActivity(LoginActivityView.class);
+//                        SPUtils.getInstance().put(AppConfig.GUIDE_VIEW, false);
+//                        ActivityManager.getInstance().finishAllActivities();
+
+                        startActivity(HomeStatusActivity.class);
                         ActivityManager.getInstance().finishAllActivities();
                     }
                 });

@@ -131,8 +131,6 @@ public final class SignInfoActivity extends AppActivity {
                             if (!TextUtils.isEmpty(data.getData().getContractUrl())) {
                                 BrowserActivity.start(getActivity(), data.getData().getContractUrl());
                             }
-                        } else {
-                            toast(data.getMessage());
                         }
                     }
                 });

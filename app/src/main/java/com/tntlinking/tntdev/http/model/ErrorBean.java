@@ -1,4 +1,4 @@
-package com.tntlinking.tntdev.ui.bean;
+package com.tntlinking.tntdev.http.model;
 
 /**
  * Created by Dan on 2021/12/23.

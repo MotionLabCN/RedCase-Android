@@ -20,6 +20,7 @@ import com.tntlinking.tntdev.action.StatusAction;
 import com.tntlinking.tntdev.aop.CheckNet;
 import com.tntlinking.tntdev.aop.Log;
 import com.tntlinking.tntdev.app.AppActivity;
+import com.tntlinking.tntdev.manager.ActivityManager;
 import com.tntlinking.tntdev.widget.BrowserView;
 import com.tntlinking.tntdev.widget.StatusLayout;
 import com.scwang.smart.refresh.layout.SmartRefreshLayout;
@@ -105,8 +106,16 @@ public final class BrowserActivity extends AppActivity
         }
 
         @JavascriptInterface //js接口声明
-        public void goBack() {
-            finish();
+        public void goBack(String params) {
+            if (params.equals("app")) {
+                startActivity(PersonDataActivity.class);
+                ActivityManager.getInstance().finishAllActivities();
+            } else if (params.equals("qugongbao")) {
+                startActivity(HomeStatusActivity.class);
+                ActivityManager.getInstance().finishAllActivities();
+            } else {
+                finish();
+            }
         }
 
 //        @JavascriptInterface //js接口声明
@@ -209,7 +218,7 @@ public final class BrowserActivity extends AppActivity
             if (icon == null) {
                 return;
             }
-            setRightIcon(new BitmapDrawable(getResources(), icon));
+//            setRightIcon(new BitmapDrawable(getResources(), icon));
         }
 
         /**

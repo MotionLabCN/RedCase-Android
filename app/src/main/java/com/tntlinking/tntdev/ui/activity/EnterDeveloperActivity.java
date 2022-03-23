@@ -16,6 +16,8 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.blankj.utilcode.constant.TimeConstants;
+import com.blankj.utilcode.util.FileUtils;
+import com.blankj.utilcode.util.ImageUtils;
 import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.TimeUtils;
 import com.bumptech.glide.load.MultiTransformation;
@@ -39,6 +41,8 @@ import com.tntlinking.tntdev.http.api.UpdateImageApi;
 import com.tntlinking.tntdev.http.glide.GlideApp;
 import com.tntlinking.tntdev.http.model.HttpData;
 import com.tntlinking.tntdev.other.AppConfig;
+import com.tntlinking.tntdev.other.BitmapUtil;
+import com.tntlinking.tntdev.other.FileSizeUtil;
 import com.tntlinking.tntdev.other.TimeUtil;
 import com.tntlinking.tntdev.other.Utils;
 import com.tntlinking.tntdev.ui.adapter.AddEducationAdapter;
@@ -532,7 +536,30 @@ public final class EnterDeveloperActivity extends AppActivity {
 //            }
 //        });
 
-        updateCropImage(sourceFile, false); // 不裁剪，直接上传
+//        updateCropImage(sourceFile, false); // 不裁剪，直接上传
+//        double fileSize = FileSizeUtil.getFileOrFilesSize(sourceFile, 3);
+//        if (2 < fileSize && fileSize < 10) {//图片大于2M 压缩再上传，小于2M 直接上传
+//            File file = new File(BitmapUtil.compressImage(sourceFile.getAbsolutePath(), 90));
+//            EasyLog.print("===1111====="+ FileUtils.getSize(file));
+//            updateCropImage(file, false);
+//        } else if (fileSize > 10) {
+//            File file = new File(BitmapUtil.compressImage(sourceFile.getAbsolutePath(), 80));
+//            EasyLog.print("===222====="+ FileUtils.getSize(file));
+//
+//            updateCropImage(file, false);
+//        } else {
+//            updateCropImage(sourceFile, false);
+//        }
+
+        double fileSize = FileSizeUtil.getFileOrFilesSize(sourceFile, 3);
+        if (fileSize > 2) {//图片大于2M 压缩再上传，小于2M 直接上传
+            File file = new File(BitmapUtil.compressImage(sourceFile.getAbsolutePath(), 90));
+            toast("图片压缩大小：" + FileUtils.getSize(file));
+            updateCropImage(file, false);
+        } else {
+            updateCropImage(sourceFile, false);
+        }
+
     }
 
     /**
