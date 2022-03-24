@@ -552,10 +552,12 @@ public final class EnterDeveloperActivity extends AppActivity {
 //        }
 
         double fileSize = FileSizeUtil.getFileOrFilesSize(sourceFile, 3);
+        EasyLog.print("===FileUtils=111==="+ FileUtils.getSize(sourceFile));
         if (fileSize > 2) {//图片大于2M 压缩再上传，小于2M 直接上传
             File file = new File(BitmapUtil.compressImage(sourceFile.getAbsolutePath(), 90));
-            toast("图片压缩大小：" + FileUtils.getSize(file));
+            EasyLog.print("===getSize=222==="+ FileUtils.getSize(file));
             updateCropImage(file, false);
+            toast("图片压缩大小==>>>" + FileUtils.getSize(file));
         } else {
             updateCropImage(sourceFile, false);
         }
@@ -580,6 +582,7 @@ public final class EnterDeveloperActivity extends AppActivity {
 
                     @Override
                     public void onSucceed(HttpData<String> data) {
+
                         mAvatarUrl = Uri.parse(data.getData());
                         GlideApp.with(getActivity())
                                 .load(mAvatarUrl)

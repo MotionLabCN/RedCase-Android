@@ -1,9 +1,4 @@
 package com.tntlinking.tntdev.other;
-
-/**
- * Created by Dan on 2022/3/22.
- */
-
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -18,9 +13,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 /**
- * Created by yemao on 2017/3/15.
- * 关于图片的工具类
+ * Created by Dan on 2022/3/22.
  */
+
 
 public class BitmapUtil {
 
