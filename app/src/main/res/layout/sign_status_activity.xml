@@ -9,6 +9,7 @@
     android:orientation="vertical">
 
     <com.hjq.bar.TitleBar
+        android:id="@+id/title_bar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_50"
         app:leftIcon="@drawable/icon_back_black"
@@ -34,7 +35,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:background="@drawable/icon_sign_fail"
+            android:background="@drawable/icon_cancel_success"
             android:scaleType="centerInside" />
 
         <TextView
@@ -42,7 +43,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_20"
-            android:text="签约失败"
+            android:text="注销成功"
             android:textColor="@color/black"
             android:textSize="@dimen/sp_13" />
 
@@ -60,6 +61,6 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/dp_16"
         android:layout_marginVertical="@dimen/dp_20"
-        android:text="联系顾问" />
+        android:text="重新开始" />
 
 </LinearLayout>

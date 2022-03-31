@@ -24,6 +24,7 @@ public final class PersonSettingActivity extends AppActivity {
 
     private AppCompatButton mOutLogin;
     private SettingBar mSettingPhone;
+    private SettingBar mSettingCancelService;
 
 
     @Override
@@ -35,9 +36,10 @@ public final class PersonSettingActivity extends AppActivity {
     protected void initView() {
 
         mSettingPhone = findViewById(R.id.setting_phone);
+        mSettingCancelService = findViewById(R.id.setting_cancel_service);
         mOutLogin = findViewById(R.id.btn_out_login);
 
-        setOnClickListener(mSettingPhone, mOutLogin);
+        setOnClickListener(mSettingPhone, mSettingCancelService, mOutLogin);
 
 
     }
@@ -68,8 +70,10 @@ public final class PersonSettingActivity extends AppActivity {
         if (view == mSettingPhone) {
 
             startActivity(ChangePhoneActivity.class);
-        } else if (view == mOutLogin) {
+        } else if (view == mSettingCancelService) {
+            startActivity(CancelServiceActivity.class);
 
+        } else if (view == mOutLogin) {
             new BaseDialog.Builder<>(PersonSettingActivity.this)
                     .setContentView(R.layout.write_daily_delete_dialog)
                     .setAnimStyle(BaseDialog.ANIM_SCALE)

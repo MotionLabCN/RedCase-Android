@@ -1,11 +1,17 @@
 package com.tntlinking.tntdev.ui.activity;
 
 import android.net.Uri;
+import android.os.Build;
+import android.text.SpannableStringBuilder;
+import android.text.style.ClickableSpan;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.blankj.utilcode.util.SPUtils;
+import com.blankj.utilcode.util.SpanUtils;
 import com.gyf.immersionbar.ImmersionBar;
 import com.hjq.base.BaseDialog;
 import com.hjq.http.EasyConfig;
@@ -31,6 +37,7 @@ import com.umeng.umverify.listener.UMTokenResultListener;
 import com.umeng.umverify.model.UMTokenRet;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatCheckBox;
 
@@ -70,6 +77,7 @@ public final class LoginActivity1 extends AppActivity {
 
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void initData() {
         if (!BuildConfig.DEBUG) {
@@ -77,6 +85,40 @@ public final class LoginActivity1 extends AppActivity {
             mUIConfig = BaseUIConfig.init(this, umVerifyHelper);
         }
 
+
+        //进入页面就弹隐私条款，同意 后面的隐私条款默认被勾选
+        BaseDialog.Builder<?> builder = new BaseDialog.Builder<>(LoginActivity1.this)
+                .setContentView(R.layout.write_daily_delete_dialog)
+                .setAnimStyle(BaseDialog.ANIM_SCALE)
+                .setCancelable(false)
+                .setCanceledOnTouchOutside(false)
+                .setText(R.id.tv_title, "spannableStringBuilder")
+                .setText(R.id.btn_dialog_custom_ok, "同意")
+                .setText(R.id.btn_dialog_custom_cancel, "不同意")
+                .setOnClickListener(R.id.btn_dialog_custom_ok, (BaseDialog.OnClickListener<Button>) (dialog, button) -> dialog.dismiss())
+                .setOnClickListener(R.id.btn_dialog_custom_cancel, (dialog, views) -> {
+                    ActivityManager.getInstance().finishAllActivities();//退出程序
+                });
+
+        TextView viewById = builder.findViewById(R.id.tv_title);
+        SpanUtils.with(viewById).append("我已阅读并同意").setForegroundColor(getColor(R.color.color_text_color))
+                .append("《隐私权限》").setClickSpan(new ClickableSpan() {
+
+            @Override
+            public void onClick(@NonNull View widget) {
+                BrowserActivity.start(getActivity(), AppConfig.PRIVATE_URL);
+            }
+        }).setForegroundColor(getColor(R.color.color_text_color)).append("和")
+                .setForegroundColor(getColor(R.color.color_text_color)).append("《用户协议》").setClickSpan(new ClickableSpan() {
+
+            @Override
+            public void onClick(@NonNull View widget) {
+                BrowserActivity.start(getActivity(), AppConfig.AGREEMENT_URL);
+            }
+        }).setForegroundColor(getColor(R.color.color_text_color)).append("的全部条款，同意后可开始使用我们的服务。")
+                .setForegroundColor(getColor(R.color.color_text_color)).create();
+
+        builder.show();
     }
 
     private AuthPageConfig mUIConfig;

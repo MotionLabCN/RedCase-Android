@@ -112,7 +112,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@null"
-                android:checked="false"
+                android:checked="true"
                 app:buttonCompat="@drawable/checkbox_icon_selector" />
 
 

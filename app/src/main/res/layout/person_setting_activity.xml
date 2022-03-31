@@ -31,6 +31,15 @@
         app:bar_rightDrawable="@drawable/icon_arrow_right"
         app:bar_rightText="xxxxx" />
 
+    <com.hjq.widget.layout.SettingBar
+        android:id="@+id/setting_cancel_service"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:bar_leftText="注销账户"
+        app:bar_lineVisible="false"
+        app:bar_rightDrawableSize="@dimen/dp_16"
+        app:bar_rightDrawable="@drawable/icon_arrow_right" />
+
     <View
         android:layout_width="match_parent"
         android:layout_height="0dp"
