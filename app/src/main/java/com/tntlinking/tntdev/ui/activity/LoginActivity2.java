@@ -47,7 +47,7 @@ public final class LoginActivity2 extends AppActivity implements TextView.OnEdit
     private CountdownView mCountdownView;
     private AppCompatCheckBox cb_deal;
     private TextView tv_deal;
-    private boolean hasChecked = false;
+    private boolean hasChecked = true;//默认条款是已选择状态
 
     @Override
     protected int getLayoutId() {

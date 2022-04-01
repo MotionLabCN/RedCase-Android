@@ -374,7 +374,7 @@
                     android:id="@+id/lv_task"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:divider="#FFECECEC"
+                    android:divider="@null"
                     android:dividerHeight="@dimen/line_size" />
                 <LinearLayout
                     android:id="@+id/ll_task_empty"
