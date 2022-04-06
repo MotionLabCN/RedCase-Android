@@ -11,6 +11,7 @@
 
 
     <ScrollView
+        android:id="@+id/scroll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -351,6 +352,7 @@
     </ScrollView>
 
     <com.hjq.bar.TitleBar
+        android:id="@+id/title_bar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_50"
         android:background="@color/transparent"

@@ -1,13 +1,17 @@
 package com.tntlinking.tntdev.ui.activity;
 
 import android.content.Intent;
+import android.os.Build;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.blankj.utilcode.util.SPUtils;
+import com.blankj.utilcode.util.SizeUtils;
 import com.gyf.immersionbar.ImmersionBar;
+import com.hjq.bar.TitleBar;
 import com.hjq.base.BaseDialog;
 import com.tntlinking.tntdev.R;
 import com.tntlinking.tntdev.aop.SingleClick;
@@ -22,6 +26,7 @@ import com.hjq.widget.layout.SettingBar;
 import com.tntlinking.tntdev.other.Utils;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 
 
 public final class PersonDataActivity extends AppActivity {
@@ -35,6 +40,8 @@ public final class PersonDataActivity extends AppActivity {
     private SettingBar person_data_about;
     private SettingBar person_data_recommend;
     private SettingBar person_data_service;
+    private ScrollView scroll;
+    private TitleBar title_bar;
     private TextView tv_avatar;
     private TextView tv_name;
     private TextView tv_position;
@@ -53,6 +60,7 @@ public final class PersonDataActivity extends AppActivity {
         return R.layout.persondata_activity;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void initView() {
 //        tv_status = findViewById(R.id.tv_status);
@@ -65,6 +73,8 @@ public final class PersonDataActivity extends AppActivity {
         person_data_about = findViewById(R.id.person_data_about);
         person_data_recommend = findViewById(R.id.person_data_recommend);
         person_data_service = findViewById(R.id.person_data_service);
+        scroll = findViewById(R.id.scroll);
+        title_bar = findViewById(R.id.title_bar);
         tv_avatar = findViewById(R.id.tv_avatar);
         tv_name = findViewById(R.id.tv_name);
         tv_position = findViewById(R.id.tv_position);
@@ -80,6 +90,17 @@ public final class PersonDataActivity extends AppActivity {
 //        } else {
 //            tv_avatar.setBackground(getResources().getDrawable(R.drawable.dot_oval_blue));
 //        }
+
+        scroll.setOnScrollChangeListener(new View.OnScrollChangeListener() {
+            @Override
+            public void onScrollChange(View v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+                if (scrollY <= 0) {
+                    title_bar.setBackgroundColor(getColor(R.color.transparent));
+                } else if (scrollY > 0 && scrollY < SizeUtils.dp2px(200)) {
+                    title_bar.setBackgroundColor(getColor(R.color.white));
+                }
+            }
+        });
     }
 
     @Override

@@ -121,7 +121,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginLeft="10dp"
                 android:text="我已阅读并同意 《隐私权限》和《用户协议》"
                 android:textColor="@color/gray"
                 android:textSize="@dimen/sp_12" />

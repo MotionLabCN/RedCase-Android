@@ -118,15 +118,14 @@
                     android:id="@+id/viewpager"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dp_220"
-                    android:layout_marginTop="@dimen/dp_32"
-                    android:paddingLeft="@dimen/dp_16" />
+                    android:layout_marginTop="@dimen/dp_32" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/dp_32"
+                    android:layout_marginLeft="@dimen/dp_16"
                     android:layout_marginTop="@dimen/dp_16"
-                    android:layout_marginRight="@dimen/dp_32"
+                    android:layout_marginRight="@dimen/dp_16"
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
 
@@ -242,7 +241,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_32"
                     android:layout_marginBottom="@dimen/dp_16"
-                    android:paddingLeft="@dimen/dp_32"
+                    android:paddingLeft="@dimen/dp_16"
                     android:text="新手任务"
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_18"
@@ -383,6 +382,7 @@
                     android:gravity="center|top"
                     android:orientation="vertical"
                     android:paddingTop="@dimen/dp_20"
+                    android:paddingBottom="@dimen/dp_16"
                     android:visibility="gone">
 
                     <ImageView
@@ -405,7 +405,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginTop="@dimen/dp_20"
                     android:layout_marginBottom="@dimen/dp_20"
                     android:orientation="horizontal">
 
@@ -434,18 +433,17 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp_16"
                     android:layout_marginTop="@dimen/dp_16"
+                    android:layout_marginRight="@dimen/dp_16"
                     android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    android:paddingLeft="@dimen/dp_15"
-                    android:paddingRight="@dimen/dp_15">
+                    android:orientation="horizontal">
 
 
                     <LinearLayout
                         android:id="@+id/ll_cooperation_1"
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
                         android:gravity="center"
                         android:orientation="vertical">
 
@@ -464,11 +462,15 @@
                             android:textSize="@dimen/sp_12" />
                     </LinearLayout>
 
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/dp_1"
+                        android:layout_weight="1" />
+
                     <LinearLayout
                         android:id="@+id/ll_service_1"
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
                         android:gravity="center"
                         android:orientation="vertical">
 
@@ -487,11 +489,15 @@
                             android:textSize="@dimen/sp_12" />
                     </LinearLayout>
 
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/dp_1"
+                        android:layout_weight="1" />
+
                     <LinearLayout
                         android:id="@+id/ll_question_1"
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
                         android:gravity="center"
                         android:orientation="vertical">
 
@@ -510,11 +516,15 @@
                             android:textSize="@dimen/sp_12" />
                     </LinearLayout>
 
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/dp_1"
+                        android:layout_weight="1" />
+
                     <LinearLayout
                         android:id="@+id/ll_contact_1"
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
                         android:gravity="center"
                         android:orientation="vertical">
 

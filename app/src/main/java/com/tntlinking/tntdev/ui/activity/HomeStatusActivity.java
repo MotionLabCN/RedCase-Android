@@ -553,7 +553,7 @@ public final class HomeStatusActivity extends AppActivity {
 
         @Override
         public float getPageWidth(int position) {
-            return (float) 0.9;
+            return (float) 0.8;
         }
     }
 
