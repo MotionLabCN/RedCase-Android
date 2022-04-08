@@ -154,6 +154,8 @@ public final class PersonDataActivity extends AppActivity {
 
                     @Override
                     public void onSucceed(HttpData<GetDeveloperStatusApi.Bean> data) {
+                        SPUtils.getInstance().put(AppConfig.CAREER_ID, data.getData().getCareerDirectionId());
+
                         if (TextUtils.isEmpty(data.getData().getRealName())) {
                             tv_avatar.setText("朋友");
                         } else {

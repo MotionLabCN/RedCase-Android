@@ -4,14 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context="com.tntlinking.tntdev.ui.activity.StatusActivity">
+    android:orientation="vertical">
 
     <com.hjq.bar.TitleBar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:leftIcon="@drawable/icon_back_black"
         app:titleStyle="bold"
+        app:lineVisible="false"
         app:title="收益账单" />
 
     <LinearLayout

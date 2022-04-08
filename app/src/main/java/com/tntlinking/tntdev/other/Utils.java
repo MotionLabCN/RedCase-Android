@@ -391,13 +391,22 @@ public class Utils {
         }
     }
 
+    /**
+     * @param str  去掉字符串后面多余的 0
+     * @return
+     */
     public static String StripZeros(String str) {
-        //若是String类型，也可以先转为BigDecimal
-        BigDecimal value = new BigDecimal(str);
-        //去除多余0
-        BigDecimal noZeros = value.stripTrailingZeros();
-        //BigDecimal => String
-        return noZeros.toPlainString();
+        if (!TextUtils.isEmpty(str)) {
+            //若是String类型，也可以先转为BigDecimal
+            BigDecimal value = new BigDecimal(str);
+            //去除多余0
+            BigDecimal noZeros = value.stripTrailingZeros();
+            //BigDecimal => String
+            return noZeros.toPlainString();
+        } else {
+            return "";
+        }
+
 
     }
 
@@ -428,7 +437,7 @@ public class Utils {
         String mName = "朋友";
         if (!TextUtils.isEmpty(name)) {
             if (name.length() > 2) {
-                 mName = name.substring(name.length() - 2);
+                mName = name.substring(name.length() - 2);
             } else {
                 return name;
             }

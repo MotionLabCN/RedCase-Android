@@ -22,6 +22,7 @@ import com.tntlinking.tntdev.http.api.UpdateBasicInfoApi;
 import com.tntlinking.tntdev.http.api.UpdateCareerApi;
 import com.tntlinking.tntdev.http.model.HttpData;
 import com.tntlinking.tntdev.other.AppConfig;
+import com.tntlinking.tntdev.other.Utils;
 import com.tntlinking.tntdev.ui.bean.DeveloperInfoBean;
 import com.tntlinking.tntdev.ui.bean.SendDeveloperBean;
 import com.tntlinking.tntdev.ui.dialog.DictionarySelectDialog;
@@ -177,10 +178,10 @@ public final class AddCareerActivity extends AppActivity {
                 break;
 
             case R.id.btn_next:
+                curSalary = Utils.StripZeros(et_salary.getText().toString());
+                lowestSalary = Utils.StripZeros(et_expect_salary_low.getText().toString());
+                highestSalary = Utils.StripZeros(et_expect_salary_high.getText().toString());
 
-                curSalary = et_salary.getText().toString();
-                lowestSalary = et_expect_salary_low.getText().toString();
-                highestSalary = et_expect_salary_high.getText().toString();
                 if (careerDirectionId == 0) {
                     toast("没选择专业方向");
                     return;
@@ -230,7 +231,7 @@ public final class AddCareerActivity extends AppActivity {
 
                     @Override
                     public void onSucceed(HttpData<List<GetProvinceApi.ProvinceBean>> data) {
-                        SPUtils.getInstance().put(AppConfig.CAREER_ID,careerDirectionId);//保存职业方向 后面获取标签需要用到
+                        SPUtils.getInstance().put(AppConfig.CAREER_ID, careerDirectionId+"");//保存职业方向 后面获取标签需要用到
                         Intent intent = new Intent();
                         setResult(RESULT_OK, intent);
                         finish();

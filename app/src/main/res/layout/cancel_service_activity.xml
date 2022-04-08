@@ -43,6 +43,7 @@
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_commit"
         style="@style/ButtonStyle"
+        android:enabled="false"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/dp_16"

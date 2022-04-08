@@ -148,6 +148,9 @@ public final class AppConfig {
     public static String DEVELOP_NAME = "develop_name";
 
     public static String CREATE_TIME = "create_time";
+    /**
+     * 职业行业id ，后台 前端， 移动端
+     */
     public static String CAREER_ID = "career_id";
     public static String GUIDE_VIEW = "guide_view";
 
@@ -163,5 +166,11 @@ public final class AppConfig {
      * 签约服务弹框，只弹一次
      */
     public static String SERVICE_DIALOG = "service_dialog";
+
+    /**
+     * 登陆查看协议弹框，同意之后不在显示，否则一直弹框
+     */
+    public static String DEAL_DIALOG = "deal_dialog";
+
 
 }

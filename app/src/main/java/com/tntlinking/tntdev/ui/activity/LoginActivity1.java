@@ -87,10 +87,12 @@ public final class LoginActivity1 extends AppActivity {
         }
 
         new Handler().postDelayed(new Runnable() {
-
             @Override
             public void run() {
-                showDealDialog();
+                boolean mBoolean = SPUtils.getInstance().getBoolean(AppConfig.DEAL_DIALOG, false);
+                if (!mBoolean){
+                    showDealDialog();
+                }
             }
         }, 1000);
 
@@ -301,9 +303,13 @@ public final class LoginActivity1 extends AppActivity {
                 .setText(R.id.tv_title, "spannableStringBuilder")
                 .setText(R.id.btn_dialog_custom_ok, "同意")
                 .setText(R.id.btn_dialog_custom_cancel, "不同意")
-                .setOnClickListener(R.id.btn_dialog_custom_ok, (BaseDialog.OnClickListener<Button>) (dialog, button) -> dialog.dismiss())
-                .setOnClickListener(R.id.btn_dialog_custom_cancel, (dialog, views) -> {
+                .setOnClickListener(R.id.btn_dialog_custom_cancel, (BaseDialog.OnClickListener<Button>) (dialog, button) -> {
+                    dialog.dismiss();
                     ActivityManager.getInstance().finishAllActivities();//退出程序
+                })
+                .setOnClickListener(R.id.btn_dialog_custom_ok, (dialog, views) -> {
+                    dialog.dismiss();
+                    SPUtils.getInstance().put(AppConfig.DEAL_DIALOG, true);
                 });
 
         TextView viewById = builder.findViewById(R.id.tv_title);

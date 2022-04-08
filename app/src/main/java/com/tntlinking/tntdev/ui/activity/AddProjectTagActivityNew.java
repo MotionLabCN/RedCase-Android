@@ -257,22 +257,20 @@ public final class AddProjectTagActivityNew extends AppActivity {
         mTagAdapter5 = new TagAdapter<>(this);
         fl_skill_tag_5.setTagCheckedMode(FlowTagLayout.FLOW_TAG_CHECKED_MULTI);
         fl_skill_tag_5.setAdapter(mTagAdapter5);
-        fl_skill_tag_5.setOnTagSelectListener(new FlowTagLayout.OnTagSelectListener() {
+        fl_skill_tag_5.setOnTagClickListener(new FlowTagLayout.OnTagClickListener() {
             @Override
-            public void onItemSelect(FlowTagLayout parent, List<Integer> selectedList) {
-                if (selectedList != null && selectedList.size() > 0) {
-                    StringBuilder sb = new StringBuilder();
-
-                    for (int i : selectedList) {
-                        sb.append(parent.getAdapter().getItem(i));
-                        sb.append(":");
-                    }
-
-                    toast(sb.toString());
+            public void onItemClick(FlowTagLayout parent, View view, int position) {
+                GetTagListApi.Bean.ChildrenBean childrenBean = mTagAdapter5.getData().get(position);
+                childrenBean.setType(5);
+                int pos = positionList(mSelectList, childrenBean);
+                if (view.isSelected()) {
+                    mSelectList.add(childrenBean);
                 } else {
-                    Snackbar.make(parent, "没有选择标签", Snackbar.LENGTH_LONG)
-                            .setAction("Action", null).show();
+//                    mSelectList.remove(childrenBean);
+                    mSelectList.remove(pos);
                 }
+
+                mTagAdapterSelect.onlyAddAll(mSelectList);
             }
         });
 
@@ -292,9 +290,8 @@ public final class AddProjectTagActivityNew extends AppActivity {
     @Override
     protected void initData() {
 //        int careerDirectionId = SendDeveloperBean.getSingleton().getCareerDirectionId();
-        int careerDirectionId = SPUtils.getInstance().getInt(AppConfig.CAREER_ID, 163);
-        getTagList(careerDirectionId + "");
-
+        String careerDirectionId = SPUtils.getInstance().getString(AppConfig.CAREER_ID, "163");
+        getTagList(careerDirectionId);
 
     }
 
@@ -612,6 +609,105 @@ public final class AddProjectTagActivityNew extends AppActivity {
                             mTagAdapter4.onlyAddAll(data.getData().get(3).getChildren());
                             mTagAdapter5.onlyAddAll(data.getData().get(4).getChildren());
 
+                            if (mSelectList != null) {
+                                for (int i = 0; i < mSelectList.size(); i++) {
+                                    if (mSelectList.get(i).getType() == 1) {
+                                        for (int j = 0; j < dataBean.get(0).getChildren().size(); j++) {
+                                            if (mSelectList.get(i).getSkillName().equals(dataBean.get(0).getChildren().get(j).getSkillName())) {
+                                                fl_skill_tag_1.getChildAt(j).setSelected(true);
+                                                GetTagListApi.Bean.ChildrenBean childrenBean = dataBean.get(0).getChildren().get(j);
+                                                childrenBean.setType(1);
+                                                mList1.add(childrenBean);
+                                                continue;
+                                            }
+                                        }
+                                    } else if (mSelectList.get(i).getType() == 2) {
+                                        for (int j = 0; j < dataBean.get(1).getChildren().size(); j++) {
+                                            if (mSelectList.get(i).getSkillName().equals(dataBean.get(1).getChildren().get(j).getSkillName())) {
+                                                fl_skill_tag_2.getChildAt(j).setSelected(true);
+                                                GetTagListApi.Bean.ChildrenBean childrenBean = dataBean.get(1).getChildren().get(j);
+                                                childrenBean.setType(2);
+                                                mList1.add(childrenBean);
+                                                continue;
+                                            }
+                                        }
+                                    } else if (mSelectList.get(i).getType() == 3) {
+                                        for (int j = 0; j < dataBean.get(2).getChildren().size(); j++) {
+                                            if (mSelectList.get(i).getSkillName().equals(dataBean.get(2).getChildren().get(j).getSkillName())) {
+                                                fl_skill_tag_3.getChildAt(j).setSelected(true);
+                                                GetTagListApi.Bean.ChildrenBean childrenBean = dataBean.get(2).getChildren().get(j);
+                                                childrenBean.setType(3);
+                                                mList1.add(childrenBean);
+                                                continue;
+                                            }
+                                        }
+                                    } else if (mSelectList.get(i).getType() == 4) {
+                                        for (int j = 0; j < dataBean.get(3).getChildren().size(); j++) {
+                                            if (mSelectList.get(i).getSkillName().equals(dataBean.get(3).getChildren().get(j).getSkillName())) {
+                                                fl_skill_tag_4.getChildAt(j).setSelected(true);
+                                                GetTagListApi.Bean.ChildrenBean childrenBean = dataBean.get(3).getChildren().get(j);
+                                                childrenBean.setType(4);
+                                                mList1.add(childrenBean);
+                                                continue;
+                                            }
+                                        }
+                                    } else if (mSelectList.get(i).getType() == 5) {
+                                        for (int j = 0; j < dataBean.get(4).getChildren().size(); j++) {
+                                            if (mSelectList.get(i).getSkillName().equals(dataBean.get(4).getChildren().get(j).getSkillName())) {
+                                                fl_skill_tag_5.getChildAt(j).setSelected(true);
+                                                GetTagListApi.Bean.ChildrenBean childrenBean = dataBean.get(4).getChildren().get(j);
+                                                childrenBean.setType(5);
+                                                mList1.add(childrenBean);
+                                                continue;
+                                            }
+                                        }
+                                    } else if (mSelectList.get(i).getType() == 0) {
+                                        int position1 = positionList(dataBean.get(0).getChildren(), mSelectList.get(i));
+                                        if (position1 != -1) {
+                                            fl_skill_tag_1.getChildAt(position1).setSelected(true);
+                                            mSelectList.get(i).setType(1);
+                                            mList1.add(mSelectList.get(i));
+                                        }
+
+                                        int position2 = positionList(dataBean.get(1).getChildren(), mSelectList.get(i));
+                                        if (position2 != -1) {
+                                            fl_skill_tag_2.getChildAt(position2).setSelected(true);
+                                            mSelectList.get(i).setType(2);
+                                            mList1.add(mSelectList.get(i));
+                                        }
+                                        int position3 = positionList(dataBean.get(2).getChildren(), mSelectList.get(i));
+                                        if (position3 != -1) {
+                                            fl_skill_tag_3.getChildAt(position3).setSelected(true);
+                                            mSelectList.get(i).setType(3);
+                                            mList1.add(mSelectList.get(i));
+                                        }
+                                        int position4 = positionList(dataBean.get(3).getChildren(), mSelectList.get(i));
+                                        if (position4 != -1) {
+                                            fl_skill_tag_4.getChildAt(position4).setSelected(true);
+                                            mSelectList.get(i).setType(4);
+                                            mList1.add(mSelectList.get(i));
+                                        }
+                                        int position5 = positionList(dataBean.get(4).getChildren(), mSelectList.get(i));
+                                        if (position5 != -1) {
+                                            fl_skill_tag_5.getChildAt(position4).setSelected(true);
+                                            mSelectList.get(i).setType(5);
+                                            mList1.add(mSelectList.get(i));
+                                        }
+
+                                    }
+
+                                }
+
+
+                                for (int i = 0; i < mSelectList.size(); i++) {
+                                    if (!isInList(mallList, mSelectList.get(i))) {
+                                        mList1.add(mSelectList.get(i));
+                                    }
+                                }
+                                mSelectList.clear();
+                                mSelectList.addAll(mList1);
+                                mTagAdapterSelect.onlyAddAll(mSelectList);
+                            }
 
                         }
 

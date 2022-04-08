@@ -1,12 +1,15 @@
 package com.tntlinking.tntdev.ui.activity;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.content.Intent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.hjq.base.BaseDialog;
 import com.hjq.http.EasyHttp;
 import com.hjq.http.listener.HttpCallback;
 import com.tntlinking.tntdev.R;
@@ -15,6 +18,7 @@ import com.tntlinking.tntdev.app.AppActivity;
 import com.tntlinking.tntdev.http.api.CancellationApi;
 import com.tntlinking.tntdev.http.api.GetCancellationApi;
 import com.tntlinking.tntdev.http.model.HttpData;
+import com.tntlinking.tntdev.manager.ActivityManager;
 import com.tntlinking.tntdev.ui.adapter.CancelServiceAdapter;
 
 import java.util.List;
@@ -57,11 +61,15 @@ public final class CancelServiceActivity extends AppActivity {
     @Override
     public void onClick(View view) {
         if (view == mCommitView) {
-            if (isFlag) {
-                cancellation();
-            } else {
-                toast("您还有相关条件未通过，暂不能申请注销");
-            }
+            new BaseDialog.Builder<>(CancelServiceActivity.this)
+                    .setContentView(R.layout.write_daily_delete_dialog)
+                    .setAnimStyle(BaseDialog.ANIM_SCALE)
+                    .setText(R.id.tv_title, "确定注销账户吗？")
+                    .setOnClickListener(R.id.btn_dialog_custom_cancel, (BaseDialog.OnClickListener<Button>) (dialog, button) -> dialog.dismiss())
+                    .setOnClickListener(R.id.btn_dialog_custom_ok, (dialog, views) -> {
+                        cancellation(dialog);
+                    })
+                    .show();
 
         }
 
@@ -85,6 +93,7 @@ public final class CancelServiceActivity extends AppActivity {
                                     isFlag = false;
                                     break;
                                 }
+                                mCommitView.setEnabled(isFlag);
                             }
                         }
                     }
@@ -92,7 +101,7 @@ public final class CancelServiceActivity extends AppActivity {
                 });
     }
 
-    private void cancellation() {
+    private void cancellation(Dialog dialog) {
         EasyHttp.post(this)
                 .api(new CancellationApi())
                 .request(new HttpCallback<HttpData<Void>>(this) {
@@ -102,6 +111,8 @@ public final class CancelServiceActivity extends AppActivity {
                         Intent intent = new Intent(CancelServiceActivity.this, SignStatusActivity.class);
                         intent.putExtra("status", "success");
                         startActivity(intent);
+                        dialog.dismiss();
+                        ActivityManager.getInstance().finishAllActivities(SignStatusActivity.class);
                     }
 
                     @Override
@@ -110,6 +121,7 @@ public final class CancelServiceActivity extends AppActivity {
                         Intent intent = new Intent(CancelServiceActivity.this, SignStatusActivity.class);
                         intent.putExtra("status", "fail");
                         startActivity(intent);
+                        dialog.dismiss();
                     }
                 });
     }
