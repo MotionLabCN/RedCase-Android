@@ -320,6 +320,9 @@ public final class HomeStatusActivity extends AppActivity {
     private List<AppListApi.Bean> mServiceList = new ArrayList<>();
     private List<AppListApi.Bean> mHistoryList = new ArrayList<>();
 
+    /**
+     * 获取在服务企业list
+     */
     private void getAppList() {
         EasyHttp.get(this)
                 .api(new AppListApi())
@@ -343,6 +346,9 @@ public final class HomeStatusActivity extends AppActivity {
                 });
     }
 
+    /**
+     * 获取面试邀约list
+     */
     @SuppressLint("CheckResult")
     private void getInterviewAppList() {
         EasyHttp.get(this)
@@ -374,6 +380,9 @@ public final class HomeStatusActivity extends AppActivity {
 
     }
 
+    /**
+     * 获取历史服务list
+     */
     private void getHistoryList() {
         EasyHttp.get(this)
                 .api(new HistoryListApi().setOrderData("2018-10-10"))
@@ -440,31 +449,35 @@ public final class HomeStatusActivity extends AppActivity {
                 });
     }
 
-    public void getStatus() {
-        EasyHttp.get(HomeStatusActivity.this)
-                .api(new GetDeveloperStatusApi())
-                .request(new HttpCallback<HttpData<GetDeveloperStatusApi.Bean>>(HomeStatusActivity.this) {
 
-                    @Override
-                    public void onSucceed(HttpData<GetDeveloperStatusApi.Bean> data) {
-                        // 1->待认证  2->待审核   3->审核成功 4->审核失败
-                        SPUtils.getInstance().put(AppConfig.DEVELOP_STATUS, data.getData().getStatus());
-                        SPUtils.getInstance().put(AppConfig.DEVELOP_NAME, data.getData().getRealName());
-                        String name = SPUtils.getInstance().getString(AppConfig.DEVELOP_NAME, "朋友");
-                        tv_avatar.setText(name);
-                        String createDate = data.getData().getCreateDate();
-                        long createTime = 0;
-                        if (createDate.contains("T")) {
-                            String replace = createDate.replace("T", " ");
-                            createTime = TimeUtils.getTimeSpanByNow(replace, TimeConstants.DAY);
-                        } else if (createDate.contains(" ")) {
-                            createTime = TimeUtils.getTimeSpanByNow(createDate, TimeConstants.DAY);
-                        }
-                        int status = Integer.parseInt(data.getData().getStatus());
-
-                    }
-                });
-    }
+    /**
+     * 获取用户信息
+     */
+//    public void getStatus() {
+//        EasyHttp.get(HomeStatusActivity.this)
+//                .api(new GetDeveloperStatusApi())
+//                .request(new HttpCallback<HttpData<GetDeveloperStatusApi.Bean>>(HomeStatusActivity.this) {
+//
+//                    @Override
+//                    public void onSucceed(HttpData<GetDeveloperStatusApi.Bean> data) {
+//                        // 1->待认证  2->待审核   3->审核成功 4->审核失败
+//                        SPUtils.getInstance().put(AppConfig.DEVELOP_STATUS, data.getData().getStatus());
+//                        SPUtils.getInstance().put(AppConfig.DEVELOP_NAME, data.getData().getRealName());
+//                        String name = SPUtils.getInstance().getString(AppConfig.DEVELOP_NAME, "朋友");
+//                        tv_avatar.setText(name);
+//                        String createDate = data.getData().getCreateDate();
+//                        long createTime = 0;
+//                        if (createDate.contains("T")) {
+//                            String replace = createDate.replace("T", " ");
+//                            createTime = TimeUtils.getTimeSpanByNow(replace, TimeConstants.DAY);
+//                        } else if (createDate.contains(" ")) {
+//                            createTime = TimeUtils.getTimeSpanByNow(createDate, TimeConstants.DAY);
+//                        }
+//                        int status = Integer.parseInt(data.getData().getStatus());
+//
+//                    }
+//                });
+//    }
 
     /**
      * 检查更新

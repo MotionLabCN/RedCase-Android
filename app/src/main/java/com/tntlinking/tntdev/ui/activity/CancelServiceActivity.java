@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -31,6 +32,7 @@ public final class CancelServiceActivity extends AppActivity {
     private TextView tv_tips;
     private AppCompatButton mCommitView;
     private CancelServiceAdapter mAdapter;
+    private LinearLayout ll_task_empty;
 
     @Override
     protected int getLayoutId() {
@@ -42,6 +44,7 @@ public final class CancelServiceActivity extends AppActivity {
 
         list_view = findViewById(R.id.list_view);
         tv_tips = findViewById(R.id.tv_tips);
+        ll_task_empty = findViewById(R.id.ll_task_empty);
         mCommitView = findViewById(R.id.btn_commit);
 
 
@@ -85,6 +88,9 @@ public final class CancelServiceActivity extends AppActivity {
                     @Override
                     public void onSucceed(HttpData<List<GetCancellationApi.ListBean>> data) {
                         if (data.getData().size() != 0) {
+                            list_view.setVisibility(View.VISIBLE);
+                            ll_task_empty.setVisibility(View.GONE);
+
                             mAdapter = new CancelServiceAdapter(CancelServiceActivity.this, data.getData());
                             list_view.setAdapter(mAdapter);
 
@@ -95,9 +101,18 @@ public final class CancelServiceActivity extends AppActivity {
                                 }
                                 mCommitView.setEnabled(isFlag);
                             }
+                        } else {
+                            list_view.setVisibility(View.GONE);
+                            ll_task_empty.setVisibility(View.VISIBLE);
                         }
                     }
 
+                    @Override
+                    public void onFail(Exception e) {
+                        super.onFail(e);
+                        list_view.setVisibility(View.GONE);
+                        ll_task_empty.setVisibility(View.VISIBLE);
+                    }
                 });
     }
 
