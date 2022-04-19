@@ -10,7 +10,9 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.blankj.utilcode.util.SPUtils;
 import com.hjq.base.BaseDialog;
+import com.hjq.http.EasyConfig;
 import com.hjq.http.EasyHttp;
 import com.hjq.http.listener.HttpCallback;
 import com.tntlinking.tntdev.R;
@@ -99,8 +101,8 @@ public final class CancelServiceActivity extends AppActivity {
                                     isFlag = false;
                                     break;
                                 }
-                                mCommitView.setEnabled(isFlag);
                             }
+                            mCommitView.setEnabled(isFlag);
                         } else {
                             list_view.setVisibility(View.GONE);
                             ll_task_empty.setVisibility(View.VISIBLE);
@@ -127,6 +129,8 @@ public final class CancelServiceActivity extends AppActivity {
                         intent.putExtra("status", "success");
                         startActivity(intent);
                         dialog.dismiss();
+                        SPUtils.getInstance().clear();
+                        EasyConfig.getInstance().removeHeader("Authorization");
                         ActivityManager.getInstance().finishAllActivities(SignStatusActivity.class);
                     }
 

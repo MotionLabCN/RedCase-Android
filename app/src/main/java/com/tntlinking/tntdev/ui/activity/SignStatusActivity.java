@@ -65,7 +65,6 @@ public final class SignStatusActivity extends AppActivity {
     public void onClick(View view) {
         if (view == btn_next) {
             if (status.equals("success")) {  //重新开始
-                SPUtils.getInstance().clear();
                 startActivity(LoginActivity1.class);
 
                 // 进行内存优化，销毁除登录页之外的所有界面

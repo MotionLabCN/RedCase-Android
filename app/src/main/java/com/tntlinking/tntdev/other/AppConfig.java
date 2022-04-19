@@ -69,13 +69,13 @@ public final class AppConfig {
     public static String HOST_URL = BuildConfig.HOST_URL + "/api/new_manpower/";
 
     /**
-     * 用户协议
+     * 用户协议    https://talent-business.stage-ttchain.tntlinking.com
      */
-    public static String AGREEMENT_URL = BuildConfig.HOST_URL + "/#/page/agreement";
+    public static String AGREEMENT_URL = BuildConfig.BUSINESS_URL + "/#/page/agreement";
     /**
-     * 隐私权限
+     * 隐私权限   https://talent-business.stage-ttchain.tntlinking.com/#/page/article?pageCode=049afbccd6e64a76951a1b204031801b
      */
-    public static String PRIVATE_URL = BuildConfig.HOST_URL + "/#/page/privacy";
+    public static String PRIVATE_URL = BuildConfig.BUSINESS_URL + "/#/page/privacy";
 
     /**
      *

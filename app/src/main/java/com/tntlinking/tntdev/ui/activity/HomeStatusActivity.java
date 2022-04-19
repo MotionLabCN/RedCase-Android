@@ -32,7 +32,9 @@ import com.tntlinking.tntdev.http.api.GetNewbieApi;
 import com.tntlinking.tntdev.http.api.HistoryListApi;
 import com.tntlinking.tntdev.http.glide.GlideApp;
 import com.tntlinking.tntdev.http.model.HttpData;
+import com.tntlinking.tntdev.manager.ActivityManager;
 import com.tntlinking.tntdev.other.AppConfig;
+import com.tntlinking.tntdev.other.DoubleClickHelper;
 import com.tntlinking.tntdev.other.Utils;
 import com.tntlinking.tntdev.ui.adapter.HistoryProjectAdapter;
 import com.tntlinking.tntdev.ui.adapter.HomeTaskAdapter;
@@ -571,4 +573,21 @@ public final class HomeStatusActivity extends AppActivity {
     }
 
 
+
+    @Override
+    public void onBackPressed() {
+        if (!DoubleClickHelper.isOnDoubleClick()) {
+            toast(R.string.home_exit_hint);
+            return;
+        }
+
+        // 移动到上一个任务栈，避免侧滑引起的不良反应
+        moveTaskToBack(false);
+        postDelayed(() -> {
+            // 进行内存优化，销毁掉所有的界面
+            ActivityManager.getInstance().finishAllActivities();
+            // 销毁进程（注意：调用此 API 可能导致当前 Activity onDestroy 方法无法正常回调）
+            // System.exit(0);
+        }, 300);
+    }
 }

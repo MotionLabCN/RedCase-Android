@@ -110,25 +110,31 @@ public final class SplashActivity extends AppActivity {
 
                                 @Override
                                 public void onSucceed(HttpData<GetDeveloperStatusApi.Bean> data) {
-                                    // 1->待认证  2->待审核   3->审核成功 4->审核失败
-                                    SPUtils.getInstance().put(AppConfig.DEVELOP_STATUS, data.getData().getStatus());
-                                    SPUtils.getInstance().put(AppConfig.DEVELOP_NAME, data.getData().getRealName());
-                                    SPUtils.getInstance().put(AppConfig.DEVELOPER_ID, data.getData().getId());
 
-                                    String createDate = data.getData().getCreateDate();
-                                    int status = Integer.parseInt(data.getData().getStatus());
-                                    Intent intent = new Intent(SplashActivity.this, HomeStatusActivity.class);
-                                    intent.putExtra(AppConfig.DEVELOP_STATUS, status);
-                                    if (createDate.contains("T")) {
-                                        String replace = createDate.replace("T", " ");
-                                        long timeSpanByNow = TimeUtils.getTimeSpanByNow(replace, TimeConstants.DAY);
-                                        intent.putExtra(AppConfig.CREATE_TIME, Math.abs(timeSpanByNow));
-                                    } else if (createDate.contains(" ")) {
-                                        long timeSpanByNow = TimeUtils.getTimeSpanByNow(createDate, TimeConstants.DAY);
-                                        intent.putExtra(AppConfig.CREATE_TIME, Math.abs(timeSpanByNow));
+                                    if (data != null) {
+                                        // 1->待认证  2->待审核   3->审核成功 4->审核失败
+                                        SPUtils.getInstance().put(AppConfig.DEVELOP_STATUS, data.getData().getStatus());
+                                        SPUtils.getInstance().put(AppConfig.DEVELOP_NAME, data.getData().getRealName());
+                                        SPUtils.getInstance().put(AppConfig.DEVELOPER_ID, data.getData().getId());
+
+                                        String createDate = data.getData().getCreateDate();
+                                        int status = Integer.parseInt(data.getData().getStatus());
+                                        Intent intent = new Intent(SplashActivity.this, HomeStatusActivity.class);
+                                        intent.putExtra(AppConfig.DEVELOP_STATUS, status);
+                                        if (createDate.contains("T")) {
+                                            String replace = createDate.replace("T", " ");
+                                            long timeSpanByNow = TimeUtils.getTimeSpanByNow(replace, TimeConstants.DAY);
+                                            intent.putExtra(AppConfig.CREATE_TIME, Math.abs(timeSpanByNow));
+                                        } else if (createDate.contains(" ")) {
+                                            long timeSpanByNow = TimeUtils.getTimeSpanByNow(createDate, TimeConstants.DAY);
+                                            intent.putExtra(AppConfig.CREATE_TIME, Math.abs(timeSpanByNow));
+                                        }
+                                        startActivity(intent);
+                                        finish();
+                                    } else {
+                                        startActivity(HomeStatusActivity.class);
+                                        finish();
                                     }
-                                    startActivity(intent);
-                                    finish();
 
 
                                 }

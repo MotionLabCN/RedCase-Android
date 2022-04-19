@@ -6,6 +6,7 @@ import android.widget.Button;
 
 import com.blankj.utilcode.util.SPUtils;
 import com.hjq.base.BaseDialog;
+import com.hjq.http.EasyConfig;
 import com.tntlinking.tntdev.R;
 import com.tntlinking.tntdev.aop.SingleClick;
 import com.tntlinking.tntdev.app.AppActivity;
@@ -99,6 +100,7 @@ public final class PersonSettingActivity extends AppActivity {
                     public void onSucceed(HttpData<Void> data) {
                         dialog.dismiss();
                         SPUtils.getInstance().clear();
+                        EasyConfig.getInstance().removeHeader("Authorization");
                         startActivity(LoginActivity1.class);
 
                         // 进行内存优化，销毁除登录页之外的所有界面

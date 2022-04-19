@@ -52,16 +52,17 @@ ext {
 //            }
             HOST_URL = "https://talent.stage-ttchain.tntlinking.com"
             SERVICE_URL = "https://stage-ttchain.tntlinking.com"
+            BUSINESS_URL = "https://talent-business.stage-ttchain.tntlinking.com"
 //            AGREEMENT_URL = "https://talent.stage-ttchain.tntlinking.com/#/page/agreement"
 //            PRIVATE_URL ="https://talent.stage-ttchain.tntlinking.com/#/page/privacy"
             break
         case SERVER_TYPE_PRODUCT:
             LOG_ENABLE = false
+
             BUGLY_ID = "请自行替换 Bugly 上面的 AppID"
             HOST_URL = "https://talent.tntlinking.com"
             SERVICE_URL = "https://www.tntlinking.com"
-//            HOST_URL = "https://talent.stage-ttchain.tntlinking.com"
-//            SERVICE_URL = "https://stage-ttchain.tntlinking.com"
+            BUSINESS_URL = "https://talent-business.tntlinking.com"
 //            AGREEMENT_URL = "https://talent.tntlinking.com/#/page/agreement"
 //            PRIVATE_URL ="https://talent.tntlinking.com/#/page/privacy"
 
