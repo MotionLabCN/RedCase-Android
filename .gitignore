@@ -105,4 +105,5 @@ lint/tmp/
 
 *.apk
 /.idea/
+/build.gradle
 /config.gradle

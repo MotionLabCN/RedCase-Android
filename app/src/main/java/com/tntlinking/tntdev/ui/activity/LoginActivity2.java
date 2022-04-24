@@ -93,6 +93,8 @@ public final class LoginActivity2 extends AppActivity implements TextView.OnEdit
 
         cb_deal.setOnCheckedChangeListener((buttonView, isChecked) -> {
             hasChecked = isChecked;
+
+
         });
     }
 
