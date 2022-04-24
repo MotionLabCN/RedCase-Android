@@ -87,7 +87,7 @@ public class DialogBottomConfig extends BaseUIConfig {
 
                 .setWebNavColor(Color.parseColor("#4850FF"))
                 .setSwitchAccHidden(true)
-                .setPrivacyState(true)//隐私条款是否默认勾选
+                .setPrivacyState(false)//隐私条款是否默认勾选
                 .setCheckboxHidden(false)
                 .setCheckedImgDrawable(mContext.getResources().getDrawable(R.drawable.icon_select))
                 .setUncheckedImgDrawable(mContext.getResources().getDrawable(R.drawable.icon_no_select))

@@ -57,10 +57,11 @@ public final class AddCareerActivity extends AppActivity {
     private int mWorkDay = 1; // 1 全日 2 半日
     private String mExpectSalary = "1"; // 期望薪资
 
+
     private int careerDirectionId = 0;
     private int workYearsId = 0;
     private String curSalary = "";
-    private int workDayMode = 1;
+    private int workDayMode = 1;// 1 全日 2 半日  //默认全日
     private String lowestSalary = "";
     private String highestSalary = "";
 

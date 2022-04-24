@@ -501,6 +501,7 @@ public final class EnterDeveloperActivity extends AppActivity {
                     public void onSucceed(HttpData<List<GetProvinceApi.ProvinceBean>> data) {
 //                        startActivity(SaveQRActivity.class);
 //                        finish();
+                        toast("提交成功");
                         onResume();
                     }
                 });
