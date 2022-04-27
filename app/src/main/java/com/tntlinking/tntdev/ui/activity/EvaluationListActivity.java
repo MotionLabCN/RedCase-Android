@@ -22,7 +22,7 @@ import java.util.List;
 
 public class EvaluationListActivity extends AppActivity {
    private final List<JKSelectJobsApi.Bean> jkSelectList = new ArrayList<>();
-   private int mjkid;
+   private int mJKid;
    private RecyclerView rv_speciality_list;
    private Button btn_out_evaluating;
 
@@ -46,9 +46,9 @@ public class EvaluationListActivity extends AppActivity {
       rv_speciality_list.setLayoutManager(layoutManager);
 
    }
-      private void getAddevaluationplan(){
+      private void getUndervaluation(){
          EasyHttp.post(this)
-                 .api(new GetAddEvaluationPlanApi().setjobId(mjkid))
+                 .api(new GetAddEvaluationPlanApi().setjobId(mJKid))
                  .request(new HttpCallback<HttpData<String>>(this) {
 
                     @SuppressLint("SetTextI18n")
@@ -86,7 +86,7 @@ public class EvaluationListActivity extends AppActivity {
                        EvaluationListAdapter mEvaluationListAdapter = new EvaluationListAdapter(jkSelectList);
                        rv_speciality_list.setAdapter(mEvaluationListAdapter);
                         mEvaluationListAdapter.setonRecyclerViewItemClickListener((jkSelectJobsApi, position) -> {
-                            mjkid =jkSelectJobsApi.getId();
+                            mJKid =jkSelectJobsApi.getId();
                             //点击按钮,将当前点击的下标传进去,刷新适配器
                             mEvaluationListAdapter.setSelPos(position);
                             mEvaluationListAdapter.notifyDataSetChanged();
@@ -106,7 +106,7 @@ public class EvaluationListActivity extends AppActivity {
     @Override
     public void onClick(View view) {
         if (view == btn_out_evaluating) { // 测评岗位列表
-            getAddevaluationplan();
+            getUndervaluation();
         }
     }
 }

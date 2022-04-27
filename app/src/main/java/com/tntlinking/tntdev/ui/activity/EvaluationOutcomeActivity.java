@@ -17,7 +17,7 @@ import com.tntlinking.tntdev.ui.adapter.EvaluationOutcomeListAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EvaluationOutcomeAtivity extends AppActivity {
+public class EvaluationOutcomeActivity extends AppActivity {
    private List<GetDeveloperJkStatusApi.Bean.stackInfoListBean> mStackInfoList = new ArrayList<>();
 
    private Button btn_out_evaluating;

@@ -65,7 +65,8 @@
             android:name="com.tntlinking.tntdev.ui.activity.SplashActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
-            android:theme="@style/SplashTheme">
+            android:theme="@style/SplashTheme"
+            android:exported="true">
 
             <!-- 程序入口 -->
             <intent-filter>
@@ -418,7 +419,12 @@
         <!-- H5测评计划页-->
         <!-- 测评结果页-->
         <activity
-            android:name="com.tntlinking.tntdev.ui.activity.EvaluationOutcomeAtivity"
+            android:name="com.tntlinking.tntdev.ui.activity.EvaluationOutcomeActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <!-- 测评结果中页-->
+        <activity
+            android:name="com.tntlinking.tntdev.ui.activity.EvaluationOutComeNullActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
         <activity

@@ -115,12 +115,12 @@ public final class PersonDataActivity extends AppActivity {
                             startActivity(EvaluationListActivity.class);
                         }else if (data.getData()!=null&&data.getData().getUserPlanStatus()==1){
                             if (data.getData().getStackInfoList().size()>0){
-                                startActivity(new Intent(PersonDataActivity.this, EvaluationOutcomeAtivity.class)
+                                startActivity(new Intent(PersonDataActivity.this, EvaluationOutcomeActivity.class)
                                         .putExtra("PlanUrl",data.getData().getPlanUrl())
                                         .putExtra("StackInfoList", (Serializable) data.getData().getStackInfoList())//集合
                                 );
                             }else {
-                                startActivity(new Intent(PersonDataActivity.this, EvaluationOutcomenullAtivity.class)
+                                startActivity(new Intent(PersonDataActivity.this, EvaluationOutComeNullActivity.class)
                                         .putExtra("PlanUrl",data.getData().getPlanUrl())
                                 );
                             }

@@ -8,7 +8,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_40"
-        android:background="@color/black5"
+        android:background="@color/color_C1C6D2"
         android:orientation="horizontal">
         <ImageView
             android:layout_width="@dimen/dp_30"
@@ -17,7 +17,7 @@
             android:layout_marginLeft="@dimen/dp_20"
             android:src="@drawable/icon_tab"/>
         <TextView
-            android:id="@+id/text_skill"
+            android:id="@+id/tv_skill"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="评测技能:Android"
@@ -32,24 +32,24 @@
         android:layout_height="@dimen/dp_320">
 
         <TextView
-            android:id="@+id/text_time_name"
+            android:id="@+id/tv_time_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/dp_15"
             android:layout_marginTop="@dimen/dp_24"
-            android:drawableLeft="@drawable/icon_time3"
+            android:drawableLeft="@drawable/icon_time"
             android:drawablePadding="@dimen/dp_4"
             android:gravity="center"
             android:text="时间"
-            android:textSize="@dimen/sp_18"
             android:textColor="@color/black"
+            android:textSize="@dimen/sp_18"
             tools:ignore="UseCompatTextViewDrawableXml" />
 
         <TextView
-            android:id="@+id/text_time"
+            android:id="@+id/tv_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/text_time_name"
+            android:layout_below="@+id/tv_time_name"
             android:layout_marginLeft="@dimen/dp_40"
             android:layout_marginTop="@dimen/dp_4"
             android:drawablePadding="@dimen/dp_4"
@@ -58,10 +58,10 @@
             android:textColor="@color/gray" />
 
         <TextView
-            android:id="@+id/evaluation_end_time"
+            android:id="@+id/tv_evaluation_end_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/text_time"
+            android:layout_below="@+id/tv_time"
             android:layout_marginLeft="@dimen/dp_40"
             android:layout_marginTop="@dimen/dp_10"
             android:drawablePadding="@dimen/dp_4"
@@ -73,10 +73,10 @@
             android:id="@+id/number_of_topics"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/evaluation_end_time"
+            android:layout_below="@+id/tv_evaluation_end_time"
             android:layout_marginLeft="@dimen/dp_15"
             android:layout_marginTop="@dimen/dp_24"
-            android:drawableLeft="@drawable/icon_sp"
+            android:drawableLeft="@drawable/icon_topic_quantity"
             android:drawablePadding="@dimen/dp_4"
 
             android:gravity="center"
@@ -86,7 +86,7 @@
             tools:ignore="UseCompatTextViewDrawableXml" />
 
         <TextView
-            android:id="@+id/number_of_name"
+            android:id="@+id/tv_number_of_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/number_of_topics"
@@ -98,13 +98,13 @@
             android:textColor="@color/gray" />
 
         <TextView
-            android:id="@+id/evaluation_level"
+            android:id="@+id/tv_evaluation"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/number_of_name"
+            android:layout_below="@+id/tv_number_of_name"
             android:layout_marginLeft="@dimen/dp_15"
             android:layout_marginTop="@dimen/dp_24"
-            android:drawableLeft="@drawable/cpjg"
+            android:drawableLeft="@drawable/icon_appraise_rank"
             android:drawablePadding="@dimen/dp_4"
 
             android:gravity="center"
@@ -117,7 +117,7 @@
             android:id="@+id/labeled"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/evaluation_level"
+            android:layout_below="@+id/tv_evaluation"
             android:layout_marginTop="@dimen/dp_14"
             android:orientation="horizontal">
 
@@ -131,20 +131,20 @@
                 android:textSize="@dimen/sp_15" />
 
             <me.zhouzhuo.zzhorizontalprogressbar.ZzHorizontalProgressBar
-               android:id="@+id/pd"
+               android:id="@+id/pb_self_rating"
                 android:layout_width="@dimen/dp_150"
                 android:layout_height="@dimen/dp_15"
                 android:layout_marginLeft="@dimen/dp_10"
                 android:layout_marginEnd="@dimen/dp_10"
                 android:layout_weight="1"
-                app:zpb_bg_color="@color/black5"
+                app:zpb_bg_color="@color/color_C1C6D2"
                 app:zpb_max="100"
                 app:zpb_padding="0dp"
                 app:zpb_pb_color="@color/common_accent_color"
                 app:zpb_progress="20" />
 
             <TextView
-                android:id="@+id/text_self_rating"
+                android:id="@+id/tv_self_rating"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -170,20 +170,20 @@
                 android:textSize="@dimen/sp_15" />
 
             <me.zhouzhuo.zzhorizontalprogressbar.ZzHorizontalProgressBar
-               android:id="@+id/pd1"
+               android:id="@+id/pd_evaluating_grade"
                 android:layout_width="@dimen/dp_150"
                 android:layout_height="@dimen/dp_15"
                 android:layout_marginLeft="@dimen/dp_10"
                 android:layout_marginEnd="@dimen/dp_10"
                 android:layout_weight="1"
-                app:zpb_bg_color="@color/black5"
+                app:zpb_bg_color="@color/color_C1C6D2"
                 app:zpb_max="100"
                 app:zpb_padding="0dp"
                 app:zpb_pb_color="@color/common_accent_color"
                 app:zpb_progress="0" />
 
             <TextView
-                android:id="@+id/text_evaluation_level"
+                android:id="@+id/tv_evaluation_level"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

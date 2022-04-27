@@ -20,29 +20,29 @@ import me.zhouzhuo.zzhorizontalprogressbar.ZzHorizontalProgressBar;
 public class EvaluationOutcomeListAdapter extends RecyclerView.Adapter<EvaluationOutcomeListAdapter.ViewHolder> {
    private final List<GetDeveloperJkStatusApi.Bean.stackInfoListBean> mStackInfoList;
    static class ViewHolder extends RecyclerView.ViewHolder{
-      TextView text_skill;
-      TextView text_time;
-      TextView text_time_name;
+      TextView tv_skill;
+      TextView tv_time;
+      TextView tv_time_name;
 
-      TextView evaluation_end_time;
-      TextView number_of_name;
-      TextView text_self_rating;
-      TextView text_evaluation_level;
-      ZzHorizontalProgressBar pb;
-      ZzHorizontalProgressBar pb1;
+      TextView tv_evaluation_end_time;
+      TextView tv_number_of_name;
+      TextView tv_self_rating;
+      TextView tv_evaluation_level;
+      ZzHorizontalProgressBar pb_self_rating;
+      ZzHorizontalProgressBar pd_evaluating_grade;
 
       public ViewHolder(@NonNull View view) {
          super(view);
-         text_time_name = view.findViewById(R.id.text_time_name);
+         tv_time_name = view.findViewById(R.id.tv_time_name);
 
-         text_skill = view.findViewById(R.id.text_skill);
-         text_time = view.findViewById(R.id.text_time);
-         evaluation_end_time = view.findViewById(R.id.evaluation_end_time);
-         number_of_name = view.findViewById(R.id.number_of_name);
-         text_self_rating = view.findViewById(R.id.text_self_rating);
-         text_evaluation_level = view.findViewById(R.id.text_evaluation_level);
-         pb = view.findViewById(R.id.pd);
-         pb1 = view.findViewById(R.id.pd1);
+         tv_skill = view.findViewById(R.id.tv_skill);
+         tv_time = view.findViewById(R.id.tv_time);
+         tv_evaluation_end_time = view.findViewById(R.id.tv_evaluation_end_time);
+         tv_number_of_name = view.findViewById(R.id.tv_number_of_name);
+         tv_self_rating = view.findViewById(R.id.tv_self_rating);
+         tv_evaluation_level = view.findViewById(R.id.tv_evaluation_level);
+         pb_self_rating = view.findViewById(R.id.pb_self_rating);
+         pd_evaluating_grade = view.findViewById(R.id.pd_evaluating_grade);
 
       }
    }
@@ -62,45 +62,45 @@ public class EvaluationOutcomeListAdapter extends RecyclerView.Adapter<Evaluatio
    @Override
    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
       GetDeveloperJkStatusApi.Bean.stackInfoListBean jkSelectJobsApi = mStackInfoList.get(position);
-      holder.text_skill.setText(jkSelectJobsApi.getStack());
-      holder.text_time.setText("答题时间:"+jkSelectJobsApi.getAnswerDuration()+"秒");
-      holder.evaluation_end_time.setText("测评结束时间:"+jkSelectJobsApi.getAnswerEndAt());
-      holder.number_of_name.setText(String.format("总数: %d  答对: %d 得分: %d", jkSelectJobsApi.getTotalQuestionCount(), jkSelectJobsApi.getCorrectQuestionCount(), jkSelectJobsApi.getScore()));
-      holder.text_self_rating.setText(jkSelectJobsApi.getSelfEvaluationGrade());
-      holder.text_evaluation_level.setText(jkSelectJobsApi.getEvaluationGrade());
+      holder.tv_skill.setText(jkSelectJobsApi.getStack());
+      holder.tv_time.setText("答题时间:"+jkSelectJobsApi.getAnswerDuration()+"秒");
+      holder.tv_evaluation_end_time.setText("测评结束时间:"+jkSelectJobsApi.getAnswerEndAt());
+      holder.tv_number_of_name.setText(String.format("总数: %d  答对: %d 得分: %d", jkSelectJobsApi.getTotalQuestionCount(), jkSelectJobsApi.getCorrectQuestionCount(), jkSelectJobsApi.getScore()));
+      holder.tv_self_rating.setText(jkSelectJobsApi.getSelfEvaluationGrade());
+      holder.tv_evaluation_level.setText(jkSelectJobsApi.getEvaluationGrade());
 
       switch (jkSelectJobsApi.getSelfEvaluationGrade()) {
          case "了解":
-            holder.pb.setProgress(20);
+            holder.pb_self_rating.setProgress(20);
             break;
          case "熟悉":
-            holder.pb.setProgress(40);
+            holder.pb_self_rating.setProgress(40);
             break;
          case "掌握":
-            holder.pb.setProgress(60);
+            holder.pb_self_rating.setProgress(60);
             break;
          case "精通":
-            holder.pb.setProgress(80);
+            holder.pb_self_rating.setProgress(80);
             break;
          case "专家":
-            holder.pb.setProgress(100);
+            holder.pb_self_rating.setProgress(100);
             break;
       }
       switch (jkSelectJobsApi.getEvaluationGrade()) {
          case "了解":
-            holder.pb1.setProgress(20);
+            holder.pd_evaluating_grade.setProgress(20);
             break;
          case "熟悉":
-            holder.pb1.setProgress(40);
+            holder.pd_evaluating_grade.setProgress(40);
             break;
          case "掌握":
-            holder.pb1.setProgress(60);
+            holder.pd_evaluating_grade.setProgress(60);
             break;
          case "精通":
-            holder.pb1.setProgress(80);
+            holder.pd_evaluating_grade.setProgress(80);
             break;
          case "专家":
-            holder.pb1.setProgress(100);
+            holder.pd_evaluating_grade.setProgress(100);
             break;
       }
 
