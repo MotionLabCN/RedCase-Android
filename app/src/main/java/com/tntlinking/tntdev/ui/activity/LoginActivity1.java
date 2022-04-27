@@ -18,6 +18,8 @@ import com.hjq.base.BaseDialog;
 import com.hjq.http.EasyConfig;
 import com.hjq.http.EasyHttp;
 import com.hjq.http.listener.HttpCallback;
+import com.hjq.permissions.Permission;
+import com.hjq.permissions.XXPermissions;
 import com.tntlinking.tntdev.BuildConfig;
 import com.tntlinking.tntdev.R;
 import com.tntlinking.tntdev.aop.SingleClick;
@@ -27,6 +29,7 @@ import com.tntlinking.tntdev.http.api.OneClickLoginApi;
 import com.tntlinking.tntdev.http.model.HttpData;
 import com.tntlinking.tntdev.manager.ActivityManager;
 import com.tntlinking.tntdev.other.AppConfig;
+import com.tntlinking.tntdev.other.PermissionCallback;
 import com.tntlinking.tntdev.ui.dialog.LoginDialog;
 import com.tntlinking.tntdev.widget.CustomVideoView;
 import com.tntlinking.tntdev.widget.config.AuthPageConfig;
@@ -36,6 +39,8 @@ import com.umeng.umverify.UMVerifyHelper;
 import com.umeng.umverify.listener.UMPreLoginResultListener;
 import com.umeng.umverify.listener.UMTokenResultListener;
 import com.umeng.umverify.model.UMTokenRet;
+
+import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
@@ -90,7 +95,7 @@ public final class LoginActivity1 extends AppActivity {
             @Override
             public void run() {
                 boolean mBoolean = SPUtils.getInstance().getBoolean(AppConfig.DEAL_DIALOG, false);
-                if (!mBoolean){
+                if (!mBoolean) {
                     showDealDialog();
                 }
             }
@@ -225,12 +230,24 @@ public final class LoginActivity1 extends AppActivity {
 //                return;
 //            }
 
-            if (BuildConfig.DEBUG) {
-                startActivity(LoginActivity2.class);
-            } else {
-                getLoginToken(5000);
-            }
+            XXPermissions.with(LoginActivity1.this)
+                    .permission(Permission.READ_EXTERNAL_STORAGE)
+                    .permission(Permission.WRITE_EXTERNAL_STORAGE)
+                    .permission(Permission.ACCESS_FINE_LOCATION)
+                    .permission(Permission.ACCESS_COARSE_LOCATION)
+                    .request(new PermissionCallback() {
 
+                        @Override
+                        public void onGranted(List<String> permissions, boolean all) {
+                            if (all) {
+                                if (BuildConfig.DEBUG) {
+                                    startActivity(LoginActivity2.class);
+                                } else {
+                                    getLoginToken(5000);
+                                }
+                            }
+                        }
+                    });
 
         }
     }
@@ -331,5 +348,23 @@ public final class LoginActivity1 extends AppActivity {
                 .setForegroundColor(getColor(R.color.color_text_color)).create();
 
         builder.show();
+    }
+
+
+    public void getPermissions() {
+        XXPermissions.with(LoginActivity1.this)
+                .permission(Permission.READ_EXTERNAL_STORAGE)
+                .permission(Permission.WRITE_EXTERNAL_STORAGE)
+                .permission(Permission.ACCESS_FINE_LOCATION)
+                .permission(Permission.ACCESS_COARSE_LOCATION)
+                .request(new PermissionCallback() {
+
+                    @Override
+                    public void onGranted(List<String> permissions, boolean all) {
+                        if (all) {
+
+                        }
+                    }
+                });
     }
 }

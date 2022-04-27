@@ -39,8 +39,9 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="AllowBackup,LockedOrientationActivity"
-        tools:replace="android:allowBackup,android:supportsRtl"
+        tools:replace="android:allowBackup,android:supportsRtl,android:label"
         tools:targetApi="n">
+<!--        tools:replace="android:allowBackup,android:supportsRtl"-->
 
         <!-- 表示当前已经适配了分区存储 -->
         <meta-data
@@ -398,6 +399,33 @@
             android:name="com.tntlinking.tntdev.ui.activity.AddBaseInfoActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
+        <!-- 评测岗位列表-->
+        <activity
+            android:name="com.tntlinking.tntdev.ui.activity.EvaluationListActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+
+        <!-- 暂无测评计划页-->
+        <activity
+            android:name="com.tntlinking.tntdev.ui.activity.NotYetEvaluationActvity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <!-- 暂无测评计划页-->
+        <activity
+            android:name="com.tntlinking.tntdev.ui.activity.EvaluationActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <!-- H5测评计划页-->
+        <!-- 测评结果页-->
+        <activity
+            android:name="com.tntlinking.tntdev.ui.activity.EvaluationOutcomeAtivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.tntlinking.tntdev.ui.activity.JkBrowserActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+
         <!-- 写日报页面-->
         <activity
             android:name="com.tntlinking.tntdev.ui.activity.AddCareerActivity"

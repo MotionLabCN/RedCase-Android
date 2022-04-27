@@ -1,5 +1,6 @@
 package com.tntlinking.tntdev.ui.activity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Build;
 import android.text.TextUtils;
@@ -16,6 +17,7 @@ import com.hjq.base.BaseDialog;
 import com.tntlinking.tntdev.R;
 import com.tntlinking.tntdev.aop.SingleClick;
 import com.tntlinking.tntdev.app.AppActivity;
+import com.tntlinking.tntdev.http.api.GetDeveloperJkStatusApi;
 import com.tntlinking.tntdev.http.api.GetDeveloperStatusApi;
 import com.tntlinking.tntdev.http.api.GetSignContractPDFApi;
 import com.tntlinking.tntdev.http.model.HttpData;
@@ -27,6 +29,8 @@ import com.tntlinking.tntdev.other.Utils;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
+
+import java.io.Serializable;
 
 
 public final class PersonDataActivity extends AppActivity {
@@ -40,21 +44,16 @@ public final class PersonDataActivity extends AppActivity {
     private SettingBar person_data_about;
     private SettingBar person_data_recommend;
     private SettingBar person_data_service;
-    private ScrollView scroll;
+    private SettingBar person_data_evaluation;
+
     private TitleBar title_bar;
     private TextView tv_avatar;
     private TextView tv_name;
     private TextView tv_position;
     private TextView tv_sign_num;
     private TextView tv_profit_total;
-    //    private TextView tv_status;
-    //https://fuchsia-athlete-f65.notion.site/9f0df9c1265e4d00a99ac0591d390ac3
-    //https://fuchsia-athlete-f65.notion.site/cfcae78c7aa643228502af8e9c6a0d17
-    private String status_1 = "尚未完善入驻资料，请先完善";// 待完善
-    private String status_2 = "入驻资料尚未完成审核，请稍后再试";// 待审核
-    private String status_3 = "很遗憾入驻资料未通过审核，请先完善";// 审核失败
 
-    //    private String status_1 ="尚未完善入驻资料，请先完善";// 审核成功
+
     @Override
     protected int getLayoutId() {
         return R.layout.persondata_activity;
@@ -73,7 +72,9 @@ public final class PersonDataActivity extends AppActivity {
         person_data_about = findViewById(R.id.person_data_about);
         person_data_recommend = findViewById(R.id.person_data_recommend);
         person_data_service = findViewById(R.id.person_data_service);
-        scroll = findViewById(R.id.scroll);
+        person_data_evaluation = findViewById(R.id.person_data_evaluation);
+
+        ScrollView scroll = findViewById(R.id.scroll);
         title_bar = findViewById(R.id.title_bar);
         tv_avatar = findViewById(R.id.tv_avatar);
         tv_name = findViewById(R.id.tv_name);
@@ -82,23 +83,15 @@ public final class PersonDataActivity extends AppActivity {
         tv_profit_total = findViewById(R.id.tv_profit_total);
 
         setOnClickListener(mPersonDataIncome, mPersonDataSetting, mPersonDataInterview,
-                person_data_private, person_data_deal, person_data_dev, person_data_about, person_data_recommend, person_data_service);
+                person_data_private, person_data_deal, person_data_dev, person_data_evaluation,person_data_about, person_data_recommend, person_data_service);
 
-//        String name = SPUtils.getInstance().getString(AppConfig.DEVELOP_NAME);
-//        if (!TextUtils.isEmpty(name)) {
-//            tv_avatar.setText(name);
-//        } else {
-//            tv_avatar.setBackground(getResources().getDrawable(R.drawable.dot_oval_blue));
-//        }
 
-        scroll.setOnScrollChangeListener(new View.OnScrollChangeListener() {
-            @Override
-            public void onScrollChange(View v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
-                if (scrollY <= 0) {
-                    title_bar.setBackgroundColor(getColor(R.color.transparent));
-                } else if (scrollY > 0 && scrollY < SizeUtils.dp2px(200)) {
-                    title_bar.setBackgroundColor(getColor(R.color.white));
-                }
+
+        scroll.setOnScrollChangeListener((v, scrollX, scrollY, oldScrollX, oldScrollY) -> {
+            if (scrollY <= 0) {
+                title_bar.setBackgroundColor(getColor(R.color.transparent));
+            } else if (scrollY < SizeUtils.dp2px(200)) {
+                title_bar.setBackgroundColor(getColor(R.color.white));
             }
         });
     }
@@ -106,9 +99,40 @@ public final class PersonDataActivity extends AppActivity {
     @Override
     protected void initData() {
         getData();
-
     }
 
+    private void getDeveloperJkStatus() {
+        EasyHttp.get(this)
+                .api(new GetDeveloperJkStatusApi())
+                .request(new HttpCallback<HttpData<GetDeveloperJkStatusApi.Bean>>(this) {
+
+                    @SuppressLint("SetTextI18n")
+                    @Override
+                    public void onSucceed(HttpData<GetDeveloperJkStatusApi.Bean> data) {
+                        if (mStatus.equals("1")){
+                            startActivity(EvaluationActivity.class);
+                        }else if (data.getData()!=null&&data.getData().getUserPlanStatus()==0){
+                            startActivity(EvaluationListActivity.class);
+                        }else if (data.getData()!=null&&data.getData().getUserPlanStatus()==1){
+                            if (data.getData().getStackInfoList().size()>0){
+                                startActivity(new Intent(PersonDataActivity.this, EvaluationOutcomeAtivity.class)
+                                        .putExtra("PlanUrl",data.getData().getPlanUrl())
+                                        .putExtra("StackInfoList", (Serializable) data.getData().getStackInfoList())//集合
+                                );
+                            }else {
+                                startActivity(new Intent(PersonDataActivity.this, EvaluationOutcomenullAtivity.class)
+                                        .putExtra("PlanUrl",data.getData().getPlanUrl())
+                                );
+                            }
+
+
+                        }
+
+                    }
+                });
+    }
+
+    @SuppressLint("NewApi")
     @SingleClick
     @Override
     public void onClick(View view) {
@@ -131,10 +155,34 @@ public final class PersonDataActivity extends AppActivity {
             startActivity(PersonSettingActivity.class);
         } else if (view == person_data_about) {// 关于天天数链开发者
             startActivity(AboutAppActivity.class);
+        }else if (view == person_data_evaluation){
+            showDealDialog();
+
         }
 
     }
+    public void showDealDialog() {
+        BaseDialog.Builder<?> builder = new BaseDialog.Builder<>(PersonDataActivity.this)
+                .setContentView(R.layout.write_daily_delete_dialog)
+                .setAnimStyle(BaseDialog.ANIM_SCALE)
+                .setCancelable(false)
+                .setCanceledOnTouchOutside(false)
+                .setText(R.id.tv_title, "我们会遵循隐私政策收集,使用您的信息,但不会仅因为您同意本隐私政策而采取强制捆绑的方式一览子收集您个人信息")
+                .setText(R.id.btn_dialog_custom_ok, "已知晓")
+                .setText(R.id.btn_dialog_custom_cancel, "取消")
+                .setOnClickListener(R.id.btn_dialog_custom_cancel, (BaseDialog.OnClickListener<Button>) (dialog, button) -> {
+                    dialog.dismiss();
+                })
+                .setOnClickListener(R.id.btn_dialog_custom_ok, (dialog, views) -> {
 
+                    getDeveloperJkStatus();
+                    dialog.dismiss();
+                });
+
+
+
+        builder.show();
+    }
 
     @NonNull
     @Override
@@ -152,6 +200,7 @@ public final class PersonDataActivity extends AppActivity {
                 .api(new GetDeveloperStatusApi())
                 .request(new HttpCallback<HttpData<GetDeveloperStatusApi.Bean>>(this) {
 
+                    @SuppressLint("SetTextI18n")
                     @Override
                     public void onSucceed(HttpData<GetDeveloperStatusApi.Bean> data) {
                         SPUtils.getInstance().put(AppConfig.CAREER_ID, data.getData().getCareerDirectionId());
@@ -178,18 +227,23 @@ public final class PersonDataActivity extends AppActivity {
                             person_data_service.setRightText("签约失败");
                         }
 
-                        if (mStatus.equals("1")) {
-                            person_data_dev.setRightText("待完善");
-                            person_data_dev.setRightTextColor(getResources().getColor(R.color.color_hint_color));
-                        } else if (mStatus.equals("2")) {
-                            person_data_dev.setRightText("待审核");
-                            person_data_dev.setRightTextColor(getResources().getColor(R.color.color_FB8B39));
-                        } else if (mStatus.equals("3")) {
-                            person_data_dev.setRightText("审核成功");
-                            person_data_dev.setRightTextColor(getResources().getColor(R.color.color_hint_color));
-                        } else if (mStatus.equals("4")) {
-                            person_data_dev.setRightText("审核失败");
-                            person_data_dev.setRightTextColor(getResources().getColor(R.color.color_F5313D));
+                        switch (mStatus) {
+                            case "1":
+                                person_data_dev.setRightText("待完善");
+                                person_data_dev.setRightTextColor(getResources().getColor(R.color.color_hint_color));
+                                break;
+                            case "2":
+                                person_data_dev.setRightText("待审核");
+                                person_data_dev.setRightTextColor(getResources().getColor(R.color.color_FB8B39));
+                                break;
+                            case "3":
+                                person_data_dev.setRightText("审核成功");
+                                person_data_dev.setRightTextColor(getResources().getColor(R.color.color_hint_color));
+                                break;
+                            case "4":
+                                person_data_dev.setRightText("审核失败");
+                                person_data_dev.setRightTextColor(getResources().getColor(R.color.color_F5313D));
+                                break;
                         }
                     }
                 });
@@ -199,64 +253,66 @@ public final class PersonDataActivity extends AppActivity {
      * 不同的状态点进服务协议的弹框
      */
     public void showServiceDialog() {
-        if (mStatus.equals("1")) { // 入驻资料1  待完善 2  待审核 3  审核成功 4  审核失败
-            new BaseDialog.Builder<>(PersonDataActivity.this)
-                    .setContentView(R.layout.write_daily_delete_dialog)
-                    .setAnimStyle(BaseDialog.ANIM_SCALE)
-                    .setText(R.id.tv_title, "尚未完善入驻资料，请先完善。")
-                    .setText(R.id.btn_dialog_custom_cancel, "取消")
-                    .setText(R.id.btn_dialog_custom_ok, "去完善")
-                    .setOnClickListener(R.id.btn_dialog_custom_cancel, (BaseDialog.OnClickListener<Button>) (dialog, button) -> dialog.dismiss())
-                    .setOnClickListener(R.id.btn_dialog_custom_ok, (dialog, views) -> {
+        switch (mStatus) {
+            case "1":  // 入驻资料1  待完善 2  待审核 3  审核成功 4  审核失败
+                new BaseDialog.Builder<>(PersonDataActivity.this)
+                        .setContentView(R.layout.write_daily_delete_dialog)
+                        .setAnimStyle(BaseDialog.ANIM_SCALE)
+                        .setText(R.id.tv_title, "尚未完善入驻资料，请先完善。")
+                        .setText(R.id.btn_dialog_custom_cancel, "取消")
+                        .setText(R.id.btn_dialog_custom_ok, "去完善")
+                        .setOnClickListener(R.id.btn_dialog_custom_cancel, (BaseDialog.OnClickListener<Button>) (dialog, button) -> dialog.dismiss())
+                        .setOnClickListener(R.id.btn_dialog_custom_ok, (dialog, views) -> {
 
-                        startActivity(EnterDeveloperActivity.class);
-                        dialog.dismiss();
-                    })
-                    .show();
-        } else if (mStatus.equals("2")) {// 入驻资料 2  待审核
-            new BaseDialog.Builder<>(PersonDataActivity.this)
-                    .setContentView(R.layout.write_daily_delete_dialog)
-                    .setAnimStyle(BaseDialog.ANIM_SCALE)
-                    .setText(R.id.tv_title, "入驻资料尚未完成审核，请稍后再试。")
-                    .setVisibility(R.id.btn_dialog_custom_cancel, View.GONE)
-                    .setText(R.id.btn_dialog_custom_ok, "同意")
-                    .setOnClickListener(R.id.btn_dialog_custom_cancel, (BaseDialog.OnClickListener<Button>) (dialog, button) -> dialog.dismiss())
-                    .setOnClickListener(R.id.btn_dialog_custom_ok, (dialog, views) -> {
+                            startActivity(EnterDeveloperActivity.class);
+                            dialog.dismiss();
+                        })
+                        .show();
+                break;
+            case "2": // 入驻资料 2  待审核
+                new BaseDialog.Builder<>(PersonDataActivity.this)
+                        .setContentView(R.layout.write_daily_delete_dialog)
+                        .setAnimStyle(BaseDialog.ANIM_SCALE)
+                        .setText(R.id.tv_title, "入驻资料尚未完成审核，请稍后再试。")
+                        .setVisibility(R.id.btn_dialog_custom_cancel, View.GONE)
+                        .setText(R.id.btn_dialog_custom_ok, "同意")
+                        .setOnClickListener(R.id.btn_dialog_custom_cancel, (BaseDialog.OnClickListener<Button>) (dialog, button) -> dialog.dismiss())
+                        .setOnClickListener(R.id.btn_dialog_custom_ok, (dialog, views) -> dialog.dismiss())
+                        .show();
+                break;
+            case "3": // 入驻资料3  审核成功
+                if (mContractStatus == 0) {//待签约
+                    startActivity(SignContactActivity.class);
+                } else if (mContractStatus == 1) {//签约中
+                    BrowserActivity.start(this, AppConfig.SIGN_CONTRACT_URL + "?developerId="
+                            + SPUtils.getInstance().getInt(AppConfig.DEVELOPER_ID), "签约中");
 
-                        dialog.dismiss();
-                    })
-                    .show();
-        } else if (mStatus.equals("3")) {// 入驻资料3  审核成功
-            if (mContractStatus == 0) {//待签约
-                startActivity(SignContactActivity.class);
-            } else if (mContractStatus == 1) {//签约中
-                BrowserActivity.start(this, AppConfig.SIGN_CONTRACT_URL + "?developerId="
-                        + SPUtils.getInstance().getInt(AppConfig.DEVELOPER_ID), "签约中");
+                } else if (mContractStatus == 2) {//签约成功
+                    Intent intent = new Intent();
+                    intent.setClass(this, PDFViewActivity.class);
+                    intent.putExtra("pdf_url", PDFUrl);
+                    intent.putExtra("title", "合作协议");
+                    startActivity(intent);
+                } else {//签约失败
+                    BrowserActivity.start(this, AppConfig.SIGN_CONTRACT_URL + "?developerId="
+                            + SPUtils.getInstance().getInt(AppConfig.DEVELOPER_ID), "签约失败");
+                }
+                break;
+            case "4": // 4  审核失败
+                new BaseDialog.Builder<>(PersonDataActivity.this)
+                        .setContentView(R.layout.write_daily_delete_dialog)
+                        .setAnimStyle(BaseDialog.ANIM_SCALE)
+                        .setText(R.id.tv_title, "很遗憾入驻资料未通过审核，请先完善。")
+                        .setText(R.id.btn_dialog_custom_cancel, "取消")
+                        .setText(R.id.btn_dialog_custom_ok, "去完善")
+                        .setOnClickListener(R.id.btn_dialog_custom_cancel, (BaseDialog.OnClickListener<Button>) (dialog, button) -> dialog.dismiss())
+                        .setOnClickListener(R.id.btn_dialog_custom_ok, (dialog, views) -> {
 
-            } else if (mContractStatus == 2) {//签约成功
-                Intent intent = new Intent();
-                intent.setClass(this, PDFViewActivity.class);
-                intent.putExtra("pdf_url", PDFUrl);
-                intent.putExtra("title", "合作协议");
-                startActivity(intent);
-            } else {//签约失败
-                BrowserActivity.start(this, AppConfig.SIGN_CONTRACT_URL + "?developerId="
-                        + SPUtils.getInstance().getInt(AppConfig.DEVELOPER_ID), "签约失败");
-            }
-        } else if (mStatus.equals("4")) {// 4  审核失败
-            new BaseDialog.Builder<>(PersonDataActivity.this)
-                    .setContentView(R.layout.write_daily_delete_dialog)
-                    .setAnimStyle(BaseDialog.ANIM_SCALE)
-                    .setText(R.id.tv_title, "很遗憾入驻资料未通过审核，请先完善。")
-                    .setText(R.id.btn_dialog_custom_cancel, "取消")
-                    .setText(R.id.btn_dialog_custom_ok, "去完善")
-                    .setOnClickListener(R.id.btn_dialog_custom_cancel, (BaseDialog.OnClickListener<Button>) (dialog, button) -> dialog.dismiss())
-                    .setOnClickListener(R.id.btn_dialog_custom_ok, (dialog, views) -> {
-
-                        startActivity(EnterDeveloperActivity.class);
-                        dialog.dismiss();
-                    })
-                    .show();
+                            startActivity(EnterDeveloperActivity.class);
+                            dialog.dismiss();
+                        })
+                        .show();
+                break;
         }
     }
 

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <com.hjq.bar.TitleBar
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_50"
+        app:rightBackground="@null"
+        app:rightTitle=""
+        app:leftIcon="@drawable/icon_back_black"
+        app:lineVisible="false"
+        app:rightTitleColor="@color/common_accent_color"
+        app:rightTitleSize="@dimen/sp_14"
+        app:title="参与测评" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="为什么要参与测评?"
+        android:layout_marginLeft="@dimen/dp_20"
+        android:textSize="@dimen/sp_15"
+        android:layout_marginTop="@dimen/dp_20"
+        android:textStyle="bold"
+        android:textColor="@color/common_primary_dark_color"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="1.参与测评有助于提高竞争力！"
+        android:layout_marginLeft="@dimen/dp_20"
+        android:textSize="@dimen/sp_10"
+        android:layout_marginTop="@dimen/dp_5"
+        android:textColor="@color/common_text_hint_color"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="2.参与测评可以更高效的匹配职位!"
+        android:layout_marginLeft="@dimen/dp_20"
+        android:textSize="@dimen/sp_10"
+        android:layout_marginTop="@dimen/dp_5"
+        android:textColor="@color/common_text_hint_color"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="3.优先展示个HR,提高曝光率!"
+        android:layout_marginLeft="@dimen/dp_20"
+        android:textSize="@dimen/sp_10"
+        android:layout_marginTop="@dimen/dp_5"
+        android:textColor="@color/common_text_hint_color"/>
+
+    <ImageView
+        android:layout_width="@dimen/dp_300"
+        android:layout_height="@dimen/dp_300"
+        android:layout_marginTop="@dimen/dp_20"
+        android:layout_marginLeft="@dimen/dp_30"
+        android:src="@drawable/ioc_no"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_out_evaluate"
+        style="@style/ButtonStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/dp_16"
+        android:layout_marginVertical="@dimen/dp_30"
+        android:textColor="@color/common_primary_color"
+        android:text="参与测评" />
+</LinearLayout>
