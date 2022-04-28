@@ -11,7 +11,7 @@ import com.tntlinking.tntdev.aop.SingleClick;
 import com.tntlinking.tntdev.app.AppActivity;
 
 
-public class EvaluationOutComeNullActivity extends AppActivity {
+public final class EvaluationOutComeNullActivity extends AppActivity {
 
    private Button btn_out_evaluating;
    private String mPlanUrl;

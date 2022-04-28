@@ -15,7 +15,7 @@ import com.tntlinking.tntdev.http.api.JKSelectJobsApi;
 
 import java.util.List;
 
-public class EvaluationListAdapter extends RecyclerView.Adapter<EvaluationListAdapter.ViewHolder> {
+public final class EvaluationListAdapter extends RecyclerView.Adapter<EvaluationListAdapter.ViewHolder> {
    private final List<JKSelectJobsApi.Bean> mFruitList;
    private onRecyclerViewItemClickListener onRecyclerViewItemClickListener;
    /**

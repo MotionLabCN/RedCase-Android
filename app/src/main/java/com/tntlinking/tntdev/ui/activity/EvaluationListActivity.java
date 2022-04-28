@@ -20,7 +20,7 @@ import com.tntlinking.tntdev.ui.adapter.EvaluationListAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EvaluationListActivity extends AppActivity {
+public final class EvaluationListActivity extends AppActivity {
    private final List<JKSelectJobsApi.Bean> jkSelectList = new ArrayList<>();
    private int mJKid;
    private RecyclerView rv_speciality_list;

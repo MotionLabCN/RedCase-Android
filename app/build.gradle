@@ -219,6 +219,7 @@ dependencies {
     implementation 'com.github.shxdos:AndroidPdfViewer:2.7.0-beta.2'
 
     implementation 'com.github.zhouzhuo810:ZzHorizontalProgressBar:1.1.1'
+
     // 多语种：https://github.com/getActivity/MultiLanguages
     // 悬浮窗：https://github.com/getActivity/XToast
     // 日志输出：https://github.com/getActivity/Logcat
