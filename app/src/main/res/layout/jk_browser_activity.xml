@@ -13,7 +13,8 @@
         app:rightIconHeight="@dimen/dp_20"
         app:leftIcon="@drawable/icon_back_black"
         app:title="@string/web_title"
-       />
+        app:rightTitleColor="@color/black"
+        app:rightTitle="@string/setting_evaluation"/>
 
     <ProgressBar
         android:id="@+id/pb_browser_progress"

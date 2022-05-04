@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:layoutAnimation="@null">
+
+
+    <com.hjq.bar.TitleBar
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_50"
+        app:rightBackground="@null"
+        app:rightTitle=""
+        app:leftIcon="@drawable/icon_back_black"
+        app:lineVisible="false"
+        app:rightTitleColor="@color/common_accent_color"
+        app:rightTitleSize="@dimen/sp_14"
+        app:title="测评需知" />
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:layout_weight="1">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+    <LinearLayout
+        android:id="@+id/rl_number_of_name"
+        android:layout_width="@dimen/dp_343"
+        android:layout_height="@dimen/dp_100"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/dp_10"
+        android:background="@drawable/bg_grey_radius_8"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/tv_total"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textSize="@dimen/sp_12"
+            android:layout_marginLeft="@dimen/dp_8"
+            android:text="欢迎您参与专业测评，主要是通过答题的方式对相关技能点进行一个客观的评价，帮助挖掘优势和发现短板，助您获得高服务费订单。测评中如遇到问题，可联系您的专属人才顾问"
+            android:textColor="#7E89A3"
+            />
+    </LinearLayout>
+        <TextView
+            android:id="@+id/tv_skill"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/dp_15"
+            android:layout_marginTop="@dimen/dp_24"
+            android:text="如何测评？"
+            android:textColor="@color/black"
+            android:textSize="@dimen/sp_15"
+            android:textStyle="bold"
+            android:typeface="monospace" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp_16"
+        android:layout_marginTop="@dimen/dp_16"
+        android:layout_marginRight="@dimen/dp_16"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+
+        <LinearLayout
+            android:id="@+id/ll_cooperation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="@dimen/dp_46"
+                android:layout_height="@dimen/dp_46"
+                android:layout_gravity="center"
+                android:src="@drawable/iocn_evaluation_position" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_5"
+                android:text="现在测评职位"
+                android:textColor="@color/color_text_color"
+                android:textSize="@dimen/sp_12" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dp_1"
+            android:layout_weight="1" />
+
+        <LinearLayout
+            android:id="@+id/ll_service"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="@dimen/dp_46"
+                android:layout_height="@dimen/dp_46"
+                android:layout_gravity="center"
+                android:src="@drawable/iocn_evaluation_skill" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_5"
+                android:text="选择测评技能"
+                android:textColor="@color/color_text_color"
+                android:textSize="@dimen/sp_12" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dp_1"
+            android:layout_weight="1" />
+
+        <LinearLayout
+            android:id="@+id/ll_question"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="@dimen/dp_46"
+                android:layout_height="@dimen/dp_46"
+                android:layout_gravity="center"
+                android:src="@drawable/iocn_evaluation_answer" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_5"
+                android:text="进行测评答题"
+                android:textColor="@color/color_text_color"
+                android:textSize="@dimen/sp_12" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dp_1"
+            android:layout_weight="1" />
+
+        <LinearLayout
+            android:id="@+id/ll_contact"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="@dimen/dp_46"
+                android:layout_height="@dimen/dp_46"
+                android:layout_gravity="center"
+                android:src="@drawable/iocn_evaluation_result" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_5"
+                android:text="查看测评结果"
+                android:textColor="@color/color_text_color"
+                android:textSize="@dimen/sp_12" />
+        </LinearLayout>
+    </LinearLayout>
+        <View
+            android:layout_marginTop="@dimen/dp_24"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/line_size"
+            android:layout_marginLeft="@dimen/dp_15"
+            android:layout_marginEnd="@dimen/dp_15"
+            android:background="@color/common_line_color" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/dp_15"
+            android:layout_marginTop="@dimen/dp_24"
+            android:text="Step1 选择测评职位"
+            android:textColor="@color/black"
+            android:textSize="@dimen/sp_15"
+            android:textStyle="bold"
+            android:typeface="monospace" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textSize="@dimen/sp_12"
+            android:layout_marginTop="@dimen/dp_8"
+            android:layout_marginLeft="@dimen/dp_15"
+            android:layout_marginEnd="@dimen/dp_15"
+            android:text="平台会根据您选择的职位方向，选择对应的具体职位进行测评，选择后不可修改，如需修改请联系人才顾问。"
+            android:textColor="#7E89A3"
+            />
+        <View
+            android:layout_marginTop="@dimen/dp_24"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/line_size"
+            android:layout_marginLeft="@dimen/dp_15"
+            android:layout_marginEnd="@dimen/dp_15"
+            android:background="@color/common_line_color" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/dp_15"
+            android:layout_marginTop="@dimen/dp_24"
+            android:text="Step2 选择测评技能"
+            android:textColor="@color/black"
+            android:textSize="@dimen/sp_15"
+            android:textStyle="bold"
+            android:typeface="monospace" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textSize="@dimen/sp_12"
+            android:layout_marginTop="@dimen/dp_8"
+            android:layout_marginLeft="@dimen/dp_15"
+            android:layout_marginEnd="@dimen/dp_15"
+            android:text="每个具体职位有多个3～5个技能点测评，各技能点可分开单独进行测评，每个技能点的测评大约20～30分钟。"
+            android:textColor="#7E89A3"
+            />
+        <View
+            android:layout_marginTop="@dimen/dp_24"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/line_size"
+            android:layout_marginLeft="@dimen/dp_15"
+            android:layout_marginEnd="@dimen/dp_15"
+            android:background="@color/common_line_color" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/dp_15"
+            android:layout_marginTop="@dimen/dp_24"
+            android:text="Step3 进行测评答题 "
+            android:textColor="@color/black"
+            android:textSize="@dimen/sp_15"
+            android:textStyle="bold"
+            android:typeface="monospace" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textSize="@dimen/sp_12"
+            android:layout_marginTop="@dimen/dp_8"
+            android:layout_marginLeft="@dimen/dp_15"
+            android:layout_marginEnd="@dimen/dp_15"
+            android:text="题型全部是选择题，一旦开始就1点技能点答题后，中间建议不要中断，以防影响评价。"
+            android:textColor="#7E89A3"
+            />
+        <View
+            android:layout_marginTop="@dimen/dp_24"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/line_size"
+            android:layout_marginLeft="@dimen/dp_15"
+            android:layout_marginEnd="@dimen/dp_15"
+            android:background="@color/common_line_color" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/dp_15"
+            android:layout_marginTop="@dimen/dp_24"
+            android:text="Step4 查看测评结果"
+            android:textColor="@color/black"
+            android:textSize="@dimen/sp_15"
+            android:textStyle="bold"
+            android:typeface="monospace" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textSize="@dimen/sp_12"
+            android:layout_marginTop="@dimen/dp_8"
+            android:layout_marginLeft="@dimen/dp_15"
+            android:layout_marginEnd="@dimen/dp_15"
+            android:text="每个技能点完成测评后都会获得1份专业的评估结果供您参考，所有的技能点测试完成后，也会获得一份完整的评估结果。"
+            android:textColor="#7E89A3"
+            />
+        <View
+            android:layout_marginTop="@dimen/dp_24"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/line_size"
+            android:layout_marginLeft="@dimen/dp_15"
+            android:layout_marginEnd="@dimen/dp_15"
+            android:background="@color/common_line_color" />
+    </LinearLayout>
+</ScrollView>
+
+    <LinearLayout
+        android:id="@+id/ll_evaluating"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="@dimen/dp_10"
+        android:gravity="center"
+        android:orientation="horizontal">
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_out_evaluating"
+            style="@style/ButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginHorizontal="@dimen/dp_16"
+            android:layout_marginVertical="@dimen/dp_20"
+            android:text="开始测评"
+            android:textColor="@color/common_primary_color"
+            tools:ignore="ObsoleteLayoutParam" />
+
+    </LinearLayout>
+
+
+</LinearLayout>
+
+

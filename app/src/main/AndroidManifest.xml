@@ -340,6 +340,11 @@
             android:name="com.tntlinking.tntdev.ui.activity.HomeWorkActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
+        <!-- 测评须知 页面 -->
+        <activity
+            android:name="com.tntlinking.tntdev.ui.activity.EvaluationNeedsTokNowActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
         <!-- 工作主页 页面 -->
         <activity
             android:name="com.tntlinking.tntdev.ui.activity.InterviewActivity"
@@ -423,10 +428,6 @@
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
         <!-- 测评结果中页-->
-        <activity
-            android:name="com.tntlinking.tntdev.ui.activity.EvaluationOutComeNullActivity"
-            android:launchMode="singleTop"
-            android:screenOrientation="portrait" />
         <activity
             android:name="com.tntlinking.tntdev.ui.activity.JkBrowserActivity"
             android:launchMode="singleTop"

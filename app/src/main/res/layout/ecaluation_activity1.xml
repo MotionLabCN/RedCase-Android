@@ -58,13 +58,12 @@
     <ImageView
         android:layout_width="@dimen/dp_300"
         android:layout_height="@dimen/dp_300"
-        android:layout_marginLeft="@dimen/dp_30"
+        android:layout_gravity="center"
         android:src="@drawable/bg_check_status"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="信息未完善"
-        android:layout_marginLeft="@dimen/dp_20"
         android:textSize="@dimen/sp_20"
         android:textStyle="bold"
         android:layout_gravity="center"
@@ -74,7 +73,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="请先完善个人信息"
-        android:layout_marginLeft="@dimen/dp_20"
         android:textSize="@dimen/sp_20"
         android:textStyle="bold"
         android:layout_gravity="center"

@@ -68,7 +68,7 @@ public final class JkBrowserActivity extends AppActivity
 
     @Override
     protected int getLayoutId() {
-        return R.layout.browser_activity;
+        return R.layout.jk_browser_activity;
     }
 
     @Override
@@ -129,6 +129,12 @@ public final class JkBrowserActivity extends AppActivity
     @Override
     public void onLeftClick(View view) {
         finish();
+    }
+
+    @Override
+    public void onRightClick(View view) {
+        startActivity(EvaluationOutcomeActivity.class);
+
     }
 
     @Override
@@ -211,9 +217,7 @@ public final class JkBrowserActivity extends AppActivity
 
         @Override
         public void onReceivedIcon(WebView view, Bitmap icon) {
-            if (icon == null) {
-            }
-//            setRightIcon(new BitmapDrawable(getResources(), icon));
+
         }
 
         /**

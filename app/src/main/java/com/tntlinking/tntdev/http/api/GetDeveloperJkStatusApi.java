@@ -47,11 +47,11 @@ public final  class GetDeveloperJkStatusApi implements IRequestApi {
             this.answerEndAt = answerEndAt;
          }
 
-         public int getCorrectQuestionCount() {
+         public String getCorrectQuestionCount() {
             return correctQuestionCount;
          }
 
-         public void setCorrectQuestionCount(int correctQuestionCount) {
+         public void setCorrectQuestionCount(String correctQuestionCount) {
             this.correctQuestionCount = correctQuestionCount;
          }
 
@@ -79,11 +79,11 @@ public final  class GetDeveloperJkStatusApi implements IRequestApi {
             this.planId = planId;
          }
 
-         public int getScore() {
+         public String getScore() {
             return score;
          }
 
-         public void setScore(int score) {
+         public void setScore(String score) {
             this.score = score;
          }
 
@@ -103,11 +103,11 @@ public final  class GetDeveloperJkStatusApi implements IRequestApi {
             this.stack = stack;
          }
 
-         public int getTotalQuestionCount() {
+         public String getTotalQuestionCount() {
             return totalQuestionCount;
          }
 
-         public void setTotalQuestionCount(int totalQuestionCount) {
+         public void setTotalQuestionCount(String totalQuestionCount) {
             this.totalQuestionCount = totalQuestionCount;
          }
 
@@ -122,11 +122,11 @@ public final  class GetDeveloperJkStatusApi implements IRequestApi {
          private int answerDuration;
          private String answerEndAt;
 
-         private int correctQuestionCount;
+         private String correctQuestionCount;
          private String evaluationGrade;
          private int evaluationId;
          private int planId;
-         private int score;
+         private String score;
 
          @Override
          public String toString() {
@@ -147,7 +147,7 @@ public final  class GetDeveloperJkStatusApi implements IRequestApi {
 
          private String selfEvaluationGrade;
          private String stack;
-         private int totalQuestionCount;
+         private String totalQuestionCount;
          private int userId;
 
       }

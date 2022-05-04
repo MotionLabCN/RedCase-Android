@@ -28,6 +28,7 @@
     android:orientation="vertical"
     android:layout_weight="1"
     tools:ignore="InefficientWeight">
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_outcome_list"
         android:layout_width="match_parent"
@@ -38,12 +39,38 @@
         android:layout_marginTop="@dimen/dp_20"
         android:layout_marginRight="@dimen/dp_20"
         tools:ignore="ObsoleteLayoutParam" />
+    <LinearLayout
+        android:layout_gravity="center_horizontal"
+        android:layout_width="wrap_content"
+        android:id="@+id/ll_default_page"
+        android:visibility="gone"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/bg_check_fail" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/dp_10"
+            android:text="暂无数据请继续参与测评"
+
+            android:textColor="@color/color_b5bed3"
+            android:textSize="@dimen/sp_15" />
+    </LinearLayout>
 </LinearLayout>
 
 
 
 
     <LinearLayout
+        android:id="@+id/ll_evaluating"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginVertical="@dimen/dp_10"

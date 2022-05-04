@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.content.Intent;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.ScaleAnimation;
@@ -138,7 +139,15 @@ public final class SplashActivity extends AppActivity {
 
 
                                 }
+
+                                @Override
+                                public void onFail(Exception e) {
+                                    super.onFail(e);
+                                    startActivity(LoginActivity1.class);
+
+                                }
                             });
+
                 }
 
             }

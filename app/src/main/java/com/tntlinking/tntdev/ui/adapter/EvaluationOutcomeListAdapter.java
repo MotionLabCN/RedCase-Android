@@ -25,7 +25,9 @@ public final class EvaluationOutcomeListAdapter extends RecyclerView.Adapter<Eva
       TextView tv_time_name;
 
       TextView tv_evaluation_end_time;
-      TextView tv_number_of_name;
+      TextView tv_total;
+      TextView tv_answer;
+      TextView tv_score;
       TextView tv_self_rating;
       TextView tv_evaluation_level;
       ZzHorizontalProgressBar pb_self_rating;
@@ -38,7 +40,10 @@ public final class EvaluationOutcomeListAdapter extends RecyclerView.Adapter<Eva
          tv_skill = view.findViewById(R.id.tv_skill);
          tv_time = view.findViewById(R.id.tv_time);
          tv_evaluation_end_time = view.findViewById(R.id.tv_evaluation_end_time);
-         tv_number_of_name = view.findViewById(R.id.tv_number_of_name);
+         tv_total = view.findViewById(R.id.tv_total);
+         tv_answer = view.findViewById(R.id.tv_answer);
+         tv_score = view.findViewById(R.id.tv_score);
+
          tv_self_rating = view.findViewById(R.id.tv_self_rating);
          tv_evaluation_level = view.findViewById(R.id.tv_evaluation_level);
          pb_self_rating = view.findViewById(R.id.pb_self_rating);
@@ -64,8 +69,10 @@ public final class EvaluationOutcomeListAdapter extends RecyclerView.Adapter<Eva
       GetDeveloperJkStatusApi.Bean.stackInfoListBean jkSelectJobsApi = mStackInfoList.get(position);
       holder.tv_skill.setText(jkSelectJobsApi.getStack());
       holder.tv_time.setText("答题时间:"+jkSelectJobsApi.getAnswerDuration()+"秒");
-      holder.tv_evaluation_end_time.setText("测评结束时间:"+jkSelectJobsApi.getAnswerEndAt());
-      holder.tv_number_of_name.setText(String.format("总数: %d  答对: %d 得分: %d", jkSelectJobsApi.getTotalQuestionCount(), jkSelectJobsApi.getCorrectQuestionCount(), jkSelectJobsApi.getScore()));
+      holder.tv_evaluation_end_time.setText(jkSelectJobsApi.getAnswerEndAt());
+      holder.tv_total.setText(jkSelectJobsApi.getTotalQuestionCount());
+      holder.tv_answer.setText(jkSelectJobsApi.getCorrectQuestionCount());
+      holder.tv_score.setText(jkSelectJobsApi.getScore());
       holder.tv_self_rating.setText(jkSelectJobsApi.getSelfEvaluationGrade());
       holder.tv_evaluation_level.setText(jkSelectJobsApi.getEvaluationGrade());
 

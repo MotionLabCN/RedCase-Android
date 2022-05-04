@@ -101,7 +101,6 @@ public final class EvaluationListActivity extends AppActivity {
               });
    }
 
-    @SuppressLint("NewApi")
     @SingleClick
     @Override
     public void onClick(View view) {
