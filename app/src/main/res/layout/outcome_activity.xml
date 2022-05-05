@@ -82,7 +82,7 @@
                 android:layout_alignParentBottom="true"
                 android:layout_marginHorizontal="@dimen/dp_16"
                 android:layout_marginVertical="@dimen/dp_20"
-                android:text="参与测评"
+                android:text="@string/setting_participate_in_evaluation"
                 android:textColor="@color/common_primary_color"
                 tools:ignore="ObsoleteLayoutParam" />
 

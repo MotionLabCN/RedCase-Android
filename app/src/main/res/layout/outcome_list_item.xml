@@ -31,7 +31,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="@dimen/dp_8"
-            android:text="评测技能:Android"
+            android:text="@string/setting_evaluation_skills_android"
             android:textColor="@color/black"
             android:textSize="@dimen/sp_15"
             android:textStyle="bold"
@@ -56,7 +56,7 @@
             android:drawableLeft="@drawable/icon_evaluation_time"
             android:drawablePadding="@dimen/dp_4"
             android:gravity="center"
-            android:text="时间"
+            android:text="@string/setting_time"
             android:textColor="@color/black"
             android:textSize="@dimen/sp_13"
             android:textStyle="bold"
@@ -77,7 +77,7 @@
                 android:layout_marginTop="@dimen/dp_16"
                 android:drawablePadding="@dimen/dp_4"
                 android:gravity="center"
-                android:text="答题时间:"
+                android:text="@string/setting_answer_time"
                 android:textColor="@color/color_7E89A3"
                 android:textSize="@dimen/sp_13" />
 
@@ -89,9 +89,9 @@
                 android:layout_marginTop="@dimen/dp_16"
                 android:layout_marginRight="@dimen/dp_16"
                 android:drawablePadding="@dimen/dp_4"
-                android:text="120秒"
                 android:textColor="@color/color_7E89A3"
-                android:textSize="@dimen/sp_13" />
+                android:textSize="@dimen/sp_13"
+                tools:ignore="RelativeOverlap" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -110,7 +110,7 @@
                 android:layout_marginTop="@dimen/dp_16"
                 android:drawablePadding="@dimen/dp_4"
                 android:gravity="center"
-                android:text="评测结束时间:"
+                android:text="@string/setting_evaluation_end_time"
                 android:textColor="@color/color_7E89A3"
                 android:textSize="@dimen/sp_13" />
 
@@ -122,9 +122,9 @@
                 android:layout_marginTop="@dimen/dp_16"
                 android:layout_marginRight="@dimen/dp_16"
                 android:drawablePadding="@dimen/dp_4"
-                android:text="2022-04-25 15:03:05"
                 android:textColor="@color/color_7E89A3"
-                android:textSize="@dimen/sp_13" />
+                android:textSize="@dimen/sp_13"
+                tools:ignore="RelativeOverlap" />
         </RelativeLayout>
 
         <View
@@ -146,7 +146,7 @@
             android:layout_marginTop="@dimen/dp_17"
             android:drawableLeft="@drawable/icon_number_of_topics"
             android:gravity="center"
-            android:text="题目数量"
+            android:text="@string/setting_number_of_topics"
             android:textColor="@color/black"
             android:textSize="@dimen/sp_13"
             android:textStyle="bold"
@@ -161,7 +161,8 @@
             android:layout_marginTop="@dimen/dp_16"
             android:layout_marginRight="@dimen/dp_16"
             android:background="@drawable/bg_grey_radius_8"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            tools:ignore="DisableBaselineAlignment">
 
             <LinearLayout
                 android:layout_width="@dimen/dp_103"
@@ -176,7 +177,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginLeft="@dimen/dp_8"
-                    android:text="总数:"
+                    android:text="@string/setting_total"
                     android:textColor="@color/color_7E89A3" />
 
                 <TextView
@@ -185,7 +186,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginLeft="@dimen/dp_8"
-                    android:text="142秒"
+                    android:text=""
                     android:textColor="#7E89A3"
                     android:textStyle="bold" />
             </LinearLayout>
@@ -202,7 +203,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/dp_8"
-                    android:text="答对:"
+                    android:text="@string/setting_answer"
                     android:textColor="@color/color_7E89A3" />
 
                 <TextView
@@ -210,8 +211,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/dp_8"
-                    android:text="20"
-
+                    android:text=""
                     android:textColor="@color/gray"
                     android:textStyle="bold" />
             </LinearLayout>
@@ -230,7 +230,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/dp_8"
                     android:gravity="center"
-                    android:text="得分:"
+                    android:text="@string/setting_score"
                     android:textColor="@color/color_7E89A3" />
 
                 <TextView
@@ -239,8 +239,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/dp_8"
                     android:gravity="center"
-
-                    android:text="25"
+                    android:text=""
                     android:textColor="@color/gray"
                     android:textStyle="bold" />
             </LinearLayout>
@@ -266,8 +265,7 @@
             android:drawableLeft="@drawable/icon_opinion_rating"
             android:drawablePadding="@dimen/dp_4"
             android:gravity="center"
-
-            android:text="评价等级"
+            android:text="@string/setting_opinion_rating"
             android:textColor="@color/black"
             android:textSize="@dimen/sp_13"
             android:textStyle="bold"
@@ -282,11 +280,11 @@
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="@dimen/dp_52"
-                android:layout_height="@dimen/dp_18"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginLeft="@dimen/dp_17"
-                android:text="自评等级"
+                android:text="@string/setting_self_rating_grade"
 
                 android:textColor="@color/color_7E89A3"
                 android:textSize="@dimen/sp_13" />
@@ -311,7 +309,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginEnd="@dimen/dp_16"
-                android:text="了解"
+                android:text=""
                 android:textColor="@color/color_202839"
                 android:textSize="@dimen/sp_13" />
         </LinearLayout>
@@ -328,7 +326,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginLeft="@dimen/dp_17"
-                android:text="评测等级"
+                android:text="@string/setting_evaluation_grade"
 
                 android:textColor="@color/color_7E89A3"
                 android:textSize="@dimen/sp_13" />
@@ -355,7 +353,7 @@
                 android:layout_gravity="center"
                 android:layout_marginEnd="@dimen/dp_16"
 
-                android:text="了解"
+                android:text=""
                 android:textColor="@color/color_202839"
                 android:textSize="@dimen/sp_13" />
         </LinearLayout>

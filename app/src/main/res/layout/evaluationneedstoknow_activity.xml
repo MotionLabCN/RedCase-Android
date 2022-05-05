@@ -30,7 +30,6 @@
         android:orientation="vertical"
         >
     <LinearLayout
-        android:id="@+id/rl_number_of_name"
         android:layout_width="@dimen/dp_343"
         android:layout_height="@dimen/dp_100"
         android:gravity="center"
@@ -39,18 +38,16 @@
         android:background="@drawable/bg_grey_radius_8"
         android:orientation="vertical">
         <TextView
-            android:id="@+id/tv_total"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:textSize="@dimen/sp_12"
             android:layout_marginLeft="@dimen/dp_8"
-            android:text="欢迎您参与专业测评，主要是通过答题的方式对相关技能点进行一个客观的评价，帮助挖掘优势和发现短板，助您获得高服务费订单。测评中如遇到问题，可联系您的专属人才顾问"
+            android:text="@string/setting_public_notice"
             android:textColor="#7E89A3"
             />
     </LinearLayout>
         <TextView
-            android:id="@+id/tv_skill"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
@@ -72,7 +69,6 @@
 
 
         <LinearLayout
-            android:id="@+id/ll_cooperation"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -89,7 +85,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_5"
-                android:text="现在测评职位"
+                android:text="选择测评职位"
                 android:textColor="@color/color_text_color"
                 android:textSize="@dimen/sp_12" />
         </LinearLayout>
@@ -100,7 +96,6 @@
             android:layout_weight="1" />
 
         <LinearLayout
-            android:id="@+id/ll_service"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -128,7 +123,6 @@
             android:layout_weight="1" />
 
         <LinearLayout
-            android:id="@+id/ll_question"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -156,7 +150,6 @@
             android:layout_weight="1" />
 
         <LinearLayout
-            android:id="@+id/ll_contact"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"

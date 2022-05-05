@@ -189,6 +189,20 @@
 
     <string name="setting_exit">退出登录</string>
     <string name="setting_evaluation">测评</string>
+    <string name="setting_participate_in_evaluation">参与测评</string>
+    <string name="setting_evaluation_skills_android">评测技能:Android</string>
+    <string name="setting_time">时间</string>
+    <string name="setting_answer_time">答题时间:</string>
+    <string name="setting_evaluation_end_time">评测结束时间:</string>
+    <string name="setting_number_of_topics">题目数量:</string>
+    <string name="setting_total">总数:</string>
+    <string name="setting_answer">答对:</string>
+    <string name="setting_score">得分:</string>
+    <string name="setting_opinion_rating">评价等级:</string>
+    <string name="setting_self_rating_grade">自评等级:</string>
+    <string name="setting_evaluation_grade">评测等级:</string>
+    <string name="setting_public_notice">欢迎您参与专业测评，主要是通过答题的方式对相关技能点进行一个客观的评价，帮助挖掘优势和发现短板，助您获得高服务费订单。测评中如遇到问题，可联系您的专属人才顾问</string>
+    <string name="test_and_appraise">"如何测评？</string>
 
     <!-- 关于 -->
     <string name="about_title">关于我们</string>
