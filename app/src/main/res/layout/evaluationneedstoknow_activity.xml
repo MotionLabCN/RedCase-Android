@@ -76,13 +76,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            tools:ignore="UseCompoundDrawables">
 
             <ImageView
                 android:layout_width="@dimen/dp_46"
                 android:layout_height="@dimen/dp_46"
                 android:layout_gravity="center"
-                android:src="@drawable/iocn_evaluation_position" />
+                android:src="@drawable/icon_evaluation_position" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -103,13 +104,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            tools:ignore="UseCompoundDrawables">
 
             <ImageView
                 android:layout_width="@dimen/dp_46"
                 android:layout_height="@dimen/dp_46"
                 android:layout_gravity="center"
-                android:src="@drawable/iocn_evaluation_skill" />
+                android:src="@drawable/icon_evaluation_skill" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -130,13 +132,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            tools:ignore="UseCompoundDrawables">
 
             <ImageView
                 android:layout_width="@dimen/dp_46"
                 android:layout_height="@dimen/dp_46"
                 android:layout_gravity="center"
-                android:src="@drawable/iocn_evaluation_answer" />
+                android:src="@drawable/icon_evaluation_answer" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -157,13 +160,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            tools:ignore="UseCompoundDrawables">
 
             <ImageView
                 android:layout_width="@dimen/dp_46"
                 android:layout_height="@dimen/dp_46"
                 android:layout_gravity="center"
-                android:src="@drawable/iocn_evaluation_result" />
+                android:src="@drawable/icon_evaluation_result" />
 
             <TextView
                 android:layout_width="wrap_content"

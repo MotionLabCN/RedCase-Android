@@ -35,9 +35,6 @@
         android:layout_height="wrap_content"
         android:overScrollMode="never"
         android:layout_below="@+id/title_bar"
-        android:layout_marginLeft="@dimen/dp_20"
-        android:layout_marginTop="@dimen/dp_20"
-        android:layout_marginRight="@dimen/dp_20"
         tools:ignore="ObsoleteLayoutParam" />
     <LinearLayout
         android:layout_gravity="center_horizontal"
@@ -45,7 +42,8 @@
         android:id="@+id/ll_default_page"
         android:visibility="gone"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        tools:ignore="UseCompoundDrawables">
 
         <ImageView
             android:id="@+id/image"

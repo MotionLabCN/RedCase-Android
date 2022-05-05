@@ -116,9 +116,6 @@ public final class PersonDataActivity extends AppActivity {
                         }else if (data.getData()!=null&&data.getData().getUserPlanStatus()==1){
                             if (data.getData().getStackInfoList().size()>0){
                                 startActivity(new Intent(PersonDataActivity.this, EvaluationOutcomeActivity.class)
-                                        .putExtra("userPlanStatus",data.getData().getUserPlanStatus())
-                                        .putExtra("PlanUrl",data.getData().getPlanUrl())
-                                        .putExtra("StackInfoList", (Serializable) data.getData().getStackInfoList())//集合
                                 );
                             }else {
                                 JkBrowserActivity.start(getActivity(), data.getData().getPlanUrl());
