@@ -84,8 +84,7 @@ public final class PersonDataActivity extends AppActivity {
         tv_profit_total = findViewById(R.id.tv_profit_total);
 
         setOnClickListener(mPersonDataIncome, mPersonDataSetting, mPersonDataInterview,
-                person_data_private, person_data_deal, person_data_dev, person_data_evaluation,person_data_about, person_data_recommend, person_data_service);
-
+                person_data_private, person_data_deal, person_data_dev, person_data_evaluation, person_data_about, person_data_recommend, person_data_service);
 
 
         scroll.setOnScrollChangeListener((v, scrollX, scrollY, oldScrollX, oldScrollY) -> {
@@ -110,19 +109,21 @@ public final class PersonDataActivity extends AppActivity {
                     @SuppressLint("SetTextI18n")
                     @Override
                     public void onSucceed(HttpData<GetDeveloperJkStatusApi.Bean> data) {
-                        if (mStatus.equals("1")){
+                        if (mStatus.equals("1")) {
                             startActivity(EvaluationActivity.class);
-                        }else if (data.getData()!=null&&data.getData().getUserPlanStatus()==0){
-                                    startActivity(EvaluationNeedsTokNowActivity.class);
-                        }else if (data.getData()!=null&&data.getData().getUserPlanStatus()==1){
-                            if (data.getData().getStackInfoList().size()>0){
+                        } else if (data.getData() != null && data.getData().getUserPlanStatus() == 0) {
+                            startActivity(EvaluationNeedsTokNowActivity.class);
+                        } else if (data.getData() != null && data.getData().getUserPlanStatus() == 1) {
+                            if (data.getData().getStackInfoList().size() > 0) {
                                 startActivity(new Intent(PersonDataActivity.this, EvaluationOutcomeActivity.class)
                                 );
-                            }else {
+                            } else {
                                 JkBrowserActivity.start(getActivity(), data.getData().getPlanUrl());
                             }
 
-
+                        } else if (data.getData() != null && data.getData().getUserPlanStatus() == 2) {
+                            startActivity(new Intent(PersonDataActivity.this, EvaluationOutcomeActivity.class)
+                            );
                         }
 
                     }
@@ -151,12 +152,13 @@ public final class PersonDataActivity extends AppActivity {
             startActivity(PersonSettingActivity.class);
         } else if (view == person_data_about) {// 关于天天数链开发者
             startActivity(AboutAppActivity.class);
-        }else if (view == person_data_evaluation){
+        } else if (view == person_data_evaluation) {
             showDealDialog();
 
         }
 
     }
+
     public void showDealDialog() {
         BaseDialog.Builder<?> builder = new BaseDialog.Builder<>(PersonDataActivity.this)
                 .setContentView(R.layout.geeks_evaluation_need_to_know_dialog)
@@ -172,7 +174,6 @@ public final class PersonDataActivity extends AppActivity {
                     getDeveloperJkStatus();
                     dialog.dismiss();
                 });
-
 
 
         builder.show();
