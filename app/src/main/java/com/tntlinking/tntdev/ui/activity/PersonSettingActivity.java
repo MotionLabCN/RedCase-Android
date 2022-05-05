@@ -69,7 +69,6 @@ public final class PersonSettingActivity extends AppActivity {
     @Override
     public void onClick(View view) {
         if (view == mSettingPhone) {
-
             startActivity(ChangePhoneActivity.class);
         } else if (view == mSettingCancelService) {
             startActivity(CancelServiceActivity.class);
