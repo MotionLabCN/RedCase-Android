@@ -1,6 +1,8 @@
 package com.tntlinking.tntdev.ui.activity;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -54,7 +56,14 @@ public final class EvaluationListActivity extends AppActivity {
                     @SuppressLint("SetTextI18n")
                     @Override
                     public void onSucceed(HttpData<String> data) {
-                        JkBrowserActivity.start(getActivity(), data.getData());
+                         if (data.getCode()==900503){
+                            Intent intent = new Intent();
+                            intent.setClass(EvaluationListActivity.this, SaveQRActivity.class);
+                            intent.putExtra("contact", "contact");
+                            startActivity(intent);
+                        }else {
+                             JkBrowserActivity.start(getActivity(), data.getData());
+                         }
 
                     }
 
@@ -62,7 +71,9 @@ public final class EvaluationListActivity extends AppActivity {
                      public void onFail(Exception e) {
                          super.onFail(e);
 
+
                      }
+
                  });
       }
    /**

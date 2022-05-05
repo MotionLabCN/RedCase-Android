@@ -130,6 +130,10 @@ public final class RequestHandler implements IRequestHandler {
             HttpData<?> model = (HttpData<?>) result;
 
             if (model.isRequestSucceed()) {
+                // 代表查询岗位未找到
+                return result;
+            }
+            if (model.isRequestNotFound()) {
                 // 代表执行成功
                 return result;
             }

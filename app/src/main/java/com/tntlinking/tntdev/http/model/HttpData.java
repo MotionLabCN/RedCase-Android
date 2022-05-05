@@ -38,4 +38,7 @@ public class HttpData<T> {
     public boolean isTokenFailure() {
         return code == 401;
     }
+    public boolean isRequestNotFound() {
+        return code == 900503;
+    }
 }
