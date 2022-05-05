@@ -1,4 +1,4 @@
-package com.tntlinking.tntdev.ui.activity;
+package com.tntlinking.tntdev.ui.fragment;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -14,26 +14,41 @@ import com.blankj.utilcode.util.SizeUtils;
 import com.gyf.immersionbar.ImmersionBar;
 import com.hjq.bar.TitleBar;
 import com.hjq.base.BaseDialog;
+import com.hjq.http.EasyHttp;
+import com.hjq.http.listener.HttpCallback;
+import com.hjq.widget.layout.SettingBar;
 import com.tntlinking.tntdev.R;
 import com.tntlinking.tntdev.aop.SingleClick;
-import com.tntlinking.tntdev.app.AppActivity;
+import com.tntlinking.tntdev.app.TitleBarFragment;
 import com.tntlinking.tntdev.http.api.GetDeveloperJkStatusApi;
 import com.tntlinking.tntdev.http.api.GetDeveloperStatusApi;
 import com.tntlinking.tntdev.http.api.GetSignContractPDFApi;
 import com.tntlinking.tntdev.http.model.HttpData;
 import com.tntlinking.tntdev.other.AppConfig;
-import com.hjq.http.EasyHttp;
-import com.hjq.http.listener.HttpCallback;
-import com.hjq.widget.layout.SettingBar;
 import com.tntlinking.tntdev.other.Utils;
+import com.tntlinking.tntdev.ui.activity.AboutAppActivity;
+import com.tntlinking.tntdev.ui.activity.BrowserActivity;
+import com.tntlinking.tntdev.ui.activity.EnterDeveloperActivity;
+import com.tntlinking.tntdev.ui.activity.EvaluationActivity;
+import com.tntlinking.tntdev.ui.activity.EvaluationNeedsTokNowActivity;
+import com.tntlinking.tntdev.ui.activity.EvaluationOutcomeActivity;
+import com.tntlinking.tntdev.ui.activity.IncomeListActivity;
+import com.tntlinking.tntdev.ui.activity.InterviewActivity;
+import com.tntlinking.tntdev.ui.activity.InterviewSettingActivity;
+import com.tntlinking.tntdev.ui.activity.JkBrowserActivity;
+import com.tntlinking.tntdev.ui.activity.MainActivity;
+import com.tntlinking.tntdev.ui.activity.PDFViewActivity;
+import com.tntlinking.tntdev.ui.activity.PersonDataActivity;
+import com.tntlinking.tntdev.ui.activity.PersonSettingActivity;
+import com.tntlinking.tntdev.ui.activity.SignContactActivity;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 
-import java.io.Serializable;
-
-
-public final class PersonDataActivity extends AppActivity {
+/**
+ * desc   : 我的 Fragment
+ */
+public final class MineFragment1 extends TitleBarFragment<MainActivity> {
 
     private SettingBar mPersonDataIncome;
     private SettingBar mPersonDataInterview;
@@ -53,10 +68,13 @@ public final class PersonDataActivity extends AppActivity {
     private TextView tv_sign_num;
     private TextView tv_profit_total;
 
+    public static MineFragment1 newInstance() {
+        return new MineFragment1();
+    }
 
     @Override
     protected int getLayoutId() {
-        return R.layout.persondata_activity;
+        return R.layout.persondata_fragment;
     }
 
     @RequiresApi(api = Build.VERSION_CODES.M)
@@ -83,8 +101,7 @@ public final class PersonDataActivity extends AppActivity {
         tv_profit_total = findViewById(R.id.tv_profit_total);
 
         setOnClickListener(mPersonDataIncome, mPersonDataSetting, mPersonDataInterview,
-                person_data_private, person_data_deal, person_data_dev, person_data_evaluation,person_data_about, person_data_recommend, person_data_service);
-
+                person_data_private, person_data_deal, person_data_dev, person_data_evaluation, person_data_about, person_data_recommend, person_data_service);
 
 
         scroll.setOnScrollChangeListener((v, scrollX, scrollY, oldScrollX, oldScrollY) -> {
@@ -109,15 +126,15 @@ public final class PersonDataActivity extends AppActivity {
                     @SuppressLint("SetTextI18n")
                     @Override
                     public void onSucceed(HttpData<GetDeveloperJkStatusApi.Bean> data) {
-                        if (mStatus.equals("1")){
+                        if (mStatus.equals("1")) {
                             startActivity(EvaluationActivity.class);
-                        }else if (data.getData()!=null&&data.getData().getUserPlanStatus()==0){
-                                    startActivity(EvaluationNeedsTokNowActivity.class);
-                        }else if (data.getData()!=null&&data.getData().getUserPlanStatus()==1){
-                            if (data.getData().getStackInfoList().size()>0){
-                                startActivity(new Intent(PersonDataActivity.this, EvaluationOutcomeActivity.class)
+                        } else if (data.getData() != null && data.getData().getUserPlanStatus() == 0) {
+                            startActivity(EvaluationNeedsTokNowActivity.class);
+                        } else if (data.getData() != null && data.getData().getUserPlanStatus() == 1) {
+                            if (data.getData().getStackInfoList().size() > 0) {
+                                startActivity(new Intent(getActivity(), EvaluationOutcomeActivity.class)
                                 );
-                            }else {
+                            } else {
                                 JkBrowserActivity.start(getActivity(), data.getData().getPlanUrl());
                             }
 
@@ -132,9 +149,7 @@ public final class PersonDataActivity extends AppActivity {
     @Override
     public void onClick(View view) {
         if (view == person_data_dev) { // 入驻资料
-//            startActivity(EnterDeveloperActivity.class);
-            startActivity(MainActivity.class);
-
+            startActivity(EnterDeveloperActivity.class);
         } else if (view == person_data_service) {// 服务协议
             showServiceDialog();
 //            startActivity(SignContactActivity.class);
@@ -152,14 +167,15 @@ public final class PersonDataActivity extends AppActivity {
             startActivity(PersonSettingActivity.class);
         } else if (view == person_data_about) {// 关于天天数链开发者
             startActivity(AboutAppActivity.class);
-        }else if (view == person_data_evaluation){
+        } else if (view == person_data_evaluation) {
             showDealDialog();
 
         }
 
     }
+
     public void showDealDialog() {
-        BaseDialog.Builder<?> builder = new BaseDialog.Builder<>(PersonDataActivity.this)
+        BaseDialog.Builder<?> builder = new BaseDialog.Builder<>(getActivity())
                 .setContentView(R.layout.geeks_evaluation_need_to_know_dialog)
                 .setAnimStyle(BaseDialog.ANIM_SCALE)
                 .setCancelable(false)
@@ -173,7 +189,6 @@ public final class PersonDataActivity extends AppActivity {
                     getDeveloperJkStatus();
                     dialog.dismiss();
                 });
-
 
 
         builder.show();
@@ -250,7 +265,7 @@ public final class PersonDataActivity extends AppActivity {
     public void showServiceDialog() {
         switch (mStatus) {
             case "1":  // 入驻资料1  待完善 2  待审核 3  审核成功 4  审核失败
-                new BaseDialog.Builder<>(PersonDataActivity.this)
+                new BaseDialog.Builder<>(getActivity())
                         .setContentView(R.layout.write_daily_delete_dialog)
                         .setAnimStyle(BaseDialog.ANIM_SCALE)
                         .setText(R.id.tv_title, "尚未完善入驻资料，请先完善。")
@@ -265,7 +280,7 @@ public final class PersonDataActivity extends AppActivity {
                         .show();
                 break;
             case "2": // 入驻资料 2  待审核
-                new BaseDialog.Builder<>(PersonDataActivity.this)
+                new BaseDialog.Builder<>(getActivity())
                         .setContentView(R.layout.write_daily_delete_dialog)
                         .setAnimStyle(BaseDialog.ANIM_SCALE)
                         .setText(R.id.tv_title, "入驻资料尚未完成审核，请稍后再试。")
@@ -279,22 +294,22 @@ public final class PersonDataActivity extends AppActivity {
                 if (mContractStatus == 0) {//待签约
                     startActivity(SignContactActivity.class);
                 } else if (mContractStatus == 1) {//签约中
-                    BrowserActivity.start(this, AppConfig.SIGN_CONTRACT_URL + "?developerId="
+                    BrowserActivity.start(getActivity(), AppConfig.SIGN_CONTRACT_URL + "?developerId="
                             + SPUtils.getInstance().getInt(AppConfig.DEVELOPER_ID), "签约中");
 
                 } else if (mContractStatus == 2) {//签约成功
                     Intent intent = new Intent();
-                    intent.setClass(this, PDFViewActivity.class);
+                    intent.setClass(getActivity(), PDFViewActivity.class);
                     intent.putExtra("pdf_url", PDFUrl);
                     intent.putExtra("title", "合作协议");
                     startActivity(intent);
                 } else {//签约失败
-                    BrowserActivity.start(this, AppConfig.SIGN_CONTRACT_URL + "?developerId="
+                    BrowserActivity.start(getActivity(), AppConfig.SIGN_CONTRACT_URL + "?developerId="
                             + SPUtils.getInstance().getInt(AppConfig.DEVELOPER_ID), "签约失败");
                 }
                 break;
             case "4": // 4  审核失败
-                new BaseDialog.Builder<>(PersonDataActivity.this)
+                new BaseDialog.Builder<>(getActivity())
                         .setContentView(R.layout.write_daily_delete_dialog)
                         .setAnimStyle(BaseDialog.ANIM_SCALE)
                         .setText(R.id.tv_title, "很遗憾入驻资料未通过审核，请先完善。")

@@ -188,7 +188,7 @@ public final class LoginActivity2 extends AppActivity implements TextView.OnEdit
 //                        SPUtils.getInstance().put(AppConfig.GUIDE_VIEW, false);
 //                        ActivityManager.getInstance().finishAllActivities();
 
-                        startActivity(HomeStatusActivity.class);
+                        startActivity(MainActivity.class);
                         ActivityManager.getInstance().finishAllActivities();
                     }
                 });

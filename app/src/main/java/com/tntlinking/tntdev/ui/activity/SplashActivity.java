@@ -90,15 +90,16 @@ public final class SplashActivity extends AppActivity {
             public void run() {
                 if (TextUtils.isEmpty(SPUtils.getInstance().getString(AppConfig.ACCESS_TOKEN))) {
                     if (SPUtils.getInstance().getBoolean(AppConfig.HAS_LOGIN, false)) {
-                        if (SPUtils.getInstance().getString(AppConfig.DEVELOP_STATUS, "1").equals("1")) {
-                            startActivity(HomeStatusActivity.class);
-                        } else if (SPUtils.getInstance().getString(AppConfig.DEVELOP_STATUS, "1").equals("3")) {
-                            startActivity(HomeStatusActivity.class);
-                        } else if (SPUtils.getInstance().getString(AppConfig.DEVELOP_STATUS, "1").equals("2")) {
-                            startActivity(HomeStatusActivity.class);
-                        } else {
-                            startActivity(CheckDeveloperFailActivity.class);
-                        }
+//                        if (SPUtils.getInstance().getString(AppConfig.DEVELOP_STATUS, "1").equals("1")) {
+//                            startActivity(HomeStatusActivity.class);
+//                        } else if (SPUtils.getInstance().getString(AppConfig.DEVELOP_STATUS, "1").equals("3")) {
+//                            startActivity(HomeStatusActivity.class);
+//                        } else if (SPUtils.getInstance().getString(AppConfig.DEVELOP_STATUS, "1").equals("2")) {
+//                            startActivity(HomeStatusActivity.class);
+//                        } else {
+//                            startActivity(CheckDeveloperFailActivity.class);
+//                        }
+                        startActivity(MainActivity.class);
                     } else {
                         startActivity(LoginActivity1.class);
                     }
@@ -118,22 +119,10 @@ public final class SplashActivity extends AppActivity {
                                         SPUtils.getInstance().put(AppConfig.DEVELOP_NAME, data.getData().getRealName());
                                         SPUtils.getInstance().put(AppConfig.DEVELOPER_ID, data.getData().getId());
 
-                                        String createDate = data.getData().getCreateDate();
-                                        int status = Integer.parseInt(data.getData().getStatus());
-                                        Intent intent = new Intent(SplashActivity.this, HomeStatusActivity.class);
-                                        intent.putExtra(AppConfig.DEVELOP_STATUS, status);
-                                        if (createDate.contains("T")) {
-                                            String replace = createDate.replace("T", " ");
-                                            long timeSpanByNow = TimeUtils.getTimeSpanByNow(replace, TimeConstants.DAY);
-                                            intent.putExtra(AppConfig.CREATE_TIME, Math.abs(timeSpanByNow));
-                                        } else if (createDate.contains(" ")) {
-                                            long timeSpanByNow = TimeUtils.getTimeSpanByNow(createDate, TimeConstants.DAY);
-                                            intent.putExtra(AppConfig.CREATE_TIME, Math.abs(timeSpanByNow));
-                                        }
-                                        startActivity(intent);
+                                        startActivity(MainActivity.class);
                                         finish();
                                     } else {
-                                        startActivity(HomeStatusActivity.class);
+                                        startActivity(MainActivity.class);
                                         finish();
                                     }
 
