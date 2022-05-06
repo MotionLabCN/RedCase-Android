@@ -153,12 +153,15 @@
     <style name="TablaYouTstYle" parent="Base.Widget.Design.TabLayout">
         <item name="tabBackground">@color/white</item>
         <item name="tabMode">fixed</item>
-        <item name="actionBarSize">@dimen/sp_18</item>
-        <item name="android:textSize">@dimen/sp_18</item>
+        <item name="android:layout_marginLeft">@dimen/dp_20</item>
         <item name="tabIndicatorHeight">2dp</item>
         <item name="android:tabStripEnabled">false</item>
         <item name="tabSelectedTextColor">@color/black</item>
         <item name="tabTextColor">@color/gray</item>
+    </style>
+    <style name="tabLayout_testStyle" parent="TextAppearance.Design.Tab">
+        <!--此处可用dp也可以用sp都可以,任选一个-->
+        <item name="android:textSize">@dimen/sp_18</item>
     </style>
     <style name="TabText" parent="Base.Widget.Design.TabLayout">
         <item name="tabBackground">@color/white</item>
@@ -173,8 +176,8 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">@dimen/dp_200</item>
         <item name="android:layout_weight">1</item>
-        <item name="android:layout_marginLeft">@dimen/dp_25</item>
-        <item name="android:layout_marginRight">@dimen/dp_25</item>
+        <item name="android:layout_marginLeft">@dimen/dp_20</item>
+        <item name="android:layout_marginRight">@dimen/dp_20</item>
         <item name="android:overScrollMode">never</item>
     </style>
 </resources>
