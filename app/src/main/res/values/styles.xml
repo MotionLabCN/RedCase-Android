@@ -173,6 +173,8 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">@dimen/dp_200</item>
         <item name="android:layout_weight">1</item>
+        <item name="android:layout_marginLeft">@dimen/dp_25</item>
+        <item name="android:layout_marginRight">@dimen/dp_25</item>
         <item name="android:overScrollMode">never</item>
     </style>
 </resources>
