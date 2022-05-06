@@ -91,8 +91,7 @@ public final class HomeStatusActivity extends AppActivity {
     private ServiceProjectAdapter mServiceAdapter;
     private HistoryProjectAdapter mHistoryAdapter;
     String name = SPUtils.getInstance().getString(AppConfig.DEVELOP_NAME, "朋友");
-    private String[] titles = {"单选", "多选"};
-    private List<Fragment> fragmentList = new ArrayList<>();
+
 
     @Override
     protected int getLayoutId() {
@@ -232,32 +231,6 @@ public final class HomeStatusActivity extends AppActivity {
                 }
             }
         });
-//造数据
-        fragmentList.add(new OneFragment());
-        fragmentList.add(new TwoFragment());
-        TabLayout tabs = findViewById(R.id.tab_position);
-        ViewPager2 viewPager = findViewById(R.id.vp_position);
-        viewPager.setAdapter(new FragmentStateAdapter(this) {
-            @NonNull
-            @Override
-            public Fragment createFragment(int position) {
-                return fragmentList.get(position);
-            }
-
-            @Override
-            public int getItemCount() {
-                return fragmentList.size();
-            }
-        });
-        viewPager.setOffscreenPageLimit(2);
-        TabLayoutMediator tabLayoutMediator = new TabLayoutMediator(tabs, viewPager, new TabLayoutMediator.TabConfigurationStrategy() {
-            @Override
-            public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
-                tab.setText(titles[position]);
-            }
-        });
-        //这句话很重要
-        tabLayoutMediator.attach();
     }
 
 

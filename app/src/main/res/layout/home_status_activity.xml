@@ -367,14 +367,7 @@
                 <!--                    </LinearLayout>-->
 
                 <!--                </LinearLayout>-->
-                <com.google.android.material.tabs.TabLayout
-                    android:id="@+id/tab_position"
-                    android:layout_width="match_parent"
-                    style="@style/TablaYouTstYle"
-                    android:layout_height="@dimen/dp_50"/>
-                <androidx.viewpager2.widget.ViewPager2
-                    style="@style/MyViewPaper"
-                    android:id="@+id/vp_position"/>
+
 
                 <com.tntlinking.tntdev.widget.MyListView
                     android:id="@+id/lv_task"

@@ -243,10 +243,16 @@
                     android:layout_marginBottom="@dimen/dp_16"
                     android:paddingLeft="@dimen/dp_16"
                     android:text="新手任务"
+                    android:visibility="gone"
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_18"
                     android:textStyle="bold" />
-
+                <View
+                    android:layout_marginTop="@dimen/dp_5"
+                    android:layout_width="match_parent"
+                    android:background="@color/color_b5bed3"
+                    android:layout_height="@dimen/dp_10"
+                    android:layout_weight="1" />
 
                 <!--                <LinearLayout-->
                 <!--                    android:layout_width="match_parent"-->
@@ -368,12 +374,20 @@
 
                 <!--                </LinearLayout>-->
 
-
+                <com.google.android.material.tabs.TabLayout
+                    android:id="@+id/tab_position"
+                    android:layout_width="match_parent"
+                    style="@style/TablaYouTstYle"
+                    android:layout_height="@dimen/dp_50"/>
+                <androidx.viewpager2.widget.ViewPager2
+                    style="@style/MyViewPaper"
+                    android:id="@+id/vp_position"/>
                 <com.tntlinking.tntdev.widget.MyListView
                     android:id="@+id/lv_task"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:divider="@null"
+                    android:visibility="gone"
                     android:dividerHeight="@dimen/line_size" />
                 <LinearLayout
                     android:id="@+id/ll_task_empty"
@@ -405,6 +419,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:visibility="gone"
                     android:layout_marginBottom="@dimen/dp_20"
                     android:orientation="horizontal">
 
