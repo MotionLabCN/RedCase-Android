@@ -145,31 +145,14 @@ public final class PersonDataActivity extends AppActivity {
         } else if (view == person_data_about) {// 关于天天数链开发者
             startActivity(AboutAppActivity.class);
         } else if (view == person_data_evaluation) {
-            showDealDialog();
+            getDeveloperJkStatus();
+
 
         }
 
     }
 
-    public void showDealDialog() {
-        BaseDialog.Builder<?> builder = new BaseDialog.Builder<>(PersonDataActivity.this)
-                .setContentView(R.layout.geeks_evaluation_need_to_know_dialog)
-                .setAnimStyle(BaseDialog.ANIM_SCALE)
-                .setCancelable(false)
-                .setCanceledOnTouchOutside(false)
-                .setText(R.id.tv_title, "我们会遵循隐私政策收集,使用您的信息,但不会仅因为您同意本隐私政策而采取强制捆绑的方式一览子收集您个人信息")
-                .setText(R.id.btn_dialog_custom_ok, "已知晓")
-                .setText(R.id.btn_dialog_custom_cancel, "取消")
-                .setOnClickListener(R.id.btn_dialog_custom_cancel, (BaseDialog.OnClickListener<Button>) (dialog, button) -> dialog.dismiss())
-                .setOnClickListener(R.id.btn_dialog_custom_ok, (dialog, views) -> {
 
-                    getDeveloperJkStatus();
-                    dialog.dismiss();
-                });
-
-
-        builder.show();
-    }
 
     @NonNull
     @Override
