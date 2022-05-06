@@ -114,18 +114,8 @@ public final class PersonDataActivity extends AppActivity {
                         } else if (data.getData() != null && data.getData().getUserPlanStatus() == 0) {
                             startActivity(EvaluationNeedsTokNowActivity.class);
                         } else  {
-//                            if (data.getData().getStackInfoList().size() > 0) {
-//                                startActivity(new Intent(PersonDataActivity.this, EvaluationOutcomeActivity.class)
-//                                );
-//                            } else {
-//                                JkBrowserActivity.start(getActivity(), data.getData().getPlanUrl());
-//                            }
-//
-//                        } else if (data.getData() != null && data.getData().getUserPlanStatus() == 2) {
                             JkBrowserActivity.start(getActivity(), data.getData().getPlanUrl());
 
-//                            startActivity(new Intent(PersonDataActivity.this, EvaluationOutcomeActivity.class)
-//                            );
                         }
 
                     }
