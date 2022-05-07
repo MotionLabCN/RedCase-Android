@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/tab_item_textview"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="bottom"
+    android:textSize="@dimen/sp_20"
+    android:textColor="@color/black"
+    android:textStyle="bold"
+
+    android:typeface="sans"
+    >
+</TextView>

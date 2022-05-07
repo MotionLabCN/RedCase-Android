@@ -71,11 +71,20 @@
             android:layout_height="@dimen/dp_1"
             android:layout_weight="1" />
 
-        <ImageView
-            android:id="@+id/iv_interview"
-            android:layout_width="@dimen/dp_36"
-            android:layout_height="@dimen/dp_36"
-            android:src="@drawable/icon_interview" />
+        <TextView
+            android:id="@+id/tv_order_switching"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_6"
+            android:background="@drawable/bg_blue_stroke"
+            android:paddingLeft="@dimen/dp_4"
+            android:paddingTop="@dimen/dp_2"
+            android:paddingRight="@dimen/dp_4"
+            android:paddingBottom="@dimen/dp_2"
+            android:text="可接单"
+            android:drawableRight="@drawable/icon_change_over"
+            android:textColor="@color/main_color"
+            android:textSize="@dimen/sp_12" />
 
     </LinearLayout>
 
@@ -247,12 +256,6 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_18"
                     android:textStyle="bold" />
-                <View
-                    android:layout_marginTop="@dimen/dp_5"
-                    android:layout_width="match_parent"
-                    android:background="@color/color_b5bed3"
-                    android:layout_height="@dimen/dp_10"
-                    android:layout_weight="1" />
 
                 <!--                <LinearLayout-->
                 <!--                    android:layout_width="match_parent"-->
@@ -377,23 +380,17 @@
                 <com.google.android.material.tabs.TabLayout
                     android:id="@+id/tab_position"
                     android:layout_width="@dimen/dp_200"
-                    style="@style/TablaYouTstYle"
+                    style="@style/tabLayout_position_or_activity"
                     app:tabPaddingEnd="2dp"
 
                     app:tabPaddingStart="2dp"
+                    app:tabIndicatorHeight="0dp"
+                    app:tabTextAppearance="@style/TabLayoutTextSize"
 
-
-                    app:tabTextAppearance="@style/tabLayout_testStyle"
                     android:layout_height="@dimen/dp_50"/>
                 <androidx.viewpager2.widget.ViewPager2
-                    style="@style/MyViewPaper"
+                    style="@style/ViewPaper_PositionRecommendation"
                     android:id="@+id/vp_position"/>
-                <View
-                    android:layout_marginTop="@dimen/dp_35"
-                    android:layout_width="match_parent"
-                    android:background="@color/color_b5bed3"
-                    android:layout_height="@dimen/dp_10"
-                    android:layout_weight="1" />
                 <com.tntlinking.tntdev.widget.MyListView
                     android:id="@+id/lv_task"
                     android:layout_width="match_parent"

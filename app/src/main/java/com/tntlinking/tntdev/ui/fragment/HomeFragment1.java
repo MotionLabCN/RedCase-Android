@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.ColorStateList;
+import android.graphics.Typeface;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -76,7 +77,7 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity>{
     private TextView tv_avatar;
     private TextView tv_name;
     private TextView tv_status;
-    private ImageView iv_interview;
+    private TextView tv_order_switching;
     private LinearLayout ll_cooperation;
     private LinearLayout ll_service;
     private LinearLayout ll_question;
@@ -120,7 +121,7 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity>{
         tv_name = findViewById(R.id.tv_name);
         tv_status = findViewById(R.id.tv_status);
 
-        iv_interview = findViewById(R.id.iv_interview);
+        tv_order_switching = findViewById(R.id.tv_order_switching);
         ll_cooperation = findViewById(R.id.ll_cooperation);
         ll_service = findViewById(R.id.ll_service);
         ll_question = findViewById(R.id.ll_question);
@@ -143,12 +144,9 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity>{
         tv_name.setText("你好," + name);
 
         ImmersionBar.setTitleBar(this, ll_title);
-        setOnClickListener(iv_interview, tv_avatar, ll_cooperation, ll_service, ll_question, ll_contact,
+        setOnClickListener(tv_order_switching, tv_avatar, ll_cooperation, ll_service, ll_question, ll_contact,
                 ll_cooperation_1, ll_service_1, ll_question_1, ll_contact_1);
 
-        GlideApp.with(this)
-                .load(R.drawable.icon_gif_interview)
-                .into(iv_interview);
 
         BannerBean banner1 = new BannerBean();
         banner1.setImgRes(R.drawable.bg_img_1);
@@ -243,12 +241,31 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity>{
             }
         });
 //造数据
-        fragmentList.add(new OneFragment());
-        fragmentList.add(new TwoFragment());
+        fragmentList.add(new PositionRecommendationFragment());
+        fragmentList.add(new ActiveTaskFragment());
         TabLayout tabs = findViewById(R.id.tab_position);
         ViewPager2 viewPager = findViewById(R.id.vp_position);
         tabs.setSelectedTabIndicatorHeight(0);
+        tabs.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                tab.setCustomView(R.layout.layout_tab);
+                TextView textView =tab.getCustomView().findViewById(R.id.tab_item_textview);
+                textView.setText(tab.getText());
 
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+                tab.setCustomView(null);
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
         viewPager.setAdapter(new FragmentStateAdapter(this) {
             @NonNull
             @Override
@@ -296,7 +313,7 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity>{
         getAppUpdate();
     }
 
-    @SuppressLint("NonConstantResourceId")
+    @SuppressLint({"NonConstantResourceId", "ResourceAsColor"})
     @Override
     public void onClick(View view) {
         Intent intent = new Intent();
@@ -340,7 +357,23 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity>{
                 intent.putExtra("contact", "contact");
                 startActivity(intent);
                 break;
+            case R.id.tv_order_switching:
+                new BaseDialog.Builder<>(getActivity())
+                        .setContentView(R.layout.change_over_order_dialog)
+                        .setAnimStyle(BaseDialog.ANIM_SCALE)
+                        .setText(R.id.tv_title, "确定切换不接单?")
+                        .setText(R.id.btn_dialog_custom_cancel, "取消")
+                        .setText(R.id.btn_dialog_custom_ok, "确认")
+                        .setOnClickListener(R.id.btn_dialog_custom_cancel, (BaseDialog.OnClickListener<Button>) (dialog, button) -> dialog.dismiss())
+                        .setOnClickListener(R.id.btn_dialog_custom_ok, (dialog, views) -> {
 
+                            dialog.dismiss();
+                            tv_order_switching.setText("不接单");
+                            tv_order_switching.setTextColor(R.color.color_444E64);
+                            tv_order_switching.setBackgroundResource(R.drawable.bg_dark_grey_stroke);
+                        })
+                        .show();
+                break;
         }
 
     }

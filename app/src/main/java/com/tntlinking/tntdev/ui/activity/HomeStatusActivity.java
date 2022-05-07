@@ -14,8 +14,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.blankj.utilcode.util.SPUtils;
-import com.google.android.material.tabs.TabLayout;
-import com.google.android.material.tabs.TabLayoutMediator;
 import com.gyf.immersionbar.ImmersionBar;
 import com.hjq.base.BaseDialog;
 import com.hjq.http.EasyHttp;
@@ -38,19 +36,13 @@ import com.tntlinking.tntdev.ui.adapter.HomeTaskAdapter;
 import com.tntlinking.tntdev.ui.adapter.ServiceProjectAdapter;
 import com.tntlinking.tntdev.ui.bean.BannerBean;
 import com.tntlinking.tntdev.ui.dialog.AppUpdateDialog;
-import com.tntlinking.tntdev.ui.fragment.OneFragment;
-import com.tntlinking.tntdev.ui.fragment.TwoFragment;
 import com.tntlinking.tntdev.widget.MyListView;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
-import androidx.viewpager2.adapter.FragmentStateAdapter;
-import androidx.viewpager2.widget.ViewPager2;
 
 /**
  * 工作主页面

@@ -285,7 +285,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_4"
-                app:bar_leftDrawable="@drawable/icon_recommend"
+                app:bar_leftDrawable="@drawable/icon_opinion_rating"
                 app:bar_leftText="推荐有礼"
                 app:bar_leftTextSize="@dimen/sp_13"
                 app:bar_lineVisible="false"
