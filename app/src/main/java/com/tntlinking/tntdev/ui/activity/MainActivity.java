@@ -7,17 +7,20 @@ import android.os.Bundle;
 
 import com.gyf.immersionbar.ImmersionBar;
 import com.hjq.base.FragmentPagerAdapter;
+import com.hjq.http.EasyHttp;
+import com.hjq.http.listener.HttpCallback;
 import com.tntlinking.tntdev.R;
 import com.tntlinking.tntdev.app.AppActivity;
 import com.tntlinking.tntdev.app.AppFragment;
+import com.tntlinking.tntdev.http.api.GetAppUpdateApi;
+import com.tntlinking.tntdev.http.model.HttpData;
 import com.tntlinking.tntdev.manager.ActivityManager;
+import com.tntlinking.tntdev.other.AppConfig;
 import com.tntlinking.tntdev.other.DoubleClickHelper;
 import com.tntlinking.tntdev.ui.adapter.NavigationAdapter;
-import com.tntlinking.tntdev.ui.fragment.FindFragment;
+import com.tntlinking.tntdev.ui.dialog.AppUpdateDialog;
 import com.tntlinking.tntdev.ui.fragment.HomeFragment;
 import com.tntlinking.tntdev.ui.fragment.HomeFragment1;
-import com.tntlinking.tntdev.ui.fragment.MessageFragment;
-import com.tntlinking.tntdev.ui.fragment.MineFragment;
 import com.tntlinking.tntdev.ui.fragment.MineFragment1;
 import com.tntlinking.tntdev.ui.fragment.TreatyFragment;
 
@@ -85,6 +88,8 @@ public final class MainActivity extends AppActivity
         mViewPager.setAdapter(mPagerAdapter);
 
         onNewIntent(getIntent());
+
+        getAppUpdate();
     }
 
     @Override
@@ -172,5 +177,50 @@ public final class MainActivity extends AppActivity
         mViewPager.setAdapter(null);
         mNavigationView.setAdapter(null);
         mNavigationAdapter.setOnNavigationListener(null);
+    }
+
+
+    /**
+     * 检查更新
+     */
+    public void getAppUpdate() {
+
+        EasyHttp.get(this)
+                .api(new GetAppUpdateApi()
+                        .setOsType(2)//1 ios   2 android
+                        .setCurrVersion(AppConfig.getVersionName()))
+                .request(new HttpCallback<HttpData<GetAppUpdateApi.Bean>>(this) {
+
+                    @Override
+                    public void onSucceed(HttpData<GetAppUpdateApi.Bean> data) {
+                        if (data.getData() != null) {
+                            GetAppUpdateApi.Bean bean = data.getData();
+                            if (AppConfig.getVersionName().equals(bean.getVersion())) {
+
+                            } else {
+
+                                String description = bean.getDescription();
+                                if (description.contains("\\n")) {
+                                    description = description.replace("\\n", "\n");
+                                }
+                                boolean isForce = bean.getForceUpdate() == 1;
+                                // 升级对话框
+                                new AppUpdateDialog.Builder(MainActivity.this)
+                                        // 版本名
+                                        .setVersionName("最新版本：" + bean.getVersion())
+                                        // 是否强制更新
+                                        .setForceUpdate(isForce)
+                                        // 更新日志
+                                        .setUpdateLog(description)
+                                        // 下载 URL
+                                        .setDownloadUrl(bean.getDownloadUrl())
+                                        // 文件 MD5
+//                                            .setFileMd5("df2f045dfa854d8461d9cefe08b813a8")
+                                        .show();
+                            }
+                        }
+                    }
+                });
+
     }
 }
