@@ -57,6 +57,7 @@ import java.util.List;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
@@ -75,19 +76,16 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity>{
     private LinearLayout ll_service;
     private LinearLayout ll_question;
     private LinearLayout ll_contact;
-    private LinearLayout ll_cooperation_1;
-    private LinearLayout ll_service_1;
-    private LinearLayout ll_question_1;
-    private LinearLayout ll_contact_1;
     private ViewPager viewPager;
     private LinearLayout ll_title;
-    private LinearLayout ll_empty;
+
     private LinearLayout ll_status;// 平台介绍页面
-    private LinearLayout ll_work;// 工作服务列表页面
+    //    private LinearLayout ll_work;// 工作服务列表页面
     private LinearLayout ll_task_empty;//
     private MyListView lv_task;
-    private MyListView lv_1;
-    private MyListView lv_2;
+
+    private LinearLayout ll_accept_order;
+    private TextView tv_accept_status;
 
     private int appSize = 0; //工作请求列表size
     private int interSize = 0; //面试请求列表size
@@ -96,6 +94,7 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity>{
     private ServiceProjectAdapter mServiceAdapter;
     private HistoryProjectAdapter mHistoryAdapter;
     String name = SPUtils.getInstance().getString(AppConfig.DEVELOP_NAME, "朋友");
+    private int mStatus = 1;// 接单状态 1 默认可接单
 
     public static HomeFragment1 newInstance() {
         return new HomeFragment1();
@@ -118,26 +117,21 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity>{
         ll_service = findViewById(R.id.ll_service);
         ll_question = findViewById(R.id.ll_question);
         ll_contact = findViewById(R.id.ll_contact);
-        ll_cooperation_1 = findViewById(R.id.ll_cooperation_1);
-        ll_service_1 = findViewById(R.id.ll_service_1);
-        ll_question_1 = findViewById(R.id.ll_question_1);
-        ll_contact_1 = findViewById(R.id.ll_contact_1);
+
         viewPager = findViewById(R.id.viewpager);
         ll_title = findViewById(R.id.ll_title);
         lv_task = findViewById(R.id.lv_task);
-        lv_1 = findViewById(R.id.lv_1);
-        lv_2 = findViewById(R.id.lv_2);
-        ll_empty = findViewById(R.id.ll_empty);
         ll_status = findViewById(R.id.ll_status);
-        ll_work = findViewById(R.id.ll_work);
+//        ll_work = findViewById(R.id.ll_work);
         ll_task_empty = findViewById(R.id.ll_task_empty);
+        ll_accept_order = findViewById(R.id.ll_accept_order);
+        tv_accept_status = findViewById(R.id.tv_accept_status);
 
         tv_avatar.setText(Utils.formatName(name));
         tv_name.setText("你好," + name);
 
         ImmersionBar.setTitleBar(this, ll_title);
-        setOnClickListener(iv_interview, tv_avatar, ll_cooperation, ll_service, ll_question, ll_contact,
-                ll_cooperation_1, ll_service_1, ll_question_1, ll_contact_1);
+        setOnClickListener(iv_interview, tv_avatar, ll_cooperation, ll_service, ll_question, ll_contact, ll_accept_order);
 
         GlideApp.with(this)
                 .load(R.drawable.icon_gif_interview)
@@ -167,74 +161,11 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity>{
 
         viewPager.setPageMargin(getResources().getDimensionPixelSize(R.dimen.dp_16)); //显示viewpager间距
         viewPager.setOffscreenPageLimit(3);
-       MyViewPagerAdapter adapter = new MyViewPagerAdapter(getActivity(), list);
+        MyViewPagerAdapter adapter = new MyViewPagerAdapter(getActivity(), list);
         viewPager.setAdapter(adapter);
         mTaskAdapter = new HomeTaskAdapter(getActivity(), mTaskList);
         lv_task.setAdapter(mTaskAdapter);
-        mServiceAdapter = new ServiceProjectAdapter(getActivity(), mServiceList);
-        mHistoryAdapter = new HistoryProjectAdapter(getActivity(), mHistoryList);
-        lv_1.setAdapter(mServiceAdapter);
-        lv_2.setAdapter(mHistoryAdapter);
-        lv_1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                AppListApi.Bean item = (AppListApi.Bean) mServiceAdapter.getItem(position);
-                if (!TextUtils.isEmpty(item.getServiceName())) {
 
-                    Intent intent = new Intent(getActivity(), WriteDailyActivity.class);
-                    intent.putExtra("orderId", item.getId());
-                    startActivity(intent);
-                } else {
-                    Intent intent = new Intent(getActivity(), InterviewDetailActivity.class);
-                    intent.putExtra("interviewId", item.getId());
-                    startActivity(intent);
-                }
-
-            }
-        });
-
-        lv_task.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                GetNewbieApi.Bean item = mTaskAdapter.getItem(position);
-                if (item.getTaskId() == 2) { //入驻任务
-                    if (item.getTaskStatus() == 0 || item.getTaskStatus() == 1) { //做任务
-                        startActivity(EnterDeveloperActivity.class);
-                    } else if (item.getTaskStatus() == 2) {
-                        if (item.getRewardStatus() == 0 || item.getRewardStatus() == 1) {// 已完成
-                            startActivity(SaveQRActivity.class);
-                        }
-                    }
-                } else if (item.getTaskId() == 3) {//签订协议任务
-
-                    String status = SPUtils.getInstance().getString(AppConfig.DEVELOP_STATUS, "1");
-                    if (status.equals("3")){
-                        if (item.getTaskStatus() == 0 || item.getTaskStatus() == 1) { //做任务
-                            startActivity(SignContactActivity.class);
-                        } else if (item.getTaskStatus() == 2) {
-                            if (item.getRewardStatus() == 0 || item.getRewardStatus() == 1) {// 已完成
-                                startActivity(SaveQRActivity.class);
-                            }
-                        }
-                    }else {
-                        new BaseDialog.Builder<>(getActivity())
-                                .setContentView(R.layout.write_daily_delete_dialog)
-                                .setAnimStyle(BaseDialog.ANIM_SCALE)
-                                .setText(R.id.tv_title, "请先完成“完善入驻信息”任务")
-                                .setText(R.id.btn_dialog_custom_cancel, "取消")
-                                .setText(R.id.btn_dialog_custom_ok, "做任务")
-                                .setOnClickListener(R.id.btn_dialog_custom_cancel, (BaseDialog.OnClickListener<Button>) (dialog, button) -> dialog.dismiss())
-                                .setOnClickListener(R.id.btn_dialog_custom_ok, (dialog, views) -> {
-
-                                    startActivity(EnterDeveloperActivity.class);
-                                    dialog.dismiss();
-                                })
-                                .show();
-                    }
-
-                }
-            }
-        });
 
     }
 
@@ -249,16 +180,16 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity>{
             tv_status.setVisibility(View.VISIBLE);
             tv_status.setText("已认证");
 
-            getAppList();
+//            getAppList();
         } else {
             ll_status.setVisibility(View.VISIBLE); //1、2、4 状态下显示平台介绍和新手任务
-            ll_work.setVisibility(View.GONE);
+//            ll_work.setVisibility(View.GONE);
 
             tv_status.setVisibility(View.GONE);
 
         }
 
-        getAppUpdate();
+//        getAppUpdate();
     }
 
     @SuppressLint("NonConstantResourceId")
@@ -273,7 +204,6 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity>{
                 startActivity(InterviewActivity.class);
                 break;
             case R.id.ll_cooperation:
-            case R.id.ll_cooperation_1:
 //                BrowserActivity.start(getActivity(), "https://stage-ttchain.tntlinking.com/api/minio/manpower-pages/recruit_guide.pdf","合作模式");
                 String PDFUrl = AppConfig.RECRUIT_GUIDE_URL;
                 intent.setClass(getActivity(), PDFViewActivity.class);
@@ -282,7 +212,6 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity>{
                 startActivity(intent);
                 break;
             case R.id.ll_service:
-            case R.id.ll_service_1:
 //                String service_guide = "https://stage-ttchain.tntlinking.com/api/minio/manpower-pages/service_guide.md";
                 String service_guide = AppConfig.SERVICE_GUIDE_URL;
                 intent.setClass(getActivity(), MDViewActivity.class);
@@ -291,7 +220,6 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity>{
                 startActivity(intent);
                 break;
             case R.id.ll_question:
-            case R.id.ll_question_1:
 //                String faq_guide = "https://stage-ttchain.tntlinking.com/api/minio/manpower-pages/faq_guide.md";
                 String faq_guide = AppConfig.FAQ_GUIDE_URL;
                 intent.setClass(getActivity(), MDViewActivity.class);
@@ -300,10 +228,13 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity>{
                 startActivity(intent);
                 break;
             case R.id.ll_contact:
-            case R.id.ll_contact_1:
                 intent.setClass(getActivity(), SaveQRActivity.class);
                 intent.putExtra("contact", "contact");
                 startActivity(intent);
+                break;
+
+            case R.id.ll_accept_order:
+                checkStatus(getActivity(), mStatus);
                 break;
 
         }
@@ -311,6 +242,32 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity>{
     }
 
 
+    /**
+     * 切换 是否可接单状态
+     *
+     * @param activity
+     * @param status
+     */
+    public void checkStatus(FragmentActivity activity, int status) {
+        String title = (status == 1) ? "确定切换为不接单吗？" : "确定切换为可接单吗？";
+        String content = (status == 1) ? "切换为不接单状态后将不在显示职位推荐" : "切换为可接单状态后将展示职位推荐";
+
+        new BaseDialog.Builder<>(activity)
+                .setContentView(R.layout.check_order_status_dialog)
+                .setAnimStyle(BaseDialog.ANIM_SCALE)
+                .setText(R.id.tv_title, title)
+                .setText(R.id.tv_content, content)
+                .setText(R.id.btn_dialog_custom_cancel, "取消")
+                .setText(R.id.btn_dialog_custom_ok, "确定")
+                .setOnClickListener(R.id.btn_dialog_custom_cancel, (BaseDialog.OnClickListener<Button>) (dialog, button) -> dialog.dismiss())
+                .setOnClickListener(R.id.btn_dialog_custom_ok, (dialog, views) -> {
+
+                    mStatus = (status == 1) ? 2 : 1;
+                    String str = (mStatus == 1) ? "可接单" : "不接单";
+                    tv_accept_status.setText(str);
+                    dialog.dismiss();
+                }).show();
+    }
 
 
     private List<GetNewbieApi.Bean> mTaskList = new ArrayList<>();
@@ -367,9 +324,9 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity>{
                         getHistoryList();
                         interSize = 0;
                         if (appSize + interSize == 0) {
-                            ll_empty.setVisibility(View.VISIBLE);
+//                            ll_empty.setVisibility(View.VISIBLE);
                         } else {
-                            ll_empty.setVisibility(View.GONE);
+//                            ll_empty.setVisibility(View.GONE);
                         }
                     }
                 });
@@ -393,15 +350,15 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity>{
                             //无服务项目（包含面试邀约）且无历史服务项目  显示平台介绍和新手任务
                             if (appSize + interSize == 0) {
                                 ll_status.setVisibility(View.VISIBLE);
-                                ll_work.setVisibility(View.GONE);
+//                                ll_work.setVisibility(View.GONE);
 
-                                ll_empty.setVisibility(View.VISIBLE);
+//                                ll_empty.setVisibility(View.VISIBLE);
                             } else {
                                 ll_status.setVisibility(View.GONE);
-                                ll_work.setVisibility(View.VISIBLE);
+//                                ll_work.setVisibility(View.VISIBLE);
                                 mServiceAdapter.setData(mServiceList);
 
-                                ll_empty.setVisibility(View.GONE);
+//                                ll_empty.setVisibility(View.GONE);
                             }
                             mHistoryList.addAll(data.getData());
                             mHistoryAdapter.setData(mHistoryList);
@@ -410,7 +367,7 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity>{
                             //无服务项目（包含面试邀约）但有历史服务项目  显示暂无工作和历史项目
                             if (appSize + interSize == 0) {
                                 ll_status.setVisibility(View.VISIBLE);
-                                ll_work.setVisibility(View.GONE);
+//                                ll_work.setVisibility(View.GONE);
                             }
                         }
 
@@ -420,10 +377,11 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity>{
                     public void onFail(Exception e) {
                         super.onFail(e);
                         ll_status.setVisibility(View.VISIBLE);
-                        ll_work.setVisibility(View.GONE);
+//                        ll_work.setVisibility(View.GONE);
                     }
                 });
     }
+
     /**
      * 获取任务状态
      */
@@ -537,9 +495,6 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity>{
             return (float) 0.85;
         }
     }
-
-
-
 
 
     @Override
