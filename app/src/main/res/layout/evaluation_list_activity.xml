@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
@@ -18,16 +17,27 @@
         app:rightTitleSize="@dimen/sp_14"
         app:title="参与测评" />
 
-
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="选择测评岗位 【单选】"
+        android:text="选择测评岗位"
         android:layout_marginLeft="@dimen/dp_20"
         android:textSize="@dimen/sp_15"
-        android:layout_marginTop="@dimen/dp_20"
         android:textStyle="bold"
         android:textColor="@color/common_primary_dark_color"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="【单选】"
+        android:textSize="@dimen/sp_15"
+        android:textStyle="bold"
+        android:textColor="#7E89A3"/>
+</LinearLayout>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_speciality_list"
         android:layout_marginTop="@dimen/dp_10"
