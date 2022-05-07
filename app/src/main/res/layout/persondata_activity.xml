@@ -169,7 +169,7 @@
                             android:id="@+id/tv_profit_total"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="xxxxxx"
+                            android:text=""
                             android:textColor="@color/white"
                             android:textSize="@dimen/sp_15"
                             android:textStyle="bold" />
@@ -194,14 +194,15 @@
                 android:gravity="center"
                 android:text="平台"
                 android:textColor="@color/color_hint_color"
-                android:textSize="@dimen/sp_13" />
+                android:textSize="@dimen/sp_13"
+                tools:ignore="UseCompatTextViewDrawableXml" />
 
             <com.hjq.widget.layout.SettingBar
                 android:id="@+id/person_data_dev"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_4"
-                app:bar_leftDrawable="@drawable/icon_enter_develoer"
+                app:bar_leftDrawable="@drawable/icon_settled_material"
                 app:bar_leftText="入驻资料"
                 app:bar_leftTextSize="@dimen/sp_13"
                 app:bar_lineVisible="false"
@@ -266,7 +267,8 @@
                 android:drawablePadding="@dimen/dp_4"
                 android:gravity="center"
                 android:text="资金"
-                android:textColor="@color/color_hint_color" />
+                android:textColor="@color/color_hint_color"
+                tools:ignore="UseCompatTextViewDrawableXml" />
 
             <com.hjq.widget.layout.SettingBar
                 android:id="@+id/person_data_income"
@@ -309,7 +311,8 @@
                 android:drawablePadding="@dimen/dp_4"
                 android:gravity="center"
                 android:text="其他"
-                android:textColor="@color/color_hint_color" />
+                android:textColor="@color/color_hint_color"
+                tools:ignore="UseCompatTextViewDrawableXml" />
 
             <com.hjq.widget.layout.SettingBar
                 android:id="@+id/person_data_private"
