@@ -69,11 +69,11 @@ public final class MainActivity extends AppActivity
 
         mNavigationAdapter = new NavigationAdapter(this);
         mNavigationAdapter.addItem(new NavigationAdapter.MenuItem(getString(R.string.home_nav_index),
-                ContextCompat.getDrawable(this, R.drawable.home_home_selector)));
+                ContextCompat.getDrawable(this, R.drawable.tab_home_selector)));
         mNavigationAdapter.addItem(new NavigationAdapter.MenuItem(getString(R.string.home_nav_treaty),
-                ContextCompat.getDrawable(this, R.drawable.home_found_selector)));
+                ContextCompat.getDrawable(this, R.drawable.tab_treaty_selector)));
         mNavigationAdapter.addItem(new NavigationAdapter.MenuItem(getString(R.string.home_nav_me),
-                ContextCompat.getDrawable(this, R.drawable.home_me_selector)));
+                ContextCompat.getDrawable(this, R.drawable.tab_mine_selector)));
         mNavigationAdapter.setOnNavigationListener(this);
         mNavigationView.setAdapter(mNavigationAdapter);
 

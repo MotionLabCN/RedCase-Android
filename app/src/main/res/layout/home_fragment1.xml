@@ -77,12 +77,12 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/dp_6"
             android:background="@drawable/bg_blue_stroke"
-            android:paddingLeft="@dimen/dp_4"
-            android:paddingTop="@dimen/dp_2"
-            android:paddingRight="@dimen/dp_4"
-            android:paddingBottom="@dimen/dp_2"
+            android:drawableRight="@drawable/icon_refresh"
+            android:paddingLeft="@dimen/dp_5"
+            android:paddingTop="@dimen/dp_3"
+            android:paddingRight="@dimen/dp_5"
+            android:paddingBottom="@dimen/dp_3"
             android:text="可接单"
-            android:drawableRight="@drawable/icon_change_over"
             android:textColor="@color/main_color"
             android:textSize="@dimen/sp_12" />
 

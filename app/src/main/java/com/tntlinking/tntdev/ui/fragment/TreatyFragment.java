@@ -1,26 +1,53 @@
 package com.tntlinking.tntdev.ui.fragment;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.text.TextUtils;
 import android.view.View;
-import android.widget.ImageView;
-
-import com.bumptech.glide.load.MultiTransformation;
-import com.bumptech.glide.load.resource.bitmap.CenterCrop;
-import com.bumptech.glide.load.resource.bitmap.CircleCrop;
-import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
-import com.hjq.widget.view.CountdownView;
-import com.hjq.widget.view.SwitchButton;
+import android.widget.AdapterView;
+import android.widget.LinearLayout;
+import com.blankj.utilcode.util.SPUtils;
+import com.hjq.http.EasyHttp;
+import com.hjq.http.listener.HttpCallback;
 import com.tntlinking.tntdev.R;
 import com.tntlinking.tntdev.aop.SingleClick;
 import com.tntlinking.tntdev.app.TitleBarFragment;
-import com.tntlinking.tntdev.http.glide.GlideApp;
-import com.tntlinking.tntdev.ui.activity.HomeActivity;
+import com.tntlinking.tntdev.http.api.AppListApi;
+import com.tntlinking.tntdev.http.api.AppListInterviewApi;
+import com.tntlinking.tntdev.http.api.GetNewbieApi;
+import com.tntlinking.tntdev.http.api.HistoryListApi;
+import com.tntlinking.tntdev.http.model.HttpData;
+import com.tntlinking.tntdev.other.AppConfig;
+import com.tntlinking.tntdev.ui.activity.InterviewDetailActivity;
 import com.tntlinking.tntdev.ui.activity.MainActivity;
+import com.tntlinking.tntdev.ui.activity.WriteDailyActivity;
+import com.tntlinking.tntdev.ui.adapter.HistoryProjectAdapter;
+import com.tntlinking.tntdev.ui.adapter.ServiceProjectAdapter;
+import com.tntlinking.tntdev.widget.MyListView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * desc   : 服务 Fragment
  */
 public final class TreatyFragment extends TitleBarFragment<MainActivity> {
 
+    private MyListView lv_1;
+    private MyListView lv_2;
+    private LinearLayout ll_empty;
+
+
+    private List<GetNewbieApi.Bean> mTaskList = new ArrayList<>();
+    private List<AppListApi.Bean> mServiceList = new ArrayList<>();
+    private List<AppListApi.Bean> mHistoryList = new ArrayList<>();
+
+    private int appSize = 0; //工作请求列表size
+    private int interSize = 0; //面试请求列表size
+    private int historySize = 0;//历史记录列表size
+
+    private ServiceProjectAdapter mServiceAdapter;
+    private HistoryProjectAdapter mHistoryAdapter;
 
     public static TreatyFragment newInstance() {
         return new TreatyFragment();
@@ -33,12 +60,43 @@ public final class TreatyFragment extends TitleBarFragment<MainActivity> {
 
     @Override
     protected void initView() {
+        lv_1 = findViewById(R.id.lv_1);
+        lv_2 = findViewById(R.id.lv_2);
+        ll_empty = findViewById(R.id.ll_empty);
 
+        mServiceAdapter = new ServiceProjectAdapter(getActivity(), mServiceList);
+        mHistoryAdapter = new HistoryProjectAdapter(getActivity(), mHistoryList);
+        lv_1.setAdapter(mServiceAdapter);
+        lv_2.setAdapter(mHistoryAdapter);
+        lv_1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                AppListApi.Bean item = (AppListApi.Bean) mServiceAdapter.getItem(position);
+                if (!TextUtils.isEmpty(item.getServiceName())) {
+
+                    Intent intent = new Intent(getActivity(), WriteDailyActivity.class);
+                    intent.putExtra("orderId", item.getId());
+                    startActivity(intent);
+                } else {
+                    Intent intent = new Intent(getActivity(), InterviewDetailActivity.class);
+                    intent.putExtra("interviewId", item.getId());
+                    startActivity(intent);
+                }
+
+            }
+        });
     }
 
     @Override
     protected void initData() {
+        String status = SPUtils.getInstance().getString(AppConfig.DEVELOP_STATUS, "1");
 
+        if (status.equals("3")) {
+            getAppList();
+        }else {
+            toast("您还没有认证");
+            ll_empty.setVisibility(View.VISIBLE);
+        }
     }
 
     @SingleClick
@@ -51,6 +109,107 @@ public final class TreatyFragment extends TitleBarFragment<MainActivity> {
     public boolean isStatusBarEnabled() {
         // 使用沉浸式状态栏
         return !super.isStatusBarEnabled();
+    }
+
+
+    /**
+     * 获取在服务企业list
+     */
+    private void getAppList() {
+        EasyHttp.get(this)
+                .api(new AppListApi())
+                .request(new HttpCallback<HttpData<List<AppListApi.Bean>>>(this) {
+
+                    @Override
+                    public void onSucceed(HttpData<List<AppListApi.Bean>> data) {
+                        if (data.getData().size() > 0) {
+                            mServiceList.addAll(data.getData());
+                        }
+                        getInterviewAppList();
+                        appSize = data.getData().size();
+                    }
+
+                    @Override
+                    public void onFail(Exception e) {
+                        super.onFail(e);
+                        getHistoryList();
+                        appSize = 0;
+                    }
+                });
+    }
+
+    /**
+     * 获取面试邀约list
+     */
+    @SuppressLint("CheckResult")
+    private void getInterviewAppList() {
+        EasyHttp.get(this)
+                .api(new AppListInterviewApi())
+                .request(new HttpCallback<HttpData<List<AppListApi.Bean>>>(this) {
+
+                    @Override
+                    public void onSucceed(HttpData<List<AppListApi.Bean>> data) {
+                        interSize = data.getData().size();
+                        if (data.getData().size() > 0) {
+                            mServiceList.addAll(data.getData());
+                        }
+                        getHistoryList();
+                    }
+
+                    @Override
+                    public void onFail(Exception e) {
+                        super.onFail(e);
+                        getHistoryList();
+                        interSize = 0;
+                        if (appSize + interSize == 0) {
+                            ll_empty.setVisibility(View.VISIBLE);
+                        } else {
+                            ll_empty.setVisibility(View.GONE);
+                        }
+                    }
+                });
+
+
+    }
+
+
+    /**
+     * 获取历史服务list
+     */
+    private void getHistoryList() {
+        EasyHttp.get(this)
+                .api(new HistoryListApi().setOrderData("2018-10-10"))
+                .request(new HttpCallback<HttpData<List<AppListApi.Bean>>>(this) {
+
+                    @Override
+                    public void onSucceed(HttpData<List<AppListApi.Bean>> data) {
+                        if (data.getData().size() > 0) {
+
+                            //无服务项目（包含面试邀约）且无历史服务项目  显示平台介绍和新手任务
+                            if (appSize + interSize == 0) {
+                                ll_empty.setVisibility(View.VISIBLE);
+                            } else {
+                                mServiceAdapter.setData(mServiceList);
+                                ll_empty.setVisibility(View.GONE);
+                            }
+                            mHistoryList.addAll(data.getData());
+                            mHistoryAdapter.setData(mHistoryList);
+
+                        } else {
+                            //无服务项目（包含面试邀约）但有历史服务项目  显示暂无工作和历史项目
+                            if (appSize + interSize == 0) {
+
+                            }
+                        }
+
+                    }
+
+                    @Override
+                    public void onFail(Exception e) {
+                        super.onFail(e);
+
+                    }
+                });
     }
 
 }
