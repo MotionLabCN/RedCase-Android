@@ -3,8 +3,7 @@ package com.tntlinking.tntdev.ui.fragment;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.ColorStateList;
-import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +21,7 @@ import com.gyf.immersionbar.ImmersionBar;
 import com.hjq.base.BaseDialog;
 import com.hjq.base.FragmentPagerAdapter;
 import com.hjq.http.EasyHttp;
+
 import com.hjq.http.listener.HttpCallback;
 import com.tntlinking.tntdev.R;
 import com.tntlinking.tntdev.app.AppFragment;
@@ -62,6 +62,7 @@ import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
@@ -69,10 +70,9 @@ import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 
 /**
- *
- *    desc   : 首页 Fragment
+ * desc   : 首页 Fragment
  */
-public final class HomeFragment1 extends TitleBarFragment<MainActivity>{
+public final class HomeFragment1 extends TitleBarFragment<MainActivity> {
 
     private TextView tv_avatar;
     private TextView tv_name;
@@ -105,6 +105,9 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity>{
     String name = SPUtils.getInstance().getString(AppConfig.DEVELOP_NAME, "朋友");
     private String[] titles = {"职位推荐", "活动任务"};
     private List<Fragment> fragmentList = new ArrayList<>();
+
+    private int mStatus = 1;// 接单状态 1 默认可接单
+
     public static HomeFragment1 newInstance() {
         return new HomeFragment1();
     }
@@ -172,7 +175,7 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity>{
 
         viewPager.setPageMargin(getResources().getDimensionPixelSize(R.dimen.dp_16)); //显示viewpager间距
         viewPager.setOffscreenPageLimit(3);
-       MyViewPagerAdapter adapter = new MyViewPagerAdapter(getActivity(), list);
+        MyViewPagerAdapter adapter = new MyViewPagerAdapter(getActivity(), list);
         viewPager.setAdapter(adapter);
         mTaskAdapter = new HomeTaskAdapter(getActivity(), mTaskList);
         lv_task.setAdapter(mTaskAdapter);
@@ -213,7 +216,7 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity>{
                 } else if (item.getTaskId() == 3) {//签订协议任务
 
                     String status = SPUtils.getInstance().getString(AppConfig.DEVELOP_STATUS, "1");
-                    if (status.equals("3")){
+                    if (status.equals("3")) {
                         if (item.getTaskStatus() == 0 || item.getTaskStatus() == 1) { //做任务
                             startActivity(SignContactActivity.class);
                         } else if (item.getTaskStatus() == 2) {
@@ -221,7 +224,7 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity>{
                                 startActivity(SaveQRActivity.class);
                             }
                         }
-                    }else {
+                    } else {
                         new BaseDialog.Builder<>(getActivity())
                                 .setContentView(R.layout.write_daily_delete_dialog)
                                 .setAnimStyle(BaseDialog.ANIM_SCALE)
@@ -250,7 +253,7 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity>{
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 tab.setCustomView(R.layout.layout_tab);
-                TextView textView =tab.getCustomView().findViewById(R.id.tab_item_textview);
+                TextView textView = tab.getCustomView().findViewById(R.id.tab_item_textview);
                 textView.setText(tab.getText());
 
             }
@@ -313,7 +316,6 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity>{
         getAppUpdate();
     }
 
-    @SuppressLint({"NonConstantResourceId", "ResourceAsColor"})
     @Override
     public void onClick(View view) {
         Intent intent = new Intent();
@@ -358,27 +360,51 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity>{
                 startActivity(intent);
                 break;
             case R.id.tv_order_switching:
-                new BaseDialog.Builder<>(getActivity())
-                        .setContentView(R.layout.change_over_order_dialog)
-                        .setAnimStyle(BaseDialog.ANIM_SCALE)
-                        .setText(R.id.tv_title, "确定切换不接单?")
-                        .setText(R.id.btn_dialog_custom_cancel, "取消")
-                        .setText(R.id.btn_dialog_custom_ok, "确认")
-                        .setOnClickListener(R.id.btn_dialog_custom_cancel, (BaseDialog.OnClickListener<Button>) (dialog, button) -> dialog.dismiss())
-                        .setOnClickListener(R.id.btn_dialog_custom_ok, (dialog, views) -> {
 
-                            dialog.dismiss();
-                            tv_order_switching.setText("不接单");
-                            tv_order_switching.setTextColor(R.color.color_444E64);
-                            tv_order_switching.setBackgroundResource(R.drawable.bg_dark_grey_stroke);
-                        })
-                        .show();
+                checkStatus(getActivity(), mStatus);
                 break;
         }
 
     }
 
+    /**
+     * 切换 是否可接单状态
+     *
+     * @param activity
+     * @param status
+     */
+    public void checkStatus(FragmentActivity activity, int status) {
+        String title = (status == 1) ? "确定切换不接单？" : "确定切换可接单？";
+        String content = (status == 1) ? "切换为不接单状态后,将不再展示职位推荐" : "切换为可接单状态后,将展示职位推荐";
 
+        new BaseDialog.Builder<>(activity)
+                .setContentView(R.layout.check_order_status_dialog)
+                .setAnimStyle(BaseDialog.ANIM_SCALE)
+                .setText(R.id.tv_title, title)
+                .setText(R.id.tv_content, content)
+                .setText(R.id.btn_dialog_custom_cancel, "取消")
+                .setText(R.id.btn_dialog_custom_ok, "确认")
+                .setOnClickListener(R.id.btn_dialog_custom_cancel, (BaseDialog.OnClickListener<Button>) (dialog, button) -> dialog.dismiss())
+                .setOnClickListener(R.id.btn_dialog_custom_ok, (dialog, views) -> {
+
+                     if(mStatus==1){
+                         tv_order_switching.setText("不接单");
+                         tv_order_switching.setTextColor(getResources().getColor(R.color.color_444E64));
+                         tv_order_switching.setBackground(getResources().getDrawable(R.drawable.bg_dark_grey_stroke));
+                         Drawable drawable = getResources().getDrawable(R.drawable.icon_change_over);
+                         tv_order_switching.setCompoundDrawablesWithIntrinsicBounds(null, null, drawable, null);
+                     }else {
+                         tv_order_switching.setText("可接单");
+                         tv_order_switching.setTextColor(getResources().getColor(R.color.main_color));
+                         tv_order_switching.setBackground(getResources().getDrawable(R.drawable.bg_blue_stroke));
+                         Drawable drawable = getResources().getDrawable(R.drawable.icon_refresh);
+                         tv_order_switching.setCompoundDrawablesWithIntrinsicBounds(null, null, drawable, null);
+                     }
+
+                    mStatus = (status == 1) ? 2 : 1;
+                    dialog.dismiss();
+                }).show();
+    }
 
 
     private List<GetNewbieApi.Bean> mTaskList = new ArrayList<>();
@@ -605,9 +631,6 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity>{
             return (float) 0.85;
         }
     }
-
-
-
 
 
     @Override
