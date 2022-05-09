@@ -1,6 +1,8 @@
 package com.tntlinking.tntdev.ui.bean;
 
-public class PositionBean {
+import java.io.Serializable;
+
+public class PositionBean implements Serializable {
     private String position_name;
     private String recommend;
     private String salary;

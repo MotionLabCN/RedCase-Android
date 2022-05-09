@@ -10,8 +10,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.tntlinking.tntdev.R;
-import com.tntlinking.tntdev.http.api.GetNewbieApi;
-import com.tntlinking.tntdev.other.Utils;
 import com.tntlinking.tntdev.ui.bean.PositionBean;
 
 import java.util.List;
@@ -19,9 +17,8 @@ import java.util.List;
 public class PositionRecommendationAdapter extends BaseAdapter {
 
     private List<PositionBean> mList;
-    private LayoutInflater layoutInflater;
+    private final LayoutInflater layoutInflater;
     private Context mContext;
-
     public PositionRecommendationAdapter(Context context, List<PositionBean> list) {
         this.mContext = context;
         this.mList = list;
@@ -58,7 +55,7 @@ public class PositionRecommendationAdapter extends BaseAdapter {
         PositionRecommendationAdapter.ViewHolder holder = null;
         if (convertView == null) {
             convertView = layoutInflater.inflate(R.layout.position_item, null);
-            holder = new PositionRecommendationAdapter.ViewHolder();
+            holder = new ViewHolder();
             holder.tv_position_name = convertView.findViewById(R.id.tv_position_name);
             holder.tv_recommend = convertView.findViewById(R.id.tv_recommend);
             holder.tv_salary = convertView.findViewById(R.id.tv_salary);
@@ -89,7 +86,7 @@ public class PositionRecommendationAdapter extends BaseAdapter {
         return convertView;
     }
 
-    class ViewHolder {
+    static class ViewHolder {
         TextView tv_position_name;
         TextView tv_recommend;
         TextView tv_salary;

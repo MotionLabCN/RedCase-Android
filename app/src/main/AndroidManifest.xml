@@ -245,7 +245,11 @@
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
 
-
+        <!-- 职位详情 -->
+        <activity
+            android:name="com.tntlinking.tntdev.ui.activity.JobDetailsActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
         <!-- 登陆页面1 -->
         <activity
             android:name="com.tntlinking.tntdev.ui.activity.LoginActivity1"
