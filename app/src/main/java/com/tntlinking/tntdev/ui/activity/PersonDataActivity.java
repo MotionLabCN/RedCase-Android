@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Build;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ScrollView;
@@ -83,8 +84,7 @@ public final class PersonDataActivity extends AppActivity {
         tv_profit_total = findViewById(R.id.tv_profit_total);
 
         setOnClickListener(mPersonDataIncome, mPersonDataSetting, mPersonDataInterview,
-                person_data_private, person_data_deal, person_data_dev, person_data_evaluation,person_data_about, person_data_recommend, person_data_service);
-
+                person_data_private, person_data_deal, person_data_dev, person_data_evaluation, person_data_about, person_data_recommend, person_data_service);
 
 
         scroll.setOnScrollChangeListener((v, scrollX, scrollY, oldScrollX, oldScrollY) -> {
@@ -109,18 +109,12 @@ public final class PersonDataActivity extends AppActivity {
                     @SuppressLint("SetTextI18n")
                     @Override
                     public void onSucceed(HttpData<GetDeveloperJkStatusApi.Bean> data) {
-                        if (mStatus.equals("1")){
+                        if (mStatus.equals("1")) {
                             startActivity(EvaluationActivity.class);
-                        }else if (data.getData()!=null&&data.getData().getUserPlanStatus()==0){
-                                    startActivity(EvaluationNeedsTokNowActivity.class);
-                        }else if (data.getData()!=null&&data.getData().getUserPlanStatus()==1){
-                            if (data.getData().getStackInfoList().size()>0){
-                                startActivity(new Intent(PersonDataActivity.this, EvaluationOutcomeActivity.class)
-                                );
-                            }else {
-                                JkBrowserActivity.start(getActivity(), data.getData().getPlanUrl());
-                            }
-
+                        } else if (data.getData() != null && data.getData().getUserPlanStatus() == 0) {
+                            startActivity(EvaluationNeedsTokNowActivity.class);
+                        } else  {
+                            JkBrowserActivity.start(getActivity(), data.getData().getPlanUrl());
 
                         }
 
@@ -152,32 +146,15 @@ public final class PersonDataActivity extends AppActivity {
             startActivity(PersonSettingActivity.class);
         } else if (view == person_data_about) {// 关于天天数链开发者
             startActivity(AboutAppActivity.class);
-        }else if (view == person_data_evaluation){
-            showDealDialog();
+        } else if (view == person_data_evaluation) {
+            getDeveloperJkStatus();
+
 
         }
 
     }
-    public void showDealDialog() {
-        BaseDialog.Builder<?> builder = new BaseDialog.Builder<>(PersonDataActivity.this)
-                .setContentView(R.layout.geeks_evaluation_need_to_know_dialog)
-                .setAnimStyle(BaseDialog.ANIM_SCALE)
-                .setCancelable(false)
-                .setCanceledOnTouchOutside(false)
-                .setText(R.id.tv_title, "我们会遵循隐私政策收集,使用您的信息,但不会仅因为您同意本隐私政策而采取强制捆绑的方式一览子收集您个人信息")
-                .setText(R.id.btn_dialog_custom_ok, "已知晓")
-                .setText(R.id.btn_dialog_custom_cancel, "取消")
-                .setOnClickListener(R.id.btn_dialog_custom_cancel, (BaseDialog.OnClickListener<Button>) (dialog, button) -> dialog.dismiss())
-                .setOnClickListener(R.id.btn_dialog_custom_ok, (dialog, views) -> {
-
-                    getDeveloperJkStatus();
-                    dialog.dismiss();
-                });
 
 
-
-        builder.show();
-    }
 
     @NonNull
     @Override

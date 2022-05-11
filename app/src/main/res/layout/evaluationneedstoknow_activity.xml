@@ -34,6 +34,10 @@
         android:layout_height="@dimen/dp_100"
         android:gravity="center"
         android:layout_gravity="center"
+        android:paddingLeft="@dimen/dp_16"
+        android:paddingEnd="@dimen/dp_16"
+        android:paddingBottom="@dimen/dp_16"
+        android:paddingTop="@dimen/dp_16"
         android:layout_marginTop="@dimen/dp_10"
         android:background="@drawable/bg_grey_radius_8"
         android:orientation="vertical">
@@ -42,7 +46,6 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:textSize="@dimen/sp_12"
-            android:layout_marginLeft="@dimen/dp_8"
             android:text="@string/setting_public_notice"
             android:textColor="#7E89A3"
             />

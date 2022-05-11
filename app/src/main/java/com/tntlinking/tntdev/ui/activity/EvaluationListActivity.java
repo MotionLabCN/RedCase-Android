@@ -1,6 +1,8 @@
 package com.tntlinking.tntdev.ui.activity;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -9,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.hjq.http.EasyHttp;
 import com.hjq.http.listener.HttpCallback;
+import com.hjq.toast.ToastUtils;
 import com.tntlinking.tntdev.R;
 import com.tntlinking.tntdev.aop.SingleClick;
 import com.tntlinking.tntdev.app.AppActivity;
@@ -22,7 +25,7 @@ import java.util.List;
 
 public final class EvaluationListActivity extends AppActivity {
    private final List<JKSelectJobsApi.Bean> jkSelectList = new ArrayList<>();
-   private int mJKid;
+   private int mJKid=0;
    private RecyclerView rv_speciality_list;
    private Button btn_out_evaluating;
 
@@ -54,15 +57,23 @@ public final class EvaluationListActivity extends AppActivity {
                     @SuppressLint("SetTextI18n")
                     @Override
                     public void onSucceed(HttpData<String> data) {
-                        JkBrowserActivity.start(getActivity(), data.getData());
+                         if (data.getCode()==900503){
+                             ToastUtils.show("该岗位对应的计划未找到,请联系人才顾问！");
+                             Intent intent = new Intent();
+                            intent.setClass(EvaluationListActivity.this, SaveQRActivity.class);
+                            intent.putExtra("contact", "contact");
+                            startActivity(intent);
+                        }else {
+                             JkBrowserActivity.start(getActivity(), data.getData());
+                         }
 
                     }
 
                      @Override
                      public void onFail(Exception e) {
                          super.onFail(e);
-
                      }
+
                  });
       }
    /**
@@ -105,6 +116,10 @@ public final class EvaluationListActivity extends AppActivity {
     @Override
     public void onClick(View view) {
         if (view == btn_out_evaluating) { // 测评岗位列表
+            if (mJKid==0){
+                ToastUtils.show("请选择测评岗位!");
+                return;
+            }
             getUndervaluation();
         }
     }

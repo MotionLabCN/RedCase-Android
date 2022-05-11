@@ -128,6 +128,7 @@ public final class JkBrowserActivity extends AppActivity
 
     @Override
     public void onLeftClick(View view) {
+        startActivity(PersonDataActivity.class);
         finish();
     }
 

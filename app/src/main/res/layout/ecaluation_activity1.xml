@@ -19,65 +19,51 @@
         app:rightTitleColor="@color/common_accent_color"
         app:rightTitleSize="@dimen/sp_14"
         app:title="参与测评" />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="为什么要参与测评?"
-        android:layout_marginLeft="@dimen/dp_20"
-        android:textSize="@dimen/sp_15"
-        android:layout_marginTop="@dimen/dp_20"
-        android:textStyle="bold"
-        android:textColor="@color/common_primary_dark_color"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="1.参与测评有助于提高竞争力！"
-        android:layout_marginLeft="@dimen/dp_20"
-        android:textSize="@dimen/sp_10"
-        android:layout_marginTop="@dimen/dp_5"
-        android:textColor="@color/common_text_hint_color"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="2.参与测评可以更高效的匹配职位!"
-        android:layout_marginLeft="@dimen/dp_20"
-        android:textSize="@dimen/sp_10"
-        android:layout_marginTop="@dimen/dp_5"
-        android:textColor="@color/common_text_hint_color"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="3.优先展示个HR,提高曝光率!"
-        android:layout_marginLeft="@dimen/dp_20"
-        android:textSize="@dimen/sp_10"
-        android:layout_marginTop="@dimen/dp_5"
-        android:textColor="@color/common_text_hint_color"/>
-
-    <ImageView
-        android:layout_width="@dimen/dp_300"
-        android:layout_height="@dimen/dp_300"
+    <LinearLayout
+        android:layout_width="@dimen/dp_343"
+        android:layout_height="@dimen/dp_100"
+        android:gravity="center"
         android:layout_gravity="center"
+        android:paddingLeft="@dimen/dp_16"
+        android:paddingEnd="@dimen/dp_16"
+        android:paddingBottom="@dimen/dp_16"
+        android:paddingTop="@dimen/dp_16"
+        android:layout_marginTop="@dimen/dp_10"
+        android:background="@drawable/bg_grey_radius_8"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+
+            android:textSize="@dimen/sp_12"
+            android:text="@string/setting_public_notice"
+            android:textColor="#7E89A3"
+            />
+    </LinearLayout>
+    <ImageView
+        android:layout_width="@dimen/dp_200"
+        android:layout_height="@dimen/dp_128"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/dp_113"
         android:src="@drawable/bg_check_status"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="信息未完善"
-        android:textSize="@dimen/sp_20"
+        android:textSize="@dimen/sp_15"
         android:textStyle="bold"
         android:layout_gravity="center"
         android:layout_marginTop="@dimen/dp_5"
-        android:textColor="@color/common_primary_dark_color"/>
+        android:textColor="@color/color_202839"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="请先完善个人信息"
-        android:textSize="@dimen/sp_20"
-        android:textStyle="bold"
+        android:textSize="@dimen/sp_13"
         android:layout_gravity="center"
-        android:layout_marginTop="@dimen/dp_5"
-        android:textColor="@color/common_primary_dark_color"/>
+        android:layout_marginTop="@dimen/dp_8"
+        android:textColor="@color/color_7E89A3"/>
     <View
         android:layout_width="match_parent"
         android:layout_height="0dp"
