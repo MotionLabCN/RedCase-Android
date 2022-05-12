@@ -31,7 +31,6 @@ import com.tntlinking.tntdev.http.api.AppListInterviewApi;
 import com.tntlinking.tntdev.http.api.GetAppUpdateApi;
 import com.tntlinking.tntdev.http.api.GetNewbieApi;
 import com.tntlinking.tntdev.http.api.HistoryListApi;
-import com.tntlinking.tntdev.http.glide.GlideApp;
 import com.tntlinking.tntdev.http.model.HttpData;
 import com.tntlinking.tntdev.other.AppConfig;
 import com.tntlinking.tntdev.other.Utils;
@@ -91,6 +90,9 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity> {
     private LinearLayout ll_empty;
     private LinearLayout ll_status;// 平台介绍页面
     private LinearLayout ll_work;// 工作服务列表页面
+    private LinearLayout ll_tab_recommended_position;// 推荐职位列表页面
+    private LinearLayout ll_novice_task;// 新手任务列表页面
+
     private LinearLayout ll_task_empty;//
     private MyListView lv_task;
     private MyListView lv_1;
@@ -107,6 +109,7 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity> {
     private List<Fragment> fragmentList = new ArrayList<>();
 
     private int mStatus = 1;// 接单状态 1 默认可接单
+    private int mPositionStatus= 2;// 没有可推荐职位
 
     public static HomeFragment1 newInstance() {
         return new HomeFragment1();
@@ -142,6 +145,8 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity> {
         ll_status = findViewById(R.id.ll_status);
         ll_work = findViewById(R.id.ll_work);
         ll_task_empty = findViewById(R.id.ll_task_empty);
+        ll_tab_recommended_position = findViewById(R.id.ll_tab_recommended_position);
+        ll_novice_task = findViewById(R.id.ll_novice_task);
 
         tv_avatar.setText(Utils.formatName(name));
         tv_name.setText("你好," + name);
@@ -243,7 +248,7 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity> {
                 }
             }
         });
-//造数据
+        //造数据
         fragmentList.add(new PositionRecommendationFragment());
         fragmentList.add(new ActiveTaskFragment());
         TabLayout tabs = findViewById(R.id.tab_position);
@@ -297,6 +302,11 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity> {
     @Override
     protected void initData() {
 //        getStatus();
+        if (mPositionStatus==1){
+            ll_novice_task.setVisibility(View.VISIBLE);
+        }else {
+            ll_tab_recommended_position.setVisibility(View.VISIBLE);
+        }
         getNewbie();
         String status = SPUtils.getInstance().getString(AppConfig.DEVELOP_STATUS, "1");
 

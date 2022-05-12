@@ -6,6 +6,8 @@ buildscript {
     // 导入通用的 Maven 库配置
     apply from : 'maven.gradle'
     repositories {
+        jcenter()
+        mavenCentral()
         // 阿里云云效仓库（Gradle 插件）：https://maven.aliyun.com/mvn/guide
         maven { url 'https://maven.aliyun.com/repository/gradle-plugin' }
         addCommonMaven(repositories)
@@ -23,6 +25,8 @@ buildscript {
 
 allprojects {
     repositories {
+        jcenter()
+        mavenCentral()
         // 友盟远程仓库：https://info.umeng.com/detail?id=443&cateId=1
         maven { url 'https://repo1.maven.org/maven2' }
         addCommonMaven(repositories)

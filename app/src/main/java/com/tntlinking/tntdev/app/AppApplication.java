@@ -36,6 +36,8 @@ import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleOwner;
+
+import cn.jpush.android.api.JPushInterface;
 import okhttp3.OkHttpClient;
 import timber.log.Timber;
 
@@ -48,6 +50,8 @@ public final class AppApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        JPushInterface.setDebugMode(true);
+        JPushInterface.init(this);
         initSdk(this);
     }
 
@@ -94,6 +98,7 @@ public final class AppApplication extends Application {
                     // 仿苹果越界效果开关
                     .setEnableOverScrollDrag(false);
         });
+        // 初始化极光推送
 
         // 初始化吐司
         ToastUtils.init(application, new ToastStyle());

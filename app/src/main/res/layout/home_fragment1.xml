@@ -245,17 +245,7 @@
 
                 </LinearLayout>
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_32"
-                    android:layout_marginBottom="@dimen/dp_16"
-                    android:paddingLeft="@dimen/dp_16"
-                    android:text="新手任务"
-                    android:visibility="gone"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/sp_18"
-                    android:textStyle="bold" />
+
 
                 <!--                <LinearLayout-->
                 <!--                    android:layout_width="match_parent"-->
@@ -376,13 +366,17 @@
                 <!--                    </LinearLayout>-->
 
                 <!--                </LinearLayout>-->
-
+            <LinearLayout
+                android:id="@+id/ll_tab_recommended_position"
+                android:layout_width="match_parent"
+                android:visibility="gone"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
                 <com.google.android.material.tabs.TabLayout
                     android:id="@+id/tab_position"
                     android:layout_width="@dimen/dp_200"
                     style="@style/tabLayout_position_or_activity"
                     app:tabPaddingEnd="2dp"
-
                     app:tabPaddingStart="2dp"
                     app:tabIndicatorHeight="0dp"
                     app:tabTextAppearance="@style/TabLayoutTextSize"
@@ -391,59 +385,76 @@
                 <androidx.viewpager2.widget.ViewPager2
                     style="@style/ViewPaper_PositionRecommendation"
                     android:id="@+id/vp_position"/>
-                <com.tntlinking.tntdev.widget.MyListView
-                    android:id="@+id/lv_task"
+            </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/ll_novice_task"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:divider="@null"
                     android:visibility="gone"
-                    android:dividerHeight="@dimen/line_size" />
-                <LinearLayout
-                    android:id="@+id/ll_task_empty"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center|top"
-                    android:orientation="vertical"
-                    android:paddingTop="@dimen/dp_20"
-                    android:paddingBottom="@dimen/dp_16"
-                    android:visibility="gone">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/icon_task_empty" />
-
+                    android:orientation="vertical">
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_10"
-                        android:text="暂无任务"
-                        android:textStyle="bold"
+                        android:layout_marginTop="@dimen/dp_32"
+                        android:layout_marginBottom="@dimen/dp_16"
+                        android:paddingLeft="@dimen/dp_16"
+                        android:text="新手任务"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/sp_15" />
+                        android:textSize="@dimen/sp_18"
+                        android:textStyle="bold" />
+                    <com.tntlinking.tntdev.widget.MyListView
+                        android:id="@+id/lv_task"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:divider="@null"
+                        android:visibility="visible"
+                        android:dividerHeight="@dimen/line_size" />
+                    <LinearLayout
+                        android:id="@+id/ll_task_empty"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center|top"
+                        android:orientation="vertical"
+                        android:paddingTop="@dimen/dp_20"
+                        android:paddingBottom="@dimen/dp_16"
+                        android:visibility="gone">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/icon_task_empty" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_10"
+                            android:text="暂无任务"
+                            android:textStyle="bold"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/sp_15" />
 
 
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:visibility="gone"
-                    android:layout_marginBottom="@dimen/dp_20"
-                    android:orientation="horizontal">
-
-                    <ImageView
+                    </LinearLayout>
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/icon_cup" />
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="@dimen/dp_20"
+                        android:orientation="horizontal">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/dp_2"
-                        android:text="更多新手任务敬请期待 最高可领100元"
-                        android:textColor="@color/color_C1C6D2"
-                        android:textSize="@dimen/sp_13" />
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/icon_cup" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/dp_2"
+                            android:text="更多新手任务敬请期待 最高可领100元"
+                            android:textColor="@color/color_C1C6D2"
+                            android:textSize="@dimen/sp_13" />
+                    </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
 
