@@ -23,6 +23,8 @@ public final class GetNewbieApi implements IRequestApi {
         private int taskStatus;  //任务状态 0-未开始 1-进行中 2-已完成 3-已失效
         private int rewardStatus;  //	奖励发放状态：0-不满足 1-待发放 2-已发放
         private int taskId;// 2 是完善信息 3 是签订服务协议
+        private int detailType;//
+        private String router;
 
         public int getDeveloperId() {
             return developerId;
@@ -102,6 +104,22 @@ public final class GetNewbieApi implements IRequestApi {
 
         public void setTaskId(int taskId) {
             this.taskId = taskId;
+        }
+
+        public int getDetailType() {
+            return detailType;
+        }
+
+        public void setDetailType(int detailType) {
+            this.detailType = detailType;
+        }
+
+        public String getRouter() {
+            return router;
+        }
+
+        public void setRouter(String router) {
+            this.router = router;
         }
     }
 }

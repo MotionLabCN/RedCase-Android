@@ -83,11 +83,11 @@ public final class CheckDeveloperActivity extends AppActivity {
                         }
                     });
         } else if (view == tv_enter) {
-
-            Intent intent = new Intent(this, HomeWorkActivity.class);
-            intent.putExtra(AppConfig.DEVELOP_STATUS, 2); //是否认证  1->待认证  2->待审核   3->审核成功 4->审核失败
-            startActivity(intent);
-            finish();
+//
+//            Intent intent = new Intent(this, HomeWorkActivity.class);
+//            intent.putExtra(AppConfig.DEVELOP_STATUS, 2); //是否认证  1->待认证  2->待审核   3->审核成功 4->审核失败
+//            startActivity(intent);
+//            finish();
         }
 
     }

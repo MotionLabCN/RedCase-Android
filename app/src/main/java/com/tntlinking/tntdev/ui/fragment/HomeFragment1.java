@@ -29,6 +29,7 @@ import com.tntlinking.tntdev.app.TitleBarFragment;
 import com.tntlinking.tntdev.http.api.AppListApi;
 import com.tntlinking.tntdev.http.api.AppListInterviewApi;
 import com.tntlinking.tntdev.http.api.GetAppUpdateApi;
+import com.tntlinking.tntdev.http.api.GetDeveloperJkStatusApi;
 import com.tntlinking.tntdev.http.api.GetNewbieApi;
 import com.tntlinking.tntdev.http.api.HistoryListApi;
 import com.tntlinking.tntdev.http.glide.GlideApp;
@@ -36,12 +37,15 @@ import com.tntlinking.tntdev.http.model.HttpData;
 import com.tntlinking.tntdev.other.AppConfig;
 import com.tntlinking.tntdev.other.Utils;
 import com.tntlinking.tntdev.ui.activity.EnterDeveloperActivity;
+import com.tntlinking.tntdev.ui.activity.EvaluationActivity;
+import com.tntlinking.tntdev.ui.activity.EvaluationNeedsTokNowActivity;
+import com.tntlinking.tntdev.ui.activity.EvaluationOutcomeActivity;
 import com.tntlinking.tntdev.ui.activity.InterviewActivity;
 import com.tntlinking.tntdev.ui.activity.InterviewDetailActivity;
+import com.tntlinking.tntdev.ui.activity.JkBrowserActivity;
 import com.tntlinking.tntdev.ui.activity.MDViewActivity;
 import com.tntlinking.tntdev.ui.activity.MainActivity;
 import com.tntlinking.tntdev.ui.activity.PDFViewActivity;
-import com.tntlinking.tntdev.ui.activity.PersonDataActivity;
 import com.tntlinking.tntdev.ui.activity.SaveQRActivity;
 import com.tntlinking.tntdev.ui.activity.SignContactActivity;
 import com.tntlinking.tntdev.ui.activity.WriteDailyActivity;
@@ -58,9 +62,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.widget.AppCompatImageView;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
@@ -304,7 +305,7 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity> {
             tv_status.setVisibility(View.VISIBLE);
             tv_status.setText("已认证");
 
-            getAppList();
+//            getAppList();
         } else {
             ll_status.setVisibility(View.VISIBLE); //1、2、4 状态下显示平台介绍和新手任务
             ll_work.setVisibility(View.GONE);
@@ -387,19 +388,19 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity> {
                 .setOnClickListener(R.id.btn_dialog_custom_cancel, (BaseDialog.OnClickListener<Button>) (dialog, button) -> dialog.dismiss())
                 .setOnClickListener(R.id.btn_dialog_custom_ok, (dialog, views) -> {
 
-                     if(mStatus==1){
-                         tv_order_switching.setText("不接单");
-                         tv_order_switching.setTextColor(getResources().getColor(R.color.color_444E64));
-                         tv_order_switching.setBackground(getResources().getDrawable(R.drawable.bg_dark_grey_stroke));
-                         Drawable drawable = getResources().getDrawable(R.drawable.icon_change_over);
-                         tv_order_switching.setCompoundDrawablesWithIntrinsicBounds(null, null, drawable, null);
-                     }else {
-                         tv_order_switching.setText("可接单");
-                         tv_order_switching.setTextColor(getResources().getColor(R.color.main_color));
-                         tv_order_switching.setBackground(getResources().getDrawable(R.drawable.bg_blue_stroke));
-                         Drawable drawable = getResources().getDrawable(R.drawable.icon_refresh);
-                         tv_order_switching.setCompoundDrawablesWithIntrinsicBounds(null, null, drawable, null);
-                     }
+                    if (mStatus == 1) {
+                        tv_order_switching.setText("不接单");
+                        tv_order_switching.setTextColor(getResources().getColor(R.color.color_444E64));
+                        tv_order_switching.setBackground(getResources().getDrawable(R.drawable.bg_dark_grey_stroke));
+                        Drawable drawable = getResources().getDrawable(R.drawable.icon_change_over);
+                        tv_order_switching.setCompoundDrawablesWithIntrinsicBounds(null, null, drawable, null);
+                    } else {
+                        tv_order_switching.setText("可接单");
+                        tv_order_switching.setTextColor(getResources().getColor(R.color.main_color));
+                        tv_order_switching.setBackground(getResources().getDrawable(R.drawable.bg_blue_stroke));
+                        Drawable drawable = getResources().getDrawable(R.drawable.icon_refresh);
+                        tv_order_switching.setCompoundDrawablesWithIntrinsicBounds(null, null, drawable, null);
+                    }
 
                     mStatus = (status == 1) ? 2 : 1;
                     dialog.dismiss();
@@ -411,113 +412,8 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity> {
     private List<AppListApi.Bean> mServiceList = new ArrayList<>();
     private List<AppListApi.Bean> mHistoryList = new ArrayList<>();
 
-    /**
-     * 获取在服务企业list
-     */
-    private void getAppList() {
-        EasyHttp.get(this)
-                .api(new AppListApi())
-                .request(new HttpCallback<HttpData<List<AppListApi.Bean>>>(this) {
-
-                    @Override
-                    public void onSucceed(HttpData<List<AppListApi.Bean>> data) {
-                        if (data.getData().size() > 0) {
-                            mServiceList.addAll(data.getData());
-                        }
-                        getInterviewAppList();
-                        appSize = data.getData().size();
-                    }
-
-                    @Override
-                    public void onFail(Exception e) {
-                        super.onFail(e);
-                        getHistoryList();
-                        appSize = 0;
-                    }
-                });
-    }
-
-    /**
-     * 获取面试邀约list
-     */
-    @SuppressLint("CheckResult")
-    private void getInterviewAppList() {
-        EasyHttp.get(this)
-                .api(new AppListInterviewApi())
-                .request(new HttpCallback<HttpData<List<AppListApi.Bean>>>(this) {
-
-                    @Override
-                    public void onSucceed(HttpData<List<AppListApi.Bean>> data) {
-                        interSize = data.getData().size();
-                        if (data.getData().size() > 0) {
-                            mServiceList.addAll(data.getData());
-                        }
-                        getHistoryList();
-                    }
-
-                    @Override
-                    public void onFail(Exception e) {
-                        super.onFail(e);
-                        getHistoryList();
-                        interSize = 0;
-                        if (appSize + interSize == 0) {
-                            ll_empty.setVisibility(View.VISIBLE);
-                        } else {
-                            ll_empty.setVisibility(View.GONE);
-                        }
-                    }
-                });
 
 
-    }
-
-
-    /**
-     * 获取历史服务list
-     */
-    private void getHistoryList() {
-        EasyHttp.get(this)
-                .api(new HistoryListApi().setOrderData("2018-10-10"))
-                .request(new HttpCallback<HttpData<List<AppListApi.Bean>>>(this) {
-
-                    @Override
-                    public void onSucceed(HttpData<List<AppListApi.Bean>> data) {
-                        if (data.getData().size() > 0) {
-
-                            //无服务项目（包含面试邀约）且无历史服务项目  显示平台介绍和新手任务
-                            if (appSize + interSize == 0) {
-                                ll_status.setVisibility(View.VISIBLE);
-                                ll_work.setVisibility(View.GONE);
-
-                                ll_empty.setVisibility(View.VISIBLE);
-                            } else {
-                                ll_status.setVisibility(View.GONE);
-                                ll_work.setVisibility(View.VISIBLE);
-                                mServiceAdapter.setData(mServiceList);
-
-                                ll_empty.setVisibility(View.GONE);
-                            }
-                            mHistoryList.addAll(data.getData());
-                            mHistoryAdapter.setData(mHistoryList);
-
-                        } else {
-                            //无服务项目（包含面试邀约）但有历史服务项目  显示暂无工作和历史项目
-                            if (appSize + interSize == 0) {
-                                ll_status.setVisibility(View.VISIBLE);
-                                ll_work.setVisibility(View.GONE);
-                            }
-                        }
-
-                    }
-
-                    @Override
-                    public void onFail(Exception e) {
-                        super.onFail(e);
-                        ll_status.setVisibility(View.VISIBLE);
-                        ll_work.setVisibility(View.GONE);
-                    }
-                });
-    }
     /**
      * 获取任务状态
      */

@@ -38,7 +38,6 @@ import com.tntlinking.tntdev.ui.activity.InterviewSettingActivity;
 import com.tntlinking.tntdev.ui.activity.JkBrowserActivity;
 import com.tntlinking.tntdev.ui.activity.MainActivity;
 import com.tntlinking.tntdev.ui.activity.PDFViewActivity;
-import com.tntlinking.tntdev.ui.activity.PersonDataActivity;
 import com.tntlinking.tntdev.ui.activity.PersonSettingActivity;
 import com.tntlinking.tntdev.ui.activity.SignContactActivity;
 
@@ -132,8 +131,7 @@ public final class MineFragment1 extends TitleBarFragment<MainActivity> {
                             startActivity(EvaluationNeedsTokNowActivity.class);
                         } else if (data.getData() != null && data.getData().getUserPlanStatus() == 1) {
                             if (data.getData().getStackInfoList().size() > 0) {
-                                startActivity(new Intent(getActivity(), EvaluationOutcomeActivity.class)
-                                );
+                                startActivity(new Intent(getActivity(), EvaluationOutcomeActivity.class));
                             } else {
                                 JkBrowserActivity.start(getActivity(), data.getData().getPlanUrl());
                             }
@@ -175,7 +173,7 @@ public final class MineFragment1 extends TitleBarFragment<MainActivity> {
     }
 
     public void showDealDialog() {
-        BaseDialog.Builder<?> builder = new BaseDialog.Builder<>(getActivity())
+        new BaseDialog.Builder<>(getActivity())
                 .setContentView(R.layout.geeks_evaluation_need_to_know_dialog)
                 .setAnimStyle(BaseDialog.ANIM_SCALE)
                 .setCancelable(false)
@@ -188,10 +186,8 @@ public final class MineFragment1 extends TitleBarFragment<MainActivity> {
 
                     getDeveloperJkStatus();
                     dialog.dismiss();
-                });
+                }).show();
 
-
-        builder.show();
     }
 
     @NonNull

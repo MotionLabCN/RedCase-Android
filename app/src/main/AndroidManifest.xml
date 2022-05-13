@@ -339,11 +339,7 @@
             android:name="com.tntlinking.tntdev.ui.activity.IncomeDetailActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
-        <!-- 工作主页 页面 -->
-        <activity
-            android:name="com.tntlinking.tntdev.ui.activity.HomeWorkActivity"
-            android:launchMode="singleTop"
-            android:screenOrientation="portrait" />
+
         <!-- 测评须知 页面 -->
         <activity
             android:name="com.tntlinking.tntdev.ui.activity.EvaluationNeedsTokNowActivity"

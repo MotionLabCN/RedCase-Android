@@ -89,7 +89,7 @@ public final class MainActivity extends AppActivity
 
         onNewIntent(getIntent());
 
-        getAppUpdate();
+//        getAppUpdate();
     }
 
     @Override
@@ -184,7 +184,6 @@ public final class MainActivity extends AppActivity
      * 检查更新
      */
     public void getAppUpdate() {
-
         EasyHttp.get(this)
                 .api(new GetAppUpdateApi()
                         .setOsType(2)//1 ios   2 android
