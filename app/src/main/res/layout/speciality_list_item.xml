@@ -8,14 +8,13 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:gravity="center_vertical"
-        android:background="@color/gray"
+        android:background="@drawable/bg_gray_round_radius_8"
         android:layout_height="@dimen/dp_40">
         <ImageView
             android:id="@+id/iv_select"
             android:layout_marginLeft="@dimen/dp_20"
             android:layout_width="@dimen/dp_20"
             android:layout_height="@dimen/dp_20"
-            android:layout_centerVertical="true"
             android:src="@drawable/select_list_item" />
     <TextView
         android:id="@+id/tv_name"

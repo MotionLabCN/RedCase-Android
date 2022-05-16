@@ -4,15 +4,12 @@ android {
     // 编译源码版本
     compileSdkVersion 30
     defaultConfig {
-
         // 最低安装版本
         minSdkVersion 21
         // 目标适配版本
         targetSdkVersion 30
         versionName '1.6.0'
-        versionCode 16
-
-
+        versionCode 17
     }
 
     // 支持 Java JDK 8
@@ -48,8 +45,6 @@ android {
 
     // 代码警告配置
     lintOptions {
-        abortOnError false
-
         // 禁用文本硬编码警告
         disable 'HardcodedText'
         // 禁用图片描述警告

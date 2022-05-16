@@ -32,6 +32,8 @@ public final class GetNewbieApi implements IRequestApi {
         public void setCareerDirection(String careerDirection) {
             this.careerDirection = careerDirection;
         }
+        private int detailType;//
+        private String router;
 
         public int getDeveloperId() {
             return developerId;
@@ -111,6 +113,22 @@ public final class GetNewbieApi implements IRequestApi {
 
         public void setTaskId(int taskId) {
             this.taskId = taskId;
+        }
+
+        public int getDetailType() {
+            return detailType;
+        }
+
+        public void setDetailType(int detailType) {
+            this.detailType = detailType;
+        }
+
+        public String getRouter() {
+            return router;
+        }
+
+        public void setRouter(String router) {
+            this.router = router;
         }
     }
 }
