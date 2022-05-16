@@ -1,7 +1,8 @@
-package com.tntlinking.tntdev.Service;
+package com.tntlinking.tntdev.jpush;
 
 
 import cn.jpush.android.service.JCommonService;
 
 public class PushService extends JCommonService {
+
 }

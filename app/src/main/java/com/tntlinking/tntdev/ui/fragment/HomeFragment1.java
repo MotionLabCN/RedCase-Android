@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,6 +38,7 @@ import com.tntlinking.tntdev.other.Utils;
 import com.tntlinking.tntdev.ui.activity.EnterDeveloperActivity;
 import com.tntlinking.tntdev.ui.activity.InterviewActivity;
 import com.tntlinking.tntdev.ui.activity.InterviewDetailActivity;
+import com.tntlinking.tntdev.ui.activity.LoginActivity2;
 import com.tntlinking.tntdev.ui.activity.MDViewActivity;
 import com.tntlinking.tntdev.ui.activity.MainActivity;
 import com.tntlinking.tntdev.ui.activity.PDFViewActivity;
@@ -55,6 +57,7 @@ import com.tntlinking.tntdev.widget.XCollapsingToolbarLayout;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatImageView;
@@ -67,6 +70,9 @@ import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
+
+import cn.jpush.android.api.JPushInterface;
+import cn.jpush.android.api.JPushMessage;
 
 /**
  * desc   : 首页 Fragment
@@ -97,7 +103,7 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity> {
     private MyListView lv_task;
     private MyListView lv_1;
     private MyListView lv_2;
-
+    private Set<String>tags;
     private int appSize = 0; //工作请求列表size
     private int interSize = 0; //面试请求列表size
     private int historySize = 0;//历史记录列表size
@@ -107,8 +113,10 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity> {
     String name = SPUtils.getInstance().getString(AppConfig.DEVELOP_NAME, "朋友");
     private String[] titles = {"职位推荐", "活动任务"};
     private List<Fragment> fragmentList = new ArrayList<>();
+    private static int sequence = 1;
 
     private int mStatus = 1;// 接单状态 1 默认可接单
+    private int mTaskId;// 接单状态 1 默认可接单
     private int mPositionStatus= 2;// 没有可推荐职位
 
     public static HomeFragment1 newInstance() {
@@ -538,6 +546,13 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity> {
                     @Override
                     public void onSucceed(HttpData<List<GetNewbieApi.Bean>> data) {
                         if (data.getData() != null && data.getData().size() != 0) {
+                            JPushInterface.setAlias(getActivity(), sequence++, "ttsl_"+data.getData().get(0).getDeveloperId());
+                            Log.d("alias",">>>"+new JPushMessage().getAlias());
+                            Log.d("RegistrationID",">>>"+JPushInterface.getRegistrationID(getActivity()));
+                            tags.add(data.getData().get(0).getCareerDirection());
+                            JPushInterface.setTags(getActivity(),sequence++, tags);
+                            Log.d("getTags",">>>"+ new JPushMessage().getTags());
+
                             ll_task_empty.setVisibility(View.GONE);
                             mTaskList.clear();
                             mTaskList.addAll(data.getData());

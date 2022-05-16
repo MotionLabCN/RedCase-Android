@@ -50,9 +50,13 @@ public final class AppApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+// 初始化极光推送
         JPushInterface.setDebugMode(true);
         JPushInterface.init(this);
         initSdk(this);
+        initToast();
+        initKV();
+
     }
 
     @Override
@@ -73,7 +77,13 @@ public final class AppApplication extends Application {
         // 根据手机内存剩余情况清理图片内存缓存
         GlideApp.get(this).onTrimMemory(level);
     }
+    private void initKV() {
+        MMKV.initialize(this);
+    }
 
+    private void initToast() {
+        ToastUtils.init(this);
+    }
     /**
      * 初始化一些第三方框架
      */
@@ -98,7 +108,6 @@ public final class AppApplication extends Application {
                     // 仿苹果越界效果开关
                     .setEnableOverScrollDrag(false);
         });
-        // 初始化极光推送
 
         // 初始化吐司
         ToastUtils.init(application, new ToastStyle());
