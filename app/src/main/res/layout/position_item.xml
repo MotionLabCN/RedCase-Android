@@ -157,7 +157,13 @@
                     android:layout_height="wrap_content"
                     android:text="柏鑫·技术总监"/>
 
-
+        <ImageView
+            android:id="@+id/iv_recommend"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="@dimen/dp_4"
+            android:src="@drawable/icon_run_recommend" />
 
     </LinearLayout>
     <LinearLayout
@@ -174,12 +180,7 @@
             android:textColor="@color/color_7E89A3"
             android:layout_height="wrap_content"
             android:text="黄焖鸡科技有限公司"/>
-        <ImageView
-            android:id="@+id/iv_recommend"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/dp_4"
-            android:src="@drawable/icon_run_recommend" />
+
     </LinearLayout>
 </LinearLayout>
 </com.hjq.shape.layout.ShapeFrameLayout>

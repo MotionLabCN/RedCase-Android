@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,7 +33,6 @@ import com.tntlinking.tntdev.http.api.GetAppUpdateApi;
 import com.tntlinking.tntdev.http.api.GetDeveloperJkStatusApi;
 import com.tntlinking.tntdev.http.api.GetNewbieApi;
 import com.tntlinking.tntdev.http.api.HistoryListApi;
-import com.tntlinking.tntdev.http.api.UpdateServiceStatusApi;
 import com.tntlinking.tntdev.http.glide.GlideApp;
 import com.tntlinking.tntdev.http.model.HttpData;
 import com.tntlinking.tntdev.other.AppConfig;
@@ -43,6 +43,7 @@ import com.tntlinking.tntdev.ui.activity.EvaluationNeedsTokNowActivity;
 import com.tntlinking.tntdev.ui.activity.EvaluationOutcomeActivity;
 import com.tntlinking.tntdev.ui.activity.InterviewActivity;
 import com.tntlinking.tntdev.ui.activity.InterviewDetailActivity;
+import com.tntlinking.tntdev.ui.activity.LoginActivity2;
 import com.tntlinking.tntdev.ui.activity.JkBrowserActivity;
 import com.tntlinking.tntdev.ui.activity.MDViewActivity;
 import com.tntlinking.tntdev.ui.activity.MainActivity;
@@ -61,6 +62,7 @@ import com.tntlinking.tntdev.widget.XCollapsingToolbarLayout;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -70,6 +72,9 @@ import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
+
+import cn.jpush.android.api.JPushInterface;
+import cn.jpush.android.api.JPushMessage;
 
 /**
  * desc   : 首页 Fragment
@@ -93,6 +98,9 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity> {
     private LinearLayout ll_empty;
     private LinearLayout ll_status;// 平台介绍页面
     private LinearLayout ll_work;// 工作服务列表页面
+    private LinearLayout ll_tab_recommended_position;// 推荐职位列表页面
+    private LinearLayout ll_novice_task;// 新手任务列表页面
+
     private LinearLayout ll_task_empty;//
     private MyListView lv_task;
     private MyListView lv_1;
@@ -107,8 +115,11 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity> {
     String name = SPUtils.getInstance().getString(AppConfig.DEVELOP_NAME, "朋友");
     private String[] titles = {"职位推荐", "活动任务"};
     private List<Fragment> fragmentList = new ArrayList<>();
+    private static int sequence = 1;
 
-    private int mStatus = 1;// 接单状态 1 默认可接单 切换状态 1：可接单 2：不接单
+    private int mStatus = 1;// 接单状态 1 默认可接单
+    private int mTaskId;// 接单状态 1 默认可接单
+    private int mPositionStatus= 2;// 没有可推荐职位
 
     public static HomeFragment1 newInstance() {
         return new HomeFragment1();
@@ -144,6 +155,8 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity> {
         ll_status = findViewById(R.id.ll_status);
         ll_work = findViewById(R.id.ll_work);
         ll_task_empty = findViewById(R.id.ll_task_empty);
+        ll_tab_recommended_position = findViewById(R.id.ll_tab_recommended_position);
+        ll_novice_task = findViewById(R.id.ll_novice_task);
 
         tv_avatar.setText(Utils.formatName(name));
         tv_name.setText("你好," + name);
@@ -245,7 +258,7 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity> {
                 }
             }
         });
-//造数据
+        //造数据
         fragmentList.add(new PositionRecommendationFragment());
         fragmentList.add(new ActiveTaskFragment());
         TabLayout tabs = findViewById(R.id.tab_position);
@@ -299,6 +312,11 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity> {
     @Override
     protected void initData() {
 //        getStatus();
+        if (mPositionStatus==1){
+            ll_novice_task.setVisibility(View.VISIBLE);
+        }else {
+            ll_tab_recommended_position.setVisibility(View.VISIBLE);
+        }
         getNewbie();
         String status = SPUtils.getInstance().getString(AppConfig.DEVELOP_STATUS, "1");
 
@@ -442,6 +460,9 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity> {
                     @Override
                     public void onSucceed(HttpData<List<GetNewbieApi.Bean>> data) {
                         if (data.getData() != null && data.getData().size() != 0) {
+                            JPushInterface.setAlias(getActivity(), sequence++, "ttsl_"+data.getData().get(0).getDeveloperId());
+                            Log.d("alias",">>>"+new JPushMessage().getAlias());
+                            Log.d("RegistrationID",">>>"+JPushInterface.getRegistrationID(getActivity()));
                             ll_task_empty.setVisibility(View.GONE);
                             mTaskList.clear();
                             mTaskList.addAll(data.getData());

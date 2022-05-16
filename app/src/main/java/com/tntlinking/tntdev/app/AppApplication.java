@@ -36,6 +36,8 @@ import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleOwner;
+
+import cn.jpush.android.api.JPushInterface;
 import okhttp3.OkHttpClient;
 import timber.log.Timber;
 
@@ -48,7 +50,13 @@ public final class AppApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+// 初始化极光推送
+        JPushInterface.setDebugMode(true);
+        JPushInterface.init(this);
         initSdk(this);
+        initToast();
+        initKV();
+
     }
 
     @Override
@@ -69,7 +77,13 @@ public final class AppApplication extends Application {
         // 根据手机内存剩余情况清理图片内存缓存
         GlideApp.get(this).onTrimMemory(level);
     }
+    private void initKV() {
+        MMKV.initialize(this);
+    }
 
+    private void initToast() {
+        ToastUtils.init(this);
+    }
     /**
      * 初始化一些第三方框架
      */

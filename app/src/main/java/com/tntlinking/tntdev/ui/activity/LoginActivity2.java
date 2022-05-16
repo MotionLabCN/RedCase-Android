@@ -15,6 +15,7 @@ import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.SpanUtils;
 import com.blankj.utilcode.util.TimeUtils;
 import com.gyf.immersionbar.ImmersionBar;
+import com.tencent.mm.opensdk.utils.Log;
 import com.tntlinking.tntdev.BuildConfig;
 import com.tntlinking.tntdev.R;
 import com.tntlinking.tntdev.aop.SingleClick;
@@ -35,6 +36,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatCheckBox;
+
+import cn.jpush.android.api.JPushInterface;
 
 /**
  * desc   : 登录界面
@@ -182,11 +185,6 @@ public final class LoginActivity2 extends AppActivity implements TextView.OnEdit
                         SPUtils.getInstance().put(AppConfig.DEVELOP_NAME, data.getData().getRealName());
                         SPUtils.getInstance().put(AppConfig.DEVELOPER_ID, data.getData().getId());
 
-
-//                        SPUtils.getInstance().getBoolean(AppConfig.GUIDE_VIEW, true);
-//                        startActivity(LoginActivityView.class);
-//                        SPUtils.getInstance().put(AppConfig.GUIDE_VIEW, false);
-//                        ActivityManager.getInstance().finishAllActivities();
 
                         startActivity(MainActivity.class);
                         ActivityManager.getInstance().finishAllActivities();
