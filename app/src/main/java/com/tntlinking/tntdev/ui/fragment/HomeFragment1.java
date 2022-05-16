@@ -445,10 +445,6 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity> {
                             JPushInterface.setAlias(getActivity(), sequence++, "ttsl_"+data.getData().get(0).getDeveloperId());
                             Log.d("alias",">>>"+new JPushMessage().getAlias());
                             Log.d("RegistrationID",">>>"+JPushInterface.getRegistrationID(getActivity()));
-                            tags.add(data.getData().get(0).getCareerDirection());
-                            JPushInterface.setTags(getActivity(),sequence++, tags);
-                            Log.d("getTags",">>>"+ new JPushMessage().getTags());
-
                             ll_task_empty.setVisibility(View.GONE);
                             mTaskList.clear();
                             mTaskList.addAll(data.getData());
