@@ -32,6 +32,7 @@ import com.tntlinking.tntdev.http.api.GetAppUpdateApi;
 import com.tntlinking.tntdev.http.api.GetDeveloperJkStatusApi;
 import com.tntlinking.tntdev.http.api.GetNewbieApi;
 import com.tntlinking.tntdev.http.api.HistoryListApi;
+import com.tntlinking.tntdev.http.api.UpdateServiceStatusApi;
 import com.tntlinking.tntdev.http.glide.GlideApp;
 import com.tntlinking.tntdev.http.model.HttpData;
 import com.tntlinking.tntdev.other.AppConfig;
@@ -107,7 +108,7 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity> {
     private String[] titles = {"职位推荐", "活动任务"};
     private List<Fragment> fragmentList = new ArrayList<>();
 
-    private int mStatus = 1;// 接单状态 1 默认可接单
+    private int mStatus = 1;// 接单状态 1 默认可接单 切换状态 1：可接单 2：不接单
 
     public static HomeFragment1 newInstance() {
         return new HomeFragment1();
@@ -402,9 +403,26 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity> {
                         tv_order_switching.setCompoundDrawablesWithIntrinsicBounds(null, null, drawable, null);
                     }
 
-                    mStatus = (status == 1) ? 2 : 1;
+                    updateServiceStatus(mStatus);
                     dialog.dismiss();
                 }).show();
+    }
+
+
+    /**
+     * 切换可接单状态
+     */
+    public void updateServiceStatus(int status) {
+        EasyHttp.post(this)
+                .api(new UpdateServiceStatusApi()
+                        .setType(status))
+                .request(new HttpCallback<HttpData<Void>>(this) {
+
+                    @Override
+                    public void onSucceed(HttpData<Void> data) {
+                        mStatus = (status == 1) ? 2 : 1;
+                    }
+                });
     }
 
 
