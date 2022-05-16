@@ -1,6 +1,5 @@
 package com.tntlinking.tntdev.http.api;
 
-import com.hjq.http.annotation.HttpIgnore;
 import com.hjq.http.config.IRequestApi;
 import com.hjq.http.config.IRequestType;
 import com.hjq.http.model.BodyType;

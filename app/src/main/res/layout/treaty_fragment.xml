@@ -10,7 +10,7 @@
     <com.hjq.bar.TitleBar
         android:id="@+id/title_bar"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_50"
+        android:layout_height="@dimen/dp_60"
         app:leftIcon="@null"
         app:lineVisible="false"
         app:leftTitle="服务项目"
