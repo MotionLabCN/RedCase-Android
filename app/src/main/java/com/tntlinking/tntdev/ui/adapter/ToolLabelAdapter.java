@@ -18,10 +18,10 @@ import java.util.List;
 
 public class ToolLabelAdapter extends RecyclerView.Adapter<ToolLabelAdapter.FlexboxAdapterHolder> {
     Context mContext;
-    private final List<String> mStringArrayList;
+    private final List<String> mStringToolLabelArrayList;
     public ToolLabelAdapter(Context context, List<String> list) {
         this.mContext = context;
-        this.mStringArrayList= list;
+        this.mStringToolLabelArrayList= list;
     }
     @NonNull
     @Override
@@ -34,13 +34,13 @@ public class ToolLabelAdapter extends RecyclerView.Adapter<ToolLabelAdapter.Flex
     @SuppressLint("ResourceAsColor")
     @Override
     public void onBindViewHolder(@NonNull FlexboxAdapterHolder holder, final int position) {
-        holder.tv_require_labels.setText(mStringArrayList.get(position));
+        holder.tv_require_labels.setText(mStringToolLabelArrayList.get(position));
 
     }
 
     @Override
     public int getItemCount() {
-        return mStringArrayList.size();
+        return mStringToolLabelArrayList.size();
     }
 
     public static class FlexboxAdapterHolder extends RecyclerView.ViewHolder {

@@ -80,7 +80,6 @@ public class PositionRecommendationAdapter extends BaseAdapter {
         holder.tv_academic_degree.setText(item.getEducationName());
         holder.tv_work_experience.setText(item.getWorkYearsName());
         holder.tv_job_skills_name.setText(item.getSkillNames().get(0));
-        holder.tv_recommend.setText(item.getWorkDaysModeName());
         holder.tv_salary.setText(item.getStartPay()+"-"+item.getEndPay()+"k·月");
         holder.tv_content.setText(item.getDescription());
         holder.tv_name.setText(item.getCompanyRecruiterRealNamel());
@@ -91,7 +90,7 @@ public class PositionRecommendationAdapter extends BaseAdapter {
             holder.iv_recommend.setVisibility(View.VISIBLE);
 
         }else {
-            holder.tv_recommend.setVisibility(View.VISIBLE);
+            holder.tv_recommend.setVisibility(View.GONE);
             holder.iv_recommend.setVisibility(View.GONE);
         }
 

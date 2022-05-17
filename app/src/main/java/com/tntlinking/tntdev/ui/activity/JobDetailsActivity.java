@@ -1,5 +1,7 @@
 package com.tntlinking.tntdev.ui.activity;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.graphics.Paint;
 import android.text.TextUtils;
 import android.util.Log;
@@ -14,22 +16,31 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.flexbox.FlexDirection;
 import com.google.android.flexbox.FlexboxLayoutManager;
 import com.gyf.immersionbar.ImmersionBar;
+import com.hjq.http.EasyHttp;
+import com.hjq.http.listener.HttpCallback;
 import com.hjq.toast.ToastUtils;
 import com.tntlinking.tntdev.R;
 import com.tntlinking.tntdev.aop.SingleClick;
 import com.tntlinking.tntdev.app.AppActivity;
+import com.tntlinking.tntdev.http.api.GetAddEvaluationPlanApi;
+import com.tntlinking.tntdev.http.api.JobDetailsApi;
+import com.tntlinking.tntdev.http.api.SelfReCommendApi;
+import com.tntlinking.tntdev.http.model.HttpData;
 import com.tntlinking.tntdev.ui.adapter.JobRequirementsAdapter;
 import com.tntlinking.tntdev.ui.adapter.ToolLabelAdapter;
-import com.tntlinking.tntdev.ui.bean.PositionBean;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class JobDetailsActivity extends AppActivity {
     private RecyclerView rv_job_requirements;
     private RecyclerView rv_tool_label;
-    private final String[] arr= {"Java","C++","HTM5","CSS","MVC"};
-    private final String[] arr1= {"微信","钉钉","企业微信"};
+    private final List<String> mStringArrayList = new ArrayList<String>();
+    private final List<String> mStringToolLabelArrayList = new ArrayList<String>();
+
+    private final String[] arr = {"Java", "C++", "HTM5", "CSS", "MVC"};
+    private final String[] arr1 = {"微信", "钉钉", "企业微信"};
     private TextView tv_position_name;
     private TextView tv_salary;
     private TextView tv_service_mode;
@@ -42,6 +53,7 @@ public class JobDetailsActivity extends AppActivity {
     private TextView tv_company_size;
     private AppCompatButton btn_recommend_oneself;
     private String mPositionId;
+
     @Override
     protected int getLayoutId() {
         return R.layout.job_details_activity;
@@ -62,28 +74,18 @@ public class JobDetailsActivity extends AppActivity {
         tv_professional_title = findViewById(R.id.tv_professional_title);
         tv_company_size = findViewById(R.id.tv_company_size);
         btn_recommend_oneself = findViewById(R.id.btn_recommend_oneself);
-
-        tv_content.setText("1.负责产品的核心功能和模块的代码编写2.负责数据平台的搭建和管理3.具备良好的团队精神和沟通表达能力，协同开发，保证项目质量与进度");
-
         tv_content.getViewTreeObserver().addOnGlobalLayoutListener(new OnTvGlobalLayoutListener());
         //将正常的manager替换为FlexboxLayoutManager
-        FlexboxLayoutManager layoutManager =new FlexboxLayoutManager(this);
+        FlexboxLayoutManager layoutManager = new FlexboxLayoutManager(this);
         layoutManager.setFlexDirection(FlexDirection.ROW);//设置水平方向。也可以设置垂直方向
-        // layoutManager.setJustifyContent(JustifyContent.FLEX_END);
-        // layoutManager.setAlignItems(AlignItems.CENTER);
         rv_job_requirements.setLayoutManager(layoutManager);
-        FlexboxLayoutManager layoutManager1 =new FlexboxLayoutManager(this);
-        layoutManager.setFlexDirection(FlexDirection.ROW);//设置水平方向。也可以设置垂直方向
+        FlexboxLayoutManager layoutManager1 = new FlexboxLayoutManager(this);
+        layoutManager1.setFlexDirection(FlexDirection.ROW);//设置水平方向。也可以设置垂直方向
         rv_tool_label.setLayoutManager(layoutManager1);
 
-        ArrayList<String> list = new ArrayList<>(Arrays.asList(arr));
-        ArrayList<String> list2 = new ArrayList<>(Arrays.asList(arr1));
-        JobRequirementsAdapter adapter =new JobRequirementsAdapter(this,list);
-        rv_job_requirements.setAdapter(adapter);
-        ToolLabelAdapter toolLabelAdapter=new ToolLabelAdapter(this,list2);
-        rv_tool_label.setAdapter(toolLabelAdapter);
 
     }
+
     private class OnTvGlobalLayoutListener implements ViewTreeObserver.OnGlobalLayoutListener {
         @Override
         public void onGlobalLayout() {
@@ -97,27 +99,57 @@ public class JobDetailsActivity extends AppActivity {
 
     @Override
     protected void initData() {
-         mPositionId=getIntent().getStringExtra("positionId");
-        Log.d("mPositionId",">>>"+mPositionId);
-//        tv_position_name.setText(positionBean.getPosition_name());
-//        tv_salary.setText(positionBean.getSalary());
-////        tv_service_mode.setText(positionBean.getSalary());
-////        tv_work_experience.setText(positionBean.getSalary());
-////        tv_academic_degree.setText(positionBean.getSalary());
-////        tv_total_number_of_people.setText(positionBean.getSalary());
-//        tv_content.setText(positionBean.getContent());
-//        tv_name.setText(positionBean.getName());
-//        tv_professional_title.setText(positionBean.getCompany());
-//        tv_company_size.setText(positionBean.getProfessional_title());
+        mPositionId = getString("positionId");
+        getJobDetails(mPositionId);
         setOnClickListener(btn_recommend_oneself);
 
     }
+
+    private void getJobDetails(String mPositionId) {
+        EasyHttp.get(this)
+                .api(new JobDetailsApi().setpositionId(mPositionId))
+                .request(new HttpCallback<HttpData<JobDetailsApi.Bean>>(this) {
+
+                    @Override
+                    public void onSucceed(HttpData<JobDetailsApi.Bean> data) {
+                        if (data.getData() != null) {
+                            if (data.getData().getStatus()==1){
+                                btn_recommend_oneself.setText("自荐成功");
+
+                                btn_recommend_oneself.setEnabled(false);
+                                btn_recommend_oneself.setBackgroundResource(R.drawable.button_grey_circle_selector);
+                            }
+                            tv_position_name.setText(data.getData().getTitle());
+                            tv_salary.setText(data.getData().getStartPay()+"-"+data.getData().getEndPay()+"k·月");
+                            tv_service_mode.setText(data.getData().getWorkDaysMode());
+                            tv_work_experience.setText(data.getData().getWorkYears());
+                            tv_academic_degree.setText(data.getData().getTrainingMode());
+                            tv_total_number_of_people.setText(data.getData().getRecruitCount()+"人");
+                            tv_content.setText(data.getData().getDescription());
+                            tv_name.setText(data.getData().getCompany().getShortName());
+                            tv_professional_title.setText(data.getData().getCompany().getCompanyName());
+                            tv_company_size.setText(data.getData().getCompany().getIndustry()+"·"+data.getData().getCompany().getPersonSize());
+                            mStringArrayList.clear();
+                            mStringArrayList.addAll(data.getData().getSkills());
+                            mStringToolLabelArrayList.clear();
+                            mStringToolLabelArrayList.addAll(data.getData().getCompany().getTeamToolsDesc());
+                            JobRequirementsAdapter adapter = new JobRequirementsAdapter(JobDetailsActivity.this, mStringArrayList);
+                            rv_job_requirements.setAdapter(adapter);
+                            ToolLabelAdapter toolLabelAdapter = new ToolLabelAdapter(JobDetailsActivity.this, mStringToolLabelArrayList);
+                            rv_tool_label.setAdapter(toolLabelAdapter);
+                        }
+
+
+                    }
+                });
+    }
+
     private String autoSplitText(final TextView tv) {
         final String rawText = tv.getText().toString(); //原始文本
         final Paint tvPaint = tv.getPaint(); //paint，包含字体等信息
         final float tvWidth = tv.getWidth() - tv.getPaddingLeft() - tv.getPaddingRight(); //控件可用宽度
         //将原始文本按行拆分
-        String [] rawTextLines = rawText.replaceAll("\r", "").split("\n");
+        String[] rawTextLines = rawText.replaceAll("\r", "").split("\n");
         StringBuilder sbNewText = new StringBuilder();
         for (String rawTextLine : rawTextLines) {
             if (tvPaint.measureText(rawTextLine) <= tvWidth) {
@@ -152,12 +184,37 @@ public class JobDetailsActivity extends AppActivity {
     @SingleClick
     @Override
     public void onClick(View view) {
-        if (view == btn_recommend_oneself) { // 入驻资料
-            ToastUtils.show("自荐成功");
-            btn_recommend_oneself.setText("自荐成功");
+        if (view == btn_recommend_oneself) { // 立即推荐
+            self_recommend();
+
         }
 
     }
+
+    private void self_recommend() {
+        EasyHttp.post(this)
+                .api(new SelfReCommendApi().setpositionId(mPositionId))
+                .request(new HttpCallback<HttpData<Boolean>>(this) {
+
+                    @SuppressLint({"SetTextI18n", "ResourceType"})
+                    @Override
+                    public void onSucceed(HttpData<Boolean> data) {
+                        if (data.getData()==true){
+                            ToastUtils.show("自荐成功");
+                            btn_recommend_oneself.setText("自荐成功");
+                            btn_recommend_oneself.setBackgroundResource(R.drawable.button_grey_circle_selector);
+                        }
+
+                    }
+
+                    @Override
+                    public void onFail(Exception e) {
+                        super.onFail(e);
+                    }
+
+                });
+    }
+
     @NonNull
     @Override
     protected ImmersionBar createStatusBarConfig() {

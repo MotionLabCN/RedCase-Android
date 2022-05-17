@@ -12,8 +12,8 @@ public final class GetDeveloperRecommendsApi implements IRequestApi {
         return "developer_recommends/position";
     }
 
-    public class Bean implements Serializable{
-        private int positionId;
+    public final static class Bean implements Serializable{
+        private String positionId;
         private String title;
         private String workDaysModeName;
         private int startPay;
@@ -36,11 +36,11 @@ public final class GetDeveloperRecommendsApi implements IRequestApi {
         private String companyRecruiterPosition;
         private Boolean selfRecommendStatus;
 
-        public int getPositionId() {
+        public String getPositionId() {
             return positionId;
         }
 
-        public void setPositionId(int positionId) {
+        public void setPositionId(String positionId) {
             this.positionId = positionId;
         }
 

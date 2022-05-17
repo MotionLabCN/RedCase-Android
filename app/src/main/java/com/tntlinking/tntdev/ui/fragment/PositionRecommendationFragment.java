@@ -1,6 +1,7 @@
 package com.tntlinking.tntdev.ui.fragment;
 
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 
@@ -8,13 +9,17 @@ import com.hjq.http.EasyHttp;
 import com.hjq.http.listener.HttpCallback;
 import com.tntlinking.tntdev.R;
 import com.tntlinking.tntdev.app.TitleBarFragment;
+import com.tntlinking.tntdev.http.api.AppListApi;
 import com.tntlinking.tntdev.http.api.GetDeveloperRecommendsApi;
 import com.tntlinking.tntdev.http.api.GetNewbieApi;
 
 import com.tntlinking.tntdev.http.model.HttpData;
+import com.tntlinking.tntdev.ui.activity.EvaluationListActivity;
 import com.tntlinking.tntdev.ui.activity.JobDetailsActivity;
 import com.tntlinking.tntdev.ui.activity.MainActivity;
 
+import com.tntlinking.tntdev.ui.activity.SaveQRActivity;
+import com.tntlinking.tntdev.ui.activity.WriteDailyActivity;
 import com.tntlinking.tntdev.ui.adapter.PositionRecommendationAdapter;
 import com.tntlinking.tntdev.ui.bean.PositionBean;
 import com.tntlinking.tntdev.widget.MyListView;
@@ -51,10 +56,15 @@ public class PositionRecommendationFragment extends TitleBarFragment<MainActivit
         lv_position.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                GetDeveloperRecommendsApi.Bean item = mPositionRecommendationAdapter.getItem(position);
+                GetDeveloperRecommendsApi.Bean item = (GetDeveloperRecommendsApi.Bean) mPositionRecommendationAdapter.getItem(position);
+                Log.d("mPositionId",">>>1"+item.getPositionId());
+
                 Intent intent = new Intent(getActivity(), JobDetailsActivity.class);
                 intent.putExtra("positionId", item.getPositionId());
                 startActivity(intent);
+
+
+
 
             }
         });

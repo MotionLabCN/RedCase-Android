@@ -13,6 +13,7 @@ import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.tntlinking.tntdev.R;
+import com.tntlinking.tntdev.http.api.JobDetailsApi;
 
 import java.util.List;
 

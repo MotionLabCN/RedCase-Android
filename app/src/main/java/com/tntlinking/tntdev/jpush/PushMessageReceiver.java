@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.tntlinking.tntdev.ui.activity.MainActivity;
 import com.tntlinking.tntdev.ui.activity.TestActivity;
 
 import cn.jpush.android.api.CmdMessage;
@@ -30,7 +31,7 @@ public class PushMessageReceiver extends JPushMessageReceiver {
         Log.e(TAG, "[onNotifyMessageOpened] " + message);
         try{
             //打开自定义的Activity
-            Intent i = new Intent(context, TestActivity.class);
+            Intent i = new Intent(context, MainActivity.class);
             Bundle bundle = new Bundle();
             bundle.putString(JPushInterface.EXTRA_NOTIFICATION_TITLE,message.notificationTitle);
             bundle.putString(JPushInterface.EXTRA_ALERT,message.notificationContent);
