@@ -74,6 +74,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
         <TextView
+            android:id="@+id/tv_work_pattern"
             android:layout_gravity="center_vertical"
             android:layout_width="wrap_content"
             android:layout_marginLeft="@dimen/dp_16"
@@ -84,6 +85,7 @@
             android:layout_height="@dimen/dp_21"
             android:text="全日"/>
         <TextView
+            android:id="@+id/tv_academic_degree"
             android:layout_gravity="center_vertical"
             android:layout_width="wrap_content"
             android:textSize="@dimen/sp_12"
@@ -94,6 +96,7 @@
             android:layout_height="@dimen/dp_21"
             android:text="大专"/>
         <TextView
+            android:id="@+id/tv_work_experience"
             android:layout_gravity="center_vertical"
             android:layout_width="wrap_content"
             android:textSize="@dimen/sp_12"
@@ -105,6 +108,7 @@
             android:layout_height="@dimen/dp_21"
             android:text="3年经验"/>
         <TextView
+            android:id="@+id/tv_job_skills_name"
             android:layout_gravity="center_vertical"
             android:layout_width="wrap_content"
             android:textSize="@dimen/sp_12"
@@ -112,9 +116,9 @@
             android:background="@drawable/button_circle_selector_white"
             android:gravity="center"
             android:layout_marginLeft="@dimen/dp_10"
-
             android:layout_height="@dimen/dp_21"
-            android:text="java"/>
+            android:text=""/>
+
     </LinearLayout>
     <TextView
         android:id="@+id/tv_content"

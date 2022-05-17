@@ -72,6 +72,7 @@ public class TagAliasOperatorHelper {
     public void onAliasOperatorResult(Context context, JPushMessage jPushMessage) {
         int sequence = jPushMessage.getSequence();
         Log.d("alias",">>>"+jPushMessage.getAlias());
+        Log.d("Tags",">>>"+jPushMessage.getTags());
 
         Log.i(TAG,"action - onAliasOperatorResult, sequence:"+sequence+",alias:"+jPushMessage.getAlias());
         init(context);

@@ -2,6 +2,7 @@ package com.tntlinking.tntdev.ui.activity;
 
 import android.graphics.Paint;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.TextView;
@@ -40,6 +41,7 @@ public class JobDetailsActivity extends AppActivity {
     private TextView tv_professional_title;
     private TextView tv_company_size;
     private AppCompatButton btn_recommend_oneself;
+    private String mPositionId;
     @Override
     protected int getLayoutId() {
         return R.layout.job_details_activity;
@@ -95,17 +97,17 @@ public class JobDetailsActivity extends AppActivity {
 
     @Override
     protected void initData() {
-
-        PositionBean positionBean = (PositionBean) getIntent().getSerializableExtra("Position");
-        tv_position_name.setText(positionBean.getPosition_name());
-        tv_salary.setText(positionBean.getSalary());
-//        tv_service_mode.setText(positionBean.getSalary());
-//        tv_work_experience.setText(positionBean.getSalary());
-//        tv_academic_degree.setText(positionBean.getSalary());
-//        tv_total_number_of_people.setText(positionBean.getSalary());
-        tv_content.setText(positionBean.getContent());
-        tv_name.setText(positionBean.getName());
-        tv_professional_title.setText(positionBean.getCompany());
+         mPositionId=getIntent().getStringExtra("positionId");
+        Log.d("mPositionId",">>>"+mPositionId);
+//        tv_position_name.setText(positionBean.getPosition_name());
+//        tv_salary.setText(positionBean.getSalary());
+////        tv_service_mode.setText(positionBean.getSalary());
+////        tv_work_experience.setText(positionBean.getSalary());
+////        tv_academic_degree.setText(positionBean.getSalary());
+////        tv_total_number_of_people.setText(positionBean.getSalary());
+//        tv_content.setText(positionBean.getContent());
+//        tv_name.setText(positionBean.getName());
+//        tv_professional_title.setText(positionBean.getCompany());
 //        tv_company_size.setText(positionBean.getProfessional_title());
         setOnClickListener(btn_recommend_oneself);
 

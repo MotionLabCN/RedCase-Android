@@ -10,16 +10,17 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.tntlinking.tntdev.R;
+import com.tntlinking.tntdev.http.api.GetDeveloperRecommendsApi;
 import com.tntlinking.tntdev.ui.bean.PositionBean;
 
 import java.util.List;
 
 public class PositionRecommendationAdapter extends BaseAdapter {
 
-    private List<PositionBean> mList;
+    private List<GetDeveloperRecommendsApi.Bean> mList;
     private final LayoutInflater layoutInflater;
     private Context mContext;
-    public PositionRecommendationAdapter(Context context, List<PositionBean> list) {
+    public PositionRecommendationAdapter(Context context, List<GetDeveloperRecommendsApi.Bean> list) {
         this.mContext = context;
         this.mList = list;
         layoutInflater = LayoutInflater.from(context);
@@ -31,7 +32,7 @@ public class PositionRecommendationAdapter extends BaseAdapter {
     }
 
     @Override
-    public PositionBean getItem(int position) {
+    public GetDeveloperRecommendsApi.Bean getItem(int position) {
         return mList.get(position);
     }
 
@@ -40,7 +41,7 @@ public class PositionRecommendationAdapter extends BaseAdapter {
         return 0;
     }
 
-    public void setData(List<PositionBean> list) {
+    public void setData(List<GetDeveloperRecommendsApi.Bean> list) {
         if (list != null) {
             this.mList = list;
             notifyDataSetChanged();
@@ -57,6 +58,10 @@ public class PositionRecommendationAdapter extends BaseAdapter {
             convertView = layoutInflater.inflate(R.layout.position_item, null);
             holder = new ViewHolder();
             holder.tv_position_name = convertView.findViewById(R.id.tv_position_name);
+            holder.tv_work_pattern = convertView.findViewById(R.id.tv_work_pattern);
+            holder.tv_job_skills_name = convertView.findViewById(R.id.tv_job_skills_name);
+            holder.tv_academic_degree = convertView.findViewById(R.id.tv_academic_degree);
+            holder.tv_work_experience = convertView.findViewById(R.id.tv_work_experience);
             holder.tv_recommend = convertView.findViewById(R.id.tv_recommend);
             holder.tv_salary = convertView.findViewById(R.id.tv_salary);
             holder.tv_content = convertView.findViewById(R.id.tv_content);
@@ -69,17 +74,24 @@ public class PositionRecommendationAdapter extends BaseAdapter {
         } else {
             holder = (PositionRecommendationAdapter.ViewHolder) convertView.getTag();
         }
-        PositionBean item = mList.get(position);
-        holder.tv_position_name.setText(item.getPosition_name());
-        holder.tv_recommend.setText(item.getRecommend());
-        holder.tv_salary.setText(item.getSalary());
-        holder.tv_content.setText(item.getContent());
-        holder.tv_name.setText(item.getName());
-        holder.tv_professional_title.setText(item.getProfessional_title());
-        holder.tv_company.setText(item.getCompany());
-        if (item.isIcon_recommend()==true){
+        GetDeveloperRecommendsApi.Bean item = mList.get(position);
+        holder.tv_position_name.setText(item.getTitle());
+        holder.tv_work_pattern.setText(item.getWorkDaysModeName());
+        holder.tv_academic_degree.setText(item.getEducationName());
+        holder.tv_work_experience.setText(item.getWorkYearsName());
+        holder.tv_job_skills_name.setText(item.getSkillNames().get(0));
+        holder.tv_recommend.setText(item.getWorkDaysModeName());
+        holder.tv_salary.setText(item.getStartPay()+"-"+item.getEndPay()+"k·月");
+        holder.tv_content.setText(item.getDescription());
+        holder.tv_name.setText(item.getCompanyRecruiterRealNamel());
+        holder.tv_professional_title.setText(item.getCompanyRecruiterRealNamel()+"·"+item.getCompanyRecruiterPosition());
+        holder.tv_company.setText(item.getCompanyName());
+        if (item.getSelfRecommendStatus()==true){
+            holder.tv_recommend.setVisibility(View.VISIBLE);
             holder.iv_recommend.setVisibility(View.VISIBLE);
+
         }else {
+            holder.tv_recommend.setVisibility(View.VISIBLE);
             holder.iv_recommend.setVisibility(View.GONE);
         }
 
@@ -88,12 +100,16 @@ public class PositionRecommendationAdapter extends BaseAdapter {
 
     static class ViewHolder {
         TextView tv_position_name;
+        TextView tv_work_pattern;
+        TextView tv_academic_degree;
+        TextView tv_work_experience;
         TextView tv_recommend;
         TextView tv_salary;
         TextView tv_content;
         TextView tv_name;
         TextView tv_professional_title;
         TextView tv_company;
+        TextView tv_job_skills_name;
         ImageView iv_recommend;
 
 

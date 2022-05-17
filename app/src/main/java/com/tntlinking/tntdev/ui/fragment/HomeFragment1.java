@@ -31,6 +31,7 @@ import com.tntlinking.tntdev.http.api.AppListApi;
 import com.tntlinking.tntdev.http.api.AppListInterviewApi;
 import com.tntlinking.tntdev.http.api.GetAppUpdateApi;
 import com.tntlinking.tntdev.http.api.GetDeveloperJkStatusApi;
+import com.tntlinking.tntdev.http.api.GetDeveloperRecommendsApi;
 import com.tntlinking.tntdev.http.api.GetNewbieApi;
 import com.tntlinking.tntdev.http.api.HistoryListApi;
 import com.tntlinking.tntdev.http.model.HttpData;
@@ -60,6 +61,7 @@ import com.tntlinking.tntdev.widget.MyListView;
 import com.tntlinking.tntdev.widget.XCollapsingToolbarLayout;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -104,7 +106,6 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity> {
     private MyListView lv_task;
     private MyListView lv_1;
     private MyListView lv_2;
-    private Set<String>tags;
     private int appSize = 0; //工作请求列表size
     private int interSize = 0; //面试请求列表size
     private int historySize = 0;//历史记录列表size
@@ -114,7 +115,6 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity> {
     String name = SPUtils.getInstance().getString(AppConfig.DEVELOP_NAME, "朋友");
     private String[] titles = {"职位推荐", "活动任务"};
     private List<Fragment> fragmentList = new ArrayList<>();
-    private static int sequence = 1;
 
     private int mStatus = 1;// 接单状态 1 默认可接单
     private int mTaskId;// 接单状态 1 默认可接单
@@ -335,6 +335,7 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity> {
         getAppUpdate();
     }
 
+
     @Override
     public void onClick(View view) {
         Intent intent = new Intent();
@@ -442,9 +443,7 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity> {
                     @Override
                     public void onSucceed(HttpData<List<GetNewbieApi.Bean>> data) {
                         if (data.getData() != null && data.getData().size() != 0) {
-                            JPushInterface.setAlias(getActivity(), sequence++, "ttsl_"+data.getData().get(0).getDeveloperId());
-                            Log.d("alias",">>>"+new JPushMessage().getAlias());
-                            Log.d("RegistrationID",">>>"+JPushInterface.getRegistrationID(getActivity()));
+
                             ll_task_empty.setVisibility(View.GONE);
                             mTaskList.clear();
                             mTaskList.addAll(data.getData());
