@@ -34,6 +34,8 @@ import com.tntlinking.tntdev.http.api.GetDeveloperJkStatusApi;
 import com.tntlinking.tntdev.http.api.GetDeveloperRecommendsApi;
 import com.tntlinking.tntdev.http.api.GetNewbieApi;
 import com.tntlinking.tntdev.http.api.HistoryListApi;
+import com.tntlinking.tntdev.http.api.UpdateServiceStatusApi;
+import com.tntlinking.tntdev.http.glide.GlideApp;
 import com.tntlinking.tntdev.http.model.HttpData;
 import com.tntlinking.tntdev.other.AppConfig;
 import com.tntlinking.tntdev.other.Utils;
@@ -61,7 +63,6 @@ import com.tntlinking.tntdev.widget.MyListView;
 import com.tntlinking.tntdev.widget.XCollapsingToolbarLayout;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -90,20 +91,17 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity> {
     private LinearLayout ll_service;
     private LinearLayout ll_question;
     private LinearLayout ll_contact;
-    private LinearLayout ll_cooperation_1;
-    private LinearLayout ll_service_1;
-    private LinearLayout ll_question_1;
-    private LinearLayout ll_contact_1;
     private ViewPager viewPager;
     private LinearLayout ll_title;
     private LinearLayout ll_empty;
     private LinearLayout ll_status;// 平台介绍页面
-    private LinearLayout ll_work;// 工作服务列表页面
-    private LinearLayout ll_tab_recommended_position;// 推荐职位列表页面
-    private LinearLayout ll_novice_task;// 新手任务列表页面
+    //    private LinearLayout ll_work;// 工作服务列表页面
+    private LinearLayout ll_tab;// 推荐职位列表页面
+    private LinearLayout ll_task;// 新手任务列表页面
 
     private LinearLayout ll_task_empty;//
     private MyListView lv_task;
+
     private MyListView lv_1;
     private MyListView lv_2;
     private int appSize = 0; //工作请求列表size
@@ -117,8 +115,6 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity> {
     private List<Fragment> fragmentList = new ArrayList<>();
 
     private int mStatus = 1;// 接单状态 1 默认可接单
-    private int mTaskId;// 接单状态 1 默认可接单
-    private int mPositionStatus= 2;// 没有可推荐职位
 
     public static HomeFragment1 newInstance() {
         return new HomeFragment1();
@@ -141,28 +137,22 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity> {
         ll_service = findViewById(R.id.ll_service);
         ll_question = findViewById(R.id.ll_question);
         ll_contact = findViewById(R.id.ll_contact);
-        ll_cooperation_1 = findViewById(R.id.ll_cooperation_1);
-        ll_service_1 = findViewById(R.id.ll_service_1);
-        ll_question_1 = findViewById(R.id.ll_question_1);
-        ll_contact_1 = findViewById(R.id.ll_contact_1);
         viewPager = findViewById(R.id.viewpager);
         ll_title = findViewById(R.id.ll_title);
         lv_task = findViewById(R.id.lv_task);
-        lv_1 = findViewById(R.id.lv_1);
-        lv_2 = findViewById(R.id.lv_2);
+
         ll_empty = findViewById(R.id.ll_empty);
         ll_status = findViewById(R.id.ll_status);
-        ll_work = findViewById(R.id.ll_work);
+//        ll_work = findViewById(R.id.ll_work);
         ll_task_empty = findViewById(R.id.ll_task_empty);
-        ll_tab_recommended_position = findViewById(R.id.ll_tab_recommended_position);
-        ll_novice_task = findViewById(R.id.ll_novice_task);
+        ll_tab = findViewById(R.id.ll_tab);
+        ll_task = findViewById(R.id.ll_task);
 
         tv_avatar.setText(Utils.formatName(name));
         tv_name.setText("你好," + name);
 
         ImmersionBar.setTitleBar(this, ll_title);
-        setOnClickListener(tv_order_switching, tv_avatar, ll_cooperation, ll_service, ll_question, ll_contact,
-                ll_cooperation_1, ll_service_1, ll_question_1, ll_contact_1);
+        setOnClickListener(tv_order_switching, tv_avatar, ll_cooperation, ll_service, ll_question, ll_contact);
 
 
         BannerBean banner1 = new BannerBean();
@@ -193,27 +183,11 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity> {
         viewPager.setAdapter(adapter);
         mTaskAdapter = new HomeTaskAdapter(getActivity(), mTaskList);
         lv_task.setAdapter(mTaskAdapter);
-        mServiceAdapter = new ServiceProjectAdapter(getActivity(), mServiceList);
-        mHistoryAdapter = new HistoryProjectAdapter(getActivity(), mHistoryList);
-        lv_1.setAdapter(mServiceAdapter);
-        lv_2.setAdapter(mHistoryAdapter);
-        lv_1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                AppListApi.Bean item = (AppListApi.Bean) mServiceAdapter.getItem(position);
-                if (!TextUtils.isEmpty(item.getServiceName())) {
+//        mServiceAdapter = new ServiceProjectAdapter(getActivity(), mServiceList);
+//        mHistoryAdapter = new HistoryProjectAdapter(getActivity(), mHistoryList);
+//        lv_1.setAdapter(mServiceAdapter);
+//        lv_2.setAdapter(mHistoryAdapter);
 
-                    Intent intent = new Intent(getActivity(), WriteDailyActivity.class);
-                    intent.putExtra("orderId", item.getId());
-                    startActivity(intent);
-                } else {
-                    Intent intent = new Intent(getActivity(), InterviewDetailActivity.class);
-                    intent.putExtra("interviewId", item.getId());
-                    startActivity(intent);
-                }
-
-            }
-        });
 
         lv_task.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -311,11 +285,7 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity> {
     @Override
     protected void initData() {
 //        getStatus();
-        if (mPositionStatus==1){
-            ll_novice_task.setVisibility(View.VISIBLE);
-        }else {
-            ll_tab_recommended_position.setVisibility(View.VISIBLE);
-        }
+
         getNewbie();
         String status = SPUtils.getInstance().getString(AppConfig.DEVELOP_STATUS, "1");
 
@@ -326,12 +296,18 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity> {
 //            getAppList();
         } else {
             ll_status.setVisibility(View.VISIBLE); //1、2、4 状态下显示平台介绍和新手任务
-            ll_work.setVisibility(View.GONE);
 
             tv_status.setVisibility(View.GONE);
 
         }
-
+        //切换接单模式
+        if (mStatus == 1) {
+            ll_tab.setVisibility(View.VISIBLE);
+            ll_task.setVisibility(View.GONE);
+        } else {
+            ll_tab.setVisibility(View.GONE);
+            ll_task.setVisibility(View.VISIBLE);
+        }
         getAppUpdate();
     }
 
@@ -347,7 +323,6 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity> {
                 startActivity(InterviewActivity.class);
                 break;
             case R.id.ll_cooperation:
-            case R.id.ll_cooperation_1:
 //                BrowserActivity.start(getActivity(), "https://stage-ttchain.tntlinking.com/api/minio/manpower-pages/recruit_guide.pdf","合作模式");
                 String PDFUrl = AppConfig.RECRUIT_GUIDE_URL;
                 intent.setClass(getActivity(), PDFViewActivity.class);
@@ -356,7 +331,6 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity> {
                 startActivity(intent);
                 break;
             case R.id.ll_service:
-            case R.id.ll_service_1:
 //                String service_guide = "https://stage-ttchain.tntlinking.com/api/minio/manpower-pages/service_guide.md";
                 String service_guide = AppConfig.SERVICE_GUIDE_URL;
                 intent.setClass(getActivity(), MDViewActivity.class);
@@ -365,7 +339,6 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity> {
                 startActivity(intent);
                 break;
             case R.id.ll_question:
-            case R.id.ll_question_1:
 //                String faq_guide = "https://stage-ttchain.tntlinking.com/api/minio/manpower-pages/faq_guide.md";
                 String faq_guide = AppConfig.FAQ_GUIDE_URL;
                 intent.setClass(getActivity(), MDViewActivity.class);
@@ -374,7 +347,6 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity> {
                 startActivity(intent);
                 break;
             case R.id.ll_contact:
-            case R.id.ll_contact_1:
                 intent.setClass(getActivity(), SaveQRActivity.class);
                 intent.putExtra("contact", "contact");
                 startActivity(intent);
@@ -421,9 +393,33 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity> {
                         tv_order_switching.setCompoundDrawablesWithIntrinsicBounds(null, null, drawable, null);
                     }
 
-                    mStatus = (status == 1) ? 2 : 1;
+                    updateServiceStatus(mStatus);
                     dialog.dismiss();
                 }).show();
+    }
+
+
+    /**
+     * 切换可接单状态
+     */
+    public void updateServiceStatus(int status) {
+        EasyHttp.post(this)
+                .api(new UpdateServiceStatusApi()
+                        .setType(status))
+                .request(new HttpCallback<HttpData<Void>>(this) {
+
+                    @Override
+                    public void onSucceed(HttpData<Void> data) {
+                        mStatus = (status == 1) ? 2 : 1;
+                        if (mStatus == 1) {
+                            ll_tab.setVisibility(View.VISIBLE);
+                            ll_task.setVisibility(View.GONE);
+                        } else {
+                            ll_tab.setVisibility(View.GONE);
+                            ll_task.setVisibility(View.VISIBLE);
+                        }
+                    }
+                });
     }
 
 

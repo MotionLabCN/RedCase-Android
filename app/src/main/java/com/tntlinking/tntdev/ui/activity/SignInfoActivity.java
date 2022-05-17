@@ -4,6 +4,7 @@ package com.tntlinking.tntdev.ui.activity;
 import android.text.TextUtils;
 import android.view.View;
 
+import com.blankj.utilcode.util.RegexUtils;
 import com.hjq.http.EasyHttp;
 import com.hjq.http.listener.HttpCallback;
 import com.hjq.widget.view.ClearEditText;
@@ -78,7 +79,7 @@ public final class SignInfoActivity extends AppActivity {
                     toast("您的手机号码输入有误");
                     return;
                 }
-                if (TextUtils.isEmpty(mIdCard) && mIdCard.length() < 18) {
+                if (TextUtils.isEmpty(mIdCard) && RegexUtils.isIDCard18(mIdCard)) {
                     toast("您的证件号码输入有误");
                     return;
                 }
