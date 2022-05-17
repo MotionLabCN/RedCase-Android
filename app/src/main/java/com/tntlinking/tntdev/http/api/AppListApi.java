@@ -14,6 +14,7 @@ public final class AppListApi implements IRequestApi {
     public final static class Bean {
         private String id;
         private String orderStatus;
+        private String orderNo;
         private String workDaysMode;
         private String workDaysModeName;
         private String companyName;
@@ -50,6 +51,14 @@ public final class AppListApi implements IRequestApi {
 
         public void setOrderStatus(String orderStatus) {
             this.orderStatus = orderStatus;
+        }
+
+        public String getOrderNo() {
+            return orderNo;
+        }
+
+        public void setOrderNo(String orderNo) {
+            this.orderNo = orderNo;
         }
 
         public String getWorkDaysMode() {

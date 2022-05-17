@@ -58,6 +58,7 @@ public final class HistoryProjectAdapter extends BaseAdapter {
             holder.tv_position_name = convertView.findViewById(R.id.tv_position_name);
             holder.tv_company_name = convertView.findViewById(R.id.tv_company_name);
             holder.tv_work_info = convertView.findViewById(R.id.tv_work_info);
+            holder.tv_order_id = convertView.findViewById(R.id.tv_order_id);
 
 
             convertView.setTag(holder);
@@ -69,7 +70,7 @@ public final class HistoryProjectAdapter extends BaseAdapter {
         holder.tv_position_name.setText(item.getPositionName());
         holder.tv_company_name.setText(item.getCompanyName());
         holder.tv_work_info.setText(item.getWorkDaysModeName() + " | " + Utils.getYearFromDate(item.getWorkStartDate()) + "—" + Utils.getYearFromDate(item.getFinishDate()));
-
+        holder.tv_order_id.setText("订单号："+item.getOrderNo());
         return convertView;
     }
 
@@ -77,6 +78,7 @@ public final class HistoryProjectAdapter extends BaseAdapter {
         TextView tv_position_name;
         TextView tv_company_name;
         TextView tv_work_info;
+        TextView tv_order_id;
 
     }
 

@@ -6,6 +6,8 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
+
 import com.blankj.utilcode.util.SPUtils;
 import com.hjq.http.EasyHttp;
 import com.hjq.http.listener.HttpCallback;
@@ -36,7 +38,7 @@ public final class TreatyFragment extends TitleBarFragment<MainActivity> {
     private MyListView lv_1;
     private MyListView lv_2;
     private LinearLayout ll_empty;
-
+    private TextView tv_footer;
 
     private List<GetNewbieApi.Bean> mTaskList = new ArrayList<>();
     private List<AppListApi.Bean> mServiceList = new ArrayList<>();
@@ -63,6 +65,7 @@ public final class TreatyFragment extends TitleBarFragment<MainActivity> {
         lv_1 = findViewById(R.id.lv_1);
         lv_2 = findViewById(R.id.lv_2);
         ll_empty = findViewById(R.id.ll_empty);
+        tv_footer = findViewById(R.id.tv_footer);
 
         mServiceAdapter = new ServiceProjectAdapter(getActivity(), mServiceList);
         mHistoryAdapter = new HistoryProjectAdapter(getActivity(), mHistoryList);
@@ -194,12 +197,13 @@ public final class TreatyFragment extends TitleBarFragment<MainActivity> {
                             }
                             mHistoryList.addAll(data.getData());
                             mHistoryAdapter.setData(mHistoryList);
-
+                            tv_footer.setVisibility(View.VISIBLE);
                         } else {
                             //无服务项目（包含面试邀约）但有历史服务项目  显示暂无工作和历史项目
                             if (appSize + interSize == 0) {
 
                             }
+                            tv_footer.setVisibility(View.GONE);
                         }
 
                     }
