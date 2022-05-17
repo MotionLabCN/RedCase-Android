@@ -12,117 +12,126 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_60"
         app:leftIcon="@null"
-        app:lineVisible="false"
         app:leftTitle="服务项目"
         app:leftTitleColor="@color/black"
         app:leftTitleSize="@dimen/sp_20"
-        app:leftTitleStyle="bold"/>
+        app:leftTitleStyle="bold"
+        app:lineVisible="false" />
 
-    <LinearLayout
-        android:id="@+id/ll_work"
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-<!--        <TextView-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginStart="@dimen/dp_15"-->
-<!--            android:layout_marginTop="@dimen/dp_20"-->
-<!--            android:layout_marginEnd="@dimen/dp_15"-->
-<!--            android:layout_marginBottom="@dimen/dp_20"-->
-<!--            android:text="服务项目"-->
-<!--            android:textColor="@color/black"-->
-<!--            android:textSize="@dimen/sp_25"-->
-<!--            android:textStyle="bold" />-->
-
-        <com.tntlinking.tntdev.widget.MyListView
-            android:id="@+id/lv_1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:divider="@null"
-            android:dividerHeight="@dimen/dp_16" />
-        <!--                    tools:listitem="@layout/item_app_list"/>-->
+        android:layout_height="wrap_content">
 
         <LinearLayout
-            android:id="@+id/ll_empty"
+            android:id="@+id/ll_work"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/white"
-            android:gravity="center|top"
-            android:orientation="vertical"
-            android:paddingTop="@dimen/dp_20"
-            android:visibility="gone">
+            android:orientation="vertical">
 
-            <ImageView
-                android:layout_width="wrap_content"
+            <!--        <TextView-->
+            <!--            android:layout_width="match_parent"-->
+            <!--            android:layout_height="wrap_content"-->
+            <!--            android:layout_marginStart="@dimen/dp_15"-->
+            <!--            android:layout_marginTop="@dimen/dp_20"-->
+            <!--            android:layout_marginEnd="@dimen/dp_15"-->
+            <!--            android:layout_marginBottom="@dimen/dp_20"-->
+            <!--            android:text="服务项目"-->
+            <!--            android:textColor="@color/black"-->
+            <!--            android:textSize="@dimen/sp_25"-->
+            <!--            android:textStyle="bold" />-->
+
+            <com.tntlinking.tntdev.widget.MyListView
+                android:id="@+id/lv_1"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:src="@drawable/bg_home_work_empty" />
+                android:divider="@null"
+                android:dividerHeight="@dimen/dp_16" />
+            <!--                    tools:listitem="@layout/item_app_list"/>-->
+
+            <LinearLayout
+                android:id="@+id/ll_empty"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                android:gravity="center|top"
+                android:orientation="vertical"
+                android:paddingTop="@dimen/dp_20"
+                android:visibility="gone">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/bg_home_work_empty" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:text="暂无工作"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp_15"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:text="联系客服人员尽快匹配新工作"
+                    android:textColor="#7E89A3"
+                    android:textSize="@dimen/sp_12" />
+
+                <TextView
+                    android:id="@+id/tv_refresh"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:background="@drawable/btn_blue_radius_10"
+                    android:paddingLeft="@dimen/dp_40"
+                    android:paddingTop="@dimen/dp_8"
+                    android:paddingRight="@dimen/dp_40"
+                    android:paddingBottom="@dimen/dp_8"
+                    android:text="刷新"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/sp_12"
+                    android:visibility="gone"/>
+            </LinearLayout>
 
             <TextView
-                android:layout_width="wrap_content"
+                android:id="@+id/tv_title"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_10"
-                android:text="暂无工作"
+                android:layout_marginTop="@dimen/dp_12"
+                android:background="@drawable/bg_white_radius_top_6"
+                android:paddingLeft="@dimen/dp_15"
+                android:paddingTop="@dimen/dp_20"
+                android:paddingBottom="@dimen/dp_10"
+                android:text="历史工作"
                 android:textColor="@color/black"
-                android:textSize="@dimen/sp_15"
+                android:textSize="@dimen/sp_20"
                 android:textStyle="bold" />
 
-            <TextView
-                android:layout_width="wrap_content"
+            <com.tntlinking.tntdev.widget.MyListView
+                android:id="@+id/lv_2"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_10"
-                android:text="联系客服人员尽快匹配新工作"
-                android:textColor="#7E89A3"
-                android:textSize="@dimen/sp_12" />
+                android:divider="@null"
+                android:dividerHeight="@dimen/dp_16" />
 
             <TextView
-                android:id="@+id/tv_refresh"
-                android:layout_width="wrap_content"
+                android:id="@+id/tv_footer"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_2"
                 android:layout_marginTop="@dimen/dp_10"
-                android:background="@drawable/btn_blue_radius_10"
-                android:paddingLeft="@dimen/dp_40"
-                android:paddingTop="@dimen/dp_8"
-                android:paddingRight="@dimen/dp_40"
-                android:paddingBottom="@dimen/dp_8"
-                android:text="刷新"
-                android:textColor="@color/white"
-                android:textSize="@dimen/sp_12" />
+                android:layout_marginBottom="@dimen/dp_20"
+                android:gravity="center"
+                android:text="只展示最近半年合约订单"
+                android:textColor="@color/color_hint_color"
+                android:textSize="@dimen/sp_13"
+                android:visibility="gone"/>
+
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/tv_title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_12"
-            android:background="@drawable/bg_white_radius_top_6"
-            android:paddingLeft="@dimen/dp_15"
-            android:paddingTop="@dimen/dp_20"
-            android:paddingBottom="@dimen/dp_10"
-            android:text="历史工作"
-            android:textColor="@color/black"
-            android:textSize="@dimen/sp_20"
-            android:textStyle="bold" />
-
-        <com.tntlinking.tntdev.widget.MyListView
-            android:id="@+id/lv_2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:divider="#FFECECEC"
-            android:dividerHeight="@dimen/line_size" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/dp_2"
-            android:layout_marginTop="@dimen/dp_20"
-            android:gravity="center"
-            android:text="更多新手任务敬请期待 最高可领100元"
-            android:textColor="@color/color_C1C6D2"
-            android:textSize="@dimen/sp_13"
-            android:visibility="gone" />
-
-    </LinearLayout>
-
+    </ScrollView>
 </LinearLayout>
