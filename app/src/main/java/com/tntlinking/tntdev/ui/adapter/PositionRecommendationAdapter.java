@@ -82,8 +82,8 @@ public class PositionRecommendationAdapter extends BaseAdapter {
         holder.tv_job_skills_name.setText(item.getSkillNames().get(0));
         holder.tv_salary.setText(item.getStartPay()+"-"+item.getEndPay()+"k·月");
         holder.tv_content.setText(item.getDescription());
-        holder.tv_name.setText(item.getCompanyRecruiterRealNamel());
-        holder.tv_professional_title.setText(item.getCompanyRecruiterRealNamel()+"·"+item.getCompanyRecruiterPosition());
+        holder.tv_name.setText(item.getCompanyRecruiterRealName());
+        holder.tv_professional_title.setText(item.getCompanyRecruiterRealName()+"·"+item.getCompanyRecruiterPosition());
         holder.tv_company.setText(item.getCompanyName());
         if (item.getSelfRecommendStatus()==true){
             holder.tv_recommend.setVisibility(View.VISIBLE);

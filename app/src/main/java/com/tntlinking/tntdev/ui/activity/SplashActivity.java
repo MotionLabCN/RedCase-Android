@@ -118,6 +118,7 @@ public final class SplashActivity extends AppActivity {
                                         SPUtils.getInstance().put(AppConfig.DEVELOP_STATUS, data.getData().getStatus());
                                         SPUtils.getInstance().put(AppConfig.DEVELOP_NAME, data.getData().getRealName());
                                         SPUtils.getInstance().put(AppConfig.DEVELOPER_ID, data.getData().getId());
+                                        SPUtils.getInstance().put(AppConfig.SERVICE_STATUS,data.getData().getServiceStatus());
 
                                         startActivity(MainActivity.class);
                                         finish();
