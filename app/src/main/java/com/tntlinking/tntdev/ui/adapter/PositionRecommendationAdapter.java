@@ -82,6 +82,7 @@ public class PositionRecommendationAdapter extends BaseAdapter {
             holder.tv_company = convertView.findViewById(R.id.tv_company);
             holder.iv_recommend = convertView.findViewById(R.id.iv_recommend);
             holder.rv_job_requirements = convertView.findViewById(R.id.rv_job_requirements);
+
             convertView.setTag(holder);
         } else {
             holder = (PositionRecommendationAdapter.ViewHolder) convertView.getTag();

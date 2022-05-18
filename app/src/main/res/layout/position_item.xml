@@ -155,15 +155,19 @@
             android:layout_marginLeft="@dimen/dp_10"
             android:layout_height="@dimen/dp_21"
             android:text="java"/>
+
+
+    </LinearLayout>
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_job_requirements"
             android:layout_width="wrap_content"
             android:layout_weight="1"
             android:visibility="visible"
+            android:layout_marginTop="@dimen/dp_10"
             android:layout_marginLeft="@dimen/dp_10"
             android:layout_marginEnd="@dimen/dp_16"
-            android:layout_height="@dimen/dp_21"/>
-    </LinearLayout>
+            android:layout_height="wrap_content"
+            tools:ignore="InefficientWeight" />
     <TextView
         android:id="@+id/tv_content"
         android:layout_gravity="center_vertical"
