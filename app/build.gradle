@@ -269,9 +269,23 @@ android {
         // 隐私调用监控：https://github.com/huage2580/PermissionMonitor
     }
 }
-
+//dependencies {
+//    //JPush Android SDK 4.6.0 更新华为HMS SDK版本为:6.1.0.300,接入要求：Android Studio 3.6.1 或更高版本、Android Gradle 插件 3.5.4 或更高版本。
+//    implementation 'com.huawei.hms:push:6.1.0.300'
+//    //仅使用 com.huawei.hms:push:6.1.0.XXX 版本需要加 base 依赖，其他版本不需要
+//    implementation 'com.huawei.hms:base:6.2.0.300'
+//    //厂商版本和 JPush SDK 版本保持一致
+//    implementation 'cn.jiguang.sdk.plugin:huawei:4.x.x'
+//}
 dependencies {
     implementation files('libs\\jcore-android-3.2.4.jar')
 }
+dependencies {
+    implementation 'com.huawei.hms:push:5.3.0.301'
+    //https://developer.huawei.com/consumer/cn/doc/development/HMSCore-Guides/android-app-version-0000001074227861
+    //厂商版本和JPush SDK版本保持一致
+    implementation 'cn.jiguang.sdk.plugin:huawei:4.6.6'
+}
+apply plugin: 'com.huawei.agconnect'
 
 
