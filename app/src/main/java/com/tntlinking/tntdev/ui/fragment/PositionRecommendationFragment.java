@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.LinearLayout;
 
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -31,7 +32,7 @@ import java.util.List;
 
 public class PositionRecommendationFragment extends TitleBarFragment<MainActivity> {
     private MyListView lv_position;
-
+    private LinearLayout ll_settled_material_empty;
     private PositionRecommendationAdapter mPositionRecommendationAdapter;
     private List<GetDeveloperRecommendsApi.Bean> mList = new ArrayList<>();
     public static PositionRecommendationFragment newInstance() {
@@ -45,6 +46,7 @@ public class PositionRecommendationFragment extends TitleBarFragment<MainActivit
     @Override
     protected void initView() {
         lv_position = findViewById(R.id.lv_position);
+        ll_settled_material_empty = findViewById(R.id.ll_settled_material_empty);
 
 
 
@@ -58,6 +60,7 @@ public class PositionRecommendationFragment extends TitleBarFragment<MainActivit
 
     @Override
     protected void initData() {
+        getNewbie();
         getDeveloper_Recommends();
         mPositionRecommendationAdapter = new PositionRecommendationAdapter(getActivity(), mList);
         lv_position.setAdapter(mPositionRecommendationAdapter);
@@ -92,6 +95,23 @@ public class PositionRecommendationFragment extends TitleBarFragment<MainActivit
                             mList.addAll(data.getData());
                             mPositionRecommendationAdapter.setData(mList);
                         } else {
+                        }
+
+                    }
+                });
+    }
+    /**
+     * 获取任务状态
+     */
+    public void getNewbie() {
+        EasyHttp.get(this)
+                .api(new GetNewbieApi())
+                .request(new HttpCallback<HttpData<List<GetNewbieApi.Bean>>>(this) {
+                    @Override
+                    public void onSucceed(HttpData<List<GetNewbieApi.Bean>> data) {
+                        if (data.getData() != null && data.getData().size() != 0&&data.getData().get(0).getTaskId()==2) {
+                            lv_position.setVisibility(View.VISIBLE);
+                            ll_settled_material_empty.setVisibility(View.GONE);
                         }
 
                     }

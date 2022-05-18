@@ -12,7 +12,6 @@
         android:id="@+id/tv_require_labels"
         android:layout_gravity="center_vertical"
         android:layout_width="wrap_content"
-        android:layout_marginTop="@dimen/dp_5"
         android:textSize="@dimen/sp_12"
         android:paddingLeft="@dimen/dp_8"
         android:paddingEnd="@dimen/dp_8"

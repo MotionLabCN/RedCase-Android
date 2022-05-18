@@ -2,6 +2,7 @@ package com.tntlinking.tntdev.ui.adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.flexbox.FlexDirection;
@@ -90,22 +92,23 @@ public class PositionRecommendationAdapter extends BaseAdapter {
         holder.tv_academic_degree.setText(item.getEducationName());
         holder.tv_work_experience.setText(item.getWorkYearsName());
 
-        if (item.getSkillNames().size()>2){
-            holder.tv_job_skills_name.setText(item.getSkillNames().get(0));
-            holder.tv_job_skills_name2.setText(item.getSkillNames().get(1));
-            holder.tv_job_skills_name3.setText(item.getSkillNames().get(2));
-        }else if (item.getSkillNames().size()>1){
-            holder.tv_job_skills_name.setText(item.getSkillNames().get(0));
-            holder.tv_job_skills_name2.setText(item.getSkillNames().get(1));
-        }else if (item.getSkillNames().size()>0){
-            holder.tv_job_skills_name.setText(item.getSkillNames().get(0));
-        }else {
-            holder.tv_job_skills_name.setText(item.getSkillNames().get(0));
-
-        }
+//        if (item.getSkillNames().size()>2){
+//            holder.tv_job_skills_name.setText(item.getSkillNames().get(0));
+//            holder.tv_job_skills_name2.setText(item.getSkillNames().get(1));
+//            holder.tv_job_skills_name3.setText(item.getSkillNames().get(2));
+//        }else if (item.getSkillNames().size()>1){
+//            holder.tv_job_skills_name.setText(item.getSkillNames().get(0));
+//            holder.tv_job_skills_name2.setText(item.getSkillNames().get(1));
+//        }else if (item.getSkillNames().size()>0){
+//            holder.tv_job_skills_name.setText(item.getSkillNames().get(0));
+//        }else {
+//            holder.tv_job_skills_name.setText(item.getSkillNames().get(0));
+//
+//        }
         holder.tv_salary.setText(item.getStartPay()+"-"+item.getEndPay()+"k·月");
         holder.tv_content.setText(item.getDescription());
-        holder.tv_name.setText(item.getCompanyName());
+       String RealName=item.getCompanyRecruiterRealName().substring(1);
+        holder.tv_name.setText(RealName);
         holder.tv_professional_title.setText(item.getCompanyRecruiterRealName()+"·"+item.getCompanyRecruiterPosition());
         holder.tv_company.setText(item.getCompanyName());
         if (item.getSelfRecommendStatus()==true){
@@ -120,10 +123,14 @@ public class PositionRecommendationAdapter extends BaseAdapter {
 //        FlexboxLayoutManager layoutManager = new FlexboxLayoutManager(mContext);
 //        layoutManager.setFlexDirection(FlexDirection.ROW);//设置水平方向。也可以设置垂直方向
 //        holder.rv_job_requirements.setLayoutManager(layoutManager);
-//        mStringArrayList.clear();
-//        mStringArrayList.addAll(item.getSkillNames());
-//        JobRequirementsAdapter adapter = new JobRequirementsAdapter(mContext, mStringArrayList);
-//        holder.rv_job_requirements.setAdapter(adapter);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mContext);
+        linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        holder.rv_job_requirements.setLayoutManager(linearLayoutManager);
+
+        mStringArrayList.clear();
+        mStringArrayList.addAll(item.getSkillNames());
+        JobRequirementsAdapter adapter = new JobRequirementsAdapter(mContext, mStringArrayList);
+        holder.rv_job_requirements.setAdapter(adapter);
         return convertView;
     }
 

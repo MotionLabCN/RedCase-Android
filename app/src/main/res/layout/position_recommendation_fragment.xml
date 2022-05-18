@@ -6,6 +6,7 @@
     android:layout_height="wrap_content">
     <com.tntlinking.tntdev.widget.MyListView
         android:id="@+id/lv_position"
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:divider="@null"

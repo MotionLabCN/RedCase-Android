@@ -88,8 +88,7 @@ public class ActiveTaskFragment extends TitleBarFragment<MainActivity> {
                     }
 
                 }else if (item.getTaskId() == 4) {//即可测评
-                    showDealDialog();
-
+                    getDeveloperJkStatus();
                 }
             }
         });
@@ -118,23 +117,7 @@ public class ActiveTaskFragment extends TitleBarFragment<MainActivity> {
     }
 
 
-    public void showDealDialog() {
-        new BaseDialog.Builder<>(getActivity())
-                .setContentView(R.layout.geeks_evaluation_need_to_know_dialog)
-                .setAnimStyle(BaseDialog.ANIM_SCALE)
-                .setCancelable(false)
-                .setCanceledOnTouchOutside(false)
-                .setText(R.id.tv_title, "我们会遵循隐私政策收集,使用您的信息,但不会仅因为您同意本隐私政策而采取强制捆绑的方式一览子收集您个人信息")
-                .setText(R.id.btn_dialog_custom_ok, "已知晓")
-                .setText(R.id.btn_dialog_custom_cancel, "取消")
-                .setOnClickListener(R.id.btn_dialog_custom_cancel, (BaseDialog.OnClickListener<Button>) (dialog, button) -> dialog.dismiss())
-                .setOnClickListener(R.id.btn_dialog_custom_ok, (dialog, views) -> {
 
-                    getDeveloperJkStatus();
-                    dialog.dismiss();
-                }).show();
-
-    }
 
     private void getDeveloperJkStatus() {
         EasyHttp.get(this)
@@ -150,13 +133,8 @@ public class ActiveTaskFragment extends TitleBarFragment<MainActivity> {
                             startActivity(EvaluationActivity.class);
                         } else if (data.getData() != null && data.getData().getUserPlanStatus() == 0) {
                             startActivity(EvaluationNeedsTokNowActivity.class);
-                        } else if (data.getData() != null && data.getData().getUserPlanStatus() == 1) {
-                            if (data.getData().getStackInfoList().size() > 0) {
-                                startActivity(new Intent(getActivity(), EvaluationOutcomeActivity.class));
-                            } else {
-                                JkBrowserActivity.start(getActivity(), data.getData().getPlanUrl());
-                            }
-
+                        } else  {
+                            JkBrowserActivity.start(getActivity(), data.getData().getPlanUrl());
 
                         }
 
