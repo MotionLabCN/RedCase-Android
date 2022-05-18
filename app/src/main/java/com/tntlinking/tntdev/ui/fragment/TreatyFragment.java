@@ -11,6 +11,9 @@ import android.widget.TextView;
 import com.blankj.utilcode.util.SPUtils;
 import com.hjq.http.EasyHttp;
 import com.hjq.http.listener.HttpCallback;
+import com.scwang.smart.refresh.layout.SmartRefreshLayout;
+import com.scwang.smart.refresh.layout.api.RefreshLayout;
+import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener;
 import com.tntlinking.tntdev.R;
 import com.tntlinking.tntdev.aop.SingleClick;
 import com.tntlinking.tntdev.app.TitleBarFragment;
@@ -30,15 +33,19 @@ import com.tntlinking.tntdev.widget.MyListView;
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.annotation.NonNull;
+
 /**
  * desc   : 服务 Fragment
  */
-public final class TreatyFragment extends TitleBarFragment<MainActivity> {
+public final class TreatyFragment extends TitleBarFragment<MainActivity> implements OnRefreshLoadMoreListener {
 
     private MyListView lv_1;
     private MyListView lv_2;
     private LinearLayout ll_empty;
+    private LinearLayout ll_history_empty;
     private TextView tv_footer;
+    private SmartRefreshLayout mRefreshLayout;
 
     private List<GetNewbieApi.Bean> mTaskList = new ArrayList<>();
     private List<AppListApi.Bean> mServiceList = new ArrayList<>();
@@ -65,7 +72,11 @@ public final class TreatyFragment extends TitleBarFragment<MainActivity> {
         lv_1 = findViewById(R.id.lv_1);
         lv_2 = findViewById(R.id.lv_2);
         ll_empty = findViewById(R.id.ll_empty);
+        ll_history_empty = findViewById(R.id.ll_history_empty);
         tv_footer = findViewById(R.id.tv_footer);
+        mRefreshLayout = findViewById(R.id.rl_status_refresh);
+        mRefreshLayout.setOnRefreshLoadMoreListener(this);
+        mRefreshLayout.setEnableLoadMore(false);
 
         mServiceAdapter = new ServiceProjectAdapter(getActivity(), mServiceList);
         mHistoryAdapter = new HistoryProjectAdapter(getActivity(), mHistoryList);
@@ -194,18 +205,25 @@ public final class TreatyFragment extends TitleBarFragment<MainActivity> {
                             } else {
                                 mServiceAdapter.setData(mServiceList);
                                 ll_empty.setVisibility(View.GONE);
+
                             }
                             mHistoryList.addAll(data.getData());
                             mHistoryAdapter.setData(mHistoryList);
                             tv_footer.setVisibility(View.VISIBLE);
+                            ll_history_empty.setVisibility(View.GONE);
                         } else {
                             //无服务项目（包含面试邀约）但有历史服务项目  显示暂无工作和历史项目
-                            if (appSize + interSize == 0) {
 
+                            if (appSize + interSize == 0) {
+                                ll_empty.setVisibility(View.VISIBLE);
+                            } else {
+                                mServiceAdapter.setData(mServiceList);
+                                ll_empty.setVisibility(View.GONE);
                             }
+                            ll_history_empty.setVisibility(View.VISIBLE);
                             tv_footer.setVisibility(View.GONE);
                         }
-
+                        mRefreshLayout.finishRefresh();
                     }
 
                     @Override
@@ -215,5 +233,21 @@ public final class TreatyFragment extends TitleBarFragment<MainActivity> {
                     }
                 });
     }
+
+    @Override
+    public void onRefresh(@NonNull RefreshLayout refreshLayout) {
+        mServiceList.clear();
+        mHistoryList.clear();
+        String status = SPUtils.getInstance().getString(AppConfig.DEVELOP_STATUS, "1");
+        if (status.equals("3")) {
+            getAppList();
+        }
+    }
+
+    @Override
+    public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
+
+    }
+
 
 }
