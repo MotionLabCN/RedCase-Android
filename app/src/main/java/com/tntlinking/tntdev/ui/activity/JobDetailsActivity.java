@@ -46,7 +46,7 @@ public class JobDetailsActivity extends AppActivity {
     private TextView tv_company_size;
     private AppCompatButton btn_recommend_oneself;
     private String mPositionId;
-
+    private Boolean SelfRecommendStatus;
     @Override
     protected int getLayoutId() {
         return R.layout.job_details_activity;
@@ -93,6 +93,7 @@ public class JobDetailsActivity extends AppActivity {
     @Override
     protected void initData() {
         mPositionId = getString("positionId");
+        SelfRecommendStatus=getBoolean("selfRecommendStatus");
         getJobDetails(mPositionId);
         setOnClickListener(btn_recommend_oneself);
 
@@ -106,7 +107,7 @@ public class JobDetailsActivity extends AppActivity {
                     @Override
                     public void onSucceed(HttpData<JobDetailsApi.Bean> data) {
                         if (data.getData() != null) {
-                            if (data.getData().getStatus() == 1) {
+                            if (SelfRecommendStatus== true) {
                                 btn_recommend_oneself.setText("自荐成功");
 
                                 btn_recommend_oneself.setEnabled(false);

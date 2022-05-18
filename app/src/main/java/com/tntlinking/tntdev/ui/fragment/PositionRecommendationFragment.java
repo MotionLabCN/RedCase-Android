@@ -68,6 +68,8 @@ public class PositionRecommendationFragment extends TitleBarFragment<MainActivit
                 GetDeveloperRecommendsApi.Bean item = (GetDeveloperRecommendsApi.Bean) mPositionRecommendationAdapter.getItem(position);
                 Intent intent = new Intent(getActivity(), JobDetailsActivity.class);
                 intent.putExtra("positionId", item.getPositionId());
+                intent.putExtra("selfRecommendStatus", item.getSelfRecommendStatus());
+
                 startActivity(intent);
 
 
