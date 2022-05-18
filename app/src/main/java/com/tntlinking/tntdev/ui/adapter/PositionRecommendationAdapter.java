@@ -2,7 +2,7 @@ package com.tntlinking.tntdev.ui.adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.util.Log;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,25 +10,24 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.flexbox.FlexDirection;
 import com.google.android.flexbox.FlexboxLayoutManager;
 import com.tntlinking.tntdev.R;
 import com.tntlinking.tntdev.http.api.GetDeveloperRecommendsApi;
-import com.tntlinking.tntdev.ui.activity.JobDetailsActivity;
-import com.tntlinking.tntdev.ui.bean.PositionBean;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class PositionRecommendationAdapter extends BaseAdapter {
-    private final List<String> mStringArrayList = new ArrayList<String>();
+    private final List<String> mStringArrayList = new ArrayList<>();
 
     private List<GetDeveloperRecommendsApi.Bean> mList;
     private final LayoutInflater layoutInflater;
-    private Context mContext;
+    private final Context mContext;
     public PositionRecommendationAdapter(Context context, List<GetDeveloperRecommendsApi.Bean> list) {
         this.mContext = context;
         this.mList = list;
@@ -59,10 +58,11 @@ public class PositionRecommendationAdapter extends BaseAdapter {
 
     }
 
-    @SuppressLint({"SetTextI18n", "UseCompatLoadingForDrawables"})
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    @SuppressLint({"SetTextI18n", "UseCompatLoadingForDrawables", "InflateParams"})
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        PositionRecommendationAdapter.ViewHolder holder = null;
+        PositionRecommendationAdapter.ViewHolder holder;
         if (convertView == null) {
             convertView = layoutInflater.inflate(R.layout.position_item, null);
             holder = new ViewHolder();
@@ -91,27 +91,13 @@ public class PositionRecommendationAdapter extends BaseAdapter {
         holder.tv_work_pattern.setText(item.getWorkDaysModeName());
         holder.tv_academic_degree.setText(item.getEducationName());
         holder.tv_work_experience.setText(item.getWorkYearsName());
-
-//        if (item.getSkillNames().size()>2){
-//            holder.tv_job_skills_name.setText(item.getSkillNames().get(0));
-//            holder.tv_job_skills_name2.setText(item.getSkillNames().get(1));
-//            holder.tv_job_skills_name3.setText(item.getSkillNames().get(2));
-//        }else if (item.getSkillNames().size()>1){
-//            holder.tv_job_skills_name.setText(item.getSkillNames().get(0));
-//            holder.tv_job_skills_name2.setText(item.getSkillNames().get(1));
-//        }else if (item.getSkillNames().size()>0){
-//            holder.tv_job_skills_name.setText(item.getSkillNames().get(0));
-//        }else {
-//            holder.tv_job_skills_name.setText(item.getSkillNames().get(0));
-//
-//        }
         holder.tv_salary.setText(item.getStartPay()+"-"+item.getEndPay()+"k·月");
         holder.tv_content.setText(item.getDescription());
        String RealName=item.getCompanyRecruiterRealName().substring(1);
         holder.tv_name.setText(RealName);
         holder.tv_professional_title.setText(item.getCompanyRecruiterRealName()+"·"+item.getCompanyRecruiterPosition());
         holder.tv_company.setText(item.getCompanyName());
-        if (item.getSelfRecommendStatus()==true){
+        if (item.getSelfRecommendStatus()){
             holder.tv_recommend.setVisibility(View.VISIBLE);
             holder.iv_recommend.setVisibility(View.VISIBLE);
 
@@ -120,15 +106,11 @@ public class PositionRecommendationAdapter extends BaseAdapter {
             holder.iv_recommend.setVisibility(View.GONE);
         }
         //将正常的manager替换为FlexboxLayoutManager
-//        FlexboxLayoutManager layoutManager = new FlexboxLayoutManager(mContext);
-//        layoutManager.setFlexDirection(FlexDirection.ROW);//设置水平方向。也可以设置垂直方向
-//        holder.rv_job_requirements.setLayoutManager(layoutManager);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mContext);
-        linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-        holder.rv_job_requirements.setLayoutManager(linearLayoutManager);
-
+        FlexboxLayoutManager layoutManager = new FlexboxLayoutManager(mContext);
+        layoutManager.setFlexDirection(FlexDirection.ROW);//设置水平方向。也可以设置垂直方向
+        holder.rv_job_requirements.setLayoutManager(layoutManager);
         mStringArrayList.clear();
-        mStringArrayList.addAll(item.getSkillNames());
+        mStringArrayList.addAll(item.getSkillNames().stream().limit(3).collect(Collectors.toList()));
         JobRequirementsAdapter adapter = new JobRequirementsAdapter(mContext, mStringArrayList);
         holder.rv_job_requirements.setAdapter(adapter);
         return convertView;
