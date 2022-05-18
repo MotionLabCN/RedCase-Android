@@ -34,7 +34,7 @@ public final class GetDeveloperStatusApi implements IRequestApi {
         private String signContractNum;
         private String profitTotal;
         private int contractStatus;//签约状态 0, "待签约"，1, "签约中" 2, "签约成功" 3, "签约失败"
-
+        private int serviceStatus;// 接单状态 1 可接单 2 不可接单
 
         public int getId() {
             return id;
@@ -210,6 +210,14 @@ public final class GetDeveloperStatusApi implements IRequestApi {
 
         public void setContractStatus(int contractStatus) {
             this.contractStatus = contractStatus;
+        }
+
+        public int getServiceStatus() {
+            return serviceStatus;
+        }
+
+        public void setServiceStatus(int serviceStatus) {
+            this.serviceStatus = serviceStatus;
         }
     }
 }

@@ -51,10 +51,10 @@
                     android:background="@drawable/bg_gray_radius_3"
                     android:gravity="center_vertical"
                     android:orientation="horizontal"
-                    android:paddingLeft="@dimen/dp_8"
-                    android:paddingTop="@dimen/dp_4"
-                    android:paddingRight="@dimen/dp_8"
-                    android:paddingBottom="@dimen/dp_4">
+                    android:paddingLeft="@dimen/dp_9"
+                    android:paddingTop="@dimen/dp_6"
+                    android:paddingRight="@dimen/dp_9"
+                    android:paddingBottom="@dimen/dp_6">
 
 
                     <View
@@ -152,18 +152,17 @@
             android:layout_marginEnd="@dimen/dp_10"
             android:gravity="center"
             android:orientation="horizontal"
-            android:paddingBottom="@dimen/dp_10"
-            android:visibility="gone">
+            android:paddingBottom="@dimen/dp_10">
 
             <TextView
                 android:id="@+id/tv_interview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/bg_interview_top_radius_6"
-                android:paddingLeft="@dimen/dp_8"
-                android:paddingTop="@dimen/dp_4"
-                android:paddingRight="@dimen/dp_8"
-                android:paddingBottom="@dimen/dp_4"
+                android:background="@drawable/bg_interview_radius_3"
+                android:paddingLeft="@dimen/dp_9"
+                android:paddingTop="@dimen/dp_6"
+                android:paddingRight="@dimen/dp_9"
+                android:paddingBottom="@dimen/dp_6"
                 android:text="面试邀约"
                 android:textColor="@color/main_color"
                 android:textSize="@dimen/sp_12" />

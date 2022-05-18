@@ -189,6 +189,7 @@ public final class LoginActivity2 extends AppActivity implements TextView.OnEdit
                         SPUtils.getInstance().put(AppConfig.DEVELOP_STATUS, data.getData().getStatus());
                         SPUtils.getInstance().put(AppConfig.DEVELOP_NAME, data.getData().getRealName());
                         SPUtils.getInstance().put(AppConfig.DEVELOPER_ID, data.getData().getId());
+                        SPUtils.getInstance().put(AppConfig.SERVICE_STATUS,data.getData().getServiceStatus());
                         JPushInterface.setAlias(getActivity(), sequence++, "ttsl_"+data.getData().getId());
                         Set set=new HashSet();
                         set.add("移动开发");

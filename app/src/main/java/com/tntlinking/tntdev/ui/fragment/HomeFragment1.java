@@ -91,7 +91,8 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity> {
     private String[] titles = {"职位推荐", "活动任务"};
     private List<Fragment> fragmentList = new ArrayList<>();
 
-    private int mStatus = 1;// 接单状态 1 默认可接单
+    private int mStatus = SPUtils.getInstance().getInt(AppConfig.SERVICE_STATUS, 1); // 接单状态 1 默认可接单 2 不可接单
+
 
     public static HomeFragment1 newInstance() {
         return new HomeFragment1();
@@ -278,9 +279,22 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity> {
         }
         //切换接单模式
         if (mStatus == 1) {
+            tv_order_switching.setText("可接单");
+            tv_order_switching.setTextColor(getResources().getColor(R.color.main_color));
+            tv_order_switching.setBackground(getResources().getDrawable(R.drawable.bg_blue_stroke));
+            Drawable drawable = getResources().getDrawable(R.drawable.icon_refresh);
+            tv_order_switching.setCompoundDrawablesWithIntrinsicBounds(null, null, drawable, null);
+
             ll_tab.setVisibility(View.VISIBLE);
             ll_task.setVisibility(View.GONE);
+
         } else {
+            tv_order_switching.setText("不接单");
+            tv_order_switching.setTextColor(getResources().getColor(R.color.color_444E64));
+            tv_order_switching.setBackground(getResources().getDrawable(R.drawable.bg_dark_grey_stroke));
+            Drawable drawable = getResources().getDrawable(R.drawable.icon_change_over);
+            tv_order_switching.setCompoundDrawablesWithIntrinsicBounds(null, null, drawable, null);
+
             ll_tab.setVisibility(View.GONE);
             ll_task.setVisibility(View.VISIBLE);
         }
@@ -293,13 +307,20 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity> {
                 .request(new HttpCallback<HttpData<List<GetDeveloperRecommendsApi.Bean>>>(this) {
                     @Override
                     public void onSucceed(HttpData<List<GetDeveloperRecommendsApi.Bean>> data) {
-                        if (data.getData() != null && data.getData().size() != 0) {
-                            ll_tab.setVisibility(View.VISIBLE);
-                            ll_task.setVisibility(View.GONE);
-                        } else {
+                        int mStatus = SPUtils.getInstance().getInt(AppConfig.SERVICE_STATUS, 1);
+                        if (mStatus==1){
+                            if (data.getData() != null && data.getData().size() != 0) {
+                                ll_tab.setVisibility(View.VISIBLE);
+                                ll_task.setVisibility(View.GONE);
+                            } else {
+                                ll_tab.setVisibility(View.GONE);
+                                ll_task.setVisibility(View.VISIBLE);
+                            }
+                        }else {
                             ll_tab.setVisibility(View.GONE);
                             ll_task.setVisibility(View.VISIBLE);
                         }
+
 
                     }
                 });
@@ -373,20 +394,7 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity> {
                 .setOnClickListener(R.id.btn_dialog_custom_cancel, (BaseDialog.OnClickListener<Button>) (dialog, button) -> dialog.dismiss())
                 .setOnClickListener(R.id.btn_dialog_custom_ok, (dialog, views) -> {
 
-                    if (mStatus == 1) {
-                        tv_order_switching.setText("不接单");
-                        tv_order_switching.setTextColor(getResources().getColor(R.color.color_444E64));
-                        tv_order_switching.setBackground(getResources().getDrawable(R.drawable.bg_dark_grey_stroke));
-                        Drawable drawable = getResources().getDrawable(R.drawable.icon_change_over);
-                        tv_order_switching.setCompoundDrawablesWithIntrinsicBounds(null, null, drawable, null);
-                    } else {
-                        tv_order_switching.setText("可接单");
-                        tv_order_switching.setTextColor(getResources().getColor(R.color.main_color));
-                        tv_order_switching.setBackground(getResources().getDrawable(R.drawable.bg_blue_stroke));
-                        Drawable drawable = getResources().getDrawable(R.drawable.icon_refresh);
-                        tv_order_switching.setCompoundDrawablesWithIntrinsicBounds(null, null, drawable, null);
-                    }
-
+                    mStatus = (status == 1) ? 2 : 1;
                     updateServiceStatus(mStatus);
                     dialog.dismiss();
                 }).show();
@@ -404,14 +412,29 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity> {
 
                     @Override
                     public void onSucceed(HttpData<Void> data) {
-                        mStatus = (status == 1) ? 2 : 1;
+                        SPUtils.getInstance().put(AppConfig.SERVICE_STATUS,status);
                         if (mStatus == 1) {
-                            ll_tab.setVisibility(View.VISIBLE);
-                            ll_task.setVisibility(View.GONE);
+                            tv_order_switching.setText("可接单");
+                            tv_order_switching.setTextColor(getResources().getColor(R.color.main_color));
+                            tv_order_switching.setBackground(getResources().getDrawable(R.drawable.bg_blue_stroke));
+                            Drawable drawable = getResources().getDrawable(R.drawable.icon_refresh);
+                            tv_order_switching.setCompoundDrawablesWithIntrinsicBounds(null, null, drawable, null);
+
+//                            ll_tab.setVisibility(View.VISIBLE);
+//                            ll_task.setVisibility(View.GONE);
+
                         } else {
-                            ll_tab.setVisibility(View.GONE);
-                            ll_task.setVisibility(View.VISIBLE);
+                            tv_order_switching.setText("不接单");
+                            tv_order_switching.setTextColor(getResources().getColor(R.color.color_444E64));
+                            tv_order_switching.setBackground(getResources().getDrawable(R.drawable.bg_dark_grey_stroke));
+                            Drawable drawable = getResources().getDrawable(R.drawable.icon_change_over);
+                            tv_order_switching.setCompoundDrawablesWithIntrinsicBounds(null, null, drawable, null);
+
+//                            ll_tab.setVisibility(View.GONE);
+//                            ll_task.setVisibility(View.VISIBLE);
                         }
+
+                        getDeveloper_Recommends();
                     }
                 });
     }
@@ -420,7 +443,6 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity> {
     private List<GetNewbieApi.Bean> mTaskList = new ArrayList<>();
     private List<AppListApi.Bean> mServiceList = new ArrayList<>();
     private List<AppListApi.Bean> mHistoryList = new ArrayList<>();
-
 
 
     /**
