@@ -5,6 +5,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.hjq.http.EasyHttp;
 import com.hjq.http.listener.HttpCallback;
 import com.tntlinking.tntdev.R;
@@ -29,6 +31,7 @@ import java.util.List;
 
 public class PositionRecommendationFragment extends TitleBarFragment<MainActivity> {
     private MyListView lv_position;
+
     private PositionRecommendationAdapter mPositionRecommendationAdapter;
     private List<GetDeveloperRecommendsApi.Bean> mList = new ArrayList<>();
     public static PositionRecommendationFragment newInstance() {
@@ -48,6 +51,12 @@ public class PositionRecommendationFragment extends TitleBarFragment<MainActivit
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        getDeveloper_Recommends();
+    }
+
+    @Override
     protected void initData() {
         getDeveloper_Recommends();
         mPositionRecommendationAdapter = new PositionRecommendationAdapter(getActivity(), mList);
@@ -57,8 +66,6 @@ public class PositionRecommendationFragment extends TitleBarFragment<MainActivit
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 GetDeveloperRecommendsApi.Bean item = (GetDeveloperRecommendsApi.Bean) mPositionRecommendationAdapter.getItem(position);
-                Log.d("mPositionId",">>>1"+item.getPositionId());
-
                 Intent intent = new Intent(getActivity(), JobDetailsActivity.class);
                 intent.putExtra("positionId", item.getPositionId());
                 startActivity(intent);

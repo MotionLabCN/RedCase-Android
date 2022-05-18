@@ -1,10 +1,8 @@
 package com.tntlinking.tntdev.ui.activity;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.graphics.Paint;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.TextView;
@@ -22,7 +20,6 @@ import com.hjq.toast.ToastUtils;
 import com.tntlinking.tntdev.R;
 import com.tntlinking.tntdev.aop.SingleClick;
 import com.tntlinking.tntdev.app.AppActivity;
-import com.tntlinking.tntdev.http.api.GetAddEvaluationPlanApi;
 import com.tntlinking.tntdev.http.api.JobDetailsApi;
 import com.tntlinking.tntdev.http.api.SelfReCommendApi;
 import com.tntlinking.tntdev.http.model.HttpData;
@@ -30,7 +27,6 @@ import com.tntlinking.tntdev.ui.adapter.JobRequirementsAdapter;
 import com.tntlinking.tntdev.ui.adapter.ToolLabelAdapter;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class JobDetailsActivity extends AppActivity {
@@ -38,9 +34,6 @@ public class JobDetailsActivity extends AppActivity {
     private RecyclerView rv_tool_label;
     private final List<String> mStringArrayList = new ArrayList<String>();
     private final List<String> mStringToolLabelArrayList = new ArrayList<String>();
-
-    private final String[] arr = {"Java", "C++", "HTM5", "CSS", "MVC"};
-    private final String[] arr1 = {"微信", "钉钉", "企业微信"};
     private TextView tv_position_name;
     private TextView tv_salary;
     private TextView tv_service_mode;
@@ -113,22 +106,22 @@ public class JobDetailsActivity extends AppActivity {
                     @Override
                     public void onSucceed(HttpData<JobDetailsApi.Bean> data) {
                         if (data.getData() != null) {
-                            if (data.getData().getStatus()==1){
+                            if (data.getData().getStatus() == 1) {
                                 btn_recommend_oneself.setText("自荐成功");
 
                                 btn_recommend_oneself.setEnabled(false);
                                 btn_recommend_oneself.setBackgroundResource(R.drawable.button_grey_circle_selector);
                             }
                             tv_position_name.setText(data.getData().getTitle());
-                            tv_salary.setText(data.getData().getStartPay()+"-"+data.getData().getEndPay()+"k·月");
+                            tv_salary.setText(data.getData().getStartPay() + "-" + data.getData().getEndPay() + "k·月");
                             tv_service_mode.setText(data.getData().getWorkDaysMode());
                             tv_work_experience.setText(data.getData().getWorkYears());
                             tv_academic_degree.setText(data.getData().getTrainingMode());
-                            tv_total_number_of_people.setText(data.getData().getRecruitCount()+"人");
+                            tv_total_number_of_people.setText(data.getData().getRecruitCount() + "人");
                             tv_content.setText(data.getData().getDescription());
                             tv_name.setText(data.getData().getCompany().getShortName());
                             tv_professional_title.setText(data.getData().getCompany().getCompanyName());
-                            tv_company_size.setText(data.getData().getCompany().getIndustry()+"·"+data.getData().getCompany().getPersonSize());
+                            tv_company_size.setText(data.getData().getCompany().getIndustry() + "·" + data.getData().getCompany().getPersonSize());
                             mStringArrayList.clear();
                             mStringArrayList.addAll(data.getData().getSkills());
                             mStringToolLabelArrayList.clear();
@@ -199,7 +192,7 @@ public class JobDetailsActivity extends AppActivity {
                     @SuppressLint({"SetTextI18n", "ResourceType"})
                     @Override
                     public void onSucceed(HttpData<Boolean> data) {
-                        if (data.getData()==true){
+                        if (data.getData() == true) {
                             ToastUtils.show("自荐成功");
                             btn_recommend_oneself.setText("自荐成功");
                             btn_recommend_oneself.setBackgroundResource(R.drawable.button_grey_circle_selector);

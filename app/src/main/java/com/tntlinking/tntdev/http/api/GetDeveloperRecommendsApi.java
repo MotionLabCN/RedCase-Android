@@ -32,7 +32,7 @@ public final class GetDeveloperRecommendsApi implements IRequestApi {
         private List<String> skillNames;
         private String description;
         private String companyName;
-        private String companyRecruiterRealNamel;
+        private String companyRecruiterRealName;
         private String companyRecruiterPosition;
         private Boolean selfRecommendStatus;
 
@@ -111,12 +111,12 @@ public final class GetDeveloperRecommendsApi implements IRequestApi {
             this.companyName = companyName;
         }
 
-        public String getCompanyRecruiterRealNamel() {
-            return companyRecruiterRealNamel;
+        public String getCompanyRecruiterRealName() {
+            return companyRecruiterRealName;
         }
 
-        public void setCompanyRecruiterRealNamel(String companyRecruiterRealNamel) {
-            this.companyRecruiterRealNamel = companyRecruiterRealNamel;
+        public void setCompanyRecruiterRealName(String companyRecruiterRealName) {
+            this.companyRecruiterRealName = companyRecruiterRealName;
         }
 
         public String getCompanyRecruiterPosition() {

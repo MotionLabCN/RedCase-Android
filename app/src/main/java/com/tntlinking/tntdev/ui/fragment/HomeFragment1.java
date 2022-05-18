@@ -1,11 +1,8 @@
 package com.tntlinking.tntdev.ui.fragment;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
-import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,63 +17,43 @@ import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.gyf.immersionbar.ImmersionBar;
 import com.hjq.base.BaseDialog;
-import com.hjq.base.FragmentPagerAdapter;
 import com.hjq.http.EasyHttp;
 
 import com.hjq.http.listener.HttpCallback;
 import com.tntlinking.tntdev.R;
-import com.tntlinking.tntdev.app.AppFragment;
 import com.tntlinking.tntdev.app.TitleBarFragment;
 import com.tntlinking.tntdev.http.api.AppListApi;
-import com.tntlinking.tntdev.http.api.AppListInterviewApi;
 import com.tntlinking.tntdev.http.api.GetAppUpdateApi;
-import com.tntlinking.tntdev.http.api.GetDeveloperJkStatusApi;
 import com.tntlinking.tntdev.http.api.GetDeveloperRecommendsApi;
 import com.tntlinking.tntdev.http.api.GetNewbieApi;
-import com.tntlinking.tntdev.http.api.HistoryListApi;
 import com.tntlinking.tntdev.http.api.UpdateServiceStatusApi;
-import com.tntlinking.tntdev.http.glide.GlideApp;
 import com.tntlinking.tntdev.http.model.HttpData;
 import com.tntlinking.tntdev.other.AppConfig;
 import com.tntlinking.tntdev.other.Utils;
 import com.tntlinking.tntdev.ui.activity.EnterDeveloperActivity;
-import com.tntlinking.tntdev.ui.activity.EvaluationActivity;
-import com.tntlinking.tntdev.ui.activity.EvaluationNeedsTokNowActivity;
-import com.tntlinking.tntdev.ui.activity.EvaluationOutcomeActivity;
 import com.tntlinking.tntdev.ui.activity.InterviewActivity;
-import com.tntlinking.tntdev.ui.activity.InterviewDetailActivity;
-import com.tntlinking.tntdev.ui.activity.LoginActivity2;
-import com.tntlinking.tntdev.ui.activity.JkBrowserActivity;
 import com.tntlinking.tntdev.ui.activity.MDViewActivity;
 import com.tntlinking.tntdev.ui.activity.MainActivity;
 import com.tntlinking.tntdev.ui.activity.PDFViewActivity;
 import com.tntlinking.tntdev.ui.activity.SaveQRActivity;
 import com.tntlinking.tntdev.ui.activity.SignContactActivity;
-import com.tntlinking.tntdev.ui.activity.WriteDailyActivity;
 import com.tntlinking.tntdev.ui.adapter.HistoryProjectAdapter;
 import com.tntlinking.tntdev.ui.adapter.HomeTaskAdapter;
 import com.tntlinking.tntdev.ui.adapter.ServiceProjectAdapter;
-import com.tntlinking.tntdev.ui.adapter.TabAdapter;
 import com.tntlinking.tntdev.ui.bean.BannerBean;
 import com.tntlinking.tntdev.ui.dialog.AppUpdateDialog;
 import com.tntlinking.tntdev.widget.MyListView;
-import com.tntlinking.tntdev.widget.XCollapsingToolbarLayout;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
-import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
-
-import cn.jpush.android.api.JPushInterface;
-import cn.jpush.android.api.JPushMessage;
 
 /**
  * desc   : 首页 Fragment
@@ -284,8 +261,7 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity> {
 
     @Override
     protected void initData() {
-//        getStatus();
-
+        getDeveloper_Recommends();
         getNewbie();
         String status = SPUtils.getInstance().getString(AppConfig.DEVELOP_STATUS, "1");
 
@@ -309,6 +285,24 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity> {
             ll_task.setVisibility(View.VISIBLE);
         }
         getAppUpdate();
+    }
+
+    private void getDeveloper_Recommends() {
+        EasyHttp.get(this)
+                .api(new GetDeveloperRecommendsApi())
+                .request(new HttpCallback<HttpData<List<GetDeveloperRecommendsApi.Bean>>>(this) {
+                    @Override
+                    public void onSucceed(HttpData<List<GetDeveloperRecommendsApi.Bean>> data) {
+                        if (data.getData() != null && data.getData().size() != 0) {
+                            ll_tab.setVisibility(View.VISIBLE);
+                            ll_task.setVisibility(View.GONE);
+                        } else {
+                            ll_tab.setVisibility(View.GONE);
+                            ll_task.setVisibility(View.VISIBLE);
+                        }
+
+                    }
+                });
     }
 
 
