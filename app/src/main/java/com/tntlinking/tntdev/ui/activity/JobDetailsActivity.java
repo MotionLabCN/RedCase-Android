@@ -32,8 +32,8 @@ import java.util.List;
 public class JobDetailsActivity extends AppActivity {
     private RecyclerView rv_job_requirements;
     private RecyclerView rv_tool_label;
-    private final List<String> mStringArrayList = new ArrayList<String>();
-    private final List<String> mStringToolLabelArrayList = new ArrayList<String>();
+    private final List<String> mStringArrayList = new ArrayList<>();
+    private final List<String> mStringToolLabelArrayList = new ArrayList<>();
     private TextView tv_position_name;
     private TextView tv_salary;
     private TextView tv_service_mode;
@@ -91,6 +91,12 @@ public class JobDetailsActivity extends AppActivity {
     }
 
     @Override
+    public void onLeftClick(View view) {
+        setResult(1);
+        finish();
+    }
+
+    @Override
     protected void initData() {
         mPositionId = getString("positionId");
         SelfRecommendStatus=getBoolean("selfRecommendStatus");
@@ -104,10 +110,11 @@ public class JobDetailsActivity extends AppActivity {
                 .api(new JobDetailsApi().setpositionId(mPositionId))
                 .request(new HttpCallback<HttpData<JobDetailsApi.Bean>>(this) {
 
+                    @SuppressLint("SetTextI18n")
                     @Override
                     public void onSucceed(HttpData<JobDetailsApi.Bean> data) {
                         if (data.getData() != null) {
-                            if (SelfRecommendStatus== true) {
+                            if (SelfRecommendStatus) {
                                 btn_recommend_oneself.setText("自荐成功");
 
                                 btn_recommend_oneself.setEnabled(false);
@@ -193,7 +200,7 @@ public class JobDetailsActivity extends AppActivity {
                     @SuppressLint({"SetTextI18n", "ResourceType"})
                     @Override
                     public void onSucceed(HttpData<Boolean> data) {
-                        if (data.getData() == true) {
+                        if (data.getData()) {
                             ToastUtils.show("自荐成功");
                             btn_recommend_oneself.setText("自荐成功");
                             btn_recommend_oneself.setBackgroundResource(R.drawable.button_grey_circle_selector);

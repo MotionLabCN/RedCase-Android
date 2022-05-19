@@ -25,9 +25,10 @@
         <ImageView
             android:layout_width="@dimen/dp_64"
             android:layout_height="@dimen/dp_64"
-            android:src="@drawable/icon_task_empty" />
+            android:src="@drawable/bg_home_work_empty" />
 
         <TextView
+            android:id="@+id/tv_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_10"

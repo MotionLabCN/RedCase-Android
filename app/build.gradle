@@ -284,6 +284,8 @@ dependencies {
 dependencies {
     implementation 'com.huawei.hms:push:6.1.0.300'
     //厂商版本和JPush SDK版本保持一致
+    //仅使用 com.huawei.hms:push:6.1.0.XXX 版本需要加 base 依赖，其他版本不需要
+    implementation 'com.huawei.hms:base:6.2.0.300'
     implementation 'cn.jiguang.sdk.plugin:huawei:4.6.6'
 }
 apply plugin: 'com.huawei.agconnect'

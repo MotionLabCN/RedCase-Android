@@ -262,7 +262,6 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity> {
 
     @Override
     protected void initData() {
-        getDeveloper_Recommends();
         getNewbie();
         String status = SPUtils.getInstance().getString(AppConfig.DEVELOP_STATUS, "1");
 
@@ -420,8 +419,8 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity> {
                             Drawable drawable = getResources().getDrawable(R.drawable.icon_refresh);
                             tv_order_switching.setCompoundDrawablesWithIntrinsicBounds(null, null, drawable, null);
 
-//                            ll_tab.setVisibility(View.VISIBLE);
-//                            ll_task.setVisibility(View.GONE);
+                            ll_tab.setVisibility(View.VISIBLE);
+                            ll_task.setVisibility(View.GONE);
 
                         } else {
                             tv_order_switching.setText("不接单");
@@ -430,11 +429,11 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity> {
                             Drawable drawable = getResources().getDrawable(R.drawable.icon_change_over);
                             tv_order_switching.setCompoundDrawablesWithIntrinsicBounds(null, null, drawable, null);
 
-//                            ll_tab.setVisibility(View.GONE);
-//                            ll_task.setVisibility(View.VISIBLE);
+                            ll_tab.setVisibility(View.GONE);
+                            ll_task.setVisibility(View.VISIBLE);
                         }
 
-                        getDeveloper_Recommends();
+//                        getDeveloper_Recommends();
                     }
                 });
     }
