@@ -24,7 +24,6 @@ import java.util.stream.Collectors;
 
 public class PositionRecommendationAdapter extends BaseAdapter {
     private final List<String> mStringArrayList = new ArrayList<>();
-
     private List<GetDeveloperRecommendsApi.Bean> mList;
     private final LayoutInflater layoutInflater;
     private final Context mContext;
@@ -72,7 +71,6 @@ public class PositionRecommendationAdapter extends BaseAdapter {
             holder.tv_job_skills_name = convertView.findViewById(R.id.tv_job_skills_name);
             holder.tv_job_skills_name2 = convertView.findViewById(R.id.tv_job_skills_name2);
             holder.tv_job_skills_name3 = convertView.findViewById(R.id.tv_job_skills_name3);
-
             holder.tv_academic_degree = convertView.findViewById(R.id.tv_academic_degree);
             holder.tv_work_experience = convertView.findViewById(R.id.tv_work_experience);
             holder.tv_recommend = convertView.findViewById(R.id.tv_recommend);
@@ -83,7 +81,6 @@ public class PositionRecommendationAdapter extends BaseAdapter {
             holder.tv_company = convertView.findViewById(R.id.tv_company);
             holder.iv_recommend = convertView.findViewById(R.id.iv_recommend);
             holder.rv_job_requirements = convertView.findViewById(R.id.rv_job_requirements);
-
             convertView.setTag(holder);
         } else {
             holder = (PositionRecommendationAdapter.ViewHolder) convertView.getTag();
@@ -132,11 +129,8 @@ public class PositionRecommendationAdapter extends BaseAdapter {
         TextView tv_job_skills_name;
         TextView tv_job_skills_name2;
         TextView tv_job_skills_name3;
-
         ImageView iv_recommend;
         RecyclerView rv_job_requirements;
-
-
     }
 
 

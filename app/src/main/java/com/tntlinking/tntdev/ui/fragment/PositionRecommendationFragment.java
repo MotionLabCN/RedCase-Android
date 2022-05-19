@@ -31,7 +31,7 @@ public class PositionRecommendationFragment extends TitleBarFragment<MainActivit
     private TextView tv_name;
     private PositionRecommendationAdapter mPositionRecommendationAdapter;
     private final List<GetDeveloperRecommendsApi.Bean> mList = new ArrayList<>();
-    private final String mStatus=SPUtils.getInstance().getString(AppConfig.DEVELOP_STATUS, "1");;
+    private final String Status=SPUtils.getInstance().getString(AppConfig.DEVELOP_STATUS, "1");;
     public static PositionRecommendationFragment newInstance() {
         return new PositionRecommendationFragment();
     }
@@ -44,19 +44,12 @@ public class PositionRecommendationFragment extends TitleBarFragment<MainActivit
     protected void initView() {
         lv_position = findViewById(R.id.lv_position);
         tv_name = findViewById(R.id.tv_name);
-
         ll_settled_material_empty = findViewById(R.id.ll_settled_material_empty);
-
-
-
     }
-
-
-
     @Override
     protected void initData() {
         //1->待认证  2->待审核   3->审核成功 4->审核失败
-        switch (mStatus) {
+        switch (Status) {
             case "1":
                 lv_position.setVisibility(View.GONE);
                 ll_settled_material_empty.setVisibility(View.VISIBLE);
@@ -75,18 +68,12 @@ public class PositionRecommendationFragment extends TitleBarFragment<MainActivit
         }
         mPositionRecommendationAdapter = new PositionRecommendationAdapter(getActivity(), mList);
         lv_position.setAdapter(mPositionRecommendationAdapter);
-
         lv_position.setOnItemClickListener((parent, view, position, id) -> {
             GetDeveloperRecommendsApi.Bean item = mPositionRecommendationAdapter.getItem(position);
             Intent intent = new Intent(getActivity(), JobDetailsActivity.class);
             intent.putExtra("positionId", item.getPositionId());
             intent.putExtra("selfRecommendStatus", item.getSelfRecommendStatus());
-
             startActivityForResult(intent,1);
-
-
-
-
         });
     }
 
@@ -120,6 +107,5 @@ public class PositionRecommendationFragment extends TitleBarFragment<MainActivit
         if (resultCode==1){
             getDeveloperRecommends();
         }
-
     }
 }
