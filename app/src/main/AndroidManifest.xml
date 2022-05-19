@@ -9,8 +9,7 @@
     <!-- Required  一些系统要求的权限，如访问网络等-->
     <uses-permission android:name="${applicationId}.permission.JPUSH_MESSAGE" />
     <!--华为角标-->
-    <uses-permission
-        android:name="com.huawei.android.launcher.permission.CHANGE_BADGE"/>
+    <uses-permission android:name="com.huawei.android.launcher.permission.CHANGE_BADGE" />
 
     <!--vivo 角标-->
     <uses-permission android:name="com.vivo.notification.permission.BADGE_ICON" />
@@ -22,7 +21,7 @@
     <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
     <uses-permission android:name="android.permission.GET_TASKS" />
-    <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES"/>
+    <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES" />
     <!-- 网络相关 -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
@@ -111,7 +110,7 @@
         tools:ignore="AllowBackup,LockedOrientationActivity"
         tools:replace="android:allowBackup,android:supportsRtl,android:label"
         tools:targetApi="n">
-<!--        tools:replace="android:allowBackup,android:supportsRtl"-->
+        <!--        tools:replace="android:allowBackup,android:supportsRtl"-->
         <uses-library
             android:name="org.apache.http.legacy"
             android:required="false" />
@@ -135,10 +134,10 @@
         <!-- 闪屏页 -->
         <activity
             android:name="com.tntlinking.tntdev.ui.activity.SplashActivity"
+            android:exported="true"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
-            android:theme="@style/SplashTheme"
-            android:exported="true">
+            android:theme="@style/SplashTheme">
 
             <!-- 程序入口 -->
             <intent-filter>
@@ -366,20 +365,20 @@
         <activity
             android:name="com.tntlinking.tntdev.ui.activity.AddWorkActivity"
             android:launchMode="singleTop"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
         <!-- 添加项目经验 -->
         <activity
             android:name="com.tntlinking.tntdev.ui.activity.AddProjectActivity"
             android:launchMode="singleTop"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
         <!-- 添加项目经验 -->
         <activity
             android:name="com.tntlinking.tntdev.ui.activity.AddProjectActivityNew"
             android:launchMode="singleTop"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
         <!-- 标签选择页面-->
         <activity
             android:name="com.tntlinking.tntdev.ui.activity.AddProjectTagActivity"
@@ -564,7 +563,9 @@
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
 
         <!-- For test only 测试状态通知栏，需要打开的Activity -->
-        <activity android:name=".ui.activity.TestActivity" android:exported="false">
+        <activity
+            android:name=".ui.activity.TestActivity"
+            android:exported="false">
             <intent-filter>
                 <action android:name="jpush.testAction" />
                 <category android:name="jpush.testCategory" />
@@ -575,15 +576,15 @@
         <!--User defined.  For test only 继承自cn.jpush.android.service.JCommonService-->
         <service
             android:name=".jpush.PushService"
-            android:process=":pushcore"
-            android:exported="true">
+            android:exported="true"
+            android:process=":pushcore">
             <intent-filter>
                 <action android:name="cn.jiguang.user.service.action" />
             </intent-filter>
         </service>
 
-<!--        &lt;!&ndash; User defined.  For test only  用户自定义接收消息器,3.0.7开始支持,目前新tag/alias接口设置结果会在该广播接收器对应的方法中回调&ndash;&gt;-->
-<!--        &lt;!&ndash;since 3.3.0 接收JPush相关事件&ndash;&gt;-->
+        <!--        &lt;!&ndash; User defined.  For test only  用户自定义接收消息器,3.0.7开始支持,目前新tag/alias接口设置结果会在该广播接收器对应的方法中回调&ndash;&gt;-->
+        <!--        &lt;!&ndash;since 3.3.0 接收JPush相关事件&ndash;&gt;-->
         <receiver android:name=".jpush.PushMessageReceiver">
             <intent-filter>
                 <action android:name="cn.jpush.android.intent.RECEIVE_MESSAGE" />
@@ -660,9 +661,10 @@
             android:name="cn.jpush.android.service.JNotifyActivity"
             android:exported="true"
             android:taskAffinity="jpush.custom"
-            android:theme="@style/JPushTheme" >
+            android:theme="@style/JPushTheme">
             <intent-filter>
                 <action android:name="cn.jpush.android.intent.JNotifyActivity" />
+
                 <category android:name="android.intent.category.DEFAULT" />
 
                 <category android:name="${applicationId}" />
@@ -673,16 +675,19 @@
             android:name="cn.android.service.JTransitActivity"
             android:exported="true"
             android:taskAffinity="jpush.custom"
-            android:theme="@style/JPushTheme" >
+            android:theme="@style/JPushTheme">
             <intent-filter>
                 <action android:name="cn.android.service.JTransitActivity" />
-                <category android:name="android.intent.category.DEFAULT"/>
+
+                <category android:name="android.intent.category.DEFAULT" />
 
                 <category android:name="${applicationId}" />
             </intent-filter>
         </activity>
         <!-- since 3.5.6 新增华硕通道 -->
-        <receiver android:name="cn.jpush.android.asus.AsusPushMessageReceiver" android:exported="false"/>
+        <receiver
+            android:name="cn.jpush.android.asus.AsusPushMessageReceiver"
+            android:exported="false" />
 
         <!-- Required SDK 核心功能 -->
         <!-- 可配置android:process参数将PushService放在其他进程中 -->
@@ -821,13 +826,11 @@
         <!--huawei_config_end-->
 
 
-
-
         <!--oppo_config_start-->
         <service
             android:name="cn.jpush.android.service.PluginOppoPushService"
-            android:permission="com.coloros.mcs.permission.SEND_MCS_MESSAGE"
-            android:exported="true">
+            android:exported="true"
+            android:permission="com.coloros.mcs.permission.SEND_MCS_MESSAGE">
 
             <intent-filter>
                 <action android:name="com.coloros.mcs.action.RECEIVE_MCS_MESSAGE" />
@@ -836,8 +839,8 @@
         <!-- since JPushv3.6.8 ，oppov2.1.0 oppo 核心功能-->
         <service
             android:name="com.heytap.msp.push.service.DataMessageCallbackService"
-            android:permission="com.heytap.mcs.permission.SEND_PUSH_MESSAGE"
-            android:exported="true">
+            android:exported="true"
+            android:permission="com.heytap.mcs.permission.SEND_PUSH_MESSAGE">
 
             <intent-filter>
                 <action android:name="com.heytap.mcs.action.RECEIVE_MCS_MESSAGE" />
@@ -857,7 +860,8 @@
         <!--oppo_config_end-->
 
         <!--vivo_config_start-->
-        <receiver android:name="cn.jpush.android.service.PluginVivoMessageReceiver"
+        <receiver
+            android:name="cn.jpush.android.service.PluginVivoMessageReceiver"
             android:exported="true">
 
             <intent-filter>
@@ -881,8 +885,6 @@
             android:name="com.vivo.push.app_id"
             android:value="${VIVO_APPID}" />
         <!--vivo_config_end-->
-
-
 
 
         <!--Required_config-->

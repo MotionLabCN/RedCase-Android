@@ -160,7 +160,7 @@ android {
 // api 与 implementation 的区别：https://www.jianshu.com/p/8962d6ba936e
     dependencies {
         // 依赖 libs 目录下所有的 jar 和 aar 包
-        implementation fileTree(include: ['*.jar',"*.aar"], dir: 'libs')
+        implementation fileTree(include: ['*.jar', "*.aar"], dir: 'libs')
 
         // 基类封装
         implementation project(':library:base')
