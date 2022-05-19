@@ -820,40 +820,8 @@
         </service>
         <!--huawei_config_end-->
 
-        <!--meizu_config_start-->
-        <receiver android:name="cn.jpush.android.service.PluginMeizuPlatformsReceiver"
-            android:exported="true">
-            <intent-filter>
-                <!-- 接收 push 消息 -->
-                <action android:name="com.meizu.flyme.push.intent.MESSAGE" />
-                <!-- 接收 register 消息 -->
-                <action android:name="com.meizu.flyme.push.intent.REGISTER.FEEDBACK" />
-                <!-- 接收 unregister 消息-->
-                <action android:name="com.meizu.flyme.push.intent.UNREGISTER.FEEDBACK" />
-                <!-- 兼容低版本 Flyme3 推送服务配置 -->
-                <action android:name="com.meizu.c2dm.intent.REGISTRATION" />
-                <action android:name="com.meizu.c2dm.intent.RECEIVE" />
 
-                <category android:name="${applicationId}" />
-            </intent-filter>
-        </receiver>
 
-        <meta-data
-            android:name="MEIZU_APPKEY"
-            android:value="${MEIZU_APPKEY}" />
-        <meta-data
-            android:name="MEIZU_APPID"
-            android:value="${MEIZU_APPID}" />
-        <!--meizu_config_end-->
-
-        <!--fcm_config_start-->
-        <service android:name="cn.jpush.android.service.PluginFCMMessagingService"
-            android:exported="false">
-            <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT" />
-            </intent-filter>
-        </service>
-        <!--fcm_config_end-->
 
         <!--oppo_config_start-->
         <service

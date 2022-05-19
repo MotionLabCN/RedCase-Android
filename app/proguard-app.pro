@@ -19,3 +19,6 @@
 -keepclassmembernames class ** {
     @com.tntlinking.tntdev.aop.Log <methods>;
 }
+
+-dontwarn com.xiaomi.push.**
+-keep class com.xiaomi.push.** { *; }

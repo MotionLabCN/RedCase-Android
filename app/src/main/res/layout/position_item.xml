@@ -36,7 +36,6 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="@dimen/dp_16"
                 android:text="测试工程师"
-
                 android:textSize="@dimen/sp_15"
                 android:textStyle="bold" />
 
@@ -65,9 +64,7 @@
                 android:singleLine="true"
                 android:text="10-11k·月"
                 android:textColor="@color/main_color"
-                android:textStyle="bold"
-
-                />
+                android:textStyle="bold" />
         </LinearLayout>
 
         <LinearLayout
@@ -133,7 +130,6 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="@dimen/dp_10"
                 android:layout_weight="1"
-
                 android:background="@drawable/button_circle_selector_white"
                 android:gravity="center"
                 android:text="java"
@@ -149,7 +145,6 @@
                 android:layout_weight="1"
                 android:background="@drawable/button_circle_selector_white"
                 android:gravity="center"
-
                 android:text="java"
                 android:textSize="@dimen/sp_12"
                 android:visibility="gone" />

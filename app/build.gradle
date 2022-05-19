@@ -1,6 +1,6 @@
-apply plugin : 'com.android.application'
-apply plugin : 'android-aspectjx'
-apply from : '../common.gradle'
+apply plugin: 'com.android.application'
+apply plugin: 'android-aspectjx'
+apply from: '../common.gradle'
 
 // Android 代码规范文档：https://github.com/getActivity/AndroidCodeStandard
 android {
@@ -43,13 +43,13 @@ android {
                 JPUSH_CHANNEL : "default_developer",
                 MEIZU_APPKEY  : "MZ-魅族的APPKEY",
                 MEIZU_APPID   : "MZ-魅族的APPID",
-                XIAOMI_APPID  : "MI-小米的APPID",
-                XIAOMI_APPKEY : "MI-小米的APPKEY",
-                OPPO_APPKEY   : "OP-oppo的APPKEY",
-                OPPO_APPID    : "OP-oppo的APPID",
+                XIAOMI_APPID  : "2882303761520133226",
+                XIAOMI_APPKEY : "5152013340226",
+                OPPO_APPKEY   : "OP-f0bccb3908b844c2a70d22967f2870b3",
+                OPPO_APPID    : "OP-30739381",
                 OPPO_APPSECRET: "OP-oppo的APPSECRET",
-                VIVO_APPKEY   : "vivo的APPKEY",
-                VIVO_APPID    : "vivo的APPID"
+                VIVO_APPKEY   : "3e14d2655dcc83564438fd1721c7cf20",
+                VIVO_APPID    : "105539219"
         ]
     }
     // Apk 签名的那些事：https://www.jianshu.com/p/a1f8e5896aa2
@@ -94,6 +94,8 @@ android {
         preview.initWith(debug)
         preview {
             applicationIdSuffix ''
+            // 代码混淆开关
+            minifyEnabled false
             // 添加清单占位符
             addManifestPlaceholders([
                     'app_name': '天天数链 Preview 版'
@@ -154,11 +156,11 @@ android {
     }
 
 
-
 // 添加构建依赖项：https://developer.android.google.cn/studio/build/dependencies
 // api 与 implementation 的区别：https://www.jianshu.com/p/8962d6ba936e
     dependencies {
-
+        // 依赖 libs 目录下所有的 jar 和 aar 包
+        implementation fileTree(include: ['*.jar',"*.aar"], dir: 'libs')
 
         // 基类封装
         implementation project(':library:base')
@@ -252,6 +254,9 @@ android {
         // flexbox 标签
         implementation 'com.google.android.flexbox:flexbox:3.0.0'
 
+
+        implementation files('libs\\jpush-android-plugin-xiaomi-v4.6.6.jar')
+        implementation files('libs\\MiPush_SDK_Client_4_9_1.jar')
 //        implementation 'cn.jiguang.sdk:jpush:4.6.4'  // 此处以JPush 4.6.4 版本为例。
 //        implementation   'cn.jiguang.sdk:jcore:3.2.4'  // 此处以JCore 3.2.4 版本为例。
         // 多语种：https://github.com/getActivity/MultiLanguages
@@ -277,17 +282,15 @@ android {
 //    //厂商版本和 JPush SDK 版本保持一致
 //    implementation 'cn.jiguang.sdk.plugin:huawei:4.x.x'
 //}
-dependencies {
-    //noinspection GradlePath
-    implementation files('libs\\jcore-android-3.2.4.jar')
-}
+
 dependencies {
     implementation 'com.huawei.hms:push:6.1.0.300'
     //厂商版本和JPush SDK版本保持一致
-    //仅使用 com.huawei.hms:push:6.1.0.XXX 版本需要加 base 依赖，其他版本不需要
-    implementation 'com.huawei.hms:base:6.2.0.300'
     implementation 'cn.jiguang.sdk.plugin:huawei:4.6.6'
+
 }
+
+
 apply plugin: 'com.huawei.agconnect'
 
 

@@ -54,3 +54,12 @@
 -keep class com.hianalytics.android.**{*;}
 -keep class com.huawei.updatesdk.**{*;}
 -keep class com.huawei.hms.**{*;}
+
+-dontwarn com.coloros.mcsdk.**
+-keep class com.coloros.mcsdk.** { *; }
+
+-dontwarn com.heytap.**
+-keep class com.heytap.** { *; }
+
+-dontwarn com.mcs.**
+-keep class com.mcs.** { *; }
