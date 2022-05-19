@@ -34,9 +34,11 @@ public class ActiveTaskFragment extends TitleBarFragment<MainActivity> {
     private MyListView lv_task;
     private HomeTaskAdapter mTaskAdapter;
     private List<GetNewbieApi.Bean> mTaskList = new ArrayList<>();
+
     public static ActiveTaskFragment newInstance() {
         return new ActiveTaskFragment();
     }
+
     @Override
     protected int getLayoutId() {
         return R.layout.active_task_fragment;
@@ -63,7 +65,7 @@ public class ActiveTaskFragment extends TitleBarFragment<MainActivity> {
                 } else if (item.getTaskId() == 3) {//签订协议任务
 
                     String status = SPUtils.getInstance().getString(AppConfig.DEVELOP_STATUS, "1");
-                    if (status.equals("3")){
+                    if (status.equals("3")) {
                         if (item.getTaskStatus() == 0 || item.getTaskStatus() == 1) { //做任务
                             startActivity(SignContactActivity.class);
                         } else if (item.getTaskStatus() == 2) {
@@ -71,7 +73,7 @@ public class ActiveTaskFragment extends TitleBarFragment<MainActivity> {
                                 startActivity(SaveQRActivity.class);
                             }
                         }
-                    }else {
+                    } else {
                         new BaseDialog.Builder<>(getActivity())
                                 .setContentView(R.layout.write_daily_delete_dialog)
                                 .setAnimStyle(BaseDialog.ANIM_SCALE)
@@ -87,7 +89,7 @@ public class ActiveTaskFragment extends TitleBarFragment<MainActivity> {
                                 .show();
                     }
 
-                }else if (item.getTaskId() == 4) {//即可测评
+                } else if (item.getTaskId() == 4) {//即可测评
                     getDeveloperJkStatus();
                 }
             }
@@ -117,8 +119,6 @@ public class ActiveTaskFragment extends TitleBarFragment<MainActivity> {
     }
 
 
-
-
     private void getDeveloperJkStatus() {
         EasyHttp.get(this)
                 .api(new GetDeveloperJkStatusApi())
@@ -133,7 +133,7 @@ public class ActiveTaskFragment extends TitleBarFragment<MainActivity> {
                             startActivity(EvaluationActivity.class);
                         } else if (data.getData() != null && data.getData().getUserPlanStatus() == 0) {
                             startActivity(EvaluationNeedsTokNowActivity.class);
-                        } else  {
+                        } else {
                             JkBrowserActivity.start(getActivity(), data.getData().getPlanUrl());
 
                         }

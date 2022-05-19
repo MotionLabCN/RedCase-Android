@@ -28,6 +28,7 @@ public class PositionRecommendationAdapter extends BaseAdapter {
     private List<GetDeveloperRecommendsApi.Bean> mList;
     private final LayoutInflater layoutInflater;
     private final Context mContext;
+
     public PositionRecommendationAdapter(Context context, List<GetDeveloperRecommendsApi.Bean> list) {
         this.mContext = context;
         this.mList = list;
@@ -92,17 +93,17 @@ public class PositionRecommendationAdapter extends BaseAdapter {
         holder.tv_work_pattern.setText(item.getWorkDaysModeName());
         holder.tv_academic_degree.setText(item.getEducationName());
         holder.tv_work_experience.setText(item.getWorkYearsName());
-        holder.tv_salary.setText(item.getStartPay()+"-"+item.getEndPay()+"k·月");
+        holder.tv_salary.setText(item.getStartPay() + "-" + item.getEndPay() + "k·月");
         holder.tv_content.setText(item.getDescription());
-       String RealName=item.getCompanyRecruiterRealName().substring(1);
+        String RealName = item.getCompanyRecruiterRealName().substring(1);
         holder.tv_name.setText(RealName);
-        holder.tv_professional_title.setText(item.getCompanyRecruiterRealName()+"·"+item.getCompanyRecruiterPosition());
+        holder.tv_professional_title.setText(item.getCompanyRecruiterRealName() + "·" + item.getCompanyRecruiterPosition());
         holder.tv_company.setText(item.getCompanyName());
-        if (item.getSelfRecommendStatus()){
+        if (item.getSelfRecommendStatus()) {
             holder.tv_recommend.setVisibility(View.VISIBLE);
             holder.iv_recommend.setVisibility(View.VISIBLE);
 
-        }else {
+        } else {
             holder.tv_recommend.setVisibility(View.GONE);
             holder.iv_recommend.setVisibility(View.GONE);
         }

@@ -5,7 +5,7 @@ import com.hjq.http.config.IRequestType;
 import com.hjq.http.model.BodyType;
 
 
-public final class UpdateServiceStatusApi implements IRequestApi , IRequestType{
+public final class UpdateServiceStatusApi implements IRequestApi, IRequestType {
 
     @Override
     public String getApi() {

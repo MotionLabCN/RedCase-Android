@@ -12,7 +12,7 @@ public final class GetDeveloperRecommendsApi implements IRequestApi {
         return "developer_recommends/position";
     }
 
-    public final static class Bean implements Serializable{
+    public final static class Bean implements Serializable {
         private String positionId;
         private String title;
         private String workDaysModeName;
@@ -91,8 +91,6 @@ public final class GetDeveloperRecommendsApi implements IRequestApi {
         public void setWorkYearsName(String workYearsName) {
             this.workYearsName = workYearsName;
         }
-
-
 
 
         public String getDescription() {

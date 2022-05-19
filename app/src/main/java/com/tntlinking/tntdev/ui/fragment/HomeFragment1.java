@@ -307,7 +307,7 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity> {
                     @Override
                     public void onSucceed(HttpData<List<GetDeveloperRecommendsApi.Bean>> data) {
                         int mStatus = SPUtils.getInstance().getInt(AppConfig.SERVICE_STATUS, 1);
-                        if (mStatus==1){
+                        if (mStatus == 1) {
                             if (data.getData() != null && data.getData().size() != 0) {
                                 ll_tab.setVisibility(View.VISIBLE);
                                 ll_task.setVisibility(View.GONE);
@@ -315,7 +315,7 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity> {
                                 ll_tab.setVisibility(View.GONE);
                                 ll_task.setVisibility(View.VISIBLE);
                             }
-                        }else {
+                        } else {
                             ll_tab.setVisibility(View.GONE);
                             ll_task.setVisibility(View.VISIBLE);
                         }
@@ -411,7 +411,7 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity> {
 
                     @Override
                     public void onSucceed(HttpData<Void> data) {
-                        SPUtils.getInstance().put(AppConfig.SERVICE_STATUS,status);
+                        SPUtils.getInstance().put(AppConfig.SERVICE_STATUS, status);
                         if (mStatus == 1) {
                             tv_order_switching.setText("可接单");
                             tv_order_switching.setTextColor(getResources().getColor(R.color.main_color));

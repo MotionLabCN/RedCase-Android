@@ -70,7 +70,7 @@ public class PositionRecommendationFragment extends TitleBarFragment<MainActivit
             case "3":
                 lv_position.setVisibility(View.VISIBLE);
                 ll_settled_material_empty.setVisibility(View.GONE);
-                getDeveloper_Recommends();
+                getDeveloperRecommends();
                 break;
         }
         mPositionRecommendationAdapter = new PositionRecommendationAdapter(getActivity(), mList);
@@ -93,7 +93,7 @@ public class PositionRecommendationFragment extends TitleBarFragment<MainActivit
     /**
      * 开发者_推荐
      */
-    private void getDeveloper_Recommends() {
+    private void getDeveloperRecommends() {
         EasyHttp.get(this)
                 .api(new GetDeveloperRecommendsApi())
                 .request(new HttpCallback<HttpData<List<GetDeveloperRecommendsApi.Bean>>>(this) {
@@ -118,7 +118,7 @@ public class PositionRecommendationFragment extends TitleBarFragment<MainActivit
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode==1){
-            getDeveloper_Recommends();
+            getDeveloperRecommends();
         }
 
     }

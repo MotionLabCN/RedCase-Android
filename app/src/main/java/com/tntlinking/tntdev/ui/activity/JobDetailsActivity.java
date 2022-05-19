@@ -47,6 +47,7 @@ public class JobDetailsActivity extends AppActivity {
     private AppCompatButton btn_recommend_oneself;
     private String mPositionId;
     private Boolean SelfRecommendStatus;
+
     @Override
     protected int getLayoutId() {
         return R.layout.job_details_activity;
@@ -99,7 +100,7 @@ public class JobDetailsActivity extends AppActivity {
     @Override
     protected void initData() {
         mPositionId = getString("positionId");
-        SelfRecommendStatus=getBoolean("selfRecommendStatus");
+        SelfRecommendStatus = getBoolean("selfRecommendStatus");
         getJobDetails(mPositionId);
         setOnClickListener(btn_recommend_oneself);
 

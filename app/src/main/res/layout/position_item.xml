@@ -4,195 +4,210 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:descendantFocusability="blocksDescendants"
     android:gravity="center"
     app:shape="rectangle"
     app:shape_radius="@dimen/dp_10"
     app:shape_shadowColor="@color/black25"
     app:shape_shadowSize="20dp"
-    android:descendantFocusability="blocksDescendants"
 
     app:shape_solidColor="@color/white90">
+
     <LinearLayout
-        android:orientation="vertical"
-        android:background="@drawable/bg_grey_stroke"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/dp_16"
         android:layout_marginEnd="@dimen/dp_16"
         android:layout_marginBottom="@dimen/dp_16"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:background="@drawable/bg_grey_stroke"
+        android:orientation="vertical">
 
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_marginTop="@dimen/dp_16"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <TextView
-            android:id="@+id/tv_position_name"
-            android:layout_gravity="center_vertical"
-            android:layout_width="wrap_content"
-            android:layout_marginLeft="@dimen/dp_16"
-            android:textSize="@dimen/sp_15"
-            android:textStyle="bold"
-
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="测试工程师"/>
-        <TextView
-            android:id="@+id/tv_recommend"
+            android:layout_marginTop="@dimen/dp_16"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_position_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/dp_16"
+                android:text="测试工程师"
+
+                android:textSize="@dimen/sp_15"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_recommend"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_6"
+                android:background="@drawable/bg_blue_stroke"
+                android:paddingLeft="@dimen/dp_4"
+                android:paddingTop="@dimen/dp_2"
+                android:paddingRight="@dimen/dp_4"
+                android:paddingBottom="@dimen/dp_2"
+                android:text="已自荐"
+                android:textColor="@color/main_color"
+                android:textSize="@dimen/sp_10" />
+
+            <TextView
+                android:id="@+id/tv_salary"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/dp_16"
+                android:layout_weight="1"
+                android:gravity="right"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:text="10-11k·月"
+                android:textColor="@color/main_color"
+                android:textStyle="bold"
+
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_10"
+            android:orientation="horizontal"
+            tools:ignore="UselessLeaf" />
+
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/dp_6"
-            android:background="@drawable/bg_blue_stroke"
-            android:paddingLeft="@dimen/dp_4"
-            android:paddingTop="@dimen/dp_2"
-            android:paddingRight="@dimen/dp_4"
-            android:paddingBottom="@dimen/dp_2"
-            android:text="已自荐"
-            android:textColor="@color/main_color"
-            android:textSize="@dimen/sp_10" />
-        <TextView
-            android:id="@+id/tv_salary"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="10-11k·月"
-            android:layout_weight="1"
-            android:maxLines="1"
-            android:singleLine="true"
-            android:layout_marginEnd="@dimen/dp_16"
-            android:gravity="right"
-            android:textColor="@color/main_color"
-            android:textStyle="bold"
+            android:layout_marginTop="@dimen/dp_8"
+            android:orientation="horizontal">
 
-             />
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_marginTop="@dimen/dp_10"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        tools:ignore="UselessLeaf" />
+            <TextView
+                android:id="@+id/tv_work_pattern"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/dp_21"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/dp_16"
+                android:layout_weight="1"
+                android:background="@drawable/button_circle_selector_white"
+                android:gravity="center"
+                android:paddingLeft="@dimen/dp_3"
+                android:paddingEnd="@dimen/dp_3"
+                android:text="全日"
+                android:textSize="@dimen/sp_12" />
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_marginTop="@dimen/dp_8"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <TextView
-            android:id="@+id/tv_work_pattern"
-            android:layout_gravity="center_vertical"
-            android:layout_width="wrap_content"
-            android:layout_marginLeft="@dimen/dp_16"
-            android:textSize="@dimen/sp_12"
-            android:paddingLeft="@dimen/dp_3"
-            android:paddingEnd="@dimen/dp_3"
-            android:gravity="center"
-            android:background="@drawable/button_circle_selector_white"
-            android:layout_weight="1"
-            android:layout_height="@dimen/dp_21"
-            android:text="全日"/>
-        <TextView
-            android:id="@+id/tv_academic_degree"
-            android:layout_gravity="center_vertical"
-            android:layout_width="wrap_content"
-            android:textSize="@dimen/sp_12"
-            android:layout_weight="1"
-            android:paddingLeft="@dimen/dp_3"
-            android:paddingEnd="@dimen/dp_3"
-            android:layout_marginLeft="@dimen/dp_10"
-            android:background="@drawable/button_circle_selector_white"
-            android:gravity="center"
-            android:layout_height="@dimen/dp_21"
-            android:text="大专"/>
-        <TextView
-            android:id="@+id/tv_work_experience"
-            android:layout_gravity="center_vertical"
-            android:layout_width="wrap_content"
-            android:textSize="@dimen/sp_12"
-            android:layout_weight="1"
-            android:paddingLeft="@dimen/dp_3"
-            android:paddingEnd="@dimen/dp_3"
-            android:background="@drawable/button_circle_selector_white"
-            android:gravity="center"
-            android:layout_marginLeft="@dimen/dp_10"
+            <TextView
+                android:id="@+id/tv_academic_degree"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/dp_21"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:layout_weight="1"
+                android:background="@drawable/button_circle_selector_white"
+                android:gravity="center"
+                android:paddingLeft="@dimen/dp_3"
+                android:paddingEnd="@dimen/dp_3"
+                android:text="大专"
+                android:textSize="@dimen/sp_12" />
 
-            android:layout_height="@dimen/dp_21"
-            android:text="3年经验"/>
-        <TextView
-            android:id="@+id/tv_job_skills_name"
-            android:layout_gravity="center_vertical"
-            android:layout_width="wrap_content"
-            android:textSize="@dimen/sp_12"
-            android:layout_weight="1"
-            android:visibility="gone"
+            <TextView
+                android:id="@+id/tv_work_experience"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/dp_21"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:layout_weight="1"
+                android:background="@drawable/button_circle_selector_white"
+                android:gravity="center"
+                android:paddingLeft="@dimen/dp_3"
+                android:paddingEnd="@dimen/dp_3"
 
-            android:background="@drawable/button_circle_selector_white"
-            android:gravity="center"
-            android:layout_marginLeft="@dimen/dp_10"
-            android:layout_height="@dimen/dp_21"
-            android:text="java"/>
-        <TextView
-            android:id="@+id/tv_job_skills_name2"
-            android:layout_gravity="center_vertical"
-            android:layout_width="wrap_content"
-            android:textSize="@dimen/sp_12"
-            android:layout_weight="1"
-            android:background="@drawable/button_circle_selector_white"
-            android:gravity="center"
-            android:visibility="gone"
+                android:text="3年经验"
+                android:textSize="@dimen/sp_12" />
 
-            android:layout_marginLeft="@dimen/dp_10"
-            android:layout_height="@dimen/dp_21"
-            android:text="java"/>
-        <TextView
-            android:id="@+id/tv_job_skills_name3"
-            android:layout_gravity="center_vertical"
-            android:layout_width="wrap_content"
-            android:textSize="@dimen/sp_12"
-            android:layout_weight="1"
-            android:visibility="gone"
-            android:background="@drawable/button_circle_selector_white"
-            android:gravity="center"
-            android:layout_marginLeft="@dimen/dp_10"
-            android:layout_height="@dimen/dp_21"
-            android:text="java"/>
+            <TextView
+                android:id="@+id/tv_job_skills_name"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/dp_21"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:layout_weight="1"
+
+                android:background="@drawable/button_circle_selector_white"
+                android:gravity="center"
+                android:text="java"
+                android:textSize="@dimen/sp_12"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/tv_job_skills_name2"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/dp_21"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:layout_weight="1"
+                android:background="@drawable/button_circle_selector_white"
+                android:gravity="center"
+
+                android:text="java"
+                android:textSize="@dimen/sp_12"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/tv_job_skills_name3"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/dp_21"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:layout_weight="1"
+                android:background="@drawable/button_circle_selector_white"
+                android:gravity="center"
+                android:text="java"
+                android:textSize="@dimen/sp_12"
+                android:visibility="gone" />
 
 
-    </LinearLayout>
+        </LinearLayout>
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_job_requirements"
             android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginEnd="@dimen/dp_16"
             android:layout_weight="1"
             android:visibility="visible"
-            android:layout_marginTop="@dimen/dp_10"
-            android:layout_marginLeft="@dimen/dp_10"
-            android:layout_marginEnd="@dimen/dp_16"
-            android:layout_height="wrap_content"
             tools:ignore="InefficientWeight" />
-    <TextView
-        android:id="@+id/tv_content"
-        android:layout_gravity="center_vertical"
-        android:layout_width="wrap_content"
-        android:layout_marginLeft="@dimen/dp_16"
-        android:layout_marginTop="@dimen/dp_10"
-        android:textSize="@dimen/sp_13"
-        android:layout_height="wrap_content"
-        android:textColor="@color/color_7E89A3"
-        android:text="1.负责产品的核心功能和模块的代码编写...."/>
+
+        <TextView
+            android:id="@+id/tv_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/dp_16"
+            android:layout_marginTop="@dimen/dp_10"
+            android:text="1.负责产品的核心功能和模块的代码编写...."
+            android:textColor="@color/color_7E89A3"
+            android:textSize="@dimen/sp_13" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_10"
             android:layout_marginBottom="@dimen/dp_16"
             android:orientation="horizontal">
+
             <TextView
                 android:id="@+id/tv_name"
                 android:layout_width="@dimen/dp_34"
                 android:layout_height="@dimen/dp_34"
+                android:layout_marginLeft="@dimen/dp_16"
                 android:layout_marginTop="@dimen/dp_10"
                 android:background="@drawable/avatar_oval_black"
                 android:ellipsize="end"
                 android:gravity="center"
-                android:layout_marginLeft="@dimen/dp_16"
                 android:singleLine="true"
                 android:text="测试"
                 android:textColor="@color/white"
@@ -200,46 +215,49 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_marginTop="@dimen/dp_10"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_10"
                 android:orientation="vertical">
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     tools:ignore="UseCompoundDrawables">
+
                     <TextView
                         android:id="@+id/tv_professional_title"
                         android:layout_width="wrap_content"
-                        android:layout_marginLeft="@dimen/dp_10"
-                        android:textSize="@dimen/sp_13"
-                        android:gravity="center"
-                        android:textColor="@color/color_444E64"
                         android:layout_height="wrap_content"
-                        android:text="柏鑫·技术总监"/>
+                        android:layout_marginLeft="@dimen/dp_10"
+                        android:gravity="center"
+                        android:text="柏鑫·技术总监"
+                        android:textColor="@color/color_444E64"
+                        android:textSize="@dimen/sp_13" />
 
                     <ImageView
                         android:id="@+id/iv_recommend"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:visibility="gone"
                         android:layout_marginLeft="@dimen/dp_4"
-                        android:src="@drawable/icon_run_recommend" />
+                        android:src="@drawable/icon_run_recommend"
+                        android:visibility="gone" />
 
                 </LinearLayout>
+
                 <TextView
                     android:id="@+id/tv_company"
-                    android:layout_gravity="center_vertical"
                     android:layout_width="wrap_content"
-                    android:textSize="@dimen/sp_12"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
                     android:layout_marginLeft="@dimen/dp_10"
                     android:layout_marginTop="@dimen/dp_3"
+                    android:text="黄焖鸡科技有限公司"
                     android:textColor="@color/color_7E89A3"
-                    android:layout_height="wrap_content"
-                    android:text="黄焖鸡科技有限公司"/>
-                </LinearLayout>
+                    android:textSize="@dimen/sp_12" />
+            </LinearLayout>
 
         </LinearLayout>
-</LinearLayout>
+    </LinearLayout>
 </com.hjq.shape.layout.ShapeFrameLayout>

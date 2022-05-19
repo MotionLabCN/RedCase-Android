@@ -20,10 +20,12 @@ import java.util.List;
 public class JobRequirementsAdapter extends RecyclerView.Adapter<JobRequirementsAdapter.FlexboxAdapterHolder> {
     Context mContext;
     private final List<String> mStringArrayList;
+
     public JobRequirementsAdapter(Context context, List<String> list) {
         this.mContext = context;
-        this.mStringArrayList= list;
+        this.mStringArrayList = list;
     }
+
     @NonNull
     @Override
     public FlexboxAdapterHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

@@ -129,7 +129,7 @@ public final class MineFragment1 extends TitleBarFragment<MainActivity> {
                             startActivity(EvaluationActivity.class);
                         } else if (data.getData() != null && data.getData().getUserPlanStatus() == 0) {
                             startActivity(EvaluationNeedsTokNowActivity.class);
-                        } else  {
+                        } else {
                             JkBrowserActivity.start(getActivity(), data.getData().getPlanUrl());
 
                         }
@@ -165,6 +165,7 @@ public final class MineFragment1 extends TitleBarFragment<MainActivity> {
         }
 
     }
+
     @NonNull
     @Override
     protected ImmersionBar createStatusBarConfig() {

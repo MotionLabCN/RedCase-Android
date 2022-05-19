@@ -19,10 +19,12 @@ import java.util.List;
 public class ToolLabelAdapter extends RecyclerView.Adapter<ToolLabelAdapter.FlexboxAdapterHolder> {
     Context mContext;
     private final List<String> mStringToolLabelArrayList;
+
     public ToolLabelAdapter(Context context, List<String> list) {
         this.mContext = context;
-        this.mStringToolLabelArrayList= list;
+        this.mStringToolLabelArrayList = list;
     }
+
     @NonNull
     @Override
     public FlexboxAdapterHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
