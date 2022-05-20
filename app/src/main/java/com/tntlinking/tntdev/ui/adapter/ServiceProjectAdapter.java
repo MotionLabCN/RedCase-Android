@@ -82,7 +82,7 @@ public final class ServiceProjectAdapter extends BaseAdapter {
             holder.tv_position_name.setText(item.getPositionName());
             holder.tv_company_name.setText(item.getCompanyName());
             holder.tv_work_info.setText(item.getWorkDaysModeName() + " | " + Utils.getYearFromDate(item.getWorkStartDate()) + "—" + Utils.getYearFromDate(item.getFinishDate()));
-            holder.tv_status.setText(item.getServiceName());
+            holder.tv_status.setText(item.getStatusName());
             holder.view_line.setVisibility(View.VISIBLE);
             holder.tv_order_id.setVisibility(View.VISIBLE);
             holder.ll_detail.setVisibility(View.GONE);
@@ -112,12 +112,18 @@ public final class ServiceProjectAdapter extends BaseAdapter {
             if (item.getInterviewTimeType().equals("今日面试")) {
                 holder.tv_status.setText(item.getInterviewTimeType());
                 holder.tv_interview.setVisibility(View.VISIBLE);
+                holder.view_dot.setBackground(mContext.getDrawable(R.drawable.dot_oval_green));
+                holder.ll_status.setBackground(mContext.getDrawable(R.drawable.bg_green_radius_3));
+                holder.tv_status.setTextColor(mContext.getResources().getColor(R.color.color_5CE28A));
+            } else if (!item.getInterviewTimeType().equals("今日面试")) {
+                holder.tv_status.setText("等待面试");
+                holder.tv_interview.setVisibility(View.VISIBLE);
                 holder.view_dot.setBackground(mContext.getDrawable(R.drawable.dot_oval_red));
                 holder.ll_status.setBackground(mContext.getDrawable(R.drawable.bg_red_radius_3));
                 holder.tv_status.setTextColor(mContext.getResources().getColor(R.color.color_F5313D));
-            } else {
+            }else  if (TextUtils.isEmpty(item.getInterviewTimeType())) {
                 holder.tv_interview.setVisibility(View.GONE);
-                holder.ll_status.setVisibility(View.GONE);
+//                holder.ll_status.setVisibility(View.GONE);
             }
         }
 

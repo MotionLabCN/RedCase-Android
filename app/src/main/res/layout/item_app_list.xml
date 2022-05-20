@@ -16,6 +16,7 @@
         android:layout_marginStart="@dimen/dp_16"
         android:layout_marginEnd="@dimen/dp_16"
         android:layout_marginBottom="@dimen/dp_10"
+        android:layout_marginTop="@dimen/dp_10"
         android:background="@drawable/bg_grey_stroke"
         android:orientation="vertical">
 

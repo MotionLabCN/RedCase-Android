@@ -27,7 +27,6 @@ public class PositionRecommendationAdapter extends BaseAdapter {
     private List<GetDeveloperRecommendsApi.Bean> mList;
     private final LayoutInflater layoutInflater;
     private final Context mContext;
-
     public PositionRecommendationAdapter(Context context, List<GetDeveloperRecommendsApi.Bean> list) {
         this.mContext = context;
         this.mList = list;

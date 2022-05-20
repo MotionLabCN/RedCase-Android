@@ -9,7 +9,6 @@
     android:orientation="vertical">
 
     <com.hjq.bar.TitleBar
-        android:id="@+id/title_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:leftIcon="@drawable/icon_back_black"
@@ -214,8 +213,8 @@
 
                 <TextView
                     android:id="@+id/tv_name"
-                    android:layout_width="@dimen/dp_48"
-                    android:layout_height="@dimen/dp_48"
+                    android:layout_width="60dp"
+                    android:layout_height="62dp"
                     android:layout_gravity="center"
                     android:layout_marginLeft="@dimen/dp_16"
                     android:background="@drawable/avatar_oval_black"
@@ -289,26 +288,16 @@
         </LinearLayout>
     </ScrollView>
 
-    <LinearLayout
-        android:id="@+id/ll_evaluating"
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_recommend_oneself"
+        style="@style/ButtonStyle"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_119"
-        android:layout_marginVertical="@dimen/dp_10"
-        android:layout_marginTop="@dimen/dp_23"
-        android:orientation="vertical">
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_recommend_oneself"
-            style="@style/ButtonStyle"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_53"
-            android:layout_alignParentBottom="true"
-            android:layout_marginHorizontal="@dimen/dp_16"
-            android:layout_marginVertical="@dimen/dp_20"
-            android:layout_marginBottom="@dimen/dp_50"
-            android:text="@string/setting_recommend_yourself_immediately"
-            android:textColor="@color/common_primary_color"
-            tools:ignore="ObsoleteLayoutParam" />
-
-    </LinearLayout>
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginHorizontal="@dimen/dp_16"
+        android:layout_marginVertical="@dimen/dp_20"
+        android:layout_marginBottom="@dimen/dp_16"
+        android:text="@string/setting_recommend_yourself_immediately"
+        android:textColor="@color/common_primary_color"
+        tools:ignore="ObsoleteLayoutParam" />
 </LinearLayout>

@@ -122,7 +122,7 @@ public class JobDetailsActivity extends AppActivity {
                                 btn_recommend_oneself.setBackgroundResource(R.drawable.button_grey_circle_selector);
                             }
                             tv_position_name.setText(data.getData().getTitle());
-                            tv_salary.setText(data.getData().getStartPay() + "-" + data.getData().getEndPay() + "k·月");
+                            tv_salary.setText(data.getData().getStartPay() + "-" + data.getData().getEndPay() + "k/月");
                             tv_service_mode.setText(data.getData().getWorkDaysMode());
                             tv_work_experience.setText(data.getData().getWorkYears());
                             tv_academic_degree.setText(data.getData().getTrainingMode());
