@@ -27,6 +27,7 @@ public class PositionRecommendationAdapter extends BaseAdapter {
     private List<GetDeveloperRecommendsApi.Bean> mList;
     private final LayoutInflater layoutInflater;
     private final Context mContext;
+
     public PositionRecommendationAdapter(Context context, List<GetDeveloperRecommendsApi.Bean> list) {
         this.mContext = context;
         this.mList = list;
@@ -84,41 +85,41 @@ public class PositionRecommendationAdapter extends BaseAdapter {
         } else {
             holder = (PositionRecommendationAdapter.ViewHolder) convertView.getTag();
         }
-        if (mList.size() > 0) {
-            GetDeveloperRecommendsApi.Bean item = mList.get(position);
-            holder.tv_position_name.setText(item.getTitle());
-            holder.tv_work_pattern.setText(item.getWorkDaysModeName());
-            holder.tv_academic_degree.setText(item.getEducationName());
-            holder.tv_work_experience.setText(item.getWorkYearsName());
-            holder.tv_salary.setText(item.getStartPay() + "-" + item.getEndPay() + "k·月");
-            holder.tv_content.setText(item.getDescription());
-            if (item.getCompanyRecruiterRealName() != null && item.getCompanyRecruiterRealName().length() > 2) {
-                String RealName = item.getCompanyRecruiterRealName().substring(1);
-                holder.tv_name.setText(RealName);
-            } else {
-                holder.tv_name.setText(item.getCompanyRecruiterRealName());
-            }
-            holder.tv_professional_title.setText(item.getCompanyRecruiterRealName() + "·" + item.getCompanyRecruiterPosition());
-            holder.tv_company.setText(item.getCompanyName());
-            if (item.getSelfRecommendStatus()) {
-                holder.tv_recommend.setVisibility(View.VISIBLE);
-            } else {
-                holder.tv_recommend.setVisibility(View.GONE);
-            }
-            if (item.getRecommendByOperate()) {
-                holder.iv_recommend.setVisibility(View.VISIBLE);
-            } else {
-                holder.iv_recommend.setVisibility(View.GONE);
-            }
-            //将正常的manager替换为FlexboxLayoutManager
-            FlexboxLayoutManager layoutManager = new FlexboxLayoutManager(mContext);
-            layoutManager.setFlexDirection(FlexDirection.ROW);//设置水平方向。也可以设置垂直方向
-            holder.rv_job_requirements.setLayoutManager(layoutManager);
-            mStringArrayList.clear();
-            mStringArrayList.addAll(item.getSkillNames().stream().limit(3).collect(Collectors.toList()));
-            JobRequirementsAdapter adapter = new JobRequirementsAdapter(mContext, mStringArrayList);
-            holder.rv_job_requirements.setAdapter(adapter);
+
+        GetDeveloperRecommendsApi.Bean item = mList.get(position);
+        holder.tv_position_name.setText(item.getTitle());
+        holder.tv_work_pattern.setText(item.getWorkDaysModeName());
+        holder.tv_academic_degree.setText(item.getEducationName());
+        holder.tv_work_experience.setText(item.getWorkYearsName());
+        holder.tv_salary.setText(item.getStartPay() + "-" + item.getEndPay() + "k·月");
+        holder.tv_content.setText(item.getDescription());
+        if (item.getCompanyRecruiterRealName() != null && item.getCompanyRecruiterRealName().length() > 2) {
+            String RealName = item.getCompanyRecruiterRealName().substring(1);
+            holder.tv_name.setText(RealName);
+        } else {
+            holder.tv_name.setText(item.getCompanyRecruiterRealName());
         }
+        holder.tv_professional_title.setText(item.getCompanyRecruiterRealName() + "·" + item.getCompanyRecruiterPosition());
+        holder.tv_company.setText(item.getCompanyName());
+        if (item.getSelfRecommendStatus()) {
+            holder.tv_recommend.setVisibility(View.VISIBLE);
+        } else {
+            holder.tv_recommend.setVisibility(View.GONE);
+        }
+        if (item.getRecommendByOperate()) {
+            holder.iv_recommend.setVisibility(View.VISIBLE);
+        } else {
+            holder.iv_recommend.setVisibility(View.GONE);
+        }
+        //将正常的manager替换为FlexboxLayoutManager
+        FlexboxLayoutManager layoutManager = new FlexboxLayoutManager(mContext);
+        layoutManager.setFlexDirection(FlexDirection.ROW);//设置水平方向。也可以设置垂直方向
+        holder.rv_job_requirements.setLayoutManager(layoutManager);
+        mStringArrayList.clear();
+        mStringArrayList.addAll(item.getSkillNames().stream().limit(3).collect(Collectors.toList()));
+        JobRequirementsAdapter adapter = new JobRequirementsAdapter(mContext, mStringArrayList);
+        holder.rv_job_requirements.setAdapter(adapter);
+
 
         return convertView;
     }
