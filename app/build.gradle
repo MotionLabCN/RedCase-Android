@@ -41,13 +41,11 @@ android {
                 JPUSH_PKGNAME : defaultConfig.applicationId,
                 JPUSH_APPKEY  : "0cdfdc2a82ef9c205085b60e",//值来自开发者平台取得的AppKey
                 JPUSH_CHANNEL : "default_developer",
-                MEIZU_APPKEY  : "MZ-魅族的APPKEY",
-                MEIZU_APPID   : "MZ-魅族的APPID",
-                XIAOMI_APPID  : "2882303761520133226",
-                XIAOMI_APPKEY : "5152013340226",
+                XIAOMI_APPID  : "MI-2882303761520133226",
+                XIAOMI_APPKEY : "MI-5152013340226",
                 OPPO_APPKEY   : "OP-f0bccb3908b844c2a70d22967f2870b3",
                 OPPO_APPID    : "OP-30739381",
-                OPPO_APPSECRET: "OP-oppo的APPSECRET",
+                OPPO_APPSECRET: "OP-d2b63d06280f443b8e0b2f53a89679d9",
                 VIVO_APPKEY   : "3e14d2655dcc83564438fd1721c7cf20",
                 VIVO_APPID    : "105539219"
         ]
@@ -81,7 +79,7 @@ android {
             signingConfig signingConfigs.config
             // 添加清单占位符
             addManifestPlaceholders([
-                    'app_name': '天天数链 Debug 版'
+                    'app_name': '@string/app_name_debug'
             ])
 
 
@@ -98,7 +96,8 @@ android {
             minifyEnabled false
             // 添加清单占位符
             addManifestPlaceholders([
-                    'app_name': '天天数链 Preview 版'
+                    'app_name': '@string/app_name_preview'
+
             ])
         }
 
@@ -159,8 +158,7 @@ android {
 // 添加构建依赖项：https://developer.android.google.cn/studio/build/dependencies
 // api 与 implementation 的区别：https://www.jianshu.com/p/8962d6ba936e
     dependencies {
-        // 依赖 libs 目录下所有的 jar 和 aar 包
-        implementation fileTree(include: ['*.jar', "*.aar"], dir: 'libs')
+
 
         // 基类封装
         implementation project(':library:base')
@@ -255,8 +253,8 @@ android {
         implementation 'com.google.android.flexbox:flexbox:3.0.0'
 
 
-        implementation files('libs\\jpush-android-plugin-xiaomi-v4.6.6.jar')
-        implementation files('libs\\MiPush_SDK_Client_4_9_1.jar')
+//        implementation files('libs\\jpush-android-plugin-xiaomi-v4.6.6.jar')
+//        implementation files('libs\\MiPush_SDK_Client_4_9_1.jar')
 //        implementation 'cn.jiguang.sdk:jpush:4.6.4'  // 此处以JPush 4.6.4 版本为例。
 //        implementation   'cn.jiguang.sdk:jcore:3.2.4'  // 此处以JCore 3.2.4 版本为例。
         // 多语种：https://github.com/getActivity/MultiLanguages
@@ -272,6 +270,7 @@ android {
         // 设备唯一标识：http://msa-alliance.cn/col.jsp?id=120
         // 嵌套滚动容器：https://github.com/donkingliang/ConsecutiveScroller
         // 隐私调用监控：https://github.com/huage2580/PermissionMonitor
+
     }
 }
 //dependencies {

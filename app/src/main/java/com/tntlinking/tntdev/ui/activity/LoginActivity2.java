@@ -191,13 +191,6 @@ public final class LoginActivity2 extends AppActivity implements TextView.OnEdit
                         SPUtils.getInstance().put(AppConfig.DEVELOPER_ID, data.getData().getId());
                         SPUtils.getInstance().put(AppConfig.SERVICE_STATUS,data.getData().getServiceStatus());
                         JPushInterface.setAlias(getActivity(), sequence++, "ttsl_"+data.getData().getId());
-                        Set set=new HashSet();
-                        set.add("移动开发");
-                        JPushInterface.setTags(getActivity(),sequence++,set);
-                        android.util.Log.d("Tags",">>>"+new JPushMessage().getTags());
-                        android.util.Log.d("alias",">>>"+new JPushMessage().getAlias());
-                        Log.d("RegistrationID",">>>"+JPushInterface.getRegistrationID(getActivity()));
-
                         startActivity(MainActivity.class);
                         ActivityManager.getInstance().finishAllActivities();
                     }

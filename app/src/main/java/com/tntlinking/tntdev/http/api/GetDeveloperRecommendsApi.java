@@ -21,6 +21,15 @@ public final class GetDeveloperRecommendsApi implements IRequestApi {
         private String educationName;
         private String workYearsName;
 
+        public Boolean getRecommendByOperate() {
+            return recommendByOperate;
+        }
+
+        public void setRecommendByOperate(Boolean recommendByOperate) {
+            this.recommendByOperate = recommendByOperate;
+        }
+
+        private Boolean recommendByOperate;
         public List<String> getSkillNames() {
             return skillNames;
         }

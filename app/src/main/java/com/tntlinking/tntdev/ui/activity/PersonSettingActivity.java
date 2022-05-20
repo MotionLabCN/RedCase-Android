@@ -21,11 +21,14 @@ import com.hjq.widget.layout.SettingBar;
 
 import androidx.appcompat.widget.AppCompatButton;
 
+import cn.jpush.android.api.JPushInterface;
+
 public final class PersonSettingActivity extends AppActivity {
 
     private AppCompatButton mOutLogin;
     private SettingBar mSettingPhone;
     private SettingBar mSettingCancelService;
+    private static int sequence = 1;
 
 
     @Override
@@ -80,6 +83,8 @@ public final class PersonSettingActivity extends AppActivity {
                     .setText(R.id.tv_title, "是否退出登录？")
                     .setOnClickListener(R.id.btn_dialog_custom_cancel, (BaseDialog.OnClickListener<Button>) (dialog, button) -> dialog.dismiss())
                     .setOnClickListener(R.id.btn_dialog_custom_ok, (dialog, views) -> {
+                        //删除极光推送别名
+                        JPushInterface.deleteAlias(PersonSettingActivity.this, sequence++);
                         loginOut(dialog);
                     })
                     .show();
