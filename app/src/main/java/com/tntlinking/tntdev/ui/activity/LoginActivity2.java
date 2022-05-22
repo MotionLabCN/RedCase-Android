@@ -3,6 +3,7 @@ package com.tntlinking.tntdev.ui.activity;
 import android.content.Intent;
 import android.os.Build;
 import android.text.style.ClickableSpan;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.animation.AnimationUtils;
@@ -36,6 +37,12 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatCheckBox;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import cn.jpush.android.api.JPushInterface;
+import cn.jpush.android.api.JPushMessage;
+
 /**
  * desc   : 登录界面
  */
@@ -48,6 +55,7 @@ public final class LoginActivity2 extends AppActivity implements TextView.OnEdit
     private AppCompatCheckBox cb_deal;
     private TextView tv_deal;
     private boolean hasChecked = false;//默认条款是已选择状态
+    private static int sequence = 1;
 
     @Override
     protected int getLayoutId() {
@@ -181,14 +189,9 @@ public final class LoginActivity2 extends AppActivity implements TextView.OnEdit
                         SPUtils.getInstance().put(AppConfig.DEVELOP_STATUS, data.getData().getStatus());
                         SPUtils.getInstance().put(AppConfig.DEVELOP_NAME, data.getData().getRealName());
                         SPUtils.getInstance().put(AppConfig.DEVELOPER_ID, data.getData().getId());
-
-
-//                        SPUtils.getInstance().getBoolean(AppConfig.GUIDE_VIEW, true);
-//                        startActivity(LoginActivityView.class);
-//                        SPUtils.getInstance().put(AppConfig.GUIDE_VIEW, false);
-//                        ActivityManager.getInstance().finishAllActivities();
-
-                        startActivity(HomeStatusActivity.class);
+                        SPUtils.getInstance().put(AppConfig.SERVICE_STATUS,data.getData().getServiceStatus());
+                        JPushInterface.setAlias(getActivity(), sequence++, "ttsl_"+data.getData().getId());
+                        startActivity(MainActivity.class);
                         ActivityManager.getInstance().finishAllActivities();
                     }
                 });

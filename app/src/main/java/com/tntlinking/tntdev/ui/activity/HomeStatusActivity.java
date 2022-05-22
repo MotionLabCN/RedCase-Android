@@ -13,21 +13,16 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.blankj.utilcode.constant.TimeConstants;
 import com.blankj.utilcode.util.SPUtils;
-import com.blankj.utilcode.util.TimeUtils;
 import com.gyf.immersionbar.ImmersionBar;
 import com.hjq.base.BaseDialog;
 import com.hjq.http.EasyHttp;
-import com.hjq.http.EasyLog;
 import com.hjq.http.listener.HttpCallback;
 import com.tntlinking.tntdev.R;
 import com.tntlinking.tntdev.app.AppActivity;
 import com.tntlinking.tntdev.http.api.AppListApi;
 import com.tntlinking.tntdev.http.api.AppListInterviewApi;
 import com.tntlinking.tntdev.http.api.GetAppUpdateApi;
-import com.tntlinking.tntdev.http.api.GetCodeApi;
-import com.tntlinking.tntdev.http.api.GetDeveloperStatusApi;
 import com.tntlinking.tntdev.http.api.GetNewbieApi;
 import com.tntlinking.tntdev.http.api.HistoryListApi;
 import com.tntlinking.tntdev.http.glide.GlideApp;
@@ -88,6 +83,7 @@ public final class HomeStatusActivity extends AppActivity {
     private ServiceProjectAdapter mServiceAdapter;
     private HistoryProjectAdapter mHistoryAdapter;
     String name = SPUtils.getInstance().getString(AppConfig.DEVELOP_NAME, "朋友");
+
 
     @Override
     protected int getLayoutId() {
@@ -227,7 +223,6 @@ public final class HomeStatusActivity extends AppActivity {
                 }
             }
         });
-
     }
 
 

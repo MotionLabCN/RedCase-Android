@@ -190,5 +190,8 @@ public final class AppConfig {
      */
     public static String DEAL_DIALOG = "deal_dialog";
 
-
+    /**
+     *  接单状态 1 可接单 2 不可接单
+     */
+    public static String SERVICE_STATUS = "service_status";
 }

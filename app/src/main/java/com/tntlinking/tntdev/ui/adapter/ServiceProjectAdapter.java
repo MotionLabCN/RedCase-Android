@@ -69,18 +69,24 @@ public final class ServiceProjectAdapter extends BaseAdapter {
             holder.tv_type = convertView.findViewById(R.id.tv_type);
             holder.tv_interview = convertView.findViewById(R.id.tv_interview);
             holder.view_dot = convertView.findViewById(R.id.view_dot);
+            holder.tv_write = convertView.findViewById(R.id.tv_write);
+            holder.view_line = convertView.findViewById(R.id.view_line);
+            holder.tv_order_id = convertView.findViewById(R.id.tv_order_id);
+            holder.ll_detail = convertView.findViewById(R.id.ll_detail);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
         AppListApi.Bean item = mList.get(position);
-        if (!TextUtils.isEmpty(item.getServiceName())) { // 订单列表
+        if (!TextUtils.isEmpty(item.getOrderNo())) { // 订单列表
             holder.tv_position_name.setText(item.getPositionName());
             holder.tv_company_name.setText(item.getCompanyName());
-            holder.tv_work_info.setText(item.getWorkDaysModeName() + " | " +
-                    Utils.getYearFromDate(item.getWorkStartDate()) + "—" + Utils.getYearFromDate(item.getFinishDate()));
-            holder.tv_status.setText(item.getServiceName());
-            holder.tv_type.setText("写日报");
+            holder.tv_work_info.setText(item.getWorkDaysModeName() + " | " + Utils.getYearFromDate(item.getWorkStartDate()) + "—" + Utils.getYearFromDate(item.getFinishDate()));
+            holder.tv_status.setText(item.getStatusName());
+            holder.view_line.setVisibility(View.VISIBLE);
+            holder.tv_order_id.setVisibility(View.VISIBLE);
+            holder.ll_detail.setVisibility(View.GONE);
+            holder.tv_order_id.setText("订单号："+item.getOrderNo());
             if (item.getServiceName().equals("服务中")) { // 服务中
                 holder.view_dot.setBackground(mContext.getDrawable(R.drawable.dot_oval_orange));
                 holder.ll_status.setBackground(mContext.getDrawable(R.drawable.bg_orange_radius_3));
@@ -98,16 +104,26 @@ public final class ServiceProjectAdapter extends BaseAdapter {
             holder.tv_position_name.setText(item.getPositionName());
             holder.tv_company_name.setText(item.getCompanyName());
             holder.tv_work_info.setText(item.getWorkDaysModeName() + " | " + Utils.getYearFromDate(item.getInterviewStartDate()) + " " + Utils.getHoursAndMin(item.getInterviewStartDate()) + "—" + Utils.getHoursAndMin(item.getInterviewEndDate()));
-            holder.tv_type.setText("详情");
+            holder.view_line.setVisibility(View.GONE);
+            holder.tv_order_id.setVisibility(View.GONE);
+            holder.tv_write.setVisibility(View.GONE);
+            holder.ll_detail.setVisibility(View.VISIBLE);
+
             if (item.getInterviewTimeType().equals("今日面试")) {
                 holder.tv_status.setText(item.getInterviewTimeType());
                 holder.tv_interview.setVisibility(View.VISIBLE);
-                holder.view_dot.setBackground(mContext.getDrawable(R.drawable.dot_oval_blue));
-                holder.ll_status.setBackground(mContext.getDrawable(R.drawable.bg_blue_radius_3));
-                holder.tv_status.setTextColor(mContext.getResources().getColor(R.color.main_color));
-            } else {
+                holder.view_dot.setBackground(mContext.getDrawable(R.drawable.dot_oval_green));
+                holder.ll_status.setBackground(mContext.getDrawable(R.drawable.bg_green_radius_3));
+                holder.tv_status.setTextColor(mContext.getResources().getColor(R.color.color_5CE28A));
+            } else if (!item.getInterviewTimeType().equals("今日面试")) {
+                holder.tv_status.setText("等待面试");
+                holder.tv_interview.setVisibility(View.VISIBLE);
+                holder.view_dot.setBackground(mContext.getDrawable(R.drawable.dot_oval_red));
+                holder.ll_status.setBackground(mContext.getDrawable(R.drawable.bg_red_radius_3));
+                holder.tv_status.setTextColor(mContext.getResources().getColor(R.color.color_F5313D));
+            }else  if (TextUtils.isEmpty(item.getInterviewTimeType())) {
                 holder.tv_interview.setVisibility(View.GONE);
-                holder.ll_status.setVisibility(View.GONE);
+//                holder.ll_status.setVisibility(View.GONE);
             }
         }
 
@@ -123,6 +139,10 @@ public final class ServiceProjectAdapter extends BaseAdapter {
         TextView tv_type;
         TextView tv_interview;
         View view_dot;
+        TextView tv_write;
+        View view_line;
+        TextView tv_order_id;
+        LinearLayout ll_detail;
 
     }
 

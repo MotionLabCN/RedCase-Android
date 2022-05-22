@@ -45,5 +45,3 @@ public final class EvaluationNeedsTokNowActivity extends AppActivity {
     }
 
 }
-
-// 指定导航栏背景颜色

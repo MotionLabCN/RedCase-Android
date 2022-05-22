@@ -23,6 +23,7 @@ import com.tntlinking.tntdev.aop.CheckNet;
 import com.tntlinking.tntdev.aop.Log;
 import com.tntlinking.tntdev.app.AppActivity;
 import com.tntlinking.tntdev.manager.ActivityManager;
+import com.tntlinking.tntdev.ui.fragment.MineFragment1;
 import com.tntlinking.tntdev.widget.BrowserView;
 import com.tntlinking.tntdev.widget.StatusLayout;
 
@@ -107,7 +108,8 @@ public final class JkBrowserActivity extends AppActivity
         @JavascriptInterface //js接口声明
         public void goBack(String params) {
             if (params.equals("app")) {
-                startActivity(PersonDataActivity.class);
+//                startActivity(PersonDataActivity.class);
+                MainActivity.start(JkBrowserActivity.this, MineFragment1.class);
                 ActivityManager.getInstance().finishAllActivities();
             } else if (params.equals("qugongbao")) {
                 startActivity(HomeStatusActivity.class);
@@ -128,7 +130,8 @@ public final class JkBrowserActivity extends AppActivity
 
     @Override
     public void onLeftClick(View view) {
-        startActivity(PersonDataActivity.class);
+//        startActivity(PersonDataActivity.class);
+        MainActivity.start(JkBrowserActivity.this, MineFragment1.class);
         finish();
     }
 

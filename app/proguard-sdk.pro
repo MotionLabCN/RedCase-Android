@@ -34,3 +34,32 @@
 -dontwarn okhttp3.**
 -dontwarn okio.**
 -dontwarn org.conscrypt.**
+
+# jpush
+
+-dontoptimize
+-dontpreverify
+-dontwarn cn.jpush.**
+-keep class cn.jpush.** { *; }
+-keep class * extends cn.jpush.android.helpers.JPushMessageReceiver { *; }
+-dontwarn cn.jiguang.**
+-keep class cn.jiguang.** { *; }
+
+#-ignorewarning
+-keepattributes *Annotation*
+-keepattributes Exceptions
+-keepattributes InnerClasses
+-keepattributes Signature
+-keepattributes SourceFile,LineNumberTable
+-keep class com.hianalytics.android.**{*;}
+-keep class com.huawei.updatesdk.**{*;}
+-keep class com.huawei.hms.**{*;}
+
+-dontwarn com.coloros.mcsdk.**
+-keep class com.coloros.mcsdk.** { *; }
+
+-dontwarn com.heytap.**
+-keep class com.heytap.** { *; }
+
+-dontwarn com.mcs.**
+-keep class com.mcs.** { *; }

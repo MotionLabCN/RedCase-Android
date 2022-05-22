@@ -59,6 +59,18 @@
         <item name="android:background">@drawable/button_circle_selector</item>
         <item name="android:foreground">@null</item>
     </style>
+    <!-- 推荐成功按钮样式 -->
+    <style name="ButtonStyleRecommend" parent="Widget.AppCompat.Button.Borderless">
+        <item name="android:paddingStart">@dimen/dp_20</item>
+        <item name="android:paddingEnd">@dimen/dp_20</item>
+        <item name="android:paddingTop">@dimen/dp_10</item>
+        <item name="android:paddingBottom">@dimen/dp_10</item>
+        <item name="android:textSize">@dimen/sp_14</item>
+        <item name="android:textColor">@color/white90</item>
+        <item name="android:gravity">center</item>
+        <item name="android:background">@drawable/button_grey_circle_selector</item>
+        <item name="android:foreground">@null</item>
+    </style>
     <!-- 默认按钮样式 -->
     <style name="ButtonStyleNo" parent="Widget.AppCompat.Button.Borderless">
         <item name="android:paddingStart">@dimen/dp_20</item>
@@ -149,5 +161,57 @@
         <item name="android:paddingBottom">@dimen/dp_10</item>
         <item name="android:paddingStart">@dimen/dp_10</item>
         <item name="android:paddingEnd">@dimen/dp_10</item>
+    </style>
+
+    <style name="tabLayout_position_or_activity" parent="Base.Widget.Design.TabLayout">
+        <item name="tabBackground">@color/white</item>
+        <item name="tabMode">fixed</item>
+        <item name="tabIndicatorHeight">2dp</item>
+        <item name="android:tabStripEnabled">false</item>
+        <item name="tabSelectedTextColor">@color/black</item>
+    </style>
+    <style name="TabLayoutTextSize">
+        <item name="android:textSize">@dimen/sp_15</item>
+        <item name="android:textColor">@color/gray</item>
+    </style>
+    <style name="TabLayoutTextStyle">
+    <item name="android:textStyle">bold</item>
+    </style>
+    <style name="tabLayout_testStyle" parent="TextAppearance.Design.Tab">
+        <!--此处可用dp也可以用sp都可以,任选一个-->
+        <item name="android:textSize">@dimen/sp_20</item>
+    </style>
+    <style name="TabText" parent="Base.Widget.Design.TabLayout">
+        <item name="tabBackground">@color/white</item>
+        <item name="tabMode">fixed</item>
+        <item name="tabIndicatorColor">@color/red</item>
+        <item name="tabIndicatorHeight">2dp</item>
+        <item name="tabSelectedTextColor">@color/cardview_dark_background</item>
+        <item name="tabTextColor">@color/black</item>
+    </style>
+
+    <style name="ViewPaper_PositionRecommendation">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:overScrollMode">never</item>
+    </style>
+    <style name="MyDialogStyle">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
+        <item name="android:backgroundDimEnabled">true</item>
+    </style>
+    <style name="JPushTheme">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
     </style>
 </resources>

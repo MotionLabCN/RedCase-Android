@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.hjq.base.BaseDialog;
 import com.hjq.http.EasyHttp;
+import com.hjq.http.EasyLog;
 import com.hjq.http.listener.OnDownloadListener;
 import com.hjq.http.model.HttpMethod;
 import com.hjq.permissions.Permission;
@@ -24,6 +25,7 @@ import com.tntlinking.tntdev.aop.CheckNet;
 import com.tntlinking.tntdev.aop.Permissions;
 import com.tntlinking.tntdev.aop.SingleClick;
 import com.tntlinking.tntdev.other.AppConfig;
+import com.tntlinking.tntdev.other.Utils;
 
 import java.io.File;
 
@@ -172,9 +174,9 @@ public final class AppUpdateDialog {
                     // 设置通知标题
                     .setContentTitle(getString(R.string.app_name))
                     // 设置通知小图标
-                    .setSmallIcon(R.mipmap.launcher_ic)
+                    .setSmallIcon(R.mipmap.app_logo)
                     // 设置通知大图标
-                    .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.mipmap.launcher_ic))
+                    .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.mipmap.app_logo))
                     // 设置通知静音
                     .setDefaults(NotificationCompat.FLAG_ONLY_ALERT_ONCE)
                     // 设置震动频率
@@ -187,6 +189,8 @@ public final class AppUpdateDialog {
             // 创建要下载的文件对象
             mApkFile = new File(getContext().getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS),
                     getString(R.string.app_name) + "_v" + mNameView.getText().toString() + ".apk");
+
+            EasyLog.print("=========md5===111111="+ Utils.getFileMD5(mApkFile));
             EasyHttp.download(getDialog())
                     .method(HttpMethod.GET)
                     .file(mApkFile)

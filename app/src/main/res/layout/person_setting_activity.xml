@@ -10,14 +10,11 @@
 
     <com.hjq.bar.TitleBar
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_50"
-        app:rightBackground="@null"
-        app:rightTitle=""
+        android:layout_height="wrap_content"
         app:leftIcon="@drawable/icon_back_black"
+        app:title="账户设置"
         app:lineVisible="false"
-        app:rightTitleColor="@color/common_accent_color"
-        app:rightTitleSize="@dimen/sp_14"
-        app:title="账户设置" />
+        app:titleStyle="bold" />
 
 
     <com.hjq.widget.layout.SettingBar

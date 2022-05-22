@@ -294,7 +294,7 @@ public final class LoginActivity1 extends AppActivity {
 //                        SPUtils.getInstance().put(AppConfig.GUIDE_VIEW, false);
 //                        ActivityManager.getInstance().finishAllActivities();
 
-                        startActivity(HomeStatusActivity.class);
+                        startActivity(MainActivity.class);
                         ActivityManager.getInstance().finishAllActivities();
                     }
                 });

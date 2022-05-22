@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <com.hjq.bar.TitleBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:leftIcon="@drawable/icon_back_black"
+        app:lineVisible="false"
+        app:title="职位详情"
+        app:titleStyle="bold" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        tools:ignore="InefficientWeight">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_100"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_16"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tv_position_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="@dimen/dp_16"
+                        android:text="web后端开发工程师"
+
+                        android:textSize="@dimen/sp_24"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tv_salary"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginEnd="@dimen/dp_16"
+                        android:layout_weight="1"
+                        android:gravity="right"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:text="10-11k·月"
+                        android:textColor="@color/main_color"
+                        android:textSize="@dimen/sp_15"
+                        android:textStyle="bold"
+
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:orientation="horizontal"
+                    tools:ignore="UselessLeaf" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_8"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tv_service_mode"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/dp_21"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="@dimen/dp_16"
+                        android:drawableLeft="@drawable/icon_full_time"
+                        android:gravity="center"
+                        android:text="全日"
+                        android:textSize="@dimen/sp_12"
+                        tools:ignore="UseCompatTextViewDrawableXml" />
+
+                    <TextView
+                        android:id="@+id/tv_work_experience"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/dp_21"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="@dimen/dp_18"
+                        android:drawableLeft="@drawable/icon_working_life"
+                        android:gravity="center"
+                        android:text="1-3年经验"
+                        android:textSize="@dimen/sp_12"
+                        tools:ignore="UseCompatTextViewDrawableXml" />
+
+                    <TextView
+                        android:id="@+id/tv_academic_degree"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/dp_21"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="@dimen/dp_18"
+                        android:drawableLeft="@drawable/icon_academic_degree"
+                        android:gravity="center"
+                        android:text="大专"
+                        android:textSize="@dimen/sp_12"
+                        tools:ignore="UseCompatTextViewDrawableXml" />
+
+                    <TextView
+                        android:id="@+id/tv_total_number_of_people"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/dp_21"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="@dimen/dp_18"
+                        android:drawableLeft="@drawable/icon_total_number_of_people"
+                        android:gravity="center"
+                        android:text="3人"
+                        android:textSize="@dimen/sp_12"
+                        tools:ignore="UseCompatTextViewDrawableXml" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_8"
+                android:background="@color/color_F6F6FC" />
+
+            <TextView
+                android:id="@+id/tv_Job_requirements"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/dp_16"
+                android:layout_marginTop="@dimen/dp_24"
+                android:text="职位要求"
+                android:textSize="@dimen/sp_15"
+                android:textStyle="bold" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_job_requirements"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_16"
+                android:layout_marginTop="@dimen/dp_16"
+                android:layout_marginEnd="@dimen/dp_16" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_1"
+                android:layout_marginLeft="@dimen/dp_16"
+                android:layout_marginTop="@dimen/dp_24"
+                android:layout_marginEnd="@dimen/dp_16"
+                android:background="@color/color_F6F6FC" />
+
+            <TextView
+                android:id="@+id/tv_Job_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/dp_16"
+                android:layout_marginTop="@dimen/dp_24"
+                android:text="职位描述"
+                android:textSize="@dimen/sp_15"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_content"
+                android:layout_width="@dimen/dp_343"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/dp_16"
+                android:layout_marginTop="@dimen/dp_16"
+                android:layout_marginEnd="@dimen/dp_16"
+                android:paddingEnd="@dimen/dp_16"
+                android:textColor="@color/color_7E89A3"
+                android:textSize="@dimen/sp_13" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_1"
+                android:layout_marginLeft="@dimen/dp_16"
+                android:layout_marginTop="@dimen/dp_24"
+                android:layout_marginEnd="@dimen/dp_16"
+                android:background="@color/color_F6F6FC" />
+
+            <TextView
+                android:id="@+id/tv_enterprise_information"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/dp_16"
+                android:layout_marginTop="@dimen/dp_24"
+                android:text="企业信息"
+                android:textSize="@dimen/sp_15"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_16"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_name"
+                    android:layout_width="60dp"
+                    android:layout_height="62dp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="@dimen/dp_16"
+                    android:background="@drawable/avatar_oval_black"
+                    android:ellipsize="end"
+                    android:gravity="center"
+                    android:singleLine="true"
+                    android:text="测试"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/sp_10" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_professional_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="@dimen/dp_10"
+                        android:layout_marginTop="@dimen/dp_2"
+                        android:gravity="center"
+                        android:text="黄焖鸡科技有限公司"
+                        android:textColor="@color/color_444E64"
+                        android:textSize="@dimen/sp_15"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tv_company_size"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="@dimen/dp_10"
+                        android:layout_marginTop="@dimen/dp_8"
+                        android:gravity="center"
+                        android:text="软件开发·100-499人"
+                        android:textColor="@color/color_7E89A3"
+                        android:textSize="@dimen/sp_13" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_1"
+                android:layout_marginLeft="@dimen/dp_16"
+                android:layout_marginTop="@dimen/dp_24"
+                android:layout_marginEnd="@dimen/dp_16"
+                android:background="@color/color_F6F6FC" />
+
+            <TextView
+                android:id="@+id/tv_common_collaboration_tools"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/dp_16"
+                android:layout_marginTop="@dimen/dp_24"
+                android:drawableLeft="@drawable/icon_tool"
+                android:text="常用协作工具"
+                android:textSize="@dimen/sp_13"
+                android:textStyle="bold"
+                tools:ignore="UseCompatTextViewDrawableXml" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_tool_label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_16"
+                android:layout_marginTop="@dimen/dp_18"
+                android:layout_marginEnd="@dimen/dp_16" />
+        </LinearLayout>
+    </ScrollView>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_recommend_oneself"
+        style="@style/ButtonStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginHorizontal="@dimen/dp_16"
+        android:layout_marginVertical="@dimen/dp_20"
+        android:layout_marginBottom="@dimen/dp_16"
+        android:text="@string/setting_recommend_yourself_immediately"
+        android:textColor="@color/common_primary_color"
+        tools:ignore="ObsoleteLayoutParam" />
+</LinearLayout>

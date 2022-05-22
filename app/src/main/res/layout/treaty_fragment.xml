@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <com.hjq.bar.TitleBar
+        android:id="@+id/title_bar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_60"
+        app:leftIcon="@null"
+        app:leftTitle="服务项目"
+        app:leftTitleColor="@color/black"
+        app:leftTitleSize="@dimen/sp_20"
+        app:leftTitleStyle="bold"
+        app:lineVisible="false" />
+
+    <com.scwang.smart.refresh.layout.SmartRefreshLayout
+        android:id="@+id/rl_status_refresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:srlEnablePreviewInEditMode="false">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:id="@+id/ll_work"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <!--        <TextView-->
+                <!--            android:layout_width="match_parent"-->
+                <!--            android:layout_height="wrap_content"-->
+                <!--            android:layout_marginStart="@dimen/dp_15"-->
+                <!--            android:layout_marginTop="@dimen/dp_20"-->
+                <!--            android:layout_marginEnd="@dimen/dp_15"-->
+                <!--            android:layout_marginBottom="@dimen/dp_20"-->
+                <!--            android:text="服务项目"-->
+                <!--            android:textColor="@color/black"-->
+                <!--            android:textSize="@dimen/sp_25"-->
+                <!--            android:textStyle="bold" />-->
+
+                <com.tntlinking.tntdev.widget.MyListView
+                    android:id="@+id/lv_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:divider="@null"
+                    android:dividerHeight="@dimen/dp_1" />
+                <!--                    tools:listitem="@layout/item_app_list"/>-->
+
+                <LinearLayout
+                    android:id="@+id/ll_empty"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/white"
+                    android:gravity="center|top"
+                    android:orientation="vertical"
+                    android:paddingTop="@dimen/dp_20"
+                    android:visibility="gone">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/bg_home_work_empty" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_10"
+                        android:text="暂无工作"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/sp_15"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_10"
+                        android:text="联系客服人员尽快匹配新工作"
+                        android:textColor="#7E89A3"
+                        android:textSize="@dimen/sp_12" />
+
+                    <TextView
+                        android:id="@+id/tv_refresh"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_10"
+                        android:background="@drawable/btn_blue_radius_10"
+                        android:paddingLeft="@dimen/dp_40"
+                        android:paddingTop="@dimen/dp_8"
+                        android:paddingRight="@dimen/dp_40"
+                        android:paddingBottom="@dimen/dp_8"
+                        android:text="刷新"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/sp_12"
+                        android:visibility="gone" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tv_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_12"
+                    android:background="@drawable/bg_white_radius_top_6"
+                    android:paddingLeft="@dimen/dp_15"
+                    android:paddingTop="@dimen/dp_20"
+                    android:paddingBottom="@dimen/dp_10"
+                    android:text="历史工作"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp_20"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:id="@+id/ll_history_empty"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/white"
+                    android:gravity="center_horizontal"
+                    android:paddingBottom="@dimen/dp_20"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_50"
+                        android:src="@drawable/bg_empty_income" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_10"
+                        android:text="暂无历史数据"
+                        android:textColor="@color/color_hint_color"
+                        android:textSize="@dimen/sp_13" />
+
+
+                </LinearLayout>
+
+                <com.tntlinking.tntdev.widget.MyListView
+                    android:id="@+id/lv_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:divider="@null"
+                    android:dividerHeight="@dimen/dp_1" />
+
+                <LinearLayout
+                    android:id="@+id/ll_history"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/white"
+                    android:gravity="center|top"
+                    android:orientation="vertical"
+                    android:paddingTop="@dimen/dp_20"
+                    android:visibility="gone">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/bg_home_work_empty" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_10"
+                        android:text="暂无数据"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/sp_15"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_10"
+                        android:text="联系客服人员尽快匹配新工作"
+                        android:textColor="#7E89A3"
+                        android:textSize="@dimen/sp_12" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_10"
+                        android:background="@drawable/btn_blue_radius_10"
+                        android:paddingLeft="@dimen/dp_40"
+                        android:paddingTop="@dimen/dp_8"
+                        android:paddingRight="@dimen/dp_40"
+                        android:paddingBottom="@dimen/dp_8"
+                        android:text="刷新"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/sp_12"
+                        android:visibility="gone" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tv_footer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp_2"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:layout_marginBottom="@dimen/dp_20"
+                    android:gravity="center"
+                    android:text="只展示最近半年合约订单"
+                    android:textColor="@color/color_hint_color"
+                    android:textSize="@dimen/sp_13"
+                    android:visibility="gone" />
+
+            </LinearLayout>
+
+        </ScrollView>
+    </com.scwang.smart.refresh.layout.SmartRefreshLayout>
+</LinearLayout>

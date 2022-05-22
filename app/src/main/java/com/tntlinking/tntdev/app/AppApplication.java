@@ -36,6 +36,8 @@ import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleOwner;
+
+import cn.jpush.android.api.JPushInterface;
 import okhttp3.OkHttpClient;
 import timber.log.Timber;
 
@@ -48,7 +50,13 @@ public final class AppApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+// 初始化极光推送
+        JPushInterface.setDebugMode(true);
+        JPushInterface.init(this);
         initSdk(this);
+        initToast();
+        initKV();
+
     }
 
     @Override
@@ -69,7 +77,13 @@ public final class AppApplication extends Application {
         // 根据手机内存剩余情况清理图片内存缓存
         GlideApp.get(this).onTrimMemory(level);
     }
+    private void initKV() {
+        MMKV.initialize(this);
+    }
 
+    private void initToast() {
+        ToastUtils.init(this);
+    }
     /**
      * 初始化一些第三方框架
      */
@@ -94,6 +108,23 @@ public final class AppApplication extends Application {
                     // 仿苹果越界效果开关
                     .setEnableOverScrollDrag(false);
         });
+
+//        //设置全局的Header构建器
+//        SmartRefreshLayout.setDefaultRefreshHeaderCreator(new DefaultRefreshHeaderCreator() {
+//            @Override
+//            public RefreshHeader createRefreshHeader(Context context, RefreshLayout layout) {
+//                layout.setPrimaryColorsId(R.color.common_accent_color, android.R.color.white);//全局设置主题颜色
+//                return new ClassicsHeader(context);//.setTimeFormat(new DynamicTimeFormat("更新于 %s"));//指定为经典Header，默认是 贝塞尔雷达Header
+//            }
+//        });
+//        //设置全局的Footer构建器
+//        SmartRefreshLayout.setDefaultRefreshFooterCreator(new DefaultRefreshFooterCreator() {
+//            @Override
+//            public RefreshFooter createRefreshFooter(Context context, RefreshLayout layout) {
+//                //指定为经典Footer，默认是 BallPulseFooter
+//                return new ClassicsFooter(context).setDrawableSize(20);
+//            }
+//        });
 
         // 初始化吐司
         ToastUtils.init(application, new ToastStyle());

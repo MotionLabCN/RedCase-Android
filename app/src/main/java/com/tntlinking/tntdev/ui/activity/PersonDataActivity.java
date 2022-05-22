@@ -126,10 +126,11 @@ public final class PersonDataActivity extends AppActivity {
     @Override
     public void onClick(View view) {
         if (view == person_data_dev) { // 入驻资料
-            startActivity(EnterDeveloperActivity.class);
+//            startActivity(EnterDeveloperActivity.class);
+            startActivity(MainActivity.class);
+
         } else if (view == person_data_service) {// 服务协议
             showServiceDialog();
-//            startActivity(SignContactActivity.class);
         } else if (view == mPersonDataIncome) {// 收益账单
             startActivity(IncomeListActivity.class);
         } else if (view == mPersonDataInterview) {// 面试设置
