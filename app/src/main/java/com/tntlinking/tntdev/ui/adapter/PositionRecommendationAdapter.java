@@ -85,7 +85,6 @@ public class PositionRecommendationAdapter extends BaseAdapter {
         } else {
             holder = (PositionRecommendationAdapter.ViewHolder) convertView.getTag();
         }
-
         GetDeveloperRecommendsApi.Bean item = mList.get(position);
         holder.tv_position_name.setText(item.getTitle());
         holder.tv_work_pattern.setText(item.getWorkDaysModeName());

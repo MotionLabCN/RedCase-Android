@@ -562,15 +562,7 @@
             android:exported="true"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
 
-        <!-- For test only 测试状态通知栏，需要打开的Activity -->
-        <activity
-            android:name=".ui.activity.TestActivity"
-            android:exported="false">
-            <intent-filter>
-                <action android:name="jpush.testAction" />
-                <category android:name="jpush.testCategory" />
-            </intent-filter>
-        </activity>
+
         <!-- since 3.3.0 Required SDK 核心功能-->
         <!-- 可配置android:process参数将PushService放在其他进程中 -->
         <!--User defined.  For test only 继承自cn.jpush.android.service.JCommonService-->
@@ -591,6 +583,7 @@
                 <category android:name="${applicationId}"></category>
             </intent-filter>
         </receiver>
+
         <!--huawei_config_start-->
         <service
             android:name="cn.jpush.android.service.PluginHuaweiPlatformsService"
