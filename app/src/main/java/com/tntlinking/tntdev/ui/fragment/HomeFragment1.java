@@ -3,9 +3,11 @@ package com.tntlinking.tntdev.ui.fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.renderscript.ScriptGroup;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -215,12 +217,15 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity> {
         TabLayout tabs = findViewById(R.id.tab_position);
         ViewPager2 viewPager = findViewById(R.id.vp_position);
         tabs.setSelectedTabIndicatorHeight(0);
+
+
         tabs.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 tab.setCustomView(R.layout.layout_tab);
                 TextView textView = tab.getCustomView().findViewById(R.id.tab_item_textview);
                 textView.setText(tab.getText());
+
 
             }
 
@@ -234,7 +239,10 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity> {
             public void onTabReselected(TabLayout.Tab tab) {
 
             }
+
+
         });
+
         viewPager.setAdapter(new FragmentStateAdapter(this) {
             @NonNull
             @Override
@@ -256,8 +264,29 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity> {
         });
         //这句话很重要
         tabLayoutMediator.attach();
-
+        viewPager.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                updatePagerHeightForChild(viewPager.getRootView(),viewPager);
+            }
+        });
     }
+    // 解决ViewPager2 切换时高度问题
+    private void updatePagerHeightForChild(View view, ViewPager2 pager) {
+        view.post(() -> {
+            int wMeasureSpec = View.MeasureSpec.makeMeasureSpec(view.getWidth(), View.MeasureSpec.EXACTLY);
+            int hMeasureSpec = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
+            view.measure(wMeasureSpec, hMeasureSpec);
+            if (pager.getLayoutParams().height != view.getMeasuredHeight()) {
+                ViewGroup.LayoutParams layoutParams = pager.getLayoutParams();
+                layoutParams.height = view.getMeasuredHeight();
+                pager.setLayoutParams(layoutParams);
+            }
+        });
+    }
+
+
+
 
 
     @Override

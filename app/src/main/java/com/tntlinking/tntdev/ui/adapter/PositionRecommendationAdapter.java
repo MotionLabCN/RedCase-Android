@@ -90,7 +90,7 @@ public class PositionRecommendationAdapter extends BaseAdapter {
         holder.tv_work_pattern.setText(item.getWorkDaysModeName());
         holder.tv_academic_degree.setText(item.getEducationName());
         holder.tv_work_experience.setText(item.getWorkYearsName());
-        holder.tv_salary.setText(item.getStartPay() + "-" + item.getEndPay() + "k·月");
+        holder.tv_salary.setText(item.getStartPay()/ 1000 + "-" + item.getEndPay()/1000 + "k/月");
         holder.tv_content.setText(item.getDescription());
         if (item.getCompanyRecruiterRealName() != null && item.getCompanyRecruiterRealName().length() > 2) {
             String RealName = item.getCompanyRecruiterRealName().substring(1);
@@ -115,7 +115,7 @@ public class PositionRecommendationAdapter extends BaseAdapter {
         layoutManager.setFlexDirection(FlexDirection.ROW);//设置水平方向。也可以设置垂直方向
         holder.rv_job_requirements.setLayoutManager(layoutManager);
         mStringArrayList.clear();
-        mStringArrayList.addAll(item.getSkillNames().stream().limit(3).collect(Collectors.toList()));
+        mStringArrayList.addAll(item.getSkillNames());
         JobRequirementsAdapter adapter = new JobRequirementsAdapter(mContext, mStringArrayList);
         holder.rv_job_requirements.setAdapter(adapter);
 

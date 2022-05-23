@@ -174,7 +174,7 @@
             android:layout_marginTop="@dimen/dp_10"
             android:layout_marginEnd="@dimen/dp_16"
             android:layout_weight="1"
-            android:visibility="visible"
+            android:visibility="gone"
             tools:ignore="InefficientWeight" />
 
         <TextView
@@ -183,6 +183,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="@dimen/dp_16"
+            android:visibility="gone"
             android:layout_marginRight="@dimen/dp_16"
             android:layout_marginTop="@dimen/dp_10"
             android:text="1.负责产品的核心功能和模块的代码编写...."
@@ -238,6 +239,9 @@
                         android:layout_marginLeft="@dimen/dp_10"
                         android:gravity="center"
                         android:text="柏鑫·技术总监"
+                        android:ellipsize="none"
+                        android:maxLines="100"
+                        android:scrollHorizontally="false"
                         android:textColor="@color/color_444E64"
                         android:textSize="@dimen/sp_13" />
 
@@ -248,7 +252,7 @@
                         android:layout_gravity="center"
                         android:layout_marginLeft="@dimen/dp_4"
                         android:src="@drawable/icon_run_recommend"
-                        android:visibility="gone" />
+                        android:visibility="visible" />
 
                 </LinearLayout>
 

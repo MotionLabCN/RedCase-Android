@@ -7,13 +7,14 @@ import android.content.Intent;
 import android.util.Log;
 
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.tntlinking.tntdev.ui.activity.InterviewDetailActivity;
 import com.tntlinking.tntdev.ui.activity.JobDetailsActivity;
 
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
 
 
 import cn.jpush.android.api.CmdMessage;
@@ -44,9 +45,19 @@ public class PushMessageReceiver extends JPushMessageReceiver {
         //**************解析推送过来的json数据******************
         JSONObject jsonObject;
         try {
+
             jsonObject = new JSONObject(message.notificationExtras);
-            MessageType = jsonObject.getString("messageType");
-            TypeId = jsonObject.getString("typeId");
+
+            String extra = jsonObject.getString("extra");
+            Gson gson = new Gson();
+            // 直接转换
+            ExtraBean extraBean = new Gson().fromJson(extra, new TypeToken<ExtraBean>() {
+            }.getType());
+            Log.e("extra", ">>" + extra);
+            Log.e("extra", ">>" + extraBean.getMessageType());
+
+            MessageType = extraBean.getMessageType();
+            TypeId = extraBean.getTypeId();
         } catch (JSONException e) {
             e.printStackTrace();
         }
