@@ -27,12 +27,12 @@
         android:id="@+id/sv"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:paddingBottom="@dimen/dp_20"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        android:paddingBottom="@dimen/dp_20">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
             android:paddingLeft="@dimen/dp_16"
             android:paddingRight="@dimen/dp_16">
@@ -46,7 +46,8 @@
                 android:paddingLeft="@dimen/dp_14"
                 android:paddingTop="@dimen/dp_12"
                 android:paddingRight="@dimen/dp_14"
-                android:paddingBottom="@dimen/dp_12">
+                android:paddingBottom="@dimen/dp_12"
+                android:visibility="gone">
 
                 <ImageView
                     android:id="@+id/iv_progress"
@@ -69,9 +70,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_24"
                 android:text="如何签约？"
-                android:textStyle="bold"
                 android:textColor="@color/black"
-                android:textSize="@dimen/sp_15" />
+                android:textSize="@dimen/sp_15"
+                android:textStyle="bold" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -86,7 +87,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    tools:ignore="UseCompoundDrawables">
 
                     <ImageView
                         android:layout_width="@dimen/dp_46"
@@ -114,7 +116,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    tools:ignore="UseCompoundDrawables">
 
                     <ImageView
                         android:layout_width="@dimen/dp_46"
@@ -141,7 +144,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:gravity="center"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    tools:ignore="UseCompoundDrawables">
 
                     <ImageView
                         android:layout_width="@dimen/dp_46"
@@ -219,8 +223,8 @@
                 android:layout_marginTop="@dimen/dp_24"
                 android:text="Step3 完成实名认证 "
                 android:textColor="@color/color_text_color"
-                android:textStyle="bold"
-                android:textSize="@dimen/sp_13" />
+                android:textSize="@dimen/sp_13"
+                android:textStyle="bold" />
 
             <TextView
                 android:layout_width="wrap_content"

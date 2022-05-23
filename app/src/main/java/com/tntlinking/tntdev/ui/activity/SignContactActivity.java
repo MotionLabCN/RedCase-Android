@@ -2,6 +2,8 @@ package com.tntlinking.tntdev.ui.activity;
 
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
+
 import com.blankj.utilcode.util.SPUtils;
 import com.gyf.immersionbar.ImmersionBar;
 import com.hjq.base.BaseDialog;
@@ -13,7 +15,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatButton;
 
 public final class SignContactActivity extends AppActivity {
-
 
     private AppCompatButton btn_commit;
     private String sign_text = "在用户使用身份认证的功能或相关服务所需时，根据相关法律法规，本平台可能收集你的真实身份信息" +
