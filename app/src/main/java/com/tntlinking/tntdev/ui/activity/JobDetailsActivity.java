@@ -46,7 +46,6 @@ public class JobDetailsActivity extends AppActivity {
     private TextView tv_company_size;
     private AppCompatButton btn_recommend_oneself;
     private String mPositionId;
-    private Boolean SelfRecommendStatus;
     private String StartPay;
     private String EndPay;
 
@@ -102,7 +101,6 @@ public class JobDetailsActivity extends AppActivity {
     @Override
     protected void initData() {
         mPositionId = getString("positionId");
-        SelfRecommendStatus = getBoolean("selfRecommendStatus");
         getJobDetails(mPositionId);
         setOnClickListener(btn_recommend_oneself);
 
@@ -117,36 +115,38 @@ public class JobDetailsActivity extends AppActivity {
                     @Override
                     public void onSucceed(HttpData<JobDetailsApi.Bean> data) {
                         if (data.getData() != null) {
-                            if (SelfRecommendStatus) {
+                            if (data.getData().getSelfRecommendStatus()) {
                                 btn_recommend_oneself.setText("自荐成功");
 
                                 btn_recommend_oneself.setEnabled(false);
                                 btn_recommend_oneself.setBackgroundResource(R.drawable.button_grey_circle_selector);
                             }
                             tv_position_name.setText(data.getData().getTitle());
-                            if (data.getData().getStartPay()!=0&&data.getData().getStartPay()>1000){
-                                StartPay= String.valueOf(data.getData().getStartPay()/1000)+"k";
-                            }else {
-                                StartPay= String.valueOf(data.getData().getStartPay())+"元";
+                            if (data.getData().getStartPay() != 0 && data.getData().getStartPay() > 1000) {
+                                int startPay = (int) (data.getData().getStartPay() / 1000);
+                                StartPay = String.valueOf(startPay);
+                            } else {
+                                StartPay = String.valueOf(data.getData().getStartPay() / 1000);
                             }
-                            if (data.getData().getStartPay()!=0&& data.getData().getEndPay()>1000){
-                                EndPay= String.valueOf(data.getData().getEndPay()/1000)+"K";
-                            }else {
-                                EndPay= String.valueOf(data.getData().getEndPay())+"元";
+                            if (data.getData().getStartPay() != 0 && data.getData().getEndPay() > 1000) {
+                                int endPay = (int) (data.getData().getEndPay() / 1000);
+                                EndPay = String.valueOf(endPay);
+                            } else {
+                                EndPay = String.valueOf(data.getData().getEndPay() / 1000);
                             }
-                            tv_salary.setText(StartPay + "-" + EndPay + "/月");
-                            tv_service_mode.setText(data.getData().getWorkDaysMode());
-                            tv_work_experience.setText(data.getData().getWorkYears());
-                            tv_academic_degree.setText(data.getData().getTrainingMode());
+                            tv_salary.setText(StartPay + "-" + EndPay + "k/月");
+                            tv_service_mode.setText(data.getData().getWorkDaysModeName());
+                            tv_work_experience.setText(data.getData().getWorkYearsName());
+                            tv_academic_degree.setText(data.getData().getEducationName());
                             tv_total_number_of_people.setText(data.getData().getRecruitCount() + "人");
                             tv_content.setText(data.getData().getDescription());
-                            tv_name.setText(data.getData().getCompany().getShortName());
-                            tv_professional_title.setText(data.getData().getCompany().getCompanyName());
-                            tv_company_size.setText(data.getData().getCompany().getIndustry() + "·" + data.getData().getCompany().getPersonSize());
+                            tv_name.setText(data.getData().getCompanyIndustryName());
+                            tv_professional_title.setText(data.getData().getCompanyName());
+                            tv_company_size.setText(data.getData().getCompanyIndustryName() + "·" + data.getData().getCompanyPersonSizeName());
                             mStringArrayList.clear();
-                            mStringArrayList.addAll(data.getData().getSkills());
+                            mStringArrayList.addAll(data.getData().getSkillNames());
                             mStringToolLabelArrayList.clear();
-                            mStringToolLabelArrayList.addAll(data.getData().getCompany().getTeamToolsDesc());
+                            mStringToolLabelArrayList.addAll(data.getData().getCompanyTeamToolsDescNames());
                             JobRequirementsAdapter adapter = new JobRequirementsAdapter(JobDetailsActivity.this, mStringArrayList);
                             rv_job_requirements.setAdapter(adapter);
                             ToolLabelAdapter toolLabelAdapter = new ToolLabelAdapter(JobDetailsActivity.this, mStringToolLabelArrayList);

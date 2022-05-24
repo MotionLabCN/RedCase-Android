@@ -30,7 +30,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_100"
+                android:layout_height="wrap_content"
                 android:orientation="vertical">
 
                 <LinearLayout
@@ -41,12 +41,13 @@
 
                     <TextView
                         android:id="@+id/tv_position_name"
-                        android:layout_width="wrap_content"
+                        android:layout_width="@dimen/dp_216"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="@dimen/dp_16"
+                        android:ellipsize="none"
+                        android:scrollHorizontally="false"
                         android:text="web后端开发工程师"
-
                         android:textSize="@dimen/sp_24"
                         android:textStyle="bold" />
 
@@ -58,9 +59,8 @@
                         android:layout_marginEnd="@dimen/dp_16"
                         android:layout_weight="1"
                         android:gravity="right"
-                        android:maxLines="1"
-                        android:singleLine="true"
-                        android:text="10-11k·月"
+
+                        android:text="111.0-111k·月"
                         android:textColor="@color/main_color"
                         android:textSize="@dimen/sp_15"
                         android:textStyle="bold"
@@ -79,6 +79,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_8"
+                    android:layout_marginBottom="@dimen/dp_16"
                     android:orientation="horizontal">
 
                     <TextView
@@ -223,7 +224,8 @@
                     android:singleLine="true"
                     android:text="测试"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/sp_10" />
+                    android:textSize="@dimen/sp_10"
+                    android:visibility="gone" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -235,7 +237,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="@dimen/dp_10"
+                        android:layout_marginLeft="@dimen/dp_16"
                         android:layout_marginTop="@dimen/dp_2"
                         android:gravity="center"
                         android:text="黄焖鸡科技有限公司"
@@ -248,7 +250,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="@dimen/dp_10"
+                        android:layout_marginLeft="@dimen/dp_16"
                         android:layout_marginTop="@dimen/dp_8"
                         android:gravity="center"
                         android:text="软件开发·100-499人"

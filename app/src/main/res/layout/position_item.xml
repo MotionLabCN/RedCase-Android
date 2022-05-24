@@ -17,9 +17,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/dp_16"
+        android:layout_marginTop="@dimen/dp_10"
         android:layout_marginEnd="@dimen/dp_16"
         android:layout_marginBottom="@dimen/dp_10"
-        android:layout_marginTop="@dimen/dp_10"
         android:background="@drawable/bg_grey_stroke"
         android:orientation="vertical">
 
@@ -183,20 +183,20 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="@dimen/dp_16"
-            android:visibility="gone"
-            android:layout_marginRight="@dimen/dp_16"
             android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginRight="@dimen/dp_16"
             android:text="1.负责产品的核心功能和模块的代码编写...."
             android:textColor="@color/color_7E89A3"
-            android:textSize="@dimen/sp_13" />
+            android:textSize="@dimen/sp_13"
+            android:visibility="gone" />
 
         <View
             android:layout_width="match_parent"
             android:layout_height="@dimen/line_size"
-            android:background="@color/common_line_color"
-            android:layout_marginRight="@dimen/dp_16"
             android:layout_marginLeft="@dimen/dp_16"
-            android:layout_marginTop="@dimen/dp_10"/>
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginRight="@dimen/dp_16"
+            android:background="@color/common_line_color" />
 
 
         <LinearLayout
@@ -237,11 +237,11 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/dp_10"
-                        android:gravity="center"
-                        android:text="柏鑫·技术总监"
                         android:ellipsize="none"
+                        android:gravity="center"
                         android:maxLines="100"
                         android:scrollHorizontally="false"
+                        android:text="柏鑫哈哈·技术"
                         android:textColor="@color/color_444E64"
                         android:textSize="@dimen/sp_13" />
 

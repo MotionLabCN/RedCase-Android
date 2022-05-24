@@ -8,7 +8,7 @@ public final class JobDetailsApi implements IRequestApi {
 
     @Override
     public String getApi() {
-        return "position/info";
+        return "developer_recommends/position_info";
     }
 
     private String positionId;
@@ -26,16 +26,106 @@ public final class JobDetailsApi implements IRequestApi {
         private String createDate;
         private String description;
         private String education;
-        private int endPay;
+        private double endPay;
         private int id;
         private String recruitCount;
         private int recruiterId;
-        private List<String> skills;
-        private int startPay;
+        private double startPay;
         private int status;
         private String title;
         private String trainingMode;
         private String workDaysMode;
+        private String workDaysModeName;
+        private String workYearsName;
+        private String educationName;
+        private List<String> skillNames;
+        private String companyIndustryName;
+
+        public String getCompanyPersonSizeName() {
+            return companyPersonSizeName;
+        }
+
+        public void setCompanyPersonSizeName(String companyPersonSizeName) {
+            this.companyPersonSizeName = companyPersonSizeName;
+        }
+
+        private String companyPersonSizeName;
+
+        public String getCompanyName() {
+            return companyName;
+        }
+
+        public void setCompanyName(String companyName) {
+            this.companyName = companyName;
+        }
+
+        public boolean isSelfRecommendStatus() {
+            return selfRecommendStatus;
+        }
+
+        private String companyName;
+
+        private List<String> companyTeamToolsDescNames;
+
+        public String getWorkDaysModeName() {
+            return workDaysModeName;
+        }
+
+        public void setWorkDaysModeName(String workDaysModeName) {
+            this.workDaysModeName = workDaysModeName;
+        }
+
+        public String getWorkYearsName() {
+            return workYearsName;
+        }
+
+        public void setWorkYearsName(String workYearsName) {
+            this.workYearsName = workYearsName;
+        }
+
+        public String getEducationName() {
+            return educationName;
+        }
+
+        public void setEducationName(String educationName) {
+            this.educationName = educationName;
+        }
+
+        public List<String> getSkillNames() {
+            return skillNames;
+        }
+
+        public void setSkillNames(List<String> skillNames) {
+            this.skillNames = skillNames;
+        }
+
+        public String getCompanyIndustryName() {
+            return companyIndustryName;
+        }
+
+        public void setCompanyIndustryName(String companyIndustryName) {
+            this.companyIndustryName = companyIndustryName;
+        }
+
+        public List<String> getCompanyTeamToolsDescNames() {
+            return companyTeamToolsDescNames;
+        }
+
+        public void setCompanyTeamToolsDescNames(List<String> companyTeamToolsDescNames) {
+            this.companyTeamToolsDescNames = companyTeamToolsDescNames;
+        }
+
+        public boolean getSelfRecommendStatus() {
+            return selfRecommendStatus;
+        }
+
+        public void setSelfRecommendStatus(boolean selfRecommendStatus) {
+            this.selfRecommendStatus = selfRecommendStatus;
+        }
+
+
+        private boolean selfRecommendStatus;
+
 
         public String getCareerDirection() {
             return careerDirection;
@@ -85,11 +175,11 @@ public final class JobDetailsApi implements IRequestApi {
             this.education = education;
         }
 
-        public int getEndPay() {
+        public double getEndPay() {
             return endPay;
         }
 
-        public void setEndPay(int endPay) {
+        public void setEndPay(double endPay) {
             this.endPay = endPay;
         }
 
@@ -117,19 +207,12 @@ public final class JobDetailsApi implements IRequestApi {
             this.recruiterId = recruiterId;
         }
 
-        public List<String> getSkills() {
-            return skills;
-        }
 
-        public void setSkills(List<String> skills) {
-            this.skills = skills;
-        }
-
-        public int getStartPay() {
+        public double getStartPay() {
             return startPay;
         }
 
-        public void setStartPay(int startPay) {
+        public void setStartPay(double startPay) {
             this.startPay = startPay;
         }
 
@@ -185,8 +268,8 @@ public final class JobDetailsApi implements IRequestApi {
         private String workYears;
 
     }
-    public final static class CompanyBean{
-        private String companyName;
+
+    public final static class CompanyBean {
         private String createDate;
         private String createUser;
         private String id;
@@ -201,13 +284,6 @@ public final class JobDetailsApi implements IRequestApi {
         private String taxInvoice;
         private List<String> teamToolsDesc;
 
-        public String getCompanyName() {
-            return companyName;
-        }
-
-        public void setCompanyName(String companyName) {
-            this.companyName = companyName;
-        }
 
         public String getCreateDate() {
             return createDate;
