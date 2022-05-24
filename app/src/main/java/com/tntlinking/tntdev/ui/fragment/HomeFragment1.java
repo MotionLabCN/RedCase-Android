@@ -12,6 +12,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TableLayout;
 import android.widget.TextView;
 
 import com.blankj.utilcode.util.SPUtils;
@@ -80,7 +81,7 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity> {
 
     private LinearLayout ll_task_empty;//
     private MyListView lv_task;
-
+    private  com.google.android.material.tabs.TabLayout tabs;
     private MyListView lv_1;
     private MyListView lv_2;
     private int appSize = 0; //工作请求列表size
@@ -92,8 +93,10 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity> {
     String name = SPUtils.getInstance().getString(AppConfig.DEVELOP_NAME, "朋友");
     private String[] titles = {"职位推荐", "活动任务"};
     private List<Fragment> fragmentList = new ArrayList<>();
-
+    private PositionRecommendationFragment positionRecommendationFragment;
+    private ActiveTaskFragment activeTaskFragment;
     private int mStatus = SPUtils.getInstance().getInt(AppConfig.SERVICE_STATUS, 1); // 接单状态 1 默认可接单 2 不可接单
+
 
 
     public static HomeFragment1 newInstance() {
@@ -214,7 +217,7 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity> {
         //造数据
         fragmentList.add(new PositionRecommendationFragment());
         fragmentList.add(new ActiveTaskFragment());
-        TabLayout tabs = findViewById(R.id.tab_position);
+        tabs = findViewById(R.id.tab_position);
         ViewPager2 viewPager = findViewById(R.id.vp_position);
         tabs.setSelectedTabIndicatorHeight(0);
 
@@ -264,11 +267,8 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity> {
         });
         //这句话很重要
         tabLayoutMediator.attach();
-        viewPager.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-            @Override
-            public void onGlobalLayout() {
-                updatePagerHeightForChild(viewPager.getRootView(),viewPager);
-            }
+        viewPager.setPageTransformer((page, position) -> {
+//            updatePagerHeightForChild(page,viewPager);
         });
     }
     // 解决ViewPager2 切换时高度问题
@@ -291,6 +291,7 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity> {
 
     @Override
     protected void initData() {
+
         getNewbie();
         String status = SPUtils.getInstance().getString(AppConfig.DEVELOP_STATUS, "1");
 

@@ -47,6 +47,8 @@ public class JobDetailsActivity extends AppActivity {
     private AppCompatButton btn_recommend_oneself;
     private String mPositionId;
     private Boolean SelfRecommendStatus;
+    private String StartPay;
+    private String EndPay;
 
     @Override
     protected int getLayoutId() {
@@ -122,7 +124,17 @@ public class JobDetailsActivity extends AppActivity {
                                 btn_recommend_oneself.setBackgroundResource(R.drawable.button_grey_circle_selector);
                             }
                             tv_position_name.setText(data.getData().getTitle());
-                            tv_salary.setText(data.getData().getStartPay() + "-" + data.getData().getEndPay() + "k/月");
+                            if (data.getData().getStartPay()!=0&&data.getData().getStartPay()>1000){
+                                StartPay= String.valueOf(data.getData().getStartPay()/1000)+"k";
+                            }else {
+                                StartPay= String.valueOf(data.getData().getStartPay())+"元";
+                            }
+                            if (data.getData().getStartPay()!=0&& data.getData().getEndPay()>1000){
+                                EndPay= String.valueOf(data.getData().getEndPay()/1000)+"K";
+                            }else {
+                                EndPay= String.valueOf(data.getData().getEndPay())+"元";
+                            }
+                            tv_salary.setText(StartPay + "-" + EndPay + "/月");
                             tv_service_mode.setText(data.getData().getWorkDaysMode());
                             tv_work_experience.setText(data.getData().getWorkYears());
                             tv_academic_degree.setText(data.getData().getTrainingMode());

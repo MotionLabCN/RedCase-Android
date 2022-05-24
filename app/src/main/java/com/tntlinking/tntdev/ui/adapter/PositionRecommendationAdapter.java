@@ -27,6 +27,8 @@ public class PositionRecommendationAdapter extends BaseAdapter {
     private List<GetDeveloperRecommendsApi.Bean> mList;
     private final LayoutInflater layoutInflater;
     private final Context mContext;
+    private String StartPay;
+    private String EndPay;
 
     public PositionRecommendationAdapter(Context context, List<GetDeveloperRecommendsApi.Bean> list) {
         this.mContext = context;
@@ -90,7 +92,17 @@ public class PositionRecommendationAdapter extends BaseAdapter {
         holder.tv_work_pattern.setText(item.getWorkDaysModeName());
         holder.tv_academic_degree.setText(item.getEducationName());
         holder.tv_work_experience.setText(item.getWorkYearsName());
-        holder.tv_salary.setText(item.getStartPay()/ 1000 + "-" + item.getEndPay()/1000 + "k/月");
+        if (item.getStartPay()!=0&&item.getStartPay()>1000){
+            StartPay= String.valueOf(item.getStartPay()/1000)+"K";
+        }else {
+            StartPay= String.valueOf(item.getStartPay()+"元");
+        }
+        if (item.getStartPay()!=0&& item.getEndPay()>1000){
+            EndPay= String.valueOf(item.getEndPay()/1000)+"K";
+        }else {
+            EndPay= String.valueOf(item.getEndPay())+"元";
+        }
+        holder.tv_salary.setText(StartPay+ "-" + EndPay + "/月");
         holder.tv_content.setText(item.getDescription());
         if (item.getCompanyRecruiterRealName() != null && item.getCompanyRecruiterRealName().length() > 2) {
             String RealName = item.getCompanyRecruiterRealName().substring(1);
@@ -122,7 +134,13 @@ public class PositionRecommendationAdapter extends BaseAdapter {
 
         return convertView;
     }
-
+    public static String subZeroAndDot(String s){
+        if(s.indexOf(".") > 0){
+            s = s.replaceAll("0+?$", "");//去掉多余的0
+            s = s.replaceAll("[.]$", "");//如最后一位是.则去掉
+        }
+        return s;
+    }
     static class ViewHolder {
         TextView tv_position_name;
         TextView tv_work_pattern;
