@@ -1,6 +1,7 @@
 package com.tntlinking.tntdev.ui.fragment;
 
 import android.annotation.SuppressLint;
+import android.view.View;
 
 import com.blankj.utilcode.util.SPUtils;
 import com.hjq.http.EasyHttp;
@@ -11,6 +12,7 @@ import com.tntlinking.tntdev.http.api.GetDeveloperJkStatusApi;
 import com.tntlinking.tntdev.http.api.GetNewbieApi;
 import com.tntlinking.tntdev.http.model.HttpData;
 import com.tntlinking.tntdev.other.AppConfig;
+import com.tntlinking.tntdev.other.HomeChangeListener;
 import com.tntlinking.tntdev.ui.activity.EnterDeveloperActivity;
 import com.tntlinking.tntdev.ui.activity.EvaluationActivity;
 import com.tntlinking.tntdev.ui.activity.EvaluationNeedsTokNowActivity;
@@ -27,7 +29,11 @@ import java.util.List;
 public class ActiveTaskFragment extends TitleBarFragment<MainActivity> {
     private HomeTaskAdapter mTaskAdapter;
     private final List<GetNewbieApi.Bean> mTaskList = new ArrayList<>();
-
+    private HomeChangeListener listener;
+    private MyListView lv_task;
+    public void setListener(HomeChangeListener listener) {
+        this.listener = listener;
+    }
     public static ActiveTaskFragment newInstance() {
         return new ActiveTaskFragment();
     }
@@ -39,7 +45,7 @@ public class ActiveTaskFragment extends TitleBarFragment<MainActivity> {
 
     @Override
     protected void initView() {
-        MyListView lv_task = findViewById(R.id.lv_task);
+        lv_task = findViewById(R.id.lv_task);
         mTaskAdapter = new HomeTaskAdapter(getActivity(), mTaskList);
         lv_task.setAdapter(mTaskAdapter);
 
@@ -76,6 +82,14 @@ public class ActiveTaskFragment extends TitleBarFragment<MainActivity> {
                             mTaskList.clear();
                             mTaskList.addAll(data.getData());
                             mTaskAdapter.setData(mTaskList);
+                            lv_task.post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    int hMeasureSpec = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
+                                    lv_task.measure(0, hMeasureSpec);
+                                    listener.onDataChanged(lv_task.getMeasuredHeight());
+                                }
+                            });
                         }
                     }
                 });

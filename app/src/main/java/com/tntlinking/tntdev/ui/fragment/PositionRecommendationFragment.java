@@ -16,6 +16,7 @@ import com.tntlinking.tntdev.http.api.GetDeveloperRecommendsApi;
 
 import com.tntlinking.tntdev.http.model.HttpData;
 import com.tntlinking.tntdev.other.AppConfig;
+import com.tntlinking.tntdev.other.HomeChangeListener;
 import com.tntlinking.tntdev.ui.activity.JobDetailsActivity;
 import com.tntlinking.tntdev.ui.activity.MainActivity;
 
@@ -32,6 +33,12 @@ public class PositionRecommendationFragment extends TitleBarFragment<MainActivit
     private PositionRecommendationAdapter mPositionRecommendationAdapter;
     private final List<GetDeveloperRecommendsApi.Bean> mList = new ArrayList<>();
     private final String Status=SPUtils.getInstance().getString(AppConfig.DEVELOP_STATUS, "1");;
+    private HomeChangeListener listener;
+
+    public void setListener(HomeChangeListener listener) {
+        this.listener = listener;
+    }
+
     public static PositionRecommendationFragment newInstance() {
         return new PositionRecommendationFragment();
     }
@@ -90,6 +97,14 @@ public class PositionRecommendationFragment extends TitleBarFragment<MainActivit
                             mList.clear();
                             mList.addAll(data.getData());
                             mPositionRecommendationAdapter.setData(mList);
+                            lv_position.post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    int hMeasureSpec = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
+                                    lv_position.measure(0, hMeasureSpec);
+                                    listener.onDataChanged(lv_position.getMeasuredHeight());
+                                }
+                            });
                         } else {
                             lv_position.setVisibility(View.GONE);
                             ll_settled_material_empty.setVisibility(View.VISIBLE);
