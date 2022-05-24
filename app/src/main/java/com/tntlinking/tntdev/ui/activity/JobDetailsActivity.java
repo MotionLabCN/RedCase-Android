@@ -26,6 +26,7 @@ import com.tntlinking.tntdev.http.model.HttpData;
 import com.tntlinking.tntdev.ui.adapter.JobRequirementsAdapter;
 import com.tntlinking.tntdev.ui.adapter.ToolLabelAdapter;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -122,20 +123,11 @@ public class JobDetailsActivity extends AppActivity {
                                 btn_recommend_oneself.setBackgroundResource(R.drawable.button_grey_circle_selector);
                             }
                             tv_position_name.setText(data.getData().getTitle());
-                            if (data.getData().getStartPay() != 0 && data.getData().getStartPay() > 1000) {
-                                StartPay = String.valueOf(data.getData().getStartPay() / 1000);
-                            } else {
-                                double startPay = (double) (data.getData().getStartPay());
-
-                                StartPay = String.valueOf(startPay / 1000);
-                            }
-                            if (data.getData().getEndPay() != 0 && data.getData().getEndPay() > 1000) {
-                                EndPay = String.valueOf(data.getData().getEndPay() / 1000);
-                            } else {
-                                double endPay = (double) (data.getData().getEndPay());
-
-                                EndPay = String.valueOf(endPay / 1000);
-                            }
+                            DecimalFormat decimalFormat = new DecimalFormat("###################.###########");
+                            double startPay = data.getData().getStartPay() / 1000;
+                            StartPay = decimalFormat.format(startPay);
+                            double endPay = data.getData().getEndPay() / 1000;
+                            EndPay = decimalFormat.format(endPay);
                             tv_salary.setText(StartPay + "-" + EndPay + "k/月");
                             tv_service_mode.setText(data.getData().getWorkDaysModeName());
                             tv_work_experience.setText(data.getData().getWorkYearsName());

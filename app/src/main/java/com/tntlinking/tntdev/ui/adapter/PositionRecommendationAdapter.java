@@ -19,6 +19,7 @@ import com.google.android.flexbox.FlexboxLayoutManager;
 import com.tntlinking.tntdev.R;
 import com.tntlinking.tntdev.http.api.GetDeveloperRecommendsApi;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -93,20 +94,11 @@ public class PositionRecommendationAdapter extends BaseAdapter {
         holder.tv_work_pattern.setText(item.getWorkDaysModeName());
         holder.tv_academic_degree.setText(item.getEducationName());
         holder.tv_work_experience.setText(item.getWorkYearsName());
-        if (item.getStartPay() != 0 && item.getStartPay() > 1000) {
-            StartPay = String.valueOf(item.getStartPay() / 1000);
-        } else {
-            double startPay = (double) item.getStartPay();
-
-            StartPay = String.valueOf(startPay / 1000);
-        }
-        if (item.getStartPay() != 0 && item.getEndPay() > 1000) {
-            EndPay = String.valueOf(item.getEndPay() / 1000);
-        } else {
-            double endPay = (double) item.getStartPay();
-
-            EndPay = String.valueOf(endPay / 1000);
-        }
+        DecimalFormat decimalFormat = new DecimalFormat("###################.###########");
+        double startPay = item.getStartPay() / 1000;
+        StartPay = decimalFormat.format(startPay);
+        double endPay = item.getEndPay() / 1000;
+        EndPay = decimalFormat.format(endPay);
         holder.tv_salary.setText(StartPay + "-" + EndPay + "k/月");
         holder.tv_content.setText(item.getDescription());
         if (item.getCompanyRecruiterRealName() != null && item.getCompanyRecruiterRealName().length() > 2) {
