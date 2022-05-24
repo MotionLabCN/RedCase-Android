@@ -94,16 +94,18 @@ public class PositionRecommendationAdapter extends BaseAdapter {
         holder.tv_academic_degree.setText(item.getEducationName());
         holder.tv_work_experience.setText(item.getWorkYearsName());
         if (item.getStartPay() != 0 && item.getStartPay() > 1000) {
-            int startPay = (int) (item.getStartPay() / 1000);
-            StartPay = String.valueOf(startPay);
-        } else {
             StartPay = String.valueOf(item.getStartPay() / 1000);
+        } else {
+            double startPay = (double) item.getStartPay();
+
+            StartPay = String.valueOf(startPay / 1000);
         }
         if (item.getStartPay() != 0 && item.getEndPay() > 1000) {
-            int endPay = (int) (item.getEndPay() / 1000);
-            EndPay = String.valueOf(endPay);
-        } else {
             EndPay = String.valueOf(item.getEndPay() / 1000);
+        } else {
+            double endPay = (double) item.getStartPay();
+
+            EndPay = String.valueOf(endPay / 1000);
         }
         holder.tv_salary.setText(StartPay + "-" + EndPay + "k/月");
         holder.tv_content.setText(item.getDescription());

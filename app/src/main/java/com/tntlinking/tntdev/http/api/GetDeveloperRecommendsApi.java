@@ -16,8 +16,8 @@ public final class GetDeveloperRecommendsApi implements IRequestApi {
         private String positionId;
         private String title;
         private String workDaysModeName;
-        private double startPay;
-        private double endPay;
+        private int startPay;
+        private int endPay;
         private String educationName;
         private String workYearsName;
 
@@ -70,19 +70,19 @@ public final class GetDeveloperRecommendsApi implements IRequestApi {
             this.workDaysModeName = workDaysModeName;
         }
 
-        public double getStartPay() {
+        public int getStartPay() {
             return startPay;
         }
 
-        public void setStartPay(double startPay) {
+        public void setStartPay(int startPay) {
             this.startPay = startPay;
         }
 
-        public double getEndPay() {
+        public int getEndPay() {
             return endPay;
         }
 
-        public void setEndPay(double endPay) {
+        public void setEndPay(int endPay) {
             this.endPay = endPay;
         }
 

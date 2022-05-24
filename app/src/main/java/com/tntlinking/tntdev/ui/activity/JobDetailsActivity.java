@@ -123,16 +123,18 @@ public class JobDetailsActivity extends AppActivity {
                             }
                             tv_position_name.setText(data.getData().getTitle());
                             if (data.getData().getStartPay() != 0 && data.getData().getStartPay() > 1000) {
-                                int startPay = (int) (data.getData().getStartPay() / 1000);
-                                StartPay = String.valueOf(startPay);
-                            } else {
                                 StartPay = String.valueOf(data.getData().getStartPay() / 1000);
-                            }
-                            if (data.getData().getStartPay() != 0 && data.getData().getEndPay() > 1000) {
-                                int endPay = (int) (data.getData().getEndPay() / 1000);
-                                EndPay = String.valueOf(endPay);
                             } else {
+                                double startPay = (double) (data.getData().getStartPay());
+
+                                StartPay = String.valueOf(startPay / 1000);
+                            }
+                            if (data.getData().getEndPay() != 0 && data.getData().getEndPay() > 1000) {
                                 EndPay = String.valueOf(data.getData().getEndPay() / 1000);
+                            } else {
+                                double endPay = (double) (data.getData().getEndPay());
+
+                                EndPay = String.valueOf(endPay / 1000);
                             }
                             tv_salary.setText(StartPay + "-" + EndPay + "k/月");
                             tv_service_mode.setText(data.getData().getWorkDaysModeName());

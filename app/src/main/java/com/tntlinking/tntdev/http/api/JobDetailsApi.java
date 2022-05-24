@@ -26,11 +26,11 @@ public final class JobDetailsApi implements IRequestApi {
         private String createDate;
         private String description;
         private String education;
-        private double endPay;
+        private int endPay;
         private int id;
         private String recruitCount;
         private int recruiterId;
-        private double startPay;
+        private int startPay;
         private int status;
         private String title;
         private String trainingMode;
@@ -175,11 +175,11 @@ public final class JobDetailsApi implements IRequestApi {
             this.education = education;
         }
 
-        public double getEndPay() {
+        public int getEndPay() {
             return endPay;
         }
 
-        public void setEndPay(double endPay) {
+        public void setEndPay(int endPay) {
             this.endPay = endPay;
         }
 
@@ -208,11 +208,11 @@ public final class JobDetailsApi implements IRequestApi {
         }
 
 
-        public double getStartPay() {
+        public int getStartPay() {
             return startPay;
         }
 
-        public void setStartPay(double startPay) {
+        public void setStartPay(int startPay) {
             this.startPay = startPay;
         }
 
