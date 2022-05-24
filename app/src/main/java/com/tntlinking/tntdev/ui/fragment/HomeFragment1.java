@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.renderscript.ScriptGroup;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +13,6 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TableLayout;
 import android.widget.TextView;
 
 import com.blankj.utilcode.util.SPUtils;
@@ -32,6 +32,7 @@ import com.tntlinking.tntdev.http.api.GetNewbieApi;
 import com.tntlinking.tntdev.http.api.UpdateServiceStatusApi;
 import com.tntlinking.tntdev.http.model.HttpData;
 import com.tntlinking.tntdev.other.AppConfig;
+import com.tntlinking.tntdev.other.HomeChangeListener;
 import com.tntlinking.tntdev.other.Utils;
 import com.tntlinking.tntdev.ui.activity.EnterDeveloperActivity;
 import com.tntlinking.tntdev.ui.activity.InterviewActivity;
@@ -61,7 +62,7 @@ import androidx.viewpager2.widget.ViewPager2;
 /**
  * desc   : 首页 Fragment
  */
-public final class HomeFragment1 extends TitleBarFragment<MainActivity> {
+public final class HomeFragment1 extends TitleBarFragment<MainActivity> implements HomeChangeListener {
 
     private TextView tv_avatar;
     private TextView tv_name;
@@ -72,6 +73,7 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity> {
     private LinearLayout ll_question;
     private LinearLayout ll_contact;
     private ViewPager viewPager;
+    private ViewPager2 viewPager2;
     private LinearLayout ll_title;
     private LinearLayout ll_empty;
     private LinearLayout ll_status;// 平台介绍页面
@@ -81,7 +83,7 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity> {
 
     private LinearLayout ll_task_empty;//
     private MyListView lv_task;
-    private  com.google.android.material.tabs.TabLayout tabs;
+
     private MyListView lv_1;
     private MyListView lv_2;
     private int appSize = 0; //工作请求列表size
@@ -93,10 +95,8 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity> {
     String name = SPUtils.getInstance().getString(AppConfig.DEVELOP_NAME, "朋友");
     private String[] titles = {"职位推荐", "活动任务"};
     private List<Fragment> fragmentList = new ArrayList<>();
-    private PositionRecommendationFragment positionRecommendationFragment;
-    private ActiveTaskFragment activeTaskFragment;
-    private int mStatus = SPUtils.getInstance().getInt(AppConfig.SERVICE_STATUS, 1); // 接单状态 1 默认可接单 2 不可接单
 
+    private int mStatus = SPUtils.getInstance().getInt(AppConfig.SERVICE_STATUS, 1); // 接单状态 1 默认可接单 2 不可接单
 
 
     public static HomeFragment1 newInstance() {
@@ -215,13 +215,15 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity> {
             }
         });
         //造数据
-        fragmentList.add(new PositionRecommendationFragment());
-        fragmentList.add(new ActiveTaskFragment());
-        tabs = findViewById(R.id.tab_position);
-        ViewPager2 viewPager = findViewById(R.id.vp_position);
+        PositionRecommendationFragment first = new PositionRecommendationFragment();
+        ActiveTaskFragment second = new ActiveTaskFragment();
+        first.setListener(this);
+        second.setListener(this);
+        fragmentList.add(first);
+        fragmentList.add(second);
+        TabLayout tabs = findViewById(R.id.tab_position);
+        viewPager2 = findViewById(R.id.vp_position);
         tabs.setSelectedTabIndicatorHeight(0);
-
-
         tabs.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
@@ -246,7 +248,7 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity> {
 
         });
 
-        viewPager.setAdapter(new FragmentStateAdapter(this) {
+        viewPager2.setAdapter(new FragmentStateAdapter(this) {
             @NonNull
             @Override
             public Fragment createFragment(int position) {
@@ -258,8 +260,16 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity> {
                 return fragmentList.size();
             }
         });
-        viewPager.setOffscreenPageLimit(2);
-        TabLayoutMediator tabLayoutMediator = new TabLayoutMediator(tabs, viewPager, new TabLayoutMediator.TabConfigurationStrategy() {
+        viewPager2.setOffscreenPageLimit(2);
+        viewPager2.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+            @Override
+            public void onPageSelected(int position) {
+                super.onPageSelected(position);
+                View view = fragmentList.get(position).getView();
+                updatePagerHeight(view, viewPager2);
+            }
+        });
+        TabLayoutMediator tabLayoutMediator = new TabLayoutMediator(tabs, viewPager2, new TabLayoutMediator.TabConfigurationStrategy() {
             @Override
             public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
                 tab.setText(titles[position]);
@@ -267,12 +277,9 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity> {
         });
         //这句话很重要
         tabLayoutMediator.attach();
-        viewPager.setPageTransformer((page, position) -> {
-//            updatePagerHeightForChild(page,viewPager);
-        });
     }
-    // 解决ViewPager2 切换时高度问题
-    private void updatePagerHeightForChild(View view, ViewPager2 pager) {
+
+    private void updatePagerHeight(View view, ViewPager2 pager) {
         view.post(() -> {
             int wMeasureSpec = View.MeasureSpec.makeMeasureSpec(view.getWidth(), View.MeasureSpec.EXACTLY);
             int hMeasureSpec = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
@@ -285,13 +292,22 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity> {
         });
     }
 
-
-
+    private void updatePagerHeightForChild(int height) {
+        viewPager2.post(new Runnable() {
+            @Override
+            public void run() {
+                if (viewPager2.getMeasuredHeight() < height) {
+                    ViewGroup.LayoutParams layoutParams = viewPager2.getLayoutParams();
+                    layoutParams.height = height;
+                    viewPager2.setLayoutParams(layoutParams);
+                }
+            }
+        });
+    }
 
 
     @Override
     protected void initData() {
-
         getNewbie();
         String status = SPUtils.getInstance().getString(AppConfig.DEVELOP_STATUS, "1");
 
@@ -539,6 +555,11 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity> {
                     }
                 });
 
+    }
+
+    @Override
+    public void onDataChanged(int height) {
+        updatePagerHeightForChild(height);
     }
 
     public class MyViewPagerAdapter extends PagerAdapter {

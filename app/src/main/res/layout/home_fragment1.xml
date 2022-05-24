@@ -89,264 +89,260 @@
     </LinearLayout>
 
 
-    <ScrollView
+    <!--    <ScrollView-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:fillViewport="true"-->
+    <!--        android:layout_height="wrap_content">-->
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:fillViewport="true"
         android:layout_height="match_parent">
 
         <LinearLayout
+            android:id="@+id/ll_status"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <LinearLayout
-                android:id="@+id/ll_status"
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_marginTop="@dimen/dp_20"
+                android:gravity="center"
+                android:text="欢迎成为自由开发者"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_24"
+                android:textStyle="bold" />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_20"
-                    android:gravity="center"
-                    android:text="欢迎成为自由开发者"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/sp_24"
-                    android:textStyle="bold" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_10"
+                android:gravity="center"
+                android:text="热爱 / 灵活 / 匠心 / 享受 "
+                android:textColor="@color/gray"
+                android:textSize="@dimen/sp_12" />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_10"
-                    android:gravity="center"
-                    android:text="热爱 / 灵活 / 匠心 / 享受 "
-                    android:textColor="@color/gray"
-                    android:textSize="@dimen/sp_12" />
+            <androidx.viewpager.widget.ViewPager
+                android:id="@+id/viewpager"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_220"
+                android:layout_marginLeft="@dimen/dp_16"
+                android:layout_marginTop="@dimen/dp_32" />
 
-                <androidx.viewpager.widget.ViewPager
-                    android:id="@+id/viewpager"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/dp_220"
-                    android:layout_marginLeft="@dimen/dp_16"
-                    android:layout_marginTop="@dimen/dp_32" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/dp_16"
-                    android:layout_marginTop="@dimen/dp_16"
-                    android:layout_marginRight="@dimen/dp_16"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
-
-
-                    <LinearLayout
-                        android:id="@+id/ll_cooperation"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:orientation="vertical">
-
-                        <ImageView
-                            android:layout_width="@dimen/dp_46"
-                            android:layout_height="@dimen/dp_46"
-                            android:layout_gravity="center"
-                            android:src="@drawable/icon_cooperation" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/dp_5"
-                            android:text="合作模式"
-                            android:textColor="@color/color_text_color"
-                            android:textSize="@dimen/sp_12" />
-                    </LinearLayout>
-
-                    <View
-                        android:layout_width="0dp"
-                        android:layout_height="@dimen/dp_1"
-                        android:layout_weight="1" />
-
-                    <LinearLayout
-                        android:id="@+id/ll_service"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:orientation="vertical">
-
-                        <ImageView
-                            android:layout_width="@dimen/dp_46"
-                            android:layout_height="@dimen/dp_46"
-                            android:layout_gravity="center"
-                            android:src="@drawable/icon_service" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/dp_5"
-                            android:text="服务手册"
-                            android:textColor="@color/color_text_color"
-                            android:textSize="@dimen/sp_12" />
-                    </LinearLayout>
-
-                    <View
-                        android:layout_width="0dp"
-                        android:layout_height="@dimen/dp_1"
-                        android:layout_weight="1" />
-
-                    <LinearLayout
-                        android:id="@+id/ll_question"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:orientation="vertical">
-
-                        <ImageView
-                            android:layout_width="@dimen/dp_46"
-                            android:layout_height="@dimen/dp_46"
-                            android:layout_gravity="center"
-                            android:src="@drawable/icon_question" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/dp_5"
-                            android:text="常见问题"
-                            android:textColor="@color/color_text_color"
-                            android:textSize="@dimen/sp_12" />
-                    </LinearLayout>
-
-                    <View
-                        android:layout_width="0dp"
-                        android:layout_height="@dimen/dp_1"
-                        android:layout_weight="1" />
-
-                    <LinearLayout
-                        android:id="@+id/ll_contact"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:orientation="vertical">
-
-                        <ImageView
-                            android:layout_width="@dimen/dp_46"
-                            android:layout_height="@dimen/dp_46"
-                            android:layout_gravity="center"
-                            android:src="@drawable/icon_contact" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/dp_5"
-                            android:text="联系顾问"
-                            android:textColor="@color/color_text_color"
-                            android:textSize="@dimen/sp_12" />
-                    </LinearLayout>
-
-                </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_16"
+                android:layout_marginTop="@dimen/dp_16"
+                android:layout_marginRight="@dimen/dp_16"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
 
 
                 <LinearLayout
-                    android:id="@+id/ll_tab"
-                    android:layout_width="match_parent"
+                    android:id="@+id/ll_cooperation"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_10"
+                    android:gravity="center"
                     android:orientation="vertical">
 
-                    <com.google.android.material.tabs.TabLayout
-                        android:id="@+id/tab_position"
-                        style="@style/tabLayout_position_or_activity"
-                        android:layout_width="@dimen/dp_200"
-                        android:layout_height="@dimen/dp_50"
-                        app:tabIndicatorHeight="0dp"
-                        app:tabPaddingEnd="@dimen/dp_2"
-                        app:tabPaddingStart="@dimen/dp_16"
-                        app:tabTextAppearance="@style/TabLayoutTextSize" />
-
-                    <androidx.viewpager2.widget.ViewPager2
-                        android:id="@+id/vp_position"
-                        style="@style/ViewPaper_PositionRecommendation" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/ll_task"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:visibility="gone">
+                    <ImageView
+                        android:layout_width="@dimen/dp_46"
+                        android:layout_height="@dimen/dp_46"
+                        android:layout_gravity="center"
+                        android:src="@drawable/icon_cooperation" />
 
                     <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_16"
-                        android:layout_marginBottom="@dimen/dp_16"
-                        android:paddingLeft="@dimen/dp_16"
-                        android:text="活动任务"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/sp_20"
-                        android:textStyle="bold" />
-
-                    <com.tntlinking.tntdev.widget.MyListView
-                        android:id="@+id/lv_task"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:divider="@null"
-                        android:dividerHeight="@dimen/line_size"
-                        android:visibility="visible" />
-
-                    <LinearLayout
-                        android:id="@+id/ll_task_empty"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:gravity="center|top"
-                        android:orientation="vertical"
-                        android:paddingTop="@dimen/dp_20"
-                        android:paddingBottom="@dimen/dp_16"
-                        android:visibility="gone">
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/icon_task_empty" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/dp_10"
-                            android:text="暂无任务"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/sp_15"
-                            android:textStyle="bold" />
-
-
-                    </LinearLayout>
-
-                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginBottom="@dimen/dp_20"
-                        android:orientation="horizontal">
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/icon_cup" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/dp_2"
-                            android:text="更多新手任务敬请期待 最高可领100元"
-                            android:textColor="@color/color_C1C6D2"
-                            android:textSize="@dimen/sp_13" />
-                    </LinearLayout>
+                        android:layout_marginTop="@dimen/dp_5"
+                        android:text="合作模式"
+                        android:textColor="@color/color_text_color"
+                        android:textSize="@dimen/sp_12" />
                 </LinearLayout>
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/dp_1"
+                    android:layout_weight="1" />
+
+                <LinearLayout
+                    android:id="@+id/ll_service"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="@dimen/dp_46"
+                        android:layout_height="@dimen/dp_46"
+                        android:layout_gravity="center"
+                        android:src="@drawable/icon_service" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_5"
+                        android:text="服务手册"
+                        android:textColor="@color/color_text_color"
+                        android:textSize="@dimen/sp_12" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/dp_1"
+                    android:layout_weight="1" />
+
+                <LinearLayout
+                    android:id="@+id/ll_question"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="@dimen/dp_46"
+                        android:layout_height="@dimen/dp_46"
+                        android:layout_gravity="center"
+                        android:src="@drawable/icon_question" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_5"
+                        android:text="常见问题"
+                        android:textColor="@color/color_text_color"
+                        android:textSize="@dimen/sp_12" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/dp_1"
+                    android:layout_weight="1" />
+
+                <LinearLayout
+                    android:id="@+id/ll_contact"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="@dimen/dp_46"
+                        android:layout_height="@dimen/dp_46"
+                        android:layout_gravity="center"
+                        android:src="@drawable/icon_contact" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_5"
+                        android:text="联系顾问"
+                        android:textColor="@color/color_text_color"
+                        android:textSize="@dimen/sp_12" />
+                </LinearLayout>
+
             </LinearLayout>
 
 
+            <LinearLayout
+                android:id="@+id/ll_tab"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_10"
+                android:orientation="vertical">
+
+                <com.google.android.material.tabs.TabLayout
+                    android:id="@+id/tab_position"
+                    style="@style/tabLayout_position_or_activity"
+                    android:layout_width="@dimen/dp_200"
+                    android:layout_height="@dimen/dp_50"
+                    app:tabIndicatorHeight="0dp"
+                    app:tabPaddingEnd="@dimen/dp_2"
+                    app:tabPaddingStart="@dimen/dp_16"
+                    app:tabTextAppearance="@style/TabLayoutTextSize" />
+
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/vp_position"
+                    style="@style/ViewPaper_PositionRecommendation" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_task"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_16"
+                    android:layout_marginBottom="@dimen/dp_16"
+                    android:paddingLeft="@dimen/dp_16"
+                    android:text="活动任务"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp_20"
+                    android:textStyle="bold" />
+
+                <com.tntlinking.tntdev.widget.MyListView
+                    android:id="@+id/lv_task"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:divider="@null"
+                    android:dividerHeight="@dimen/line_size"
+                    android:visibility="visible" />
+
+                <LinearLayout
+                    android:id="@+id/ll_task_empty"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center|top"
+                    android:orientation="vertical"
+                    android:paddingTop="@dimen/dp_20"
+                    android:paddingBottom="@dimen/dp_16"
+                    android:visibility="gone">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/icon_task_empty" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_10"
+                        android:text="暂无任务"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/sp_15"
+                        android:textStyle="bold" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="@dimen/dp_20"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/icon_cup" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dp_2"
+                        android:text="更多新手任务敬请期待 最高可领100元"
+                        android:textColor="@color/color_C1C6D2"
+                        android:textSize="@dimen/sp_13" />
+                </LinearLayout>
+            </LinearLayout>
         </LinearLayout>
 
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
+
 </LinearLayout>
