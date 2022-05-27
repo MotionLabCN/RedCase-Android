@@ -152,6 +152,11 @@ android {
                 outputFileName += '.apk'
             }
         }
+
+        lintOptions {
+            checkReleaseBuilds false
+            abortOnError false
+        }
     }
 
 
