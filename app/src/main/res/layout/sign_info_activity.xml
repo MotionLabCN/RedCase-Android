@@ -40,6 +40,18 @@
         android:layout_marginRight="@dimen/dp_16"
         android:background="#FFECECEC" />
 
+    <TextView
+        android:id="@+id/tv_progress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/dp_15"
+        android:drawableLeft="@drawable/icon_warning"
+        android:drawablePadding="@dimen/dp_5"
+        android:layout_marginTop="@dimen/dp_6"
+        android:text="为保证您实名认证成功，请填写真实姓名！"
+        android:textColor="@color/color_FB8B39"
+        android:textSize="@dimen/sp_13" />
+
     <com.hjq.widget.view.ClearEditText
         android:id="@+id/et_sign_info_phone"
         style="@style/EditTextStyleNew"

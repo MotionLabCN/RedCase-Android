@@ -18,6 +18,7 @@ import com.google.android.flexbox.FlexDirection;
 import com.google.android.flexbox.FlexboxLayoutManager;
 import com.tntlinking.tntdev.R;
 import com.tntlinking.tntdev.http.api.GetDeveloperRecommendsApi;
+import com.tntlinking.tntdev.other.OnItemClickListener;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -32,6 +33,10 @@ public class PositionRecommendationAdapter extends BaseAdapter {
     private String StartPay;
     private String EndPay;
 
+    private OnItemClickListener mOnItemClickListener;
+    public void setOnItemClickListener(OnItemClickListener mOnItemSelectListener) {
+        this.mOnItemClickListener = mOnItemSelectListener;
+    }
     public PositionRecommendationAdapter(Context context, List<GetDeveloperRecommendsApi.Bean> list) {
         this.mContext = context;
         this.mList = list;
@@ -84,6 +89,7 @@ public class PositionRecommendationAdapter extends BaseAdapter {
             holder.tv_professional_title = convertView.findViewById(R.id.tv_professional_title);
             holder.tv_company = convertView.findViewById(R.id.tv_company);
             holder.iv_recommend = convertView.findViewById(R.id.iv_recommend);
+            holder.iv_close = convertView.findViewById(R.id.iv_close);
             holder.rv_job_requirements = convertView.findViewById(R.id.rv_job_requirements);
             convertView.setTag(holder);
         } else {
@@ -128,7 +134,14 @@ public class PositionRecommendationAdapter extends BaseAdapter {
         JobRequirementsAdapter adapter = new JobRequirementsAdapter(mContext, mStringArrayList);
         holder.rv_job_requirements.setAdapter(adapter);
 
-
+        holder.iv_close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mOnItemClickListener != null) {
+                    mOnItemClickListener.onItemClick(position);
+                }
+            }
+        });
         return convertView;
     }
 
@@ -155,6 +168,7 @@ public class PositionRecommendationAdapter extends BaseAdapter {
         TextView tv_job_skills_name2;
         TextView tv_job_skills_name3;
         ImageView iv_recommend;
+        ImageView iv_close;
         RecyclerView rv_job_requirements;
     }
 
