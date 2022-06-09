@@ -158,7 +158,6 @@ public class PositionRecommendationFragment extends TitleBarFragment<MainActivit
 
                         toast("职位信息关闭成功");
                         dialog.dismiss();
-                        getDeveloperRecommends();
 
                     }
                 });
