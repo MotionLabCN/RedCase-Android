@@ -356,7 +356,6 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity> implemen
 
             ll_tab.setVisibility(View.VISIBLE);
             ll_task.setVisibility(View.GONE);
-
         } else {
             tv_order_switching.setText("不接单");
             tv_order_switching.setTextColor(getResources().getColor(R.color.color_444E64));
