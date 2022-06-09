@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
@@ -63,6 +64,7 @@ public final class BrowserActivity extends AppActivity
         }
         context.startActivity(intent);
     }
+
     private StatusLayout mStatusLayout;
     private ProgressBar mProgressBar;
     private SmartRefreshLayout mRefreshLayout;
@@ -120,10 +122,6 @@ public final class BrowserActivity extends AppActivity
             }
         }
 
-//        @JavascriptInterface //js接口声明
-//        public void getTitle(String title) {
-//
-//        }
     }
 
 
@@ -164,6 +162,7 @@ public final class BrowserActivity extends AppActivity
         reload();
     }
 
+    private String mUrl = "";
     private class AppBrowserViewClient extends BrowserView.BrowserViewClient {
 
         /**
@@ -181,6 +180,7 @@ public final class BrowserActivity extends AppActivity
         @Override
         public void onPageStarted(WebView view, String url, Bitmap favicon) {
             mProgressBar.setVisibility(View.VISIBLE);
+            mUrl = url;
         }
 
         /**
@@ -191,6 +191,10 @@ public final class BrowserActivity extends AppActivity
             mProgressBar.setVisibility(View.GONE);
             mRefreshLayout.finishRefresh();
             showComplete();
+            //判断域名一样，后面不一样的时候重新刷新加载问题
+            if (!url.equals(mUrl)){
+                view.reload();
+            }
         }
     }
 

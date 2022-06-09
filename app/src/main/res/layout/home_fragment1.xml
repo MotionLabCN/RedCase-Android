@@ -17,7 +17,6 @@
     <!--        app:rightTitle=""-->
     <!--        app:title="" />-->
 
-
     <LinearLayout
         android:id="@+id/ll_title"
         android:layout_width="match_parent"
@@ -88,11 +87,10 @@
 
     </LinearLayout>
 
-
-    <!--    <ScrollView-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:fillViewport="true"-->
-    <!--        android:layout_height="wrap_content">-->
+    <!--        <ScrollView-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:fillViewport="true"-->
+    <!--            android:layout_height="wrap_content">-->
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -344,5 +342,6 @@
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>
+
 
 </LinearLayout>

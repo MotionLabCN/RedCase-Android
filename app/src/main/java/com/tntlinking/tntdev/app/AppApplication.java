@@ -10,6 +10,13 @@ import android.text.TextUtils;
 
 import com.blankj.utilcode.util.SPUtils;
 import com.hjq.bar.TitleBar;
+import com.scwang.smart.refresh.footer.ClassicsFooter;
+import com.scwang.smart.refresh.header.ClassicsHeader;
+import com.scwang.smart.refresh.layout.api.RefreshFooter;
+import com.scwang.smart.refresh.layout.api.RefreshHeader;
+import com.scwang.smart.refresh.layout.api.RefreshLayout;
+import com.scwang.smart.refresh.layout.listener.DefaultRefreshFooterCreator;
+import com.scwang.smart.refresh.layout.listener.DefaultRefreshHeaderCreator;
 import com.tntlinking.tntdev.R;
 import com.hjq.gson.factory.GsonFactory;
 import com.hjq.http.EasyConfig;
@@ -91,40 +98,41 @@ public final class AppApplication extends Application {
         // 设置标题栏初始化器
         TitleBar.setDefaultStyle(new TitleBarStyle());
 
-        // 设置全局的 Header 构建器
-        SmartRefreshLayout.setDefaultRefreshHeaderCreator((cx, layout) -> new MaterialHeader(application).setColorSchemeColors(ContextCompat.getColor(application, R.color.common_accent_color)));
-        // 设置全局的 Footer 构建器
-        SmartRefreshLayout.setDefaultRefreshFooterCreator((cx, layout) -> new SmartBallPulseFooter(application));
-        // 设置全局初始化器
-        SmartRefreshLayout.setDefaultRefreshInitializer((cx, layout) -> {
-            // 刷新头部是否跟随内容偏移
-            layout.setEnableHeaderTranslationContent(true)
-                    // 刷新尾部是否跟随内容偏移
-                    .setEnableFooterTranslationContent(true)
-                    // 加载更多是否跟随内容偏移
-                    .setEnableFooterFollowWhenNoMoreData(true)
-                    // 内容不满一页时是否可以上拉加载更多
-                    .setEnableLoadMoreWhenContentNotFull(false)
-                    // 仿苹果越界效果开关
-                    .setEnableOverScrollDrag(false);
-        });
+//        // 设置全局的 Header 构建器
+//        SmartRefreshLayout.setDefaultRefreshHeaderCreator((cx, layout) -> new MaterialHeader(application).setColorSchemeColors(ContextCompat.getColor(application, R.color.common_accent_color)));
+//        // 设置全局的 Footer 构建器
+//        SmartRefreshLayout.setDefaultRefreshFooterCreator((cx, layout) -> new SmartBallPulseFooter(application));
+//        // 设置全局初始化器
+//        SmartRefreshLayout.setDefaultRefreshInitializer((cx, layout) -> {
+//            // 刷新头部是否跟随内容偏移
+//            layout.setEnableHeaderTranslationContent(true)
+//                    // 刷新尾部是否跟随内容偏移
+//                    .setEnableFooterTranslationContent(true)
+//                    // 加载更多是否跟随内容偏移
+//                    .setEnableFooterFollowWhenNoMoreData(true)
+//                    // 内容不满一页时是否可以上拉加载更多
+//                    .setEnableLoadMoreWhenContentNotFull(false)
+//                    // 仿苹果越界效果开关
+//                    .setEnableOverScrollDrag(false);
+//        });
 
-//        //设置全局的Header构建器
-//        SmartRefreshLayout.setDefaultRefreshHeaderCreator(new DefaultRefreshHeaderCreator() {
-//            @Override
-//            public RefreshHeader createRefreshHeader(Context context, RefreshLayout layout) {
-//                layout.setPrimaryColorsId(R.color.common_accent_color, android.R.color.white);//全局设置主题颜色
-//                return new ClassicsHeader(context);//.setTimeFormat(new DynamicTimeFormat("更新于 %s"));//指定为经典Header，默认是 贝塞尔雷达Header
-//            }
-//        });
-//        //设置全局的Footer构建器
-//        SmartRefreshLayout.setDefaultRefreshFooterCreator(new DefaultRefreshFooterCreator() {
-//            @Override
-//            public RefreshFooter createRefreshFooter(Context context, RefreshLayout layout) {
-//                //指定为经典Footer，默认是 BallPulseFooter
-//                return new ClassicsFooter(context).setDrawableSize(20);
-//            }
-//        });
+        //设置全局的Header构建器
+        SmartRefreshLayout.setDefaultRefreshHeaderCreator(new DefaultRefreshHeaderCreator() {
+            @Override
+            public RefreshHeader createRefreshHeader(Context context, RefreshLayout layout) {
+                layout.setPrimaryColorsId(R.color.white, android.R.color.background_dark);//全局设置主题颜色
+
+                return new ClassicsHeader(context).setEnableLastTime(false);//.setTimeFormat(new DynamicTimeFormat("更新于 %s"));//指定为经典Header，默认是 贝塞尔雷达Header
+            }
+        });
+        //设置全局的Footer构建器
+        SmartRefreshLayout.setDefaultRefreshFooterCreator(new DefaultRefreshFooterCreator() {
+            @Override
+            public RefreshFooter createRefreshFooter(Context context, RefreshLayout layout) {
+                //指定为经典Footer，默认是 BallPulseFooter
+                return new ClassicsFooter(context).setDrawableSize(20);
+            }
+        });
 
         // 初始化吐司
         ToastUtils.init(application, new ToastStyle());

@@ -2,21 +2,25 @@ package com.tntlinking.tntdev.ui.fragment;
 
 import android.content.Intent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 
 import com.blankj.utilcode.util.SPUtils;
+import com.hjq.base.BaseDialog;
 import com.hjq.http.EasyHttp;
 import com.hjq.http.listener.HttpCallback;
 import com.tntlinking.tntdev.R;
 import com.tntlinking.tntdev.app.TitleBarFragment;
+import com.tntlinking.tntdev.http.api.DeleteDeveloperRecommendsApi;
 import com.tntlinking.tntdev.http.api.GetDeveloperRecommendsApi;
 
 import com.tntlinking.tntdev.http.model.HttpData;
 import com.tntlinking.tntdev.other.AppConfig;
 import com.tntlinking.tntdev.other.HomeChangeListener;
+import com.tntlinking.tntdev.other.OnItemClickListener;
 import com.tntlinking.tntdev.ui.activity.JobDetailsActivity;
 import com.tntlinking.tntdev.ui.activity.MainActivity;
 
@@ -32,7 +36,7 @@ public class PositionRecommendationFragment extends TitleBarFragment<MainActivit
     private TextView tv_name;
     private PositionRecommendationAdapter mPositionRecommendationAdapter;
     private final List<GetDeveloperRecommendsApi.Bean> mList = new ArrayList<>();
-    private final String Status=SPUtils.getInstance().getString(AppConfig.DEVELOP_STATUS, "1");;
+    private final String Status = SPUtils.getInstance().getString(AppConfig.DEVELOP_STATUS, "1");
     private HomeChangeListener listener;
 
     public void setListener(HomeChangeListener listener) {
@@ -80,7 +84,26 @@ public class PositionRecommendationFragment extends TitleBarFragment<MainActivit
             Intent intent = new Intent(getActivity(), JobDetailsActivity.class);
             intent.putExtra("positionId", item.getPositionId());
             intent.putExtra("selfRecommendStatus", item.getSelfRecommendStatus());
-            startActivityForResult(intent,1);
+            startActivityForResult(intent, 1);
+        });
+        mPositionRecommendationAdapter.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                GetDeveloperRecommendsApi.Bean item = mPositionRecommendationAdapter.getItem(position);
+
+                new BaseDialog.Builder<>(getActivity())
+                        .setContentView(R.layout.check_order_status_dialog)
+                        .setAnimStyle(BaseDialog.ANIM_SCALE)
+                        .setText(R.id.tv_title,"关闭职位信息")
+                        .setText(R.id.tv_content,"是否关闭当前职位信息")
+                        .setText(R.id.btn_dialog_custom_cancel, "取消")
+                        .setText(R.id.btn_dialog_custom_ok, "确认")
+                        .setOnClickListener(R.id.btn_dialog_custom_cancel, (BaseDialog.OnClickListener<Button>) (dialog, button) -> dialog.dismiss())
+                        .setOnClickListener(R.id.btn_dialog_custom_ok, (dialog, views) -> {
+
+                            deleteDeveloperRecommends(Integer.valueOf(item.getPositionId()), item.getRecommendByOperate(), position, dialog);
+                        }).show();
+            }
         });
     }
 
@@ -116,10 +139,34 @@ public class PositionRecommendationFragment extends TitleBarFragment<MainActivit
     }
 
 
+    /**
+     * 删除某个推荐职位
+     *
+     * @param operate
+     * @param position
+     * @param dialog
+     */
+    private void deleteDeveloperRecommends(int positionId, boolean operate, int position, BaseDialog dialog) {
+        EasyHttp.delete(this)
+                .api(new DeleteDeveloperRecommendsApi()
+                        .setPositionId(positionId)
+                        .setRecommendByOperate(operate))
+                .request(new HttpCallback<HttpData<Void>>(this) {
+                    @Override
+                    public void onSucceed(HttpData<Void> data) {
+                        getDeveloperRecommends();//重新刷新界面获取列表数据
+
+                        toast("职位信息关闭成功");
+                        dialog.dismiss();
+
+                    }
+                });
+    }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode==1){
+        if (resultCode == 1) {
             getDeveloperRecommends();
         }
     }

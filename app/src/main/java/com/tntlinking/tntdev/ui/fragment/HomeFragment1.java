@@ -1,5 +1,6 @@
 package com.tntlinking.tntdev.ui.fragment;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -23,10 +24,12 @@ import com.hjq.base.BaseDialog;
 import com.hjq.http.EasyHttp;
 
 import com.hjq.http.listener.HttpCallback;
+
 import com.tntlinking.tntdev.R;
 import com.tntlinking.tntdev.app.TitleBarFragment;
 import com.tntlinking.tntdev.http.api.AppListApi;
 import com.tntlinking.tntdev.http.api.GetAppUpdateApi;
+import com.tntlinking.tntdev.http.api.GetDeveloperJkStatusApi;
 import com.tntlinking.tntdev.http.api.GetDeveloperRecommendsApi;
 import com.tntlinking.tntdev.http.api.GetNewbieApi;
 import com.tntlinking.tntdev.http.api.UpdateServiceStatusApi;
@@ -35,7 +38,10 @@ import com.tntlinking.tntdev.other.AppConfig;
 import com.tntlinking.tntdev.other.HomeChangeListener;
 import com.tntlinking.tntdev.other.Utils;
 import com.tntlinking.tntdev.ui.activity.EnterDeveloperActivity;
+import com.tntlinking.tntdev.ui.activity.EvaluationActivity;
+import com.tntlinking.tntdev.ui.activity.EvaluationNeedsTokNowActivity;
 import com.tntlinking.tntdev.ui.activity.InterviewActivity;
+import com.tntlinking.tntdev.ui.activity.JkBrowserActivity;
 import com.tntlinking.tntdev.ui.activity.MDViewActivity;
 import com.tntlinking.tntdev.ui.activity.MainActivity;
 import com.tntlinking.tntdev.ui.activity.PDFViewActivity;
@@ -83,7 +89,6 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity> implemen
 
     private LinearLayout ll_task_empty;//
     private MyListView lv_task;
-
     private MyListView lv_1;
     private MyListView lv_2;
     private int appSize = 0; //工作请求列表size
@@ -133,7 +138,6 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity> implemen
 
         tv_avatar.setText(Utils.formatName(name));
         tv_name.setText("你好," + name);
-
         ImmersionBar.setTitleBar(this, ll_title);
         setOnClickListener(tv_order_switching, tv_avatar, ll_cooperation, ll_service, ll_question, ll_contact);
 
@@ -176,6 +180,43 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity> implemen
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 GetNewbieApi.Bean item = mTaskAdapter.getItem(position);
+//                if (item.getTaskId() == 2) { //入驻任务
+//                    if (item.getTaskStatus() == 0 || item.getTaskStatus() == 1) { //做任务
+//                        startActivity(EnterDeveloperActivity.class);
+//                    } else if (item.getTaskStatus() == 2) {
+//                        if (item.getRewardStatus() == 0 || item.getRewardStatus() == 1) {// 已完成
+//                            startActivity(SaveQRActivity.class);
+//                        }
+//                    }
+//                } else if (item.getTaskId() == 3) {//签订协议任务
+//
+//                    String status = SPUtils.getInstance().getString(AppConfig.DEVELOP_STATUS, "1");
+//                    if (status.equals("3")) {
+//                        if (item.getTaskStatus() == 0 || item.getTaskStatus() == 1) { //做任务
+//                            startActivity(SignContactActivity.class);
+//                        } else if (item.getTaskStatus() == 2) {
+//                            if (item.getRewardStatus() == 0 || item.getRewardStatus() == 1) {// 已完成
+//                                startActivity(SaveQRActivity.class);
+//                            }
+//                        }
+//                    } else {
+//                        new BaseDialog.Builder<>(getActivity())
+//                                .setContentView(R.layout.write_daily_delete_dialog)
+//                                .setAnimStyle(BaseDialog.ANIM_SCALE)
+//                                .setText(R.id.tv_title, "请先完成“完善入驻信息”任务")
+//                                .setText(R.id.btn_dialog_custom_cancel, "取消")
+//                                .setText(R.id.btn_dialog_custom_ok, "做任务")
+//                                .setOnClickListener(R.id.btn_dialog_custom_cancel, (BaseDialog.OnClickListener<Button>) (dialog, button) -> dialog.dismiss())
+//                                .setOnClickListener(R.id.btn_dialog_custom_ok, (dialog, views) -> {
+//
+//                                    startActivity(EnterDeveloperActivity.class);
+//                                    dialog.dismiss();
+//                                })
+//                                .show();
+//                    }
+//
+//                }
+
                 if (item.getTaskId() == 2) { //入驻任务
                     if (item.getTaskStatus() == 0 || item.getTaskStatus() == 1) { //做任务
                         startActivity(EnterDeveloperActivity.class);
@@ -184,33 +225,16 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity> implemen
                             startActivity(SaveQRActivity.class);
                         }
                     }
-                } else if (item.getTaskId() == 3) {//签订协议任务
-
-                    String status = SPUtils.getInstance().getString(AppConfig.DEVELOP_STATUS, "1");
-                    if (status.equals("3")) {
-                        if (item.getTaskStatus() == 0 || item.getTaskStatus() == 1) { //做任务
-                            startActivity(SignContactActivity.class);
-                        } else if (item.getTaskStatus() == 2) {
-                            if (item.getRewardStatus() == 0 || item.getRewardStatus() == 1) {// 已完成
-                                startActivity(SaveQRActivity.class);
-                            }
+                } else if (item.getTaskId() == 4) {//即可测评
+                    getDeveloperJkStatus();
+                } else {//签订协议任务
+                    if (item.getTaskStatus() == 0 || item.getTaskStatus() == 1) { //做任务
+                        startActivity(SignContactActivity.class);
+                    } else if (item.getTaskStatus() == 2) {
+                        if (item.getRewardStatus() == 0 || item.getRewardStatus() == 1) {// 已完成
+                            startActivity(SaveQRActivity.class);
                         }
-                    } else {
-                        new BaseDialog.Builder<>(getActivity())
-                                .setContentView(R.layout.write_daily_delete_dialog)
-                                .setAnimStyle(BaseDialog.ANIM_SCALE)
-                                .setText(R.id.tv_title, "请先完成“完善入驻信息”任务")
-                                .setText(R.id.btn_dialog_custom_cancel, "取消")
-                                .setText(R.id.btn_dialog_custom_ok, "做任务")
-                                .setOnClickListener(R.id.btn_dialog_custom_cancel, (BaseDialog.OnClickListener<Button>) (dialog, button) -> dialog.dismiss())
-                                .setOnClickListener(R.id.btn_dialog_custom_ok, (dialog, views) -> {
-
-                                    startActivity(EnterDeveloperActivity.class);
-                                    dialog.dismiss();
-                                })
-                                .show();
                     }
-
                 }
             }
         });
@@ -366,6 +390,29 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity> implemen
                             ll_task.setVisibility(View.VISIBLE);
                         }
 
+
+                    }
+                });
+    }
+
+    private void getDeveloperJkStatus() {
+        EasyHttp.get(this)
+                .api(new GetDeveloperJkStatusApi())
+                .request(new HttpCallback<HttpData<GetDeveloperJkStatusApi.Bean>>(this) {
+
+                    @SuppressLint("SetTextI18n")
+                    @Override
+                    public void onSucceed(HttpData<GetDeveloperJkStatusApi.Bean> data) {
+                        //1->待认证  2->待审核   3->审核成功 4->审核失败
+                        String mStatus = SPUtils.getInstance().getString(AppConfig.DEVELOP_STATUS, "1");
+                        if (mStatus.equals("1")) {
+                            startActivity(EvaluationActivity.class);
+                        } else if (data.getData() != null && data.getData().getUserPlanStatus() == 0) {
+                            startActivity(EvaluationNeedsTokNowActivity.class);
+                        } else {
+                            JkBrowserActivity.start(getActivity(), data.getData().getPlanUrl());
+
+                        }
 
                     }
                 });
@@ -561,6 +608,7 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity> implemen
     public void onDataChanged(int height) {
         updatePagerHeightForChild(height);
     }
+
 
     public class MyViewPagerAdapter extends PagerAdapter {
         private Context mContext;

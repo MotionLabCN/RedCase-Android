@@ -86,7 +86,7 @@ public final class TreatyFragment extends TitleBarFragment<MainActivity> impleme
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 AppListApi.Bean item = (AppListApi.Bean) mServiceAdapter.getItem(position);
-                if (!TextUtils.isEmpty(item.getServiceName())) {
+                if (!TextUtils.isEmpty(item.getServiceName()) && item.getServiceName().equals("服务中")) {
 
                     Intent intent = new Intent(getActivity(), WriteDailyActivity.class);
                     intent.putExtra("orderId", item.getId());
@@ -107,7 +107,7 @@ public final class TreatyFragment extends TitleBarFragment<MainActivity> impleme
 
         if (status.equals("3")) {
             getAppList();
-        }else {
+        } else {
             toast("您还没有认证");
             ll_empty.setVisibility(View.VISIBLE);
         }
@@ -203,10 +203,10 @@ public final class TreatyFragment extends TitleBarFragment<MainActivity> impleme
                             if (appSize + interSize == 0) {
                                 ll_empty.setVisibility(View.VISIBLE);
                             } else {
-                                mServiceAdapter.setData(mServiceList);
                                 ll_empty.setVisibility(View.GONE);
-
                             }
+                            mServiceAdapter.setData(mServiceList);
+
                             mHistoryList.addAll(data.getData());
                             mHistoryAdapter.setData(mHistoryList);
                             tv_footer.setVisibility(View.VISIBLE);
@@ -217,9 +217,10 @@ public final class TreatyFragment extends TitleBarFragment<MainActivity> impleme
                             if (appSize + interSize == 0) {
                                 ll_empty.setVisibility(View.VISIBLE);
                             } else {
-                                mServiceAdapter.setData(mServiceList);
                                 ll_empty.setVisibility(View.GONE);
                             }
+                            mServiceAdapter.setData(mServiceList);
+
                             ll_history_empty.setVisibility(View.VISIBLE);
                             tv_footer.setVisibility(View.GONE);
                         }

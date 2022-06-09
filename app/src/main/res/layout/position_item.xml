@@ -63,7 +63,7 @@
                 android:gravity="right"
                 android:maxLines="1"
                 android:singleLine="true"
-                android:text="10-11k·月"
+                android:text="10-11k/月"
                 android:textColor="@color/main_color"
                 android:textStyle="bold" />
         </LinearLayout>
@@ -221,13 +221,14 @@
                 android:textSize="@dimen/sp_10" />
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_10"
+                android:layout_weight="1"
                 android:orientation="vertical">
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     tools:ignore="UseCompoundDrawables">
@@ -268,6 +269,42 @@
                     android:textSize="@dimen/sp_12" />
             </LinearLayout>
 
+            <ImageView
+                android:id="@+id/iv_close"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/dp_16"
+                android:layout_marginBottom="@dimen/dp_2"
+                android:layout_gravity="bottom"
+                android:src="@drawable/icon_close_position" />
+
         </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/ll_settled_material_empty"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center|top"
+        android:orientation="vertical"
+        android:paddingTop="@dimen/dp_20"
+        android:paddingBottom="@dimen/dp_16"
+        android:visibility="gone"
+        tools:ignore="UseCompoundDrawables">
+
+        <ImageView
+            android:layout_width="@dimen/dp_64"
+            android:layout_height="@dimen/dp_64"
+            android:src="@drawable/bg_home_work_empty" />
+
+        <TextView
+            android:id="@+id/tv_name1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_10"
+            android:text="完善入驻资料后,再来查看吧!"
+            android:textColor="@color/color_7E89A3"
+            android:textSize="@dimen/sp_13" />
+
+
     </LinearLayout>
 </com.hjq.shape.layout.ShapeFrameLayout>

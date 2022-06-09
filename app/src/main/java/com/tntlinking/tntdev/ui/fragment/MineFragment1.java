@@ -17,6 +17,9 @@ import com.hjq.base.BaseDialog;
 import com.hjq.http.EasyHttp;
 import com.hjq.http.listener.HttpCallback;
 import com.hjq.widget.layout.SettingBar;
+import com.scwang.smart.refresh.layout.SmartRefreshLayout;
+import com.scwang.smart.refresh.layout.api.RefreshLayout;
+import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener;
 import com.tntlinking.tntdev.R;
 import com.tntlinking.tntdev.aop.SingleClick;
 import com.tntlinking.tntdev.app.TitleBarFragment;
@@ -46,7 +49,8 @@ import androidx.annotation.RequiresApi;
 /**
  * desc   : 我的 Fragment
  */
-public final class MineFragment1 extends TitleBarFragment<MainActivity> {
+public final class MineFragment1 extends TitleBarFragment<MainActivity> implements OnRefreshLoadMoreListener {
+    private SmartRefreshLayout mRefreshLayout;
 
     private SettingBar mPersonDataIncome;
     private SettingBar mPersonDataInterview;
@@ -97,6 +101,10 @@ public final class MineFragment1 extends TitleBarFragment<MainActivity> {
         tv_position = findViewById(R.id.tv_position);
         tv_sign_num = findViewById(R.id.tv_sign_num);
         tv_profit_total = findViewById(R.id.tv_profit_total);
+
+        mRefreshLayout = findViewById(R.id.rl_status_refresh);
+        mRefreshLayout.setOnRefreshLoadMoreListener(this);
+        mRefreshLayout.setEnableLoadMore(false);
 
         setOnClickListener(mPersonDataIncome, mPersonDataSetting, mPersonDataInterview,
                 person_data_private, person_data_deal, person_data_dev, person_data_evaluation, person_data_about, person_data_recommend, person_data_service);
@@ -153,6 +161,7 @@ public final class MineFragment1 extends TitleBarFragment<MainActivity> {
             startActivity(InterviewActivity.class);
         } else if (view == person_data_private) {// 隐私政策
             BrowserActivity.start(getActivity(), AppConfig.PRIVATE_URL);
+//            BrowserActivity.start(getActivity(), "https://talent-business.tntlinking.com/#/page/article?pageCode=5f537d5726744c0ab632f8379eeae3e5");
         } else if (view == person_data_deal) {// 用户协议
             BrowserActivity.start(getActivity(), AppConfig.AGREEMENT_URL);
         } else if (view == mPersonDataSetting) {// 账户设置
@@ -185,14 +194,17 @@ public final class MineFragment1 extends TitleBarFragment<MainActivity> {
                     @Override
                     public void onSucceed(HttpData<GetDeveloperStatusApi.Bean> data) {
                         SPUtils.getInstance().put(AppConfig.CAREER_ID, data.getData().getCareerDirectionId());
-
+                        mRefreshLayout.finishRefresh();
                         if (TextUtils.isEmpty(data.getData().getRealName())) {
                             tv_avatar.setText("朋友");
+                            tv_name.setText("你好，新朋友");
+                            tv_position.setText("尚未确认职业");
                         } else {
                             tv_avatar.setText(Utils.formatName(data.getData().getRealName()));
+                            tv_name.setText(data.getData().getRealName());
+                            tv_position.setText(data.getData().getCareerDirection());
                         }
-                        tv_name.setText(data.getData().getRealName());
-                        tv_position.setText(data.getData().getCareerDirection());
+
                         tv_sign_num.setText(data.getData().getSignContractNum() + "次");
                         tv_profit_total.setText("¥" + data.getData().getProfitTotal());
                         mStatus = data.getData().getStatus();
@@ -316,4 +328,14 @@ public final class MineFragment1 extends TitleBarFragment<MainActivity> {
                     }
                 });
     }
+
+    @Override
+    public void onRefresh(@NonNull RefreshLayout refreshLayout) {
+            getData();
+    }
+    @Override
+    public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
+
+    }
+
 }

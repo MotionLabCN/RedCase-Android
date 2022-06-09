@@ -23,10 +23,11 @@ import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
 /**
  * 账单明细列表页面
  */
-public final class IncomeListActivity extends AppActivity implements  OnRefreshLoadMoreListener,
+public final class IncomeListActivity extends AppActivity implements OnRefreshLoadMoreListener,
         BaseAdapter.OnItemClickListener {
 
 
@@ -96,14 +97,16 @@ public final class IncomeListActivity extends AppActivity implements  OnRefreshL
                                 mList.clear();
                                 mList.addAll(data.getData().getList());
                                 mAdapter.setData(mList);
-                                mRefreshLayout.finishRefresh();
                             } else {
-                                mList.addAll(data.getData().getList());
-                                mAdapter.setData(mList);
+                                if (pageNum == Integer.valueOf(data.getData().getPageNum())) { //当前pageNum 是否等于后台传过来的当前页pagenum 数
+                                    mList.addAll(data.getData().getList());
+                                    mAdapter.setData(mList);
+
+                                }
                                 mRefreshLayout.finishLoadMore();
                             }
 
-                        }else {
+                        } else {
                             ll_empty.setVisibility(View.VISIBLE);
                         }
 
