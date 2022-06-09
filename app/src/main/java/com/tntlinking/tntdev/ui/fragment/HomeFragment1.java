@@ -24,9 +24,7 @@ import com.hjq.base.BaseDialog;
 import com.hjq.http.EasyHttp;
 
 import com.hjq.http.listener.HttpCallback;
-import com.scwang.smart.refresh.layout.SmartRefreshLayout;
-import com.scwang.smart.refresh.layout.api.RefreshLayout;
-import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener;
+
 import com.tntlinking.tntdev.R;
 import com.tntlinking.tntdev.app.TitleBarFragment;
 import com.tntlinking.tntdev.http.api.AppListApi;
@@ -70,7 +68,7 @@ import androidx.viewpager2.widget.ViewPager2;
 /**
  * desc   : 首页 Fragment
  */
-public final class HomeFragment1 extends TitleBarFragment<MainActivity> implements HomeChangeListener, OnRefreshLoadMoreListener {
+public final class HomeFragment1 extends TitleBarFragment<MainActivity> implements HomeChangeListener {
 
     private TextView tv_avatar;
     private TextView tv_name;
@@ -91,7 +89,6 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity> implemen
 
     private LinearLayout ll_task_empty;//
     private MyListView lv_task;
-//    private SmartRefreshLayout mRefreshLayout;
     private MyListView lv_1;
     private MyListView lv_2;
     private int appSize = 0; //工作请求列表size
@@ -141,9 +138,6 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity> implemen
 
         tv_avatar.setText(Utils.formatName(name));
         tv_name.setText("你好," + name);
-//        mRefreshLayout= findViewById(R.id.rl_position_refresh);
-//        mRefreshLayout.setOnRefreshLoadMoreListener(this);
-//        mRefreshLayout.setEnableLoadMore(false);
         ImmersionBar.setTitleBar(this, ll_title);
         setOnClickListener(tv_order_switching, tv_avatar, ll_cooperation, ll_service, ll_question, ll_contact);
 
@@ -614,15 +608,6 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity> implemen
         updatePagerHeightForChild(height);
     }
 
-    @Override
-    public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
-
-    }
-
-    @Override
-    public void onRefresh(@NonNull RefreshLayout refreshLayout) {
-
-    }
 
     public class MyViewPagerAdapter extends PagerAdapter {
         private Context mContext;
