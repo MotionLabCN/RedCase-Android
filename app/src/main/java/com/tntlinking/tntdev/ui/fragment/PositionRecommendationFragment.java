@@ -92,14 +92,17 @@ public class PositionRecommendationFragment extends TitleBarFragment<MainActivit
                 GetDeveloperRecommendsApi.Bean item = mPositionRecommendationAdapter.getItem(position);
 
                 new BaseDialog.Builder<>(getActivity())
-                        .setContentView(R.layout.write_daily_delete_dialog)
+                        .setContentView(R.layout.check_order_status_dialog)
                         .setAnimStyle(BaseDialog.ANIM_SCALE)
-                        .setText(R.id.tv_title, "是否关闭当前职位信息?")
+                        .setText(R.id.tv_title,"关闭职位信息")
+                        .setText(R.id.tv_content,"是否关闭当前职位信息")
+                        .setText(R.id.btn_dialog_custom_cancel, "取消")
+                        .setText(R.id.btn_dialog_custom_ok, "确认")
                         .setOnClickListener(R.id.btn_dialog_custom_cancel, (BaseDialog.OnClickListener<Button>) (dialog, button) -> dialog.dismiss())
                         .setOnClickListener(R.id.btn_dialog_custom_ok, (dialog, views) -> {
+
                             deleteDeveloperRecommends(Integer.valueOf(item.getPositionId()), item.getRecommendByOperate(), position, dialog);
-                        })
-                        .show();
+                        }).show();
             }
         });
     }
@@ -151,10 +154,8 @@ public class PositionRecommendationFragment extends TitleBarFragment<MainActivit
                 .request(new HttpCallback<HttpData<Void>>(this) {
                     @Override
                     public void onSucceed(HttpData<Void> data) {
-                        if (mList.size() != 0) {
-                            mList.remove(position);
-                            mPositionRecommendationAdapter.setData(mList);
-                        }
+                        getDeveloperRecommends();//重新刷新界面获取列表数据
+
                         toast("职位信息关闭成功");
                         dialog.dismiss();
                     }

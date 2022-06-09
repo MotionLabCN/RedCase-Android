@@ -63,7 +63,7 @@
                 android:gravity="right"
                 android:maxLines="1"
                 android:singleLine="true"
-                android:text="10-11k·月"
+                android:text="10-11k/月"
                 android:textColor="@color/main_color"
                 android:textStyle="bold" />
         </LinearLayout>
@@ -273,9 +273,10 @@
                 android:id="@+id/iv_close"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_10"
                 android:layout_marginRight="@dimen/dp_16"
-                android:src="@drawable/icon_close" />
+                android:layout_marginBottom="@dimen/dp_2"
+                android:layout_gravity="bottom"
+                android:src="@drawable/icon_close_position" />
 
         </LinearLayout>
     </LinearLayout>

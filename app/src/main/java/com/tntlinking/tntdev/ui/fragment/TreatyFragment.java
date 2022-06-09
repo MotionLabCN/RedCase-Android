@@ -203,10 +203,10 @@ public final class TreatyFragment extends TitleBarFragment<MainActivity> impleme
                             if (appSize + interSize == 0) {
                                 ll_empty.setVisibility(View.VISIBLE);
                             } else {
-                                mServiceAdapter.setData(mServiceList);
                                 ll_empty.setVisibility(View.GONE);
-
                             }
+                            mServiceAdapter.setData(mServiceList);
+
                             mHistoryList.addAll(data.getData());
                             mHistoryAdapter.setData(mHistoryList);
                             tv_footer.setVisibility(View.VISIBLE);
@@ -217,9 +217,10 @@ public final class TreatyFragment extends TitleBarFragment<MainActivity> impleme
                             if (appSize + interSize == 0) {
                                 ll_empty.setVisibility(View.VISIBLE);
                             } else {
-                                mServiceAdapter.setData(mServiceList);
                                 ll_empty.setVisibility(View.GONE);
                             }
+                            mServiceAdapter.setData(mServiceList);
+
                             ll_history_empty.setVisibility(View.VISIBLE);
                             tv_footer.setVisibility(View.GONE);
                         }
