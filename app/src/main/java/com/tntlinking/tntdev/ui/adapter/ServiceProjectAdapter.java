@@ -82,7 +82,7 @@ public final class ServiceProjectAdapter extends BaseAdapter {
             holder.tv_position_name.setText(item.getPositionName());
             holder.tv_company_name.setText(item.getCompanyName());
             holder.tv_work_info.setText(item.getWorkDaysModeName() + " | " + Utils.getYearFromDate(item.getWorkStartDate()) + "—" + Utils.getYearFromDate(item.getFinishDate()));
-            holder.tv_status.setText(item.getStatusName());
+            holder.tv_status.setText(item.getServiceName());
             holder.view_line.setVisibility(View.VISIBLE);
             holder.tv_order_id.setVisibility(View.VISIBLE);
             holder.ll_detail.setVisibility(View.GONE);
