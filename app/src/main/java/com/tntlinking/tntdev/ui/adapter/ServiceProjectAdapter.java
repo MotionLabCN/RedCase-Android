@@ -86,8 +86,9 @@ public final class ServiceProjectAdapter extends BaseAdapter {
             holder.view_line.setVisibility(View.VISIBLE);
             holder.tv_order_id.setVisibility(View.VISIBLE);
             holder.ll_detail.setVisibility(View.GONE);
-            holder.tv_order_id.setText("订单号："+item.getOrderNo());
+            holder.tv_order_id.setText("订单号：" + item.getOrderNo());
             if (item.getServiceName().equals("服务中")) { // 服务中
+                holder.tv_write.setVisibility(View.VISIBLE);//显示写日志按钮（只有服务中才显示写日志按钮）
                 holder.view_dot.setBackground(mContext.getDrawable(R.drawable.dot_oval_orange));
                 holder.ll_status.setBackground(mContext.getDrawable(R.drawable.bg_orange_radius_3));
                 holder.tv_type.setTextColor(mContext.getResources().getColor(R.color.white));
@@ -121,7 +122,7 @@ public final class ServiceProjectAdapter extends BaseAdapter {
                 holder.view_dot.setBackground(mContext.getDrawable(R.drawable.dot_oval_red));
                 holder.ll_status.setBackground(mContext.getDrawable(R.drawable.bg_red_radius_3));
                 holder.tv_status.setTextColor(mContext.getResources().getColor(R.color.color_F5313D));
-            }else  if (TextUtils.isEmpty(item.getInterviewTimeType())) {
+            } else if (TextUtils.isEmpty(item.getInterviewTimeType())) {
                 holder.tv_interview.setVisibility(View.GONE);
 //                holder.ll_status.setVisibility(View.GONE);
             }

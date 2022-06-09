@@ -86,7 +86,7 @@ public final class TreatyFragment extends TitleBarFragment<MainActivity> impleme
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 AppListApi.Bean item = (AppListApi.Bean) mServiceAdapter.getItem(position);
-                if (!TextUtils.isEmpty(item.getServiceName())) {
+                if (!TextUtils.isEmpty(item.getServiceName()) && item.getServiceName().equals("服务中")) {
 
                     Intent intent = new Intent(getActivity(), WriteDailyActivity.class);
                     intent.putExtra("orderId", item.getId());
@@ -107,7 +107,7 @@ public final class TreatyFragment extends TitleBarFragment<MainActivity> impleme
 
         if (status.equals("3")) {
             getAppList();
-        }else {
+        } else {
             toast("您还没有认证");
             ll_empty.setVisibility(View.VISIBLE);
         }

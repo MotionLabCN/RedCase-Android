@@ -394,6 +394,7 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity> implemen
                     }
                 });
     }
+
     private void getDeveloperJkStatus() {
         EasyHttp.get(this)
                 .api(new GetDeveloperJkStatusApi())
