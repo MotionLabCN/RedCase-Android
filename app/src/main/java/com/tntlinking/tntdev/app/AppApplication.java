@@ -2,10 +2,7 @@ package com.tntlinking.tntdev.app;
 
 import android.app.Activity;
 import android.app.Application;
-import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
 import android.net.ConnectivityManager;
 import android.net.Network;
 import android.os.Build;
@@ -20,9 +17,6 @@ import com.scwang.smart.refresh.layout.api.RefreshHeader;
 import com.scwang.smart.refresh.layout.api.RefreshLayout;
 import com.scwang.smart.refresh.layout.listener.DefaultRefreshFooterCreator;
 import com.scwang.smart.refresh.layout.listener.DefaultRefreshHeaderCreator;
-import com.tencent.mm.opensdk.constants.ConstantsAPI;
-import com.tencent.mm.opensdk.openapi.IWXAPI;
-import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 import com.tntlinking.tntdev.R;
 import com.hjq.gson.factory.GsonFactory;
 import com.hjq.http.EasyConfig;
@@ -39,12 +33,9 @@ import com.tntlinking.tntdev.manager.ActivityManager;
 import com.tntlinking.tntdev.other.AppConfig;
 import com.tntlinking.tntdev.other.CrashHandler;
 import com.tntlinking.tntdev.other.DebugLoggerTree;
-import com.tntlinking.tntdev.other.MaterialHeader;
-import com.tntlinking.tntdev.other.SmartBallPulseFooter;
 import com.tntlinking.tntdev.other.TitleBarStyle;
 import com.tntlinking.tntdev.other.ToastLogInterceptor;
 import com.tntlinking.tntdev.other.ToastStyle;
-import com.xiaomi.mipush.sdk.Constants;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
@@ -59,14 +50,11 @@ import timber.log.Timber;
  * desc   : 应用入口
  */
 public final class AppApplication extends Application {
-
-    private IWXAPI api;
-
     @Log("启动耗时")
     @Override
     public void onCreate() {
         super.onCreate();
-// 初始化极光推送
+        // 初始化极光推送
         JPushInterface.setDebugMode(true);
         JPushInterface.init(this);
         initSdk(this);

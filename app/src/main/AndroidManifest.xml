@@ -361,6 +361,7 @@
         <activity
             android:name="com.tntlinking.tntdev.ui.activity.UploadResumeActivity"
             android:launchMode="singleTop"
+            android:taskAffinity="${applicationId}"
             android:screenOrientation="portrait" />
         <!-- 添加教育经历页面 -->
         <activity

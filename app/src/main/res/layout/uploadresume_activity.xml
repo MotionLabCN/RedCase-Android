@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
@@ -39,7 +40,8 @@
         android:paddingRight="@dimen/dp_16"
         android:text="支持pdf,doc,docx,txt,odt,RTF,HTML,JPG格式文件文件需要小7M"
         android:textColor="@color/color_hint_color"
-        android:textSize="@dimen/sp_13" />
+        android:textSize="@dimen/sp_13"
+        tools:ignore="ObsoleteLayoutParam" />
 
     <LinearLayout
         android:id="@+id/ll_wechat_upload"
@@ -57,7 +59,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_12"
             android:layout_marginBottom="@dimen/dp_12"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            tools:ignore="UselessParent">
 
             <ImageView
                 android:id="@+id/tv_name"
@@ -136,7 +139,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_12"
             android:layout_marginBottom="@dimen/dp_12"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            tools:ignore="UselessParent">
 
             <ImageView
                 android:layout_width="@dimen/dp_34"
@@ -213,7 +217,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_12"
             android:layout_marginBottom="@dimen/dp_12"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            tools:ignore="UselessParent">
 
             <ImageView
                 android:layout_width="@dimen/dp_34"
