@@ -2,7 +2,10 @@ package com.tntlinking.tntdev.app;
 
 import android.app.Activity;
 import android.app.Application;
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.net.ConnectivityManager;
 import android.net.Network;
 import android.os.Build;
@@ -17,6 +20,9 @@ import com.scwang.smart.refresh.layout.api.RefreshHeader;
 import com.scwang.smart.refresh.layout.api.RefreshLayout;
 import com.scwang.smart.refresh.layout.listener.DefaultRefreshFooterCreator;
 import com.scwang.smart.refresh.layout.listener.DefaultRefreshHeaderCreator;
+import com.tencent.mm.opensdk.constants.ConstantsAPI;
+import com.tencent.mm.opensdk.openapi.IWXAPI;
+import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 import com.tntlinking.tntdev.R;
 import com.hjq.gson.factory.GsonFactory;
 import com.hjq.http.EasyConfig;
@@ -38,6 +44,7 @@ import com.tntlinking.tntdev.other.SmartBallPulseFooter;
 import com.tntlinking.tntdev.other.TitleBarStyle;
 import com.tntlinking.tntdev.other.ToastLogInterceptor;
 import com.tntlinking.tntdev.other.ToastStyle;
+import com.xiaomi.mipush.sdk.Constants;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
@@ -49,9 +56,11 @@ import okhttp3.OkHttpClient;
 import timber.log.Timber;
 
 /**
- *    desc   : 应用入口
+ * desc   : 应用入口
  */
 public final class AppApplication extends Application {
+
+    private IWXAPI api;
 
     @Log("启动耗时")
     @Override
@@ -65,6 +74,7 @@ public final class AppApplication extends Application {
         initKV();
 
     }
+
 
     @Override
     protected void attachBaseContext(Context base) {
@@ -84,6 +94,7 @@ public final class AppApplication extends Application {
         // 根据手机内存剩余情况清理图片内存缓存
         GlideApp.get(this).onTrimMemory(level);
     }
+
     private void initKV() {
         MMKV.initialize(this);
     }
@@ -91,6 +102,7 @@ public final class AppApplication extends Application {
     private void initToast() {
         ToastUtils.init(this);
     }
+
     /**
      * 初始化一些第三方框架
      */
@@ -174,7 +186,7 @@ public final class AppApplication extends Application {
                     headers.put("deviceOaid", UmengClient.getDeviceOaid());
                     headers.put("versionName", AppConfig.getVersionName());
                     headers.put("versionCode", String.valueOf(AppConfig.getVersionCode()));
-                    if (!TextUtils.isEmpty(SPUtils.getInstance().getString(AppConfig.ACCESS_TOKEN))){
+                    if (!TextUtils.isEmpty(SPUtils.getInstance().getString(AppConfig.ACCESS_TOKEN))) {
                         headers.put("Authorization", SPUtils.getInstance().getString(AppConfig.ACCESS_TOKEN));
                     }
                     // 添加全局请求参数

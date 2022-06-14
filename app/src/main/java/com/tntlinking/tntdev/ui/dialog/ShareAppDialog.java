@@ -37,8 +37,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 /**
- *
- *    desc   : 分享对话框
+ * desc   : 分享对话框
  */
 public final class ShareAppDialog {
 
@@ -231,11 +230,17 @@ public final class ShareAppDialog {
 
     private static class ShareBean {
 
-        /** 分享图标 */
+        /**
+         * 分享图标
+         */
         final Drawable shareIcon;
-        /** 分享名称 */
+        /**
+         * 分享名称
+         */
         final String shareName;
-        /** 分享平台 */
+        /**
+         * 分享平台
+         */
         final Platform sharePlatform;
 
         private ShareBean(Drawable icon, String name, Platform platform) {

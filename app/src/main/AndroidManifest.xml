@@ -357,6 +357,11 @@
             android:name="com.tntlinking.tntdev.ui.activity.AddEducationActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
+        <!-- 上传简历页面 -->
+        <activity
+            android:name="com.tntlinking.tntdev.ui.activity.UploadResumeActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
         <!-- 添加教育经历页面 -->
         <activity
             android:name="com.tntlinking.tntdev.ui.activity.AddEducationActivityNew"

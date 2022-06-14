@@ -100,7 +100,6 @@ public class PositionRecommendationFragment extends TitleBarFragment<MainActivit
                         .setText(R.id.btn_dialog_custom_ok, "确认")
                         .setOnClickListener(R.id.btn_dialog_custom_cancel, (BaseDialog.OnClickListener<Button>) (dialog, button) -> dialog.dismiss())
                         .setOnClickListener(R.id.btn_dialog_custom_ok, (dialog, views) -> {
-
                             deleteDeveloperRecommends(Integer.valueOf(item.getPositionId()), item.getRecommendByOperate(), position, dialog);
                         }).show();
             }

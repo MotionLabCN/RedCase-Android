@@ -6,6 +6,7 @@ buildscript {
     // 导入通用的 Maven 库配置
     apply from : 'maven.gradle'
     repositories {
+        google()
         jcenter()
         mavenCentral()
         // 阿里云云效仓库（Gradle 插件）：https://maven.aliyun.com/mvn/guide

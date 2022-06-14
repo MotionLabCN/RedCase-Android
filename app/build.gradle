@@ -288,7 +288,9 @@ android {
 //    //厂商版本和 JPush SDK 版本保持一致
 //    implementation 'cn.jiguang.sdk.plugin:huawei:4.x.x'
 //}
-
+//dependencies {
+//    implementation 'com.tencent.mm.opensdk:wechat-sdk-android:6.8.0'
+//}
 dependencies {
     implementation 'com.huawei.hms:push:6.1.0.300'
     //厂商版本和JPush SDK版本保持一致

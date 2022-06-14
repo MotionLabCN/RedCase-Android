@@ -74,7 +74,7 @@ public final class EnterDeveloperActivity extends AppActivity {
     private TextView tv_progress;
     private ImageView iv_progress;
     private ProgressBar progress_bar;
-
+    private TextView tv_import_resume;
     public static final String INTENT_KEY_DEVELOPER_INFO = "DeveloperInfoBean";
 
 
@@ -118,10 +118,11 @@ public final class EnterDeveloperActivity extends AppActivity {
         tv_progress = findViewById(R.id.tv_progress);
         iv_progress = findViewById(R.id.iv_progress);
         progress_bar = findViewById(R.id.progress_bar);
+        tv_import_resume= findViewById(R.id.tv_import_resume);
 
         mCommit = findViewById(R.id.btn_commit);
         setOnClickListener(mCommit, ll_add_base_info, ll_base_info, ll_add_career_info, ll_career_info,
-                ll_add_education, ll_add_work, ll_add_project, ll_add_photo, fl_add_photo, tv_photo_skills);
+                ll_add_education, ll_add_work, ll_add_project, ll_add_photo, fl_add_photo, tv_photo_skills,tv_import_resume);
 
         lv1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -248,7 +249,10 @@ public final class EnterDeveloperActivity extends AppActivity {
                 }
                 submitDeveloper();
                 break;
+            case R.id.tv_import_resume:
+                startActivity(UploadResumeActivity.class);
 
+                break;
         }
 
     }
