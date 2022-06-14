@@ -140,7 +140,6 @@ public final class AppApplication extends Application {
         ToastUtils.setDebugMode(AppConfig.isDebug());
         // 设置 Toast 拦截器
         ToastUtils.setInterceptor(new ToastLogInterceptor());
-
         // 本地异常捕捉
         CrashHandler.register(application);
 
