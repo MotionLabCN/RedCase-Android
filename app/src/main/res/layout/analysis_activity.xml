@@ -18,21 +18,21 @@
         app:titleStyle="bold" />
 
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        tools:ignore="InefficientWeight">
 
-        <LinearLayout
+        <com.github.barteksc.pdfviewer.PDFView
+            android:id="@+id/pdfView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical">
-
-            <com.github.barteksc.pdfviewer.PDFView
-                android:id="@+id/pdfView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="@dimen/dp_16"
-                android:layout_marginRight="@dimen/dp_16"
-                android:background="@color/color_F6F6FC" />
-        </LinearLayout>
+            android:layout_marginLeft="@dimen/dp_16"
+            android:layout_marginRight="@dimen/dp_16"
+            android:background="@color/color_F6F6FC" />
+    </LinearLayout>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_start_parsing"
