@@ -1,12 +1,23 @@
 package com.tntlinking.tntdev.ui.activity;
 
 import android.annotation.SuppressLint;
+import android.content.ContentResolver;
+import android.content.Intent;
+import android.database.Cursor;
+import android.net.Uri;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.hjq.base.BaseDialog;
+import com.hjq.http.EasyHttp;
+import com.hjq.http.EasyLog;
+import com.hjq.http.listener.HttpCallback;
+import com.leon.lfilepickerlibrary.LFilePicker;
+import com.leon.lfilepickerlibrary.utils.Constant;
 import com.tencent.mm.opensdk.constants.ConstantsAPI;
 import com.tencent.mm.opensdk.modelbase.BaseReq;
 import com.tencent.mm.opensdk.modelbase.BaseResp;
@@ -16,9 +27,15 @@ import com.tencent.mm.opensdk.openapi.IWXAPIEventHandler;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 import com.tntlinking.tntdev.R;
 import com.tntlinking.tntdev.app.AppActivity;
+import com.tntlinking.tntdev.http.api.ParseResumeApi;
+import com.tntlinking.tntdev.http.model.HttpData;
+
+import java.io.File;
+import java.util.List;
 
 
 public final class UploadResumeActivity extends AppActivity implements IWXAPIEventHandler {
+    private final int REQUEST_CODE_FROM_ACTIVITY = 1000;
 
     @Override
     protected int getLayoutId() {
@@ -47,8 +64,8 @@ public final class UploadResumeActivity extends AppActivity implements IWXAPIEve
                 wxApi.registerApp("wx1e91399d09c1cd9a");
                 boolean bIsWXAppInstalled;
                 bIsWXAppInstalled = wxApi.isWXAppInstalled();
-                if(!bIsWXAppInstalled){
-                    Toast.makeText(this,"请先安装微信",Toast.LENGTH_SHORT).show();
+                if (!bIsWXAppInstalled) {
+                    Toast.makeText(this, "请先安装微信", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 String appId = "wx1e91399d09c1cd9a"; // 填移动应用(App)的 AppId，非小程序的 AppID
@@ -61,28 +78,14 @@ public final class UploadResumeActivity extends AppActivity implements IWXAPIEve
                 api.sendReq(req);
                 break;
             case R.id.ll_mobile_upload:
-                resumeUpload();
+//                resumeUpload();
+                pickFile(null);
                 break;
             case R.id.ll_other_uploads:
                 break;
         }
     }
 
-    private void resumeUpload() {
-        new BaseDialog.Builder<>(this)
-                .setContentView(R.layout.check_order_status_dialog)
-                .setAnimStyle(BaseDialog.ANIM_SCALE)
-                .setText(R.id.tv_title, "简历上传")
-                .setText(R.id.tv_content, "是否将简历上传到天天数链开发者")
-                .setText(R.id.btn_dialog_custom_cancel, "取消")
-                .setText(R.id.btn_dialog_custom_ok, "确认")
-                .setOnClickListener(R.id.btn_dialog_custom_cancel, (BaseDialog.OnClickListener<Button>) (dialog, button) -> dialog.dismiss())
-                .setOnClickListener(R.id.btn_dialog_custom_ok, (dialog, views) -> {
-                    startActivity(ResumeAnalysisActivity.class);
-
-                    dialog.dismiss();
-                }).show();
-    }
 
     @Override
     public void onReq(BaseReq baseReq) {
@@ -94,7 +97,67 @@ public final class UploadResumeActivity extends AppActivity implements IWXAPIEve
     public void onResp(BaseResp baseResp) {
         if (baseResp.getType() == ConstantsAPI.COMMAND_LAUNCH_WX_MINIPROGRAM) {
             WXLaunchMiniProgram.Resp launchMiniProResp = (WXLaunchMiniProgram.Resp) baseResp;
-            String extraData =launchMiniProResp.extMsg; //对应小程序组件 <button open-type="launchApp"> 中的 app-parameter 属性
+            String extraData = launchMiniProResp.extMsg; //对应小程序组件 <button open-type="launchApp"> 中的 app-parameter 属性
         }
+    }
+
+    /**
+     * 点击打开文件选择器
+     */
+
+
+    public void pickFile(View view) {
+        new LFilePicker()
+                .withActivity(UploadResumeActivity.this)
+                .withRequestCode(REQUEST_CODE_FROM_ACTIVITY)
+                .withFileFilter(new String[]{".txt", ".png", ".doc", ".pdf", ".JPG"})
+                .withIsGreater(false)
+                .withFileSize(7 * 1024 * 1024)// 选择文件不能大于7M
+                .start();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            if (requestCode == REQUEST_CODE_FROM_ACTIVITY) {
+                //如果是文件选择模式，需要获取选择的所有文件的路径集合
+                List<String> list = data.getStringArrayListExtra(Constant.RESULT_INFO);//Constant.RESULT_INFO == "paths"
+                if (list.size() > 0) {
+                    if (!TextUtils.isEmpty(list.get(0))) {
+                        parseResume(new File(list.get(0)));
+                    }
+                }
+            }
+        }
+    }
+
+
+    private void parseResume(File file) {
+        EasyHttp.post(this)
+                .api(new ParseResumeApi().setFile(file))
+                .request(new HttpCallback<HttpData<ParseResumeApi.Bean>>(this) {
+
+                    @Override
+                    public void onSucceed(HttpData<ParseResumeApi.Bean> data) {
+                        String url = data.getData().getUrl();
+                        String fileName = data.getData().getFileName();
+                        new BaseDialog.Builder<>(UploadResumeActivity.this)
+                                .setContentView(R.layout.check_order_status_dialog)
+                                .setAnimStyle(BaseDialog.ANIM_SCALE)
+                                .setText(R.id.tv_title, "简历上传")
+                                .setText(R.id.tv_content, "是否将简历上传到天天数链开发者")
+                                .setText(R.id.btn_dialog_custom_cancel, "取消")
+                                .setText(R.id.btn_dialog_custom_ok, "确认")
+                                .setOnClickListener(R.id.btn_dialog_custom_cancel, (BaseDialog.OnClickListener<Button>) (dialog, button) -> dialog.dismiss())
+                                .setOnClickListener(R.id.btn_dialog_custom_ok, (dialog, views) -> {
+                                    Intent intent = new Intent(UploadResumeActivity.this, ResumeAnalysisActivity.class);
+                                    intent.putExtra("url", url);
+                                    intent.putExtra("fileName", fileName);
+                                    startActivity(intent);
+                                    dialog.dismiss();
+                                }).show();
+                    }
+                });
     }
 }

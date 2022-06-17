@@ -86,6 +86,7 @@ public final class BrowserActivity extends AppActivity
         mBrowserView.setLifecycleOwner(this);
         // 设置网页刷新监听
         mRefreshLayout.setOnRefreshListener(this);
+        mRefreshLayout.setEnableRefresh(false);//下拉不刷新网页
     }
 
     @SuppressLint({"JavascriptInterface", "SetJavaScriptEnabled"})
@@ -163,6 +164,7 @@ public final class BrowserActivity extends AppActivity
     }
 
     private String mUrl = "";
+
     private class AppBrowserViewClient extends BrowserView.BrowserViewClient {
 
         /**
@@ -192,7 +194,7 @@ public final class BrowserActivity extends AppActivity
             mRefreshLayout.finishRefresh();
             showComplete();
             //判断域名一样，后面不一样的时候重新刷新加载问题
-            if (!url.equals(mUrl)){
+            if (!url.equals(mUrl)) {
                 view.reload();
             }
         }

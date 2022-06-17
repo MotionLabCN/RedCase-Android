@@ -230,24 +230,31 @@ public final class LoginActivity1 extends AppActivity {
 //                return;
 //            }
 
-            XXPermissions.with(LoginActivity1.this)
-                    .permission(Permission.READ_EXTERNAL_STORAGE)
-                    .permission(Permission.WRITE_EXTERNAL_STORAGE)
-                    .permission(Permission.ACCESS_FINE_LOCATION)
-                    .permission(Permission.ACCESS_COARSE_LOCATION)
-                    .request(new PermissionCallback() {
+//            XXPermissions.with(LoginActivity1.this)
+//                    .permission(Permission.READ_EXTERNAL_STORAGE)
+//                    .permission(Permission.WRITE_EXTERNAL_STORAGE)
+//                    .permission(Permission.ACCESS_FINE_LOCATION)
+//                    .permission(Permission.ACCESS_COARSE_LOCATION)
+//                    .request(new PermissionCallback() {
+//
+//                        @Override
+//                        public void onGranted(List<String> permissions, boolean all) {
+//                            if (all) {
+//                                if (BuildConfig.DEBUG) {
+//                                    startActivity(LoginActivity2.class);
+//                                } else {
+//                                    getLoginToken(5000);
+//                                }
+//                            }
+//
+//                        }
+//                    });
 
-                        @Override
-                        public void onGranted(List<String> permissions, boolean all) {
-                            if (all) {
-                                if (BuildConfig.DEBUG) {
-                                    startActivity(LoginActivity2.class);
-                                } else {
-                                    getLoginToken(5000);
-                                }
-                            }
-                        }
-                    });
+            if (BuildConfig.DEBUG) {
+                startActivity(LoginActivity2.class);
+            } else {
+                getLoginToken(5000);
+            }
 
         }
     }
@@ -326,7 +333,9 @@ public final class LoginActivity1 extends AppActivity {
                 })
                 .setOnClickListener(R.id.btn_dialog_custom_ok, (dialog, views) -> {
                     dialog.dismiss();
+                    getPermissions();
                     SPUtils.getInstance().put(AppConfig.DEAL_DIALOG, true);
+
                 });
 
         TextView viewById = builder.findViewById(R.id.tv_title);
