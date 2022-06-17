@@ -2,9 +2,11 @@ package com.tntlinking.tntdev.ui.activity;
 
 import android.annotation.SuppressLint;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.hjq.base.BaseDialog;
 import com.tencent.mm.opensdk.constants.ConstantsAPI;
 import com.tencent.mm.opensdk.modelbase.BaseReq;
 import com.tencent.mm.opensdk.modelbase.BaseResp;
@@ -16,7 +18,7 @@ import com.tntlinking.tntdev.R;
 import com.tntlinking.tntdev.app.AppActivity;
 
 
-public class UploadResumeActivity extends AppActivity implements IWXAPIEventHandler {
+public final class UploadResumeActivity extends AppActivity implements IWXAPIEventHandler {
 
     @Override
     protected int getLayoutId() {
@@ -59,10 +61,27 @@ public class UploadResumeActivity extends AppActivity implements IWXAPIEventHand
                 api.sendReq(req);
                 break;
             case R.id.ll_mobile_upload:
+                resumeUpload();
                 break;
             case R.id.ll_other_uploads:
                 break;
         }
+    }
+
+    private void resumeUpload() {
+        new BaseDialog.Builder<>(this)
+                .setContentView(R.layout.check_order_status_dialog)
+                .setAnimStyle(BaseDialog.ANIM_SCALE)
+                .setText(R.id.tv_title, "简历上传")
+                .setText(R.id.tv_content, "是否将简历上传到天天数链开发者")
+                .setText(R.id.btn_dialog_custom_cancel, "取消")
+                .setText(R.id.btn_dialog_custom_ok, "确认")
+                .setOnClickListener(R.id.btn_dialog_custom_cancel, (BaseDialog.OnClickListener<Button>) (dialog, button) -> dialog.dismiss())
+                .setOnClickListener(R.id.btn_dialog_custom_ok, (dialog, views) -> {
+                    startActivity(ResumeAnalysisActivity.class);
+
+                    dialog.dismiss();
+                }).show();
     }
 
     @Override

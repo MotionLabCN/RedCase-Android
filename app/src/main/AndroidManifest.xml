@@ -361,7 +361,12 @@
         <activity
             android:name="com.tntlinking.tntdev.ui.activity.UploadResumeActivity"
             android:launchMode="singleTop"
-            android:taskAffinity="${applicationId}"
+            android:screenOrientation="portrait"
+            android:taskAffinity="${applicationId}" />
+        <!-- 解析简历页面 -->
+        <activity
+            android:name="com.tntlinking.tntdev.ui.activity.ResumeAnalysisActivity"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait" />
         <!-- 添加教育经历页面 -->
         <activity

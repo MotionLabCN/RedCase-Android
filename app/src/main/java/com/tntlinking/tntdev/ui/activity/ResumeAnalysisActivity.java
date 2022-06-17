@@ -4,53 +4,47 @@ import android.annotation.SuppressLint;
 import android.os.AsyncTask;
 import android.text.TextUtils;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.github.barteksc.pdfviewer.PDFView;
-import com.github.barteksc.pdfviewer.listener.OnFileDownloadCompleteListener;
 import com.github.barteksc.pdfviewer.listener.OnLoadCompleteListener;
 import com.github.barteksc.pdfviewer.listener.OnPageChangeListener;
-import com.hjq.bar.TitleBar;
 import com.tntlinking.tntdev.R;
 import com.tntlinking.tntdev.app.AppActivity;
 import com.tntlinking.tntdev.other.AppConfig;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 
-/**
- * 合作模式
- */
-public final class PDFViewActivity extends AppActivity {
+public final class ResumeAnalysisActivity extends AppActivity {
     private PDFView pdfView;
-    private TitleBar title_bar;
-    //    private String PDFUrl = "https://stage-ttchain.tntlinking.com/api/minio/pdf/manpower-pages/recruit_guide.pdf";
     private String PDFUrl = AppConfig.RECRUIT_GUIDE_URL;
-
-
     @Override
     protected int getLayoutId() {
-        return R.layout.pdf_view_activity;
+        return R.layout.analysis_activity;
+
+
     }
 
     @Override
     protected void initView() {
         pdfView = findViewById(R.id.pdfView);
-        title_bar = findViewById(R.id.title_bar);
-        String pdf_url = getString("pdf_url");
-        Log.d("PDF",">>>"+pdf_url);
-        String title = getString("title");
-        title_bar.setTitle(title);
+        String pdf_url = "https://stage-ttchain.tntlinking.com/api/minio/pdf/manpower-pages/recruit_guide.pdf";
         if (!TextUtils.isEmpty(pdf_url)) {
-            getPdf(pdf_url);
+//            getPdf(pdf_url);
         }
-    }
+        pdfView.fromAsset("杨志毅个人简历 .pdf").defaultPage(1).onPageChange(new OnPageChangeListener() {
 
-    @Override
-    protected void initData() {
-    }
+            @Override
+            public void onPageChanged(int page, int pageCount) {
+                // 当用户在翻页时候将回调。
+                Toast.makeText(getApplicationContext(), page + " / " + pageCount, Toast.LENGTH_SHORT).show();
+            }
+        }).load();
 
+
+    }
 
     @SuppressLint({"WrongThread", "StaticFieldLeak"})
     private void getPdf(String url) {
@@ -82,4 +76,8 @@ public final class PDFViewActivity extends AppActivity {
         }.execute();
     }
 
+    @Override
+    protected void initData() {
+
+    }
 }
