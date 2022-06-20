@@ -360,7 +360,7 @@
         <!-- 上传简历页面 -->
         <activity
             android:name="com.tntlinking.tntdev.ui.activity.UploadResumeActivity"
-            android:launchMode="singleTop"
+            android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:taskAffinity="${applicationId}" />
         <!-- 解析简历页面 -->

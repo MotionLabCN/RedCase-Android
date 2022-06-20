@@ -195,7 +195,11 @@
     <string name="setting_participate_in_evaluation">参与测评</string>
     <string name="setting_recommend_yourself_immediately">立即自荐</string>
     <string name="setting_start_parsing">开始解析</string>
-
+    <string name="errcode_success">发送成功</string>
+    <string name="errcode_cancel">发送取消</string>
+    <string name="errcode_deny">发送被拒绝</string>
+    <string name="errcode_unsupported">不支持错误</string>
+    <string name="errcode_unknown">发送返回</string>
     <string name="setting_evaluation_skills_android">评测技能:Android</string>
     <string name="setting_time">时间</string>
     <string name="setting_answer_time">答题时间:</string>
