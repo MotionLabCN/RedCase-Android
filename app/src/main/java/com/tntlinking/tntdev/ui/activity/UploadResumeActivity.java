@@ -82,6 +82,7 @@ public final class UploadResumeActivity extends AppActivity implements IWXAPIEve
                 pickFile(null);
                 break;
             case R.id.ll_other_uploads:
+                startActivity(UploadOtherActivity.class);
                 break;
         }
     }
