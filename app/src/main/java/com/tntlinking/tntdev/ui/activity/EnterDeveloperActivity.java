@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -16,9 +17,11 @@ import android.widget.TextView;
 
 import com.blankj.utilcode.util.FileUtils;
 import com.blankj.utilcode.util.SPUtils;
+import com.blankj.utilcode.util.UriUtils;
 import com.bumptech.glide.load.MultiTransformation;
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.hjq.base.BaseDialog;
 import com.hjq.http.EasyHttp;
 import com.hjq.http.EasyLog;
 import com.hjq.http.listener.HttpCallback;
@@ -27,6 +30,7 @@ import com.tntlinking.tntdev.aop.SingleClick;
 import com.tntlinking.tntdev.app.AppActivity;
 import com.tntlinking.tntdev.http.api.GetDeveloperDetailApi;
 import com.tntlinking.tntdev.http.api.GetProvinceApi;
+import com.tntlinking.tntdev.http.api.ParseResumeApi;
 import com.tntlinking.tntdev.http.api.SubmitDeveloperApi;
 import com.tntlinking.tntdev.http.api.UpdateAvatarApi;
 import com.tntlinking.tntdev.http.glide.GlideApp;
@@ -74,7 +78,7 @@ public final class EnterDeveloperActivity extends AppActivity {
     private TextView tv_progress;
     private ImageView iv_progress;
     private ProgressBar progress_bar;
-    private TextView tv_import_resume;
+    private LinearLayout ll_import_resume;
     public static final String INTENT_KEY_DEVELOPER_INFO = "DeveloperInfoBean";
 
 
@@ -118,11 +122,11 @@ public final class EnterDeveloperActivity extends AppActivity {
         tv_progress = findViewById(R.id.tv_progress);
         iv_progress = findViewById(R.id.iv_progress);
         progress_bar = findViewById(R.id.progress_bar);
-        tv_import_resume = findViewById(R.id.tv_import_resume);
+        ll_import_resume = findViewById(R.id.ll_import_resume);
 
         mCommit = findViewById(R.id.btn_commit);
         setOnClickListener(mCommit, ll_add_base_info, ll_base_info, ll_add_career_info, ll_career_info,
-                ll_add_education, ll_add_work, ll_add_project, ll_add_photo, fl_add_photo, tv_photo_skills, tv_import_resume);
+                ll_add_education, ll_add_work, ll_add_project, ll_add_photo, fl_add_photo, tv_photo_skills, ll_import_resume);
 
         lv1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -144,7 +148,6 @@ public final class EnterDeveloperActivity extends AppActivity {
                 intent.putExtra(INTENT_KEY_DEVELOPER_INFO, bean);
                 intent.putExtra("position", position);
                 getActivity().startActivityForResult(intent, 10007);
-                EasyLog.print("======position=====" + position);
             }
         });
 
@@ -167,12 +170,25 @@ public final class EnterDeveloperActivity extends AppActivity {
         if (bean != null) {
             if (!TextUtils.isEmpty(bean.getRealName())) {
                 setDeveloperInfo(bean);
-                EasyLog.print("====2222=====");
+
             }
         } else {
             int developId = SPUtils.getInstance().getInt(AppConfig.DEVELOPER_ID);
             getDeveloperDetail(developId);
-            EasyLog.print("====3333=====");
+
+            //外部分享过来的
+            String action = getIntent().getAction();//action
+            String type = getIntent().getType();//类型
+            //类型 /*&& "video/mp4".equals(type)*/
+            if (Intent.ACTION_SEND.equals(action) && type != null) {
+                Uri uri = getIntent().getParcelableExtra(Intent.EXTRA_STREAM);
+                //通过Uri获取文件在本地存储的真实路径
+                File file = UriUtils.uri2File(uri);
+                EasyLog.print("======文件路径==file=" + file);
+                if (FileUtils.isFile(file)) {
+                    parseResume(file);
+                }
+            }
         }
     }
 
@@ -266,7 +282,7 @@ public final class EnterDeveloperActivity extends AppActivity {
                 }
                 submitDeveloper();
                 break;
-            case R.id.tv_import_resume:
+            case R.id.ll_import_resume:
                 startActivity(UploadResumeActivity.class);
 
                 break;
@@ -362,8 +378,6 @@ public final class EnterDeveloperActivity extends AppActivity {
 
     @SuppressLint("SetTextI18n")
     public void getDeveloperDetail(int parentId) {
-
-
         EasyHttp.get(this)
                 .api(new GetDeveloperDetailApi().setParentId(parentId))
                 .request(new HttpCallback<HttpData<DeveloperInfoBean>>(this) {
@@ -400,7 +414,7 @@ public final class EnterDeveloperActivity extends AppActivity {
                         List<DeveloperInfoBean.WorkMode> workModeDtoList = bean.getWorkModeDtoList();
                         if (workModeDtoList.size() != 0) {
                             if (!TextUtils.isEmpty(careerDto.getCareerDirectionName())) {
-                                SPUtils.getInstance().put(AppConfig.CAREER_ID, bean.getCareerDirectionId() + "");
+                                SPUtils.getInstance().put(AppConfig.CAREER_ID,bean.getCareerDirectionId()+"");
 
                                 ll_career_info.setVisibility(View.VISIBLE);
                                 tv_career_info.setText(careerDto.getCareerDirectionName());
@@ -633,11 +647,7 @@ public final class EnterDeveloperActivity extends AppActivity {
 
             String nowTime = TimeUtil.getTimeString("yyyy-MM-dd");
             int age = Utils.getIntYear(nowTime) - Utils.getIntYear(bean.getBirthday());
-            if (bean.getProvinceName() == null && bean.getCityName() == null && bean.getAreasName() == null) {
-                tv_edit_info.setText(mSex + " | " + age + "岁  ");
-            } else {
-                tv_edit_info.setText(mSex + " | " + age + "岁 | " + bean.getProvinceName() + bean.getCityName() + bean.getAreasName());
-            }
+            tv_edit_info.setText(mSex + " | " + age + "岁 | " + bean.getProvinceName() + bean.getCityName() + bean.getAreasName());
             tv_edit_reason.setText(bean.getRemoteWorkReasonStr());
 
             progress++;
@@ -746,5 +756,39 @@ public final class EnterDeveloperActivity extends AppActivity {
             mCommit.setVisibility(View.GONE);
         }
         sv.smoothScrollTo(0, 0);
+    }
+
+
+    /**
+     * 外部分享过来的文件 解析上传
+     *
+     * @param file
+     */
+    private void parseResume(File file) {
+        EasyHttp.post(this)
+                .api(new ParseResumeApi().setFile(file))
+                .request(new HttpCallback<HttpData<ParseResumeApi.Bean>>(this) {
+
+                    @Override
+                    public void onSucceed(HttpData<ParseResumeApi.Bean> data) {
+                        String url = data.getData().getUrl();
+                        String fileName = data.getData().getFileName();
+                        new BaseDialog.Builder<>(EnterDeveloperActivity.this)
+                                .setContentView(R.layout.check_order_status_dialog)
+                                .setAnimStyle(BaseDialog.ANIM_SCALE)
+                                .setText(R.id.tv_title, "简历上传")
+                                .setText(R.id.tv_content, "是否将简历上传到天天数链开发者")
+                                .setText(R.id.btn_dialog_custom_cancel, "取消")
+                                .setText(R.id.btn_dialog_custom_ok, "确认")
+                                .setOnClickListener(R.id.btn_dialog_custom_cancel, (BaseDialog.OnClickListener<Button>) (dialog, button) -> dialog.dismiss())
+                                .setOnClickListener(R.id.btn_dialog_custom_ok, (dialog, views) -> {
+                                    Intent intent = new Intent(EnterDeveloperActivity.this, ResumeAnalysisActivity.class);
+                                    intent.putExtra("url", url);
+                                    intent.putExtra("fileName", fileName);
+                                    startActivity(intent);
+                                    dialog.dismiss();
+                                }).show();
+                    }
+                });
     }
 }

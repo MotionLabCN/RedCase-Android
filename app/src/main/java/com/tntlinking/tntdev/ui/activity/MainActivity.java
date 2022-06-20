@@ -30,7 +30,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
 /**
- *    desc   : 首页界面
+ * desc   : 首页界面
  */
 public final class MainActivity extends AppActivity
         implements NavigationAdapter.OnNavigationListener {

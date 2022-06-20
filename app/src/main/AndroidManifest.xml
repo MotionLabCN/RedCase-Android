@@ -363,6 +363,11 @@
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:taskAffinity="${applicationId}" />
+        <!-- 其他应用上传 -->
+        <activity
+            android:name="com.tntlinking.tntdev.ui.activity.UploadOtherActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"/>
         <!-- 解析简历页面 -->
         <activity
             android:name="com.tntlinking.tntdev.ui.activity.ResumeAnalysisActivity"
@@ -524,7 +529,18 @@
         <activity
             android:name="com.tntlinking.tntdev.ui.activity.EnterDeveloperActivity"
             android:launchMode="singleTop"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait">
+
+            <intent-filter>
+                <action android:name="android.intent.action.SEND"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <!-- 	指定分享类型,我这边只能分享video/mp4,image/* -->
+                <data android:mimeType="image/*" />
+                <data android:mimeType="application/pdf" />
+                <data android:mimeType="text/plain" />
+                <data android:mimeType="text/html" />
+            </intent-filter>
+        </activity>
         <!-- 写日报页面-->
         <activity
             android:name="com.tntlinking.tntdev.ui.activity.SaveQRActivity"
@@ -566,17 +582,6 @@
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" >
-
-            <intent-filter>
-                <action android:name="android.intent.action.SEND"/>
-                <category android:name="android.intent.category.DEFAULT"/>
-                <!-- 	指定分享类型,我这边只能分享video/mp4,image/* -->
-                <data android:mimeType="application/msword" />
-                <data android:mimeType="image/*" />
-                <data android:mimeType="application/pdf" />
-                <data android:mimeType="text/plain" />
-                <data android:mimeType="text/html" />
-            </intent-filter>
 
         </activity>
 
