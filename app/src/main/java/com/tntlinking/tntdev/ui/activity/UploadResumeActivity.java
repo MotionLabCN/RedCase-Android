@@ -1,6 +1,7 @@
 package com.tntlinking.tntdev.ui.activity;
 
 import android.annotation.SuppressLint;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -51,6 +52,7 @@ public final class UploadResumeActivity extends AppActivity implements IWXAPIEve
                     Toast.makeText(this,"请先安装微信",Toast.LENGTH_SHORT).show();
                     return;
                 }
+
                 String appId = "wx1e91399d09c1cd9a"; // 填移动应用(App)的 AppId，非小程序的 AppID
                 IWXAPI api = WXAPIFactory.createWXAPI(UploadResumeActivity.this, appId);
                 WXLaunchMiniProgram.Req req = new WXLaunchMiniProgram.Req();
@@ -94,7 +96,10 @@ public final class UploadResumeActivity extends AppActivity implements IWXAPIEve
     public void onResp(BaseResp baseResp) {
         if (baseResp.getType() == ConstantsAPI.COMMAND_LAUNCH_WX_MINIPROGRAM) {
             WXLaunchMiniProgram.Resp launchMiniProResp = (WXLaunchMiniProgram.Resp) baseResp;
-            String extraData =launchMiniProResp.extMsg; //对应小程序组件 <button open-type="launchApp"> 中的 app-parameter 属性
+//            String extMsg =launchMiniProResp.extMsg; //对应小程序组件 <button open-type="launchApp"> 中的 app-parameter 属性
+            String text = String.format("openid=%s\nextMsg=%s\nerrStr=%s",
+                    launchMiniProResp.openId, launchMiniProResp.extMsg,launchMiniProResp.errStr);
+            Log.d("extMsg",">>>"+text);
         }
     }
 }
