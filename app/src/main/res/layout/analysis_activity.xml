@@ -35,13 +35,13 @@
     </LinearLayout>
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_start_parsing"
+        android:id="@+id/btn_parse"
         style="@style/ButtonStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_marginHorizontal="@dimen/dp_16"
-        android:layout_marginVertical="@dimen/dp_70"
+        android:layout_marginVertical="@dimen/dp_20"
         android:layout_marginBottom="@dimen/dp_16"
         android:text="@string/setting_start_parsing"
         android:textColor="@color/common_primary_color"
