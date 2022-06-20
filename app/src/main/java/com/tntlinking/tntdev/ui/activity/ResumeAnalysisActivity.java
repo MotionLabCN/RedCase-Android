@@ -19,11 +19,14 @@ import com.tntlinking.tntdev.app.AppActivity;
 import com.tntlinking.tntdev.http.api.ParseAnalysisApi;
 import com.tntlinking.tntdev.http.api.ParseResumeApi;
 import com.tntlinking.tntdev.http.model.HttpData;
+import com.tntlinking.tntdev.ui.bean.DeveloperInfoBean;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+
+import static com.tntlinking.tntdev.ui.activity.EnterDeveloperActivity.INTENT_KEY_DEVELOPER_INFO;
 
 public final class ResumeAnalysisActivity extends AppActivity {
     private PDFView pdfView;
@@ -94,11 +97,13 @@ public final class ResumeAnalysisActivity extends AppActivity {
     private void parseResume(String fileName) {
         EasyHttp.post(this)
                 .api(new ParseAnalysisApi().setFile(fileName))
-                .request(new HttpCallback<HttpData<String>>(this) {
+                .request(new HttpCallback<HttpData<DeveloperInfoBean>>(this) {
                     @Override
-                    public void onSucceed(HttpData<String> data) {
-
-
+                    public void onSucceed(HttpData<DeveloperInfoBean> data) {
+                        Intent intent = new Intent(ResumeAnalysisActivity.this, EnterDeveloperActivity.class);
+                        intent.putExtra(INTENT_KEY_DEVELOPER_INFO, data.getData());
+                        startActivity(intent);
+                        finish();
                     }
 
                     @Override
