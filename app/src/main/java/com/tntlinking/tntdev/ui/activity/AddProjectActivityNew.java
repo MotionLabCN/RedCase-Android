@@ -120,7 +120,7 @@ public final class AddProjectActivityNew extends AppActivity {
         if (bean != null) {
             DeveloperInfoBean.DeveloperProject developerProject = bean.getProjectDtoList().get(position);
             if (bean.getWorkExperienceDtoList().size() != 0) {
-                if (TextUtils.isEmpty(developerProject.getCompanyName())) {
+                if (TextUtils.isEmpty(developerProject.getProjectName())) {//判断是否有项目名字，没有就不显示
 //                    btn_delete.setVisibility(View.GONE);
                     tv_title.setText("添加项目经历");
                     btn_delete.setText("保存");

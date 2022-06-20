@@ -268,11 +268,15 @@ public class Utils {
 
     // 格式化月份去前面的0  2020-02-09   的到 2020
     public static int getIntYear(String date) {
-        if (date.contains("-")) {
-            String[] split = date.split("-");
-            return Integer.parseInt(split[0]);
+        if (!TextUtils.isEmpty(date)) {
+            if (date.contains("-")) {
+                String[] split = date.split("-");
+                return Integer.parseInt(split[0]);
+            } else {
+                return 2001;
+            }
         } else {
-            return 2001;
+            return 2022;
         }
 
     }
@@ -297,19 +301,22 @@ public class Utils {
 
     // 格式化天去前面的0  2020-12-09   的到 9
     public static String getDay(String date) {
-        if (date.contains("-")) {
-            int index2 = date.lastIndexOf("-");
-            int day;
-            if (date.substring(index2 + 1, index2 + 2).equals("0")) {
-                day = Integer.parseInt(date.substring(index2 + 2, index2 + 3));
+        if (!TextUtils.isEmpty(date)) {
+            if (date.contains("-")) {
+                int index2 = date.lastIndexOf("-");
+                int day;
+                if (date.substring(index2 + 1, index2 + 2).equals("0")) {
+                    day = Integer.parseInt(date.substring(index2 + 2, index2 + 3));
+                } else {
+                    day = Integer.parseInt(date.substring(index2 + 1, index2 + 3));
+                }
+                return day + "";
             } else {
-                day = Integer.parseInt(date.substring(index2 + 1, index2 + 3));
+                return date;
             }
-            return day + "";
         } else {
-            return date;
+            return "1";
         }
-
     }
 
 
@@ -396,7 +403,7 @@ public class Utils {
     }
 
     /**
-     * @param str  去掉字符串后面多余的 0
+     * @param str 去掉字符串后面多余的 0
      * @return
      */
     public static String StripZeros(String str) {
@@ -454,7 +461,7 @@ public class Utils {
 
     /**
      * 获取单个文件的MD5值！
-
+     *
      * @param file
      * @return
      */
