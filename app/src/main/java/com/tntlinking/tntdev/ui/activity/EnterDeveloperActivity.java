@@ -144,7 +144,7 @@ public final class EnterDeveloperActivity extends AppActivity {
                 intent.putExtra(INTENT_KEY_DEVELOPER_INFO, bean);
                 intent.putExtra("position", position);
                 getActivity().startActivityForResult(intent, 10007);
-                EasyLog.print("======position====="+position);
+                EasyLog.print("======position=====" + position);
             }
         });
 
@@ -400,7 +400,7 @@ public final class EnterDeveloperActivity extends AppActivity {
                         List<DeveloperInfoBean.WorkMode> workModeDtoList = bean.getWorkModeDtoList();
                         if (workModeDtoList.size() != 0) {
                             if (!TextUtils.isEmpty(careerDto.getCareerDirectionName())) {
-                                SPUtils.getInstance().put(AppConfig.CAREER_ID,bean.getCareerDirectionId()+"");
+                                SPUtils.getInstance().put(AppConfig.CAREER_ID, bean.getCareerDirectionId() + "");
 
                                 ll_career_info.setVisibility(View.VISIBLE);
                                 tv_career_info.setText(careerDto.getCareerDirectionName());
@@ -564,10 +564,10 @@ public final class EnterDeveloperActivity extends AppActivity {
 //        }
 
         double fileSize = FileSizeUtil.getFileOrFilesSize(sourceFile, 3);
-        EasyLog.print("===FileUtils=111==="+ FileUtils.getSize(sourceFile));
+        EasyLog.print("===FileUtils=111===" + FileUtils.getSize(sourceFile));
         if (fileSize > 2) {//图片大于2M 压缩再上传，小于2M 直接上传
             File file = new File(BitmapUtil.compressImage(sourceFile.getAbsolutePath(), 90));
-            EasyLog.print("===getSize=222==="+ FileUtils.getSize(file));
+            EasyLog.print("===getSize=222===" + FileUtils.getSize(file));
             updateCropImage(file, false);
             toast("图片压缩大小==>>>" + FileUtils.getSize(file));
         } else {
@@ -633,7 +633,11 @@ public final class EnterDeveloperActivity extends AppActivity {
 
             String nowTime = TimeUtil.getTimeString("yyyy-MM-dd");
             int age = Utils.getIntYear(nowTime) - Utils.getIntYear(bean.getBirthday());
-            tv_edit_info.setText(mSex + " | " + age + "岁 | " + bean.getProvinceName() + bean.getCityName() + bean.getAreasName());
+            if (bean.getProvinceName() == null && bean.getCityName() == null && bean.getAreasName() == null) {
+                tv_edit_info.setText(mSex + " | " + age + "岁  ");
+            } else {
+                tv_edit_info.setText(mSex + " | " + age + "岁 | " + bean.getProvinceName() + bean.getCityName() + bean.getAreasName());
+            }
             tv_edit_reason.setText(bean.getRemoteWorkReasonStr());
 
             progress++;
@@ -642,7 +646,7 @@ public final class EnterDeveloperActivity extends AppActivity {
         List<DeveloperInfoBean.WorkMode> workModeDtoList = bean.getWorkModeDtoList();
         if (workModeDtoList.size() != 0) {
             if (!TextUtils.isEmpty(careerDto.getCareerDirectionName())) {
-                SPUtils.getInstance().put(AppConfig.CAREER_ID,bean.getCareerDirectionId()+"");
+                SPUtils.getInstance().put(AppConfig.CAREER_ID, bean.getCareerDirectionId() + "");
 
                 ll_career_info.setVisibility(View.VISIBLE);
                 tv_career_info.setText(careerDto.getCareerDirectionName());

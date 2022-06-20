@@ -1,25 +1,19 @@
 package com.tntlinking.tntdev.ui.activity;
 
 import android.annotation.SuppressLint;
-import android.content.ContentResolver;
 import android.content.Intent;
-import android.database.Cursor;
-import android.net.Uri;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import com.blankj.utilcode.util.LogUtils;
+import com.blankj.utilcode.util.SPUtils;
 import com.hjq.base.BaseDialog;
 import com.hjq.http.EasyHttp;
-import com.hjq.http.EasyLog;
 import com.hjq.http.listener.HttpCallback;
 import com.leon.lfilepickerlibrary.LFilePicker;
 import com.leon.lfilepickerlibrary.utils.Constant;
-import com.tencent.mm.opensdk.constants.ConstantsAPI;
 import com.tencent.mm.opensdk.modelbase.BaseReq;
 import com.tencent.mm.opensdk.modelbase.BaseResp;
 import com.tencent.mm.opensdk.modelbiz.WXLaunchMiniProgram;
@@ -30,7 +24,8 @@ import com.tntlinking.tntdev.R;
 import com.tntlinking.tntdev.app.AppActivity;
 import com.tntlinking.tntdev.http.api.ParseResumeApi;
 import com.tntlinking.tntdev.http.model.HttpData;
-import com.xiaomi.mipush.sdk.Constants;
+import com.tntlinking.tntdev.other.AppConfig;
+import com.tntlinking.tntdev.other.Utils;
 
 import java.io.File;
 import java.util.List;
@@ -38,9 +33,6 @@ import java.util.List;
 
 public final class UploadResumeActivity extends AppActivity implements IWXAPIEventHandler {
     private final int REQUEST_CODE_FROM_ACTIVITY = 1000;
-
-    // IWXAPI 是第三方app和微信通信的openapi接口
-    private IWXAPI api;
 
     @Override
     protected int getLayoutId() {
@@ -53,17 +45,6 @@ public final class UploadResumeActivity extends AppActivity implements IWXAPIEve
         LinearLayout ll_mobile_upload = findViewById(R.id.ll_mobile_upload);
         LinearLayout ll_other_uploads = findViewById(R.id.ll_other_uploads);
         setOnClickListener(ll_wechat_upload, ll_mobile_upload, ll_other_uploads);
-        // 通过WXAPIFactory工厂，获取IWXAPI的实例
-        api = WXAPIFactory.createWXAPI(this, Constants.APP_ID, false);
-        //注意：
-        //第三方开发者如果使用透明界面来实现WXEntryActivity，需要判断handleIntent的返回值，如果返回值为false，则说明入参不合法未被SDK处理，应finish当前透明界面，避免外部通过传递非法参数的Intent导致停留在透明界面，引起用户的疑惑
-//        try {
-//            if (!api.handleIntent(getIntent(), this)) {
-//                finish();
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
     }
 
     @Override
@@ -76,7 +57,9 @@ public final class UploadResumeActivity extends AppActivity implements IWXAPIEve
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.ll_wechat_upload:
-//                IWXAPI wxApi = WXAPIFactory.createWXAPI(this, null);
+                String appId = "wx1e91399d09c1cd9a"; // 填移动应用(App)的 AppId，非小程序的 AppID
+                // IWXAPI 是第三方app和微信通信的openapi接口
+                IWXAPI api = WXAPIFactory.createWXAPI(this, appId, false);
                 api.registerApp("wx1e91399d09c1cd9a");
                 boolean bIsWXAppInstalled;
                 bIsWXAppInstalled = api.isWXAppInstalled();
@@ -84,12 +67,11 @@ public final class UploadResumeActivity extends AppActivity implements IWXAPIEve
                     Toast.makeText(this, "请先安装微信", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                String appId = "wx1e91399d09c1cd9a"; // 填移动应用(App)的 AppId，非小程序的 AppID
-                IWXAPI api = WXAPIFactory.createWXAPI(UploadResumeActivity.this, appId);
                 WXLaunchMiniProgram.Req req = new WXLaunchMiniProgram.Req();
                 req.userName = "gh_33ffbefbd529"; // 填小程序id
                 //拉起小程序页面的可带参路径，不填默认拉起小程序首页，对于小游戏，可以只传入 query 部分，来实现传参效果，如：传入 "?foo=bar"。
-                req.path = "pages/resumeUpload/index?phone=18827060481";
+                String mobile = Utils.changPhoneNumber(SPUtils.getInstance().getString(AppConfig.DEVELOP_MOBILE));//开发者手机号码
+                req.path = "pages/resumeUpload/index?phone=" + mobile;
                 req.miniprogramType = WXLaunchMiniProgram.Req.MINIPROGRAM_TYPE_TEST;// 可选打开 开发版，体验版和正式版
                 api.sendReq(req);
                 break;
@@ -105,25 +87,10 @@ public final class UploadResumeActivity extends AppActivity implements IWXAPIEve
 
     @Override
     public void onReq(BaseReq baseReq) {
-        if (baseReq.getType() == ConstantsAPI.COMMAND_LAUNCH_WX_MINIPROGRAM) {
-
-            Log.d("extraData",">>>"+"dasdada");
-            finish();
-
-        }
-
     }
 
     @Override
-    public void onResp(BaseResp baseResp) {
-        if (baseResp.getType() == ConstantsAPI.COMMAND_LAUNCH_WX_MINIPROGRAM) {
-            WXLaunchMiniProgram.Resp launchMiniProResp = (WXLaunchMiniProgram.Resp) baseResp;
-            String extraData = launchMiniProResp.extMsg; //对应小程序组件 <button open-type="launchApp"> 中的 app-parameter 属性
-            LogUtils.i("小程序==" + extraData);
-            finish();
-
-
-        }
+    public void onResp(BaseResp resp) {
     }
 
     /**

@@ -64,8 +64,12 @@ public final class AddWorkAdapter extends BaseAdapter {
         }
         DeveloperInfoBean.DeveloperWork bean = mList.get(position);
         holder.tv_work_name.setText(bean.getCompanyName());
-        holder.tv_work_position.setText(bean.getIndustryName()+" | "+bean.getPositionName());
-        holder.tv_work_time.setText( Utils.ChangeDate(bean.getWorkStartTime()) + " - " + Utils.ChangeDate(bean.getWorkEndTime()) );
+        if (bean.getPositionName() == null) {
+            holder.tv_work_position.setText(bean.getIndustryName());
+        } else {
+            holder.tv_work_position.setText(bean.getIndustryName() + " | " + bean.getPositionName());
+        }
+        holder.tv_work_time.setText(Utils.ChangeDate(bean.getWorkStartTime()) + " - " + Utils.ChangeDate(bean.getWorkEndTime()));
 
         return convertView;
     }
