@@ -284,7 +284,7 @@ public final class EnterDeveloperActivity extends AppActivity {
                 break;
             case R.id.ll_import_resume:
                 startActivity(UploadResumeActivity.class);
-
+                finish();
                 break;
         }
 
@@ -414,7 +414,7 @@ public final class EnterDeveloperActivity extends AppActivity {
                         List<DeveloperInfoBean.WorkMode> workModeDtoList = bean.getWorkModeDtoList();
                         if (workModeDtoList.size() != 0) {
                             if (!TextUtils.isEmpty(careerDto.getCareerDirectionName())) {
-                                SPUtils.getInstance().put(AppConfig.CAREER_ID,bean.getCareerDirectionId()+"");
+                                SPUtils.getInstance().put(AppConfig.CAREER_ID, bean.getCareerDirectionId() + "");
 
                                 ll_career_info.setVisibility(View.VISIBLE);
                                 tv_career_info.setText(careerDto.getCareerDirectionName());
@@ -647,7 +647,12 @@ public final class EnterDeveloperActivity extends AppActivity {
 
             String nowTime = TimeUtil.getTimeString("yyyy-MM-dd");
             int age = Utils.getIntYear(nowTime) - Utils.getIntYear(bean.getBirthday());
-            tv_edit_info.setText(mSex + " | " + age + "岁 | " + bean.getProvinceName() + bean.getCityName() + bean.getAreasName());
+            if (bean.getProvinceName() == null) {
+                tv_edit_info.setText(mSex + " | " + age + "岁");
+            } else {
+                tv_edit_info.setText(mSex + " | " + age + "岁 | " + bean.getProvinceName() + bean.getCityName() + bean.getAreasName());
+
+            }
             tv_edit_reason.setText(bean.getRemoteWorkReasonStr());
 
             progress++;

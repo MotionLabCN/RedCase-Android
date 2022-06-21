@@ -94,7 +94,9 @@ public final class AddBaseInfoActivity extends AppActivity {
                     mInfoGender.setLeftText("女");
                 }
                 mInfoBirth.setLeftText(bean.getBirthday());
-                mInfoAddress.setLeftText(bean.getProvinceName() + "-" + bean.getCityName() + "-" + bean.getAreasName());
+                if (bean.getProvinceName() != null) {
+                    mInfoAddress.setLeftText(bean.getProvinceName() + "-" + bean.getCityName() + "-" + bean.getAreasName());
+                }
                 mInfoReason.setLeftText(bean.getRemoteWorkReasonStr());
 
                 realName = bean.getRealName();

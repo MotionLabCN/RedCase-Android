@@ -371,7 +371,7 @@
         <!-- 解析简历页面 -->
         <activity
             android:name="com.tntlinking.tntdev.ui.activity.ResumeAnalysisActivity"
-            android:launchMode="singleTop"
+            android:launchMode="singleTask"
             android:screenOrientation="portrait" />
         <!-- 添加教育经历页面 -->
         <activity
