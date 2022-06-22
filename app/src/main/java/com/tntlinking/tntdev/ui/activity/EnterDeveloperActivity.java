@@ -284,7 +284,6 @@ public final class EnterDeveloperActivity extends AppActivity {
                 break;
             case R.id.ll_import_resume:
                 startActivity(UploadResumeActivity.class);
-                finish();
                 break;
         }
 

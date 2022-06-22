@@ -362,11 +362,11 @@
             android:name="com.tntlinking.tntdev.ui.activity.UploadResumeActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
-            android:taskAffinity="${applicationId}" />
+            />
         <!-- 其他应用上传 -->
         <activity
             android:name="com.tntlinking.tntdev.ui.activity.UploadOtherActivity"
-            android:launchMode="singleTop"
+            android:launchMode="singleTask"
             android:screenOrientation="portrait"/>
         <!-- 解析简历页面 -->
         <activity

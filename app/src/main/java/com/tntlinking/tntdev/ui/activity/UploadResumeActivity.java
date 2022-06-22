@@ -74,7 +74,6 @@ public final class UploadResumeActivity extends AppActivity implements IWXAPIEve
                 req.path = "pages/resumeUpload/index?phone=" + mobile;
                 req.miniprogramType = WXLaunchMiniProgram.Req.MINIPROGRAM_TYPE_TEST;// 可选打开 开发版，体验版和正式版
                 api.sendReq(req);
-                finish();
                 break;
             case R.id.ll_mobile_upload:
 //                resumeUpload();
