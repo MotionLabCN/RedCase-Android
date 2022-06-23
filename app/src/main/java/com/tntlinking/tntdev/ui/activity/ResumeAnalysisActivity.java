@@ -51,7 +51,6 @@ public final class ResumeAnalysisActivity extends AppActivity {
     protected void initData() {
         String pdf_url = getString("url");
         String fileName = getString("fileName");
-
         if (!TextUtils.isEmpty(pdf_url)) {
             getPdf(pdf_url);
         }

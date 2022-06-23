@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -184,6 +185,8 @@ public final class EnterDeveloperActivity extends AppActivity {
                 Uri uri = getIntent().getParcelableExtra(Intent.EXTRA_STREAM);
                 //通过Uri获取文件在本地存储的真实路径
                 File file = UriUtils.uri2File(uri);
+                Log.d("fileuri", ">>>" + file);
+
                 EasyLog.print("======文件路径==file=" + file);
                 if (FileUtils.isFile(file)) {
                     parseResume(file);
@@ -511,7 +514,7 @@ public final class EnterDeveloperActivity extends AppActivity {
                             tv_welcome.setVisibility(View.GONE);
                             ll_progress.setVisibility(View.GONE);
                             mCommit.setVisibility(View.GONE);
-                            ll_import_resume.setVisibility(View.GONE);
+//                            ll_import_resume.setVisibility(View.GONE);
                         }
                         sv.smoothScrollTo(0, 0);
                     }
@@ -772,6 +775,7 @@ public final class EnterDeveloperActivity extends AppActivity {
      * @param file
      */
     private void parseResume(File file) {
+
         EasyHttp.post(this)
                 .api(new ParseResumeApi().setFile(file))
                 .request(new HttpCallback<HttpData<ParseResumeApi.Bean>>(this) {

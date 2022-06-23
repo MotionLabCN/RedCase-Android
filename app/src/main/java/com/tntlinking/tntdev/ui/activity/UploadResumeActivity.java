@@ -3,6 +3,7 @@ package com.tntlinking.tntdev.ui.activity;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -70,7 +71,7 @@ public final class UploadResumeActivity extends AppActivity implements IWXAPIEve
                 WXLaunchMiniProgram.Req req = new WXLaunchMiniProgram.Req();
                 req.userName = "gh_33ffbefbd529"; // 填小程序id
                 //拉起小程序页面的可带参路径，不填默认拉起小程序首页，对于小游戏，可以只传入 query 部分，来实现传参效果，如：传入 "?foo=bar"。
-                String mobile = Utils.changPhoneNumber(SPUtils.getInstance().getString(AppConfig.DEVELOP_MOBILE));//开发者手机号码
+                String mobile = (SPUtils.getInstance().getString(AppConfig.DEVELOP_MOBILE));//开发者手机号码
                 req.path = "pages/resumeUpload/index?phone=" + mobile;
                 req.miniprogramType = WXLaunchMiniProgram.Req.MINIPROGRAM_TYPE_TEST;// 可选打开 开发版，体验版和正式版
                 api.sendReq(req);
@@ -127,6 +128,7 @@ public final class UploadResumeActivity extends AppActivity implements IWXAPIEve
 
 
     private void parseResume(File file) {
+        Log.d("file",">>>"+file);
         EasyHttp.post(this)
                 .api(new ParseResumeApi().setFile(file))
                 .request(new HttpCallback<HttpData<ParseResumeApi.Bean>>(this) {
