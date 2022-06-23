@@ -268,6 +268,7 @@ public final class EnterDeveloperActivity extends AppActivity {
                     toast("您还没有请填写职业信息");
                     return;
                 }
+
                 if (addEducationAdapter.getCount() == 0) {
                     toast("您还没有请填写教育经历");
                     return;
