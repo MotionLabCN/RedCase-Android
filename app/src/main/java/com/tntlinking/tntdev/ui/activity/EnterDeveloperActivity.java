@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -184,6 +185,10 @@ public final class EnterDeveloperActivity extends AppActivity {
                 Uri uri = getIntent().getParcelableExtra(Intent.EXTRA_STREAM);
                 //通过Uri获取文件在本地存储的真实路径
                 File file = UriUtils.uri2File(uri);
+                //截取_之后字符串
+                String str1 = type.substring(0, type.indexOf("/"));
+                String str2 = type.substring(str1.length() + 1, type.length());
+                Log.d("str2", ">>>" + str2);
                 EasyLog.print("======文件路径==file=" + file);
                 if (FileUtils.isFile(file) && str2.equals("pdf")) {
                     parseResume(file);
