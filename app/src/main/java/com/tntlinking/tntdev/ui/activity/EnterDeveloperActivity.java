@@ -15,6 +15,7 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.blankj.utilcode.util.FileUtils;
 import com.blankj.utilcode.util.SPUtils;
@@ -183,13 +184,20 @@ public final class EnterDeveloperActivity extends AppActivity {
 
             //类型 /*&& "video/mp4".equals(type)*/
             if (Intent.ACTION_SEND.equals(action) && type != null) {
+                Log.d("action", ">>>" + action);
+
                 Uri uri = getIntent().getParcelableExtra(Intent.EXTRA_STREAM);
                 //通过Uri获取文件在本地存储的真实路径
                 File file = UriUtils.uri2File(uri);
-
+                //截取_之后字符串
+                String str1 = type.substring(0, type.indexOf("/"));
+                String str2 = type.substring(str1.length() + 1, type.length());
+                Log.d("str2", ">>>" + str2);
                 EasyLog.print("======文件路径==file=" + file);
-                if (FileUtils.isFile(file)) {
+                if (FileUtils.isFile(file) && str2.equals("pdf")) {
                     parseResume(file);
+                } else {
+                    toast("分享简历格式只支撑PDF类型,其他类型暂不支撑");
                 }
             }
         }
