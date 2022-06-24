@@ -107,9 +107,17 @@ public final class AddEducationActivityNew extends AppActivity {
                     btn_commit.setText("保存并添加下一条");
                 } else {
 //                    btn_delete.setVisibility(View.VISIBLE);
-                    tv_title.setText("编辑教育经历");
-                    btn_delete.setText("删除");
-                    btn_commit.setText("保存");
+
+                    //1 是直接点击添加的，2 是上传简历解析 没有id 也是算添加 不算编辑
+                    if (developerEducation.getId() == 0) {
+                        tv_title.setText("添加教育经历");
+                        btn_delete.setText("保存");
+                        btn_commit.setText("保存并添加下一条");
+                    } else {
+                        tv_title.setText("编辑教育经历");
+                        btn_delete.setText("删除");
+                        btn_commit.setText("保存");
+                    }
 
                     et_info_school_name.setText(developerEducation.getCollegeName());
                     info_education.setLeftText(developerEducation.getEducationName());

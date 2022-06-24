@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -15,7 +14,6 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.blankj.utilcode.util.FileUtils;
 import com.blankj.utilcode.util.SPUtils;
@@ -172,7 +170,7 @@ public final class EnterDeveloperActivity extends AppActivity {
         if (bean != null) {
             if (!TextUtils.isEmpty(bean.getRealName())) {
                 setDeveloperInfo(bean);
-
+                mCommit.setVisibility(View.VISIBLE);
             }
         } else {
             int developId = SPUtils.getInstance().getInt(AppConfig.DEVELOPER_ID);
@@ -181,18 +179,11 @@ public final class EnterDeveloperActivity extends AppActivity {
             //外部分享过来的
             String action = getIntent().getAction();//action
             String type = getIntent().getType();//类型
-
             //类型 /*&& "video/mp4".equals(type)*/
             if (Intent.ACTION_SEND.equals(action) && type != null) {
-                Log.d("action", ">>>" + action);
-
                 Uri uri = getIntent().getParcelableExtra(Intent.EXTRA_STREAM);
                 //通过Uri获取文件在本地存储的真实路径
                 File file = UriUtils.uri2File(uri);
-                //截取_之后字符串
-                String str1 = type.substring(0, type.indexOf("/"));
-                String str2 = type.substring(str1.length() + 1, type.length());
-                Log.d("str2", ">>>" + str2);
                 EasyLog.print("======文件路径==file=" + file);
                 if (FileUtils.isFile(file) && str2.equals("pdf")) {
                     parseResume(file);
@@ -211,6 +202,7 @@ public final class EnterDeveloperActivity extends AppActivity {
         if (bean != null) {
             if (TextUtils.isEmpty(bean.getRealName())) {
                 setDeveloperInfo(bean);
+                mCommit.setVisibility(View.VISIBLE);
             }
         } else {
             int developId = SPUtils.getInstance().getInt(AppConfig.DEVELOPER_ID);
@@ -279,7 +271,6 @@ public final class EnterDeveloperActivity extends AppActivity {
                     toast("您还没有请填写职业信息");
                     return;
                 }
-
                 if (addEducationAdapter.getCount() == 0) {
                     toast("您还没有请填写教育经历");
                     return;
@@ -296,6 +287,7 @@ public final class EnterDeveloperActivity extends AppActivity {
                 break;
             case R.id.ll_import_resume:
                 startActivity(UploadResumeActivity.class);
+                finish();
                 break;
         }
 
@@ -522,7 +514,6 @@ public final class EnterDeveloperActivity extends AppActivity {
                             tv_welcome.setVisibility(View.GONE);
                             ll_progress.setVisibility(View.GONE);
                             mCommit.setVisibility(View.GONE);
-//                            ll_import_resume.setVisibility(View.GONE);
                         }
                         sv.smoothScrollTo(0, 0);
                     }
@@ -771,7 +762,6 @@ public final class EnterDeveloperActivity extends AppActivity {
             tv_welcome.setVisibility(View.GONE);
             ll_progress.setVisibility(View.GONE);
             mCommit.setVisibility(View.GONE);
-            ll_import_resume.setVisibility(View.GONE);
         }
         sv.smoothScrollTo(0, 0);
     }
