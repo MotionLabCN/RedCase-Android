@@ -170,7 +170,7 @@ public final class EnterDeveloperActivity extends AppActivity {
         if (bean != null) {
             if (!TextUtils.isEmpty(bean.getRealName())) {
                 setDeveloperInfo(bean);
-
+                mCommit.setVisibility(View.VISIBLE);
             }
         } else {
             int developId = SPUtils.getInstance().getInt(AppConfig.DEVELOPER_ID);
@@ -200,6 +200,7 @@ public final class EnterDeveloperActivity extends AppActivity {
         if (bean != null) {
             if (TextUtils.isEmpty(bean.getRealName())) {
                 setDeveloperInfo(bean);
+                mCommit.setVisibility(View.VISIBLE);
             }
         } else {
             int developId = SPUtils.getInstance().getInt(AppConfig.DEVELOPER_ID);
@@ -511,7 +512,6 @@ public final class EnterDeveloperActivity extends AppActivity {
                             tv_welcome.setVisibility(View.GONE);
                             ll_progress.setVisibility(View.GONE);
                             mCommit.setVisibility(View.GONE);
-                            ll_import_resume.setVisibility(View.GONE);
                         }
                         sv.smoothScrollTo(0, 0);
                     }
@@ -760,7 +760,6 @@ public final class EnterDeveloperActivity extends AppActivity {
             tv_welcome.setVisibility(View.GONE);
             ll_progress.setVisibility(View.GONE);
             mCommit.setVisibility(View.GONE);
-            ll_import_resume.setVisibility(View.GONE);
         }
         sv.smoothScrollTo(0, 0);
     }
