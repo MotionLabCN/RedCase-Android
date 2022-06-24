@@ -180,12 +180,12 @@ public final class EnterDeveloperActivity extends AppActivity {
             //外部分享过来的
             String action = getIntent().getAction();//action
             String type = getIntent().getType();//类型
+
             //类型 /*&& "video/mp4".equals(type)*/
             if (Intent.ACTION_SEND.equals(action) && type != null) {
                 Uri uri = getIntent().getParcelableExtra(Intent.EXTRA_STREAM);
                 //通过Uri获取文件在本地存储的真实路径
                 File file = UriUtils.uri2File(uri);
-                Log.d("fileuri", ">>>" + file);
 
                 EasyLog.print("======文件路径==file=" + file);
                 if (FileUtils.isFile(file)) {
@@ -775,7 +775,6 @@ public final class EnterDeveloperActivity extends AppActivity {
      * @param file
      */
     private void parseResume(File file) {
-
         EasyHttp.post(this)
                 .api(new ParseResumeApi().setFile(file))
                 .request(new HttpCallback<HttpData<ParseResumeApi.Bean>>(this) {
