@@ -106,7 +106,6 @@ public final class WXEntryActivity extends WXCallbackActivity implements IWXAPIE
                 jsonObject = new JSONObject(launchMiniProgramResp.extMsg);
                 String mFilename = jsonObject.getString("fileName");
                 String mUrl = jsonObject.getString("url");
-                Log.d("QWER",">>>"+mFilename+mUrl);
                 Intent intent = new Intent(this, ResumeAnalysisActivity.class);
                 intent.putExtra("url", mUrl);
                 intent.putExtra("fileName", mFilename);

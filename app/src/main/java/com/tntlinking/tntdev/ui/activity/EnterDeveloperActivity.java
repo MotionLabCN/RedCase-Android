@@ -193,7 +193,7 @@ public final class EnterDeveloperActivity extends AppActivity {
                 if (FileUtils.isFile(file) && str2.equals("pdf")) {
                     parseResume(file);
                 } else {
-                    toast("分享简历格式只支撑PDF类型,其他类型暂不支撑");
+                    toast("分享简历格式只支持PDF类型,其他类型暂不支持");
                 }
             }
         }
