@@ -11,6 +11,7 @@ import com.tencent.mm.opensdk.modelbiz.WXLaunchMiniProgram;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.IWXAPIEventHandler;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
+import com.tencent.mm.opensdk.utils.Log;
 import com.tntlinking.tntdev.R;
 import com.tntlinking.tntdev.ui.activity.ResumeAnalysisActivity;
 import com.umeng.socialize.weixin.view.WXCallbackActivity;
@@ -105,6 +106,7 @@ public final class WXEntryActivity extends WXCallbackActivity implements IWXAPIE
                 jsonObject = new JSONObject(launchMiniProgramResp.extMsg);
                 String mFilename = jsonObject.getString("fileName");
                 String mUrl = jsonObject.getString("url");
+                Log.d("QWER",">>>"+mFilename+mUrl);
                 Intent intent = new Intent(this, ResumeAnalysisActivity.class);
                 intent.putExtra("url", mUrl);
                 intent.putExtra("fileName", mFilename);
