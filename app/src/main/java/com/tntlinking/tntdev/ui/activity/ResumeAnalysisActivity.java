@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import android.text.TextUtils;
 import android.widget.Button;
 
+import com.blankj.utilcode.util.SPUtils;
 import com.github.barteksc.pdfviewer.PDFView;
 import com.hjq.http.EasyHttp;
 import com.hjq.http.listener.HttpCallback;
@@ -13,6 +14,7 @@ import com.tntlinking.tntdev.R;
 import com.tntlinking.tntdev.app.AppActivity;
 import com.tntlinking.tntdev.http.api.ParseAnalysisApi;
 import com.tntlinking.tntdev.http.model.HttpData;
+import com.tntlinking.tntdev.other.AppConfig;
 import com.tntlinking.tntdev.ui.bean.DeveloperInfoBean;
 
 import java.io.IOException;
@@ -84,6 +86,8 @@ public final class ResumeAnalysisActivity extends AppActivity {
                 .request(new HttpCallback<HttpData<DeveloperInfoBean>>(this) {
                     @Override
                     public void onSucceed(HttpData<DeveloperInfoBean> data) {
+                        SPUtils.getInstance().put(AppConfig.RESUME_ANALYSIS, true);//简历解析成功
+
                         Intent intent = new Intent(ResumeAnalysisActivity.this, EnterDeveloperActivity.class);
                         intent.putExtra(INTENT_KEY_DEVELOPER_INFO, data.getData());
                         startActivity(intent);

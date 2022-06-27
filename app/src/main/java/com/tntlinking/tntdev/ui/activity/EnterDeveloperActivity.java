@@ -171,7 +171,6 @@ public final class EnterDeveloperActivity extends AppActivity {
         if (bean != null) {
             if (!TextUtils.isEmpty(bean.getRealName())) {
                 setDeveloperInfo(bean);
-                mCommit.setVisibility(View.VISIBLE);
             }
         } else {
             int developId = SPUtils.getInstance().getInt(AppConfig.DEVELOPER_ID);
@@ -207,7 +206,6 @@ public final class EnterDeveloperActivity extends AppActivity {
         if (bean != null) {
             if (TextUtils.isEmpty(bean.getRealName())) {
                 setDeveloperInfo(bean);
-                mCommit.setVisibility(View.VISIBLE);
             }
         } else {
             int developId = SPUtils.getInstance().getInt(AppConfig.DEVELOPER_ID);
@@ -391,136 +389,137 @@ public final class EnterDeveloperActivity extends AppActivity {
                 .request(new HttpCallback<HttpData<DeveloperInfoBean>>(this) {
                     @Override
                     public void onSucceed(HttpData<DeveloperInfoBean> data) {
-                        progress = 0;
-                        bean = data.getData();
-                        String realName = bean.getRealName();
-                        int sex = bean.getSex();
-                        if (!TextUtils.isEmpty(bean.getAvatarUrl())) {
-                            ll_add_photo.setVisibility(View.GONE);
-                            fl_add_photo.setVisibility(View.VISIBLE);
-                            GlideApp.with(EnterDeveloperActivity.this)
-                                    .load(bean.getAvatarUrl())
-                                    .transform(new MultiTransformation<>(new CenterCrop(), new RoundedCorners((int) getResources().getDimension(R.dimen.dp_8))))
-                                    .into(iv_photo_avatar);
-                        } else {
-                            ll_add_photo.setVisibility(View.VISIBLE);
-                            fl_add_photo.setVisibility(View.GONE);
-                        }
-                        if (!TextUtils.isEmpty(realName)) {
-                            ll_base_info.setVisibility(View.VISIBLE);
-                            tv_edit_name.setText(realName);
-                            String mSex = sex == 0 ? "男" : "女";
-
-                            String nowTime = TimeUtil.getTimeString("yyyy-MM-dd");
-                            int age = Utils.getIntYear(nowTime) - Utils.getIntYear(bean.getBirthday());
-                            tv_edit_info.setText(mSex + " | " + age + "岁 | " + bean.getProvinceName() + bean.getCityName() + bean.getAreasName());
-                            tv_edit_reason.setText(bean.getRemoteWorkReasonStr());
-
-                            progress++;
-                        }
-                        DeveloperInfoBean.DeveloperCareer careerDto = bean.getCareerDto();
-                        List<DeveloperInfoBean.WorkMode> workModeDtoList = bean.getWorkModeDtoList();
-                        if (workModeDtoList.size() != 0) {
-                            if (!TextUtils.isEmpty(careerDto.getCareerDirectionName())) {
-                                SPUtils.getInstance().put(AppConfig.CAREER_ID, bean.getCareerDirectionId() + "");
-
-                                ll_career_info.setVisibility(View.VISIBLE);
-                                tv_career_info.setText(careerDto.getCareerDirectionName());
-                                tv_career_info_work_year.setText(careerDto.getWorkYearsName() + " | 当前薪资：" + (Double.parseDouble(careerDto.getCurSalary()) / 1000) + "K");
-                                tv_career_info_work_mode.setText(workModeDtoList.get(0).getWorkDayModeName() + " | 期望薪资：" +
-                                        (Double.parseDouble(workModeDtoList.get(0).getLowestSalary()) / 1000) + "K"
-                                        + "-" + (Double.parseDouble(workModeDtoList.get(0).getHighestSalary()) / 1000) + "K");
-                                progress++;
-                            }
-                        }
-
-                        List<DeveloperInfoBean.DeveloperEducation> educationDtoList = bean.getEducationDtoList();
-                        List<DeveloperInfoBean.DeveloperWork> workExperienceDtoList = bean.getWorkExperienceDtoList();
-                        List<DeveloperInfoBean.DeveloperProject> projectDtoList = bean.getProjectDtoList();
-                        if (educationDtoList.size() != 0) {
-                            progress++;
-                        }
-                        addEducationAdapter = new AddEducationAdapter(EnterDeveloperActivity.this, educationDtoList);
-                        lv1.setAdapter(addEducationAdapter);
-
-                        if (workExperienceDtoList.size() != 0) {
-                            progress++;
-                        }
-                        addWorkAdapter = new AddWorkAdapter(EnterDeveloperActivity.this, workExperienceDtoList);
-                        lv2.setAdapter(addWorkAdapter);
-                        if (projectDtoList.size() >= 1) {
-                            progress++;
-                        }
-                        addProjectAdapter = new AddProjectAdapter(EnterDeveloperActivity.this, projectDtoList);
-                        lv3.setAdapter(addProjectAdapter);
-                        if (projectDtoList.size() >= 2) {
-                            progress++;
-                        }
-                        if (projectDtoList.size() >= 3) {
-                            progress++;
-                        }
-                        if (projectDtoList.size() >= 4) {
-                            progress++;
-                        }
-                        if (projectDtoList.size() >= 5) {
-                            progress++;
-                        }
-                        if (projectDtoList.size() >= 6) {
-                            progress++;
-                        }
-                        if (projectDtoList.size() >= 7) {
-                            progress++;
-                        }
-
-
-                        ll_progress.setVisibility(View.VISIBLE);
-                        if (progress == 0) {
-                            ll_progress.setVisibility(View.GONE);
-                        } else if (progress == 1) {
-                            tv_progress.setText("\"完成度超过2%的用户，仍需努力哦~\"");
-                            progress_bar.setProgress(2);
-                        } else if (progress == 2) {
-                            tv_progress.setText("\"完成度超过5%的用户，加油~\"");
-                            progress_bar.setProgress(5);
-                        } else if (progress == 3) {
-                            tv_progress.setText("\"完成度超过10%的用户，继续加油~\"");
-                            progress_bar.setProgress(10);
-                        } else if (progress == 4) {
-                            tv_progress.setText("\"完成度超过30%的用户，继续完善让履历更风采~\"");
-                            progress_bar.setProgress(30);
-                        } else if (progress == 5) {
-                            tv_progress.setText("\"恭喜你！完成度超过60%的用户，全面的工作和项目经历可以进一步提升竞争力~\"");
-                            progress_bar.setProgress(60);
-                        } else if (progress == 6) {
-                            tv_progress.setText("\"恭喜你！完成度超过65%的用户，全面的工作和项目经历可以进一步提升竞争力~\"");
-                            progress_bar.setProgress(65);
-                        } else if (progress == 7) {
-                            tv_progress.setText("\"恭喜你！完成度超过70%的用户，全面的工作和项目经历可以进一步提升竞争力~\"");
-                            progress_bar.setProgress(70);
-                        } else if (progress == 8) {
-                            tv_progress.setText("\"恭喜你！完成度超过75%的用户，全面的工作和项目经历可以进一步提升竞争力~\"");
-                            progress_bar.setProgress(75);
-                        } else if (progress == 9) {
-                            tv_progress.setText("\"恭喜你！完成度超过80%的用户，全面的工作和项目经历可以进一步提升竞争力~\"");
-                            progress_bar.setProgress(80);
-                        } else if (progress == 10) {
-                            tv_progress.setText("\"恭喜你！完成度超过85%的用户，全面的工作和项目经历可以进一步提升竞争力~\"");
-                            progress_bar.setProgress(85);
-                        } else {
-                            tv_progress.setText("\"恭喜你！完成度超过90%以上的用户，未来可期～\"");
-                            progress_bar.setProgress(90);
-                        }
-
-                        if (bean.getStatus() == 2) {
-                            tv_progress.setText("\"审核中，专属顾问将在1-3个工作日内完成审核\"");
-                            iv_progress.setImageResource(R.drawable.icon_warning);
-                            progress_bar.setVisibility(View.GONE);
-                        } else if (bean.getStatus() == 3) {
-                            tv_welcome.setVisibility(View.GONE);
-                            ll_progress.setVisibility(View.GONE);
-                            mCommit.setVisibility(View.GONE);
-                        }
-                        sv.smoothScrollTo(0, 0);
+                        setDeveloperInfo(data.getData());
+//                        progress = 0;
+//                        bean = data.getData();
+//                        String realName = bean.getRealName();
+//                        int sex = bean.getSex();
+//                        if (!TextUtils.isEmpty(bean.getAvatarUrl())) {
+//                            ll_add_photo.setVisibility(View.GONE);
+//                            fl_add_photo.setVisibility(View.VISIBLE);
+//                            GlideApp.with(EnterDeveloperActivity.this)
+//                                    .load(bean.getAvatarUrl())
+//                                    .transform(new MultiTransformation<>(new CenterCrop(), new RoundedCorners((int) getResources().getDimension(R.dimen.dp_8))))
+//                                    .into(iv_photo_avatar);
+//                        } else {
+//                            ll_add_photo.setVisibility(View.VISIBLE);
+//                            fl_add_photo.setVisibility(View.GONE);
+//                        }
+//                        if (!TextUtils.isEmpty(realName)) {
+//                            ll_base_info.setVisibility(View.VISIBLE);
+//                            tv_edit_name.setText(realName);
+//                            String mSex = sex == 0 ? "男" : "女";
+//
+//                            String nowTime = TimeUtil.getTimeString("yyyy-MM-dd");
+//                            int age = Utils.getIntYear(nowTime) - Utils.getIntYear(bean.getBirthday());
+//                            tv_edit_info.setText(mSex + " | " + age + "岁 | " + bean.getProvinceName() + bean.getCityName() + bean.getAreasName());
+//                            tv_edit_reason.setText(bean.getRemoteWorkReasonStr());
+//
+//                            progress++;
+//                        }
+//                        DeveloperInfoBean.DeveloperCareer careerDto = bean.getCareerDto();
+//                        List<DeveloperInfoBean.WorkMode> workModeDtoList = bean.getWorkModeDtoList();
+//                        if (workModeDtoList.size() != 0) {
+//                            if (!TextUtils.isEmpty(careerDto.getCareerDirectionName())) {
+//                                SPUtils.getInstance().put(AppConfig.CAREER_ID, bean.getCareerDirectionId() + "");
+//
+//                                ll_career_info.setVisibility(View.VISIBLE);
+//                                tv_career_info.setText(careerDto.getCareerDirectionName());
+//                                tv_career_info_work_year.setText(careerDto.getWorkYearsName() + " | 当前薪资：" + (Double.parseDouble(careerDto.getCurSalary()) / 1000) + "K");
+//                                tv_career_info_work_mode.setText(workModeDtoList.get(0).getWorkDayModeName() + " | 期望薪资：" +
+//                                        (Double.parseDouble(workModeDtoList.get(0).getLowestSalary()) / 1000) + "K"
+//                                        + "-" + (Double.parseDouble(workModeDtoList.get(0).getHighestSalary()) / 1000) + "K");
+//                                progress++;
+//                            }
+//                        }
+//
+//                        List<DeveloperInfoBean.DeveloperEducation> educationDtoList = bean.getEducationDtoList();
+//                        List<DeveloperInfoBean.DeveloperWork> workExperienceDtoList = bean.getWorkExperienceDtoList();
+//                        List<DeveloperInfoBean.DeveloperProject> projectDtoList = bean.getProjectDtoList();
+//                        if (educationDtoList.size() != 0) {
+//                            progress++;
+//                        }
+//                        addEducationAdapter = new AddEducationAdapter(EnterDeveloperActivity.this, educationDtoList);
+//                        lv1.setAdapter(addEducationAdapter);
+//
+//                        if (workExperienceDtoList.size() != 0) {
+//                            progress++;
+//                        }
+//                        addWorkAdapter = new AddWorkAdapter(EnterDeveloperActivity.this, workExperienceDtoList);
+//                        lv2.setAdapter(addWorkAdapter);
+//                        if (projectDtoList.size() >= 1) {
+//                            progress++;
+//                        }
+//                        addProjectAdapter = new AddProjectAdapter(EnterDeveloperActivity.this, projectDtoList);
+//                        lv3.setAdapter(addProjectAdapter);
+//                        if (projectDtoList.size() >= 2) {
+//                            progress++;
+//                        }
+//                        if (projectDtoList.size() >= 3) {
+//                            progress++;
+//                        }
+//                        if (projectDtoList.size() >= 4) {
+//                            progress++;
+//                        }
+//                        if (projectDtoList.size() >= 5) {
+//                            progress++;
+//                        }
+//                        if (projectDtoList.size() >= 6) {
+//                            progress++;
+//                        }
+//                        if (projectDtoList.size() >= 7) {
+//                            progress++;
+//                        }
+//
+//
+//                        ll_progress.setVisibility(View.VISIBLE);
+//                        if (progress == 0) {
+//                            ll_progress.setVisibility(View.GONE);
+//                        } else if (progress == 1) {
+//                            tv_progress.setText("\"完成度超过2%的用户，仍需努力哦~\"");
+//                            progress_bar.setProgress(2);
+//                        } else if (progress == 2) {
+//                            tv_progress.setText("\"完成度超过5%的用户，加油~\"");
+//                            progress_bar.setProgress(5);
+//                        } else if (progress == 3) {
+//                            tv_progress.setText("\"完成度超过10%的用户，继续加油~\"");
+//                            progress_bar.setProgress(10);
+//                        } else if (progress == 4) {
+//                            tv_progress.setText("\"完成度超过30%的用户，继续完善让履历更风采~\"");
+//                            progress_bar.setProgress(30);
+//                        } else if (progress == 5) {
+//                            tv_progress.setText("\"恭喜你！完成度超过60%的用户，全面的工作和项目经历可以进一步提升竞争力~\"");
+//                            progress_bar.setProgress(60);
+//                        } else if (progress == 6) {
+//                            tv_progress.setText("\"恭喜你！完成度超过65%的用户，全面的工作和项目经历可以进一步提升竞争力~\"");
+//                            progress_bar.setProgress(65);
+//                        } else if (progress == 7) {
+//                            tv_progress.setText("\"恭喜你！完成度超过70%的用户，全面的工作和项目经历可以进一步提升竞争力~\"");
+//                            progress_bar.setProgress(70);
+//                        } else if (progress == 8) {
+//                            tv_progress.setText("\"恭喜你！完成度超过75%的用户，全面的工作和项目经历可以进一步提升竞争力~\"");
+//                            progress_bar.setProgress(75);
+//                        } else if (progress == 9) {
+//                            tv_progress.setText("\"恭喜你！完成度超过80%的用户，全面的工作和项目经历可以进一步提升竞争力~\"");
+//                            progress_bar.setProgress(80);
+//                        } else if (progress == 10) {
+//                            tv_progress.setText("\"恭喜你！完成度超过85%的用户，全面的工作和项目经历可以进一步提升竞争力~\"");
+//                            progress_bar.setProgress(85);
+//                        } else {
+//                            tv_progress.setText("\"恭喜你！完成度超过90%以上的用户，未来可期～\"");
+//                            progress_bar.setProgress(90);
+//                        }
+//
+//                        if (bean.getStatus() == 2) {
+//                            tv_progress.setText("\"审核中，专属顾问将在1-3个工作日内完成审核\"");
+//                            iv_progress.setImageResource(R.drawable.icon_warning);
+//                            progress_bar.setVisibility(View.GONE);
+//                        } else if (bean.getStatus() == 3) {
+//                            tv_welcome.setVisibility(View.GONE);
+//                            ll_progress.setVisibility(View.GONE);
+//                            mCommit.setVisibility(View.GONE);
+//                        }
+//                        sv.smoothScrollTo(0, 0);
                     }
                 });
     }
@@ -534,6 +533,7 @@ public final class EnterDeveloperActivity extends AppActivity {
                     public void onSucceed(HttpData<List<GetProvinceApi.ProvinceBean>> data) {
 //                        startActivity(SaveQRActivity.class);
 //                        finish();
+                        SPUtils.getInstance().put(AppConfig.RESUME_ANALYSIS, false);
                         toast("提交成功");
                         onResume();
                     }
@@ -766,7 +766,12 @@ public final class EnterDeveloperActivity extends AppActivity {
         } else if (bean.getStatus() == 3) {
             tv_welcome.setVisibility(View.GONE);
             ll_progress.setVisibility(View.GONE);
-            mCommit.setVisibility(View.GONE);
+
+            if (SPUtils.getInstance().getBoolean(AppConfig.RESUME_ANALYSIS, false)) {
+                mCommit.setVisibility(View.VISIBLE);
+            } else {
+                mCommit.setVisibility(View.GONE);
+            }
         }
         sv.smoothScrollTo(0, 0);
     }
