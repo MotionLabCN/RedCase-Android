@@ -4,25 +4,17 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.text.TextUtils;
-import android.util.Log;
-import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 import com.github.barteksc.pdfviewer.PDFView;
-import com.github.barteksc.pdfviewer.listener.OnLoadCompleteListener;
-import com.hjq.base.BaseDialog;
 import com.hjq.http.EasyHttp;
-import com.hjq.http.EasyLog;
 import com.hjq.http.listener.HttpCallback;
 import com.tntlinking.tntdev.R;
 import com.tntlinking.tntdev.app.AppActivity;
 import com.tntlinking.tntdev.http.api.ParseAnalysisApi;
-import com.tntlinking.tntdev.http.api.ParseResumeApi;
 import com.tntlinking.tntdev.http.model.HttpData;
 import com.tntlinking.tntdev.ui.bean.DeveloperInfoBean;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
@@ -54,12 +46,9 @@ public final class ResumeAnalysisActivity extends AppActivity {
         if (!TextUtils.isEmpty(pdf_url)) {
             getPdf(pdf_url);
         }
-        btn_parse.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!TextUtils.isEmpty(fileName)) {
-                    parseResume(fileName);
-                }
+        btn_parse.setOnClickListener(v -> {
+            if (!TextUtils.isEmpty(fileName)) {
+                parseResume(fileName);
             }
         });
     }
@@ -83,12 +72,7 @@ public final class ResumeAnalysisActivity extends AppActivity {
             @Override
             protected void onPostExecute(Void aVoid) {
                 super.onPostExecute(aVoid);
-                pdfView.fromStream(input[0]).onLoad(new OnLoadCompleteListener() {
-                    @Override
-                    public void loadComplete(int nbPages) {
-                        hideDialog();
-                    }
-                }).load();
+                pdfView.fromStream(input[0]).onLoad(nbPages -> hideDialog()).load();
 
             }
         }.execute();

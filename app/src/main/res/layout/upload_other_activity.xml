@@ -47,5 +47,5 @@
         android:id="@+id/iv_show"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_370"
-        android:layout_marginTop="@dimen/dp_16"/>
+        android:layout_marginTop="@dimen/dp_16" />
 </LinearLayout>

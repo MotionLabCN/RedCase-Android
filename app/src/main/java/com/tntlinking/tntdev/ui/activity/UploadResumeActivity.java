@@ -3,7 +3,6 @@ package com.tntlinking.tntdev.ui.activity;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -26,7 +25,6 @@ import com.tntlinking.tntdev.app.AppActivity;
 import com.tntlinking.tntdev.http.api.ParseResumeApi;
 import com.tntlinking.tntdev.http.model.HttpData;
 import com.tntlinking.tntdev.other.AppConfig;
-import com.tntlinking.tntdev.other.Utils;
 
 import java.io.File;
 import java.util.List;
