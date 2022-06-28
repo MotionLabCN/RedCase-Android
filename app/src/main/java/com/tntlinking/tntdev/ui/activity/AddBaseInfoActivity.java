@@ -3,6 +3,7 @@ package com.tntlinking.tntdev.ui.activity;
 
 import android.content.Intent;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -57,6 +58,7 @@ public final class AddBaseInfoActivity extends AppActivity {
     private int areaId = 0;
     private int workReasonId = 0;
 
+    private String InfoReason = "";
 
     @Override
     protected int getLayoutId() {
@@ -102,6 +104,7 @@ public final class AddBaseInfoActivity extends AppActivity {
                 realName = bean.getRealName();
                 sex = bean.getSex();
                 birthday = bean.getBirthday();
+                InfoReason = bean.getRemoteWorkReasonStr();
                 provinceId = bean.getProvinceId();
                 cityId = bean.getCityId();
                 areaId = bean.getAreasId();
@@ -171,7 +174,7 @@ public final class AddBaseInfoActivity extends AppActivity {
                     @Override
                     public void onSelected(BaseDialog dialog, int type) {
                         mInfoReason.setLeftText(mDictionaryList.get(type).getName());
-
+                        InfoReason=mDictionaryList.get(type).getName();
                         workReasonId = mDictionaryList.get(type).getId();
                     }
                 }).show();
@@ -179,6 +182,9 @@ public final class AddBaseInfoActivity extends AppActivity {
 
             case R.id.btn_info_next:
                 String name = mInfoName.getText().toString();
+                Log.d("InfoReason",">>>"+InfoReason);
+                Log.d("InfoReason",">>>1"+workReasonId);
+
                 if (TextUtils.isEmpty(name) && name.length() < 2) {
                     toast("没有输入用户名或者输入长度不够");
                     return;
@@ -195,7 +201,12 @@ public final class AddBaseInfoActivity extends AppActivity {
                     toast("没选择地区");
                     return;
                 }
+
                 if (workReasonId == 0) {
+                    toast("没选择办公原因");
+                    return;
+                }
+                if (TextUtils.isEmpty(InfoReason)) {
                     toast("没选择办公原因");
                     return;
                 }
