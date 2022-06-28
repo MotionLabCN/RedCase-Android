@@ -5,8 +5,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
-import android.net.Uri;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
@@ -14,8 +12,9 @@ import android.webkit.JavascriptInterface;
 import android.webkit.WebView;
 import android.widget.ProgressBar;
 
-import androidx.annotation.NonNull;
-
+import com.scwang.smart.refresh.layout.SmartRefreshLayout;
+import com.scwang.smart.refresh.layout.api.RefreshLayout;
+import com.scwang.smart.refresh.layout.listener.OnRefreshListener;
 import com.tntlinking.tntdev.R;
 import com.tntlinking.tntdev.action.StatusAction;
 import com.tntlinking.tntdev.aop.CheckNet;
@@ -25,14 +24,13 @@ import com.tntlinking.tntdev.manager.ActivityManager;
 import com.tntlinking.tntdev.ui.fragment.MineFragment1;
 import com.tntlinking.tntdev.widget.BrowserView;
 import com.tntlinking.tntdev.widget.StatusLayout;
-import com.scwang.smart.refresh.layout.SmartRefreshLayout;
-import com.scwang.smart.refresh.layout.api.RefreshLayout;
-import com.scwang.smart.refresh.layout.listener.OnRefreshListener;
+
+import androidx.annotation.NonNull;
 
 /**
- * desc   : 浏览器界面
+ * desc   :加载协议相关页面
  */
-public final class BrowserActivity extends AppActivity
+public final class BrowserPrivateActivity extends AppActivity
         implements StatusAction, OnRefreshListener {
 
     private static final String INTENT_KEY_IN_URL = "url";
@@ -44,7 +42,7 @@ public final class BrowserActivity extends AppActivity
         if (TextUtils.isEmpty(url)) {
             return;
         }
-        Intent intent = new Intent(context, BrowserActivity.class);
+        Intent intent = new Intent(context, BrowserPrivateActivity.class);
         intent.putExtra(INTENT_KEY_IN_URL, url);
         if (!(context instanceof Activity)) {
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -56,7 +54,7 @@ public final class BrowserActivity extends AppActivity
         if (TextUtils.isEmpty(url)) {
             return;
         }
-        Intent intent = new Intent(context, BrowserActivity.class);
+        Intent intent = new Intent(context, BrowserPrivateActivity.class);
         intent.putExtra(INTENT_KEY_IN_URL, url);
         intent.putExtra(INTENT_TITLE_URL, title);
         if (!(context instanceof Activity)) {
@@ -113,7 +111,7 @@ public final class BrowserActivity extends AppActivity
         public void goBack(String params) {
             if (params.equals("app")) {
 //                startActivity(PersonDataActivity.class);
-                MainActivity.start(BrowserActivity.this, MineFragment1.class);
+                MainActivity.start(BrowserPrivateActivity.this, MineFragment1.class);
                 ActivityManager.getInstance().finishAllActivities();
             } else if (params.equals("qugongbao")) {
                 startActivity(HomeStatusActivity.class);
@@ -163,7 +161,8 @@ public final class BrowserActivity extends AppActivity
         reload();
     }
 
-//    private String mUrl = "";
+    private String mUrl = "";
+
     private class AppBrowserViewClient extends BrowserView.BrowserViewClient {
 
         /**
@@ -181,7 +180,7 @@ public final class BrowserActivity extends AppActivity
         @Override
         public void onPageStarted(WebView view, String url, Bitmap favicon) {
             mProgressBar.setVisibility(View.VISIBLE);
-//            mUrl = url;
+            mUrl = url;
         }
 
         /**
@@ -192,10 +191,10 @@ public final class BrowserActivity extends AppActivity
             mProgressBar.setVisibility(View.GONE);
             mRefreshLayout.finishRefresh();
             showComplete();
-//            //判断域名一样，后面不一样的时候重新刷新加载问题
-//            if (!url.equals(mUrl)) {
-//                view.reload();
-//            }
+            //判断域名一样，后面不一样的时候重新刷新加载问题
+            if (!url.equals(mUrl)) {
+                view.reload();
+            }
         }
     }
 

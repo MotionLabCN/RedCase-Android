@@ -31,6 +31,7 @@ import com.tntlinking.tntdev.other.AppConfig;
 import com.tntlinking.tntdev.other.Utils;
 import com.tntlinking.tntdev.ui.activity.AboutAppActivity;
 import com.tntlinking.tntdev.ui.activity.BrowserActivity;
+import com.tntlinking.tntdev.ui.activity.BrowserPrivateActivity;
 import com.tntlinking.tntdev.ui.activity.EnterDeveloperActivity;
 import com.tntlinking.tntdev.ui.activity.EvaluationActivity;
 import com.tntlinking.tntdev.ui.activity.EvaluationNeedsTokNowActivity;
@@ -160,10 +161,10 @@ public final class MineFragment1 extends TitleBarFragment<MainActivity> implemen
         } else if (view == person_data_recommend) {// 推荐有礼
             startActivity(InterviewActivity.class);
         } else if (view == person_data_private) {// 隐私政策
-            BrowserActivity.start(getActivity(), AppConfig.PRIVATE_URL);
+            BrowserPrivateActivity.start(getActivity(), AppConfig.PRIVATE_URL);
 //            BrowserActivity.start(getActivity(), "https://talent-business.tntlinking.com/#/page/article?pageCode=5f537d5726744c0ab632f8379eeae3e5");
         } else if (view == person_data_deal) {// 用户协议
-            BrowserActivity.start(getActivity(), AppConfig.AGREEMENT_URL);
+            BrowserPrivateActivity.start(getActivity(), AppConfig.AGREEMENT_URL);
         } else if (view == mPersonDataSetting) {// 账户设置
             startActivity(PersonSettingActivity.class);
         } else if (view == person_data_about) {// 关于天天数链开发者

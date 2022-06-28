@@ -391,12 +391,16 @@ public class Utils {
      * @return
      */
     public static String ChangeDate(String date) {
-        if (date.contains("-0")) {
-            String time = date.replace("-0", ".0");
-            return time;
-        } else if (date.contains("-")) {
-            String time = date.replace("-", ".");
-            return time;
+        if (!TextUtils.isEmpty(date)) {
+            if (date.contains("-0")) {
+                String time = date.replace("-0", ".0");
+                return time;
+            } else if (date.contains("-")) {
+                String time = date.replace("-", ".");
+                return time;
+            } else {
+                return date;
+            }
         } else {
             return date;
         }

@@ -31,7 +31,18 @@
             android:layout_height="match_parent"
             android:layout_marginLeft="@dimen/dp_16"
             android:layout_marginRight="@dimen/dp_16"
-            android:background="@color/color_F6F6FC" />
+            android:background="@color/color_F6F6FC"
+            android:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/ivView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/dp_16"
+            android:scaleType="fitCenter"
+            android:layout_marginRight="@dimen/dp_16" />
+
+
     </LinearLayout>
 
     <androidx.appcompat.widget.AppCompatButton
