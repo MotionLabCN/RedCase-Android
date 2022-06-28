@@ -80,6 +80,11 @@ public final class EnterDeveloperActivity extends AppActivity {
     private ImageView iv_progress;
     private ProgressBar progress_bar;
     private LinearLayout ll_import_resume;
+    private TextView tv_add_base_info_tips;
+    private TextView tv_add_career_info_tips;
+    private TextView tv_add_education_tips;
+    private TextView tv_add_worK_tips;
+    private TextView tv_add_project_tips;
     public static final String INTENT_KEY_DEVELOPER_INFO = "DeveloperInfoBean";
 
 
@@ -124,6 +129,11 @@ public final class EnterDeveloperActivity extends AppActivity {
         iv_progress = findViewById(R.id.iv_progress);
         progress_bar = findViewById(R.id.progress_bar);
         ll_import_resume = findViewById(R.id.ll_import_resume);
+        tv_add_base_info_tips = findViewById(R.id.tv_add_base_info_tips);
+        tv_add_career_info_tips = findViewById(R.id.tv_add_career_info_tips);
+        tv_add_education_tips = findViewById(R.id.tv_add_education_tips);
+        tv_add_worK_tips = findViewById(R.id.tv_add_worK_tips);
+        tv_add_project_tips = findViewById(R.id.tv_add_project_tips);
 
         mCommit = findViewById(R.id.btn_commit);
         setOnClickListener(mCommit, ll_add_base_info, ll_base_info, ll_add_career_info, ll_career_info,
@@ -633,6 +643,8 @@ public final class EnterDeveloperActivity extends AppActivity {
      * 简历解析页面跳转过来的，直接填充相关数据
      */
     public void setDeveloperInfo(DeveloperInfoBean data) {
+        //是否是解析页面过来的
+        boolean isResume = SPUtils.getInstance().getBoolean(AppConfig.RESUME_ANALYSIS, false);
         progress = 0;
         bean = data;
         String realName = bean.getRealName();
@@ -767,11 +779,51 @@ public final class EnterDeveloperActivity extends AppActivity {
             tv_welcome.setVisibility(View.GONE);
             ll_progress.setVisibility(View.GONE);
 
-            if (SPUtils.getInstance().getBoolean(AppConfig.RESUME_ANALYSIS, false)) {
+            if (isResume) {
                 mCommit.setVisibility(View.VISIBLE);
             } else {
                 mCommit.setVisibility(View.GONE);
             }
+        }
+        //判断解析过来 有些数据是否显示完整，没有显示完整的 显示提示请填充tips
+        if (isResume) {
+            if (TextUtils.isEmpty(bean.getRealName()) || TextUtils.isEmpty(bean.getBirthday()) ||
+                    TextUtils.isEmpty(bean.getCityName()) || TextUtils.isEmpty(bean.getRemoteWorkReasonStr())) {
+                tv_add_base_info_tips.setVisibility(View.VISIBLE);
+            }else {
+                tv_add_base_info_tips.setVisibility(View.INVISIBLE);
+            }
+
+            if (workModeDtoList.size() == 0) {
+                tv_add_career_info_tips.setVisibility(View.VISIBLE);
+            }else {
+                tv_add_career_info_tips.setVisibility(View.INVISIBLE);
+            }
+
+            if (educationDtoList.size() == 0) {
+                tv_add_education_tips.setVisibility(View.VISIBLE);
+            }else {
+                tv_add_education_tips.setVisibility(View.INVISIBLE);
+            }
+
+            if (workExperienceDtoList.size() == 0) {
+                tv_add_worK_tips.setVisibility(View.VISIBLE);
+            }else {
+                tv_add_worK_tips.setVisibility(View.INVISIBLE);
+            }
+
+            if (projectDtoList.size() == 0) {
+                tv_add_project_tips.setVisibility(View.VISIBLE);
+            }else {
+                tv_add_project_tips.setVisibility(View.INVISIBLE);
+            }
+
+        } else {
+            tv_add_base_info_tips.setVisibility(View.INVISIBLE);
+            tv_add_career_info_tips.setVisibility(View.INVISIBLE);
+            tv_add_education_tips.setVisibility(View.INVISIBLE);
+            tv_add_worK_tips.setVisibility(View.INVISIBLE);
+            tv_add_project_tips.setVisibility(View.INVISIBLE);
         }
         sv.smoothScrollTo(0, 0);
     }
