@@ -46,7 +46,7 @@ public final class ResumeAnalysisActivity extends AppActivity {
         String suffix = getString("suffix");
 
         if (!TextUtils.isEmpty(pdf_url)) {
-            getPdf(pdf_url+suffix);
+            getPdf(pdf_url);
         }
         btn_parse.setOnClickListener(v -> {
             if (!TextUtils.isEmpty(fileName)) {

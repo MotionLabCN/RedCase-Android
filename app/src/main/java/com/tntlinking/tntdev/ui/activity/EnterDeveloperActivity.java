@@ -86,11 +86,7 @@ public final class EnterDeveloperActivity extends AppActivity {
     private AddEducationAdapter addEducationAdapter;
     private AddWorkAdapter addWorkAdapter;
     private AddProjectAdapter addProjectAdapter;
-    String suffix;
-    String rtf;
-    String html;
-    String doc;
-    String docx;
+
     @Override
     protected int getLayoutId() {
         return R.layout.enter_developer_activity;
@@ -184,10 +180,6 @@ public final class EnterDeveloperActivity extends AppActivity {
             //外部分享过来的
             String action = getIntent().getAction();//action
             String type = getIntent().getType();//类型
-            Log.d("str2", ">>>3" + action);
-
-            Log.d("str2", ">>>2" + type);
-
             //类型 /*&& "video/mp4".equals(type)*/
             if (Intent.ACTION_SEND.equals(action) && type != null) {
                 Uri uri = getIntent().getParcelableExtra(Intent.EXTRA_STREAM);
@@ -196,29 +188,12 @@ public final class EnterDeveloperActivity extends AppActivity {
                 //截取_之后字符串
                 String str1 = type.substring(0, type.indexOf("/"));
                 String str2 = type.substring(str1.length() + 1, type.length());
-
-                if (str2.equals("pdf")){
-                    suffix="pdf";
-                }else if (str2.equals("rtf")){
-                    suffix="rtf";
-
-                }else if (str2.equals("html")){
-                    suffix="html";
-
-                }else if (str2.equals("jpeg")){
-                    suffix="jpeg";
-
-                }else if (str2.equals("jpg")){
-                    suffix="jpg";
-                }else {
-                    suffix="docx";
-                }
-                Log.d("str2", ">>>4" + file);
-
                 Log.d("str2", ">>>" + str2);
                 EasyLog.print("======文件路径==file=" + file);
-                if (FileUtils.isFile(file)) {
-                    parseResume(file,suffix);
+                if (FileUtils.isFile(file) && str2.equals("pdf")) {
+                    parseResume(file);
+                } else {
+                    toast("分享简历格式只支持PDF类型,其他类型暂不支持");
                 }
             }
         }
@@ -801,9 +776,8 @@ public final class EnterDeveloperActivity extends AppActivity {
      * 外部分享过来的文件 解析上传
      *
      * @param file
-     * @param suffix
      */
-    private void parseResume(File file, String suffix) {
+    private void parseResume(File file) {
         Log.d("str2", ">>>1" + file);
 
         EasyHttp.post(this)
@@ -826,7 +800,6 @@ public final class EnterDeveloperActivity extends AppActivity {
                                     Intent intent = new Intent(EnterDeveloperActivity.this, ResumeAnalysisActivity.class);
                                     intent.putExtra("url", url);
                                     intent.putExtra("fileName", fileName);
-                                    intent.putExtra("suffix", suffix);
                                     startActivity(intent);
                                     dialog.dismiss();
                                 }).show();
