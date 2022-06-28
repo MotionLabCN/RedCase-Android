@@ -788,33 +788,35 @@ public final class EnterDeveloperActivity extends AppActivity {
         //判断解析过来 有些数据是否显示完整，没有显示完整的 显示提示请填充tips
         if (isResume) {
             if (TextUtils.isEmpty(bean.getRealName()) || TextUtils.isEmpty(bean.getBirthday()) ||
-                    TextUtils.isEmpty(bean.getCityName()) || TextUtils.isEmpty(bean.getRemoteWorkReasonStr())) {
+                    TextUtils.isEmpty(bean.getProvinceName()) ||
+                    TextUtils.isEmpty(bean.getCityName()) ||
+                    TextUtils.isEmpty(bean.getAreasName()) || TextUtils.isEmpty(bean.getRemoteWorkReasonStr())) {
                 tv_add_base_info_tips.setVisibility(View.VISIBLE);
-            }else {
+            } else {
                 tv_add_base_info_tips.setVisibility(View.INVISIBLE);
             }
 
             if (workModeDtoList.size() == 0) {
                 tv_add_career_info_tips.setVisibility(View.VISIBLE);
-            }else {
+            } else {
                 tv_add_career_info_tips.setVisibility(View.INVISIBLE);
             }
 
             if (educationDtoList.size() == 0) {
                 tv_add_education_tips.setVisibility(View.VISIBLE);
-            }else {
+            } else {
                 tv_add_education_tips.setVisibility(View.INVISIBLE);
             }
 
             if (workExperienceDtoList.size() == 0) {
                 tv_add_worK_tips.setVisibility(View.VISIBLE);
-            }else {
+            } else {
                 tv_add_worK_tips.setVisibility(View.INVISIBLE);
             }
 
             if (projectDtoList.size() == 0) {
                 tv_add_project_tips.setVisibility(View.VISIBLE);
-            }else {
+            } else {
                 tv_add_project_tips.setVisibility(View.INVISIBLE);
             }
 
