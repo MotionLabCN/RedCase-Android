@@ -138,9 +138,9 @@ public final class PersonDataActivity extends AppActivity {
         } else if (view == person_data_recommend) {// 推荐有礼
             startActivity(InterviewActivity.class);
         } else if (view == person_data_private) {// 隐私政策
-            BrowserActivity.start(getActivity(), AppConfig.PRIVATE_URL);
+            BrowserPrivateActivity.start(getActivity(), AppConfig.PRIVATE_URL);
         } else if (view == person_data_deal) {// 用户协议
-            BrowserActivity.start(getActivity(), AppConfig.AGREEMENT_URL);
+            BrowserPrivateActivity.start(getActivity(), AppConfig.AGREEMENT_URL);
         } else if (view == mPersonDataSetting) {// 账户设置
             startActivity(PersonSettingActivity.class);
         } else if (view == person_data_about) {// 关于天天数链开发者

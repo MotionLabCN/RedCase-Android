@@ -191,7 +191,13 @@ public final class AppConfig {
     public static String DEAL_DIALOG = "deal_dialog";
 
     /**
-     *  接单状态 1 可接单 2 不可接单
+     * 接单状态 1 可接单 2 不可接单
      */
     public static String SERVICE_STATUS = "service_status";
+    /**
+     * 解析简历成功  false  没有解析  true 解析成功并上传
+     */
+    public static String RESUME_ANALYSIS = "resume_analysis";
+
+
 }

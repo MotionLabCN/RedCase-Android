@@ -102,6 +102,7 @@ public final class UploadResumeActivity extends AppActivity implements IWXAPIEve
         new LFilePicker()
                 .withActivity(UploadResumeActivity.this)
                 .withRequestCode(REQUEST_CODE_FROM_ACTIVITY)
+                .withMutilyMode(false)
                 .withFileFilter(new String[]{".txt", ".png", ".doc", ".pdf", ".JPG"})
                 .withIsGreater(false)
                 .withFileSize(7 * 1024 * 1024)// 选择文件不能大于7M

@@ -253,6 +253,12 @@
             android:label="@string/web_title"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
+        <!-- 网页浏览 协议相关网页-->
+        <activity
+            android:name="com.tntlinking.tntdev.ui.activity.BrowserPrivateActivity"
+            android:label="@string/web_title"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
 
         <!-- 拍照选择 -->
         <activity

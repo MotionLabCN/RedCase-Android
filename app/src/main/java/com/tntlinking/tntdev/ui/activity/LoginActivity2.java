@@ -81,14 +81,14 @@ public final class LoginActivity2 extends AppActivity implements TextView.OnEdit
 
             @Override
             public void onClick(@NonNull View widget) {
-                BrowserActivity.start(getActivity(), AppConfig.PRIVATE_URL);
+                BrowserPrivateActivity.start(getActivity(), AppConfig.PRIVATE_URL);
             }
         }).setForegroundColor(getColor(R.color.color_text_color)).append("和")
                 .setForegroundColor(getColor(R.color.color_hint_color)).append("《用户协议》").setClickSpan(new ClickableSpan() {
 
             @Override
             public void onClick(@NonNull View widget) {
-                BrowserActivity.start(getActivity(), AppConfig.AGREEMENT_URL);
+                BrowserPrivateActivity.start(getActivity(), AppConfig.AGREEMENT_URL);
             }
         })
                 .setForegroundColor(getColor(R.color.color_text_color)).create();
