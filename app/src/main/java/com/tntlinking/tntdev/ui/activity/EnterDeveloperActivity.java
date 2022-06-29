@@ -26,6 +26,7 @@ import com.hjq.base.BaseDialog;
 import com.hjq.http.EasyHttp;
 import com.hjq.http.EasyLog;
 import com.hjq.http.listener.HttpCallback;
+import com.leon.lfilepickerlibrary.utils.Constant;
 import com.tntlinking.tntdev.R;
 import com.tntlinking.tntdev.aop.SingleClick;
 import com.tntlinking.tntdev.app.AppActivity;
@@ -77,6 +78,7 @@ public final class EnterDeveloperActivity extends AppActivity {
     private ImageView iv_photo_avatar;
     private TextView tv_welcome;
     private TextView tv_progress;
+    private TextView tv_give_a_cue;
     private ImageView iv_progress;
     private ProgressBar progress_bar;
     private LinearLayout ll_import_resume;
@@ -192,7 +194,7 @@ public final class EnterDeveloperActivity extends AppActivity {
                 if (FileUtils.isFile(file) && str2.equals("pdf")) {
                     parseResume(file);
                 } else {
-                    toast("分享简历格式只支持PDF类型,其他类型暂不支持");
+                    toast("分享简历格式只支撑PDF类型,其他类型暂不支撑");
                 }
             }
         }
@@ -648,6 +650,9 @@ public final class EnterDeveloperActivity extends AppActivity {
             ll_add_photo.setVisibility(View.VISIBLE);
             fl_add_photo.setVisibility(View.GONE);
         }
+        if (TextUtils.isEmpty(realName) && bean.getBirthday() == null && bean.getProvinceName() == null && bean.getRemoteWorkReasonStr() == null) {
+            tv_give_a_cue.setVisibility(View.VISIBLE);
+        }
         if (!TextUtils.isEmpty(realName)) {
             ll_base_info.setVisibility(View.VISIBLE);
             tv_edit_name.setText(realName);
@@ -655,11 +660,11 @@ public final class EnterDeveloperActivity extends AppActivity {
 
             String nowTime = TimeUtil.getTimeString("yyyy-MM-dd");
             int age = Utils.getIntYear(nowTime) - Utils.getIntYear(bean.getBirthday());
+
             if (bean.getProvinceName() == null) {
                 tv_edit_info.setText(mSex + " | " + age + "岁");
             } else {
                 tv_edit_info.setText(mSex + " | " + age + "岁 | " + bean.getProvinceName() + bean.getCityName() + bean.getAreasName());
-
             }
             tv_edit_reason.setText(bean.getRemoteWorkReasonStr());
 

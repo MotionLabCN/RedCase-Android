@@ -3,6 +3,7 @@ package com.tntlinking.tntdev.ui.activity;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -127,6 +128,8 @@ public final class UploadResumeActivity extends AppActivity implements IWXAPIEve
 
 
     private void parseResume(File file) {
+        Log.d("File", ">>>" + file);
+
         EasyHttp.post(this)
                 .api(new ParseResumeApi().setFile(file))
                 .request(new HttpCallback<HttpData<ParseResumeApi.Bean>>(this) {
