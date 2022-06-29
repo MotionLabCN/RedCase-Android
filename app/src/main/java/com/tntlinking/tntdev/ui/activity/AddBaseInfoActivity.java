@@ -174,16 +174,15 @@ public final class AddBaseInfoActivity extends AppActivity {
                     @Override
                     public void onSelected(BaseDialog dialog, int type) {
                         mInfoReason.setLeftText(mDictionaryList.get(type).getName());
-                        InfoReason=mDictionaryList.get(type).getName();
+                        InfoReason = mDictionaryList.get(type).getName();
                         workReasonId = mDictionaryList.get(type).getId();
                     }
                 }).show();
                 break;
-
             case R.id.btn_info_next:
                 String name = mInfoName.getText().toString();
-                Log.d("InfoReason",">>>"+InfoReason);
-                Log.d("InfoReason",">>>1"+workReasonId);
+                Log.d("InfoReason", ">>>" + InfoReason);
+                Log.d("InfoReason", ">>>1" + workReasonId);
 
                 if (TextUtils.isEmpty(name) && name.length() < 2) {
                     toast("没有输入用户名或者输入长度不够");

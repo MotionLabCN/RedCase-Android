@@ -49,6 +49,7 @@ import com.tntlinking.tntdev.ui.bean.DeveloperInfoBean;
 import com.tntlinking.tntdev.ui.bean.ExperienceBean;
 
 import java.io.File;
+import java.lang.reflect.Method;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -144,8 +145,6 @@ public final class EnterDeveloperActivity extends AppActivity {
         lv1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-
                 Intent intent = new Intent(EnterDeveloperActivity.this, AddEducationActivityNew.class);
                 intent.putExtra(INTENT_KEY_DEVELOPER_INFO, bean);
                 intent.putExtra("position", position);
@@ -196,6 +195,7 @@ public final class EnterDeveloperActivity extends AppActivity {
                 Uri uri = getIntent().getParcelableExtra(Intent.EXTRA_STREAM);
                 //通过Uri获取文件在本地存储的真实路径
                 File file = UriUtils.uri2File(uri);
+
                 //截取_之后字符串
                 String str1 = type.substring(0, type.indexOf("/"));
                 String str2 = type.substring(str1.length() + 1, type.length());
@@ -662,9 +662,7 @@ public final class EnterDeveloperActivity extends AppActivity {
             ll_add_photo.setVisibility(View.VISIBLE);
             fl_add_photo.setVisibility(View.GONE);
         }
-        if (TextUtils.isEmpty(realName) && bean.getBirthday() == null && bean.getProvinceName() == null && bean.getRemoteWorkReasonStr() == null) {
-            tv_give_a_cue.setVisibility(View.VISIBLE);
-        }
+
         if (!TextUtils.isEmpty(realName)) {
             ll_base_info.setVisibility(View.VISIBLE);
             tv_edit_name.setText(realName);
