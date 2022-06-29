@@ -50,9 +50,9 @@ ext {
 //            } else {
 //                HOST_URL = "https://talent.stage-ttchain.tntlinking.com/api/new_manpower/"
 //            }
-            HOST_URL = "https://talent.stage-ttchain.tntlinking.com"
-            SERVICE_URL = "https://stage-ttchain.tntlinking.com"
-            BUSINESS_URL = "https://talent-business.stage-ttchain.tntlinking.com"
+            HOST_URL = "https://talent.staging.tntlinking.com"
+            SERVICE_URL = "https://staging.tntlinking.com"
+            BUSINESS_URL = "https://talent-business.staging.tntlinking.com"
 //            AGREEMENT_URL = "https://talent.stage-ttchain.tntlinking.com/#/page/agreement"
 //            PRIVATE_URL ="https://talent.stage-ttchain.tntlinking.com/#/page/privacy"
             break

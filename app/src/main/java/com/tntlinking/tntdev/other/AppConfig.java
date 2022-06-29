@@ -78,10 +78,10 @@ public final class AppConfig {
 //     */
 //    public static String PRIVATE_URL = BuildConfig.BUSINESS_URL + "/#/page/privacy";
 
-    public static String AGREEMENT_URL_DEBUG = "https://talent-business.stage-ttchain.tntlinking.com/#/page/article?pageCode=02d1a173715748a9bd74cfffe5600374";
+    public static String AGREEMENT_URL_DEBUG = "https://talent-business.staging.tntlinking.com/#/page/article?pageCode=02d1a173715748a9bd74cfffe5600374";
     public static String AGREEMENT_URL_RELEASE = "https://talent-business.tntlinking.com/#/page/article?pageCode=04858774a247409a997e5e822daf2d25";
 
-    public static String PRIVATE_URL_DEBUG = "https://talent-business.stage-ttchain.tntlinking.com/#/page/article?pageCode=049afbccd6e64a76951a1b204031801b";
+    public static String PRIVATE_URL_DEBUG = "https://talent-business.staging.tntlinking.com/#/page/article?pageCode=049afbccd6e64a76951a1b204031801b";
     public static String PRIVATE_URL_RELEASE = "https://talent-business.tntlinking.com/#/page/article?pageCode=5f537d5726744c0ab632f8379eeae3e5";
 
     /**
