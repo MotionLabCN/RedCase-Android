@@ -131,14 +131,25 @@ public final class AddProjectActivityNew extends AppActivity {
                     btn_delete.setText("删除");
                     btn_commit.setText("保存");
 
-                    et_project_name.setText(developerProject.getProjectName());
-                    info_project_in_time.setText(developerProject.getProjectStartDate());
-                    info_project_end_time.setText(developerProject.getProjectEndDate());
-                    et_project_position.setText(developerProject.getPosition());
+//                    et_project_name.setText(developerProject.getProjectName());
+//                    info_project_in_time.setText(developerProject.getProjectStartDate());
+//                    info_project_end_time.setText(developerProject.getProjectEndDate());
+//                    et_project_position.setText(developerProject.getPosition());
+////                    info_project_work_mode.setLeftText(developerProject.getWorkModeName());
+//                    et_project_company_name.setText(developerProject.getCompanyName());
+//                    info_project_industry.setLeftText(developerProject.getIndustryName());
+//                    et_project_description.setText(developerProject.getDescription());
+
+
+                    et_project_name.setText(TextUtils.isEmpty(developerProject.getProjectName()) ? "项目名称" : developerProject.getProjectName());
+                    info_project_in_time.setText(TextUtils.isEmpty(developerProject.getProjectStartDate()) ? "选择开始时间" : developerProject.getProjectStartDate());
+                    info_project_end_time.setText(TextUtils.isEmpty(developerProject.getProjectEndDate()) ? "选择结束时间" : developerProject.getProjectEndDate());
+                    et_project_position.setText(TextUtils.isEmpty(developerProject.getPosition()) ? "担任角色" : developerProject.getPosition());
 //                    info_project_work_mode.setLeftText(developerProject.getWorkModeName());
-                    et_project_company_name.setText(developerProject.getCompanyName());
-                    info_project_industry.setLeftText(developerProject.getIndustryName());
-                    et_project_description.setText(developerProject.getDescription());
+                    et_project_company_name.setText(TextUtils.isEmpty(developerProject.getCompanyName()) ? "所属公司" : developerProject.getCompanyName());
+                    info_project_industry.setLeftText(TextUtils.isEmpty(developerProject.getIndustryName()) ? "所在行业" : developerProject.getIndustryName());
+                    et_project_description.setText(TextUtils.isEmpty(developerProject.getDescription()) ? "项目描述" : developerProject.getDescription());
+
 
                     if (developerProject.getProjectSkillList() != null && developerProject.getProjectSkillList().size() > 0) {
                         StringBuilder sb = new StringBuilder();

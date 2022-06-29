@@ -119,12 +119,19 @@ public final class AddEducationActivityNew extends AppActivity {
                         btn_commit.setText("保存");
                     }
 
-                    et_info_school_name.setText(developerEducation.getCollegeName());
-                    info_education.setLeftText(developerEducation.getEducationName());
-                    info_school_in_time.setText(developerEducation.getInSchoolStartTime());
-                    info_school_end_time.setText(developerEducation.getInSchoolEndTime());
-                    et_info_major.setText(developerEducation.getMajor());
-                    info_training_method.setLeftText(developerEducation.getTrainingModeName());
+//                    et_info_school_name.setText(developerEducation.getCollegeName());
+//                    info_education.setLeftText(developerEducation.getEducationName());
+//                    info_school_in_time.setText(developerEducation.getInSchoolStartTime());
+//                    info_school_end_time.setText(developerEducation.getInSchoolEndTime());
+//                    et_info_major.setText(developerEducation.getMajor());
+//                    info_training_method.setLeftText(developerEducation.getTrainingModeName());
+
+                    et_info_school_name.setText(TextUtils.isEmpty(developerEducation.getCollegeName()) ? "院校名称" : developerEducation.getCollegeName());
+                    info_education.setLeftText(TextUtils.isEmpty(developerEducation.getEducationName()) ? "学历" : developerEducation.getEducationName());
+                    info_school_in_time.setText(TextUtils.isEmpty(developerEducation.getInSchoolStartTime()) ? "选择入学时间" : developerEducation.getInSchoolStartTime());
+                    info_school_end_time.setText(TextUtils.isEmpty(developerEducation.getInSchoolEndTime()) ? "选择毕业时间" : developerEducation.getInSchoolEndTime());
+                    et_info_major.setText(TextUtils.isEmpty(developerEducation.getMajor()) ? "专业" : developerEducation.getMajor());
+                    info_training_method.setLeftText(TextUtils.isEmpty(developerEducation.getTrainingModeName()) ? "培养方式" : developerEducation.getTrainingModeName());
 
 
                     school_name = developerEducation.getCollegeName();
@@ -158,9 +165,9 @@ public final class AddEducationActivityNew extends AppActivity {
                         info_education.setLeftText(mEducationList.get(type).getName());
                         educationId = mEducationList.get(type).getId();
 
-                        education = mEducationList.get(type).getName();
-                    }
-                }).show();
+                                education = mEducationList.get(type).getName();
+                            }
+                        }).show();
                 break;
 
             case R.id.info_school_in_time:
