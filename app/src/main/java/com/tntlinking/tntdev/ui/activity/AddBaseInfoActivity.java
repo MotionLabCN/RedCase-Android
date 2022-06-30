@@ -3,9 +3,7 @@ package com.tntlinking.tntdev.ui.activity;
 
 import android.content.Intent;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
-import android.widget.TextView;
 
 import com.blankj.utilcode.util.GsonUtils;
 import com.blankj.utilcode.util.SPUtils;
@@ -23,8 +21,6 @@ import com.tntlinking.tntdev.http.api.UpdateBasicInfoApi;
 import com.tntlinking.tntdev.http.model.HttpData;
 import com.tntlinking.tntdev.other.Utils;
 import com.tntlinking.tntdev.ui.bean.DeveloperInfoBean;
-import com.tntlinking.tntdev.ui.bean.ExperienceBean;
-import com.tntlinking.tntdev.ui.bean.SendDeveloperBean;
 import com.tntlinking.tntdev.ui.dialog.DateSelectDialog;
 import com.tntlinking.tntdev.ui.dialog.DictionarySelectDialog;
 import com.tntlinking.tntdev.ui.dialog.GenderSelectDialog;
@@ -57,8 +53,6 @@ public final class AddBaseInfoActivity extends AppActivity {
     private int cityId = 0;
     private int areaId = 0;
     private int workReasonId = 0;
-
-    private String InfoReason = "";
 
     @Override
     protected int getLayoutId() {
@@ -104,7 +98,6 @@ public final class AddBaseInfoActivity extends AppActivity {
                 realName = bean.getRealName();
                 sex = bean.getSex();
                 birthday = bean.getBirthday();
-                InfoReason = bean.getRemoteWorkReasonStr();
                 provinceId = bean.getProvinceId();
                 cityId = bean.getCityId();
                 areaId = bean.getAreasId();
@@ -174,7 +167,6 @@ public final class AddBaseInfoActivity extends AppActivity {
                     @Override
                     public void onSelected(BaseDialog dialog, int type) {
                         mInfoReason.setLeftText(mDictionaryList.get(type).getName());
-                        InfoReason = mDictionaryList.get(type).getName();
                         workReasonId = mDictionaryList.get(type).getId();
                     }
                 }).show();
