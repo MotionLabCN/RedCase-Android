@@ -122,16 +122,16 @@ public final class AddBaseInfoActivity extends AppActivity {
                 new GenderSelectDialog.Builder(this)
                         .setTitle("选择性别")
                         .setList("男", "女").setListener(new GenderSelectDialog.OnListener() {
-                            @Override
-                            public void onSelected(BaseDialog dialog, int type) {
-                                if (type == 0) {
-                                    mInfoGender.setLeftText("男");
-                                } else {
-                                    mInfoGender.setLeftText("女");
-                                }
-                                sex = type;
-                            }
-                        }).show();
+                    @Override
+                    public void onSelected(BaseDialog dialog, int type) {
+                        if (type == 0) {
+                            mInfoGender.setLeftText("男");
+                        } else {
+                            mInfoGender.setLeftText("女");
+                        }
+                        sex = type;
+                    }
+                }).show();
 
 
                 break;
@@ -171,13 +171,13 @@ public final class AddBaseInfoActivity extends AppActivity {
                 new DictionarySelectDialog.Builder(this)
                         .setTitle("选择原因")
                         .setList(mDictionaryList).setListener(new DictionarySelectDialog.OnListener() {
-                            @Override
-                            public void onSelected(BaseDialog dialog, int type) {
-                                mInfoReason.setLeftText(mDictionaryList.get(type).getName());
-                                InfoReason = mDictionaryList.get(type).getName();
-                                workReasonId = mDictionaryList.get(type).getId();
-                            }
-                        }).show();
+                    @Override
+                    public void onSelected(BaseDialog dialog, int type) {
+                        mInfoReason.setLeftText(mDictionaryList.get(type).getName());
+                        InfoReason = mDictionaryList.get(type).getName();
+                        workReasonId = mDictionaryList.get(type).getId();
+                    }
+                }).show();
                 break;
 
             case R.id.btn_info_next:
@@ -200,10 +200,6 @@ public final class AddBaseInfoActivity extends AppActivity {
                 }
 
                 if (workReasonId == 0 || TextUtils.isEmpty(mInfoReason.getLeftText()) || mInfoReason.getLeftText().equals("远程办公原因")) {
-                    toast("没选择办公原因");
-                    return;
-                }
-                if (TextUtils.isEmpty(InfoReason)) {
                     toast("没选择办公原因");
                     return;
                 }
