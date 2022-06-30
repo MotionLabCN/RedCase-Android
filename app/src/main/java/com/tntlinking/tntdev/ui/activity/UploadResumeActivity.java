@@ -132,7 +132,6 @@ public final class UploadResumeActivity extends AppActivity implements IWXAPIEve
         EasyHttp.post(this)
                 .api(new ParseResumeApi().setFile(file))
                 .request(new HttpCallback<HttpData<ParseResumeApi.Bean>>(this) {
-
                     @Override
                     public void onSucceed(HttpData<ParseResumeApi.Bean> data) {
                         String url = data.getData().getUrl();

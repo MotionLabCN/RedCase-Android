@@ -179,6 +179,7 @@ public final class AddBaseInfoActivity extends AppActivity {
                     }
                 }).show();
                 break;
+
             case R.id.btn_info_next:
                 String name = mInfoName.getText().toString();
                 Log.d("InfoReason", ">>>" + InfoReason);
