@@ -99,7 +99,7 @@ public final class AddBaseInfoActivity extends AppActivity {
                 if (bean.getProvinceName() != null) {
                     mInfoAddress.setLeftText(bean.getProvinceName() + "-" + bean.getCityName() + "-" + bean.getAreasName());
                 }
-                mInfoReason.setLeftText(bean.getRemoteWorkReasonStr());
+                mInfoReason.setLeftText(TextUtils.isEmpty(bean.getRemoteWorkReasonStr()) ? "远程办公原因" : bean.getRemoteWorkReasonStr());
 
                 realName = bean.getRealName();
                 sex = bean.getSex();
@@ -122,16 +122,16 @@ public final class AddBaseInfoActivity extends AppActivity {
                 new GenderSelectDialog.Builder(this)
                         .setTitle("选择性别")
                         .setList("男", "女").setListener(new GenderSelectDialog.OnListener() {
-                    @Override
-                    public void onSelected(BaseDialog dialog, int type) {
-                        if (type == 0) {
-                            mInfoGender.setLeftText("男");
-                        } else {
-                            mInfoGender.setLeftText("女");
-                        }
-                        sex = type;
-                    }
-                }).show();
+                            @Override
+                            public void onSelected(BaseDialog dialog, int type) {
+                                if (type == 0) {
+                                    mInfoGender.setLeftText("男");
+                                } else {
+                                    mInfoGender.setLeftText("女");
+                                }
+                                sex = type;
+                            }
+                        }).show();
 
 
                 break;
@@ -171,20 +171,17 @@ public final class AddBaseInfoActivity extends AppActivity {
                 new DictionarySelectDialog.Builder(this)
                         .setTitle("选择原因")
                         .setList(mDictionaryList).setListener(new DictionarySelectDialog.OnListener() {
-                    @Override
-                    public void onSelected(BaseDialog dialog, int type) {
-                        mInfoReason.setLeftText(mDictionaryList.get(type).getName());
-                        InfoReason = mDictionaryList.get(type).getName();
-                        workReasonId = mDictionaryList.get(type).getId();
-                    }
-                }).show();
+                            @Override
+                            public void onSelected(BaseDialog dialog, int type) {
+                                mInfoReason.setLeftText(mDictionaryList.get(type).getName());
+                                InfoReason = mDictionaryList.get(type).getName();
+                                workReasonId = mDictionaryList.get(type).getId();
+                            }
+                        }).show();
                 break;
 
             case R.id.btn_info_next:
                 String name = mInfoName.getText().toString();
-                Log.d("InfoReason", ">>>" + InfoReason);
-                Log.d("InfoReason", ">>>1" + workReasonId);
-
                 if (TextUtils.isEmpty(name) && name.length() < 2) {
                     toast("没有输入用户名或者输入长度不够");
                     return;
@@ -196,13 +193,13 @@ public final class AddBaseInfoActivity extends AppActivity {
                 if (TextUtils.isEmpty(birthday)) {
                     toast("没选择出生年龄");
                     return;
-                }
-                if (provinceId == 0) {
+                }   //所在地
+                if (provinceId == 0 || TextUtils.isEmpty(mInfoAddress.getLeftText()) || mInfoAddress.getLeftText().equals("所在地")) {
                     toast("没选择地区");
                     return;
                 }
 
-                if (workReasonId == 0) {
+                if (workReasonId == 0 || TextUtils.isEmpty(mInfoReason.getLeftText()) || mInfoReason.getLeftText().equals("远程办公原因")) {
                     toast("没选择办公原因");
                     return;
                 }

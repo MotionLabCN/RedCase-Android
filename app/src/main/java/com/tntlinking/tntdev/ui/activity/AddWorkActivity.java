@@ -114,11 +114,18 @@ public final class AddWorkActivity extends AppActivity {
                     btn_delete.setText("删除");
                     btn_commit.setText("保存");
 
-                    et_work_company_name.setText(developerWork.getCompanyName());
-                    info_work_industry.setLeftText(developerWork.getIndustryName());
-                    et_work_position.setText(developerWork.getPositionName());
-                    info_work_in_time.setText(developerWork.getWorkStartTime());
-                    info_work_end_time.setText(developerWork.getWorkEndTime());
+//                    et_work_company_name.setText(developerWork.getCompanyName());
+//                    info_work_industry.setLeftText(developerWork.getIndustryName());
+//                    et_work_position.setText(developerWork.getPositionName());
+//                    info_work_in_time.setText(developerWork.getWorkStartTime());
+//                    info_work_end_time.setText(developerWork.getWorkEndTime());
+
+                    et_work_company_name.setText(TextUtils.isEmpty(developerWork.getCompanyName()) ? "所属公司" : developerWork.getCompanyName());
+                    info_work_industry.setLeftText(TextUtils.isEmpty(developerWork.getIndustryName()) ? "所在行业" : developerWork.getIndustryName());
+                    et_work_position.setText(TextUtils.isEmpty(developerWork.getPositionName()) ? "担任角色" : developerWork.getPositionName());
+                    info_work_in_time.setText(TextUtils.isEmpty(developerWork.getWorkStartTime()) ? "选择开始时间" : developerWork.getWorkStartTime());
+                    info_work_end_time.setText(TextUtils.isEmpty(developerWork.getWorkEndTime()) ? "选择结束时间" : developerWork.getWorkEndTime());
+
 
                     company_name = developerWork.getCompanyName();
                     project_position = developerWork.getPositionName();
