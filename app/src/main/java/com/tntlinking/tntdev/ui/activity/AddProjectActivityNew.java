@@ -119,8 +119,9 @@ public final class AddProjectActivityNew extends AppActivity {
 
         if (bean != null) {
             DeveloperInfoBean.DeveloperProject developerProject = bean.getProjectDtoList().get(position);
-            if (bean.getWorkExperienceDtoList().size() != 0) {
-                if (TextUtils.isEmpty(developerProject.getProjectName())) {//判断是否有项目名字，没有就不显示
+            if (bean.getProjectDtoList().size() != 0) {
+//                if (TextUtils.isEmpty(developerProject.getProjectName())) {//判断是否有项目名字，没有就不显示
+                if (developerProject.getId() == 0) {//判断是否有项目名字，没有就不显示
 //                    btn_delete.setVisibility(View.GONE);
                     tv_title.setText("添加项目经历");
                     btn_delete.setText("保存");
@@ -141,14 +142,14 @@ public final class AddProjectActivityNew extends AppActivity {
 //                    et_project_description.setText(developerProject.getDescription());
 
 
-                    et_project_name.setText(TextUtils.isEmpty(developerProject.getProjectName()) ? "项目名称" : developerProject.getProjectName());
+                    et_project_name.setText(TextUtils.isEmpty(developerProject.getProjectName()) ? "" : developerProject.getProjectName());
                     info_project_in_time.setText(TextUtils.isEmpty(developerProject.getProjectStartDate()) ? "选择开始时间" : developerProject.getProjectStartDate());
                     info_project_end_time.setText(TextUtils.isEmpty(developerProject.getProjectEndDate()) ? "选择结束时间" : developerProject.getProjectEndDate());
-                    et_project_position.setText(TextUtils.isEmpty(developerProject.getPosition()) ? "担任角色" : developerProject.getPosition());
+                    et_project_position.setText(TextUtils.isEmpty(developerProject.getPosition()) ? "" : developerProject.getPosition());
 //                    info_project_work_mode.setLeftText(developerProject.getWorkModeName());
-                    et_project_company_name.setText(TextUtils.isEmpty(developerProject.getCompanyName()) ? "所属公司" : developerProject.getCompanyName());
+                    et_project_company_name.setText(TextUtils.isEmpty(developerProject.getCompanyName()) ? "" : developerProject.getCompanyName());
                     info_project_industry.setLeftText(TextUtils.isEmpty(developerProject.getIndustryName()) ? "所在行业" : developerProject.getIndustryName());
-                    et_project_description.setText(TextUtils.isEmpty(developerProject.getDescription()) ? "项目描述" : developerProject.getDescription());
+                    et_project_description.setText(TextUtils.isEmpty(developerProject.getDescription()) ? "" : developerProject.getDescription());
 
 
                     if (developerProject.getProjectSkillList() != null && developerProject.getProjectSkillList().size() > 0) {
@@ -194,14 +195,14 @@ public final class AddProjectActivityNew extends AppActivity {
                 new DictionarySelectDialog.Builder(this)
                         .setTitle("选择职业状态")
                         .setList(mWorkStatusList).setListener(new DictionarySelectDialog.OnListener() {
-                    @Override
-                    public void onSelected(BaseDialog dialog, int type) {
+                            @Override
+                            public void onSelected(BaseDialog dialog, int type) {
 
-                        info_project_work_mode.setLeftText(mWorkStatusList.get(type).getName());
-                        workModeId = mWorkStatusList.get(type).getId();
-                        work_mode = mWorkStatusList.get(type).getName();
-                    }
-                }).show();
+                                info_project_work_mode.setLeftText(mWorkStatusList.get(type).getName());
+                                workModeId = mWorkStatusList.get(type).getId();
+                                work_mode = mWorkStatusList.get(type).getName();
+                            }
+                        }).show();
                 break;
             case R.id.info_project_in_time:
                 new DateSelectDialog.Builder(this).setTitle("选择日期").setIgnoreDay().setListener(new DateSelectDialog.OnListener() {
@@ -240,7 +241,7 @@ public final class AddProjectActivityNew extends AppActivity {
                                 industryId = childrenBean.getId();
                                 industry = bean.getName() + "-" + childrenBean.getName();
 
-                                EasyLog.print("===industryId==" + industryId+"======"+childrenBean.getName());
+                                EasyLog.print("===industryId==" + industryId + "======" + childrenBean.getName());
                             }
                         }).show();
                 break;

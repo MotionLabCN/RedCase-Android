@@ -120,9 +120,9 @@ public final class AddWorkActivity extends AppActivity {
 //                    info_work_in_time.setText(developerWork.getWorkStartTime());
 //                    info_work_end_time.setText(developerWork.getWorkEndTime());
 
-                    et_work_company_name.setText(TextUtils.isEmpty(developerWork.getCompanyName()) ? "所属公司" : developerWork.getCompanyName());
+                    et_work_company_name.setText(TextUtils.isEmpty(developerWork.getCompanyName()) ? "" : developerWork.getCompanyName());
                     info_work_industry.setLeftText(TextUtils.isEmpty(developerWork.getIndustryName()) ? "所在行业" : developerWork.getIndustryName());
-                    et_work_position.setText(TextUtils.isEmpty(developerWork.getPositionName()) ? "担任角色" : developerWork.getPositionName());
+                    et_work_position.setText(TextUtils.isEmpty(developerWork.getPositionName()) ? "" : developerWork.getPositionName());
                     info_work_in_time.setText(TextUtils.isEmpty(developerWork.getWorkStartTime()) ? "选择开始时间" : developerWork.getWorkStartTime());
                     info_work_end_time.setText(TextUtils.isEmpty(developerWork.getWorkEndTime()) ? "选择结束时间" : developerWork.getWorkEndTime());
 
@@ -342,9 +342,8 @@ public final class AddWorkActivity extends AppActivity {
                             finish();
                         }else {
                             et_work_company_name.setText("");
-                            et_work_company_name.setHint("所属公司");
                             info_work_industry.setLeftText("所在行业");
-                            et_work_position.setText("担任角色");
+                            et_work_position.setText("");
                             info_work_in_time.setText("选择开始时间");
                             info_work_end_time.setText("选择结束时间");
 

@@ -421,8 +421,15 @@ public class Utils {
         } else {
             return "";
         }
+    }
 
-
+    //判断返回过来的薪资是否是为空，为空返回默认0.00
+    public static String isNullSalary(String str) {
+        if (TextUtils.isEmpty(str)) {
+            return "0.00";
+        } else {
+            return str;
+        }
     }
 
     /**
