@@ -151,6 +151,8 @@ public final class AddProjectActivityNew extends AppActivity {
                     info_project_industry.setLeftText(TextUtils.isEmpty(developerProject.getIndustryName()) ? "所在行业" : developerProject.getIndustryName());
                     et_project_description.setText(TextUtils.isEmpty(developerProject.getDescription()) ? "" : developerProject.getDescription());
 
+                    sYearMonth = Utils.splitYearMonth(developerProject.getProjectStartDate());
+                    eYearMonth = Utils.splitYearMonth(developerProject.getProjectEndDate());
 
                     if (developerProject.getProjectSkillList() != null && developerProject.getProjectSkillList().size() > 0) {
                         StringBuilder sb = new StringBuilder();
@@ -184,6 +186,9 @@ public final class AddProjectActivityNew extends AppActivity {
     private List<GetTagListApi.Bean.ChildrenBean> mSelectList = new ArrayList<>();
     private List<Integer> mTagIntList = new ArrayList<>();
 
+    private int sYearMonth;// 开始时间年，开始时间月
+    private int eYearMonth;// 结束时间年，结束时间月
+
     @SingleClick
     @Override
     public void onClick(View view) {
@@ -214,6 +219,8 @@ public final class AddProjectActivityNew extends AppActivity {
                         in_time = mInTime;
                         Long timeLong = TimeUtil.getTimeLong("yyyy-MM", mInTime);
                         EasyLog.print("===timeLong==" + timeLong);
+
+                        sYearMonth = year + month;
                     }
 
                 }).show();
@@ -223,9 +230,10 @@ public final class AddProjectActivityNew extends AppActivity {
                     @Override
                     public void onSelected(BaseDialog dialog, int year, int month, int day) {
                         String mEndTime = year + "-" + Utils.formatDate(month);
-
                         info_project_end_time.setText(mEndTime);
                         end_time = mEndTime;
+
+                        eYearMonth = year + month;
                     }
 
                 }).show();
@@ -277,6 +285,14 @@ public final class AddProjectActivityNew extends AppActivity {
                     }
                     if (TextUtils.isEmpty(end_time)) {
                         toast("没有选择结束时间");
+                        return;
+                    }
+                    if (sYearMonth > eYearMonth) {
+                        toast("项目开始时间不能大于结束时间");
+                        info_project_in_time.setText("选择开始时间");
+                        info_project_end_time.setText("选择结束时间");
+                        in_time = "";
+                        end_time = "";
                         return;
                     }
                     if (TextUtils.isEmpty(project_position)) {
@@ -335,6 +351,14 @@ public final class AddProjectActivityNew extends AppActivity {
                 }
                 if (TextUtils.isEmpty(end_time)) {
                     toast("没有选择结束时间");
+                    return;
+                }
+                if (sYearMonth > eYearMonth) {
+                    toast("项目开始时间不能大于结束时间");
+                    info_project_in_time.setText("选择开始时间");
+                    info_project_end_time.setText("选择结束时间");
+                    in_time = "";
+                    end_time = "";
                     return;
                 }
                 if (TextUtils.isEmpty(project_position)) {

@@ -905,6 +905,7 @@ public final class EnterDeveloperActivity extends AppActivity {
         }
         if (bean.getEducationDtoList().size() == 0) {
             toast("您还没有填写完整教育经历请填写");
+            return;
         } else {
             for (int i = 0; i < bean.getEducationDtoList().size(); i++) {
                 if (TextUtils.isEmpty(bean.getEducationDtoList().get(i).getCollegeName()) ||
@@ -921,6 +922,7 @@ public final class EnterDeveloperActivity extends AppActivity {
         }
         if (bean.getWorkExperienceDtoList().size() == 0) {
             toast("您还没有填写完整工作经历请填写");
+            return;
         } else {
             for (int i = 0; i < bean.getWorkExperienceDtoList().size(); i++) {
                 if (TextUtils.isEmpty(bean.getWorkExperienceDtoList().get(i).getCompanyName()) ||
@@ -937,6 +939,7 @@ public final class EnterDeveloperActivity extends AppActivity {
 
         if (bean.getProjectDtoList().size() == 0) {
             toast("您还没有填写完整项目经历请填写");
+            return;
         } else {
             for (int i = 0; i < bean.getProjectDtoList().size(); i++) {
                 if (TextUtils.isEmpty(bean.getProjectDtoList().get(i).getProjectName()) ||

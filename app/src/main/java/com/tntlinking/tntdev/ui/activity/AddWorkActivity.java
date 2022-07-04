@@ -126,6 +126,9 @@ public final class AddWorkActivity extends AppActivity {
                     info_work_in_time.setText(TextUtils.isEmpty(developerWork.getWorkStartTime()) ? "选择开始时间" : developerWork.getWorkStartTime());
                     info_work_end_time.setText(TextUtils.isEmpty(developerWork.getWorkEndTime()) ? "选择结束时间" : developerWork.getWorkEndTime());
 
+                    sYearMonth = Utils.splitYearMonth(developerWork.getWorkStartTime());
+                    eYearMonth = Utils.splitYearMonth(developerWork.getWorkEndTime());
+
 
                     company_name = developerWork.getCompanyName();
                     project_position = developerWork.getPositionName();
@@ -143,6 +146,9 @@ public final class AddWorkActivity extends AppActivity {
     private List<GetTagListApi.Bean.ChildrenBean> mSelectList = new ArrayList<>();
     private List<Integer> mTagIntList = new ArrayList<>();
 
+    private int sYearMonth;
+    private int eYearMonth;
+
     @SingleClick
     @Override
     public void onClick(View view) {
@@ -156,8 +162,9 @@ public final class AddWorkActivity extends AppActivity {
 
                         info_work_in_time.setText(mInTime);
                         in_time = mInTime;
-                        Long timeLong = TimeUtil.getTimeLong("yyyy-MM", mInTime);
-                        EasyLog.print("===timeLong==" + timeLong);
+
+                        sYearMonth = year + month;
+                        EasyLog.print("=1111==sYearMonth==" + sYearMonth);
                     }
 
                 }).show();
@@ -170,6 +177,10 @@ public final class AddWorkActivity extends AppActivity {
 
                         info_work_end_time.setText(mEndTime);
                         end_time = mEndTime;
+                        eYearMonth = year + month;
+
+                        EasyLog.print("=222==eYearMonth==" + eYearMonth);
+
                     }
 
                 }).show();
@@ -186,7 +197,7 @@ public final class AddWorkActivity extends AppActivity {
                                 industryId = childrenBean.getId();
                                 industry = bean.getName() + "-" + childrenBean.getName();
 
-                                EasyLog.print("===industryId==" + industryId+"======"+childrenBean.getName());
+                                EasyLog.print("===industryId==" + industryId + "======" + childrenBean.getName());
                             }
                         }).show();
                 break;
@@ -203,6 +214,14 @@ public final class AddWorkActivity extends AppActivity {
                     }
                     if (TextUtils.isEmpty(end_time)) {
                         toast("没有选择结束时间");
+                        return;
+                    }
+                    if (sYearMonth> eYearMonth) {
+                        toast("工作开始时间不能大于结束时间");
+                        info_work_in_time.setText("选择开始时间");
+                        info_work_end_time.setText("选择结束时间");
+                        in_time = "";
+                        end_time = "";
                         return;
                     }
                     if (TextUtils.isEmpty(project_position)) {
@@ -230,7 +249,7 @@ public final class AddWorkActivity extends AppActivity {
                             .setOnClickListener(R.id.btn_dialog_custom_cancel, (BaseDialog.OnClickListener<Button>) (dialog, button) -> dialog.dismiss())
                             .setOnClickListener(R.id.btn_dialog_custom_ok, (dialog, views) -> {
 
-                                deleteWork(mId,dialog);
+                                deleteWork(mId, dialog);
                             })
                             .show();
                 }
@@ -246,6 +265,14 @@ public final class AddWorkActivity extends AppActivity {
                 }
                 if (TextUtils.isEmpty(end_time)) {
                     toast("没有选择结束时间");
+                    return;
+                }
+                if (sYearMonth> eYearMonth) {
+                    toast("工作开始时间不能大于结束时间");
+                    info_work_in_time.setText("选择开始时间");
+                    info_work_end_time.setText("选择结束时间");
+                    in_time = "";
+                    end_time = "";
                     return;
                 }
                 if (TextUtils.isEmpty(project_position)) {
@@ -337,10 +364,10 @@ public final class AddWorkActivity extends AppActivity {
                     @Override
                     public void onSucceed(HttpData<List<GetProvinceApi.ProvinceBean>> data) {
                         EasyLog.print("====addCareer===");
-                        if (isBack){
+                        if (isBack) {
                             setResult(RESULT_OK);
                             finish();
-                        }else {
+                        } else {
                             et_work_company_name.setText("");
                             info_work_industry.setLeftText("所在行业");
                             et_work_position.setText("");

@@ -133,6 +133,8 @@ public final class AddEducationActivityNew extends AppActivity {
                     et_info_major.setText(TextUtils.isEmpty(developerEducation.getMajor()) ? "" : developerEducation.getMajor());
                     info_training_method.setLeftText(TextUtils.isEmpty(developerEducation.getTrainingModeName()) ? "培养方式" : developerEducation.getTrainingModeName());
 
+                    sYearMonth = Utils.splitYearMonth(developerEducation.getInSchoolStartTime());
+                    eYearMonth = Utils.splitYearMonth(developerEducation.getInSchoolEndTime());
 
                     school_name = developerEducation.getCollegeName();
                     education = developerEducation.getEducationName();
@@ -149,6 +151,8 @@ public final class AddEducationActivityNew extends AppActivity {
 
     }
 
+    private int sYearMonth;// 开始时间年，开始时间月
+    private int eYearMonth;// 结束时间年，结束时间月
 
     @SuppressLint("NonConstantResourceId")
     @SingleClick
@@ -159,11 +163,11 @@ public final class AddEducationActivityNew extends AppActivity {
                 new DictionarySelectDialog.Builder(this)
                         .setTitle("选择学历")
                         .setList(mEducationList).setListener(new DictionarySelectDialog.OnListener() {
-                    @Override
-                    public void onSelected(BaseDialog dialog, int type) {
+                            @Override
+                            public void onSelected(BaseDialog dialog, int type) {
 
-                        info_education.setLeftText(mEducationList.get(type).getName());
-                        educationId = mEducationList.get(type).getId();
+                                info_education.setLeftText(mEducationList.get(type).getName());
+                                educationId = mEducationList.get(type).getId();
 
                                 education = mEducationList.get(type).getName();
                             }
@@ -175,9 +179,11 @@ public final class AddEducationActivityNew extends AppActivity {
                     @Override
                     public void onSelected(BaseDialog dialog, int year, int month, int day) {
                         String mInTime = year + "-" + Utils.formatDate(month);
-
                         info_school_in_time.setText(mInTime);
                         in_time = mInTime;
+
+                        sYearMonth = year + month;
+
                     }
 
                 }).show();
@@ -190,6 +196,9 @@ public final class AddEducationActivityNew extends AppActivity {
 
                         info_school_end_time.setText(mEndTime);
                         end_time = mEndTime;
+
+                        eYearMonth = year + month;
+
                     }
 
                 }).show();
@@ -199,14 +208,14 @@ public final class AddEducationActivityNew extends AppActivity {
                 new DictionarySelectDialog.Builder(this)
                         .setTitle("选择培养方式")
                         .setList(mTrainingList).setListener(new DictionarySelectDialog.OnListener() {
-                    @Override
-                    public void onSelected(BaseDialog dialog, int type) {
+                            @Override
+                            public void onSelected(BaseDialog dialog, int type) {
 
-                        info_training_method.setLeftText(mTrainingList.get(type).getName());
-                        training_methodId = mTrainingList.get(type).getId();
-                        training = mTrainingList.get(type).getName();
-                    }
-                }).show();
+                                info_training_method.setLeftText(mTrainingList.get(type).getName());
+                                training_methodId = mTrainingList.get(type).getId();
+                                training = mTrainingList.get(type).getName();
+                            }
+                        }).show();
                 break;
             case R.id.btn_delete:
 //                setResult(RESULT_OK, new Intent().putExtra("position", position));
@@ -234,6 +243,14 @@ public final class AddEducationActivityNew extends AppActivity {
                     }
                     if (TextUtils.isEmpty(end_time)) {
                         toast("没有选择毕业时间");
+                        return;
+                    }
+                    if (sYearMonth > eYearMonth) {
+                        toast("入学时间不能大于毕业时间");
+                        info_school_in_time.setText("选择入学时间");
+                        info_school_end_time.setText("选择毕业时间");
+                        in_time = "";
+                        end_time = "";
                         return;
                     }
                     if (TextUtils.isEmpty(training)) {
@@ -277,6 +294,14 @@ public final class AddEducationActivityNew extends AppActivity {
                 }
                 if (TextUtils.isEmpty(end_time)) {
                     toast("没有选择毕业时间");
+                    return;
+                }
+                if (sYearMonth > eYearMonth) {
+                    toast("入学时间不能大于毕业时间");
+                    info_school_in_time.setText("选择入学时间");
+                    info_school_end_time.setText("选择毕业时间");
+                    in_time = "";
+                    end_time = "";
                     return;
                 }
                 if (TextUtils.isEmpty(training)) {

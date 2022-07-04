@@ -469,6 +469,21 @@ public class Utils {
         return mName;
     }
 
+    public static int splitYearMonth(String str) {
+        if (!TextUtils.isEmpty(str)) {
+            if (str.contains("-")) {
+                String[] split = str.split("-");
+                int i = Integer.parseInt(split[0]);
+                int j = Integer.parseInt(split[1]);
+
+                return i + j;
+            }
+        } else {
+            return 0;
+        }
+        return 0;
+    }
+
 
     /**
      * 获取单个文件的MD5值！
