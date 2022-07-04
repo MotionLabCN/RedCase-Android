@@ -89,7 +89,7 @@ public final class AddBaseInfoActivity extends AppActivity {
                 } else {
                     mInfoGender.setLeftText("女");
                 }
-                mInfoBirth.setLeftText(bean.getBirthday());
+                mInfoBirth.setLeftText(TextUtils.isEmpty(bean.getBirthday()) ? "出生日期" : bean.getBirthday());
                 if (bean.getProvinceName() != null) {
                     mInfoAddress.setLeftText(bean.getProvinceName() + "-" + bean.getCityName() + "-" + bean.getAreasName());
                 }

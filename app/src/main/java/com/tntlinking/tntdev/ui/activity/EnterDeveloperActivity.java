@@ -212,17 +212,18 @@ public final class EnterDeveloperActivity extends AppActivity {
 
     @Override
     protected void onResume() {
-//        int developId = SPUtils.getInstance().getInt(AppConfig.DEVELOPER_ID);
-//        getDeveloperDetail(developId);
-        DeveloperInfoBean bean = getSerializable(INTENT_KEY_DEVELOPER_INFO);
-        if (bean != null) {
-            if (TextUtils.isEmpty(bean.getRealName())) {
-                setDeveloperInfo(bean);
-            }
-        } else {
-            int developId = SPUtils.getInstance().getInt(AppConfig.DEVELOPER_ID);
-            getDeveloperDetail(developId);
-        }
+        int developId = SPUtils.getInstance().getInt(AppConfig.DEVELOPER_ID);
+        getDeveloperDetail(developId);
+
+//        DeveloperInfoBean bean = getSerializable(INTENT_KEY_DEVELOPER_INFO);
+//        if (bean != null) {
+//            if (TextUtils.isEmpty(bean.getRealName())) {
+//                setDeveloperInfo(bean);
+//            }
+//        } else {
+//            int developId = SPUtils.getInstance().getInt(AppConfig.DEVELOPER_ID);
+//            getDeveloperDetail(developId);
+//        }
         super.onResume();
 
     }
@@ -278,27 +279,29 @@ public final class EnterDeveloperActivity extends AppActivity {
                 getActivity().startActivityForResult(intent, 10005);
                 break;
             case R.id.btn_commit:
-                if (TextUtils.isEmpty(tv_edit_name.getText())) {
-                    toast("您还没有填写基本信息请填写");
-                    return;
-                }
-                if (TextUtils.isEmpty(tv_career_info.getText())) {
-                    toast("您还没有填写职业信息请填写");
-                    return;
-                }
-                if (addEducationAdapter.getCount() == 0) {
-                    toast("您还没有填写教育经历请填写");
-                    return;
-                }
-                if (addWorkAdapter.getCount() == 0) {
-                    toast("您还没有填写工作经历请填写");
-                    return;
-                }
-                if (addProjectAdapter.getCount() == 0) {
-                    toast("您还没有填写项目经历请填写");
-                    return;
-                }
-                submitDeveloper();
+//                if (TextUtils.isEmpty(tv_edit_name.getText())) {
+//                    toast("您还没有填写基本信息请填写");
+//                    return;
+//                }
+//                if (TextUtils.isEmpty(tv_career_info.getText())) {
+//                    toast("您还没有填写职业信息请填写");
+//                    return;
+//                }
+//                if (addEducationAdapter.getCount() == 0) {
+//                    toast("您还没有填写教育经历请填写");
+//                    return;
+//                }
+//                if (addWorkAdapter.getCount() == 0) {
+//                    toast("您还没有填写工作经历请填写");
+//                    return;
+//                }
+//                if (addProjectAdapter.getCount() == 0) {
+//                    toast("您还没有填写项目经历请填写");
+//                    return;
+//                }
+//                submitDeveloper();
+
+                checkCommit(bean);
                 break;
             case R.id.ll_import_resume:
                 startActivity(UploadResumeActivity.class);
@@ -644,9 +647,9 @@ public final class EnterDeveloperActivity extends AppActivity {
     /**
      * 简历解析页面跳转过来的，直接填充相关数据
      */
+    @SuppressLint("SetTextI18n")
     public void setDeveloperInfo(DeveloperInfoBean data) {
-        //是否是解析页面过来的
-        boolean isResume = SPUtils.getInstance().getBoolean(AppConfig.RESUME_ANALYSIS, false);
+
         progress = 0;
         bean = data;
         String realName = bean.getRealName();
@@ -688,11 +691,13 @@ public final class EnterDeveloperActivity extends AppActivity {
 
                 ll_career_info.setVisibility(View.VISIBLE);
                 tv_career_info.setText(careerDto.getCareerDirectionName());
-                tv_career_info_work_year.setText(careerDto.getWorkYearsName() + " | 当前薪资：" + (Double.parseDouble(careerDto.getCurSalary()) / 1000) + "K");
+                tv_career_info_work_year.setText(careerDto.getWorkYearsName() + " | 当前薪资：" + (Double.parseDouble(Utils.isNullSalary(careerDto.getCurSalary())) / 1000) + "K");
                 tv_career_info_work_mode.setText(workModeDtoList.get(0).getWorkDayModeName() + " | 期望薪资：" +
-                        (Double.parseDouble(workModeDtoList.get(0).getLowestSalary()) / 1000) + "K"
-                        + "-" + (Double.parseDouble(workModeDtoList.get(0).getHighestSalary()) / 1000) + "K");
+                        (Double.parseDouble(Utils.isNullSalary(workModeDtoList.get(0).getLowestSalary())) / 1000) + "K"
+                        + "-" + (Double.parseDouble(Utils.isNullSalary(workModeDtoList.get(0).getHighestSalary())) / 1000) + "K");
                 progress++;
+
+
             }
         }
 
@@ -773,7 +778,8 @@ public final class EnterDeveloperActivity extends AppActivity {
             tv_progress.setText("\"恭喜你！完成度超过90%以上的用户，未来可期～\"");
             progress_bar.setProgress(90);
         }
-
+        //是否是解析页面过来的
+        boolean isResume = SPUtils.getInstance().getBoolean(AppConfig.RESUME_ANALYSIS, false);
         if (bean.getStatus() == 2) {
             tv_progress.setText("\"审核中，专属顾问将在1-3个工作日内完成审核\"");
             iv_progress.setImageResource(R.drawable.icon_warning);
@@ -788,51 +794,169 @@ public final class EnterDeveloperActivity extends AppActivity {
                 mCommit.setVisibility(View.GONE);
             }
         }
-        //判断解析过来 有些数据是否显示完整，没有显示完整的 显示提示请填充tips
-        if (isResume) {
-            if (TextUtils.isEmpty(bean.getRealName()) || TextUtils.isEmpty(bean.getBirthday()) ||
-                    TextUtils.isEmpty(bean.getProvinceName()) ||
-                    TextUtils.isEmpty(bean.getCityName()) ||
-                    TextUtils.isEmpty(bean.getAreasName()) || TextUtils.isEmpty(bean.getRemoteWorkReasonStr())) {
-                tv_add_base_info_tips.setVisibility(View.VISIBLE);
-            } else {
-                tv_add_base_info_tips.setVisibility(View.INVISIBLE);
-            }
 
-            if (workModeDtoList.size() == 0) {
-                tv_add_career_info_tips.setVisibility(View.VISIBLE);
-            } else {
-                tv_add_career_info_tips.setVisibility(View.INVISIBLE);
-            }
-
-            if (educationDtoList.size() == 0) {
-                tv_add_education_tips.setVisibility(View.VISIBLE);
-            } else {
-                tv_add_education_tips.setVisibility(View.INVISIBLE);
-            }
-
-            if (workExperienceDtoList.size() == 0) {
-                tv_add_worK_tips.setVisibility(View.VISIBLE);
-            } else {
-                tv_add_worK_tips.setVisibility(View.INVISIBLE);
-            }
-
-            if (projectDtoList.size() == 0) {
-                tv_add_project_tips.setVisibility(View.VISIBLE);
-            } else {
-                tv_add_project_tips.setVisibility(View.INVISIBLE);
-            }
-
+        /**  -------------------------- 判断个个资料是否填写完整 ------------------------------------ */
+        if (TextUtils.isEmpty(bean.getRealName()) ||
+                TextUtils.isEmpty(bean.getBirthday()) ||
+                TextUtils.isEmpty(bean.getProvinceName()) ||
+                TextUtils.isEmpty(bean.getCityName()) ||
+                TextUtils.isEmpty(bean.getAreasName()) ||
+                TextUtils.isEmpty(bean.getRemoteWorkReasonStr())) {
+            tv_add_base_info_tips.setVisibility(View.VISIBLE);
         } else {
             tv_add_base_info_tips.setVisibility(View.INVISIBLE);
+        }
+
+        if (workModeDtoList.size() == 0 ||
+                TextUtils.isEmpty(careerDto.getCareerDirectionName()) ||
+                TextUtils.isEmpty(careerDto.getWorkYearsName()) ||
+                TextUtils.isEmpty(careerDto.getCurSalary())) {
+            tv_add_career_info_tips.setVisibility(View.VISIBLE);
+        } else {
             tv_add_career_info_tips.setVisibility(View.INVISIBLE);
-            tv_add_education_tips.setVisibility(View.INVISIBLE);
-            tv_add_worK_tips.setVisibility(View.INVISIBLE);
-            tv_add_project_tips.setVisibility(View.INVISIBLE);
+        }
+
+        if (educationDtoList.size() == 0) {
+            tv_add_education_tips.setVisibility(View.VISIBLE);
+        } else {
+            for (int i = 0; i < educationDtoList.size(); i++) {
+                if (TextUtils.isEmpty(educationDtoList.get(i).getCollegeName()) ||
+                        TextUtils.isEmpty(educationDtoList.get(i).getEducationName()) ||
+                        TextUtils.isEmpty(educationDtoList.get(i).getTrainingModeName()) ||
+                        TextUtils.isEmpty(educationDtoList.get(i).getMajor()) ||
+                        TextUtils.isEmpty(educationDtoList.get(i).getInSchoolStartTime()) ||
+                        TextUtils.isEmpty(educationDtoList.get(i).getInSchoolEndTime())) {
+
+                    tv_add_education_tips.setVisibility(View.VISIBLE);
+                    break;
+                } else {
+                    tv_add_education_tips.setVisibility(View.INVISIBLE);
+                }
+            }
+        }
+
+        if (workExperienceDtoList.size() == 0) {
+            tv_add_worK_tips.setVisibility(View.VISIBLE);
+        } else {
+            for (int i = 0; i < workExperienceDtoList.size(); i++) {
+                if (TextUtils.isEmpty(workExperienceDtoList.get(i).getCompanyName()) ||
+                        TextUtils.isEmpty(workExperienceDtoList.get(i).getIndustryName()) ||
+                        TextUtils.isEmpty(workExperienceDtoList.get(i).getPositionName()) ||
+                        TextUtils.isEmpty(workExperienceDtoList.get(i).getWorkStartTime()) ||
+                        TextUtils.isEmpty(workExperienceDtoList.get(i).getWorkEndTime())) {
+
+                    tv_add_worK_tips.setVisibility(View.VISIBLE);
+                    break;
+                } else {
+                    tv_add_worK_tips.setVisibility(View.INVISIBLE);
+                }
+            }
+        }
+
+        if (projectDtoList.size() == 0) {
+            tv_add_project_tips.setVisibility(View.VISIBLE);
+        } else {
+            for (int i = 0; i < projectDtoList.size(); i++) {
+                if (TextUtils.isEmpty(projectDtoList.get(i).getProjectName()) ||
+                        TextUtils.isEmpty(projectDtoList.get(i).getIndustryName()) ||
+                        TextUtils.isEmpty(projectDtoList.get(i).getProjectStartDate()) ||
+                        TextUtils.isEmpty(projectDtoList.get(i).getProjectEndDate()) ||
+                        TextUtils.isEmpty(projectDtoList.get(i).getPosition()) ||
+                        TextUtils.isEmpty(projectDtoList.get(i).getCompanyName()) ||
+                        TextUtils.isEmpty(projectDtoList.get(i).getIndustryName()) ||
+                        TextUtils.isEmpty(projectDtoList.get(i).getDescription()) ||
+                        projectDtoList.get(i).getProjectSkillList().size() == 0) {
+
+                    tv_add_project_tips.setVisibility(View.VISIBLE);
+                    break;
+                } else {
+                    tv_add_project_tips.setVisibility(View.INVISIBLE);
+                }
+            }
         }
         sv.smoothScrollTo(0, 0);
     }
 
+    /**
+     * 提交审核按钮 条件判断，
+     * 1是否基础信息完成 2是否职业信息完成 3知否教育信息完成 4是否工作信息完成 5是否项目经历完成
+     *
+     * @param bean
+     */
+    public void checkCommit(DeveloperInfoBean bean) {
+        if (TextUtils.isEmpty(bean.getRealName()) ||
+                TextUtils.isEmpty(bean.getBirthday()) ||
+                TextUtils.isEmpty(bean.getProvinceName()) ||
+                TextUtils.isEmpty(bean.getCityName()) ||
+                TextUtils.isEmpty(bean.getAreasName()) ||
+                TextUtils.isEmpty(bean.getRemoteWorkReasonStr())) {
+
+            toast("您还没有填写完整基本信息请填写");
+            return;
+        }
+
+        if (bean.getWorkModeDtoList().size() == 0 ||
+                TextUtils.isEmpty(bean.getCareerDto().getCareerDirectionName()) ||
+                TextUtils.isEmpty(bean.getCareerDto().getWorkYearsName()) ||
+                TextUtils.isEmpty(bean.getCareerDto().getCurSalary())) {
+
+            toast("您还没有填写完整职业信息请填写");
+            return;
+        }
+        if (bean.getEducationDtoList().size() == 0) {
+            toast("您还没有填写完整教育经历请填写");
+        } else {
+            for (int i = 0; i < bean.getEducationDtoList().size(); i++) {
+                if (TextUtils.isEmpty(bean.getEducationDtoList().get(i).getCollegeName()) ||
+                        TextUtils.isEmpty(bean.getEducationDtoList().get(i).getEducationName()) ||
+                        TextUtils.isEmpty(bean.getEducationDtoList().get(i).getTrainingModeName()) ||
+                        TextUtils.isEmpty(bean.getEducationDtoList().get(i).getMajor()) ||
+                        TextUtils.isEmpty(bean.getEducationDtoList().get(i).getInSchoolStartTime()) ||
+                        TextUtils.isEmpty(bean.getEducationDtoList().get(i).getInSchoolEndTime())) {
+
+                    toast("您还没有填写完整教育经历请填写");
+                    return;
+                }
+            }
+        }
+        if (bean.getWorkExperienceDtoList().size() == 0) {
+            toast("您还没有填写完整工作经历请填写");
+        } else {
+            for (int i = 0; i < bean.getWorkExperienceDtoList().size(); i++) {
+                if (TextUtils.isEmpty(bean.getWorkExperienceDtoList().get(i).getCompanyName()) ||
+                        TextUtils.isEmpty(bean.getWorkExperienceDtoList().get(i).getIndustryName()) ||
+                        TextUtils.isEmpty(bean.getWorkExperienceDtoList().get(i).getPositionName()) ||
+                        TextUtils.isEmpty(bean.getWorkExperienceDtoList().get(i).getWorkStartTime()) ||
+                        TextUtils.isEmpty(bean.getWorkExperienceDtoList().get(i).getWorkEndTime())) {
+
+                    toast("您还没有填写完整工作经历请填写");
+                    return;
+                }
+            }
+        }
+
+        if (bean.getProjectDtoList().size() == 0) {
+            toast("您还没有填写完整项目经历请填写");
+        } else {
+            for (int i = 0; i < bean.getProjectDtoList().size(); i++) {
+                if (TextUtils.isEmpty(bean.getProjectDtoList().get(i).getProjectName()) ||
+                        TextUtils.isEmpty(bean.getProjectDtoList().get(i).getIndustryName()) ||
+                        TextUtils.isEmpty(bean.getProjectDtoList().get(i).getProjectStartDate()) ||
+                        TextUtils.isEmpty(bean.getProjectDtoList().get(i).getProjectEndDate()) ||
+                        TextUtils.isEmpty(bean.getProjectDtoList().get(i).getPosition()) ||
+                        TextUtils.isEmpty(bean.getProjectDtoList().get(i).getCompanyName()) ||
+                        TextUtils.isEmpty(bean.getProjectDtoList().get(i).getIndustryName()) ||
+                        TextUtils.isEmpty(bean.getProjectDtoList().get(i).getDescription()) ||
+                        bean.getProjectDtoList().get(i).getProjectSkillList().size() == 0) {
+
+                    toast("您还没有填写完整项目经历请填写");
+                    return;
+                }
+            }
+        }
+
+        submitDeveloper();
+    }
 
     /**
      * 外部分享过来的文件 解析上传
@@ -840,8 +964,6 @@ public final class EnterDeveloperActivity extends AppActivity {
      * @param file
      */
     private void parseResume(File file) {
-        Log.d("str2", ">>>1" + file);
-
         EasyHttp.post(this)
                 .api(new ParseResumeApi().setFile(file))
                 .request(new HttpCallback<HttpData<ParseResumeApi.Bean>>(this) {

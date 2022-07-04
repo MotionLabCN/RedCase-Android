@@ -111,9 +111,10 @@ public final class AddCareerActivity extends AppActivity {
 
                 info_specialisations.setLeftText(TextUtils.isEmpty(careerDto.getCareerDirectionName()) ? "职业方向" : careerDto.getCareerDirectionName());
                 info_work_experience.setLeftText(TextUtils.isEmpty(careerDto.getWorkYearsName()) ? "工作经验" : careerDto.getWorkYearsName());
-                et_salary.setText(TextUtils.isEmpty(careerDto.getCurSalary()) ? "当前薪资(元/月)" : careerDto.getCurSalary());
-                et_expect_salary_low.setText(TextUtils.isEmpty(workModeDtoList.get(0).getLowestSalary()) ? "最低服务价格(元/月)" : workModeDtoList.get(0).getLowestSalary());
-                et_expect_salary_high.setText(TextUtils.isEmpty(workModeDtoList.get(0).getHighestSalary()) ? "最高服务价格(元/月)" : workModeDtoList.get(0).getHighestSalary());
+                et_salary.setText(TextUtils.isEmpty(careerDto.getCurSalary()) ? "" : careerDto.getCurSalary());
+                et_expect_salary_low.setText(TextUtils.isEmpty(workModeDtoList.get(0).getLowestSalary()) ? "" : workModeDtoList.get(0).getLowestSalary());
+                et_expect_salary_high.setText(TextUtils.isEmpty(workModeDtoList.get(0).getHighestSalary()) ? "" : workModeDtoList.get(0).getHighestSalary());
+
 
                 if (workModeDtoList.get(0).getWorkDayMode() == 1) {
                     tv_all_day.setBackground(getResources().getDrawable(R.drawable.bg_blue_left_radius_4));
