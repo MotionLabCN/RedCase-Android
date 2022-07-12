@@ -19,6 +19,9 @@ import java.lang.reflect.Type;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.security.MessageDigest;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Hashtable;
 
 
@@ -38,6 +41,25 @@ public class Utils {
         return str;
     }
 
+    public static long dateToStamp(String s) {
+        //设置时间模版
+        if (!TextUtils.isEmpty(s)) {
+            if (s.contains("-")) {
+                try {
+                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                    s = s + "-01 00:00:00";
+                    Date date = simpleDateFormat.parse(s);
+                    return date.getTime();
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }
+        return 0;
+
+
+    }
 
     public static Object getData(String key, Class cls) {
         String dev = SPUtils.getInstance().getString("dev");
@@ -473,10 +495,9 @@ public class Utils {
         if (!TextUtils.isEmpty(str)) {
             if (str.contains("-")) {
                 String[] split = str.split("-");
-                int i = Integer.parseInt(split[0]);
-                int j = Integer.parseInt(split[1]);
-
-                return i + j;
+                String i = Integer.parseInt(split[0]) + "";
+                String j = Integer.parseInt(split[1]) + "";
+                return Integer.parseInt(i + j);
             }
         } else {
             return 0;

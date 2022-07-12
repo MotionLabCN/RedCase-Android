@@ -687,7 +687,7 @@ public final class EnterDeveloperActivity extends AppActivity {
         List<DeveloperInfoBean.WorkMode> workModeDtoList = bean.getWorkModeDtoList();
         if (workModeDtoList.size() != 0) {
             if (!TextUtils.isEmpty(careerDto.getCareerDirectionName())) {
-                SPUtils.getInstance().put(AppConfig.CAREER_ID, bean.getCareerDirectionId() + "");
+                SPUtils.getInstance().put(AppConfig.CAREER_ID,careerDto.getCareerDirectionId());
 
                 ll_career_info.setVisibility(View.VISIBLE);
                 tv_career_info.setText(careerDto.getCareerDirectionName());

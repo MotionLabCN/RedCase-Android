@@ -290,8 +290,8 @@ public final class AddProjectTagActivityNew extends AppActivity {
     @Override
     protected void initData() {
 //        int careerDirectionId = SendDeveloperBean.getSingleton().getCareerDirectionId();
-        String careerDirectionId = SPUtils.getInstance().getString(AppConfig.CAREER_ID, "163");
-        getTagList(careerDirectionId);
+        int careerDirectionId = SPUtils.getInstance().getInt(AppConfig.CAREER_ID, 163);
+        getTagList(careerDirectionId+"");
 
     }
 
@@ -376,6 +376,14 @@ public final class AddProjectTagActivityNew extends AppActivity {
                                                 continue;
                                             }
                                         }
+                                    }else if (mSelectList.get(i).getType() == 0) {
+                                        int position1 = positionList(dataBean.get(0).getChildren(), mSelectList.get(i));
+                                        if (position1 != -1) {
+                                            fl_skill_tag_1.getChildAt(position1).setSelected(true);
+                                            mSelectList.get(i).setType(1);
+                                            mList1.add(mSelectList.get(i));
+                                        }
+
                                     }
 
                                 }
@@ -423,6 +431,21 @@ public final class AddProjectTagActivityNew extends AppActivity {
                                                 continue;
                                             }
                                         }
+                                    }else if (mSelectList.get(i).getType() == 0) {
+                                        int position1 = positionList(dataBean.get(0).getChildren(), mSelectList.get(i));
+                                        if (position1 != -1) {
+                                            fl_skill_tag_1.getChildAt(position1).setSelected(true);
+                                            mSelectList.get(i).setType(1);
+                                            mList1.add(mSelectList.get(i));
+                                        }
+
+                                        int position2 = positionList(dataBean.get(1).getChildren(), mSelectList.get(i));
+                                        if (position2 != -1) {
+                                            fl_skill_tag_2.getChildAt(position2).setSelected(true);
+                                            mSelectList.get(i).setType(2);
+                                            mList1.add(mSelectList.get(i));
+                                        }
+
                                     }
 
                                 }
@@ -482,6 +505,27 @@ public final class AddProjectTagActivityNew extends AppActivity {
                                                 continue;
                                             }
                                         }
+                                    }else if (mSelectList.get(i).getType() == 0) {
+                                        int position1 = positionList(dataBean.get(0).getChildren(), mSelectList.get(i));
+                                        if (position1 != -1) {
+                                            fl_skill_tag_1.getChildAt(position1).setSelected(true);
+                                            mSelectList.get(i).setType(1);
+                                            mList1.add(mSelectList.get(i));
+                                        }
+
+                                        int position2 = positionList(dataBean.get(1).getChildren(), mSelectList.get(i));
+                                        if (position2 != -1) {
+                                            fl_skill_tag_2.getChildAt(position2).setSelected(true);
+                                            mSelectList.get(i).setType(2);
+                                            mList1.add(mSelectList.get(i));
+                                        }
+                                        int position3 = positionList(dataBean.get(2).getChildren(), mSelectList.get(i));
+                                        if (position3 != -1) {
+                                            fl_skill_tag_3.getChildAt(position3).setSelected(true);
+                                            mSelectList.get(i).setType(3);
+                                            mList1.add(mSelectList.get(i));
+                                        }
+
                                     }
 
                                 }
@@ -620,6 +664,7 @@ public final class AddProjectTagActivityNew extends AppActivity {
                                                 GetTagListApi.Bean.ChildrenBean childrenBean = dataBean.get(0).getChildren().get(j);
                                                 childrenBean.setType(1);
                                                 mList1.add(childrenBean);
+                                                EasyLog.print("===111======"+mSelectList.get(i).getSkillName());
                                                 continue;
                                             }
                                         }
@@ -630,6 +675,7 @@ public final class AddProjectTagActivityNew extends AppActivity {
                                                 GetTagListApi.Bean.ChildrenBean childrenBean = dataBean.get(1).getChildren().get(j);
                                                 childrenBean.setType(2);
                                                 mList1.add(childrenBean);
+                                                EasyLog.print("===2222======"+mSelectList.get(i).getSkillName());
                                                 continue;
                                             }
                                         }
@@ -640,6 +686,7 @@ public final class AddProjectTagActivityNew extends AppActivity {
                                                 GetTagListApi.Bean.ChildrenBean childrenBean = dataBean.get(2).getChildren().get(j);
                                                 childrenBean.setType(3);
                                                 mList1.add(childrenBean);
+                                                EasyLog.print("===333======"+mSelectList.get(i).getSkillName());
                                                 continue;
                                             }
                                         }
@@ -650,6 +697,7 @@ public final class AddProjectTagActivityNew extends AppActivity {
                                                 GetTagListApi.Bean.ChildrenBean childrenBean = dataBean.get(3).getChildren().get(j);
                                                 childrenBean.setType(4);
                                                 mList1.add(childrenBean);
+                                                EasyLog.print("===4444======"+mSelectList.get(i).getSkillName());
                                                 continue;
                                             }
                                         }
@@ -660,6 +708,7 @@ public final class AddProjectTagActivityNew extends AppActivity {
                                                 GetTagListApi.Bean.ChildrenBean childrenBean = dataBean.get(4).getChildren().get(j);
                                                 childrenBean.setType(5);
                                                 mList1.add(childrenBean);
+                                                EasyLog.print("===5555======"+mSelectList.get(i).getSkillName());
                                                 continue;
                                             }
                                         }

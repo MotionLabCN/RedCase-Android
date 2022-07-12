@@ -126,8 +126,8 @@ public final class AddWorkActivity extends AppActivity {
                     info_work_in_time.setText(TextUtils.isEmpty(developerWork.getWorkStartTime()) ? "选择开始时间" : developerWork.getWorkStartTime());
                     info_work_end_time.setText(TextUtils.isEmpty(developerWork.getWorkEndTime()) ? "选择结束时间" : developerWork.getWorkEndTime());
 
-                    sYearMonth = Utils.splitYearMonth(developerWork.getWorkStartTime());
-                    eYearMonth = Utils.splitYearMonth(developerWork.getWorkEndTime());
+                    sYearMonth = Utils.dateToStamp(developerWork.getWorkStartTime());
+                    eYearMonth = Utils.dateToStamp(developerWork.getWorkEndTime());
 
 
                     company_name = developerWork.getCompanyName();
@@ -146,8 +146,8 @@ public final class AddWorkActivity extends AppActivity {
     private List<GetTagListApi.Bean.ChildrenBean> mSelectList = new ArrayList<>();
     private List<Integer> mTagIntList = new ArrayList<>();
 
-    private int sYearMonth;
-    private int eYearMonth;
+    private long sYearMonth;
+    private long eYearMonth;
 
     @SingleClick
     @Override
@@ -163,8 +163,8 @@ public final class AddWorkActivity extends AppActivity {
                         info_work_in_time.setText(mInTime);
                         in_time = mInTime;
 
-                        sYearMonth = year + month;
-                        EasyLog.print("=1111==sYearMonth==" + sYearMonth);
+                        sYearMonth = Utils.dateToStamp(mInTime);
+
                     }
 
                 }).show();
@@ -177,9 +177,7 @@ public final class AddWorkActivity extends AppActivity {
 
                         info_work_end_time.setText(mEndTime);
                         end_time = mEndTime;
-                        eYearMonth = year + month;
-
-                        EasyLog.print("=222==eYearMonth==" + eYearMonth);
+                        eYearMonth = Utils.dateToStamp(mEndTime);
 
                     }
 
@@ -216,7 +214,7 @@ public final class AddWorkActivity extends AppActivity {
                         toast("没有选择结束时间");
                         return;
                     }
-                    if (sYearMonth> eYearMonth) {
+                    if (sYearMonth > eYearMonth) {
                         toast("工作开始时间不能大于结束时间");
                         info_work_in_time.setText("选择开始时间");
                         info_work_end_time.setText("选择结束时间");
@@ -267,7 +265,7 @@ public final class AddWorkActivity extends AppActivity {
                     toast("没有选择结束时间");
                     return;
                 }
-                if (sYearMonth> eYearMonth) {
+                if (sYearMonth > eYearMonth) {
                     toast("工作开始时间不能大于结束时间");
                     info_work_in_time.setText("选择开始时间");
                     info_work_end_time.setText("选择结束时间");

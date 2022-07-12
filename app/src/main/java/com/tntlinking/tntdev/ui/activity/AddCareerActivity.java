@@ -239,7 +239,7 @@ public final class AddCareerActivity extends AppActivity {
 
                     @Override
                     public void onSucceed(HttpData<List<GetProvinceApi.ProvinceBean>> data) {
-                        SPUtils.getInstance().put(AppConfig.CAREER_ID, careerDirectionId+"");//保存职业方向 后面获取标签需要用到
+                        SPUtils.getInstance().put(AppConfig.CAREER_ID, careerDirectionId);//保存职业方向 后面获取标签需要用到
                         Intent intent = new Intent();
                         setResult(RESULT_OK, intent);
                         finish();

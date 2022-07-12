@@ -133,8 +133,8 @@ public final class AddEducationActivityNew extends AppActivity {
                     et_info_major.setText(TextUtils.isEmpty(developerEducation.getMajor()) ? "" : developerEducation.getMajor());
                     info_training_method.setLeftText(TextUtils.isEmpty(developerEducation.getTrainingModeName()) ? "培养方式" : developerEducation.getTrainingModeName());
 
-                    sYearMonth = Utils.splitYearMonth(developerEducation.getInSchoolStartTime());
-                    eYearMonth = Utils.splitYearMonth(developerEducation.getInSchoolEndTime());
+                    sYearMonth = Utils.dateToStamp(developerEducation.getInSchoolStartTime());
+                    eYearMonth = Utils.dateToStamp(developerEducation.getInSchoolEndTime());
 
                     school_name = developerEducation.getCollegeName();
                     education = developerEducation.getEducationName();
@@ -151,8 +151,8 @@ public final class AddEducationActivityNew extends AppActivity {
 
     }
 
-    private int sYearMonth;// 开始时间年，开始时间月
-    private int eYearMonth;// 结束时间年，结束时间月
+    private long sYearMonth;// 开始时间戳
+    private long eYearMonth;// 结束时间戳
 
     @SuppressLint("NonConstantResourceId")
     @SingleClick
@@ -182,7 +182,7 @@ public final class AddEducationActivityNew extends AppActivity {
                         info_school_in_time.setText(mInTime);
                         in_time = mInTime;
 
-                        sYearMonth = year + month;
+                        sYearMonth = Utils.dateToStamp(mInTime);
 
                     }
 
@@ -197,7 +197,7 @@ public final class AddEducationActivityNew extends AppActivity {
                         info_school_end_time.setText(mEndTime);
                         end_time = mEndTime;
 
-                        eYearMonth = year + month;
+                        eYearMonth =  Utils.dateToStamp(mEndTime);
 
                     }
 

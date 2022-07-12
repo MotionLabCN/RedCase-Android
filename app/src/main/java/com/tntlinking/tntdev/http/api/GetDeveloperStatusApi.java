@@ -29,7 +29,7 @@ public final class GetDeveloperStatusApi implements IRequestApi {
         private String avatarUrl;
         private String lastModifyDate;
         private String remoteWorkReason;
-        private String careerDirectionId;
+        private int careerDirectionId;
         private String careerDirection;
         private String signContractNum;
         private String profitTotal;
@@ -168,11 +168,11 @@ public final class GetDeveloperStatusApi implements IRequestApi {
             this.remoteWorkReason = remoteWorkReason;
         }
 
-        public String getCareerDirectionId() {
+        public int getCareerDirectionId() {
             return careerDirectionId;
         }
 
-        public void setCareerDirectionId(String careerDirectionId) {
+        public void setCareerDirectionId(int careerDirectionId) {
             this.careerDirectionId = careerDirectionId;
         }
 

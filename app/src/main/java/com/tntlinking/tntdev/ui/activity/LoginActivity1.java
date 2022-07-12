@@ -364,8 +364,6 @@ public final class LoginActivity1 extends AppActivity {
         XXPermissions.with(LoginActivity1.this)
                 .permission(Permission.READ_EXTERNAL_STORAGE)
                 .permission(Permission.WRITE_EXTERNAL_STORAGE)
-                .permission(Permission.ACCESS_FINE_LOCATION)
-                .permission(Permission.ACCESS_COARSE_LOCATION)
                 .request(new PermissionCallback() {
 
                     @Override

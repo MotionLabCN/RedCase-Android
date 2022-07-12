@@ -151,8 +151,8 @@ public final class AddProjectActivityNew extends AppActivity {
                     info_project_industry.setLeftText(TextUtils.isEmpty(developerProject.getIndustryName()) ? "所在行业" : developerProject.getIndustryName());
                     et_project_description.setText(TextUtils.isEmpty(developerProject.getDescription()) ? "" : developerProject.getDescription());
 
-                    sYearMonth = Utils.splitYearMonth(developerProject.getProjectStartDate());
-                    eYearMonth = Utils.splitYearMonth(developerProject.getProjectEndDate());
+                    sYearMonth = Utils.dateToStamp(developerProject.getProjectStartDate());
+                    eYearMonth = Utils.dateToStamp(developerProject.getProjectEndDate());
 
                     if (developerProject.getProjectSkillList() != null && developerProject.getProjectSkillList().size() > 0) {
                         StringBuilder sb = new StringBuilder();
@@ -186,8 +186,8 @@ public final class AddProjectActivityNew extends AppActivity {
     private List<GetTagListApi.Bean.ChildrenBean> mSelectList = new ArrayList<>();
     private List<Integer> mTagIntList = new ArrayList<>();
 
-    private int sYearMonth;// 开始时间年，开始时间月
-    private int eYearMonth;// 结束时间年，结束时间月
+    private long sYearMonth;// 开始时间年，开始时间月
+    private long eYearMonth;// 结束时间年，结束时间月
 
     @SingleClick
     @Override
@@ -217,10 +217,8 @@ public final class AddProjectActivityNew extends AppActivity {
 
                         info_project_in_time.setText(mInTime);
                         in_time = mInTime;
-                        Long timeLong = TimeUtil.getTimeLong("yyyy-MM", mInTime);
-                        EasyLog.print("===timeLong==" + timeLong);
 
-                        sYearMonth = year + month;
+                        sYearMonth = Utils.dateToStamp(mInTime);
                     }
 
                 }).show();
@@ -233,7 +231,7 @@ public final class AddProjectActivityNew extends AppActivity {
                         info_project_end_time.setText(mEndTime);
                         end_time = mEndTime;
 
-                        eYearMonth = year + month;
+                        eYearMonth = Utils.dateToStamp(mEndTime);
                     }
 
                 }).show();
