@@ -175,7 +175,6 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity> implemen
 //        lv_1.setAdapter(mServiceAdapter);
 //        lv_2.setAdapter(mHistoryAdapter);
 
-
         lv_task.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
