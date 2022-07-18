@@ -63,39 +63,24 @@ public class PushMessageReceiver extends JPushMessageReceiver {
         }
         switch (MessageType) {
             case "0":
+            case "1":
+                //打开职位推荐详情页面（目前统一跳转职位推荐详情页面）
                 //打开职位上新页面（目前统一跳转职位推荐详情页面）
                 Intent i = new Intent(context, JobDetailsActivity.class);
                 i.putExtra("positionId", TypeId);
                 i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 context.startActivity(i);
                 break;
-            case "1":
-                //打开职位推荐详情页面（目前统一跳转职位推荐详情页面）
-                Intent intent = new Intent(context, JobDetailsActivity.class);
-                intent.putExtra("positionId", TypeId);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                context.startActivity(intent);
-                break;
             case "2":
+            case "3":
+            case "4":
+                //打开面试开始前提醒页面（目前没有这个前面需要统一跳转面试详情页面）
+                //打开面试创建提示页面（目前没有这个前面需要统一跳转面试详情页面）
                 //打开面试邀约详情页面（目前没有这个前面需要统一跳转面试详情页面）
                 Intent intent2 = new Intent(context, InterviewDetailActivity.class);
                 intent2.putExtra("interviewId", TypeId);
                 intent2.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 context.startActivity(intent2);
-                break;
-            case "3":
-                //打开面试创建提示页面（目前没有这个前面需要统一跳转面试详情页面）
-                Intent intent3 = new Intent(context, InterviewDetailActivity.class);
-                intent3.putExtra("interviewId", TypeId);
-                intent3.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                context.startActivity(intent3);
-                break;
-            case "4":
-                //打开面试开始前提醒页面（目前没有这个前面需要统一跳转面试详情页面）
-                Intent intent4 = new Intent(context, InterviewDetailActivity.class);
-                intent4.putExtra("interviewId", TypeId);
-                intent4.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                context.startActivity(intent4);
                 break;
         }
     }

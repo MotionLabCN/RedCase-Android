@@ -634,7 +634,7 @@
 
                 <action android:name="cn.jpush.android.ui.PopWinActivity" />
 
-                <category android:name="${JPUSH_PKGNAME}" />
+                <category android:name="${applicationId}" />
             </intent-filter>
         </activity>
         <!-- Required SDK核心功能 -->
@@ -647,7 +647,7 @@
                 <action android:name="cn.jpush.android.ui.PushActivity" />
 
                 <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="${JPUSH_PKGNAME}" />
+                <category android:name="${applicationId}" />
             </intent-filter>
         </activity>
         <!-- since 3.5.0 Required SDK 核心功能 -->
@@ -659,13 +659,13 @@
         <!-- since 3.0.9 Required SDK 核心功能 -->
         <provider
             android:name="cn.jpush.android.service.DataProvider"
-            android:authorities="${JPUSH_PKGNAME}.DataProvider"
+            android:authorities="${applicationId}.DataProvider"
             android:exported="false"
             android:process=":pushcore" />
         <!-- since 3.1.0 Required SDK 核心功能 -->
         <provider
             android:name="cn.jpush.android.service.DownloadProvider"
-            android:authorities="${JPUSH_PKGNAME}.DownloadProvider"
+            android:authorities="${applicationId}.DownloadProvider"
             android:exported="true" />
         <provider
             android:name="cn.jiguang.union.ads.service.JAdFileProvider"
@@ -737,7 +737,7 @@
             <intent-filter>
                 <action android:name="cn.jpush.android.intent.DaemonService" />
 
-                <category android:name="${JPUSH_PKGNAME}" />
+                <category android:name="${applicationId}" />
             </intent-filter>
         </service>
         <!-- 可选，如果使用静态Activity方式拉起，该组件必须声明 -->
@@ -750,7 +750,7 @@
             <intent-filter>
                 <action android:name="cn.jpush.android.intent.DActivity" />
 
-                <category android:name="${JPUSH_PKGNAME}" />
+                <category android:name="${applicationId}" />
             </intent-filter>
         </activity>
 
@@ -761,7 +761,7 @@
             android:exported="false">
             <intent-filter android:priority="1000">
                 <action android:name="cn.jpush.android.intent.NOTIFICATION_RECEIVED_PROXY" /> <!-- Required  显示通知栏 -->
-                <category android:name="${JPUSH_PKGNAME}" />
+                <category android:name="${applicationId}" />
             </intent-filter>
             <intent-filter>
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />

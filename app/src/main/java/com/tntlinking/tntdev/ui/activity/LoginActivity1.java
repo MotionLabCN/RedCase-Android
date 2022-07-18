@@ -46,6 +46,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatCheckBox;
+import cn.jpush.android.api.JPushInterface;
 
 public final class LoginActivity1 extends AppActivity {
 
@@ -264,8 +265,10 @@ public final class LoginActivity1 extends AppActivity {
         EasyHttp.post(this)
                 .api(new OneClickLoginApi()
                         .setAuthorization(AppConfig.LOGIN_AUTHORIZATION)
-                        .setLoginChannel("Developer_APP")
-                        .setYouVerifyToken(token))
+                        .setLoginChannel("Member")
+                        .setYouVerifyToken(token)
+                        .setRegister_platform("mp")
+                        .setRegister_source("android"))
                 .request(new HttpCallback<HttpData<OneClickLoginApi.Bean>>(this) {
 
                     @Override
@@ -300,9 +303,10 @@ public final class LoginActivity1 extends AppActivity {
 //                        startActivity(LoginActivityView.class);
 //                        SPUtils.getInstance().put(AppConfig.GUIDE_VIEW, false);
 //                        ActivityManager.getInstance().finishAllActivities();
-
+                        JPushInterface.setAlias(getActivity(), 1001, "ttsl_" + data.getData().getId());
                         startActivity(MainActivity.class);
                         ActivityManager.getInstance().finishAllActivities();
+
                     }
                 });
 

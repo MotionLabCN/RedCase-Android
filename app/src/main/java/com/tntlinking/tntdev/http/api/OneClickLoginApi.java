@@ -2,12 +2,19 @@ package com.tntlinking.tntdev.http.api;
 
 import com.hjq.http.annotation.HttpHeader;
 import com.hjq.http.config.IRequestApi;
+import com.hjq.http.config.IRequestServer;
 import com.hjq.http.config.IRequestType;
 import com.hjq.http.model.BodyType;
+import com.tntlinking.tntdev.BuildConfig;
 
 
-public final class OneClickLoginApi implements IRequestApi, IRequestType {
+public final class OneClickLoginApi implements IRequestServer,IRequestApi, IRequestType {
 
+    @Override
+    public String getHost() { // /api/new_gateway/tntlinking-sso-authcenter/login/one_key
+
+        return BuildConfig.HOST_URL +"/api/new_gateway/tntlinking-sso-authcenter/";
+    }
     @Override
     public String getApi() {
         return "login/one_key";
@@ -24,6 +31,8 @@ public final class OneClickLoginApi implements IRequestApi, IRequestType {
     private String scope;
     private String smsCode;
     private String youVerifyToken;
+    private String register_platform;
+    private String register_source;
 
     public OneClickLoginApi setAuthorization(String authorization) {
         this.Authorization = authorization;
@@ -68,6 +77,16 @@ public final class OneClickLoginApi implements IRequestApi, IRequestType {
 
     public OneClickLoginApi setYouVerifyToken(String youVerifyToken) {
         this.youVerifyToken = youVerifyToken;
+        return this;
+    }
+
+    public OneClickLoginApi setRegister_platform(String register_platform) {
+        this.register_platform = register_platform;
+        return this;
+    }
+
+    public OneClickLoginApi setRegister_source(String register_source) {
+        this.register_source = register_source;
         return this;
     }
 

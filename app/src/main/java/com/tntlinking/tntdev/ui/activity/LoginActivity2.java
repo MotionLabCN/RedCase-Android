@@ -79,18 +79,18 @@ public final class LoginActivity2 extends AppActivity implements TextView.OnEdit
         SpanUtils.with(tv_deal).append("我已阅读并同意").setForegroundColor(getColor(R.color.color_hint_color)).
                 append("《隐私权限》").setClickSpan(new ClickableSpan() {
 
-            @Override
-            public void onClick(@NonNull View widget) {
-                BrowserPrivateActivity.start(getActivity(), AppConfig.PRIVATE_URL);
-            }
-        }).setForegroundColor(getColor(R.color.color_text_color)).append("和")
+                    @Override
+                    public void onClick(@NonNull View widget) {
+                        BrowserPrivateActivity.start(getActivity(), AppConfig.PRIVATE_URL);
+                    }
+                }).setForegroundColor(getColor(R.color.color_text_color)).append("和")
                 .setForegroundColor(getColor(R.color.color_hint_color)).append("《用户协议》").setClickSpan(new ClickableSpan() {
 
-            @Override
-            public void onClick(@NonNull View widget) {
-                BrowserPrivateActivity.start(getActivity(), AppConfig.AGREEMENT_URL);
-            }
-        })
+                    @Override
+                    public void onClick(@NonNull View widget) {
+                        BrowserPrivateActivity.start(getActivity(), AppConfig.AGREEMENT_URL);
+                    }
+                })
                 .setForegroundColor(getColor(R.color.color_text_color)).create();
 
         InputTextManager.with(this)
@@ -157,7 +157,9 @@ public final class LoginActivity2 extends AppActivity implements TextView.OnEdit
                             .setAuthorization(AppConfig.LOGIN_AUTHORIZATION)
                             .setGrant_type("sms_code")
                             .setScope("all")
-                            .setLoginChannel("Developer_APP")
+                            .setLoginChannel("Member")
+                            .setRegister_platform("mp")
+                            .setRegister_source("android")
                             .setSmsCode(mPasswordView.getText().toString())
                             .setMobile(mPhoneView.getText().toString()))
                     .request(new HttpCallback<HttpData<LoginApi2.Bean>>(this) {
@@ -189,8 +191,8 @@ public final class LoginActivity2 extends AppActivity implements TextView.OnEdit
                         SPUtils.getInstance().put(AppConfig.DEVELOP_STATUS, data.getData().getStatus());
                         SPUtils.getInstance().put(AppConfig.DEVELOP_NAME, data.getData().getRealName());
                         SPUtils.getInstance().put(AppConfig.DEVELOPER_ID, data.getData().getId());
-                        SPUtils.getInstance().put(AppConfig.SERVICE_STATUS,data.getData().getServiceStatus());
-                        JPushInterface.setAlias(getActivity(), sequence++, "ttsl_"+data.getData().getId());
+                        SPUtils.getInstance().put(AppConfig.SERVICE_STATUS, data.getData().getServiceStatus());
+                        JPushInterface.setAlias(getActivity(), 1001, "ttsl_" + data.getData().getId());
                         startActivity(MainActivity.class);
                         ActivityManager.getInstance().finishAllActivities();
                     }

@@ -106,7 +106,7 @@ public final class PersonSettingActivity extends AppActivity {
                         SPUtils.getInstance().clear();
                         EasyConfig.getInstance().removeHeader("Authorization");
                         startActivity(LoginActivity1.class);
-
+                        JPushInterface.deleteAlias(PersonSettingActivity.this, 1001);
                         // 进行内存优化，销毁除登录页之外的所有界面
                         ActivityManager.getInstance().finishAllActivities(LoginActivity1.class);
                     }
