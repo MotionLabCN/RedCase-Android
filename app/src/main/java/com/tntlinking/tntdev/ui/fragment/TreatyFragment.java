@@ -23,7 +23,7 @@ import com.tntlinking.tntdev.http.api.GetNewbieApi;
 import com.tntlinking.tntdev.http.api.HistoryListApi;
 import com.tntlinking.tntdev.http.model.HttpData;
 import com.tntlinking.tntdev.other.AppConfig;
-import com.tntlinking.tntdev.ui.activity.InterviewDetailActivity;
+import com.tntlinking.tntdev.ui.activity.AuditionDetailActivity;
 import com.tntlinking.tntdev.ui.activity.MainActivity;
 import com.tntlinking.tntdev.ui.activity.WriteDailyActivity;
 import com.tntlinking.tntdev.ui.adapter.HistoryProjectAdapter;
@@ -92,7 +92,7 @@ public final class TreatyFragment extends TitleBarFragment<MainActivity> impleme
                     intent.putExtra("orderId", item.getId());
                     startActivity(intent);
                 } else {
-                    Intent intent = new Intent(getActivity(), InterviewDetailActivity.class);
+                    Intent intent = new Intent(getActivity(), AuditionDetailActivity.class);
                     intent.putExtra("interviewId", item.getId());
                     startActivity(intent);
                 }

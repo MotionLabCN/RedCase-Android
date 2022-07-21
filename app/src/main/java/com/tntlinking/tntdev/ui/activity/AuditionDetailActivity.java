@@ -19,7 +19,7 @@ import androidx.annotation.NonNull;
 /**
  * 面试详情页面
  */
-public final class InterviewDetailActivity extends AppActivity {
+public final class AuditionDetailActivity extends AppActivity {
 
     private TextView tv_interview_position;
     private TextView tv_interview_company;

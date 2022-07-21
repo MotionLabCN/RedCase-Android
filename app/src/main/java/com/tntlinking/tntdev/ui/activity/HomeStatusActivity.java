@@ -173,7 +173,7 @@ public final class HomeStatusActivity extends AppActivity {
                     intent.putExtra("orderId", item.getId());
                     startActivity(intent);
                 } else {
-                    Intent intent = new Intent(HomeStatusActivity.this, InterviewDetailActivity.class);
+                    Intent intent = new Intent(HomeStatusActivity.this, AuditionDetailActivity.class);
                     intent.putExtra("interviewId", item.getId());
                     startActivity(intent);
                 }

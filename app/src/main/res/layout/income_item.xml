@@ -14,18 +14,20 @@
         android:id="@+id/tv_create_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:drawableStart="@drawable/icon_time"
+        android:drawableStart="@drawable/icon_time_clock"
         android:drawablePadding="@dimen/dp_10"
         android:gravity="center"
-        android:textStyle="bold"
         android:padding="@dimen/dp_10"
-        android:text="2021.10.10" />
+        android:text="2021.10.10"
+        android:textStyle="bold" />
+
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/line_size"
-        android:layout_marginRight="@dimen/dp_15"
         android:layout_marginLeft="@dimen/dp_15"
-        android:background="#FFECECEC"/>
+        android:layout_marginRight="@dimen/dp_15"
+        android:background="#FFECECEC" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -48,9 +50,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="xxxxxx"
-            android:textColor="@color/black"
-            android:textSize="@dimen/sp_14" />
+            android:textColor="@color/color_202839"
+            android:textSize="@dimen/sp_14"
+            android:textStyle="bold" />
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -73,8 +77,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="xxxxx"
-            android:textColor="@color/black"
-            android:textSize="@dimen/sp_14" />
+            android:textColor="@color/color_202839"
+            android:textSize="@dimen/sp_14"
+            android:textStyle="bold" />
     </LinearLayout>
 
     <LinearLayout
@@ -99,9 +104,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="xxxx"
-            android:textColor="@color/black"
-            android:textSize="@dimen/sp_14" />
+            android:textColor="@color/color_202839"
+            android:textSize="@dimen/sp_14"
+            android:textStyle="bold" />
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -124,9 +131,35 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="xxxxx"
-            android:textColor="@color/black"
-            android:textStyle="bold"
-            android:textSize="@dimen/sp_14" />
+            android:textColor="@color/color_202839"
+            android:textSize="@dimen/sp_14"
+            android:textStyle="bold" />
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/dp_15"
+        android:paddingTop="@dimen/dp_10"
+        android:paddingRight="@dimen/dp_15"
+        android:paddingBottom="@dimen/dp_10">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="发放日期"
+            android:textColor="@color/gray"
+            android:textSize="@dimen/sp_14" />
+
+        <TextView
+            android:id="@+id/tv_actualTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="xxxxx"
+            android:textColor="@color/color_202839"
+            android:textSize="@dimen/sp_14"
+            android:textStyle="bold" />
+    </LinearLayout>
 </LinearLayout>

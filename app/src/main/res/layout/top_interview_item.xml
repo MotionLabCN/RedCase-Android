@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.hjq.shape.layout.ShapeFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:descendantFocusability="blocksDescendants"
+    android:gravity="center"
+    app:shape="rectangle"
+    app:shape_radius="@dimen/dp_10"
+    app:shape_shadowColor="@color/black25"
+    app:shape_shadowSize="23dp"
+    app:shape_solidColor="@color/white90">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_16"
+        android:layout_marginTop="@dimen/dp_20"
+        android:layout_marginEnd="@dimen/dp_16"
+        android:background="@drawable/bg_grey_stroke"
+        android:orientation="vertical">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_16"
+            android:layout_marginTop="@dimen/dp_16"
+            android:layout_marginRight="@dimen/dp_16"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_interview_position"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="测试工程师"
+                android:textSize="@dimen/sp_15"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:id="@+id/ll_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_4"
+                android:background="@drawable/bg_green_radius_3"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/dp_9"
+                android:paddingTop="@dimen/dp_3"
+                android:paddingRight="@dimen/dp_9"
+                android:paddingBottom="@dimen/dp_3">
+
+
+                <View
+                    android:id="@+id/view_dot"
+                    android:layout_width="@dimen/dp_5"
+                    android:layout_height="@dimen/dp_5"
+                    android:background="@drawable/dot_oval_green" />
+
+                <TextView
+                    android:id="@+id/tv_interview_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp_4"
+                    android:text="今日面试"
+                    android:textColor="@color/color_5CE28A"
+                    android:textSize="@dimen/sp_12" />
+
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_interview_salary"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="right"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:text="10-11k/月"
+                android:textColor="@color/main_color"
+                android:textSize="@dimen/sp_15"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_10"
+            android:orientation="horizontal"
+            tools:ignore="UselessLeaf" />
+
+        <TextView
+            android:id="@+id/tv_interview_company"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/dp_16"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:paddingLeft="@dimen/dp_3"
+            android:paddingEnd="@dimen/dp_3"
+            android:text="上海黄焖科技"
+            android:textSize="@dimen/sp_12" />
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/line_size"
+            android:layout_marginLeft="@dimen/dp_16"
+            android:layout_marginTop="@dimen/dp_6"
+            android:layout_marginRight="@dimen/dp_16"
+            android:background="@color/common_line_color" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_16"
+            android:layout_marginTop="@dimen/dp_6"
+            android:layout_marginRight="@dimen/dp_16"
+            android:layout_marginBottom="@dimen/dp_16"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_interview_time"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="2021.10.16 15:00-16:30"
+                android:textColor="@color/color_hint_color"
+                android:textSize="@dimen/sp_12" />
+
+            <TextView
+                android:id="@+id/tv_interview_detail"
+                android:layout_width="@dimen/dp_80"
+                android:layout_height="@dimen/dp_33"
+                android:layout_gravity="center"
+                android:background="@drawable/btn_blue_radius_10"
+                android:gravity="center"
+                android:paddingLeft="@dimen/dp_13"
+                android:paddingTop="@dimen/dp_6"
+                android:paddingRight="@dimen/dp_13"
+                android:paddingBottom="@dimen/dp_6"
+                android:text="面试详情"
+                android:textColor="@color/white"
+                android:textSize="@dimen/sp_12" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_settled_material_empty"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center|top"
+        android:orientation="vertical"
+        android:paddingTop="@dimen/dp_20"
+        android:paddingBottom="@dimen/dp_16"
+        android:visibility="gone"
+        tools:ignore="UseCompoundDrawables">
+
+        <ImageView
+            android:layout_width="@dimen/dp_64"
+            android:layout_height="@dimen/dp_64"
+            android:src="@drawable/bg_home_work_empty" />
+
+        <TextView
+            android:id="@+id/tv_name1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_10"
+            android:text="完善入驻资料后,再来查看吧!"
+            android:textColor="@color/color_7E89A3"
+            android:textSize="@dimen/sp_13" />
+
+
+    </LinearLayout>
+</com.hjq.shape.layout.ShapeFrameLayout>

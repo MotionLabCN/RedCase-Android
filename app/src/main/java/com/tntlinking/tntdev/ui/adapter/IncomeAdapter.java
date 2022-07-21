@@ -31,6 +31,7 @@ public final class IncomeAdapter extends AppAdapter<developerBillListApi.Bean.Li
         private final TextView tv_deductMoney;
         private final TextView tv_personalTax;
         private final TextView tv_actualMoney;
+        private final TextView tv_actualTime;
 
         private ViewHolder() {
             super(R.layout.income_item);
@@ -39,6 +40,7 @@ public final class IncomeAdapter extends AppAdapter<developerBillListApi.Bean.Li
             tv_deductMoney = findViewById(R.id.tv_deductMoney);
             tv_personalTax = findViewById(R.id.tv_personalTax);
             tv_actualMoney = findViewById(R.id.tv_actualMoney);
+            tv_actualTime = findViewById(R.id.tv_actualTime);
         }
 
         @Override
@@ -46,6 +48,7 @@ public final class IncomeAdapter extends AppAdapter<developerBillListApi.Bean.Li
             developerBillListApi.Bean.ListBean item = getItem(position);
             tv_create_time.setText(Utils.getYearFromDate(item.getCreateDate()));
             tv_serviceMoney.setText("¥"+item.getServiceMoney());
+            tv_actualTime.setText(item.getGrantDate());
             if (item.getDeductMoney()>0){
                 tv_deductMoney.setText("+¥"+item.getDeductMoney());
             }else {

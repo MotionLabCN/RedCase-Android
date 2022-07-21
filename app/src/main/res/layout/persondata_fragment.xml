@@ -31,7 +31,7 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/bg_top_person_setting"
                     android:orientation="vertical"
-                    android:paddingTop="@dimen/dp_80">
+                    android:paddingTop="@dimen/dp_40">
 
 
                     <!--                <FrameLayout-->
@@ -69,6 +69,15 @@
                     <!--                        android:visibility="gone" />-->
 
                     <!--                </FrameLayout>-->
+                    <ImageView
+                        android:id="@+id/iv_message"
+                        android:layout_width="@dimen/dp_30"
+                        android:layout_height="@dimen/dp_30"
+                        android:layout_gravity="right"
+                        android:layout_marginTop="@dimen/dp_24"
+                        android:layout_marginRight="@dimen/dp_16"
+                        android:scaleType="center"
+                        android:src="@drawable/icon_messages" />
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -84,7 +93,7 @@
                             android:ellipsize="end"
                             android:gravity="center"
                             android:singleLine="true"
-                            android:text="xxx"
+                            android:text="某某"
                             android:textColor="@color/white"
                             android:textSize="@dimen/sp_12"
                             android:textStyle="bold" />
@@ -101,7 +110,7 @@
                                 android:id="@+id/tv_name"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="xxxxx"
+                                android:text="某某某"
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/sp_20"
                                 android:textStyle="bold" />
@@ -112,10 +121,11 @@
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="bottom"
                                 android:layout_marginTop="@dimen/dp_4"
-                                android:text="xxxxx"
+                                android:text="未知职业"
                                 android:textColor="@color/color_hint_color"
                                 android:textSize="@dimen/sp_12" />
                         </LinearLayout>
+
 
                     </LinearLayout>
 
@@ -144,7 +154,7 @@
                                 android:id="@+id/tv_sign_num"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="xx次"
+                                android:text="0次"
                                 android:textColor="@color/white"
                                 android:textSize="@dimen/sp_15"
                                 android:textStyle="bold" />
@@ -160,10 +170,11 @@
 
                         <View
                             android:layout_width="@dimen/dp_1"
-                            android:layout_height="@dimen/dp_20"
+                            android:layout_height="@dimen/dp_30"
                             android:background="@color/white50" />
 
                         <LinearLayout
+                            android:id="@+id/ll_income"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
@@ -174,7 +185,7 @@
                                 android:id="@+id/tv_profit_total"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text=""
+                                android:text="0"
                                 android:textColor="@color/white"
                                 android:textSize="@dimen/sp_15"
                                 android:textStyle="bold" />
@@ -249,41 +260,20 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_4"
-                    app:bar_leftDrawable="@drawable/icon_interview_setting"
-                    app:bar_leftText="面试设置"
+                    app:bar_leftDrawable="@drawable/icon_manage_interview"
+                    app:bar_leftText="面试管理"
                     app:bar_leftTextSize="@dimen/sp_13"
                     app:bar_lineVisible="false"
                     app:bar_rightDrawable="@drawable/icon_arrow_right"
                     app:bar_rightDrawableSize="@dimen/dp_16" />
 
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/line_size"
-                    android:layout_marginLeft="@dimen/dp_15"
-                    android:layout_marginTop="@dimen/dp_16"
-                    android:layout_marginRight="@dimen/dp_15"
-                    android:background="@color/common_line_color" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/dp_15"
-                    android:layout_marginTop="@dimen/dp_24"
-                    android:drawableLeft="@drawable/icon_funds"
-                    android:drawablePadding="@dimen/dp_4"
-                    android:gravity="center"
-                    android:text="资金"
-                    android:textColor="@color/color_hint_color"
-                    tools:ignore="UseCompatTextViewDrawableXml" />
-
                 <com.hjq.widget.layout.SettingBar
-                    android:id="@+id/person_data_income"
+                    android:id="@+id/person_data_history"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_4"
-                    app:bar_leftDrawable="@drawable/icon_income"
-                    app:bar_leftText="收益账单"
+                    app:bar_leftDrawable="@drawable/icon_history_order"
+                    app:bar_leftText="历史订单"
                     app:bar_leftTextSize="@dimen/sp_13"
                     app:bar_lineVisible="false"
                     app:bar_rightDrawable="@drawable/icon_arrow_right"
@@ -300,6 +290,39 @@
                     app:bar_lineVisible="false"
                     app:bar_rightDrawable="@drawable/icon_arrow_right"
                     app:bar_rightDrawableSize="@dimen/dp_16" />
+
+                <!--                <View-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="@dimen/line_size"-->
+                <!--                    android:layout_marginLeft="@dimen/dp_15"-->
+                <!--                    android:layout_marginTop="@dimen/dp_16"-->
+                <!--                    android:layout_marginRight="@dimen/dp_15"-->
+                <!--                    android:background="@color/common_line_color" />-->
+
+                <!--                <TextView-->
+                <!--                    android:layout_width="wrap_content"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:layout_marginLeft="@dimen/dp_15"-->
+                <!--                    android:layout_marginTop="@dimen/dp_24"-->
+                <!--                    android:drawableLeft="@drawable/icon_funds"-->
+                <!--                    android:drawablePadding="@dimen/dp_4"-->
+                <!--                    android:gravity="center"-->
+                <!--                    android:text="资金"-->
+                <!--                    android:textColor="@color/color_hint_color"-->
+                <!--                    tools:ignore="UseCompatTextViewDrawableXml" />-->
+
+                <!--                <com.hjq.widget.layout.SettingBar-->
+                <!--                    android:id="@+id/person_data_income"-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:layout_marginTop="@dimen/dp_4"-->
+                <!--                    app:bar_leftDrawable="@drawable/icon_income"-->
+                <!--                    app:bar_leftText="收益账单"-->
+                <!--                    app:bar_leftTextSize="@dimen/sp_13"-->
+                <!--                    app:bar_lineVisible="false"-->
+                <!--                    app:bar_rightDrawable="@drawable/icon_arrow_right"-->
+                <!--                    app:bar_rightDrawableSize="@dimen/dp_16" />-->
+
 
                 <View
                     android:layout_width="match_parent"

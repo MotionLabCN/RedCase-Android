@@ -2,42 +2,34 @@ package com.tntlinking.tntdev.http.api;
 
 import com.hjq.http.config.IRequestApi;
 
-//邀约面试列表
-public final class AppListApi implements IRequestApi {
+import java.io.Serializable;
+
+//指定时间的面试列表
+public final class GetAppListDateApi implements IRequestApi {
 
     @Override
     public String getApi() {
-        return "order/appList";
+        return "interview/appListDate";
+    }
+    private String interviewDate;
+
+    public GetAppListDateApi setInterviewDate(String date) {
+        this.interviewDate = date;
+        return this;
     }
 
 
-    public final static class Bean {
+    public final static class Bean  {
         private String id;
-        private String orderStatus;
-        private String orderNo;
-        private String workDaysMode;
+        private int workDaysMode;
         private String workDaysModeName;
         private String companyName;
         private String positionName;
-        private String statusName;
-        private String serviceName;
-        private String finishDate;
-        private String workStartDate;
-        private int type;
-
         private String interviewTimeType;
         private String interviewStartDate;
         private String interviewEndDate;
         private String startPay;
         private String endPay;
-
-        public int getType() {
-            return type;
-        }
-
-        public void setType(int type) {
-            this.type = type;
-        }
 
         public String getId() {
             return id;
@@ -47,27 +39,11 @@ public final class AppListApi implements IRequestApi {
             this.id = id;
         }
 
-        public String getOrderStatus() {
-            return orderStatus;
-        }
-
-        public void setOrderStatus(String orderStatus) {
-            this.orderStatus = orderStatus;
-        }
-
-        public String getOrderNo() {
-            return orderNo;
-        }
-
-        public void setOrderNo(String orderNo) {
-            this.orderNo = orderNo;
-        }
-
-        public String getWorkDaysMode() {
+        public int getWorkDaysMode() {
             return workDaysMode;
         }
 
-        public void setWorkDaysMode(String workDaysMode) {
+        public void setWorkDaysMode(int workDaysMode) {
             this.workDaysMode = workDaysMode;
         }
 
@@ -93,38 +69,6 @@ public final class AppListApi implements IRequestApi {
 
         public void setPositionName(String positionName) {
             this.positionName = positionName;
-        }
-
-        public String getStatusName() {
-            return statusName;
-        }
-
-        public void setStatusName(String statusName) {
-            this.statusName = statusName;
-        }
-
-        public String getServiceName() {
-            return serviceName;
-        }
-
-        public void setServiceName(String serviceName) {
-            this.serviceName = serviceName;
-        }
-
-        public String getFinishDate() {
-            return finishDate;
-        }
-
-        public void setFinishDate(String finishDate) {
-            this.finishDate = finishDate;
-        }
-
-        public String getWorkStartDate() {
-            return workStartDate;
-        }
-
-        public void setWorkStartDate(String workStartDate) {
-            this.workStartDate = workStartDate;
         }
 
         public String getInterviewTimeType() {
@@ -167,4 +111,6 @@ public final class AppListApi implements IRequestApi {
             this.endPay = endPay;
         }
     }
+
+
 }

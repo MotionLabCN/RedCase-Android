@@ -41,6 +41,7 @@ public final class developerBillListApi implements IRequestApi {
             private String actualMoney;
             private String createDate;
             private String status;
+            private String grantDate;//发放时间
 
 
             public String getId() {
@@ -113,6 +114,14 @@ public final class developerBillListApi implements IRequestApi {
 
             public void setStatus(String status) {
                 this.status = status;
+            }
+
+            public String getGrantDate() {
+                return grantDate;
+            }
+
+            public void setGrantDate(String grantDate) {
+                this.grantDate = grantDate;
             }
         }
 

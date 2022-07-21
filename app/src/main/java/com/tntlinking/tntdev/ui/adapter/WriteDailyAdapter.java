@@ -112,7 +112,7 @@ public final class WriteDailyAdapter extends AppAdapter<GetDailyListApi.ListBean
         @Override
         public void onBindView(int position) {
             tv_tab_left.setText("明日计划");
-            iv_tab_icon.setImageResource(R.drawable.icon_running);
+            iv_tab_icon.setImageResource(R.drawable.icon_future);
 
         }
 
@@ -134,7 +134,7 @@ public final class WriteDailyAdapter extends AppAdapter<GetDailyListApi.ListBean
         public void onBindView(int position) {
 //            mTitleView.setText(getItem(position).getStr());
             tv_tab_left.setText("需要的帮助");
-            iv_tab_icon.setImageResource(R.drawable.iocn_help);
+            iv_tab_icon.setImageResource(R.drawable.icon_help);
 
         }
 

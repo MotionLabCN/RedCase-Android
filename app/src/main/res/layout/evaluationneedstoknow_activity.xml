@@ -109,7 +109,7 @@
                 android:layout_width="@dimen/dp_46"
                 android:layout_height="@dimen/dp_46"
                 android:layout_gravity="center"
-                android:src="@drawable/iocn_evaluation_skill" />
+                android:src="@drawable/icon_evaluation_skill" />
 
             <TextView
                 android:layout_width="wrap_content"

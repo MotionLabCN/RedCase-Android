@@ -4,12 +4,10 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
-import android.renderscript.ScriptGroup;
-import android.util.Log;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -28,6 +26,7 @@ import com.hjq.http.listener.HttpCallback;
 import com.tntlinking.tntdev.R;
 import com.tntlinking.tntdev.app.TitleBarFragment;
 import com.tntlinking.tntdev.http.api.AppListApi;
+import com.tntlinking.tntdev.http.api.AppListInterviewApi;
 import com.tntlinking.tntdev.http.api.GetAppUpdateApi;
 import com.tntlinking.tntdev.http.api.GetDeveloperJkStatusApi;
 import com.tntlinking.tntdev.http.api.GetDeveloperRecommendsApi;
@@ -41,6 +40,7 @@ import com.tntlinking.tntdev.ui.activity.EnterDeveloperActivity;
 import com.tntlinking.tntdev.ui.activity.EvaluationActivity;
 import com.tntlinking.tntdev.ui.activity.EvaluationNeedsTokNowActivity;
 import com.tntlinking.tntdev.ui.activity.InterviewActivity;
+import com.tntlinking.tntdev.ui.activity.AuditionDetailActivity;
 import com.tntlinking.tntdev.ui.activity.JkBrowserActivity;
 import com.tntlinking.tntdev.ui.activity.MDViewActivity;
 import com.tntlinking.tntdev.ui.activity.MainActivity;
@@ -86,6 +86,14 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity> implemen
     //    private LinearLayout ll_work;// 工作服务列表页面
     private LinearLayout ll_tab;// 推荐职位列表页面
     private LinearLayout ll_task;// 新手任务列表页面
+    private LinearLayout ll_top_tips;//
+
+    private View layout_interview;//
+    private TextView tv_interview_position;
+    private TextView tv_interview_status;
+    private TextView tv_interview_salary;
+    private TextView tv_interview_company;
+    private TextView tv_interview_time;
 
     private LinearLayout ll_task_empty;//
     private MyListView lv_task;
@@ -135,11 +143,18 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity> implemen
         ll_task_empty = findViewById(R.id.ll_task_empty);
         ll_tab = findViewById(R.id.ll_tab);
         ll_task = findViewById(R.id.ll_task);
+        ll_top_tips = findViewById(R.id.ll_top_tips);
+        layout_interview = findViewById(R.id.layout_interview);
+        tv_interview_position = findViewById(R.id.tv_interview_position);
+        tv_interview_status = findViewById(R.id.tv_interview_status);
+        tv_interview_salary = findViewById(R.id.tv_interview_salary);
+        tv_interview_company = findViewById(R.id.tv_interview_company);
+        tv_interview_time = findViewById(R.id.tv_interview_time);
 
         tv_avatar.setText(Utils.formatName(name));
         tv_name.setText("你好," + name);
         ImmersionBar.setTitleBar(this, ll_title);
-        setOnClickListener(tv_order_switching, tv_avatar, ll_cooperation, ll_service, ll_question, ll_contact);
+        setOnClickListener(tv_order_switching, tv_avatar, ll_cooperation, ll_service, ll_question, ll_contact, layout_interview);
 
 
         BannerBean banner1 = new BannerBean();
@@ -338,7 +353,7 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity> implemen
             tv_status.setVisibility(View.VISIBLE);
             tv_status.setText("已认证");
 
-//            getAppList();
+            getInterviewAppList();
         } else {
             ll_status.setVisibility(View.VISIBLE); //1、2、4 状态下显示平台介绍和新手任务
 
@@ -417,6 +432,7 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity> implemen
     }
 
 
+    @SuppressLint("NonConstantResourceId")
     @Override
     public void onClick(View view) {
         Intent intent = new Intent();
@@ -459,6 +475,14 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity> implemen
             case R.id.tv_order_switching:
 
                 checkStatus(getActivity(), mStatus);
+                break;
+            case R.id.layout_interview:
+                if (!TextUtils.isEmpty(interviewId)) {
+                    intent.setClass(getActivity(), AuditionDetailActivity.class);
+                    intent.putExtra("interviewId", interviewId);
+                    startActivity(intent);
+                }
+
                 break;
         }
 
@@ -534,6 +558,37 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity> implemen
     private List<AppListApi.Bean> mServiceList = new ArrayList<>();
     private List<AppListApi.Bean> mHistoryList = new ArrayList<>();
 
+    private String interviewId;
+
+    /**
+     * 获取面试邀约list
+     */
+    @SuppressLint("CheckResult")
+    private void getInterviewAppList() {
+        EasyHttp.get(this)
+                .api(new AppListInterviewApi())
+                .request(new HttpCallback<HttpData<List<AppListApi.Bean>>>(this) {
+                    @Override
+                    public void onSucceed(HttpData<List<AppListApi.Bean>> data) {
+                        if (data.getData().size() > 0) {
+                            layout_interview.setVisibility(View.VISIBLE);
+                            ll_top_tips.setVisibility(View.GONE);
+                            AppListApi.Bean bean = data.getData().get(0);
+                            interviewId = bean.getId();
+                            tv_interview_position.setText(bean.getPositionName());
+                            tv_interview_status.setText(bean.getInterviewTimeType());
+                            tv_interview_salary.setText(bean.getWorkDaysModeName()+bean.getEndPay());
+                            tv_interview_company.setText(bean.getCompanyName());
+                            tv_interview_time.setText(bean.getInterviewStartDate());
+                        } else {
+                            layout_interview.setVisibility(View.GONE);
+                            ll_top_tips.setVisibility(View.VISIBLE);
+                        }
+                    }
+                });
+
+
+    }
 
     /**
      * 获取任务状态

@@ -9,7 +9,7 @@ import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.tntlinking.tntdev.ui.activity.InterviewDetailActivity;
+import com.tntlinking.tntdev.ui.activity.AuditionDetailActivity;
 import com.tntlinking.tntdev.ui.activity.JobDetailsActivity;
 
 
@@ -77,7 +77,7 @@ public class PushMessageReceiver extends JPushMessageReceiver {
                 //打开面试开始前提醒页面（目前没有这个前面需要统一跳转面试详情页面）
                 //打开面试创建提示页面（目前没有这个前面需要统一跳转面试详情页面）
                 //打开面试邀约详情页面（目前没有这个前面需要统一跳转面试详情页面）
-                Intent intent2 = new Intent(context, InterviewDetailActivity.class);
+                Intent intent2 = new Intent(context, AuditionDetailActivity.class);
                 intent2.putExtra("interviewId", TypeId);
                 intent2.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 context.startActivity(intent2);

@@ -15,8 +15,8 @@
         app:leftIcon="@drawable/icon_close_black"
         app:rightTitleColor="@color/white"
         app:rightTitleSize="@dimen/sp_14"
-        app:titleStyle="bold"
-        app:title="选择技能标签" />
+        app:title="选择技能标签"
+        app:titleStyle="bold" />
 
     <!--    <androidx.recyclerview.widget.RecyclerView-->
     <!--        android:id="@+id/rv_skill_tag"-->
@@ -76,8 +76,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_10"
-                android:paddingLeft="@dimen/dp_10"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/dp_10">
 
                 <com.tntlinking.tntdev.widget.FlowTagLayout
                     android:id="@+id/fl_skill_tag_select"
@@ -99,7 +99,7 @@
                     android:layout_marginTop="@dimen/dp_20"
                     android:gravity="left"
                     android:paddingStart="@dimen/dp_12"
-                    android:text="编程语言"
+                    android:text="技能标签1"
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_16"
                     android:textStyle="bold" />
@@ -108,8 +108,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:paddingLeft="@dimen/dp_10"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:paddingLeft="@dimen/dp_10">
 
                     <com.tntlinking.tntdev.widget.FlowTagLayout
                         android:id="@+id/fl_skill_tag_1"
@@ -132,7 +132,7 @@
                     android:layout_marginTop="@dimen/dp_20"
                     android:gravity="left"
                     android:paddingStart="@dimen/dp_12"
-                    android:text="计算机语言方向"
+                    android:text="技能标签2"
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_16"
                     android:textStyle="bold" />
@@ -141,8 +141,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_10"
-                    android:paddingLeft="@dimen/dp_10"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:paddingLeft="@dimen/dp_10">
 
 
                     <com.tntlinking.tntdev.widget.FlowTagLayout
@@ -165,7 +165,7 @@
                     android:layout_marginTop="@dimen/dp_20"
                     android:gravity="left"
                     android:paddingStart="@dimen/dp_12"
-                    android:text="后台框架"
+                    android:text="技能标签3"
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_16"
                     android:textStyle="bold" />
@@ -174,8 +174,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:paddingLeft="@dimen/dp_10"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:paddingLeft="@dimen/dp_10">
 
 
                     <com.tntlinking.tntdev.widget.FlowTagLayout
@@ -198,7 +198,7 @@
                     android:layout_marginTop="@dimen/dp_20"
                     android:gravity="left"
                     android:paddingStart="@dimen/dp_12"
-                    android:text="数据库类型"
+                    android:text="技能标签4"
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_16"
                     android:textStyle="bold" />
@@ -207,8 +207,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_10"
-                    android:paddingLeft="@dimen/dp_10"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:paddingLeft="@dimen/dp_10">
 
 
                     <com.tntlinking.tntdev.widget.FlowTagLayout
@@ -231,7 +231,7 @@
                     android:layout_marginTop="@dimen/dp_20"
                     android:gravity="left"
                     android:paddingStart="@dimen/dp_12"
-                    android:text="数据库类型"
+                    android:text="技能标签5"
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_16"
                     android:textStyle="bold" />
@@ -240,8 +240,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_10"
-                    android:paddingLeft="@dimen/dp_10"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:paddingLeft="@dimen/dp_10">
 
 
                     <com.tntlinking.tntdev.widget.FlowTagLayout
@@ -250,6 +250,7 @@
                         android:layout_height="wrap_content" />
                 </LinearLayout>
             </LinearLayout>
+
             <LinearLayout
                 android:id="@+id/ll_skill_tag_6"
                 android:layout_width="match_parent"
@@ -263,7 +264,7 @@
                     android:layout_marginTop="@dimen/dp_20"
                     android:gravity="left"
                     android:paddingStart="@dimen/dp_12"
-                    android:text="xxxxx"
+                    android:text="技能标签6"
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_16"
                     android:textStyle="bold" />
@@ -272,8 +273,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_10"
-                    android:paddingLeft="@dimen/dp_10"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:paddingLeft="@dimen/dp_10">
 
 
                     <com.tntlinking.tntdev.widget.FlowTagLayout
@@ -282,6 +283,7 @@
                         android:layout_height="wrap_content" />
                 </LinearLayout>
             </LinearLayout>
+
             <LinearLayout
                 android:id="@+id/ll_skill_tag_7"
                 android:layout_width="match_parent"
@@ -295,7 +297,7 @@
                     android:layout_marginTop="@dimen/dp_20"
                     android:gravity="left"
                     android:paddingStart="@dimen/dp_12"
-                    android:text="xxxxx"
+                    android:text="技能标签7"
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_16"
                     android:textStyle="bold" />
@@ -304,8 +306,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_10"
-                    android:paddingLeft="@dimen/dp_10"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:paddingLeft="@dimen/dp_10">
 
 
                     <com.tntlinking.tntdev.widget.FlowTagLayout

@@ -14,9 +14,10 @@ import com.tntlinking.tntdev.R;
 import com.tntlinking.tntdev.aop.SingleClick;
 import com.tntlinking.tntdev.app.AppActivity;
 import com.tntlinking.tntdev.http.api.AppScheduleApi;
+import com.tntlinking.tntdev.http.api.GetAppListDateApi;
 import com.tntlinking.tntdev.http.api.InterviewListApi;
 import com.tntlinking.tntdev.http.model.HttpData;
-import com.tntlinking.tntdev.ui.adapter.AppInterviewAdapter;
+import com.tntlinking.tntdev.ui.adapter.InterviewDetailAdapter;
 import com.tntlinking.tntdev.ui.adapter.InterviewSettingAdapter;
 import com.hjq.http.EasyHttp;
 import com.hjq.http.listener.HttpCallback;
@@ -39,8 +40,10 @@ public final class InterviewSettingActivity extends AppActivity {
     private String[] mWeek = new String[]{"日", "一", "二", "三", "四", "五", "六"};
 
     private List<InterviewListApi.Bean> mList = new ArrayList<>();
-    private AppInterviewAdapter interviewAdapter;
-    private List<AppScheduleApi.Bean> interviewList = new ArrayList<>();
+//    private AppInterviewAdapter interviewAdapter;
+    private InterviewDetailAdapter interviewAdapter;
+//    private List<AppScheduleApi.Bean> interviewList = new ArrayList<>();
+    private List<GetAppListDateApi.Bean> interviewList = new ArrayList<>();
     public static final String INTENT_KEY_INTERVIEW = "key_add_interview";
     private String mToday = TimeUtils.millis2String(TimeUtils.getNowMills(), "yyyy-MM-dd");// 默认获取当天日程
 
@@ -74,22 +77,31 @@ public final class InterviewSettingActivity extends AppActivity {
                     mList.get(position).setSelect(true);
                     mAdapter.setData(mList);
 
-                    getSchedule(mList.get(position).getScheduleDate());
+//                    getSchedule(mList.get(position).getScheduleDate());
                     mToday = mList.get(position).getScheduleDate();
+
+                    getInterviewDate(mList.get(position).getScheduleDate());
                 }
             }
         });
 
-        interviewAdapter = new AppInterviewAdapter(this, interviewList);
+        interviewAdapter = new InterviewDetailAdapter(this, interviewList);
         mListView.setAdapter(interviewAdapter);
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(InterviewSettingActivity.this, AddScheduleActivity.class);
-                AppScheduleApi.Bean bean = interviewList.get(position);
-                intent.putExtra(INTENT_KEY_INTERVIEW, bean);
-                intent.putExtra("scheduleDate", bean.getScheduleDate());
-                getActivity().startActivityForResult(intent, 10002);
+//                Intent intent = new Intent(InterviewSettingActivity.this, AddScheduleActivity.class);
+//                AppScheduleApi.Bean bean = interviewList.get(position);
+//                intent.putExtra(INTENT_KEY_INTERVIEW, bean);
+//                intent.putExtra("scheduleDate", bean.getScheduleDate());
+//                getActivity().startActivityForResult(intent, 10002);
+
+                Intent intent = new Intent(InterviewSettingActivity.this, AuditionDetailActivity.class);
+                intent.setClass(getActivity(), AuditionDetailActivity.class);
+                GetAppListDateApi.Bean bean = interviewList.get(position);
+                intent.putExtra("interviewId", bean.getId());
+                getActivity().startActivity(intent);
+
             }
         });
 
@@ -97,8 +109,9 @@ public final class InterviewSettingActivity extends AppActivity {
 
     @Override
     protected void initData() {
-        getBillList();
-        getSchedule(mToday);
+        getWeekList();
+//        getSchedule(mToday);
+        getInterviewDate(mToday);
     }
 
 
@@ -125,7 +138,7 @@ public final class InterviewSettingActivity extends AppActivity {
     /**
      * 获取日历列表
      */
-    private void getBillList() {
+    private void getWeekList() {
         mList.clear();
         EasyHttp.get(this)
                 .api(new InterviewListApi())
@@ -156,7 +169,6 @@ public final class InterviewSettingActivity extends AppActivity {
 
     /**
      * 获取某天日程
-     *
      * @param date
      */
     private void getSchedule(String date) {
@@ -166,6 +178,29 @@ public final class InterviewSettingActivity extends AppActivity {
 
                     @Override
                     public void onSucceed(HttpData<List<AppScheduleApi.Bean>> data) {
+//                        if (data.getData() != null && data.getData().size() != 0) {
+//                            interviewList.clear();
+//                            interviewList.addAll(data.getData());
+//                            interviewAdapter.setData(interviewList);
+//                        } else {
+//                            interviewList.clear();
+//                            interviewAdapter.setData(interviewList);
+//
+//                        }
+                    }
+                });
+    }
+
+    /**
+     * 指定时间的面试列表
+     * @param date
+     */
+    private void getInterviewDate(String date) {
+        EasyHttp.get(this)
+                .api(new GetAppListDateApi().setInterviewDate(date))
+                .request(new HttpCallback<HttpData<List<GetAppListDateApi.Bean>>>(this) {
+                    @Override
+                    public void onSucceed(HttpData<List<GetAppListDateApi.Bean>> data) {
                         if (data.getData() != null && data.getData().size() != 0) {
                             interviewList.clear();
                             interviewList.addAll(data.getData());
@@ -191,6 +226,6 @@ public final class InterviewSettingActivity extends AppActivity {
 
             }
         }
-        getBillList();
+        getWeekList();
     }
 }

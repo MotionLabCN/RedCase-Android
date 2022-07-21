@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/dp_10"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_time"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_45"
+        android:layout_marginLeft="@dimen/dp_15"
+        android:layout_marginRight="@dimen/dp_15"
+        android:drawableLeft="@drawable/icon_time_clock"
+        android:drawablePadding="@dimen/dp_4"
+        android:gravity="center|left"
+        android:text="xxxxx"
+        android:textColor="@color/black"
+        android:textSize="@dimen/sp_15" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/line_size"
+        android:layout_marginLeft="@dimen/dp_15"
+        android:layout_marginRight="@dimen/dp_15"
+        android:background="@color/common_line_color" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_45"
+        android:layout_marginLeft="@dimen/dp_15"
+        android:layout_marginRight="@dimen/dp_15"
+        android:drawableLeft="@drawable/icon_done"
+        android:drawablePadding="@dimen/dp_4"
+        android:gravity="center|left"
+        android:text="已完成"
+        android:textColor="@color/black"
+        android:textSize="@dimen/sp_15" />
+
+    <ListView
+        android:id="@+id/lv_1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_45"
+        android:layout_marginLeft="@dimen/dp_15"
+        android:layout_marginRight="@dimen/dp_15"
+        android:drawableLeft="@drawable/icon_running"
+        android:drawablePadding="@dimen/dp_4"
+        android:gravity="center|left"
+        android:text="进行中"
+        android:textColor="@color/black"
+        android:textSize="@dimen/sp_15" />
+
+    <ListView
+        android:id="@+id/lv_2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:divider="@null" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_45"
+        android:layout_marginLeft="@dimen/dp_15"
+        android:layout_marginRight="@dimen/dp_15"
+        android:drawableLeft="@drawable/icon_future"
+        android:drawablePadding="@dimen/dp_4"
+        android:gravity="center|left"
+        android:text="明日计划"
+        android:textColor="@color/black"
+        android:textSize="@dimen/sp_15" />
+
+    <ListView
+        android:id="@+id/lv_3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:divider="@null" />
+
+    <TextView
+        android:id="@+id/tv_tab_left"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_45"
+        android:layout_marginLeft="@dimen/dp_15"
+        android:layout_marginRight="@dimen/dp_15"
+        android:drawableLeft="@drawable/icon_help"
+        android:drawablePadding="@dimen/dp_4"
+        android:gravity="center|left"
+        android:text="需要的帮助"
+        android:textColor="@color/black"
+        android:textSize="@dimen/sp_15" />
+
+    <ListView
+        android:id="@+id/lv_4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:divider="@null"
+        android:layout_marginBottom="@dimen/dp_10"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_8"
+        android:background="@color/common_line_color" />
+</LinearLayout>

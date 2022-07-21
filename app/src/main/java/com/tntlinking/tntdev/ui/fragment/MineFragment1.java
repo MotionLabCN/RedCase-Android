@@ -6,6 +6,8 @@ import android.os.Build;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -35,11 +37,13 @@ import com.tntlinking.tntdev.ui.activity.BrowserPrivateActivity;
 import com.tntlinking.tntdev.ui.activity.EnterDeveloperActivity;
 import com.tntlinking.tntdev.ui.activity.EvaluationActivity;
 import com.tntlinking.tntdev.ui.activity.EvaluationNeedsTokNowActivity;
+import com.tntlinking.tntdev.ui.activity.HistoryListActivity;
 import com.tntlinking.tntdev.ui.activity.IncomeListActivity;
 import com.tntlinking.tntdev.ui.activity.InterviewActivity;
 import com.tntlinking.tntdev.ui.activity.InterviewSettingActivity;
 import com.tntlinking.tntdev.ui.activity.JkBrowserActivity;
 import com.tntlinking.tntdev.ui.activity.MainActivity;
+import com.tntlinking.tntdev.ui.activity.MessageListActivity;
 import com.tntlinking.tntdev.ui.activity.PDFViewActivity;
 import com.tntlinking.tntdev.ui.activity.PersonSettingActivity;
 import com.tntlinking.tntdev.ui.activity.SignContactActivity;
@@ -53,7 +57,7 @@ import androidx.annotation.RequiresApi;
 public final class MineFragment1 extends TitleBarFragment<MainActivity> implements OnRefreshLoadMoreListener {
     private SmartRefreshLayout mRefreshLayout;
 
-    private SettingBar mPersonDataIncome;
+//    private SettingBar mPersonDataIncome;
     private SettingBar mPersonDataInterview;
     private SettingBar mPersonDataSetting;
     private SettingBar person_data_private;
@@ -63,6 +67,7 @@ public final class MineFragment1 extends TitleBarFragment<MainActivity> implemen
     private SettingBar person_data_recommend;
     private SettingBar person_data_service;
     private SettingBar person_data_evaluation;
+    private SettingBar person_data_history;
 
     private TitleBar title_bar;
     private TextView tv_avatar;
@@ -70,6 +75,8 @@ public final class MineFragment1 extends TitleBarFragment<MainActivity> implemen
     private TextView tv_position;
     private TextView tv_sign_num;
     private TextView tv_profit_total;
+    private ImageView iv_message;
+    private LinearLayout ll_income;
 
     public static MineFragment1 newInstance() {
         return new MineFragment1();
@@ -84,7 +91,7 @@ public final class MineFragment1 extends TitleBarFragment<MainActivity> implemen
     @Override
     protected void initView() {
 //        tv_status = findViewById(R.id.tv_status);
-        mPersonDataIncome = findViewById(R.id.person_data_income);
+//        mPersonDataIncome = findViewById(R.id.person_data_income);
         mPersonDataInterview = findViewById(R.id.person_data_interview);
         mPersonDataSetting = findViewById(R.id.person_data_setting);
         person_data_private = findViewById(R.id.person_data_private);
@@ -94,6 +101,8 @@ public final class MineFragment1 extends TitleBarFragment<MainActivity> implemen
         person_data_recommend = findViewById(R.id.person_data_recommend);
         person_data_service = findViewById(R.id.person_data_service);
         person_data_evaluation = findViewById(R.id.person_data_evaluation);
+        person_data_history = findViewById(R.id.person_data_history);
+        ll_income = findViewById(R.id.ll_income);
 
         ScrollView scroll = findViewById(R.id.scroll);
         title_bar = findViewById(R.id.title_bar);
@@ -102,13 +111,15 @@ public final class MineFragment1 extends TitleBarFragment<MainActivity> implemen
         tv_position = findViewById(R.id.tv_position);
         tv_sign_num = findViewById(R.id.tv_sign_num);
         tv_profit_total = findViewById(R.id.tv_profit_total);
+        iv_message = findViewById(R.id.iv_message);
 
         mRefreshLayout = findViewById(R.id.rl_status_refresh);
         mRefreshLayout.setOnRefreshLoadMoreListener(this);
         mRefreshLayout.setEnableLoadMore(false);
 
-        setOnClickListener(mPersonDataIncome, mPersonDataSetting, mPersonDataInterview,
-                person_data_private, person_data_deal, person_data_dev, person_data_evaluation, person_data_about, person_data_recommend, person_data_service);
+        setOnClickListener( mPersonDataSetting, mPersonDataInterview,
+                person_data_private, person_data_deal, person_data_dev, person_data_evaluation,
+                person_data_about, person_data_recommend, person_data_service,person_data_history,iv_message,ll_income);
 
 
         scroll.setOnScrollChangeListener((v, scrollX, scrollY, oldScrollX, oldScrollY) -> {
@@ -154,7 +165,7 @@ public final class MineFragment1 extends TitleBarFragment<MainActivity> implemen
         } else if (view == person_data_service) {// 服务协议
 //            showServiceDialog();
             startActivity(SignContactActivity.class);
-        } else if (view == mPersonDataIncome) {// 收益账单
+        } else if (view == ll_income) {// 收益账单
             startActivity(IncomeListActivity.class);
         } else if (view == mPersonDataInterview) {// 面试设置
             startActivity(InterviewSettingActivity.class);
@@ -171,6 +182,10 @@ public final class MineFragment1 extends TitleBarFragment<MainActivity> implemen
             startActivity(AboutAppActivity.class);
         } else if (view == person_data_evaluation) {
             getDeveloperJkStatus();
+        }else if (view == person_data_history) {// 历史日报页面
+            startActivity(HistoryListActivity.class);
+        }else if (view == iv_message) {// 消息界面
+            startActivity(MessageListActivity.class);
         }
 
     }

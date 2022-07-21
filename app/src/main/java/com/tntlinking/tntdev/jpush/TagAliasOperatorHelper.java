@@ -43,7 +43,6 @@ public class TagAliasOperatorHelper {
 
         if(jPushMessage.getErrorCode() == 0){
             Log.i(TAG,"action - modify tag Success,sequence:"+sequence);
-            ToastHelper.showOk(context,"modify success");
         }else{
             String logs = "Failed to modify tags";
             if(jPushMessage.getErrorCode() == 6018){
@@ -62,7 +61,6 @@ public class TagAliasOperatorHelper {
         if(jPushMessage.getErrorCode() == 0){
             String logs = "modify tag "+jPushMessage.getCheckTag() + " bind state success,state:"+jPushMessage.getTagCheckStateResult();
             Log.i(TAG,logs);
-            ToastHelper.showOk(context,"modify success");
         }else{
             String logs = "Failed to modify tags, errorCode:" + jPushMessage.getErrorCode();
             Log.e(TAG, logs);
@@ -79,7 +77,7 @@ public class TagAliasOperatorHelper {
 
         if(jPushMessage.getErrorCode() == 0){
             Log.i(TAG,"action - modify alias Success,sequence:"+sequence);
-            ToastHelper.showOk(context,"modify success");
+
         }else{
             String logs = "Failed to modify alias, errorCode:" + jPushMessage.getErrorCode();
             Log.e(TAG, logs);
@@ -94,7 +92,6 @@ public class TagAliasOperatorHelper {
         init(context);
         if(jPushMessage.getErrorCode() == 0){
             Log.i(TAG,"action - set mobile number Success,sequence:"+sequence);
-            ToastHelper.showOk(context,"modify success");
         }else{
             String logs = "Failed to set mobile number, errorCode:" + jPushMessage.getErrorCode();
             Log.e(TAG, logs);
