@@ -88,7 +88,7 @@ public final class ServiceProjectAdapter extends BaseAdapter {
             holder.ll_detail.setVisibility(View.GONE);
             holder.tv_order_id.setText("订单号：" + item.getOrderNo());
             if (item.getServiceName().equals("服务中")) { // 服务中
-                holder.tv_write.setVisibility(View.VISIBLE);//显示写日志按钮（只有服务中才显示写日志按钮）
+//                holder.tv_write.setVisibility(View.VISIBLE);//显示写日志按钮（只有服务中才显示写日志按钮）
                 holder.view_dot.setBackground(mContext.getDrawable(R.drawable.dot_oval_orange));
                 holder.ll_status.setBackground(mContext.getDrawable(R.drawable.bg_orange_radius_3));
                 holder.tv_type.setTextColor(mContext.getResources().getColor(R.color.white));

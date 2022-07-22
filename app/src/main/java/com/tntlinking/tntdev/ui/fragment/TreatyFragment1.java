@@ -1,49 +1,22 @@
 package com.tntlinking.tntdev.ui.fragment;
-
-import android.content.Intent;
-import android.text.TextUtils;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.LinearLayout;
-
-import com.blankj.utilcode.util.SPUtils;
-import com.hjq.http.EasyHttp;
-import com.hjq.http.listener.HttpCallback;
-import com.scwang.smart.refresh.layout.SmartRefreshLayout;
-import com.scwang.smart.refresh.layout.api.RefreshLayout;
-import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener;
+import com.hjq.base.FragmentPagerAdapter;
 import com.tntlinking.tntdev.R;
-import com.tntlinking.tntdev.aop.SingleClick;
+import com.tntlinking.tntdev.app.AppFragment;
 import com.tntlinking.tntdev.app.TitleBarFragment;
-import com.tntlinking.tntdev.http.api.AppListApi;
-import com.tntlinking.tntdev.http.api.GetDailyListApi;
-import com.tntlinking.tntdev.http.model.HttpData;
-import com.tntlinking.tntdev.other.AppConfig;
-import com.tntlinking.tntdev.ui.activity.AuditionDetailActivity;
 import com.tntlinking.tntdev.ui.activity.MainActivity;
-import com.tntlinking.tntdev.ui.activity.WriteDailyActivity;
-import com.tntlinking.tntdev.ui.adapter.ServiceProjectAdapter;
-import com.tntlinking.tntdev.widget.MyListView;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import androidx.annotation.NonNull;
+import com.tntlinking.tntdev.ui.adapter.TabAdapter;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.ViewPager;
 
 /**
- * desc   : 服务 Fragment
+ * desc   : 首页 Fragment
  */
-public final class TreatyFragment1 extends TitleBarFragment<MainActivity> implements OnRefreshLoadMoreListener {
+public final class TreatyFragment1 extends TitleBarFragment<MainActivity> implements ViewPager.OnPageChangeListener, TabAdapter.OnTabListener {
 
-    private MyListView lv_1;
-    private LinearLayout ll_empty;
-    private SmartRefreshLayout mRefreshLayout;
-    private LinearLayout ll_history;
-    private LinearLayout ll_done, ll_running, ll_future, ll_help;
-    private MyListView my_lv_1, my_lv_2,my_lv_3,my_lv_4;
-
-    private List<AppListApi.Bean> mServiceList = new ArrayList<>();
-    private ServiceProjectAdapter mServiceAdapter;
+    private ViewPager mViewPager;
+    private RecyclerView mTabView;
+    private TabAdapter mTabAdapter;
+    private FragmentPagerAdapter<AppFragment<?>> mPagerAdapter;
 
     public static TreatyFragment1 newInstance() {
         return new TreatyFragment1();
@@ -51,79 +24,32 @@ public final class TreatyFragment1 extends TitleBarFragment<MainActivity> implem
 
     @Override
     protected int getLayoutId() {
-        return R.layout.treaty_fragment1;
+        return R.layout.treaty_fragment2;
     }
+
 
     @Override
     protected void initView() {
-        lv_1 = findViewById(R.id.lv_1);
 
-        ll_empty = findViewById(R.id.ll_empty);
-        ll_history = findViewById(R.id.ll_history);
-        ll_done = findViewById(R.id.ll_done);
-        ll_running = findViewById(R.id.ll_running);
-        ll_future = findViewById(R.id.ll_future);
-        ll_help = findViewById(R.id.ll_help);
-        my_lv_1 = findViewById(R.id.my_lv_1);
-        my_lv_2 = findViewById(R.id.my_lv_2);
-        my_lv_3 = findViewById(R.id.my_lv_3);
-        my_lv_4 = findViewById(R.id.my_lv_4);
-
-        mRefreshLayout = findViewById(R.id.rl_status_refresh);
-        mRefreshLayout.setOnRefreshLoadMoreListener(this);
-        mRefreshLayout.setEnableLoadMore(false);
-        setOnClickListener(ll_history, ll_done, ll_running, ll_future, ll_help);
-        mServiceAdapter = new ServiceProjectAdapter(getActivity(), mServiceList);
-        lv_1.setAdapter(mServiceAdapter);
-
-        lv_1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                AppListApi.Bean item = (AppListApi.Bean) mServiceAdapter.getItem(position);
-                if (!TextUtils.isEmpty(item.getServiceName()) && item.getServiceName().equals("服务中")) {
-
-                    Intent intent = new Intent(getActivity(), WriteDailyActivity.class);
-                    intent.putExtra("orderId", item.getId());
-                    startActivity(intent);
-                } else {
-                    Intent intent = new Intent(getActivity(), AuditionDetailActivity.class);
-                    intent.putExtra("interviewId", item.getId());
-                    startActivity(intent);
-                }
-
-            }
-        });
+        mTabView = findViewById(R.id.rv_home_tab);
+        mViewPager = findViewById(R.id.vp_home_pager);
+        mPagerAdapter = new FragmentPagerAdapter<>(this);
+        mPagerAdapter.addFragment(TreatyService1Fragment.newInstance());
+        mPagerAdapter.addFragment(TreatyServiced2Fragment.newInstance());
+        mViewPager.setAdapter(mPagerAdapter);
+        mViewPager.addOnPageChangeListener(this);
+        mTabAdapter = new TabAdapter(getAttachActivity(),TabAdapter.TAB_MODE_SERVICE,true);
+        mTabView.setAdapter(mTabAdapter);
     }
+
 
     @Override
     protected void initData() {
-        String status = SPUtils.getInstance().getString(AppConfig.DEVELOP_STATUS, "1");
+        mTabAdapter.addItem("服务中");
+        mTabAdapter.addItem("待服务");
+        mTabAdapter.setOnTabListener(this);
 
-        if (status.equals("3")) {
-            getAppList();
-        } else {
-            toast("您还没有认证");
-            ll_empty.setVisibility(View.VISIBLE);
-        }
     }
-
-    @SingleClick
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.ll_history:
-                break;
-            case R.id.ll_done:
-                break;
-            case R.id.ll_running:
-                break;
-            case R.id.ll_future:
-                break;
-            case R.id.ll_help:
-                break;
-        }
-    }
-
 
     @Override
     public boolean isStatusBarEnabled() {
@@ -131,80 +57,42 @@ public final class TreatyFragment1 extends TitleBarFragment<MainActivity> implem
         return !super.isStatusBarEnabled();
     }
 
-
     /**
-     * 获取在服务企业list
+     * {@link TabAdapter.OnTabListener}
      */
-    private void getAppList() {
-        EasyHttp.get(this)
-                .api(new AppListApi())
-                .request(new HttpCallback<HttpData<List<AppListApi.Bean>>>(this) {
-
-                    @Override
-                    public void onSucceed(HttpData<List<AppListApi.Bean>> data) {
-                        if (data.getData().size() > 0) {
-                            mServiceList.addAll(data.getData());
-                            mServiceAdapter.setData(mServiceList);
-                        }
-
-                    }
-
-                    @Override
-                    public void onFail(Exception e) {
-                        super.onFail(e);
-                    }
-                });
-    }
-
-
-
-    /**
-     * 获取日报列表
-     */
-    public void getDailyList(String orderId) {
-        EasyHttp.get(this)
-                .api(new GetDailyListApi().setOrderId(orderId))
-                .request(new HttpCallback<HttpData<GetDailyListApi.Bean>>(this) {
-
-                    @Override
-                    public void onSucceed(HttpData<GetDailyListApi.Bean> data) {
-//                        mList.clear();
-//                        if (data.getData() != null) {
-//                            GetDailyListApi.Bean bean = data.getData();
-//                            mList.add(new GetDailyListApi.ListBean(1));
-//                            List<GetDailyListApi.ListBean> done = bean.getDone();
-//                            mList.addAll(done);
-//                            mList.add(new GetDailyListApi.ListBean(2));
-//                            List<GetDailyListApi.ListBean> running = bean.getRunning();
-//                            mList.addAll(running);
-//                            mList.add(new GetDailyListApi.ListBean(3));
-//                            List<GetDailyListApi.ListBean> future = bean.getFuture();
-//                            mList.addAll(future);
-//                            mList.add(new GetDailyListApi.ListBean(4));
-//                            List<GetDailyListApi.ListBean> help = bean.getHelp();
-//                            mList.addAll(help);
-//                        }
-//
-//                        mAdapter.setData(mList);
-
-                    }
-                });
-    }
-
 
     @Override
-    public void onRefresh(@NonNull RefreshLayout refreshLayout) {
-        mServiceList.clear();
-        String status = SPUtils.getInstance().getString(AppConfig.DEVELOP_STATUS, "1");
-        if (status.equals("3")) {
-            getAppList();
+    public boolean onTabSelected(RecyclerView recyclerView, int position) {
+        mViewPager.setCurrentItem(position);
+        return true;
+    }
+
+    /**
+     * {@link ViewPager.OnPageChangeListener}
+     */
+
+    @Override
+    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+    }
+
+    @Override
+    public void onPageSelected(int position) {
+        if (mTabAdapter == null) {
+            return;
         }
+        mTabAdapter.setSelectedPosition(position);
     }
 
     @Override
-    public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
-
+    public void onPageScrollStateChanged(int state) {
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mViewPager.setAdapter(null);
+        mViewPager.removeOnPageChangeListener(this);
+        mTabAdapter.setOnTabListener(null);
+    }
 
 }

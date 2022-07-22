@@ -22,7 +22,7 @@ import com.tntlinking.tntdev.ui.dialog.AppUpdateDialog;
 import com.tntlinking.tntdev.ui.fragment.HomeFragment;
 import com.tntlinking.tntdev.ui.fragment.HomeFragment1;
 import com.tntlinking.tntdev.ui.fragment.MineFragment1;
-import com.tntlinking.tntdev.ui.fragment.TreatyFragment;
+import com.tntlinking.tntdev.ui.fragment.TreatyFragment1;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
@@ -83,7 +83,8 @@ public final class MainActivity extends AppActivity
     protected void initData() {
         mPagerAdapter = new FragmentPagerAdapter<>(this);
         mPagerAdapter.addFragment(HomeFragment1.newInstance());
-        mPagerAdapter.addFragment(TreatyFragment.newInstance());
+//        mPagerAdapter.addFragment(TreatyFragment.newInstance());
+        mPagerAdapter.addFragment(TreatyFragment1.newInstance());
         mPagerAdapter.addFragment(MineFragment1.newInstance());
         mViewPager.setAdapter(mPagerAdapter);
 

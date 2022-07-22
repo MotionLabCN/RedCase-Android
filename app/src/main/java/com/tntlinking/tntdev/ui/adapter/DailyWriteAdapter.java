@@ -20,24 +20,30 @@ public final class DailyWriteAdapter extends BaseAdapter {
     private List<GetDailyListApi.ListBean> mList;
     private LayoutInflater layoutInflater;
 
-    public DailyWriteAdapter(Context context, List<GetDailyListApi.ListBean> list) {
-        this.mList = list;
+    public DailyWriteAdapter(Context context) {
         layoutInflater = LayoutInflater.from(context);
     }
 
     @Override
     public int getCount() {
+        if (mList == null) {
+            return 0;
+        }
         return mList.size();
     }
 
     @Override
-    public Object getItem(int position) {
+    public GetDailyListApi.ListBean getItem(int position) {
         return mList.get(position);
     }
 
     @Override
     public long getItemId(int position) {
         return 0;
+    }
+
+    public List<GetDailyListApi.ListBean> getData() {
+        return mList;
     }
 
     public void setData(List<GetDailyListApi.ListBean> list) {

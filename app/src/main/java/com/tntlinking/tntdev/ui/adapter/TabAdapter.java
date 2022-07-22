@@ -25,6 +25,7 @@ public final class TabAdapter extends AppAdapter<String> implements BaseAdapter.
 
     public static final int TAB_MODE_DESIGN = 1;
     public static final int TAB_MODE_SLIDING = 2;
+    public static final int TAB_MODE_SERVICE = 3;
 
     /** 当前选中条目位置 */
     private int mSelectedPosition = 0;
@@ -64,6 +65,8 @@ public final class TabAdapter extends AppAdapter<String> implements BaseAdapter.
                 return new DesignViewHolder();
             case TAB_MODE_SLIDING:
                 return new SlidingViewHolder();
+            case TAB_MODE_SERVICE:
+                return new DesignServiceViewHolder();
             default:
                 throw new IllegalArgumentException("are you ok?");
         }
@@ -214,6 +217,32 @@ public final class TabAdapter extends AppAdapter<String> implements BaseAdapter.
         @Override
         public void onAnimationUpdate(ValueAnimator animation) {
             mTitleView.setTextSize(TypedValue.COMPLEX_UNIT_PX, (int) animation.getAnimatedValue());
+        }
+    }
+
+    private final class DesignServiceViewHolder extends AppAdapter<?>.ViewHolder {
+
+        private final TextView mTitleView;
+        private final View mLineView;
+
+        private DesignServiceViewHolder() {
+            super(R.layout.tab_item_design_service);
+            mTitleView = findViewById(R.id.tv_tab_design_title);
+            mLineView = findViewById(R.id.v_tab_design_line);
+            if (!mFixed) {
+                return;
+            }
+            View itemView = getItemView();
+            ViewGroup.LayoutParams layoutParams = itemView.getLayoutParams();
+            layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
+            itemView.setLayoutParams(layoutParams);
+        }
+
+        @Override
+        public void onBindView(int position) {
+            mTitleView.setText(getItem(position));
+            mTitleView.setSelected(mSelectedPosition == position);
+            mLineView.setVisibility(mSelectedPosition == position ? View.VISIBLE : View.INVISIBLE);
         }
     }
 

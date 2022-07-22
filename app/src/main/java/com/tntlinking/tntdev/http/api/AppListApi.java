@@ -10,6 +10,12 @@ public final class AppListApi implements IRequestApi {
         return "order/appList";
     }
 
+    private int orderStatus; //2 待服务，3 服务中
+
+    public AppListApi setOrderStatus(int orderStatus) {
+        this.orderStatus = orderStatus;
+        return this;
+    }
 
     public final static class Bean {
         private String id;
