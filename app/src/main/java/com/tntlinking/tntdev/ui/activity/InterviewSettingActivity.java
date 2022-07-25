@@ -34,6 +34,7 @@ import androidx.annotation.Nullable;
 public final class InterviewSettingActivity extends AppActivity {
     private TextView tv_year_month;
     private LinearLayout ll_add;
+    private LinearLayout ll_empty;
     private GridView mGridView;
     private ListView mListView;
     private InterviewSettingAdapter mAdapter;
@@ -57,6 +58,7 @@ public final class InterviewSettingActivity extends AppActivity {
         tv_year_month = findViewById(R.id.tv_year_month);
         mGridView = findViewById(R.id.grid_view);
         ll_add = findViewById(R.id.ll_add);
+        ll_empty = findViewById(R.id.ll_empty);
         mListView = findViewById(R.id.rv_app_list);
 
         String nowTime = TimeUtils.millis2String(TimeUtils.getNowMills(), "yyyy/MM");
@@ -202,13 +204,15 @@ public final class InterviewSettingActivity extends AppActivity {
                     @Override
                     public void onSucceed(HttpData<List<GetAppListDateApi.Bean>> data) {
                         if (data.getData() != null && data.getData().size() != 0) {
+                            ll_empty.setVisibility(View.GONE);
                             interviewList.clear();
                             interviewList.addAll(data.getData());
                             interviewAdapter.setData(interviewList);
+
                         } else {
                             interviewList.clear();
                             interviewAdapter.setData(interviewList);
-
+                            ll_empty.setVisibility(View.VISIBLE);
                         }
                     }
                 });

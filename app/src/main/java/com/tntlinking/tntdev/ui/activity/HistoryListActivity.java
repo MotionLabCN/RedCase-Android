@@ -2,7 +2,9 @@ package com.tntlinking.tntdev.ui.activity;
 
 import android.content.Intent;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.hjq.bar.TitleBar;
 import com.hjq.base.BaseAdapter;
@@ -33,6 +35,8 @@ public final class HistoryListActivity extends AppActivity implements OnRefreshL
 
     private TitleBar title_bar;
     private LinearLayout ll_empty;
+    private ImageView iv_empty;
+    private TextView tv_empty_tips;
     private SmartRefreshLayout mRefreshLayout;
     private WrapRecyclerView mRecyclerView;
 
@@ -48,6 +52,8 @@ public final class HistoryListActivity extends AppActivity implements OnRefreshL
     protected void initView() {
         title_bar = findViewById(R.id.title_bar);
         ll_empty = findViewById(R.id.ll_empty);
+        iv_empty = findViewById(R.id.iv_empty);
+        tv_empty_tips = findViewById(R.id.tv_empty_tips);
         mRefreshLayout = findViewById(R.id.rl_status_refresh);
         mRecyclerView = findViewById(R.id.rv_status_list);
         title_bar.setTitle("历史日报");
@@ -55,7 +61,8 @@ public final class HistoryListActivity extends AppActivity implements OnRefreshL
         mAdapter.setOnItemClickListener(this);
         mRecyclerView.setAdapter(mAdapter);
 
-
+        iv_empty.setImageResource(R.drawable.bg_empty_income);
+        tv_empty_tips.setText("暂无历史订单");
         mRefreshLayout.setOnRefreshLoadMoreListener(this);
         mRefreshLayout.setEnableLoadMore(false);
 
@@ -78,8 +85,10 @@ public final class HistoryListActivity extends AppActivity implements OnRefreshL
                     @Override
                     public void onSucceed(HttpData<List<AppListApi.Bean>> data) {
                         if (data.getData().size() > 0) {
-
+                            ll_empty.setVisibility(View.GONE);
                             mAdapter.setData(data.getData());
+                        } else {
+                            ll_empty.setVisibility(View.VISIBLE);
                         }
                         mRefreshLayout.finishRefresh();
                     }

@@ -182,7 +182,7 @@ public final class MineFragment1 extends TitleBarFragment<MainActivity> implemen
             startActivity(AboutAppActivity.class);
         } else if (view == person_data_evaluation) {
             getDeveloperJkStatus();
-        }else if (view == person_data_history) {// 历史日报页面
+        }else if (view == person_data_history) {// 历史订单
             startActivity(HistoryListActivity.class);
         }else if (view == iv_message) {// 消息界面
             startActivity(MessageListActivity.class);

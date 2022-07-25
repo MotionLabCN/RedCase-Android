@@ -26,9 +26,7 @@ import com.tntlinking.tntdev.http.api.UpdateDailyApi;
 import com.tntlinking.tntdev.http.model.HttpData;
 import com.tntlinking.tntdev.other.AppConfig;
 import com.tntlinking.tntdev.other.HomeChangeListener;
-import com.tntlinking.tntdev.ui.activity.AuditionDetailActivity;
 import com.tntlinking.tntdev.ui.activity.MainActivity;
-import com.tntlinking.tntdev.ui.activity.WriteDailyActivity;
 import com.tntlinking.tntdev.ui.adapter.DailyWriteAdapter;
 import com.tntlinking.tntdev.ui.adapter.ServiceProjectAdapter;
 import com.tntlinking.tntdev.ui.dialog.AddTagDialog;
@@ -108,20 +106,21 @@ public final class TreatyService1Fragment extends TitleBarFragment<MainActivity>
         lv_1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                AppListApi.Bean item = (AppListApi.Bean) mServiceAdapter.getItem(position);
-                if (!TextUtils.isEmpty(item.getServiceName()) && item.getServiceName().equals("服务中")) {
-
-                    Intent intent = new Intent(getActivity(), WriteDailyActivity.class);
-                    intent.putExtra("orderId", item.getId());
-                    startActivity(intent);
-                } else {
-                    Intent intent = new Intent(getActivity(), AuditionDetailActivity.class);
-                    intent.putExtra("interviewId", item.getId());
-                    startActivity(intent);
-                }
+//                AppListApi.Bean item = (AppListApi.Bean) mServiceAdapter.getItem(position);
+//                if (!TextUtils.isEmpty(item.getServiceName()) && item.getServiceName().equals("服务中")) {
+//
+//                    Intent intent = new Intent(getActivity(), WriteDailyActivity.class);
+//                    intent.putExtra("orderId", item.getId());
+//                    startActivity(intent);
+//                } else {
+//                    Intent intent = new Intent(getActivity(), AuditionDetailActivity.class);
+//                    intent.putExtra("interviewId", item.getId());
+//                    startActivity(intent);
+//                }
 
             }
         });
+
         /** ----------------------------点击事件 更新---------------------------------*/
         my_lv_1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

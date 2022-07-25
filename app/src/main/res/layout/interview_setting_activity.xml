@@ -43,32 +43,32 @@
                 android:textSize="@dimen/sp_28"
                 android:textStyle="bold" />
 
-            <View
-                android:layout_width="@dimen/dp_5"
-                android:layout_height="@dimen/dp_5"
-                android:background="@drawable/bg_red_radius_100" />
+<!--            <View-->
+<!--                android:layout_width="@dimen/dp_5"-->
+<!--                android:layout_height="@dimen/dp_5"-->
+<!--                android:background="@drawable/bg_red_radius_100" />-->
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/dp_4"
-                android:text="无法参加面试"
-                android:textColor="@color/gray"
-                android:textSize="@dimen/sp_12" />
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginLeft="@dimen/dp_4"-->
+<!--                android:text="无法参加面试"-->
+<!--                android:textColor="@color/gray"-->
+<!--                android:textSize="@dimen/sp_12" />-->
 
-            <View
-                android:layout_width="@dimen/dp_5"
-                android:layout_height="@dimen/dp_5"
-                android:layout_marginLeft="@dimen/dp_10"
-                android:background="@drawable/bg_green_radius_100" />
+<!--            <View-->
+<!--                android:layout_width="@dimen/dp_5"-->
+<!--                android:layout_height="@dimen/dp_5"-->
+<!--                android:layout_marginLeft="@dimen/dp_10"-->
+<!--                android:background="@drawable/bg_green_radius_100" />-->
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/dp_4"
-                android:text="部分时间段可以面试"
-                android:textColor="@color/gray"
-                android:textSize="@dimen/sp_12" />
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginLeft="@dimen/dp_4"-->
+<!--                android:text="部分时间段可以面试"-->
+<!--                android:textColor="@color/gray"-->
+<!--                android:textSize="@dimen/sp_12" />-->
 
 
         </LinearLayout>
@@ -93,7 +93,33 @@
             android:divider="@null"
             android:scrollbars="none"
             tools:listitem="@layout/item_add_interview" />
+        <LinearLayout
+            android:id="@+id/ll_empty"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:visibility="gone"
+            android:background="@color/white"
+            android:orientation="vertical">
 
+            <ImageView
+                android:id="@+id/iv_empty"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_70"
+                android:src="@drawable/icon_empty_interview" />
+
+            <TextView
+                android:id="@+id/tv_empty_tips"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_10"
+                android:text="今天暂无面试安排"
+                android:textColor="@color/color_hint_color"
+                android:textSize="@dimen/sp_13" />
+
+
+        </LinearLayout>
         <LinearLayout
             android:id="@+id/ll_add"
             android:layout_width="match_parent"

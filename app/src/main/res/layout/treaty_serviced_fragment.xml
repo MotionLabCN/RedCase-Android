@@ -40,28 +40,18 @@
                     android:background="@color/white"
                     android:gravity="center|top"
                     android:orientation="vertical"
-                    android:paddingTop="@dimen/dp_20"
-                    android:visibility="gone">
+                    android:paddingTop="@dimen/dp_20">
 
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/bg_home_work_empty" />
+                        android:src="@drawable/icon_empty_writedaily" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/dp_10"
-                        android:text="暂无工作"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/sp_15"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_10"
-                        android:text="联系客服人员尽快匹配新工作"
+                        android:text="待服务状态无需填写日报"
                         android:textColor="#7E89A3"
                         android:textSize="@dimen/sp_12" />
 
@@ -77,7 +67,8 @@
                         android:paddingBottom="@dimen/dp_8"
                         android:text="刷新"
                         android:textColor="@color/white"
-                        android:textSize="@dimen/sp_12" />
+                        android:textSize="@dimen/sp_12"
+                        android:visibility="gone" />
                 </LinearLayout>
 
 

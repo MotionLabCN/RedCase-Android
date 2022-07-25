@@ -113,12 +113,12 @@ public final class TreatyServiced2Fragment extends TitleBarFragment<MainActivity
                     @Override
                     public void onSucceed(HttpData<List<AppListApi.Bean>> data) {
                         if (data.getData().size() > 0) {
-                            ll_empty.setVisibility(View.GONE);
+//                            ll_empty.setVisibility(View.GONE);
 
                             mServiceList.addAll(data.getData());
                             mServiceAdapter.setData(mServiceList);
                         } else {
-                            ll_empty.setVisibility(View.VISIBLE);
+//                            ll_empty.setVisibility(View.VISIBLE);
                         }
                         mRefreshLayout.finishRefresh();
                     }
