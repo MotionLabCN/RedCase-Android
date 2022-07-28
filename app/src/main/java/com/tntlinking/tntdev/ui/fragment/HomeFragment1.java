@@ -568,6 +568,7 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity> implemen
         EasyHttp.get(this)
                 .api(new AppListInterviewApi())
                 .request(new HttpCallback<HttpData<List<AppListApi.Bean>>>(this) {
+                    @SuppressLint("SetTextI18n")
                     @Override
                     public void onSucceed(HttpData<List<AppListApi.Bean>> data) {
                         if (data.getData().size() > 0) {
@@ -577,7 +578,11 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity> implemen
                             interviewId = bean.getId();
                             tv_interview_position.setText(bean.getPositionName());
                             tv_interview_status.setText(bean.getInterviewTimeType());
-                            tv_interview_salary.setText(bean.getWorkDaysModeName()+bean.getEndPay());
+
+                            double startPay = Double.parseDouble(bean.getStartPay()) / 1000;
+                            double endPay = Double.parseDouble(bean.getEndPay()) / 1000;
+                            tv_interview_salary.setText(bean.getWorkDaysModeName() + "·" +
+                                    Utils.formatMoney(startPay) + "-" + Utils.formatMoney(endPay) + "k/月");
                             tv_interview_company.setText(bean.getCompanyName());
                             tv_interview_time.setText(bean.getInterviewStartDate());
                         } else {

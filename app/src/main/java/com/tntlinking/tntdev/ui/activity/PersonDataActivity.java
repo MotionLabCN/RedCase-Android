@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Build;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ScrollView;
@@ -30,8 +29,6 @@ import com.tntlinking.tntdev.other.Utils;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
-
-import java.io.Serializable;
 
 
 public final class PersonDataActivity extends AppActivity {

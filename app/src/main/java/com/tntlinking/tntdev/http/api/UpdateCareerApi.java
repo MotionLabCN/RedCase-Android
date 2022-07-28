@@ -15,10 +15,9 @@ public final class UpdateCareerApi implements IRequestApi, IRequestType {
 
     private int careerDirectionId;
     private double curSalary;
-    private double highestSalary;
-    private double lowestSalary;
     private int workDayMode;
     private int workYearsId;
+    private double expectSalary;
 
 
     public UpdateCareerApi setCareerDirectionId(int careerDirectionId) {
@@ -31,13 +30,8 @@ public final class UpdateCareerApi implements IRequestApi, IRequestType {
         return this;
     }
 
-    public UpdateCareerApi setHighestSalary(Double highestSalary) {
-        this.highestSalary = highestSalary;
-        return this;
-    }
-
-    public UpdateCareerApi setLowestSalary(double lowestSalary) {
-        this.lowestSalary = lowestSalary;
+    public UpdateCareerApi setExpectSalary(Double expectSalary) {
+        this.expectSalary = expectSalary;
         return this;
     }
 

@@ -19,6 +19,7 @@ import com.tntlinking.tntdev.http.api.GetDictionaryApi;
 import com.tntlinking.tntdev.http.api.GetProvinceApi;
 import com.tntlinking.tntdev.http.api.UpdateBasicInfoApi;
 import com.tntlinking.tntdev.http.model.HttpData;
+import com.tntlinking.tntdev.manager.ActivityManager;
 import com.tntlinking.tntdev.other.Utils;
 import com.tntlinking.tntdev.ui.bean.DeveloperInfoBean;
 import com.tntlinking.tntdev.ui.dialog.DateSelectDialog;
@@ -32,6 +33,8 @@ import java.util.List;
 import androidx.appcompat.widget.AppCompatButton;
 
 import static com.tntlinking.tntdev.ui.activity.EnterDeveloperActivity.INTENT_KEY_DEVELOPER_INFO;
+import static com.tntlinking.tntdev.ui.activity.ResumeAnalysisActivity.IS_FIRST_RESUME;
+import static com.tntlinking.tntdev.ui.activity.ResumeAnalysisActivity.IS_RESUME;
 
 
 /**
@@ -43,7 +46,7 @@ public final class AddBaseInfoActivity extends AppActivity {
     private SettingBar mInfoBirth;
     private SettingBar mInfoAddress;
     private SettingBar mInfoReason;
-    private AppCompatButton btn_info_next;
+    private AppCompatButton btn_commit;
 
 
     private String realName;
@@ -53,6 +56,8 @@ public final class AddBaseInfoActivity extends AppActivity {
     private int cityId = 0;
     private int areaId = 0;
     private int workReasonId = 0;
+
+    private DeveloperInfoBean mBean;
 
     @Override
     protected int getLayoutId() {
@@ -66,9 +71,9 @@ public final class AddBaseInfoActivity extends AppActivity {
         mInfoBirth = findViewById(R.id.info_birth);
         mInfoAddress = findViewById(R.id.info_address);
         mInfoReason = findViewById(R.id.info_reason);
-        btn_info_next = findViewById(R.id.btn_info_next);
+        btn_commit = findViewById(R.id.btn_commit);
 
-        setOnClickListener(mInfoGender, mInfoBirth, mInfoAddress, mInfoReason, btn_info_next);
+        setOnClickListener(mInfoGender, mInfoBirth, mInfoAddress, mInfoReason, btn_commit);
     }
 
     private List<GetDictionaryApi.DictionaryBean> mDictionaryList;
@@ -80,32 +85,46 @@ public final class AddBaseInfoActivity extends AppActivity {
         if (TextUtils.isEmpty(SPUtils.getInstance().getString("province"))) {
             GetProvince();
         }
-        DeveloperInfoBean bean = getSerializable(INTENT_KEY_DEVELOPER_INFO);
-        if (bean != null) {
-            if (!TextUtils.isEmpty(bean.getRealName())) {
-                mInfoName.setText(bean.getRealName());
-                if (bean.getSex() == 0) {
+        mBean = getSerializable(INTENT_KEY_DEVELOPER_INFO);
+        if (mBean != null) {
+            if (!TextUtils.isEmpty(mBean.getRealName())) {
+                mInfoName.setText(mBean.getRealName());
+                if (mBean.getSex() == 0) {
                     mInfoGender.setLeftText("男");
                 } else {
                     mInfoGender.setLeftText("女");
                 }
-                mInfoBirth.setLeftText(TextUtils.isEmpty(bean.getBirthday()) ? "出生日期" : bean.getBirthday());
-                if (bean.getProvinceName() != null) {
-                    mInfoAddress.setLeftText(bean.getProvinceName() + "-" + bean.getCityName() + "-" + bean.getAreasName());
+                mInfoBirth.setLeftText(TextUtils.isEmpty(mBean.getBirthday()) ? "出生日期" : mBean.getBirthday());
+                if (mBean.getProvinceName() != null) {
+                    mInfoAddress.setLeftText(mBean.getProvinceName() + "-" + mBean.getCityName() + "-" + mBean.getAreasName());
                 }
-                mInfoReason.setLeftText(TextUtils.isEmpty(bean.getRemoteWorkReasonStr()) ? "远程办公原因" : bean.getRemoteWorkReasonStr());
+                mInfoReason.setLeftText(TextUtils.isEmpty(mBean.getRemoteWorkReasonStr()) ? "远程办公原因" : mBean.getRemoteWorkReasonStr());
 
-                realName = bean.getRealName();
-                sex = bean.getSex();
-                birthday = bean.getBirthday();
-                provinceId = bean.getProvinceId();
-                cityId = bean.getCityId();
-                areaId = bean.getAreasId();
-                workReasonId = bean.getRemoteWorkReason();
+                realName = mBean.getRealName();
+                sex = mBean.getSex();
+                birthday = mBean.getBirthday();
+                provinceId = mBean.getProvinceId();
+                cityId = mBean.getCityId();
+                areaId = mBean.getAreasId();
+                workReasonId = mBean.getRemoteWorkReason();
+            }
+
+            if (getBoolean(IS_RESUME)) {
+                btn_commit.setText("下一步");
             }
         }
     }
 
+    @Override
+    public void onLeftClick(View view) {
+        super.onLeftClick(view);
+        if (getBoolean(IS_FIRST_RESUME)) {
+            Intent intent = new Intent(this, EnterDeveloperActivity.class);
+            intent.putExtra(INTENT_KEY_DEVELOPER_INFO, mBean);
+            startActivity(intent);
+            ActivityManager.getInstance().finishAllActivities();
+        }
+    }
 
     @SingleClick
     @Override
@@ -115,16 +134,16 @@ public final class AddBaseInfoActivity extends AppActivity {
                 new GenderSelectDialog.Builder(this)
                         .setTitle("选择性别")
                         .setList("男", "女").setListener(new GenderSelectDialog.OnListener() {
-                    @Override
-                    public void onSelected(BaseDialog dialog, int type) {
-                        if (type == 0) {
-                            mInfoGender.setLeftText("男");
-                        } else {
-                            mInfoGender.setLeftText("女");
-                        }
-                        sex = type;
-                    }
-                }).show();
+                            @Override
+                            public void onSelected(BaseDialog dialog, int type) {
+                                if (type == 0) {
+                                    mInfoGender.setLeftText("男");
+                                } else {
+                                    mInfoGender.setLeftText("女");
+                                }
+                                sex = type;
+                            }
+                        }).show();
 
 
                 break;
@@ -164,15 +183,15 @@ public final class AddBaseInfoActivity extends AppActivity {
                 new DictionarySelectDialog.Builder(this)
                         .setTitle("选择原因")
                         .setList(mDictionaryList).setListener(new DictionarySelectDialog.OnListener() {
-                    @Override
-                    public void onSelected(BaseDialog dialog, int type) {
-                        mInfoReason.setLeftText(mDictionaryList.get(type).getName());
-                        workReasonId = mDictionaryList.get(type).getId();
-                    }
-                }).show();
+                            @Override
+                            public void onSelected(BaseDialog dialog, int type) {
+                                mInfoReason.setLeftText(mDictionaryList.get(type).getName());
+                                workReasonId = mDictionaryList.get(type).getId();
+                            }
+                        }).show();
                 break;
 
-            case R.id.btn_info_next:
+            case R.id.btn_commit:
                 String name = mInfoName.getText().toString();
                 if (TextUtils.isEmpty(name) && name.length() < 2) {
                     toast("没有输入用户名或者输入长度不够");
@@ -195,9 +214,16 @@ public final class AddBaseInfoActivity extends AppActivity {
                     toast("没选择办公原因");
                     return;
                 }
-
                 realName = name;
-                updateBasicInfo();
+
+                if (btn_commit.getText().equals("完成")) {
+                    Intent intent = new Intent(this, EnterDeveloperActivity.class);
+                    intent.putExtra(INTENT_KEY_DEVELOPER_INFO, mBean);
+                    startActivity(intent);
+                    ActivityManager.getInstance().finishAllActivities();
+                } else {
+                    updateBasicInfo();
+                }
                 break;
         }
     }
@@ -218,9 +244,14 @@ public final class AddBaseInfoActivity extends AppActivity {
 
                     @Override
                     public void onSucceed(HttpData<List<GetProvinceApi.ProvinceBean>> data) {
-                        Intent intent = new Intent();
-                        setResult(RESULT_OK, intent);
-                        finish();
+                        if (!getBoolean(IS_RESUME)) {
+                            Intent intent = new Intent();
+                            setResult(RESULT_OK, intent);
+                            finish();
+                        } else {
+                            checkDeveloper(getSerializable(INTENT_KEY_DEVELOPER_INFO));
+                        }
+
                     }
                 });
     }
@@ -264,5 +295,153 @@ public final class AddBaseInfoActivity extends AppActivity {
                 });
     }
 
+
+    private int position1 = 0;
+    private int position2 = 0;
+    private int position3 = 0;
+
+
+    public void checkDeveloper(DeveloperInfoBean bean) {
+        Intent intent = new Intent();
+        intent.putExtra(IS_RESUME, true);
+
+        if (!isJumpCareer(bean)) {
+            intent.setClass(this, AddCareerActivity.class);
+            intent.putExtra(INTENT_KEY_DEVELOPER_INFO, bean);
+            startActivity(intent);
+            return;
+        }
+
+        if (!isJumpEducation(bean)) {
+            intent.setClass(this, AddEducationActivityNew.class);
+            intent.putExtra(INTENT_KEY_DEVELOPER_INFO, bean);
+            intent.putExtra("position", position1);
+            startActivity(intent);
+            return;
+        }
+        if (!isJumpWork(bean)) {
+            intent.setClass(this, AddWorkActivity.class);
+            intent.putExtra(INTENT_KEY_DEVELOPER_INFO, bean);
+            intent.putExtra("position", position2);
+            startActivity(intent);
+            return;
+        }
+        if (!isJumpProject(bean)) {
+            intent.setClass(this, AddProjectActivityNew.class);
+            intent.putExtra(INTENT_KEY_DEVELOPER_INFO, bean);
+            intent.putExtra("position", position3);
+            startActivity(intent);
+            return;
+        } else {
+            btn_commit.setText("完成");
+        }
+
+    }
+
+
+    // 职业资料全部没写就跳过，返回true，其他情况都要展示false
+    public boolean isJumpCareer(DeveloperInfoBean bean) {
+        if (bean.getWorkModeDtoList().size() == 0 &&
+                TextUtils.isEmpty(bean.getCareerDto().getCareerDirectionName()) &&
+                TextUtils.isEmpty(bean.getCareerDto().getWorkYearsName()) &&
+                TextUtils.isEmpty(bean.getCareerDto().getCurSalary())) {
+
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    // 教育资料全部没写就跳过，返回true，其他情况都要展示false
+    public boolean isJumpEducation(DeveloperInfoBean bean) {
+        List<DeveloperInfoBean.DeveloperEducation> educationDtoList = bean.getEducationDtoList();
+        boolean mTag = true;
+        if (educationDtoList.size() == 0) {
+            return true;
+        } else {
+            for (int i = 0; i < educationDtoList.size(); i++) {
+                if (TextUtils.isEmpty(educationDtoList.get(i).getCollegeName()) &&
+                        TextUtils.isEmpty(educationDtoList.get(i).getEducationName()) &&
+                        TextUtils.isEmpty(educationDtoList.get(i).getTrainingModeName()) &&
+                        TextUtils.isEmpty(educationDtoList.get(i).getMajor()) &&
+                        TextUtils.isEmpty(educationDtoList.get(i).getInSchoolStartTime()) &&
+                        TextUtils.isEmpty(educationDtoList.get(i).getInSchoolEndTime())) {
+                    position1 = i;
+
+                    mTag = true;
+                    break;
+                } else {
+                    position1 = i;
+                    mTag = false;
+                    break;
+                }
+            }
+            return mTag;
+        }
+
+    }
+
+    // 工作资料全部没写就跳过，返回true，其他情况都要展示false
+    public boolean isJumpWork(DeveloperInfoBean bean) {
+        List<DeveloperInfoBean.DeveloperWork> workExperienceDtoList = bean.getWorkExperienceDtoList();
+        boolean mTag = true;
+        if (workExperienceDtoList.size() == 0) {
+            return true;
+        } else {
+            for (int i = 0; i < workExperienceDtoList.size(); i++) {
+                if (TextUtils.isEmpty(workExperienceDtoList.get(i).getCompanyName()) &&
+                        TextUtils.isEmpty(workExperienceDtoList.get(i).getIndustryName()) &&
+                        TextUtils.isEmpty(workExperienceDtoList.get(i).getPositionName()) &&
+                        TextUtils.isEmpty(workExperienceDtoList.get(i).getWorkStartTime()) &&
+                        TextUtils.isEmpty(workExperienceDtoList.get(i).getWorkEndTime())) {
+                    position2 = i;
+
+                    mTag = true;
+                    break;
+                } else {
+                    position2 = i;
+
+                    mTag = false;
+                    break;
+                }
+            }
+            return mTag;
+        }
+
+    }
+
+
+    // 项目资料全部没写就跳过，返回true，其他情况都要展示false
+    public boolean isJumpProject(DeveloperInfoBean bean) {
+        List<DeveloperInfoBean.DeveloperProject> projectDtoList = bean.getProjectDtoList();
+        boolean mTag = true;
+        if (projectDtoList.size() == 0) {
+            return true;
+        } else {
+            for (int i = 0; i < projectDtoList.size(); i++) {
+                if (TextUtils.isEmpty(projectDtoList.get(i).getProjectName()) &&
+                        TextUtils.isEmpty(projectDtoList.get(i).getIndustryName()) &&
+                        TextUtils.isEmpty(projectDtoList.get(i).getProjectStartDate()) &&
+                        TextUtils.isEmpty(projectDtoList.get(i).getProjectEndDate()) &&
+                        TextUtils.isEmpty(projectDtoList.get(i).getPosition()) &&
+                        TextUtils.isEmpty(projectDtoList.get(i).getCompanyName()) &&
+                        TextUtils.isEmpty(projectDtoList.get(i).getDescription()) &&
+                        projectDtoList.get(i).getProjectSkillList().size() == 0) {
+
+                    position3 = i;
+
+                    mTag = true;
+                    break;
+                } else {
+                    position3 = i;
+
+                    mTag = false;
+                    break;
+                }
+            }
+            return mTag;
+        }
+
+    }
 
 }

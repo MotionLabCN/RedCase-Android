@@ -137,14 +137,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/dp_6"
-                        android:background="@drawable/bg_blue_stroke"
-                        android:drawableRight="@drawable/icon_vector"
-                        android:paddingLeft="@dimen/dp_5"
-                        android:paddingTop="@dimen/dp_3"
-                        android:paddingRight="@dimen/dp_5"
-                        android:paddingBottom="@dimen/dp_3"
+                        android:background="@drawable/bg_blue_btn"
+                        android:drawableRight="@drawable/icon_vector_white"
+                        android:paddingLeft="@dimen/dp_16"
+                        android:paddingTop="@dimen/dp_12"
+                        android:paddingRight="@dimen/dp_16"
+                        android:paddingBottom="@dimen/dp_12"
                         android:text="导入简历"
-                        android:textColor="@color/main_color"
+                        android:textColor="@color/white"
                         android:textSize="@dimen/sp_12" />
                 </LinearLayout>
 
@@ -279,15 +279,16 @@
                         android:textColor="@color/black"
                         android:textSize="@dimen/sp_15"
                         android:textStyle="bold" />
+
                     <TextView
                         android:id="@+id/tv_add_base_info_tips"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dp_8"
                         android:layout_weight="1"
                         android:text="*请填充"
-                        android:layout_marginLeft="@dimen/dp_8"
                         android:textColor="@color/color_F5313D"
-                        android:textSize="@dimen/sp_14"/>
+                        android:textSize="@dimen/sp_14" />
 
                     <ImageView
                         android:layout_width="@dimen/dp_16"
@@ -371,15 +372,16 @@
                         android:textColor="@color/black"
                         android:textSize="@dimen/sp_15"
                         android:textStyle="bold" />
+
                     <TextView
                         android:id="@+id/tv_add_career_info_tips"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dp_8"
                         android:layout_weight="1"
                         android:text="*请填充"
-                        android:layout_marginLeft="@dimen/dp_8"
                         android:textColor="@color/color_F5313D"
-                        android:textSize="@dimen/sp_14"/>
+                        android:textSize="@dimen/sp_14" />
 
                     <ImageView
                         android:layout_width="@dimen/dp_16"
@@ -464,15 +466,16 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_15"
                     android:textStyle="bold" />
+
                 <TextView
                     android:id="@+id/tv_add_education_tips"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp_8"
                     android:layout_weight="1"
                     android:text="*请填充"
-                    android:layout_marginLeft="@dimen/dp_8"
                     android:textColor="@color/color_F5313D"
-                    android:textSize="@dimen/sp_14"/>
+                    android:textSize="@dimen/sp_14" />
 
                 <ImageView
                     android:layout_width="@dimen/dp_16"
@@ -519,15 +522,17 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_15"
                     android:textStyle="bold" />
+
                 <TextView
                     android:id="@+id/tv_add_worK_tips"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp_8"
                     android:layout_weight="1"
                     android:text="*请填充"
-                    android:layout_marginLeft="@dimen/dp_8"
                     android:textColor="@color/color_F5313D"
-                    android:textSize="@dimen/sp_14"/>
+                    android:textSize="@dimen/sp_14" />
+
                 <ImageView
                     android:layout_width="@dimen/dp_16"
                     android:layout_height="@dimen/dp_16"
@@ -573,15 +578,17 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_15"
                     android:textStyle="bold" />
+
                 <TextView
                     android:id="@+id/tv_add_project_tips"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp_8"
                     android:layout_weight="1"
                     android:text="*请填充"
-                    android:layout_marginLeft="@dimen/dp_8"
                     android:textColor="@color/color_F5313D"
-                    android:textSize="@dimen/sp_14"/>
+                    android:textSize="@dimen/sp_14" />
+
                 <ImageView
                     android:layout_width="@dimen/dp_16"
                     android:layout_height="@dimen/dp_16"
@@ -619,7 +626,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="提交" />
+            android:text="提交审核" />
     </LinearLayout>
 
 </LinearLayout>

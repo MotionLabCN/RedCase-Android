@@ -6,6 +6,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -24,16 +25,20 @@ import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 import com.tntlinking.tntdev.R;
 import com.tntlinking.tntdev.app.AppActivity;
 import com.tntlinking.tntdev.http.api.ParseResumeApi;
+import com.tntlinking.tntdev.http.glide.GlideApp;
 import com.tntlinking.tntdev.http.model.HttpData;
 import com.tntlinking.tntdev.other.AppConfig;
 
 import java.io.File;
 import java.util.List;
 
+import androidx.annotation.NonNull;
+import okhttp3.Call;
+
 
 public final class UploadResumeActivity extends AppActivity implements IWXAPIEventHandler {
     private final int REQUEST_CODE_FROM_ACTIVITY = 1000;
-
+    private  BaseDialog.Builder<BaseDialog.Builder<?>> builderBuilder;
     @Override
     protected int getLayoutId() {
         return R.layout.uploadresume_activity;
@@ -49,6 +54,13 @@ public final class UploadResumeActivity extends AppActivity implements IWXAPIEve
 
     @Override
     protected void initData() {
+        builderBuilder = new BaseDialog.Builder<>(UploadResumeActivity.this);
+        builderBuilder.setContentView(R.layout.show_resume_dialog).setAnimStyle(BaseDialog.ANIM_SCALE);
+
+        ImageView imageView = builderBuilder.findViewById(R.id.iv_gif);
+        GlideApp.with(this)
+                .load(R.drawable.resume_1)
+                .into(imageView);
 
     }
 
@@ -72,9 +84,9 @@ public final class UploadResumeActivity extends AppActivity implements IWXAPIEve
                 //拉起小程序页面的可带参路径，不填默认拉起小程序首页，对于小游戏，可以只传入 query 部分，来实现传参效果，如：传入 "?foo=bar"。
                 String mobile = (SPUtils.getInstance().getString(AppConfig.DEVELOP_MOBILE));//开发者手机号码
                 req.path = "pages/resumeUpload/index?phone=" + mobile;
-                if (AppConfig.isDebug()){
+                if (AppConfig.isDebug()) {
                     req.miniprogramType = WXLaunchMiniProgram.Req.MINIPROGRAM_TYPE_PREVIEW;// 可选打开 开发版，体验版和正式版
-                }else {
+                } else {
                     req.miniprogramType = WXLaunchMiniProgram.Req.MINIPTOGRAM_TYPE_RELEASE;// 可选打开 开发版，体验版和正式版
                 }
 
@@ -157,6 +169,18 @@ public final class UploadResumeActivity extends AppActivity implements IWXAPIEve
                                     dialog.dismiss();
                                     finish();
                                 }).show();
+                    }
+
+                    @Override
+                    public void onStart(Call call) {
+//                        super.onStart(call);
+                        builderBuilder.show();
+                    }
+
+                    @Override
+                    public void onEnd(Call call) {
+//                        super.onEnd(call);
+                        builderBuilder.dismiss();
                     }
                 });
     }

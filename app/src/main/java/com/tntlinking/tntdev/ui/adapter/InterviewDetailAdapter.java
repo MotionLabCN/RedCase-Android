@@ -1,5 +1,6 @@
 package com.tntlinking.tntdev.ui.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -50,6 +51,7 @@ public final class InterviewDetailAdapter extends BaseAdapter {
 
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder holder = null;
@@ -70,7 +72,10 @@ public final class InterviewDetailAdapter extends BaseAdapter {
 
             holder.ll_status.setVisibility(View.GONE);
             holder.tv_interview_position.setText(bean.getPositionName());
-            holder.tv_interview_salary.setText(bean.getWorkDaysModeName()+bean.getEndPay());
+            double startPay = Double.parseDouble(bean.getStartPay()) / 1000;
+            double endPay = Double.parseDouble(bean.getEndPay()) / 1000;
+            holder.tv_interview_salary.setText(bean.getWorkDaysModeName() + "·" +
+                    Utils.formatMoney(startPay) + "-" + Utils.formatMoney(endPay) + "k/月");
             holder.tv_interview_company.setText(bean.getCompanyName());
             holder.tv_interview_time.setText(bean.getInterviewStartDate());
 

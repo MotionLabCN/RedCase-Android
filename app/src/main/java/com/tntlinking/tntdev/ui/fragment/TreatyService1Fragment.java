@@ -26,6 +26,7 @@ import com.tntlinking.tntdev.http.api.UpdateDailyApi;
 import com.tntlinking.tntdev.http.model.HttpData;
 import com.tntlinking.tntdev.other.AppConfig;
 import com.tntlinking.tntdev.other.HomeChangeListener;
+import com.tntlinking.tntdev.ui.activity.HistoryDailyListActivity;
 import com.tntlinking.tntdev.ui.activity.MainActivity;
 import com.tntlinking.tntdev.ui.adapter.DailyWriteAdapter;
 import com.tntlinking.tntdev.ui.adapter.ServiceProjectAdapter;
@@ -240,6 +241,9 @@ public final class TreatyService1Fragment extends TitleBarFragment<MainActivity>
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.ll_history:
+                Intent intent = new Intent(getActivity(), HistoryDailyListActivity.class);
+                intent.putExtra("orderId", orderId);
+                startActivity(intent);
                 break;
             case R.id.ll_done:
                 writeDaily(1);
@@ -379,7 +383,8 @@ public final class TreatyService1Fragment extends TitleBarFragment<MainActivity>
                             orderId = mServiceList.get(0).getId();// 服务项目只会有一个
 
                             getDailyList(orderId);
-                        }else {
+
+                        } else {
                             ll_empty.setVisibility(View.VISIBLE);
                             ll_daily.setVisibility(View.GONE);
                         }

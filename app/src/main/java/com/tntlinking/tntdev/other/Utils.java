@@ -19,6 +19,7 @@ import java.lang.reflect.Type;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.security.MessageDigest;
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -503,6 +504,12 @@ public class Utils {
             return 0;
         }
         return 0;
+    }
+
+    public static String formatMoney(double str) {
+        DecimalFormat decimalFormat = new DecimalFormat("###################.###########");
+        String format = decimalFormat.format(str);
+        return format;
     }
 
 

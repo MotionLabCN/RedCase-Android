@@ -863,7 +863,6 @@ public final class EnterDeveloperActivity extends AppActivity {
                         TextUtils.isEmpty(projectDtoList.get(i).getProjectEndDate()) ||
                         TextUtils.isEmpty(projectDtoList.get(i).getPosition()) ||
                         TextUtils.isEmpty(projectDtoList.get(i).getCompanyName()) ||
-                        TextUtils.isEmpty(projectDtoList.get(i).getIndustryName()) ||
                         TextUtils.isEmpty(projectDtoList.get(i).getDescription()) ||
                         projectDtoList.get(i).getProjectSkillList().size() == 0) {
 

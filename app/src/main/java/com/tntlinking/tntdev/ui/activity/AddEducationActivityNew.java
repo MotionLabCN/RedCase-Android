@@ -23,6 +23,7 @@ import com.tntlinking.tntdev.http.api.GetProvinceApi;
 import com.tntlinking.tntdev.http.api.AddEducationApi;
 import com.tntlinking.tntdev.http.api.UpdateEducationApi;
 import com.tntlinking.tntdev.http.model.HttpData;
+import com.tntlinking.tntdev.manager.ActivityManager;
 import com.tntlinking.tntdev.other.Utils;
 import com.tntlinking.tntdev.ui.bean.DeveloperInfoBean;
 import com.tntlinking.tntdev.ui.dialog.DateSelectDialog;
@@ -35,6 +36,8 @@ import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatTextView;
 
 import static com.tntlinking.tntdev.ui.activity.EnterDeveloperActivity.INTENT_KEY_DEVELOPER_INFO;
+import static com.tntlinking.tntdev.ui.activity.ResumeAnalysisActivity.IS_FIRST_RESUME;
+import static com.tntlinking.tntdev.ui.activity.ResumeAnalysisActivity.IS_RESUME;
 
 
 /**
@@ -63,6 +66,7 @@ public final class AddEducationActivityNew extends AppActivity {
 
     private int position = 0;
     private int mId = 0;// 教育条目 id
+    private DeveloperInfoBean mBean;
 
     @Override
     protected int getLayoutId() {
@@ -96,10 +100,10 @@ public final class AddEducationActivityNew extends AppActivity {
         mTrainingList = getDictionaryList("7");//培养方式
 
         position = getInt("position", 0);
-        DeveloperInfoBean bean = getSerializable(INTENT_KEY_DEVELOPER_INFO);
-        if (bean != null) {
-            DeveloperInfoBean.DeveloperEducation developerEducation = bean.getEducationDtoList().get(position);
-            if (bean.getEducationDtoList().size() != 0) {
+        mBean = getSerializable(INTENT_KEY_DEVELOPER_INFO);
+        if (mBean != null) {
+            DeveloperInfoBean.DeveloperEducation developerEducation = mBean.getEducationDtoList().get(position);
+            if (mBean.getEducationDtoList().size() != 0) {
                 if (TextUtils.isEmpty(developerEducation.getCollegeName())) {
 //                    btn_delete.setVisibility(View.GONE);
                     tv_title.setText("添加教育经历");
@@ -146,9 +150,25 @@ public final class AddEducationActivityNew extends AppActivity {
                     training_methodId = developerEducation.getTrainingMode();
                     mId = developerEducation.getId();
                 }
+
+                if (getBoolean(IS_RESUME)) {
+                    btn_commit.setText("下一步");
+                    btn_delete.setVisibility(View.GONE);
+                }
             }
         }
 
+    }
+
+    @Override
+    public void onLeftClick(View view) {
+        super.onLeftClick(view);
+        if (getBoolean(IS_FIRST_RESUME)) {
+            Intent intent = new Intent(this, EnterDeveloperActivity.class);
+            intent.putExtra(INTENT_KEY_DEVELOPER_INFO, mBean);
+            startActivity(intent);
+            ActivityManager.getInstance().finishAllActivities();
+        }
     }
 
     private long sYearMonth;// 开始时间戳
@@ -197,7 +217,7 @@ public final class AddEducationActivityNew extends AppActivity {
                         info_school_end_time.setText(mEndTime);
                         end_time = mEndTime;
 
-                        eYearMonth =  Utils.dateToStamp(mEndTime);
+                        eYearMonth = Utils.dateToStamp(mEndTime);
 
                     }
 
@@ -309,10 +329,17 @@ public final class AddEducationActivityNew extends AppActivity {
                     return;
                 }
 
-                if (mId == 0) { // 0 添加教育  不等于0 是编辑教育
-                    addEducation(false);
+                if (btn_commit.getText().equals("完成")) {
+                    Intent intent = new Intent(this, EnterDeveloperActivity.class);
+                    intent.putExtra(INTENT_KEY_DEVELOPER_INFO, mBean);
+                    startActivity(intent);
+                    ActivityManager.getInstance().finishAllActivities();
                 } else {
-                    updateEducation(mId);
+                    if (mId == 0) { // 0 添加教育  不等于0 是编辑教育
+                        addEducation(false);
+                    } else {
+                        updateEducation(mId);
+                    }
                 }
                 break;
 
@@ -403,8 +430,22 @@ public final class AddEducationActivityNew extends AppActivity {
 
                     @Override
                     public void onSucceed(HttpData<List<GetProvinceApi.ProvinceBean>> data) {
-                        setResult(RESULT_OK);
-                        finish();
+                        if (!getBoolean(IS_RESUME)) {
+                            setResult(RESULT_OK);
+                            finish();
+                        } else {
+
+                            DeveloperInfoBean.DeveloperEducation developerEducation = mBean.getEducationDtoList().get(position);
+                            developerEducation.setCollegeName(school_name);
+                            developerEducation.setEducationName(education);
+                            developerEducation.setTrainingModeName(training);
+                            developerEducation.setMajor(major);
+                            developerEducation.setInSchoolStartTime(in_time);
+                            developerEducation.setInSchoolEndTime(end_time);
+
+
+                            checkDeveloper(mBean);
+                        }
                     }
                 });
     }
@@ -432,4 +473,163 @@ public final class AddEducationActivityNew extends AppActivity {
     }
 
 
+    private int position2 = 0;
+    private int position3 = 0;
+
+    public void checkDeveloper(DeveloperInfoBean bean) {
+        Intent intent = new Intent();
+        intent.putExtra(IS_RESUME, true);
+
+        if (!isJumpEducation(bean)) {
+            setNextData(bean);
+            return;
+        }
+        if (!isJumpWork(bean)) {
+            intent.setClass(this, AddWorkActivity.class);
+            intent.putExtra(INTENT_KEY_DEVELOPER_INFO, bean);
+            intent.putExtra("position", position2);
+            startActivity(intent);
+            return;
+        }
+        if (!isJumpProject(bean)) {
+            intent.setClass(this, AddProjectActivityNew.class);
+            intent.putExtra(INTENT_KEY_DEVELOPER_INFO, bean);
+            intent.putExtra("position", position3);
+            startActivity(intent);
+            return;
+        } else {
+            btn_commit.setText("完成");
+        }
+
+    }
+
+    // 教育资料全部没写就跳过，返回true，其他情况都要展示false
+    public boolean isJumpEducation(DeveloperInfoBean bean) {
+        List<DeveloperInfoBean.DeveloperEducation> educationDtoList = bean.getEducationDtoList();
+        boolean mTag = true;
+        if (educationDtoList.size() == 0) {
+            return true;
+        } else {
+            for (int i = 0; i < educationDtoList.size(); i++) {
+                if (TextUtils.isEmpty(educationDtoList.get(i).getCollegeName()) &&
+                        TextUtils.isEmpty(educationDtoList.get(i).getEducationName()) &&
+                        TextUtils.isEmpty(educationDtoList.get(i).getTrainingModeName()) &&
+                        TextUtils.isEmpty(educationDtoList.get(i).getMajor()) &&
+                        TextUtils.isEmpty(educationDtoList.get(i).getInSchoolStartTime()) &&
+                        TextUtils.isEmpty(educationDtoList.get(i).getInSchoolEndTime())) {
+                    position = i;
+
+                    mTag = true;
+                    break;
+                } else {
+                    position = i;
+                    mTag = false;
+                    break;
+                }
+            }
+            return mTag;
+        }
+
+    }
+
+
+    // 工作资料全部没写就跳过，返回true，其他情况都要展示false
+    public boolean isJumpWork(DeveloperInfoBean bean) {
+        List<DeveloperInfoBean.DeveloperWork> workExperienceDtoList = bean.getWorkExperienceDtoList();
+        boolean mTag = true;
+        if (workExperienceDtoList.size() == 0) {
+            return true;
+        } else {
+            for (int i = 0; i < workExperienceDtoList.size(); i++) {
+                if (TextUtils.isEmpty(workExperienceDtoList.get(i).getCompanyName()) &&
+                        TextUtils.isEmpty(workExperienceDtoList.get(i).getIndustryName()) &&
+                        TextUtils.isEmpty(workExperienceDtoList.get(i).getPositionName()) &&
+                        TextUtils.isEmpty(workExperienceDtoList.get(i).getWorkStartTime()) &&
+                        TextUtils.isEmpty(workExperienceDtoList.get(i).getWorkEndTime())) {
+                    position2 = i;
+
+                    mTag = true;
+                    break;
+                } else {
+                    position2 = i;
+
+                    mTag = false;
+                    break;
+                }
+            }
+            return mTag;
+        }
+
+    }
+
+
+    // 项目资料全部没写就跳过，返回true，其他情况都要展示false
+    public boolean isJumpProject(DeveloperInfoBean bean) {
+        List<DeveloperInfoBean.DeveloperProject> projectDtoList = bean.getProjectDtoList();
+        boolean mTag = true;
+        if (projectDtoList.size() == 0) {
+            return true;
+        } else {
+            for (int i = 0; i < projectDtoList.size(); i++) {
+                if (TextUtils.isEmpty(projectDtoList.get(i).getProjectName()) &&
+                        TextUtils.isEmpty(projectDtoList.get(i).getIndustryName()) &&
+                        TextUtils.isEmpty(projectDtoList.get(i).getProjectStartDate()) &&
+                        TextUtils.isEmpty(projectDtoList.get(i).getProjectEndDate()) &&
+                        TextUtils.isEmpty(projectDtoList.get(i).getPosition()) &&
+                        TextUtils.isEmpty(projectDtoList.get(i).getCompanyName()) &&
+                        TextUtils.isEmpty(projectDtoList.get(i).getDescription()) &&
+                        projectDtoList.get(i).getProjectSkillList().size() == 0) {
+
+                    position3 = i;
+
+                    mTag = true;
+                    break;
+                } else {
+                    position3 = i;
+
+                    mTag = false;
+                    break;
+                }
+            }
+            return mTag;
+        }
+
+    }
+
+
+    public void setNextData(DeveloperInfoBean bean) {
+
+        if (bean != null) {
+            DeveloperInfoBean.DeveloperEducation developerEducation = bean.getEducationDtoList().get(position);
+            if (bean.getEducationDtoList().size() != 0) {
+
+                tv_title.setText("编辑教育经历");
+                btn_commit.setText("下一步");
+                btn_delete.setVisibility(View.GONE);
+
+                et_info_school_name.setText(TextUtils.isEmpty(developerEducation.getCollegeName()) ? "" : developerEducation.getCollegeName());
+                info_education.setLeftText(TextUtils.isEmpty(developerEducation.getEducationName()) ? "学历" : developerEducation.getEducationName());
+                info_school_in_time.setText(TextUtils.isEmpty(developerEducation.getInSchoolStartTime()) ? "选择入学时间" : developerEducation.getInSchoolStartTime());
+                info_school_end_time.setText(TextUtils.isEmpty(developerEducation.getInSchoolEndTime()) ? "选择毕业时间" : developerEducation.getInSchoolEndTime());
+                et_info_major.setText(TextUtils.isEmpty(developerEducation.getMajor()) ? "" : developerEducation.getMajor());
+                info_training_method.setLeftText(TextUtils.isEmpty(developerEducation.getTrainingModeName()) ? "培养方式" : developerEducation.getTrainingModeName());
+
+                sYearMonth = Utils.dateToStamp(developerEducation.getInSchoolStartTime());
+                eYearMonth = Utils.dateToStamp(developerEducation.getInSchoolEndTime());
+
+                school_name = developerEducation.getCollegeName();
+                education = developerEducation.getEducationName();
+                educationId = developerEducation.getEducationId();
+                major = developerEducation.getMajor();
+                in_time = developerEducation.getInSchoolStartTime();
+                end_time = developerEducation.getInSchoolEndTime();
+                training = developerEducation.getTrainingModeName();
+                training_methodId = developerEducation.getTrainingMode();
+                mId = developerEducation.getId();
+            }
+
+
+        }
+
+    }
 }

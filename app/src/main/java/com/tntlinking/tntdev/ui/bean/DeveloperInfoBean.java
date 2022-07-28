@@ -34,6 +34,7 @@ public class DeveloperInfoBean implements Serializable {
     private int workDayMode = 1; // 1 全日 2 半日  //默认全日
     private String lowestSalary; // 期望最低薪资
     private String highestSalary; // 期望最高薪资
+    private String expectSalary; //薪资
     private String careerDirection; //职业方向
     private String workYears; //工作年限
 
@@ -52,6 +53,7 @@ public class DeveloperInfoBean implements Serializable {
         private int workDayMode = 1; // 1 全日 2 半日  //默认全日
         private String lowestSalary; // 期望最低薪资
         private String highestSalary; // 期望最高薪资
+        private String expectSalary; //薪资
         private String careerDirection; //职业方向
         private String workYearsName; //工作年限
 
@@ -109,6 +111,14 @@ public class DeveloperInfoBean implements Serializable {
 
         public void setHighestSalary(String highestSalary) {
             this.highestSalary = highestSalary;
+        }
+
+        public String getExpectSalary() {
+            return expectSalary;
+        }
+
+        public void setExpectSalary(String expectSalary) {
+            this.expectSalary = expectSalary;
         }
 
         public String getCareerDirection() {

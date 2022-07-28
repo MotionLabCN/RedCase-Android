@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layout_marginLeft="@dimen/dp_40"
+    android:layout_marginRight="@dimen/dp_40"
+    app:cardBackgroundColor="@color/white"
+    app:cardCornerRadius="@dimen/dp_8"
+    app:cardElevation="0px">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/dp_50"
+        android:paddingTop="@dimen/dp_32"
+        android:paddingRight="@dimen/dp_50"
+        android:paddingBottom="@dimen/dp_32">
+
+
+        <ImageView
+            android:id="@+id/iv_gif"
+            android:layout_width="@dimen/dp_64"
+            android:layout_height="@dimen/dp_64"
+            android:src="@drawable/icon_empty_interview" />
+
+        <TextView
+            android:id="@+id/tv_tips"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_10"
+            android:text="正在上传简历"
+            android:textColor="@color/color_text_color"
+            android:textSize="@dimen/sp_13" />
+
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

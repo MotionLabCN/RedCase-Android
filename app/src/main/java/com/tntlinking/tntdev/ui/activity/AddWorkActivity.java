@@ -25,6 +25,8 @@ import com.tntlinking.tntdev.http.api.GetProvinceApi;
 import com.tntlinking.tntdev.http.api.GetTagListApi;
 import com.tntlinking.tntdev.http.api.UpdateWorkApi;
 import com.tntlinking.tntdev.http.model.HttpData;
+import com.tntlinking.tntdev.manager.ActivityManager;
+import com.tntlinking.tntdev.other.AppConfig;
 import com.tntlinking.tntdev.other.TimeUtil;
 import com.tntlinking.tntdev.other.Utils;
 import com.tntlinking.tntdev.ui.bean.DeveloperInfoBean;
@@ -40,6 +42,8 @@ import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatTextView;
 
 import static com.tntlinking.tntdev.ui.activity.EnterDeveloperActivity.INTENT_KEY_DEVELOPER_INFO;
+import static com.tntlinking.tntdev.ui.activity.ResumeAnalysisActivity.IS_FIRST_RESUME;
+import static com.tntlinking.tntdev.ui.activity.ResumeAnalysisActivity.IS_RESUME;
 
 
 /**
@@ -91,6 +95,7 @@ public final class AddWorkActivity extends AppActivity {
     private List<GetDictionaryApi.DictionaryBean> mCompanyList;
 
     private int position = 0;
+    private DeveloperInfoBean mBean;
 
     @Override
     protected void initData() {
@@ -99,10 +104,10 @@ public final class AddWorkActivity extends AppActivity {
 
 
         position = getInt("position", 0);
-        DeveloperInfoBean bean = getSerializable(INTENT_KEY_DEVELOPER_INFO);
-        if (bean != null) {
-            DeveloperInfoBean.DeveloperWork developerWork = bean.getWorkExperienceDtoList().get(position);
-            if (bean.getWorkExperienceDtoList().size() != 0) {
+        mBean = getSerializable(INTENT_KEY_DEVELOPER_INFO);
+        if (mBean != null) {
+            DeveloperInfoBean.DeveloperWork developerWork = mBean.getWorkExperienceDtoList().get(position);
+            if (mBean.getWorkExperienceDtoList().size() != 0) {
                 if (TextUtils.isEmpty(developerWork.getCompanyName())) {
 //                    btn_delete.setVisibility(View.GONE);
                     btn_delete.setText("保存");
@@ -138,9 +143,26 @@ public final class AddWorkActivity extends AppActivity {
                     industryId = developerWork.getIndustryId();
                     mId = developerWork.getId();
                 }
+
+
+                if (getBoolean(IS_RESUME)) {
+                    btn_commit.setText("下一步");
+                    btn_delete.setVisibility(View.GONE);
+                }
             }
         }
 
+    }
+
+    @Override
+    public void onLeftClick(View view) {
+        super.onLeftClick(view);
+        if (getBoolean(IS_FIRST_RESUME)) {
+            Intent intent = new Intent(this, EnterDeveloperActivity.class);
+            intent.putExtra(INTENT_KEY_DEVELOPER_INFO, mBean);
+            startActivity(intent);
+            ActivityManager.getInstance().finishAllActivities();
+        }
     }
 
     private List<GetTagListApi.Bean.ChildrenBean> mSelectList = new ArrayList<>();
@@ -288,10 +310,17 @@ public final class AddWorkActivity extends AppActivity {
                     return;
                 }
 
-                if (mId == 0) { // 0 添加教育  不等于0 是编辑教育
-                    addWork(false);
+                if (btn_commit.getText().equals("完成")) {
+                    Intent intent = new Intent(this, EnterDeveloperActivity.class);
+                    intent.putExtra(INTENT_KEY_DEVELOPER_INFO, mBean);
+                    startActivity(intent);
+                    ActivityManager.getInstance().finishAllActivities();
                 } else {
-                    updateWork(mId);
+                    if (mId == 0) { // 0 添加教育  不等于0 是编辑教育
+                        addWork(false);
+                    } else {
+                        updateWork(mId);
+                    }
                 }
                 break;
         }
@@ -389,7 +418,7 @@ public final class AddWorkActivity extends AppActivity {
     public void updateWork(int id) {
         EasyHttp.put(this)
                 .api(new UpdateWorkApi()
-                        .setDeveloperId(89)
+                        .setDeveloperId(SPUtils.getInstance().getInt(AppConfig.DEVELOPER_ID))
                         .setWorkExperienceId(id)
                         .setCompanyName(company_name)
                         .setIndustryId(industryId)
@@ -400,9 +429,22 @@ public final class AddWorkActivity extends AppActivity {
 
                     @Override
                     public void onSucceed(HttpData<List<GetProvinceApi.ProvinceBean>> data) {
-                        EasyLog.print("====updateCareer===");
-                        setResult(RESULT_OK);
-                        finish();
+                        if (!getBoolean(IS_RESUME)) {
+                            setResult(RESULT_OK);
+                            finish();
+                        } else {
+
+                            DeveloperInfoBean.DeveloperWork developerWork = mBean.getWorkExperienceDtoList().get(position);
+                            developerWork.setCompanyName(company_name);
+                            developerWork.setIndustryName(industry);
+                            developerWork.setPositionName(project_position);
+                            developerWork.setWorkStartTime(in_time);
+                            developerWork.setWorkEndTime(end_time);
+
+                            checkDeveloper(mBean);
+
+
+                        }
                     }
                 });
     }
@@ -420,6 +462,126 @@ public final class AddWorkActivity extends AppActivity {
                         finish();
                     }
                 });
+    }
+
+
+    private int position3 = 0;
+
+    public void checkDeveloper(DeveloperInfoBean bean) {
+        Intent intent = new Intent();
+        intent.putExtra(IS_RESUME, true);
+        if (!isJumpWork(bean)) {
+            setNextData(bean);
+            return;
+        }
+        if (!isJumpProject(bean)) {
+            intent.setClass(this, AddProjectActivityNew.class);
+            intent.putExtra(INTENT_KEY_DEVELOPER_INFO, bean);
+            intent.putExtra("position", position3);
+            startActivity(intent);
+        } else {
+            btn_commit.setText("完成");
+        }
+
+    }
+
+
+    // 工作资料全部没写就跳过，返回true，其他情况都要展示false
+    public boolean isJumpWork(DeveloperInfoBean bean) {
+        List<DeveloperInfoBean.DeveloperWork> workExperienceDtoList = bean.getWorkExperienceDtoList();
+        boolean mTag = true;
+        if (workExperienceDtoList.size() == 0) {
+            return true;
+        } else {
+            for (int i = 0; i < workExperienceDtoList.size(); i++) {
+                if (TextUtils.isEmpty(workExperienceDtoList.get(i).getCompanyName()) &&
+                        TextUtils.isEmpty(workExperienceDtoList.get(i).getIndustryName()) &&
+                        TextUtils.isEmpty(workExperienceDtoList.get(i).getPositionName()) &&
+                        TextUtils.isEmpty(workExperienceDtoList.get(i).getWorkStartTime()) &&
+                        TextUtils.isEmpty(workExperienceDtoList.get(i).getWorkEndTime())) {
+                    position = i;
+
+                    mTag = true;
+                    break;
+                } else {
+                    position = i;
+
+                    mTag = false;
+                    break;
+                }
+            }
+            return mTag;
+        }
+
+    }
+
+
+    // 项目资料全部没写就跳过，返回true，其他情况都要展示false
+    public boolean isJumpProject(DeveloperInfoBean bean) {
+        List<DeveloperInfoBean.DeveloperProject> projectDtoList = bean.getProjectDtoList();
+        boolean mTag = true;
+        if (projectDtoList.size() == 0) {
+            return true;
+        } else {
+            for (int i = 0; i < projectDtoList.size(); i++) {
+                if (TextUtils.isEmpty(projectDtoList.get(i).getProjectName()) &&
+                        TextUtils.isEmpty(projectDtoList.get(i).getIndustryName()) &&
+                        TextUtils.isEmpty(projectDtoList.get(i).getProjectStartDate()) &&
+                        TextUtils.isEmpty(projectDtoList.get(i).getProjectEndDate()) &&
+                        TextUtils.isEmpty(projectDtoList.get(i).getPosition()) &&
+                        TextUtils.isEmpty(projectDtoList.get(i).getCompanyName()) &&
+                        TextUtils.isEmpty(projectDtoList.get(i).getDescription()) &&
+                        projectDtoList.get(i).getProjectSkillList().size() == 0) {
+
+                    position3 = i;
+
+                    mTag = true;
+                    break;
+                } else {
+                    position3 = i;
+
+                    mTag = false;
+                    break;
+                }
+            }
+            return mTag;
+        }
+
+    }
+
+    public void setNextData(DeveloperInfoBean bean) {
+        if (bean != null) {
+            DeveloperInfoBean.DeveloperWork developerWork = bean.getWorkExperienceDtoList().get(position);
+            if (bean.getWorkExperienceDtoList().size() != 0) {
+
+                tv_title.setText("编辑工作经历");
+                btn_commit.setText("下一步");
+                btn_delete.setVisibility(View.GONE);
+
+
+                et_work_company_name.setText(TextUtils.isEmpty(developerWork.getCompanyName()) ? "" : developerWork.getCompanyName());
+                info_work_industry.setLeftText(TextUtils.isEmpty(developerWork.getIndustryName()) ? "所在行业" : developerWork.getIndustryName());
+                et_work_position.setText(TextUtils.isEmpty(developerWork.getPositionName()) ? "" : developerWork.getPositionName());
+                info_work_in_time.setText(TextUtils.isEmpty(developerWork.getWorkStartTime()) ? "选择开始时间" : developerWork.getWorkStartTime());
+                info_work_end_time.setText(TextUtils.isEmpty(developerWork.getWorkEndTime()) ? "选择结束时间" : developerWork.getWorkEndTime());
+
+                sYearMonth = Utils.dateToStamp(developerWork.getWorkStartTime());
+                eYearMonth = Utils.dateToStamp(developerWork.getWorkEndTime());
+
+
+                company_name = developerWork.getCompanyName();
+                project_position = developerWork.getPositionName();
+                in_time = developerWork.getWorkStartTime();
+                end_time = developerWork.getWorkEndTime();
+                industry = developerWork.getIndustryName();
+                industryId = developerWork.getIndustryId();
+                mId = developerWork.getId();
+            }
+
+
+        }
+
+
     }
 
 }

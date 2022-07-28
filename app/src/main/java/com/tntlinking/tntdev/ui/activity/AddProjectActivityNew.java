@@ -26,6 +26,7 @@ import com.tntlinking.tntdev.http.api.GetTagListApi;
 import com.tntlinking.tntdev.http.api.UpdateProjectApi;
 import com.tntlinking.tntdev.http.api.UpdateWorkApi;
 import com.tntlinking.tntdev.http.model.HttpData;
+import com.tntlinking.tntdev.manager.ActivityManager;
 import com.tntlinking.tntdev.other.TimeUtil;
 import com.tntlinking.tntdev.other.Utils;
 import com.tntlinking.tntdev.ui.bean.DeveloperInfoBean;
@@ -43,6 +44,8 @@ import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatTextView;
 
 import static com.tntlinking.tntdev.ui.activity.EnterDeveloperActivity.INTENT_KEY_DEVELOPER_INFO;
+import static com.tntlinking.tntdev.ui.activity.ResumeAnalysisActivity.IS_FIRST_RESUME;
+import static com.tntlinking.tntdev.ui.activity.ResumeAnalysisActivity.IS_RESUME;
 
 
 /**
@@ -108,6 +111,7 @@ public final class AddProjectActivityNew extends AppActivity {
     private List<GetDictionaryApi.DictionaryBean> mCompanyList;
 
     private int position = 0;
+    private DeveloperInfoBean mBean;
 
     @Override
     protected void initData() {
@@ -115,11 +119,10 @@ public final class AddProjectActivityNew extends AppActivity {
         mCompanyList = getDictionaryList("1");//所属行业
 
         position = getInt("position", 0);
-        DeveloperInfoBean bean = getSerializable(INTENT_KEY_DEVELOPER_INFO);
-
-        if (bean != null) {
-            DeveloperInfoBean.DeveloperProject developerProject = bean.getProjectDtoList().get(position);
-            if (bean.getProjectDtoList().size() != 0) {
+        mBean = getSerializable(INTENT_KEY_DEVELOPER_INFO);
+        if (mBean != null) {
+            DeveloperInfoBean.DeveloperProject developerProject = mBean.getProjectDtoList().get(position);
+            if (mBean.getProjectDtoList().size() != 0) {
 //                if (TextUtils.isEmpty(developerProject.getProjectName())) {//判断是否有项目名字，没有就不显示
                 if (developerProject.getId() == 0) {//判断是否有项目名字，没有就不显示
 //                    btn_delete.setVisibility(View.GONE);
@@ -179,7 +182,41 @@ public final class AddProjectActivityNew extends AppActivity {
                     description = developerProject.getDescription();
                     mId = developerProject.getId();
                 }
+
+                if (getBoolean(IS_RESUME)) {
+                    btn_commit.setText("下一步");
+                    btn_delete.setVisibility(View.GONE);
+                }
             }
+        }
+    }
+
+    @Override
+    public void onLeftClick(View view) {
+        super.onLeftClick(view);
+//        if (getBoolean(IS_FIRST_RESUME)) {
+//            new BaseDialog.Builder<>(this)
+//                    .setContentView(R.layout.check_order_status_dialog)
+//                    .setAnimStyle(BaseDialog.ANIM_SCALE)
+//                    .setText(R.id.tv_title, "简历解析")
+//                    .setText(R.id.tv_content, "是否返回到简历解析页面")
+//                    .setText(R.id.btn_dialog_custom_cancel, "否")
+//                    .setText(R.id.btn_dialog_custom_ok, "是")
+//                    .setOnClickListener(R.id.btn_dialog_custom_cancel, (BaseDialog.OnClickListener<Button>) (dialog, button) -> dialog.dismiss())
+//                    .setOnClickListener(R.id.btn_dialog_custom_ok, (dialog, views) -> {
+//                        Intent intent = new Intent(this, EnterDeveloperActivity.class);
+//                        intent.putExtra(INTENT_KEY_DEVELOPER_INFO, mBean);
+//                        startActivity(intent);
+//                        dialog.dismiss();
+//                        ActivityManager.getInstance().finishAllActivities();
+//                    }).show();
+//        }
+
+        if (getBoolean(IS_FIRST_RESUME)) {
+            Intent intent = new Intent(this, EnterDeveloperActivity.class);
+            intent.putExtra(INTENT_KEY_DEVELOPER_INFO, mBean);
+            startActivity(intent);
+            ActivityManager.getInstance().finishAllActivities();
         }
     }
 
@@ -385,10 +422,18 @@ public final class AddProjectActivityNew extends AppActivity {
                     return;
                 }
 
-                if (mId == 0) { // 0 添加教育  不等于0 是编辑教育
-                    addProject(false);
+
+                if (btn_commit.getText().equals("完成")) {
+                    Intent intent = new Intent(this, EnterDeveloperActivity.class);
+                    intent.putExtra(INTENT_KEY_DEVELOPER_INFO, mBean);
+                    startActivity(intent);
+                    ActivityManager.getInstance().finishAllActivities();
                 } else {
-                    updateProject(mId);
+                    if (mId == 0) { // 0 添加教育  不等于0 是编辑教育
+                        addProject(false);
+                    } else {
+                        updateProject(mId);
+                    }
                 }
                 break;
         }
@@ -520,9 +565,26 @@ public final class AddProjectActivityNew extends AppActivity {
 
                     @Override
                     public void onSucceed(HttpData<List<GetProvinceApi.ProvinceBean>> data) {
-                        EasyLog.print("====updateProject===");
-                        setResult(RESULT_OK);
-                        finish();
+                        if (!getBoolean(IS_RESUME)) {
+                            setResult(RESULT_OK);
+                            finish();
+                        } else {
+
+                            DeveloperInfoBean.DeveloperProject developerProject = mBean.getProjectDtoList().get(position);
+                            developerProject.setProjectName(project_name);
+                            developerProject.setIndustryName(industry);
+                            developerProject.setProjectStartDate(in_time);
+                            developerProject.setProjectEndDate(end_time);
+                            developerProject.setPosition(project_position);
+                            developerProject.setCompanyName(company_name);
+                            developerProject.setDescription(description);
+                            developerProject.setProjectSkillList(mSelectList);
+
+
+                            checkDeveloper(mBean);
+
+
+                        }
                     }
                 });
     }
@@ -540,5 +602,99 @@ public final class AddProjectActivityNew extends AppActivity {
                         finish();
                     }
                 });
+    }
+
+
+    public void checkDeveloper(DeveloperInfoBean bean) {
+        if (!isJumpProject(bean)) {
+            setNextData(bean);
+        } else {
+            btn_commit.setText("完成");
+        }
+
+    }
+
+
+    // 项目资料全部没写就跳过，返回true，其他情况都要展示false
+    public boolean isJumpProject(DeveloperInfoBean bean) {
+        List<DeveloperInfoBean.DeveloperProject> projectDtoList = bean.getProjectDtoList();
+        boolean mTag = true;
+        if (projectDtoList.size() == 0) {
+            return true;
+        } else {
+            for (int i = 0; i < projectDtoList.size(); i++) {
+                if (TextUtils.isEmpty(projectDtoList.get(i).getProjectName()) &&
+                        TextUtils.isEmpty(projectDtoList.get(i).getIndustryName()) &&
+                        TextUtils.isEmpty(projectDtoList.get(i).getProjectStartDate()) &&
+                        TextUtils.isEmpty(projectDtoList.get(i).getProjectEndDate()) &&
+                        TextUtils.isEmpty(projectDtoList.get(i).getPosition()) &&
+                        TextUtils.isEmpty(projectDtoList.get(i).getCompanyName()) &&
+                        TextUtils.isEmpty(projectDtoList.get(i).getDescription()) &&
+                        projectDtoList.get(i).getProjectSkillList().size() == 0) {
+
+                    position = i;
+
+                    mTag = true;
+                    break;
+                } else {
+                    position = i;
+
+                    mTag = false;
+                    break;
+                }
+            }
+            return mTag;
+        }
+
+    }
+
+
+    public void setNextData(DeveloperInfoBean bean) {
+        if (bean != null) {
+            DeveloperInfoBean.DeveloperProject developerProject = bean.getProjectDtoList().get(position);
+
+            if (bean.getProjectDtoList().size() != 0) {
+                tv_title.setText("编辑项目经历");
+                btn_commit.setText("下一步");
+                btn_delete.setVisibility(View.GONE);
+
+                et_project_name.setText(TextUtils.isEmpty(developerProject.getProjectName()) ? "" : developerProject.getProjectName());
+                info_project_in_time.setText(TextUtils.isEmpty(developerProject.getProjectStartDate()) ? "选择开始时间" : developerProject.getProjectStartDate());
+                info_project_end_time.setText(TextUtils.isEmpty(developerProject.getProjectEndDate()) ? "选择结束时间" : developerProject.getProjectEndDate());
+                et_project_position.setText(TextUtils.isEmpty(developerProject.getPosition()) ? "" : developerProject.getPosition());
+                et_project_company_name.setText(TextUtils.isEmpty(developerProject.getCompanyName()) ? "" : developerProject.getCompanyName());
+                info_project_industry.setLeftText(TextUtils.isEmpty(developerProject.getIndustryName()) ? "所在行业" : developerProject.getIndustryName());
+                et_project_description.setText(TextUtils.isEmpty(developerProject.getDescription()) ? "" : developerProject.getDescription());
+
+                sYearMonth = Utils.dateToStamp(developerProject.getProjectStartDate());
+                eYearMonth = Utils.dateToStamp(developerProject.getProjectEndDate());
+
+                if (developerProject.getProjectSkillList() != null && developerProject.getProjectSkillList().size() > 0) {
+                    StringBuilder sb = new StringBuilder();
+                    mTagIntList.clear();
+                    mSelectList.clear();
+                    for (GetTagListApi.Bean.ChildrenBean i : developerProject.getProjectSkillList()) {
+                        sb.append(i.getSkillName());
+                        sb.append(",");
+                        mTagIntList.add(i.getId());
+                        mSelectList.add(i);
+                    }
+                    info_project_skill.setLeftText(sb.toString());
+                }
+
+                project_name = developerProject.getProjectName();
+                in_time = developerProject.getProjectStartDate();
+                end_time = developerProject.getProjectEndDate();
+                project_position = developerProject.getPosition();
+                work_mode = developerProject.getWorkModeName();
+                workModeId = developerProject.getWorkMode();
+                company_name = developerProject.getCompanyName();
+                industry = developerProject.getIndustryName();
+                industryId = developerProject.getIndustryId();
+                description = developerProject.getDescription();
+                mId = developerProject.getId();
+            }
+
+        }
     }
 }

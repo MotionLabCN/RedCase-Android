@@ -113,23 +113,16 @@ public final class MessageListActivity extends AppActivity implements OnRefreshL
         Intent intent = new Intent();
         switch (item.getMessageType()) {// 2 面试邀约 3 面试提醒 4面试取消 5 入驻通过 6 入驻未通过
             case 2:
-                break;
             case 3:
                 intent.setClass(getActivity(), AuditionDetailActivity.class);
-                intent.putExtra("interviewId", item.getId());
+                intent.putExtra("interviewId", item.getTypeId());
                 startActivity(intent);
-                break;
-            case 4:
                 break;
             case 5:
-                intent.setClass(getActivity(), MainActivity.class);
-                intent.putExtra("interviewId", item.getId());
-                startActivity(intent);
+                startActivity(MainActivity.class);
                 break;
             case 6:
-                intent.setClass(getActivity(), EnterDeveloperActivity.class);
-                intent.putExtra("interviewId", item.getId());
-                startActivity(intent);
+                startActivity(EnterDeveloperActivity.class);
                 break;
 
         }

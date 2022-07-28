@@ -17,6 +17,7 @@ import com.tntlinking.tntdev.app.TitleBarFragment;
 import com.tntlinking.tntdev.http.api.AppListApi;
 import com.tntlinking.tntdev.http.model.HttpData;
 import com.tntlinking.tntdev.other.AppConfig;
+import com.tntlinking.tntdev.other.HomeChangeListener;
 import com.tntlinking.tntdev.ui.activity.AuditionDetailActivity;
 import com.tntlinking.tntdev.ui.activity.MainActivity;
 import com.tntlinking.tntdev.ui.activity.WriteDailyActivity;
@@ -42,6 +43,11 @@ public final class TreatyServiced2Fragment extends TitleBarFragment<MainActivity
     private ServiceProjectAdapter mServiceAdapter;
 
 
+    private HomeChangeListener listener;
+
+    public void setListener(HomeChangeListener listener) {
+        this.listener = listener;
+    }
     public static TreatyServiced2Fragment newInstance() {
         return new TreatyServiced2Fragment();
     }
@@ -117,6 +123,7 @@ public final class TreatyServiced2Fragment extends TitleBarFragment<MainActivity
 
                             mServiceList.addAll(data.getData());
                             mServiceAdapter.setData(mServiceList);
+
                         } else {
 //                            ll_empty.setVisibility(View.VISIBLE);
                         }
