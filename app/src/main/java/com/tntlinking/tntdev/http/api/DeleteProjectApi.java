@@ -9,7 +9,7 @@ public final class DeleteProjectApi implements IRequestApi{
 
     @Override
     public String getApi() {
-        return "developer/project/"+projectId;
+        return "developer/v2/delete/project/"+projectId;
     }
 
 

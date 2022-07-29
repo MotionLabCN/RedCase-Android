@@ -9,21 +9,21 @@ public final class UpdateWorkApi implements IRequestApi, IRequestType {
 
     @Override
     public String getApi() {
-        return "developer/update/work";
+//        return "developer/update/work";
+        return "developer/v2/save/work";
     }
 
 
-    private int developerId;
+    private String id;
     private String companyName;
     private int industryId;
     private String positionName;
     private String workStartTime;
     private String workEndTime;
-    private int workExperienceId;
 
 
-    public UpdateWorkApi setDeveloperId(int developerId) {
-        this.developerId = developerId;
+    public UpdateWorkApi setId(String id) {
+        this.id = id;
         return this;
     }
 
@@ -52,10 +52,6 @@ public final class UpdateWorkApi implements IRequestApi, IRequestType {
         return this;
     }
 
-    public UpdateWorkApi setWorkExperienceId(int workExperienceId) {
-        this.workExperienceId = workExperienceId;
-        return this;
-    }
 
     @Override
     public BodyType getType() {

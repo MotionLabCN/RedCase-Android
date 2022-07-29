@@ -13,13 +13,11 @@ public final class UpdateProjectApi implements IRequestApi, IRequestType {
 
     @Override
     public String getApi() {
-        return "developer/project/"+projectId;
+        return "developer/v2/save/project";
     }
 
 
-    @HttpIgnore
-    private int projectId;
-
+    public String id;
     private String companyName; //公司名称
     private String description;//项目描述
     private int industryId;//行业id
@@ -28,10 +26,10 @@ public final class UpdateProjectApi implements IRequestApi, IRequestType {
     private String projectStartDate;//项目开始时间
     private String projectName;//项目名称
     private List<Integer> skillIdList;//技能id
-    private int workModeId;//职业状态id
+    private int workMode;//职业状态id
 
-    public UpdateProjectApi setProjectId(int id) {
-        this.projectId = id;
+    public UpdateProjectApi setId(String id) {
+        this.id = id;
         return this;
     }
 
@@ -70,8 +68,8 @@ public final class UpdateProjectApi implements IRequestApi, IRequestType {
         return this;
     }
 
-    public UpdateProjectApi setWorkModeId(int workModeId) {
-        this.workModeId = workModeId;
+    public UpdateProjectApi setWorkMode(int workModeId) {
+        this.workMode = workModeId;
         return this;
     }
 

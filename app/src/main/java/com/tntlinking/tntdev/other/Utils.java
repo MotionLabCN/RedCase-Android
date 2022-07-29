@@ -4,6 +4,7 @@ package com.tntlinking.tntdev.other;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.blankj.utilcode.util.GsonUtils;
 import com.blankj.utilcode.util.SPUtils;
@@ -542,6 +543,52 @@ public class Utils {
         BigInteger bigInt = new BigInteger(1, digest.digest());
         return bigInt.toString(16);
     }
+
+
+    /**
+     * 截断输出日志
+     *
+     * @param msg
+     */
+    public static void Log(String msg) {
+        if (msg == null || msg.length() == 0)
+            return;
+
+        int segmentSize = 3 * 1024;
+        long length = msg.length();
+        if (length <= segmentSize) {// 长度小于等于限制直接打印
+            Log.e("EasyHttp", msg);
+//            EasyLog.print(msg);
+        } else {
+            while (msg.length() > segmentSize) {// 循环分段打印日志
+                String logContent = msg.substring(0, segmentSize);
+                msg = msg.replace(logContent, "");
+                Log.e("EasyHttp", logContent);
+//                EasyLog.print(logContent);
+            }
+            Log.e("EasyHttp", msg);// 打印剩余日志
+//            EasyLog.print(msg);
+        }
+    }
+
+    public static void e(String TAG, String msg) {
+        int strLength = msg.length();
+        int start = 0;
+        int end = 2000;
+        for (int i = 0; i < 100; i++) {
+            //剩下的文本还是大于规定长度则继续重复截取并输出
+            if (strLength > end) {
+                Log.e(TAG + i, msg.substring(start, end));
+                start = end;
+                end = end + 2000;
+            } else {
+                Log.e(TAG, msg.substring(start, strLength));
+                break;
+            }
+        }
+    }
+
+
 }
 
 

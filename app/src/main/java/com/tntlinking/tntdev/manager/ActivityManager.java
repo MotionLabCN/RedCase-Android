@@ -127,7 +127,7 @@ public final class ActivityManager implements Application.ActivityLifecycleCallb
     /**
      * 销毁所有的 Activity
      *
-     * @param classArray            白名单 Activity
+     * @param classArray  白名单 Activity
      */
     @SafeVarargs
     public final void finishAllActivities(Class<? extends Activity>... classArray) {

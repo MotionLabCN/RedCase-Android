@@ -13,19 +13,19 @@ import java.util.List;
 
 public class DeveloperInfoBean implements Serializable {
     private String realName;//名字
-    private int status ;
+    private int status;
     private int sex = 0; //性别 0->男 1->女
-    private String mSex ;
-    private String birthday ;
-    private String avatarUrl ;
+    private String mSex;
+    private String birthday;
+    private String avatarUrl;
     private int provinceId = 1;// 省
     private int cityId = 1;// 城市
     private int areasId = 1;// 区
-    private String provinceName ;
-    private String cityName ;
-    private String areasName ;
+    private String provinceName;
+    private String cityName;
+    private String areasName;
     private int remoteWorkReason = 1;//远程办公原因id
-    private String remoteWorkReasonStr ;//远程办公原因
+    private String remoteWorkReasonStr;//远程办公原因
 
 
     private int careerDirectionId = 163; //职业方向id
@@ -45,9 +45,9 @@ public class DeveloperInfoBean implements Serializable {
     private List<DeveloperWork> workExperienceDtoList = new ArrayList<>();
 
 
-    public static class DeveloperCareer implements Serializable{
+    public static class DeveloperCareer implements Serializable {
         private int careerDirectionId = 163; //职业方向id
-        private String careerDirectionName ; //职业方向id
+        private String careerDirectionName; //职业方向id
         private int workYearsId;    //工作年限id
         private String curSalary;    //当前薪资
         private int workDayMode = 1; // 1 全日 2 半日  //默认全日
@@ -139,9 +139,8 @@ public class DeveloperInfoBean implements Serializable {
     }
 
 
-
-    public static class WorkMode implements Serializable{
-        private int id ;
+    public static class WorkMode implements Serializable {
+        private int id;
         private String expectSalary;    //当前薪资
         private String lowestSalary;    // 期望最低薪资
         private String highestSalary;    // 期望最高薪资
@@ -205,7 +204,8 @@ public class DeveloperInfoBean implements Serializable {
             this.workDayModeDesc = workDayModeDesc;
         }
     }
-    public static class DeveloperEducation implements Serializable{
+
+    public static class DeveloperEducation implements Serializable {
         private int id;
         private int developerId;
         private String collegeName; //院校名称
@@ -299,7 +299,7 @@ public class DeveloperInfoBean implements Serializable {
     }
 
 
-    public static class DeveloperProject implements Serializable{
+    public static class DeveloperProject implements Serializable {
         private int id;
         private int developerId;
         private String companyName; //公司名称
@@ -316,7 +316,7 @@ public class DeveloperInfoBean implements Serializable {
         private List<GetTagListApi.Bean.ChildrenBean> projectSkillList;//技能id
 
 
-        private static class  Skill{
+        private static class Skill {
             private int id;
             private int projectId;
             private int skillId;
@@ -461,7 +461,7 @@ public class DeveloperInfoBean implements Serializable {
         }
     }
 
-    public static class DeveloperWork implements Serializable{
+    public static class DeveloperWork implements Serializable {
 
         private int id;
         private int developerId;
@@ -753,6 +753,10 @@ public class DeveloperInfoBean implements Serializable {
 
     public void setWorkExperienceDtoList(List<DeveloperWork> workExperienceDtoList) {
         this.workExperienceDtoList = workExperienceDtoList;
+    }
+
+    public void setDeveloperInfoBean(DeveloperInfoBean bean) {
+        this.instance = bean;
     }
 
     private volatile static DeveloperInfoBean instance; //声明成 volatile

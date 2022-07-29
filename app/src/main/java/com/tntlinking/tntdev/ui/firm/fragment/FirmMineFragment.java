@@ -1,4 +1,4 @@
-package com.tntlinking.tntdev.ui.fragment;
+package com.tntlinking.tntdev.ui.firm.fragment;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -16,6 +16,7 @@ import com.blankj.utilcode.util.SizeUtils;
 import com.gyf.immersionbar.ImmersionBar;
 import com.hjq.bar.TitleBar;
 import com.hjq.base.BaseDialog;
+import com.hjq.base.FragmentPagerAdapter;
 import com.hjq.http.EasyHttp;
 import com.hjq.http.listener.HttpCallback;
 import com.hjq.widget.layout.SettingBar;
@@ -24,12 +25,14 @@ import com.scwang.smart.refresh.layout.api.RefreshLayout;
 import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener;
 import com.tntlinking.tntdev.R;
 import com.tntlinking.tntdev.aop.SingleClick;
+import com.tntlinking.tntdev.app.AppFragment;
 import com.tntlinking.tntdev.app.TitleBarFragment;
 import com.tntlinking.tntdev.http.api.GetDeveloperJkStatusApi;
 import com.tntlinking.tntdev.http.api.GetDeveloperStatusApi;
 import com.tntlinking.tntdev.http.api.GetSignContractPDFApi;
 import com.tntlinking.tntdev.http.model.HttpData;
 import com.tntlinking.tntdev.other.AppConfig;
+import com.tntlinking.tntdev.other.HomeChangeListener;
 import com.tntlinking.tntdev.other.Utils;
 import com.tntlinking.tntdev.ui.activity.AboutAppActivity;
 import com.tntlinking.tntdev.ui.activity.BrowserActivity;
@@ -42,23 +45,29 @@ import com.tntlinking.tntdev.ui.activity.IncomeListActivity;
 import com.tntlinking.tntdev.ui.activity.InterviewActivity;
 import com.tntlinking.tntdev.ui.activity.InterviewSettingActivity;
 import com.tntlinking.tntdev.ui.activity.JkBrowserActivity;
-import com.tntlinking.tntdev.ui.activity.MainActivity;
 import com.tntlinking.tntdev.ui.activity.MessageListActivity;
 import com.tntlinking.tntdev.ui.activity.PDFViewActivity;
 import com.tntlinking.tntdev.ui.activity.PersonSettingActivity;
 import com.tntlinking.tntdev.ui.activity.SignContactActivity;
+import com.tntlinking.tntdev.ui.adapter.TabAdapter;
 import com.tntlinking.tntdev.ui.firm.activity.FirmMainActivity;
+import com.tntlinking.tntdev.ui.fragment.MineFragment1;
+import com.tntlinking.tntdev.ui.fragment.TreatyService1Fragment;
+import com.tntlinking.tntdev.ui.fragment.TreatyServiced2Fragment;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.ViewPager;
 
 /**
- * desc   : 我的 Fragment
+ * desc   : 首页 Fragment
  */
-public final class MineFragment1 extends TitleBarFragment<MainActivity> implements OnRefreshLoadMoreListener {
+public final class FirmMineFragment extends TitleBarFragment<FirmMainActivity> implements OnRefreshLoadMoreListener {
+
     private SmartRefreshLayout mRefreshLayout;
 
-//    private SettingBar mPersonDataIncome;
+    //    private SettingBar mPersonDataIncome;
     private SettingBar mPersonDataInterview;
     private SettingBar mPersonDataSetting;
     private SettingBar person_data_private;
@@ -79,8 +88,8 @@ public final class MineFragment1 extends TitleBarFragment<MainActivity> implemen
     private ImageView iv_message;
     private LinearLayout ll_income;
 
-    public static MineFragment1 newInstance() {
-        return new MineFragment1();
+    public static FirmMineFragment newInstance() {
+        return new FirmMineFragment();
     }
 
     @Override
@@ -180,8 +189,7 @@ public final class MineFragment1 extends TitleBarFragment<MainActivity> implemen
         } else if (view == mPersonDataSetting) {// 账户设置
             startActivity(PersonSettingActivity.class);
         } else if (view == person_data_about) {// 关于天天数链开发者
-//            startActivity(AboutAppActivity.class);
-            startActivity(FirmMainActivity.class);
+            startActivity(AboutAppActivity.class);
         } else if (view == person_data_evaluation) {
             getDeveloperJkStatus();
         }else if (view == person_data_history) {// 历史订单
@@ -349,7 +357,7 @@ public final class MineFragment1 extends TitleBarFragment<MainActivity> implemen
 
     @Override
     public void onRefresh(@NonNull RefreshLayout refreshLayout) {
-            getData();
+        getData();
     }
     @Override
     public void onLoadMore(@NonNull RefreshLayout refreshLayout) {

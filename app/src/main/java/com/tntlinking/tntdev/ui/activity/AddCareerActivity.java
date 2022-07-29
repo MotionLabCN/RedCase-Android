@@ -7,6 +7,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
 
+import com.blankj.utilcode.util.GsonUtils;
 import com.blankj.utilcode.util.SPUtils;
 import com.hjq.base.BaseDialog;
 import com.hjq.http.EasyHttp;
@@ -52,22 +53,17 @@ public final class AddCareerActivity extends AppActivity {
 //    private ClearEditText et_expect_salary_low;
 //    private ClearEditText et_expect_salary_high;
 
-
     private AppCompatButton btn_commit;
 
-    private int mCareerDirectionId = 1;    //职业方向id
-    private int mWorkYearsId = 1;    //工作年限id
-    private String mCurSalary = "1";    //当前薪资
-    private int mWorkDay = 1; // 1 全日 2 半日
-    private String mExpectSalary = "1"; // 期望薪资
 
-
-    private int careerDirectionId = 0;
-    private int workYearsId = 0;
-    private String curSalary = "";
+    private int careerDirectionId = 0; //职业方向id
+    private String careerDirectionName = "";
+    private int workYearsId = 0;//工作年限id
+    private String workYearsName = "";
+    private String curSalary = ""; //当前薪资
     private int workDayMode = 1;// 1 全日 2 半日  //默认全日
-    private String expectSalary = "";
-    //    private String lowestSalary = "";
+    private String expectSalary = "";// 期望薪资
+//    private String lowestSalary = "";
 //    private String highestSalary = "";
     private DeveloperInfoBean mBean;
 
@@ -143,8 +139,13 @@ public final class AddCareerActivity extends AppActivity {
             if (getBoolean(IS_RESUME)) {
                 btn_commit.setText("下一步");
             }
+
+
+            Utils.Log("====AddCareerActivity===" + GsonUtils.toJson(singleton));
         }
     }
+
+    DeveloperInfoBean singleton = DeveloperInfoBean.getSingleton();
 
     @Override
     public void onLeftClick(View view) {
@@ -153,7 +154,7 @@ public final class AddCareerActivity extends AppActivity {
             Intent intent = new Intent(this, EnterDeveloperActivity.class);
             intent.putExtra(INTENT_KEY_DEVELOPER_INFO, mBean);
             startActivity(intent);
-            ActivityManager.getInstance().finishAllActivities();
+            ActivityManager.getInstance().finishAllActivities(EnterDeveloperActivity.class, MainActivity.class);
         }
     }
 
@@ -169,8 +170,8 @@ public final class AddCareerActivity extends AppActivity {
                             @Override
                             public void onSelected(BaseDialog dialog, int type) {
                                 info_specialisations.setLeftText(mSpecialisationsList.get(type).getName());
-
                                 careerDirectionId = mSpecialisationsList.get(type).getId();
+                                careerDirectionName = mSpecialisationsList.get(type).getName();
                             }
                         }).show();
                 break;
@@ -181,8 +182,9 @@ public final class AddCareerActivity extends AppActivity {
                             @Override
                             public void onSelected(BaseDialog dialog, int type) {
                                 info_work_experience.setLeftText(mWorkList.get(type).getName());
-
                                 workYearsId = mWorkList.get(type).getId();
+                                workYearsName = mWorkList.get(type).getName();
+
                             }
                         }).show();
                 break;
@@ -267,7 +269,16 @@ public final class AddCareerActivity extends AppActivity {
                             setResult(RESULT_OK, intent);
                             finish();
                         } else {
-                            checkDeveloper(getSerializable(INTENT_KEY_DEVELOPER_INFO));
+                            singleton.getCareerDto().setCareerDirectionId(careerDirectionId);
+                            singleton.getCareerDto().setCurSalary(curSalary);
+                            singleton.getWorkModeDtoList().get(0).setExpectSalary(expectSalary);
+                            singleton.getCareerDto().setWorkDayMode(workDayMode);
+                            singleton.getCareerDto().setWorkYearsId(workYearsId);
+                            singleton.getCareerDto().setWorkYearsName(workYearsName);
+                            singleton.getCareerDto().setCareerDirectionName(careerDirectionName);
+                            checkDeveloper(singleton);
+
+//                            checkDeveloper(getSerializable(INTENT_KEY_DEVELOPER_INFO));
                         }
                     }
                 });

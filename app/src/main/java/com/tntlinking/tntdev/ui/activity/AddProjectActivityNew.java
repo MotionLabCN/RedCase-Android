@@ -70,16 +70,17 @@ public final class AddProjectActivityNew extends AppActivity {
     private int workModeId;//职业状态id
     private int industryId;//行业id
 
-    private String project_name = "";
+    private String projectName = "";
     private String in_time = "";
     private String end_time = "";
     private String project_position = "";
     private String work_mode = "";
-    private String company_name = "";
-    private String industry = "";
+    private String companyName = "";
+    private String industryName = "";
     private String project_skill = "";
     private String description = "";
     private int mId = 0;
+    private DeveloperInfoBean singleton = DeveloperInfoBean.getSingleton();
 
     @Override
     protected int getLayoutId() {
@@ -124,7 +125,7 @@ public final class AddProjectActivityNew extends AppActivity {
             DeveloperInfoBean.DeveloperProject developerProject = mBean.getProjectDtoList().get(position);
             if (mBean.getProjectDtoList().size() != 0) {
 //                if (TextUtils.isEmpty(developerProject.getProjectName())) {//判断是否有项目名字，没有就不显示
-                if (developerProject.getId() == 0) {//判断是否有项目名字，没有就不显示
+                if (TextUtils.isEmpty(developerProject.getProjectName())) {//判断是否有项目名字，没有就不显示
 //                    btn_delete.setVisibility(View.GONE);
                     tv_title.setText("添加项目经历");
                     btn_delete.setText("保存");
@@ -170,14 +171,14 @@ public final class AddProjectActivityNew extends AppActivity {
                         info_project_skill.setLeftText(sb.toString());
                     }
 
-                    project_name = developerProject.getProjectName();
+                    projectName = developerProject.getProjectName();
                     in_time = developerProject.getProjectStartDate();
                     end_time = developerProject.getProjectEndDate();
                     project_position = developerProject.getPosition();
                     work_mode = developerProject.getWorkModeName();
                     workModeId = developerProject.getWorkMode();
-                    company_name = developerProject.getCompanyName();
-                    industry = developerProject.getIndustryName();
+                    companyName = developerProject.getCompanyName();
+                    industryName = developerProject.getIndustryName();
                     industryId = developerProject.getIndustryId();
                     description = developerProject.getDescription();
                     mId = developerProject.getId();
@@ -216,7 +217,7 @@ public final class AddProjectActivityNew extends AppActivity {
             Intent intent = new Intent(this, EnterDeveloperActivity.class);
             intent.putExtra(INTENT_KEY_DEVELOPER_INFO, mBean);
             startActivity(intent);
-            ActivityManager.getInstance().finishAllActivities();
+            ActivityManager.getInstance().finishAllActivities(EnterDeveloperActivity.class, MainActivity.class);
         }
     }
 
@@ -282,7 +283,7 @@ public final class AddProjectActivityNew extends AppActivity {
 
                                 info_project_industry.setLeftText(bean.getName() + "-" + childrenBean.getName());
                                 industryId = childrenBean.getId();
-                                industry = bean.getName() + "-" + childrenBean.getName();
+                                industryName = bean.getName() + "-" + childrenBean.getName();
 
                                 EasyLog.print("===industryId==" + industryId + "======" + childrenBean.getName());
                             }
@@ -304,13 +305,13 @@ public final class AddProjectActivityNew extends AppActivity {
             case R.id.btn_delete:
 
                 if (mId == 0) { // 0 添加教育  不等于0 是编辑教育
-                    project_name = et_project_name.getText().toString();
+                    projectName = et_project_name.getText().toString();
                     project_position = et_project_position.getText().toString();
-                    company_name = et_project_company_name.getText().toString();
+                    companyName = et_project_company_name.getText().toString();
                     description = et_project_description.getText().toString();
                     project_skill = info_project_skill.getLeftText().toString();
 
-                    if (TextUtils.isEmpty(project_name)) {
+                    if (TextUtils.isEmpty(projectName)) {
                         toast("没有输入项目名称");
                         return;
                     }
@@ -338,12 +339,12 @@ public final class AddProjectActivityNew extends AppActivity {
 //                        toast("没选职业状态");
 //                        return;
 //                    }
-                    if (TextUtils.isEmpty(company_name)) {
+                    if (TextUtils.isEmpty(companyName)) {
                         toast("没有输入所属公司");
                         return;
                     }
 
-                    if (TextUtils.isEmpty(industry)) {
+                    if (TextUtils.isEmpty(industryName)) {
                         toast("没选择所在行业");
                         return;
                     }
@@ -370,13 +371,13 @@ public final class AddProjectActivityNew extends AppActivity {
                 }
                 break;
             case R.id.btn_commit:
-                project_name = et_project_name.getText().toString();
+                projectName = et_project_name.getText().toString();
                 project_position = et_project_position.getText().toString();
-                company_name = et_project_company_name.getText().toString();
+                companyName = et_project_company_name.getText().toString();
                 description = et_project_description.getText().toString();
                 project_skill = info_project_skill.getLeftText().toString();
 
-                if (TextUtils.isEmpty(project_name)) {
+                if (TextUtils.isEmpty(projectName)) {
                     toast("没有输入项目名称");
                     return;
                 }
@@ -404,12 +405,12 @@ public final class AddProjectActivityNew extends AppActivity {
 //                    toast("没选职业状态");
 //                    return;
 //                }
-                if (TextUtils.isEmpty(company_name)) {
+                if (TextUtils.isEmpty(companyName)) {
                     toast("没有输入所属公司");
                     return;
                 }
 
-                if (TextUtils.isEmpty(industry)) {
+                if (TextUtils.isEmpty(industryName)) {
                     toast("没选择所在行业");
                     return;
                 }
@@ -427,7 +428,7 @@ public final class AddProjectActivityNew extends AppActivity {
                     Intent intent = new Intent(this, EnterDeveloperActivity.class);
                     intent.putExtra(INTENT_KEY_DEVELOPER_INFO, mBean);
                     startActivity(intent);
-                    ActivityManager.getInstance().finishAllActivities();
+                    ActivityManager.getInstance().finishAllActivities(EnterDeveloperActivity.class, MainActivity.class);
                 } else {
                     if (mId == 0) { // 0 添加教育  不等于0 是编辑教育
                         addProject(false);
@@ -494,23 +495,53 @@ public final class AddProjectActivityNew extends AppActivity {
 
     public void addProject(boolean isBack) {
         EasyHttp.post(this)
-                .api(new AddProjectApi()
-                        .setProjectName(project_name)
+                .api(new UpdateProjectApi()
+                        .setId(null)
+                        .setProjectName(projectName)
                         .setProjectStartDate(in_time + "-01")
                         .setProjectEndDate(end_time + "-01")
                         .setPosition(project_position)
-                        .setCompanyName(company_name)
-                        .setWorkModeId(workModeId)
+                        .setCompanyName(companyName)
+                        .setWorkMode(workModeId)
                         .setIndustryId(industryId)
                         .setDescription(description)
                         .setSkillIdList(mTagIntList))
-                .request(new HttpCallback<HttpData<List<GetProvinceApi.ProvinceBean>>>(this) {
+                .request(new HttpCallback<HttpData<DeveloperInfoBean.DeveloperProject>>(this) {
 
                     @Override
-                    public void onSucceed(HttpData<List<GetProvinceApi.ProvinceBean>> data) {
-                        if (isBack) {
+                    public void onSucceed(HttpData<DeveloperInfoBean.DeveloperProject> data) {
+                        if (getBoolean(IS_RESUME)) {
+
+//                            DeveloperInfoBean.DeveloperProject developerProject = mBean.getProjectDtoList().get(position);
+//                            developerProject.setId(data.getData().getId());
+//                            developerProject.setProjectName(project_name);
+//                            developerProject.setIndustryName(industry);
+//                            developerProject.setProjectStartDate(in_time);
+//                            developerProject.setProjectEndDate(end_time);
+//                            developerProject.setPosition(project_position);
+//                            developerProject.setCompanyName(company_name);
+//                            developerProject.setDescription(description);
+//                            developerProject.setProjectSkillList(mSelectList);
+//                            checkDeveloper(mBean);
+
+                            DeveloperInfoBean.DeveloperProject developerProject = singleton.getProjectDtoList().get(position);
+                            developerProject.setId(data.getData().getId());
+                            developerProject.setProjectName(projectName);
+                            developerProject.setIndustryName(industryName);
+                            developerProject.setIndustryId(industryId);
+                            developerProject.setProjectStartDate(in_time);
+                            developerProject.setProjectEndDate(end_time);
+                            developerProject.setPosition(project_position);
+                            developerProject.setCompanyName(companyName);
+                            developerProject.setDescription(description);
+                            developerProject.setProjectSkillList(mSelectList);
+                            checkDeveloper(singleton);
+
+                        } else if (isBack) {
                             setResult(RESULT_OK);
                             finish();
+
+                            toast(R.string.sava_success);
                         } else {
                             et_project_name.setText("");
                             et_project_name.setHint("项目名称");
@@ -529,59 +560,72 @@ public final class AddProjectActivityNew extends AppActivity {
                             mTagIntList.clear();
                             mSelectList.clear();
 
-                            project_name = "";
+                            projectName = "";
                             in_time = "";
                             end_time = "";
                             project_position = "";
                             work_mode = "";
                             workModeId = 0;
-                            company_name = "";
-                            industry = "";
+                            companyName = "";
+                            industryName = "";
                             industryId = 0;
                             description = "";
                             mId = 0;
+
+                            toast(R.string.sava_success);
                         }
 
-                        toast("保存成功");
+//                        toast("保存成功");
 
                     }
                 });
     }
 
     public void updateProject(int id) {
-        EasyHttp.put(this)
+        EasyHttp.post(this)
                 .api(new UpdateProjectApi()
-                        .setProjectId(id)
-                        .setProjectName(project_name)
+                        .setId(id + "")
+                        .setProjectName(projectName)
                         .setProjectStartDate(in_time + "-01")
                         .setProjectEndDate(end_time + "-01")
                         .setPosition(project_position)
-                        .setCompanyName(company_name)
-                        .setWorkModeId(workModeId)
+                        .setCompanyName(companyName)
+                        .setWorkMode(workModeId)
                         .setIndustryId(industryId)
                         .setDescription(description)
                         .setSkillIdList(mTagIntList))
-                .request(new HttpCallback<HttpData<List<GetProvinceApi.ProvinceBean>>>(this) {
+                .request(new HttpCallback<HttpData<DeveloperInfoBean.DeveloperProject>>(this) {
 
                     @Override
-                    public void onSucceed(HttpData<List<GetProvinceApi.ProvinceBean>> data) {
+                    public void onSucceed(HttpData<DeveloperInfoBean.DeveloperProject> data) {
                         if (!getBoolean(IS_RESUME)) {
                             setResult(RESULT_OK);
                             finish();
                         } else {
 
-                            DeveloperInfoBean.DeveloperProject developerProject = mBean.getProjectDtoList().get(position);
-                            developerProject.setProjectName(project_name);
-                            developerProject.setIndustryName(industry);
+//                            DeveloperInfoBean.DeveloperProject developerProject = mBean.getProjectDtoList().get(position);
+//                            developerProject.setProjectName(project_name);
+//                            developerProject.setIndustryName(industryName);
+//                            developerProject.setProjectStartDate(in_time);
+//                            developerProject.setProjectEndDate(end_time);
+//                            developerProject.setPosition(project_position);
+//                            developerProject.setCompanyName(company_name);
+//                            developerProject.setDescription(description);
+//                            developerProject.setProjectSkillList(mSelectList);
+//                            checkDeveloper(mBean);
+
+                            DeveloperInfoBean.DeveloperProject developerProject = singleton.getProjectDtoList().get(position);
+                            developerProject.setId(data.getData().getId());
+                            developerProject.setProjectName(projectName);
+                            developerProject.setIndustryName(industryName);
+                            developerProject.setIndustryId(industryId);
                             developerProject.setProjectStartDate(in_time);
                             developerProject.setProjectEndDate(end_time);
                             developerProject.setPosition(project_position);
-                            developerProject.setCompanyName(company_name);
+                            developerProject.setCompanyName(companyName);
                             developerProject.setDescription(description);
                             developerProject.setProjectSkillList(mSelectList);
-
-
-                            checkDeveloper(mBean);
+                            checkDeveloper(singleton);
 
 
                         }
@@ -621,8 +665,11 @@ public final class AddProjectActivityNew extends AppActivity {
         boolean mTag = true;
         if (projectDtoList.size() == 0) {
             return true;
-        } else {
-            for (int i = 0; i < projectDtoList.size(); i++) {
+        } else {// +1 跳到下一个教育经历集合 因为当前position 已经补充完整，跳该position下一个位置
+            if (position + 1 >= projectDtoList.size()) {
+                return true;
+            }
+            for (int i = position + 1; i < projectDtoList.size(); i++) {
                 if (TextUtils.isEmpty(projectDtoList.get(i).getProjectName()) &&
                         TextUtils.isEmpty(projectDtoList.get(i).getIndustryName()) &&
                         TextUtils.isEmpty(projectDtoList.get(i).getProjectStartDate()) &&
@@ -682,14 +729,14 @@ public final class AddProjectActivityNew extends AppActivity {
                     info_project_skill.setLeftText(sb.toString());
                 }
 
-                project_name = developerProject.getProjectName();
+                projectName = developerProject.getProjectName();
                 in_time = developerProject.getProjectStartDate();
                 end_time = developerProject.getProjectEndDate();
                 project_position = developerProject.getPosition();
                 work_mode = developerProject.getWorkModeName();
                 workModeId = developerProject.getWorkMode();
-                company_name = developerProject.getCompanyName();
-                industry = developerProject.getIndustryName();
+                companyName = developerProject.getCompanyName();
+                industryName = developerProject.getIndustryName();
                 industryId = developerProject.getIndustryId();
                 description = developerProject.getDescription();
                 mId = developerProject.getId();

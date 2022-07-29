@@ -9,11 +9,12 @@ public final class UpdateEducationApi implements IRequestApi, IRequestType {
 
     @Override
     public String getApi() {
-        return "developer/update/education";
+//        return "developer/update/education";
+        return "developer/v2/save/education";
     }
 
 
-    private int id;//教育经历ID
+    private String id;//教育经历ID  // id传null或者传0 是新增，其他是更新修改
     private String collegeName; //院校名称
     private int educationId;//学历id
     private String inSchoolEndTime;//在校结束时间
@@ -21,39 +22,40 @@ public final class UpdateEducationApi implements IRequestApi, IRequestType {
     private String major;//专业id
     private int trainingMode;//培养方式id
 
-    public UpdateEducationApi setId(int id) {
+
+    public UpdateEducationApi setId(String id) {
         this.id = id;
-        return  this;
+        return this;
     }
 
     public UpdateEducationApi setEducationId(int educationId) {
         this.educationId = educationId;
-        return  this;
+        return this;
     }
 
     public UpdateEducationApi setCollegeName(String collegeName) {
         this.collegeName = collegeName;
-        return  this;
+        return this;
     }
 
     public UpdateEducationApi setMajor(String major) {
         this.major = major;
-        return  this;
+        return this;
     }
 
     public UpdateEducationApi setInSchoolStartTime(String inSchoolStartTime) {
         this.inSchoolStartTime = inSchoolStartTime;
-        return  this;
+        return this;
     }
 
     public UpdateEducationApi setInSchoolEndTime(String inSchoolEndTime) {
         this.inSchoolEndTime = inSchoolEndTime;
-        return  this;
+        return this;
     }
 
     public UpdateEducationApi setTrainingMode(int trainingMode) {
         this.trainingMode = trainingMode;
-        return  this;
+        return this;
     }
 
     @Override

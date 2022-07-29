@@ -56,7 +56,10 @@ public final class AddBaseInfoActivity extends AppActivity {
     private int cityId = 0;
     private int areaId = 0;
     private int workReasonId = 0;
-
+    private String workReasonName = "";
+    private String provinceName = "";
+    private String cityName = "";
+    private String areaName = "";
     private DeveloperInfoBean mBean;
 
     @Override
@@ -115,6 +118,8 @@ public final class AddBaseInfoActivity extends AppActivity {
         }
     }
 
+    private DeveloperInfoBean singleton = DeveloperInfoBean.getSingleton();
+
     @Override
     public void onLeftClick(View view) {
         super.onLeftClick(view);
@@ -122,7 +127,7 @@ public final class AddBaseInfoActivity extends AppActivity {
             Intent intent = new Intent(this, EnterDeveloperActivity.class);
             intent.putExtra(INTENT_KEY_DEVELOPER_INFO, mBean);
             startActivity(intent);
-            ActivityManager.getInstance().finishAllActivities();
+            ActivityManager.getInstance().finishAllActivities(EnterDeveloperActivity.class, MainActivity.class);
         }
     }
 
@@ -175,6 +180,10 @@ public final class AddBaseInfoActivity extends AppActivity {
                         provinceId = province.getId();
                         cityId = city.getId();
                         areaId = area.getId();
+
+                        singleton.setProvinceName(province.getRegionName());
+                        singleton.setCityName(city.getRegionName());
+                        singleton.setAreasName(area.getRegionName());
                     }
                 }).show();
 
@@ -187,6 +196,8 @@ public final class AddBaseInfoActivity extends AppActivity {
                             public void onSelected(BaseDialog dialog, int type) {
                                 mInfoReason.setLeftText(mDictionaryList.get(type).getName());
                                 workReasonId = mDictionaryList.get(type).getId();
+
+                                workReasonName = mDictionaryList.get(type).getName();
                             }
                         }).show();
                 break;
@@ -232,7 +243,6 @@ public final class AddBaseInfoActivity extends AppActivity {
     public void updateBasicInfo() {
         EasyHttp.post(this)
                 .api(new UpdateBasicInfoApi()
-                        .setDeveloperId(89)
                         .setRealName(realName)
                         .setBirthday(birthday)
                         .setProvinceId(provinceId)
@@ -252,6 +262,14 @@ public final class AddBaseInfoActivity extends AppActivity {
                             checkDeveloper(getSerializable(INTENT_KEY_DEVELOPER_INFO));
                         }
 
+                        singleton.setRealName(realName);
+                        singleton.setBirthday(birthday);
+                        singleton.setProvinceId(provinceId);
+                        singleton.setAreasId(areaId);
+                        singleton.setCityId(cityId);
+                        singleton.setSex(sex);
+                        singleton.setRemoteWorkReason(workReasonId);
+                        singleton.setRemoteWorkReasonStr(workReasonName);
                     }
                 });
     }

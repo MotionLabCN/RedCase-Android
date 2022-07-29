@@ -57,12 +57,12 @@ public final class AddEducationActivityNew extends AppActivity {
 
     private int educationId = 1;
     private int training_methodId = 1;
-    private String school_name = "";
-    private String education = "";
+    private String schoolName = "";
+    private String educationName = "";
     private String major = "";
     private String in_time = "";
     private String end_time = "";
-    private String training = "";
+    private String trainingName = "";
 
     private int position = 0;
     private int mId = 0;// 教育条目 id
@@ -73,6 +73,7 @@ public final class AddEducationActivityNew extends AppActivity {
         return R.layout.add_education_activity;
     }
 
+    private DeveloperInfoBean singleton = DeveloperInfoBean.getSingleton();
 
     @Override
     protected void initView() {
@@ -140,13 +141,13 @@ public final class AddEducationActivityNew extends AppActivity {
                     sYearMonth = Utils.dateToStamp(developerEducation.getInSchoolStartTime());
                     eYearMonth = Utils.dateToStamp(developerEducation.getInSchoolEndTime());
 
-                    school_name = developerEducation.getCollegeName();
-                    education = developerEducation.getEducationName();
+                    schoolName = developerEducation.getCollegeName();
+                    educationName = developerEducation.getEducationName();
                     educationId = developerEducation.getEducationId();
                     major = developerEducation.getMajor();
                     in_time = developerEducation.getInSchoolStartTime();
                     end_time = developerEducation.getInSchoolEndTime();
-                    training = developerEducation.getTrainingModeName();
+                    trainingName = developerEducation.getTrainingModeName();
                     training_methodId = developerEducation.getTrainingMode();
                     mId = developerEducation.getId();
                 }
@@ -167,7 +168,7 @@ public final class AddEducationActivityNew extends AppActivity {
             Intent intent = new Intent(this, EnterDeveloperActivity.class);
             intent.putExtra(INTENT_KEY_DEVELOPER_INFO, mBean);
             startActivity(intent);
-            ActivityManager.getInstance().finishAllActivities();
+            ActivityManager.getInstance().finishAllActivities(EnterDeveloperActivity.class, MainActivity.class);
         }
     }
 
@@ -189,7 +190,7 @@ public final class AddEducationActivityNew extends AppActivity {
                                 info_education.setLeftText(mEducationList.get(type).getName());
                                 educationId = mEducationList.get(type).getId();
 
-                                education = mEducationList.get(type).getName();
+                                educationName = mEducationList.get(type).getName();
                             }
                         }).show();
                 break;
@@ -233,7 +234,7 @@ public final class AddEducationActivityNew extends AppActivity {
 
                                 info_training_method.setLeftText(mTrainingList.get(type).getName());
                                 training_methodId = mTrainingList.get(type).getId();
-                                training = mTrainingList.get(type).getName();
+                                trainingName = mTrainingList.get(type).getName();
                             }
                         }).show();
                 break;
@@ -242,14 +243,14 @@ public final class AddEducationActivityNew extends AppActivity {
 //                finish();
 
                 if (mId == 0) { // 0 添加教育  不等于0 是编辑教育
-                    school_name = et_info_school_name.getText().toString();
+                    schoolName = et_info_school_name.getText().toString();
                     major = et_info_major.getText().toString();
 
-                    if (TextUtils.isEmpty(school_name)) {
+                    if (TextUtils.isEmpty(schoolName)) {
                         toast("没有输入院校名称");
                         return;
                     }
-                    if (TextUtils.isEmpty(education)) {
+                    if (TextUtils.isEmpty(educationName)) {
                         toast("没选择学历");
                         return;
                     }
@@ -273,7 +274,7 @@ public final class AddEducationActivityNew extends AppActivity {
                         end_time = "";
                         return;
                     }
-                    if (TextUtils.isEmpty(training)) {
+                    if (TextUtils.isEmpty(trainingName)) {
                         toast("没选择培养方式");
                         return;
                     }
@@ -293,14 +294,14 @@ public final class AddEducationActivityNew extends AppActivity {
                 }
                 break;
             case R.id.btn_commit:
-                school_name = et_info_school_name.getText().toString();
+                schoolName = et_info_school_name.getText().toString();
                 major = et_info_major.getText().toString();
 
-                if (TextUtils.isEmpty(school_name)) {
+                if (TextUtils.isEmpty(schoolName)) {
                     toast("没有输入院校名称");
                     return;
                 }
-                if (TextUtils.isEmpty(education)) {
+                if (TextUtils.isEmpty(educationName)) {
                     toast("没选择学历");
                     return;
                 }
@@ -324,7 +325,7 @@ public final class AddEducationActivityNew extends AppActivity {
                     end_time = "";
                     return;
                 }
-                if (TextUtils.isEmpty(training)) {
+                if (TextUtils.isEmpty(trainingName)) {
                     toast("没选择培养方式");
                     return;
                 }
@@ -333,7 +334,7 @@ public final class AddEducationActivityNew extends AppActivity {
                     Intent intent = new Intent(this, EnterDeveloperActivity.class);
                     intent.putExtra(INTENT_KEY_DEVELOPER_INFO, mBean);
                     startActivity(intent);
-                    ActivityManager.getInstance().finishAllActivities();
+                    ActivityManager.getInstance().finishAllActivities(EnterDeveloperActivity.class, MainActivity.class);
                 } else {
                     if (mId == 0) { // 0 添加教育  不等于0 是编辑教育
                         addEducation(false);
@@ -369,22 +370,53 @@ public final class AddEducationActivityNew extends AppActivity {
         return mList;
     }
 
+    /**
+     * 添加 和修改教育信息  id传null或者传0 是新增，其他是更新修改
+     */
     public void addEducation(boolean isBack) {
         EasyHttp.post(this)
-                .api(new AddEducationApi()
-                        .setCollegeName(school_name)
+                .api(new UpdateEducationApi()
+                        .setId(null)
+                        .setCollegeName(schoolName)
                         .setEducationId(educationId)
                         .setMajor(major)
                         .setInSchoolStartTime(in_time + "-01")
                         .setInSchoolEndTime(end_time + "-01")
                         .setTrainingMode(training_methodId))
-                .request(new HttpCallback<HttpData<List<GetProvinceApi.ProvinceBean>>>(this) {
+                .request(new HttpCallback<HttpData<DeveloperInfoBean.DeveloperEducation>>(this) {
 
                     @Override
-                    public void onSucceed(HttpData<List<GetProvinceApi.ProvinceBean>> data) {
-                        if (isBack) {
+                    public void onSucceed(HttpData<DeveloperInfoBean.DeveloperEducation> data) {
+                        if (getBoolean(IS_RESUME)) {
+//                            DeveloperInfoBean.DeveloperEducation developerEducation = mBean.getEducationDtoList().get(position);
+//                            developerEducation.setId(data.getData().getId());
+//                            developerEducation.setCollegeName(school_name);
+//                            developerEducation.setEducationName(education);
+//                            developerEducation.setTrainingModeName(training);
+//                            developerEducation.setMajor(major);
+//                            developerEducation.setInSchoolStartTime(in_time);
+//                            developerEducation.setInSchoolEndTime(end_time);
+//
+//                            checkDeveloper(mBean);
+
+
+                            DeveloperInfoBean.DeveloperEducation dEducation = singleton.getEducationDtoList().get(position);
+                            dEducation.setId(data.getData().getId());
+                            dEducation.setCollegeName(schoolName);
+                            dEducation.setEducationName(educationName);
+                            dEducation.setEducationId(educationId);
+                            dEducation.setMajor(major);
+                            dEducation.setInSchoolStartTime(in_time);
+                            dEducation.setInSchoolEndTime(end_time);
+                            dEducation.setTrainingMode(training_methodId);
+                            dEducation.setTrainingModeName(trainingName);
+
+                            checkDeveloper(singleton);
+                        } else if (isBack) {
                             setResult(RESULT_OK);
                             finish();
+
+                            toast("保存成功");
                         } else {
                             et_info_school_name.setText("");
                             et_info_school_name.setHint("院校名称");
@@ -395,56 +427,69 @@ public final class AddEducationActivityNew extends AppActivity {
                             et_info_major.setHint("专业");
                             info_training_method.setLeftText("培养方式");
 
-
-                            school_name = "";
-                            education = "";
+                            schoolName = "";
+                            educationName = "";
                             major = "";
                             in_time = "";
                             end_time = "";
-                            training = "";
+                            trainingName = "";
                             mId = 0;
+
+                            toast("保存成功");
                         }
 
-                        toast("保存成功");
 
                     }
                 });
     }
 
     /**
-     * 修改教育信息
+     * 添加 和修改教育信息  id传null或者传0 是新增，其他是更新修改
      *
      * @param id
      */
     public void updateEducation(int id) {
-        EasyHttp.put(this)
+        EasyHttp.post(this)
                 .api(new UpdateEducationApi()
-                        .setId(id)
-                        .setCollegeName(school_name)
+                        .setId(id + "")
+                        .setCollegeName(schoolName)
                         .setEducationId(educationId)
                         .setMajor(major)
                         .setInSchoolStartTime(in_time + "-01")
                         .setInSchoolEndTime(end_time + "-01")
                         .setTrainingMode(training_methodId))
-                .request(new HttpCallback<HttpData<List<GetProvinceApi.ProvinceBean>>>(this) {
+                .request(new HttpCallback<HttpData<DeveloperInfoBean.DeveloperEducation>>(this) {
 
                     @Override
-                    public void onSucceed(HttpData<List<GetProvinceApi.ProvinceBean>> data) {
+                    public void onSucceed(HttpData<DeveloperInfoBean.DeveloperEducation> data) {
                         if (!getBoolean(IS_RESUME)) {
                             setResult(RESULT_OK);
                             finish();
                         } else {
 
-                            DeveloperInfoBean.DeveloperEducation developerEducation = mBean.getEducationDtoList().get(position);
-                            developerEducation.setCollegeName(school_name);
-                            developerEducation.setEducationName(education);
-                            developerEducation.setTrainingModeName(training);
-                            developerEducation.setMajor(major);
-                            developerEducation.setInSchoolStartTime(in_time);
-                            developerEducation.setInSchoolEndTime(end_time);
+//                            DeveloperInfoBean.DeveloperEducation developerEducation = mBean.getEducationDtoList().get(position);
+//                            developerEducation.setCollegeName(school_name);
+//                            developerEducation.setEducationName(education);
+//                            developerEducation.setTrainingModeName(training);
+//                            developerEducation.setMajor(major);
+//                            developerEducation.setInSchoolStartTime(in_time);
+//                            developerEducation.setInSchoolEndTime(end_time);
+//
+//
+//                            checkDeveloper(mBean);
 
+                            DeveloperInfoBean.DeveloperEducation dEducation = singleton.getEducationDtoList().get(position);
+                            dEducation.setId(data.getData().getId());
+                            dEducation.setCollegeName(schoolName);
+                            dEducation.setEducationName(educationName);
+                            dEducation.setEducationId(educationId);
+                            dEducation.setMajor(major);
+                            dEducation.setInSchoolStartTime(in_time);
+                            dEducation.setInSchoolEndTime(end_time);
+                            dEducation.setTrainingMode(training_methodId);
+                            dEducation.setTrainingModeName(trainingName);
 
-                            checkDeveloper(mBean);
+                            checkDeveloper(singleton);
                         }
                     }
                 });
@@ -509,8 +554,11 @@ public final class AddEducationActivityNew extends AppActivity {
         boolean mTag = true;
         if (educationDtoList.size() == 0) {
             return true;
-        } else {
-            for (int i = 0; i < educationDtoList.size(); i++) {
+        } else {// +1 跳到下一个教育经历集合 因为当前position 已经补充完整，跳该position下一个位置
+            if (position + 1 >= educationDtoList.size()) {
+                return true;
+            }
+            for (int i = position + 1; i < educationDtoList.size(); i++) {
                 if (TextUtils.isEmpty(educationDtoList.get(i).getCollegeName()) &&
                         TextUtils.isEmpty(educationDtoList.get(i).getEducationName()) &&
                         TextUtils.isEmpty(educationDtoList.get(i).getTrainingModeName()) &&
@@ -518,7 +566,6 @@ public final class AddEducationActivityNew extends AppActivity {
                         TextUtils.isEmpty(educationDtoList.get(i).getInSchoolStartTime()) &&
                         TextUtils.isEmpty(educationDtoList.get(i).getInSchoolEndTime())) {
                     position = i;
-
                     mTag = true;
                     break;
                 } else {
@@ -617,13 +664,13 @@ public final class AddEducationActivityNew extends AppActivity {
                 sYearMonth = Utils.dateToStamp(developerEducation.getInSchoolStartTime());
                 eYearMonth = Utils.dateToStamp(developerEducation.getInSchoolEndTime());
 
-                school_name = developerEducation.getCollegeName();
-                education = developerEducation.getEducationName();
+                schoolName = developerEducation.getCollegeName();
+                educationName = developerEducation.getEducationName();
                 educationId = developerEducation.getEducationId();
                 major = developerEducation.getMajor();
                 in_time = developerEducation.getInSchoolStartTime();
                 end_time = developerEducation.getInSchoolEndTime();
-                training = developerEducation.getTrainingModeName();
+                trainingName = developerEducation.getTrainingModeName();
                 training_methodId = developerEducation.getTrainingMode();
                 mId = developerEducation.getId();
             }

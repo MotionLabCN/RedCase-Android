@@ -64,11 +64,12 @@ public final class AddWorkActivity extends AppActivity {
     private String in_time = "";
     private String end_time = "";
     private String project_position = "";
-    private String company_name = "";
-    private String industry = "";
+    private String companyName = "";
+    private String industryName = "";
 
     private int mId = 0;
 
+    private DeveloperInfoBean singleton = DeveloperInfoBean.getSingleton();
     @Override
     protected int getLayoutId() {
         return R.layout.add_work_activity;
@@ -135,11 +136,11 @@ public final class AddWorkActivity extends AppActivity {
                     eYearMonth = Utils.dateToStamp(developerWork.getWorkEndTime());
 
 
-                    company_name = developerWork.getCompanyName();
+                    companyName = developerWork.getCompanyName();
                     project_position = developerWork.getPositionName();
                     in_time = developerWork.getWorkStartTime();
                     end_time = developerWork.getWorkEndTime();
-                    industry = developerWork.getIndustryName();
+                    industryName = developerWork.getIndustryName();
                     industryId = developerWork.getIndustryId();
                     mId = developerWork.getId();
                 }
@@ -161,7 +162,7 @@ public final class AddWorkActivity extends AppActivity {
             Intent intent = new Intent(this, EnterDeveloperActivity.class);
             intent.putExtra(INTENT_KEY_DEVELOPER_INFO, mBean);
             startActivity(intent);
-            ActivityManager.getInstance().finishAllActivities();
+            ActivityManager.getInstance().finishAllActivities(EnterDeveloperActivity.class, MainActivity.class);
         }
     }
 
@@ -215,7 +216,7 @@ public final class AddWorkActivity extends AppActivity {
 
                                 info_work_industry.setLeftText(bean.getName() + "-" + childrenBean.getName());
                                 industryId = childrenBean.getId();
-                                industry = bean.getName() + "-" + childrenBean.getName();
+                                industryName = bean.getName() + "-" + childrenBean.getName();
 
                                 EasyLog.print("===industryId==" + industryId + "======" + childrenBean.getName());
                             }
@@ -226,7 +227,7 @@ public final class AddWorkActivity extends AppActivity {
 
                 if (mId == 0) { // 0 添加教育  不等于0 是编辑教育
                     project_position = et_work_position.getText().toString();
-                    company_name = et_work_company_name.getText().toString();
+                    companyName = et_work_company_name.getText().toString();
 
                     if (TextUtils.isEmpty(in_time)) {
                         toast("没有选择开始时间");
@@ -249,12 +250,12 @@ public final class AddWorkActivity extends AppActivity {
                         return;
                     }
 
-                    if (TextUtils.isEmpty(company_name)) {
+                    if (TextUtils.isEmpty(companyName)) {
                         toast("没有输入所属公司");
                         return;
                     }
 
-                    if (TextUtils.isEmpty(industry)) {
+                    if (TextUtils.isEmpty(industryName)) {
                         toast("没选择所在行业");
                         return;
                     }
@@ -276,7 +277,7 @@ public final class AddWorkActivity extends AppActivity {
                 break;
             case R.id.btn_commit:
                 project_position = et_work_position.getText().toString();
-                company_name = et_work_company_name.getText().toString();
+                companyName = et_work_company_name.getText().toString();
 
 
                 if (TextUtils.isEmpty(in_time)) {
@@ -300,12 +301,12 @@ public final class AddWorkActivity extends AppActivity {
                     return;
                 }
 
-                if (TextUtils.isEmpty(company_name)) {
+                if (TextUtils.isEmpty(companyName)) {
                     toast("没有输入所属公司");
                     return;
                 }
 
-                if (TextUtils.isEmpty(industry)) {
+                if (TextUtils.isEmpty(industryName)) {
                     toast("没选择所在行业");
                     return;
                 }
@@ -314,7 +315,7 @@ public final class AddWorkActivity extends AppActivity {
                     Intent intent = new Intent(this, EnterDeveloperActivity.class);
                     intent.putExtra(INTENT_KEY_DEVELOPER_INFO, mBean);
                     startActivity(intent);
-                    ActivityManager.getInstance().finishAllActivities();
+                    ActivityManager.getInstance().finishAllActivities(EnterDeveloperActivity.class, MainActivity.class);
                 } else {
                     if (mId == 0) { // 0 添加教育  不等于0 是编辑教育
                         addWork(false);
@@ -377,23 +378,49 @@ public final class AddWorkActivity extends AppActivity {
         }
     }
 
+    /**
+     * 添加工作经历
+     *
+     * @param isBack
+     */
     public void addWork(boolean isBack) {
         EasyHttp.post(this)
-                .api(new AddWorkApi()
-                        .setDeveloperId(89)
-                        .setCompanyName(company_name)
+                .api(new UpdateWorkApi()
+                        .setId(null)
+                        .setCompanyName(companyName)
                         .setIndustryId(industryId)
                         .setPositionName(project_position)
                         .setWorkStartTime(in_time + "-01")
                         .setWorkEndTime(end_time + "-01"))
-                .request(new HttpCallback<HttpData<List<GetProvinceApi.ProvinceBean>>>(this) {
+                .request(new HttpCallback<HttpData<DeveloperInfoBean.DeveloperWork>>(this) {
 
                     @Override
-                    public void onSucceed(HttpData<List<GetProvinceApi.ProvinceBean>> data) {
-                        EasyLog.print("====addCareer===");
-                        if (isBack) {
+                    public void onSucceed(HttpData<DeveloperInfoBean.DeveloperWork> data) {
+                        if (getBoolean(IS_RESUME)) {
+//                            DeveloperInfoBean.DeveloperWork developerWork = mBean.getWorkExperienceDtoList().get(position);
+//                            developerWork.setId(data.getData().getId());
+//                            developerWork.setCompanyName(company_name);
+//                            developerWork.setIndustryName(industry);
+//                            developerWork.setPositionName(project_position);
+//                            developerWork.setWorkStartTime(in_time);
+//                            developerWork.setWorkEndTime(end_time);
+
+//                            checkDeveloper(mBean);
+
+                            DeveloperInfoBean.DeveloperWork developerWork = singleton.getWorkExperienceDtoList().get(position);
+                            developerWork.setId(data.getData().getId());
+                            developerWork.setCompanyName(companyName);
+                            developerWork.setIndustryId(industryId);
+                            developerWork.setIndustryName(industryName);
+                            developerWork.setPositionName(project_position);
+                            developerWork.setWorkStartTime(in_time);
+                            developerWork.setWorkEndTime(end_time);
+                            checkDeveloper(singleton);
+                        } else if (isBack) {
                             setResult(RESULT_OK);
                             finish();
+
+                            toast(R.string.sava_success);
                         } else {
                             et_work_company_name.setText("");
                             info_work_industry.setLeftText("所在行业");
@@ -401,49 +428,62 @@ public final class AddWorkActivity extends AppActivity {
                             info_work_in_time.setText("选择开始时间");
                             info_work_end_time.setText("选择结束时间");
 
-                            company_name = "";
+                            companyName = "";
                             project_position = "";
                             in_time = "";
                             end_time = "";
-                            industry = "";
+                            industryName = "";
                             industryId = 0;
                             mId = 0;
+
+                            toast("保存成功");
                         }
 
-                        toast(R.string.sava_success);
+
                     }
                 });
     }
 
+    /**
+     * 更新工作经历
+     *
+     * @param id
+     */
     public void updateWork(int id) {
-        EasyHttp.put(this)
+        EasyHttp.post(this)
                 .api(new UpdateWorkApi()
-                        .setDeveloperId(SPUtils.getInstance().getInt(AppConfig.DEVELOPER_ID))
-                        .setWorkExperienceId(id)
-                        .setCompanyName(company_name)
+                        .setId(id + "")
+                        .setCompanyName(companyName)
                         .setIndustryId(industryId)
                         .setPositionName(project_position)
                         .setWorkStartTime(in_time + "-01")
                         .setWorkEndTime(end_time + "-01"))
-                .request(new HttpCallback<HttpData<List<GetProvinceApi.ProvinceBean>>>(this) {
-
+                .request(new HttpCallback<HttpData<DeveloperInfoBean.DeveloperWork>>(this) {
                     @Override
-                    public void onSucceed(HttpData<List<GetProvinceApi.ProvinceBean>> data) {
+                    public void onSucceed(HttpData<DeveloperInfoBean.DeveloperWork> data) {
                         if (!getBoolean(IS_RESUME)) {
                             setResult(RESULT_OK);
                             finish();
                         } else {
 
-                            DeveloperInfoBean.DeveloperWork developerWork = mBean.getWorkExperienceDtoList().get(position);
-                            developerWork.setCompanyName(company_name);
-                            developerWork.setIndustryName(industry);
+//                            DeveloperInfoBean.DeveloperWork developerWork = mBean.getWorkExperienceDtoList().get(position);
+//                            developerWork.setCompanyName(company_name);
+//                            developerWork.setIndustryName(industry);
+//                            developerWork.setPositionName(project_position);
+//                            developerWork.setWorkStartTime(in_time);
+//                            developerWork.setWorkEndTime(end_time);
+//
+//                            checkDeveloper(mBean);
+
+                            DeveloperInfoBean.DeveloperWork developerWork = singleton.getWorkExperienceDtoList().get(position);
+                            developerWork.setId(data.getData().getId());
+                            developerWork.setCompanyName(companyName);
+                            developerWork.setIndustryId(industryId);
+                            developerWork.setIndustryName(industryName);
                             developerWork.setPositionName(project_position);
                             developerWork.setWorkStartTime(in_time);
                             developerWork.setWorkEndTime(end_time);
-
-                            checkDeveloper(mBean);
-
-
+                            checkDeveloper(singleton);
                         }
                     }
                 });
@@ -492,8 +532,11 @@ public final class AddWorkActivity extends AppActivity {
         boolean mTag = true;
         if (workExperienceDtoList.size() == 0) {
             return true;
-        } else {
-            for (int i = 0; i < workExperienceDtoList.size(); i++) {
+        } else {// +1 跳到下一个教育经历集合 因为当前position 已经补充完整，跳该position下一个位置
+            if (position + 1 >= workExperienceDtoList.size()) {
+                return true;
+            }
+            for (int i = position + 1; i < workExperienceDtoList.size(); i++) {
                 if (TextUtils.isEmpty(workExperienceDtoList.get(i).getCompanyName()) &&
                         TextUtils.isEmpty(workExperienceDtoList.get(i).getIndustryName()) &&
                         TextUtils.isEmpty(workExperienceDtoList.get(i).getPositionName()) &&
@@ -534,12 +577,10 @@ public final class AddWorkActivity extends AppActivity {
                         projectDtoList.get(i).getProjectSkillList().size() == 0) {
 
                     position3 = i;
-
                     mTag = true;
                     break;
                 } else {
                     position3 = i;
-
                     mTag = false;
                     break;
                 }
@@ -569,11 +610,11 @@ public final class AddWorkActivity extends AppActivity {
                 eYearMonth = Utils.dateToStamp(developerWork.getWorkEndTime());
 
 
-                company_name = developerWork.getCompanyName();
+                companyName = developerWork.getCompanyName();
                 project_position = developerWork.getPositionName();
                 in_time = developerWork.getWorkStartTime();
                 end_time = developerWork.getWorkEndTime();
-                industry = developerWork.getIndustryName();
+                industryName = developerWork.getIndustryName();
                 industryId = developerWork.getIndustryId();
                 mId = developerWork.getId();
             }

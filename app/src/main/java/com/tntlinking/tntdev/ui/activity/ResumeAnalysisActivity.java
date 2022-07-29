@@ -156,7 +156,8 @@ public final class ResumeAnalysisActivity extends AppActivity {
                                 .setAnimStyle(BaseDialog.ANIM_SCALE)
                                 .setOnClickListener(R.id.btn_dialog_custom_ok, (dialog, views) -> {
                                     checkDeveloper(data.getData());
-
+                                    DeveloperInfoBean.getSingleton().setDeveloperInfoBean(data.getData());
+                                    finish();
                                     dialog.dismiss();
                                 }).show();
                     }
