@@ -3,14 +3,11 @@ package com.tntlinking.tntdev.ui.firm.fragment;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.blankj.utilcode.util.SPUtils;
-import com.hjq.base.FragmentPagerAdapter;
 import com.hjq.http.EasyHttp;
 import com.hjq.http.listener.HttpCallback;
 import com.scwang.smart.refresh.layout.SmartRefreshLayout;
@@ -18,49 +15,35 @@ import com.scwang.smart.refresh.layout.api.RefreshLayout;
 import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener;
 import com.tntlinking.tntdev.R;
 import com.tntlinking.tntdev.aop.SingleClick;
-import com.tntlinking.tntdev.app.AppFragment;
 import com.tntlinking.tntdev.app.TitleBarFragment;
 import com.tntlinking.tntdev.http.api.AppListApi;
-import com.tntlinking.tntdev.http.api.AppListInterviewApi;
-import com.tntlinking.tntdev.http.api.HistoryListApi;
 import com.tntlinking.tntdev.http.model.HttpData;
 import com.tntlinking.tntdev.other.AppConfig;
-import com.tntlinking.tntdev.other.HomeChangeListener;
-import com.tntlinking.tntdev.ui.activity.AuditionDetailActivity;
-import com.tntlinking.tntdev.ui.activity.EnterDeveloperActivity;
 import com.tntlinking.tntdev.ui.activity.HistoryDailyListActivity;
-import com.tntlinking.tntdev.ui.activity.WriteDailyActivity;
-import com.tntlinking.tntdev.ui.adapter.HistoryProjectAdapter;
-import com.tntlinking.tntdev.ui.adapter.ServiceProjectAdapter;
-import com.tntlinking.tntdev.ui.adapter.TabAdapter;
-import com.tntlinking.tntdev.ui.firm.activity.DeveloperInfoActivity;
 import com.tntlinking.tntdev.ui.firm.activity.FirmMainActivity;
 import com.tntlinking.tntdev.ui.firm.adapter.FirmPositionAdapter;
-import com.tntlinking.tntdev.ui.fragment.TreatyFragment;
-import com.tntlinking.tntdev.ui.fragment.TreatyService1Fragment;
-import com.tntlinking.tntdev.ui.fragment.TreatyServiced2Fragment;
+import com.tntlinking.tntdev.ui.firm.adapter.TreatyOrderAdapter;
 import com.tntlinking.tntdev.widget.MyListView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager.widget.ViewPager;
 
 /**
- * desc   :
+ * desc   : 服务 Fragment
  */
-public final class FirmCollectFragment extends TitleBarFragment<FirmMainActivity> implements OnRefreshLoadMoreListener {
+public final class TreatyOrderFragment extends TitleBarFragment<FirmMainActivity> implements OnRefreshLoadMoreListener {
 
     private MyListView lv_1;
     private LinearLayout ll_empty;
-
+    private LinearLayout ll_daily;
     private SmartRefreshLayout mRefreshLayout;
 
 
+
     private List<AppListApi.Bean> mServiceList = new ArrayList<>();
-    private FirmPositionAdapter mServiceAdapter;
+    private TreatyOrderAdapter mServiceAdapter;
 
 
     private String orderId;
@@ -68,14 +51,17 @@ public final class FirmCollectFragment extends TitleBarFragment<FirmMainActivity
     private static final String INTENT_KEY_POSITION = "position";
 
 
-    public static FirmCollectFragment newInstance() {
-
-        return new FirmCollectFragment();
+    public static TreatyOrderFragment newInstance(String url) {
+        TreatyOrderFragment fragment = new TreatyOrderFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString(INTENT_KEY_POSITION, url);
+        fragment.setArguments(bundle);
+        return fragment;
     }
 
     @Override
     protected int getLayoutId() {
-        return R.layout.firm_collect_fragment;
+        return R.layout.firm_position_fragment;
     }
 
     @Override
@@ -83,13 +69,15 @@ public final class FirmCollectFragment extends TitleBarFragment<FirmMainActivity
         lv_1 = findViewById(R.id.lv_1);
 
         ll_empty = findViewById(R.id.ll_empty);
+        ll_daily = findViewById(R.id.ll_daily);
+
 
 
         mRefreshLayout = findViewById(R.id.rl_status_refresh);
         mRefreshLayout.setOnRefreshLoadMoreListener(this);
         mRefreshLayout.setEnableLoadMore(false);
 
-        mServiceAdapter = new FirmPositionAdapter(getActivity(), mServiceList);
+        mServiceAdapter = new TreatyOrderAdapter(getActivity(), mServiceList);
 
 
         lv_1.setAdapter(mServiceAdapter);
@@ -98,7 +86,7 @@ public final class FirmCollectFragment extends TitleBarFragment<FirmMainActivity
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                startActivity(DeveloperInfoActivity.class);
+
             }
         });
 
@@ -107,7 +95,8 @@ public final class FirmCollectFragment extends TitleBarFragment<FirmMainActivity
 
     @Override
     protected void initData() {
-
+        String status = SPUtils.getInstance().getString(AppConfig.DEVELOP_STATUS, "1");
+        String string = getString(INTENT_KEY_POSITION);
         getAppList();
     }
 
@@ -124,11 +113,6 @@ public final class FirmCollectFragment extends TitleBarFragment<FirmMainActivity
         }
     }
 
-    @Override
-    public boolean isStatusBarEnabled() {
-        // 使用沉浸式状态栏
-        return !super.isStatusBarEnabled();
-    }
 
     /**
      * 获取在服务企业list //2 待服务，3 服务中
@@ -151,7 +135,6 @@ public final class FirmCollectFragment extends TitleBarFragment<FirmMainActivity
                             ll_empty.setVisibility(View.VISIBLE);
 
                         }
-                        mRefreshLayout.finishRefresh();
                     }
 
                     @Override
@@ -160,6 +143,8 @@ public final class FirmCollectFragment extends TitleBarFragment<FirmMainActivity
                     }
                 });
     }
+
+
 
 
     @Override

@@ -34,6 +34,7 @@ import com.tntlinking.tntdev.ui.adapter.DailyWriteAdapter;
 import com.tntlinking.tntdev.ui.adapter.ServiceProjectAdapter;
 import com.tntlinking.tntdev.ui.dialog.AddTagDialog;
 import com.tntlinking.tntdev.ui.firm.activity.FirmMainActivity;
+import com.tntlinking.tntdev.ui.firm.adapter.FirmPositionAdapter;
 import com.tntlinking.tntdev.ui.fragment.BrowserFragment;
 import com.tntlinking.tntdev.widget.MyListView;
 
@@ -51,12 +52,11 @@ public final class PositionFragment extends TitleBarFragment<FirmMainActivity> i
     private LinearLayout ll_empty;
     private LinearLayout ll_daily;
     private SmartRefreshLayout mRefreshLayout;
-    private LinearLayout ll_history;
 
 
 
     private List<AppListApi.Bean> mServiceList = new ArrayList<>();
-    private ServiceProjectAdapter mServiceAdapter;
+    private FirmPositionAdapter mServiceAdapter;
 
 
     private String orderId;
@@ -74,7 +74,7 @@ public final class PositionFragment extends TitleBarFragment<FirmMainActivity> i
 
     @Override
     protected int getLayoutId() {
-        return R.layout.treaty_fragment1;
+        return R.layout.firm_position_fragment;
     }
 
     @Override
@@ -83,14 +83,14 @@ public final class PositionFragment extends TitleBarFragment<FirmMainActivity> i
 
         ll_empty = findViewById(R.id.ll_empty);
         ll_daily = findViewById(R.id.ll_daily);
-        ll_history = findViewById(R.id.ll_history);
+
 
 
         mRefreshLayout = findViewById(R.id.rl_status_refresh);
         mRefreshLayout.setOnRefreshLoadMoreListener(this);
         mRefreshLayout.setEnableLoadMore(false);
-        setOnClickListener(ll_history);
-        mServiceAdapter = new ServiceProjectAdapter(getActivity(), mServiceList);
+
+        mServiceAdapter = new FirmPositionAdapter(getActivity(), mServiceList);
 
 
         lv_1.setAdapter(mServiceAdapter);
@@ -110,15 +110,7 @@ public final class PositionFragment extends TitleBarFragment<FirmMainActivity> i
     protected void initData() {
         String status = SPUtils.getInstance().getString(AppConfig.DEVELOP_STATUS, "1");
         String string = getString(INTENT_KEY_POSITION);
-        EasyLog.print("===position==="+string);
-        if (status.equals("3")) {
-            getAppList();
-        } else {
-            toast("您还没有认证");
-            ll_empty.setVisibility(View.VISIBLE);
-            ll_daily.setVisibility(View.GONE);
-        }
-
+        getAppList();
     }
 
     @SuppressLint("NonConstantResourceId")
@@ -146,7 +138,7 @@ public final class PositionFragment extends TitleBarFragment<FirmMainActivity> i
                     public void onSucceed(HttpData<List<AppListApi.Bean>> data) {
                         if (data.getData().size() > 0) {
                             ll_empty.setVisibility(View.GONE);
-                            ll_daily.setVisibility(View.VISIBLE);
+
 
                             mServiceList.addAll(data.getData());
                             mServiceAdapter.setData(mServiceList);
@@ -154,7 +146,7 @@ public final class PositionFragment extends TitleBarFragment<FirmMainActivity> i
 
                         } else {
                             ll_empty.setVisibility(View.VISIBLE);
-                            ll_daily.setVisibility(View.GONE);
+
                         }
                     }
 

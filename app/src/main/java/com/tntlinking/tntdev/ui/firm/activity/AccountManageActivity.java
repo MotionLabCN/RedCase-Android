@@ -1,16 +1,10 @@
-package com.tntlinking.tntdev.ui.firm.fragment;
+package com.tntlinking.tntdev.ui.firm.activity;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
-
 import com.blankj.utilcode.util.SPUtils;
-import com.hjq.base.FragmentPagerAdapter;
 import com.hjq.http.EasyHttp;
 import com.hjq.http.listener.HttpCallback;
 import com.scwang.smart.refresh.layout.SmartRefreshLayout;
@@ -18,65 +12,39 @@ import com.scwang.smart.refresh.layout.api.RefreshLayout;
 import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener;
 import com.tntlinking.tntdev.R;
 import com.tntlinking.tntdev.aop.SingleClick;
-import com.tntlinking.tntdev.app.AppFragment;
-import com.tntlinking.tntdev.app.TitleBarFragment;
+import com.tntlinking.tntdev.app.AppActivity;
 import com.tntlinking.tntdev.http.api.AppListApi;
-import com.tntlinking.tntdev.http.api.AppListInterviewApi;
-import com.tntlinking.tntdev.http.api.HistoryListApi;
 import com.tntlinking.tntdev.http.model.HttpData;
 import com.tntlinking.tntdev.other.AppConfig;
-import com.tntlinking.tntdev.other.HomeChangeListener;
-import com.tntlinking.tntdev.ui.activity.AuditionDetailActivity;
-import com.tntlinking.tntdev.ui.activity.EnterDeveloperActivity;
-import com.tntlinking.tntdev.ui.activity.HistoryDailyListActivity;
-import com.tntlinking.tntdev.ui.activity.WriteDailyActivity;
-import com.tntlinking.tntdev.ui.adapter.HistoryProjectAdapter;
-import com.tntlinking.tntdev.ui.adapter.ServiceProjectAdapter;
-import com.tntlinking.tntdev.ui.adapter.TabAdapter;
-import com.tntlinking.tntdev.ui.firm.activity.DeveloperInfoActivity;
-import com.tntlinking.tntdev.ui.firm.activity.FirmMainActivity;
+import com.tntlinking.tntdev.ui.activity.UploadResumeActivity;
 import com.tntlinking.tntdev.ui.firm.adapter.FirmPositionAdapter;
-import com.tntlinking.tntdev.ui.fragment.TreatyFragment;
-import com.tntlinking.tntdev.ui.fragment.TreatyService1Fragment;
-import com.tntlinking.tntdev.ui.fragment.TreatyServiced2Fragment;
+import com.tntlinking.tntdev.ui.firm.adapter.FreezeAdapter;
 import com.tntlinking.tntdev.widget.MyListView;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager.widget.ViewPager;
+import androidx.appcompat.widget.AppCompatButton;
 
 /**
- * desc   :
+ * 账户管理
  */
-public final class FirmCollectFragment extends TitleBarFragment<FirmMainActivity> implements OnRefreshLoadMoreListener {
+public final class AccountManageActivity extends AppActivity implements OnRefreshLoadMoreListener {
 
     private MyListView lv_1;
     private LinearLayout ll_empty;
+
 
     private SmartRefreshLayout mRefreshLayout;
 
 
     private List<AppListApi.Bean> mServiceList = new ArrayList<>();
-    private FirmPositionAdapter mServiceAdapter;
-
-
-    private String orderId;
-
-    private static final String INTENT_KEY_POSITION = "position";
-
-
-    public static FirmCollectFragment newInstance() {
-
-        return new FirmCollectFragment();
-    }
+    private FreezeAdapter mServiceAdapter;
 
     @Override
     protected int getLayoutId() {
-        return R.layout.firm_collect_fragment;
+        return R.layout.account_manage_activity;
     }
+
 
     @Override
     protected void initView() {
@@ -85,49 +53,51 @@ public final class FirmCollectFragment extends TitleBarFragment<FirmMainActivity
         ll_empty = findViewById(R.id.ll_empty);
 
 
+
         mRefreshLayout = findViewById(R.id.rl_status_refresh);
         mRefreshLayout.setOnRefreshLoadMoreListener(this);
         mRefreshLayout.setEnableLoadMore(false);
 
-        mServiceAdapter = new FirmPositionAdapter(getActivity(), mServiceList);
+        mServiceAdapter = new FreezeAdapter(getActivity(), mServiceList);
 
 
         lv_1.setAdapter(mServiceAdapter);
-
+//        btn_commit.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                startActivity(SendPositionActivity.class);
+//            }
+//        });
         lv_1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                startActivity(DeveloperInfoActivity.class);
+
             }
         });
 
 
     }
 
-    @Override
-    protected void initData() {
 
+    @Override
+    protected void initData() {// 一个是从简历解析传过来的，一个是进入页面接口请求显示数据的
         getAppList();
     }
 
-    @SuppressLint("NonConstantResourceId")
+
     @SingleClick
     @Override
     public void onClick(View view) {
+        Intent intent = new Intent();
         switch (view.getId()) {
-            case R.id.ll_history:
-                Intent intent = new Intent(getActivity(), HistoryDailyListActivity.class);
-                intent.putExtra("orderId", orderId);
-                startActivity(intent);
+            case R.id.ll_add_photo:
                 break;
-        }
-    }
+            case R.id.ll_add_base_info:
+                break;
 
-    @Override
-    public boolean isStatusBarEnabled() {
-        // 使用沉浸式状态栏
-        return !super.isStatusBarEnabled();
+        }
+
     }
 
     /**
@@ -145,7 +115,7 @@ public final class FirmCollectFragment extends TitleBarFragment<FirmMainActivity
 
                             mServiceList.addAll(data.getData());
                             mServiceAdapter.setData(mServiceList);
-                            orderId = mServiceList.get(0).getId();// 服务项目只会有一个
+
 
                         } else {
                             ll_empty.setVisibility(View.VISIBLE);
@@ -175,6 +145,5 @@ public final class FirmCollectFragment extends TitleBarFragment<FirmMainActivity
     public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
 
     }
-
 
 }
