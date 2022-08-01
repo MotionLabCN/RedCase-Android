@@ -165,6 +165,15 @@ public final class ResumeAnalysisActivity extends AppActivity {
                     @Override
                     public void onFail(Exception e) {
                         super.onFail(e);
+                        new BaseDialog.Builder<>(ResumeAnalysisActivity.this)
+                                .setContentView(R.layout.show_resume_status_dialog)
+                                .setAnimStyle(BaseDialog.ANIM_SCALE)
+                                .setImageDrawable(R.id.iv_gif, R.drawable.icon_resume_fail)
+                                .setOnClickListener(R.id.btn_dialog_custom_ok, (dialog, views) -> {
+                                    parseResume(fileName);
+                                    dialog.dismiss();
+                                }).show();
+
                     }
 
                     @Override

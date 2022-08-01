@@ -259,17 +259,20 @@ public final class AddBaseInfoActivity extends AppActivity {
                             setResult(RESULT_OK, intent);
                             finish();
                         } else {
-                            checkDeveloper(getSerializable(INTENT_KEY_DEVELOPER_INFO));
+                            singleton.setRealName(realName);
+                            singleton.setBirthday(birthday);
+                            singleton.setProvinceId(provinceId);
+                            singleton.setAreasId(areaId);
+                            singleton.setCityId(cityId);
+                            singleton.setSex(sex);
+                            singleton.setRemoteWorkReason(workReasonId);
+                            singleton.setRemoteWorkReasonStr(workReasonName);
+                            checkDeveloper(singleton);
+
+//                            checkDeveloper(getSerializable(INTENT_KEY_DEVELOPER_INFO));
                         }
 
-                        singleton.setRealName(realName);
-                        singleton.setBirthday(birthday);
-                        singleton.setProvinceId(provinceId);
-                        singleton.setAreasId(areaId);
-                        singleton.setCityId(cityId);
-                        singleton.setSex(sex);
-                        singleton.setRemoteWorkReason(workReasonId);
-                        singleton.setRemoteWorkReasonStr(workReasonName);
+
                     }
                 });
     }

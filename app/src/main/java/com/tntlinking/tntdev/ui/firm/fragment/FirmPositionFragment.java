@@ -47,7 +47,7 @@ public final class FirmPositionFragment extends TitleBarFragment<FirmMainActivit
 
 
     private List<AppListApi.Bean> mServiceList = new ArrayList<>();
-    private FirmPositionAdapter mServiceAdapter;
+    private FirmPositionAdapter mAdapter;
 
 
     private String orderId;
@@ -77,10 +77,10 @@ public final class FirmPositionFragment extends TitleBarFragment<FirmMainActivit
         mRefreshLayout.setOnRefreshLoadMoreListener(this);
         mRefreshLayout.setEnableLoadMore(false);
 
-        mServiceAdapter = new FirmPositionAdapter(getActivity(), mServiceList);
+        mAdapter = new FirmPositionAdapter(getActivity());
 
 
-        lv_1.setAdapter(mServiceAdapter);
+        lv_1.setAdapter(mAdapter);
         btn_commit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -100,8 +100,19 @@ public final class FirmPositionFragment extends TitleBarFragment<FirmMainActivit
 
     @Override
     protected void initData() {
+        mAdapter.setData(analogData());
+//        getAppList();
+    }
 
-        getAppList();
+    /**
+     * 模拟数据
+     */
+    private List<String> analogData() {
+        List<String> data = new ArrayList<>();
+        for (int i = mAdapter.getCount(); i < mAdapter.getCount() + 20; i++) {
+            data.add("我是第" + i + "条目");
+        }
+        return data;
     }
 
     @SuppressLint("NonConstantResourceId")
@@ -132,18 +143,18 @@ public final class FirmPositionFragment extends TitleBarFragment<FirmMainActivit
                 .request(new HttpCallback<HttpData<List<AppListApi.Bean>>>(this) {
                     @Override
                     public void onSucceed(HttpData<List<AppListApi.Bean>> data) {
-                        if (data.getData().size() > 0) {
-                            ll_empty.setVisibility(View.GONE);
-
-
-                            mServiceList.addAll(data.getData());
-                            mServiceAdapter.setData(mServiceList);
-                            orderId = mServiceList.get(0).getId();// 服务项目只会有一个
-
-                        } else {
-                            ll_empty.setVisibility(View.VISIBLE);
-
-                        }
+//                        if (data.getData().size() > 0) {
+//                            ll_empty.setVisibility(View.GONE);
+//
+//
+//                            mServiceList.addAll(data.getData());
+//                            mServiceAdapter.setData(mServiceList);
+//                            orderId = mServiceList.get(0).getId();// 服务项目只会有一个
+//
+//                        } else {
+//                            ll_empty.setVisibility(View.VISIBLE);
+//
+//                        }
                         mRefreshLayout.finishRefresh();
                     }
 
@@ -157,11 +168,11 @@ public final class FirmPositionFragment extends TitleBarFragment<FirmMainActivit
 
     @Override
     public void onRefresh(@NonNull RefreshLayout refreshLayout) {
-        mServiceList.clear();
-        String status = SPUtils.getInstance().getString(AppConfig.DEVELOP_STATUS, "1");
-        if (status.equals("3")) {
-            getAppList();
-        }
+//        mServiceList.clear();
+//        String status = SPUtils.getInstance().getString(AppConfig.DEVELOP_STATUS, "1");
+//        if (status.equals("3")) {
+//            getAppList();
+//        }
     }
 
     @Override

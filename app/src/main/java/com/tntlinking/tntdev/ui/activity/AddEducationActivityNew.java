@@ -55,16 +55,16 @@ public final class AddEducationActivityNew extends AppActivity {
     private AppCompatButton btn_commit;
 
 
-    private int educationId = 1;
-    private int training_methodId = 1;
-    private String schoolName = "";
-    private String educationName = "";
-    private String major = "";
-    private String in_time = "";
-    private String end_time = "";
-    private String trainingName = "";
+    private int educationId = 1;//学历id
+    private int training_methodId = 1;//培养方式id
+    private String schoolName = "";//学校名字
+    private String educationName = "";//学历
+    private String major = "";//专业名字
+    private String in_time = "";//入校时间
+    private String end_time = "";//毕业时间
+    private String trainingName = "";//培养方式
 
-    private int position = 0;
+    private int position = 0;//传过来教育list 哪个条目的position
     private int mId = 0;// 教育条目 id
     private DeveloperInfoBean mBean;
 

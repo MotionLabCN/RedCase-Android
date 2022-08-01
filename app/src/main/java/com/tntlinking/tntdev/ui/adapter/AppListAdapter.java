@@ -111,7 +111,7 @@ public final class AppListAdapter extends AppAdapter<AppListApi.Bean> {
                     tv_status.setText(item.getInterviewTimeType());
                     tv_interview.setVisibility(View.VISIBLE);
                     view_dot.setBackground(mContext.getDrawable(R.drawable.dot_oval_blue));
-                    ll_status.setBackground(mContext.getDrawable(R.drawable.bg_blue_radius_3));
+                    ll_status.setBackground(mContext.getDrawable(R.drawable.bg_white_radius_3));
                     tv_status.setTextColor(mContext.getResources().getColor(R.color.main_color));
                 } else {
                     tv_interview.setVisibility(View.GONE);

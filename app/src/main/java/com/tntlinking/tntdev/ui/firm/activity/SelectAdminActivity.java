@@ -1,7 +1,9 @@
 package com.tntlinking.tntdev.ui.firm.activity;
+
 import android.content.Intent;
 import android.view.View;
 import android.widget.LinearLayout;
+
 import com.tntlinking.tntdev.R;
 import com.tntlinking.tntdev.aop.SingleClick;
 import com.tntlinking.tntdev.app.AppActivity;
@@ -9,14 +11,14 @@ import com.tntlinking.tntdev.app.AppActivity;
 /**
  * 角色切换页面
  */
-public final class ChangeAdminActivity extends AppActivity {
+public final class SelectAdminActivity extends AppActivity {
     private LinearLayout ll_firm;
     private LinearLayout ll_dev;
 
 
     @Override
     protected int getLayoutId() {
-        return R.layout.change_admin_activity;
+        return R.layout.select_admin_activity;
     }
 
 
@@ -51,5 +53,7 @@ public final class ChangeAdminActivity extends AppActivity {
         }
 
     }
+
+
 
 }

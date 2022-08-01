@@ -21,19 +21,15 @@ import com.tntlinking.tntdev.R;
 import com.tntlinking.tntdev.aop.SingleClick;
 import com.tntlinking.tntdev.app.TitleBarFragment;
 import com.tntlinking.tntdev.http.api.AppListApi;
-import com.tntlinking.tntdev.http.api.CreateDailyApi;
-import com.tntlinking.tntdev.http.api.DeleteDailyApi;
-import com.tntlinking.tntdev.http.api.GetDailyListApi;
-import com.tntlinking.tntdev.http.api.UpdateDailyApi;
+
 import com.tntlinking.tntdev.http.model.HttpData;
 import com.tntlinking.tntdev.other.AppConfig;
 import com.tntlinking.tntdev.other.HomeChangeListener;
 import com.tntlinking.tntdev.ui.activity.HistoryDailyListActivity;
-import com.tntlinking.tntdev.ui.activity.MainActivity;
-import com.tntlinking.tntdev.ui.adapter.DailyWriteAdapter;
-import com.tntlinking.tntdev.ui.adapter.ServiceProjectAdapter;
-import com.tntlinking.tntdev.ui.dialog.AddTagDialog;
+
+import com.tntlinking.tntdev.ui.firm.activity.DeveloperInfoActivity;
 import com.tntlinking.tntdev.ui.firm.activity.FirmMainActivity;
+import com.tntlinking.tntdev.ui.firm.adapter.FirmHomeAdapter;
 import com.tntlinking.tntdev.ui.firm.adapter.FirmPositionAdapter;
 import com.tntlinking.tntdev.ui.fragment.BrowserFragment;
 import com.tntlinking.tntdev.widget.MyListView;
@@ -54,9 +50,8 @@ public final class PositionFragment extends TitleBarFragment<FirmMainActivity> i
     private SmartRefreshLayout mRefreshLayout;
 
 
-
     private List<AppListApi.Bean> mServiceList = new ArrayList<>();
-    private FirmPositionAdapter mServiceAdapter;
+    private FirmHomeAdapter mAdapter;
 
 
     private String orderId;
@@ -85,20 +80,18 @@ public final class PositionFragment extends TitleBarFragment<FirmMainActivity> i
         ll_daily = findViewById(R.id.ll_daily);
 
 
-
         mRefreshLayout = findViewById(R.id.rl_status_refresh);
         mRefreshLayout.setOnRefreshLoadMoreListener(this);
         mRefreshLayout.setEnableLoadMore(false);
 
-        mServiceAdapter = new FirmPositionAdapter(getActivity(), mServiceList);
-
-
-        lv_1.setAdapter(mServiceAdapter);
+        mAdapter = new FirmHomeAdapter(getActivity());
+        lv_1.setAdapter(mAdapter);
 
         lv_1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
+                startActivity(DeveloperInfoActivity.class);
 
             }
         });
@@ -108,9 +101,20 @@ public final class PositionFragment extends TitleBarFragment<FirmMainActivity> i
 
     @Override
     protected void initData() {
-        String status = SPUtils.getInstance().getString(AppConfig.DEVELOP_STATUS, "1");
-        String string = getString(INTENT_KEY_POSITION);
-        getAppList();
+
+        mAdapter.setData(analogData());
+//        getAppList();
+    }
+
+    /**
+     * 模拟数据
+     */
+    private List<String> analogData() {
+        List<String> data = new ArrayList<>();
+        for (int i = mAdapter.getCount(); i < mAdapter.getCount() + 20; i++) {
+            data.add("我是第" + i + "条目");
+        }
+        return data;
     }
 
     @SuppressLint("NonConstantResourceId")
@@ -136,18 +140,18 @@ public final class PositionFragment extends TitleBarFragment<FirmMainActivity> i
                 .request(new HttpCallback<HttpData<List<AppListApi.Bean>>>(this) {
                     @Override
                     public void onSucceed(HttpData<List<AppListApi.Bean>> data) {
-                        if (data.getData().size() > 0) {
-                            ll_empty.setVisibility(View.GONE);
-
-
-                            mServiceList.addAll(data.getData());
-                            mServiceAdapter.setData(mServiceList);
-                            orderId = mServiceList.get(0).getId();// 服务项目只会有一个
-
-                        } else {
-                            ll_empty.setVisibility(View.VISIBLE);
-
-                        }
+//                        if (data.getData().size() > 0) {
+//                            ll_empty.setVisibility(View.GONE);
+//
+//
+//                            mServiceList.addAll(data.getData());
+//                            mServiceAdapter.setData(mServiceList);
+//                            orderId = mServiceList.get(0).getId();// 服务项目只会有一个
+//
+//                        } else {
+//                            ll_empty.setVisibility(View.VISIBLE);
+//
+//                        }
                     }
 
                     @Override
@@ -156,8 +160,6 @@ public final class PositionFragment extends TitleBarFragment<FirmMainActivity> i
                     }
                 });
     }
-
-
 
 
     @Override

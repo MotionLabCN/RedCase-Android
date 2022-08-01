@@ -21,6 +21,7 @@ import com.tntlinking.tntdev.http.model.HttpData;
 import com.tntlinking.tntdev.other.AppConfig;
 import com.tntlinking.tntdev.ui.activity.HistoryDailyListActivity;
 import com.tntlinking.tntdev.ui.firm.activity.FirmMainActivity;
+import com.tntlinking.tntdev.ui.firm.adapter.RecommendPositionAdapter;
 import com.tntlinking.tntdev.ui.firm.adapter.TreatyOrderAdapter;
 import com.tntlinking.tntdev.widget.MyListView;
 
@@ -32,7 +33,7 @@ import androidx.annotation.NonNull;
 /**
  * desc   : 服务 Fragment
  */
-public final class TreatyOrderFragment extends TitleBarFragment<FirmMainActivity> implements OnRefreshLoadMoreListener {
+public final class RecommendPositionFragment extends TitleBarFragment<FirmMainActivity> implements OnRefreshLoadMoreListener {
 
     private MyListView lv_1;
     private LinearLayout ll_empty;
@@ -42,7 +43,7 @@ public final class TreatyOrderFragment extends TitleBarFragment<FirmMainActivity
 
 
     private List<AppListApi.Bean> mServiceList = new ArrayList<>();
-    private TreatyOrderAdapter mServiceAdapter;
+    private RecommendPositionAdapter mServiceAdapter;
 
 
     private String orderId;
@@ -50,8 +51,8 @@ public final class TreatyOrderFragment extends TitleBarFragment<FirmMainActivity
     private static final String INTENT_KEY_POSITION = "position";
 
 
-    public static TreatyOrderFragment newInstance(String url) {
-        TreatyOrderFragment fragment = new TreatyOrderFragment();
+    public static RecommendPositionFragment newInstance(String url) {
+        RecommendPositionFragment fragment = new RecommendPositionFragment();
         Bundle bundle = new Bundle();
         bundle.putString(INTENT_KEY_POSITION, url);
         fragment.setArguments(bundle);
@@ -76,7 +77,7 @@ public final class TreatyOrderFragment extends TitleBarFragment<FirmMainActivity
         mRefreshLayout.setOnRefreshLoadMoreListener(this);
         mRefreshLayout.setEnableLoadMore(false);
 
-        mServiceAdapter = new TreatyOrderAdapter(getActivity(), mServiceList);
+        mServiceAdapter = new RecommendPositionAdapter(getActivity(), mServiceList);
 
 
         lv_1.setAdapter(mServiceAdapter);

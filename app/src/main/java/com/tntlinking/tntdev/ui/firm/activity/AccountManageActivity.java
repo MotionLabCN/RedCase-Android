@@ -16,14 +16,12 @@ import com.tntlinking.tntdev.app.AppActivity;
 import com.tntlinking.tntdev.http.api.AppListApi;
 import com.tntlinking.tntdev.http.model.HttpData;
 import com.tntlinking.tntdev.other.AppConfig;
-import com.tntlinking.tntdev.ui.activity.UploadResumeActivity;
-import com.tntlinking.tntdev.ui.firm.adapter.FirmPositionAdapter;
 import com.tntlinking.tntdev.ui.firm.adapter.FreezeAdapter;
 import com.tntlinking.tntdev.widget.MyListView;
 import java.util.ArrayList;
 import java.util.List;
 import androidx.annotation.NonNull;
-import androidx.appcompat.widget.AppCompatButton;
+
 
 /**
  * 账户管理
