@@ -68,6 +68,7 @@
                     android:layout_height="wrap_content"
                     android:divider="@null"
                     android:dividerHeight="@dimen/dp_1" />
+                <!--                    tools:listitem="@layout/item_app_list" />-->
 
                 <LinearLayout
                     android:id="@+id/ll_empty"
@@ -113,11 +114,8 @@
                         android:paddingBottom="@dimen/dp_8"
                         android:text="刷新"
                         android:textColor="@color/white"
-                        android:textSize="@dimen/sp_12"
-                        android:visibility="gone" />
+                        android:textSize="@dimen/sp_12" />
                 </LinearLayout>
-
-
             </LinearLayout>
 
         </ScrollView>

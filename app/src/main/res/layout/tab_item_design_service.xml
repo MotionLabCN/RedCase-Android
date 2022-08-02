@@ -25,8 +25,8 @@
         android:layout_alignStart="@id/tv_tab_design_title"
         android:layout_alignEnd="@id/tv_tab_design_title"
         android:layout_alignBottom="@id/tv_tab_design_title"
-        android:layout_marginLeft="@dimen/dp_14"
-        android:layout_marginRight="@dimen/dp_14"
+        android:layout_marginLeft="@dimen/dp_6"
+        android:layout_marginRight="@dimen/dp_6"
         android:background="@drawable/tab_bottom_line" />
 
 </RelativeLayout>

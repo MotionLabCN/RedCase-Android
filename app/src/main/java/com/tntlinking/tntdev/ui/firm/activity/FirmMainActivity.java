@@ -75,9 +75,9 @@ public final class FirmMainActivity extends AppActivity
         mNavigationAdapter.addItem(new NavigationAdapter.MenuItem(getString(R.string.home_nav_index),
                 ContextCompat.getDrawable(this, R.drawable.tab_home_selector)));
         mNavigationAdapter.addItem(new NavigationAdapter.MenuItem(getString(R.string.home_nav_position),
-                ContextCompat.getDrawable(this, R.drawable.tab_treaty_selector)));
+                ContextCompat.getDrawable(this, R.drawable.tab_position_selector)));
         mNavigationAdapter.addItem(new NavigationAdapter.MenuItem(getString(R.string.home_nav_collect),
-                ContextCompat.getDrawable(this, R.drawable.tab_mine_selector)));
+                ContextCompat.getDrawable(this, R.drawable.tab_collect_selector)));
         mNavigationAdapter.addItem(new NavigationAdapter.MenuItem(getString(R.string.home_nav_me),
                 ContextCompat.getDrawable(this, R.drawable.tab_mine_selector)));
         mNavigationAdapter.setOnNavigationListener(this);

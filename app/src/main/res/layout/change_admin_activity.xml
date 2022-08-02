@@ -15,7 +15,7 @@
         app:rightBackground="@null"
         app:rightTitleColor="@color/common_accent_color"
         app:rightTitleSize="@dimen/sp_14"
-        app:title="切换身份"
+        app:title="身份切换"
         app:titleStyle="bold" />
 
 
@@ -30,6 +30,7 @@
             android:id="@+id/tv_avatar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_10"
             android:text="身份切换"
             android:textColor="@color/black"
             android:textSize="@dimen/sp_24"
@@ -40,15 +41,18 @@
             android:id="@+id/ll_firm"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_10"
-            android:background="@drawable/bg_blue_stroke"
+            android:layout_marginTop="@dimen/dp_30"
+            android:background="@drawable/bg_blue_stroke_8"
             android:orientation="horizontal"
-            android:padding="@dimen/dp_16">
+            android:paddingLeft="@dimen/dp_20"
+            android:paddingTop="@dimen/dp_30"
+            android:paddingRight="@dimen/dp_20"
+            android:paddingBottom="@dimen/dp_30">
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/app_logo" />
+                android:src="@drawable/icon_firm_admin" />
 
             <TextView
                 android:layout_width="0dp"
@@ -65,7 +69,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:src="@drawable/icon_back_black" />
+                android:src="@drawable/icon_firm_blue_intent" />
 
         </LinearLayout>
 
@@ -74,14 +78,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_10"
-            android:background="@drawable/bg_gray_stroke"
+            android:background="@drawable/bg_gray_stroke_8"
             android:orientation="horizontal"
-            android:padding="@dimen/dp_16">
+            android:paddingLeft="@dimen/dp_20"
+            android:paddingTop="@dimen/dp_30"
+            android:paddingRight="@dimen/dp_20"
+            android:paddingBottom="@dimen/dp_30">
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/app_logo" />
+                android:src="@drawable/icon_firm_dev" />
 
             <TextView
                 android:layout_width="0dp"
@@ -98,7 +105,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:src="@drawable/icon_back_black" />
+                android:src="@drawable/icon_firm_blue_intent" />
 
         </LinearLayout>
     </LinearLayout>

@@ -51,7 +51,7 @@ public final class RecommendPositionActivity extends AppActivity implements View
 
         mViewPager.setAdapter(mPagerAdapter);
         mViewPager.addOnPageChangeListener(this);
-        mTabAdapter = new TabAdapter(this, TabAdapter.TAB_MODE_SERVICE, false);
+        mTabAdapter = new TabAdapter(this, TabAdapter.TAB_MODE_SERVICE, true);
         mTabView.setAdapter(mTabAdapter);
 
 

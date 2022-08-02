@@ -28,9 +28,6 @@ public final class ContractPayActivity extends AppActivity {
     private AppCompatButton mCommit;
     private ScrollView sv;
 
-    public static final String INTENT_KEY_DEVELOPER_INFO = "DeveloperInfoBean";
-
-
 
 
     @Override
@@ -53,17 +50,8 @@ public final class ContractPayActivity extends AppActivity {
 
 
     @Override
-    protected void initData() {// 一个是从简历解析传过来的，一个是进入页面接口请求显示数据的
-        DeveloperInfoBean bean = getSerializable(INTENT_KEY_DEVELOPER_INFO);
-        if (bean != null) {
-            if (!TextUtils.isEmpty(bean.getRealName())) {
-                setDeveloperInfo(bean);
-            }
-        } else {
-            int developId = SPUtils.getInstance().getInt(AppConfig.DEVELOPER_ID);
-            getDeveloperDetail(developId);
+    protected void initData() {
 
-        }
     }
 
 

@@ -30,7 +30,7 @@ import androidx.recyclerview.widget.RecyclerView;
  * 账单明细列表页面
  */
 public final class AuditionHistoryListActivity extends AppActivity implements OnRefreshLoadMoreListener,
-        BaseAdapter.OnItemClickListener {
+        BaseAdapter.OnItemClickListener, BaseAdapter.OnChildClickListener {
 
 
     private LinearLayout ll_empty;
@@ -56,6 +56,7 @@ public final class AuditionHistoryListActivity extends AppActivity implements On
 
         mAdapter = new AuditionHistoryAdapter(this);
         mAdapter.setOnItemClickListener(this);
+        mAdapter.setOnChildClickListener(R.id.ll_interview_resume, this);
         mRecyclerView.setAdapter(mAdapter);
 
         mRefreshLayout.setOnRefreshLoadMoreListener(this);
@@ -146,6 +147,11 @@ public final class AuditionHistoryListActivity extends AppActivity implements On
     public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
         pageNum++;
         getBillList(pageNum);
+
+    }
+
+    @Override
+    public void onChildClick(RecyclerView recyclerView, View childView, int position) {
 
     }
 }

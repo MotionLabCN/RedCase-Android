@@ -55,6 +55,9 @@ import com.tntlinking.tntdev.ui.adapter.AddProjectAdapter;
 import com.tntlinking.tntdev.ui.adapter.AddWorkAdapter;
 import com.tntlinking.tntdev.ui.bean.DeveloperInfoBean;
 import com.tntlinking.tntdev.ui.bean.ExperienceBean;
+import com.tntlinking.tntdev.ui.firm.adapter.DevEducationAdapter;
+import com.tntlinking.tntdev.ui.firm.adapter.DevProjectAdapter;
+import com.tntlinking.tntdev.ui.firm.adapter.DevWorkAdapter;
 
 import java.io.File;
 import java.util.Collections;
@@ -68,16 +71,18 @@ import androidx.appcompat.widget.AppCompatButton;
  * 用户信息填写页面3
  */
 public final class DeveloperInfoActivity extends AppActivity {
-    private AppCompatButton mCommit;
+    private LinearLayout ll_to_collect;
+    private LinearLayout ll_to_sign;
+    private AppCompatButton btn_to_interview;
     private ListView lv1, lv2, lv3;
     private ScrollView sv;
 
     public static final String INTENT_KEY_DEVELOPER_INFO = "DeveloperInfoBean";
 
 
-    private AddEducationAdapter addEducationAdapter;
-    private AddWorkAdapter addWorkAdapter;
-    private AddProjectAdapter addProjectAdapter;
+    private DevEducationAdapter addEducationAdapter;
+    private DevWorkAdapter addWorkAdapter;
+    private DevProjectAdapter addProjectAdapter;
 
     @Override
     protected int getLayoutId() {
@@ -87,48 +92,16 @@ public final class DeveloperInfoActivity extends AppActivity {
 
     @Override
     protected void initView() {
-
-
         lv1 = findViewById(R.id.lv_1);
         lv2 = findViewById(R.id.lv_2);
         lv3 = findViewById(R.id.lv_3);
         sv = findViewById(R.id.sv);
+        ll_to_collect = findViewById(R.id.ll_to_collect);
+        ll_to_sign = findViewById(R.id.ll_to_sign);
+        btn_to_interview = findViewById(R.id.btn_to_interview);
 
+        setOnClickListener(ll_to_collect, ll_to_sign, btn_to_interview);
 
-        mCommit = findViewById(R.id.btn_commit);
-        setOnClickListener(mCommit);
-
-        lv1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(DeveloperInfoActivity.this, AddEducationActivityNew.class);
-                intent.putExtra(INTENT_KEY_DEVELOPER_INFO, bean);
-                intent.putExtra("position", position);
-                getActivity().startActivityForResult(intent, 10006);
-            }
-        });
-
-        lv2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                Intent intent = new Intent(DeveloperInfoActivity.this, AddWorkActivity.class);
-                intent.putExtra(INTENT_KEY_DEVELOPER_INFO, bean);
-                intent.putExtra("position", position);
-                getActivity().startActivityForResult(intent, 10007);
-            }
-        });
-
-        lv3.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                Intent intent = new Intent(DeveloperInfoActivity.this, AddProjectActivityNew.class);
-                intent.putExtra(INTENT_KEY_DEVELOPER_INFO, bean);
-                intent.putExtra("position", position);
-                getActivity().startActivityForResult(intent, 10008);
-            }
-        });
     }
 
 
@@ -147,26 +120,30 @@ public final class DeveloperInfoActivity extends AppActivity {
     }
 
 
-
     @SingleClick
     @Override
     public void onClick(View view) {
         Intent intent = new Intent();
         switch (view.getId()) {
-            case R.id.ll_add_photo:
+            case R.id.ll_to_collect:
+                toast("收藏");
                 break;
-            case R.id.ll_add_base_info:
+            case R.id.ll_to_sign:
+                toast("去签约");
+                startActivity(ContractDetailActivity.class);
+                break;
+            case R.id.btn_to_interview:
 
-                break;
-            case R.id.ll_import_resume:
-                startActivity(UploadResumeActivity.class);
-                finish();
+                new BaseDialog.Builder<>(this)
+                        .setContentView(R.layout.to_add_service_dialog)
+                        .setAnimStyle(BaseDialog.ANIM_SCALE)
+                        .setOnClickListener(R.id.iv_close, (dialog, views) -> {
+                            dialog.dismiss();
+                        }).show();
                 break;
         }
 
     }
-
-
 
 
     @Override
@@ -232,18 +209,18 @@ public final class DeveloperInfoActivity extends AppActivity {
         if (educationDtoList.size() != 0) {
             progress++;
         }
-        addEducationAdapter = new AddEducationAdapter(DeveloperInfoActivity.this, educationDtoList);
+        addEducationAdapter = new DevEducationAdapter(DeveloperInfoActivity.this, educationDtoList);
         lv1.setAdapter(addEducationAdapter);
 
         if (workExperienceDtoList.size() != 0) {
             progress++;
         }
-        addWorkAdapter = new AddWorkAdapter(DeveloperInfoActivity.this, workExperienceDtoList);
+        addWorkAdapter = new DevWorkAdapter(DeveloperInfoActivity.this, workExperienceDtoList);
         lv2.setAdapter(addWorkAdapter);
         if (projectDtoList.size() >= 1) {
             progress++;
         }
-        addProjectAdapter = new AddProjectAdapter(DeveloperInfoActivity.this, projectDtoList);
+        addProjectAdapter = new DevProjectAdapter(DeveloperInfoActivity.this, projectDtoList);
         lv3.setAdapter(addProjectAdapter);
 
         sv.smoothScrollTo(0, 0);

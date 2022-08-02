@@ -1,19 +1,12 @@
 package com.tntlinking.tntdev.ui.firm.activity;
 
 
-import android.content.Intent;
 import android.os.Build;
-import android.text.TextUtils;
 import android.view.View;
-
-import com.hjq.base.BaseDialog;
 import com.hjq.widget.layout.SettingBar;
 import com.tntlinking.tntdev.R;
 import com.tntlinking.tntdev.aop.SingleClick;
 import com.tntlinking.tntdev.app.AppActivity;
-import com.tntlinking.tntdev.http.api.GetDictionaryApi;
-import com.tntlinking.tntdev.ui.dialog.DictionarySelectDialog;
-import java.util.List;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.widget.AppCompatButton;
 

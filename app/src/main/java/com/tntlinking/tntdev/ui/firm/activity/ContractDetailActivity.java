@@ -5,10 +5,13 @@ import android.content.Intent;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ScrollView;
+import android.widget.TextView;
 
 import com.blankj.utilcode.util.SPUtils;
+import com.hjq.base.BaseDialog;
 import com.hjq.http.EasyHttp;
 import com.hjq.http.listener.HttpCallback;
 import com.tntlinking.tntdev.R;
@@ -19,6 +22,7 @@ import com.tntlinking.tntdev.http.api.GetProvinceApi;
 import com.tntlinking.tntdev.http.api.SubmitDeveloperApi;
 import com.tntlinking.tntdev.http.model.HttpData;
 import com.tntlinking.tntdev.other.AppConfig;
+import com.tntlinking.tntdev.other.Utils;
 import com.tntlinking.tntdev.ui.activity.AddEducationActivityNew;
 import com.tntlinking.tntdev.ui.activity.AddProjectActivityNew;
 import com.tntlinking.tntdev.ui.activity.AddWorkActivity;
@@ -27,6 +31,7 @@ import com.tntlinking.tntdev.ui.adapter.AddEducationAdapter;
 import com.tntlinking.tntdev.ui.adapter.AddProjectAdapter;
 import com.tntlinking.tntdev.ui.adapter.AddWorkAdapter;
 import com.tntlinking.tntdev.ui.bean.DeveloperInfoBean;
+import com.tntlinking.tntdev.ui.dialog.DateSelectDialog;
 
 import java.util.List;
 
@@ -37,13 +42,17 @@ import androidx.appcompat.widget.AppCompatButton;
  * 签约单页面
  */
 public final class ContractDetailActivity extends AppActivity {
-    private AppCompatButton mCommit;
-    private ScrollView sv;
-
-    public static final String INTENT_KEY_DEVELOPER_INFO = "DeveloperInfoBean";
-
-
-
+    private TextView tv_name;
+    private TextView tv_position;
+    private TextView tv_work_mode;
+    private TextView tv_work_salary;
+    private LinearLayout ll_work_time;
+    private TextView tv_work_time;
+    private TextView tv_work_money;
+    private TextView tv_work_time_start;
+    private TextView tv_work_time_end;
+    private TextView tv_work_freeze_money;
+    private AppCompatButton btn_create;
 
     @Override
     protected int getLayoutId() {
@@ -54,11 +63,19 @@ public final class ContractDetailActivity extends AppActivity {
     @Override
     protected void initView() {
 
-        sv = findViewById(R.id.sv);
+        tv_name = findViewById(R.id.tv_name);
+        tv_position = findViewById(R.id.tv_position);
+        tv_work_mode = findViewById(R.id.tv_work_mode);
+        tv_work_salary = findViewById(R.id.tv_work_salary);
+        ll_work_time = findViewById(R.id.ll_work_time);
+        tv_work_time = findViewById(R.id.tv_work_time);
+        tv_work_money = findViewById(R.id.tv_work_money);
+        tv_work_time_start = findViewById(R.id.tv_work_time_start);
+        tv_work_time_end = findViewById(R.id.tv_work_time_end);
+        tv_work_freeze_money = findViewById(R.id.tv_work_freeze_money);
+        btn_create = findViewById(R.id.btn_create);
 
-
-        mCommit = findViewById(R.id.btn_commit);
-        setOnClickListener(mCommit);
+        setOnClickListener(ll_work_time, btn_create);
 
 
     }
@@ -66,45 +83,30 @@ public final class ContractDetailActivity extends AppActivity {
 
     @Override
     protected void initData() {// 一个是从简历解析传过来的，一个是进入页面接口请求显示数据的
-        DeveloperInfoBean bean = getSerializable(INTENT_KEY_DEVELOPER_INFO);
-        if (bean != null) {
-            if (!TextUtils.isEmpty(bean.getRealName())) {
-                setDeveloperInfo(bean);
-            }
-        } else {
-            int developId = SPUtils.getInstance().getInt(AppConfig.DEVELOPER_ID);
-            getDeveloperDetail(developId);
 
-        }
     }
 
 
     @SingleClick
     @Override
     public void onClick(View view) {
-        Intent intent = new Intent();
+
         switch (view.getId()) {
-            case R.id.ll_add_photo:
-                break;
-            case R.id.ll_add_base_info:
+            case R.id.ll_work_time:
+                new DateSelectDialog.Builder(this).setTitle("选择日期").setListener(new DateSelectDialog.OnListener() {
+                    @Override
+                    public void onSelected(BaseDialog dialog, int year, int month, int day) {
+                        String mInTime = year + "-" + Utils.formatDate(month) + "-" + day;
+                        toast(mInTime);
+                    }
 
+                }).show();
                 break;
-            case R.id.ll_import_resume:
-                startActivity(UploadResumeActivity.class);
-                finish();
+            case R.id.btn_create:
+                startActivity(ContractPayActivity.class);
                 break;
         }
 
-    }
-
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_OK) {
-            int developId = SPUtils.getInstance().getInt(AppConfig.DEVELOPER_ID);
-            getDeveloperDetail(developId);
-        }
     }
 
 
@@ -121,15 +123,5 @@ public final class ContractDetailActivity extends AppActivity {
                 });
     }
 
-
-
-
-    /**
-     * 简历解析页面跳转过来的，直接填充相关数据
-     */
-    @SuppressLint("SetTextI18n")
-    public void setDeveloperInfo(DeveloperInfoBean data) {
-
-    }
 
 }

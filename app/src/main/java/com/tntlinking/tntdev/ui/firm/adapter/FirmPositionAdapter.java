@@ -75,8 +75,7 @@ public final class FirmPositionAdapter extends BaseAdapter {
             holder.ll_status = convertView.findViewById(R.id.ll_status);
             holder.tv_company_name = convertView.findViewById(R.id.tv_company_name);
             holder.tv_position_desc = convertView.findViewById(R.id.tv_position_desc);
-            holder.btn_status = convertView.findViewById(R.id.btn_status);
-
+//            holder.btn_status = convertView.findViewById(R.id.btn_status);
 
             convertView.setTag(holder);
         } else {
@@ -84,7 +83,6 @@ public final class FirmPositionAdapter extends BaseAdapter {
         }
         String item = mList.get(position);
         holder.tv_company_name.setText(item);
-
 
         return convertView;
     }

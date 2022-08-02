@@ -2,6 +2,7 @@ package com.tntlinking.tntdev.ui.firm.fragment;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 import com.blankj.utilcode.util.SPUtils;
 import com.hjq.base.FragmentPagerAdapter;
 import com.hjq.http.EasyHttp;
+import com.hjq.http.EasyLog;
 import com.hjq.http.listener.HttpCallback;
 import com.scwang.smart.refresh.layout.SmartRefreshLayout;
 import com.scwang.smart.refresh.layout.api.RefreshLayout;
@@ -22,8 +24,12 @@ import com.tntlinking.tntdev.http.api.AppListApi;
 import com.tntlinking.tntdev.http.model.HttpData;
 import com.tntlinking.tntdev.other.AppConfig;
 import com.tntlinking.tntdev.ui.activity.HistoryDailyListActivity;
+import com.tntlinking.tntdev.ui.firm.activity.DeveloperInfoActivity;
+import com.tntlinking.tntdev.ui.firm.activity.FirmInfoActivity;
 import com.tntlinking.tntdev.ui.firm.activity.FirmMainActivity;
+import com.tntlinking.tntdev.ui.firm.activity.RecommendPositionActivity;
 import com.tntlinking.tntdev.ui.firm.activity.SendPositionActivity;
+import com.tntlinking.tntdev.ui.firm.adapter.FirmHomeAdapter;
 import com.tntlinking.tntdev.ui.firm.adapter.FirmPositionAdapter;
 import com.tntlinking.tntdev.widget.MyListView;
 
@@ -38,11 +44,9 @@ import androidx.appcompat.widget.AppCompatButton;
  */
 public final class FirmPositionFragment extends TitleBarFragment<FirmMainActivity> implements OnRefreshLoadMoreListener {
 
-
     private MyListView lv_1;
     private LinearLayout ll_empty;
-    private AppCompatButton btn_commit;
-
+    private LinearLayout ll_daily;
     private SmartRefreshLayout mRefreshLayout;
 
 
@@ -50,13 +54,7 @@ public final class FirmPositionFragment extends TitleBarFragment<FirmMainActivit
     private FirmPositionAdapter mAdapter;
 
 
-    private String orderId;
-
-    private static final String INTENT_KEY_POSITION = "position";
-
-
     public static FirmPositionFragment newInstance() {
-
         return new FirmPositionFragment();
     }
 
@@ -70,7 +68,7 @@ public final class FirmPositionFragment extends TitleBarFragment<FirmMainActivit
         lv_1 = findViewById(R.id.lv_1);
 
         ll_empty = findViewById(R.id.ll_empty);
-        btn_commit = findViewById(R.id.btn_commit);
+        ll_daily = findViewById(R.id.ll_daily);
 
 
         mRefreshLayout = findViewById(R.id.rl_status_refresh);
@@ -78,20 +76,16 @@ public final class FirmPositionFragment extends TitleBarFragment<FirmMainActivit
         mRefreshLayout.setEnableLoadMore(false);
 
         mAdapter = new FirmPositionAdapter(getActivity());
-
-
         lv_1.setAdapter(mAdapter);
-        btn_commit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(SendPositionActivity.class);
-            }
-        });
+
         lv_1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-
+                if (position == 0) {
+                    startActivity(FirmInfoActivity.class);
+                } else {
+                    startActivity(RecommendPositionActivity.class);
+                }
             }
         });
 
@@ -100,6 +94,7 @@ public final class FirmPositionFragment extends TitleBarFragment<FirmMainActivit
 
     @Override
     protected void initData() {
+
         mAdapter.setData(analogData());
 //        getAppList();
     }
@@ -121,18 +116,12 @@ public final class FirmPositionFragment extends TitleBarFragment<FirmMainActivit
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.ll_history:
-                Intent intent = new Intent(getActivity(), HistoryDailyListActivity.class);
-                intent.putExtra("orderId", orderId);
-                startActivity(intent);
+
+
                 break;
         }
     }
 
-    @Override
-    public boolean isStatusBarEnabled() {
-        // 使用沉浸式状态栏
-        return !super.isStatusBarEnabled();
-    }
 
     /**
      * 获取在服务企业list //2 待服务，3 服务中
@@ -155,7 +144,6 @@ public final class FirmPositionFragment extends TitleBarFragment<FirmMainActivit
 //                            ll_empty.setVisibility(View.VISIBLE);
 //
 //                        }
-                        mRefreshLayout.finishRefresh();
                     }
 
                     @Override
@@ -168,11 +156,11 @@ public final class FirmPositionFragment extends TitleBarFragment<FirmMainActivit
 
     @Override
     public void onRefresh(@NonNull RefreshLayout refreshLayout) {
-//        mServiceList.clear();
-//        String status = SPUtils.getInstance().getString(AppConfig.DEVELOP_STATUS, "1");
-//        if (status.equals("3")) {
-//            getAppList();
-//        }
+        mServiceList.clear();
+        String status = SPUtils.getInstance().getString(AppConfig.DEVELOP_STATUS, "1");
+        if (status.equals("3")) {
+            getAppList();
+        }
     }
 
     @Override

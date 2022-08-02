@@ -82,7 +82,6 @@ public final class FirmHomeAdapter extends BaseAdapter {
         String item = mList.get(position);
         holder.tv_position.setText(item);
 
-
         return convertView;
     }
 

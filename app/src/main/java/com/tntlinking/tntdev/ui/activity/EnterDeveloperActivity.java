@@ -675,7 +675,11 @@ public final class EnterDeveloperActivity extends AppActivity {
             int age = Utils.getIntYear(nowTime) - Utils.getIntYear(bean.getBirthday());
 
             if (bean.getProvinceName() == null) {
-                tv_edit_info.setText(mSex + " | " + age + "岁");
+                if (age == 0) {
+                    tv_edit_info.setText("");
+                } else {
+                    tv_edit_info.setText(mSex + " | " + age + "岁");
+                }
             } else {
                 tv_edit_info.setText(mSex + " | " + age + "岁 | " + bean.getProvinceName() + bean.getCityName() + bean.getAreasName());
             }
@@ -687,14 +691,15 @@ public final class EnterDeveloperActivity extends AppActivity {
         List<DeveloperInfoBean.WorkMode> workModeDtoList = bean.getWorkModeDtoList();
         if (workModeDtoList.size() != 0) {
             if (!TextUtils.isEmpty(careerDto.getCareerDirectionName())) {
-                SPUtils.getInstance().put(AppConfig.CAREER_ID,careerDto.getCareerDirectionId());
+                SPUtils.getInstance().put(AppConfig.CAREER_ID, careerDto.getCareerDirectionId());
 
                 ll_career_info.setVisibility(View.VISIBLE);
                 tv_career_info.setText(careerDto.getCareerDirectionName());
                 tv_career_info_work_year.setText(careerDto.getWorkYearsName() + " | 当前薪资：" + (Double.parseDouble(Utils.isNullSalary(careerDto.getCurSalary())) / 1000) + "K");
                 tv_career_info_work_mode.setText(workModeDtoList.get(0).getWorkDayModeName() + " | 期望薪资：" +
-                        (Double.parseDouble(Utils.isNullSalary(workModeDtoList.get(0).getLowestSalary())) / 1000) + "K"
-                        + "-" + (Double.parseDouble(Utils.isNullSalary(workModeDtoList.get(0).getHighestSalary())) / 1000) + "K");
+                        (Double.parseDouble(Utils.isNullSalary(workModeDtoList.get(0).getExpectSalary())) / 1000) + "K");
+
+
                 progress++;
 
 

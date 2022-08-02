@@ -137,7 +137,7 @@
                         android:layout_marginTop="@dimen/dp_24"
                         android:layout_marginRight="@dimen/dp_16"
                         android:layout_marginBottom="@dimen/dp_24"
-                        android:background="@drawable/bg_blue_bottom_radius_6"
+                        android:background="@drawable/bg_white_radius_6"
                         android:gravity="center"
                         android:orientation="horizontal"
                         android:paddingTop="@dimen/dp_20"
@@ -154,14 +154,14 @@
                             <ImageView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:src="@drawable/icon_deal" />
+                                android:src="@drawable/icon_audition_manage" />
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/dp_4"
+                                android:layout_marginTop="@dimen/dp_10"
                                 android:text="面试管理"
-                                android:textColor="@color/white"
+                                android:textColor="@color/color_text_color"
                                 android:textSize="@dimen/sp_12" />
                         </LinearLayout>
 
@@ -178,14 +178,14 @@
 
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:src="@drawable/icon_deal" />
+                                android:src="@drawable/icon_treaty_order" />
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/dp_4"
+                                android:layout_marginTop="@dimen/dp_10"
                                 android:text="合约单"
-                                android:textColor="@color/white"
+                                android:textColor="@color/color_text_color"
                                 android:textSize="@dimen/sp_12" />
                         </LinearLayout>
 
@@ -201,14 +201,14 @@
 
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:src="@drawable/icon_deal" />
+                                android:src="@drawable/icon_firm_account" />
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/dp_4"
+                                android:layout_marginTop="@dimen/dp_10"
                                 android:text="账户管理"
-                                android:textColor="@color/white"
+                                android:textColor="@color/color_text_color"
                                 android:textSize="@dimen/sp_12" />
                         </LinearLayout>
 
@@ -224,14 +224,14 @@
                             <ImageView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:src="@drawable/icon_deal" />
+                                android:src="@drawable/icon_firm_manage" />
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/dp_4"
+                                android:layout_marginTop="@dimen/dp_10"
                                 android:text="企业管理"
-                                android:textColor="@color/white"
+                                android:textColor="@color/color_text_color"
                                 android:textSize="@dimen/sp_12" />
                         </LinearLayout>
                     </LinearLayout>
@@ -243,13 +243,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_4"
-                    app:bar_leftDrawable="@drawable/icon_settled_material"
+                    app:bar_leftDrawable="@drawable/icon_check"
                     app:bar_leftText="身份切换"
                     app:bar_leftTextSize="@dimen/sp_13"
                     app:bar_lineVisible="false"
                     app:bar_rightDrawable="@drawable/icon_arrow_right"
                     app:bar_rightDrawableSize="@dimen/dp_16"
-                    app:bar_rightText="待完善"
+                    app:bar_rightText="当前企业端"
                     app:bar_rightTextColor="@color/color_hint_color"
                     app:bar_rightTextSize="@dimen/sp_13" />
 
@@ -258,13 +258,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_4"
-                    app:bar_leftDrawable="@drawable/icon_service_deal"
+                    app:bar_leftDrawable="@drawable/icon_firm_certification"
                     app:bar_leftText="企业认证"
                     app:bar_leftTextSize="@dimen/sp_13"
                     app:bar_lineVisible="false"
                     app:bar_rightDrawable="@drawable/icon_arrow_right"
                     app:bar_rightDrawableSize="@dimen/dp_16"
-                    app:bar_rightText="未签约"
+                    app:bar_rightText="不通过重新认证"
                     app:bar_rightTextColor="@color/color_hint_color"
                     app:bar_rightTextSize="@dimen/sp_13" />
 

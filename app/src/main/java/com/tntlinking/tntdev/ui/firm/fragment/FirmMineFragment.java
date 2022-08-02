@@ -1,11 +1,9 @@
 package com.tntlinking.tntdev.ui.firm.fragment;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.os.Build;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
@@ -15,8 +13,6 @@ import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.SizeUtils;
 import com.gyf.immersionbar.ImmersionBar;
 import com.hjq.bar.TitleBar;
-import com.hjq.base.BaseDialog;
-import com.hjq.base.FragmentPagerAdapter;
 import com.hjq.http.EasyHttp;
 import com.hjq.http.listener.HttpCallback;
 import com.hjq.widget.layout.SettingBar;
@@ -25,45 +21,24 @@ import com.scwang.smart.refresh.layout.api.RefreshLayout;
 import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener;
 import com.tntlinking.tntdev.R;
 import com.tntlinking.tntdev.aop.SingleClick;
-import com.tntlinking.tntdev.app.AppFragment;
 import com.tntlinking.tntdev.app.TitleBarFragment;
-import com.tntlinking.tntdev.http.api.GetDeveloperJkStatusApi;
 import com.tntlinking.tntdev.http.api.GetDeveloperStatusApi;
 import com.tntlinking.tntdev.http.api.GetSignContractPDFApi;
 import com.tntlinking.tntdev.http.model.HttpData;
 import com.tntlinking.tntdev.other.AppConfig;
-import com.tntlinking.tntdev.other.HomeChangeListener;
 import com.tntlinking.tntdev.other.Utils;
 import com.tntlinking.tntdev.ui.activity.AboutAppActivity;
-import com.tntlinking.tntdev.ui.activity.BrowserActivity;
 import com.tntlinking.tntdev.ui.activity.BrowserPrivateActivity;
-import com.tntlinking.tntdev.ui.activity.EnterDeveloperActivity;
-import com.tntlinking.tntdev.ui.activity.EvaluationActivity;
-import com.tntlinking.tntdev.ui.activity.EvaluationNeedsTokNowActivity;
-import com.tntlinking.tntdev.ui.activity.HistoryListActivity;
-import com.tntlinking.tntdev.ui.activity.IncomeListActivity;
-import com.tntlinking.tntdev.ui.activity.InterviewActivity;
-import com.tntlinking.tntdev.ui.activity.InterviewSettingActivity;
-import com.tntlinking.tntdev.ui.activity.JkBrowserActivity;
-import com.tntlinking.tntdev.ui.activity.MessageListActivity;
-import com.tntlinking.tntdev.ui.activity.PDFViewActivity;
-import com.tntlinking.tntdev.ui.activity.PersonSettingActivity;
-import com.tntlinking.tntdev.ui.activity.SignContactActivity;
-import com.tntlinking.tntdev.ui.adapter.TabAdapter;
 import com.tntlinking.tntdev.ui.firm.activity.AccountManageActivity;
 import com.tntlinking.tntdev.ui.firm.activity.AuditionMangeActivity;
 import com.tntlinking.tntdev.ui.firm.activity.ChangeAdminActivity;
 import com.tntlinking.tntdev.ui.firm.activity.FirmMainActivity;
 import com.tntlinking.tntdev.ui.firm.activity.FirmManageActivity;
 import com.tntlinking.tntdev.ui.firm.activity.TreatyOrderListActivity;
-import com.tntlinking.tntdev.ui.fragment.MineFragment1;
-import com.tntlinking.tntdev.ui.fragment.TreatyService1Fragment;
-import com.tntlinking.tntdev.ui.fragment.TreatyServiced2Fragment;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager.widget.ViewPager;
+
 
 /**
  * desc   : 首页 Fragment
@@ -146,26 +121,27 @@ public final class FirmMineFragment extends TitleBarFragment<FirmMainActivity> i
     }
 
 
+    @SuppressLint("NonConstantResourceId")
     @SingleClick
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.person_data_dev:
+            case R.id.person_data_dev://身份切换
                 startActivity(ChangeAdminActivity.class);
                 break;
-            case R.id.person_data_service:
+            case R.id.person_data_service://企业认证
 
                 break;
-            case R.id.ll_mine_audition:
+            case R.id.ll_mine_audition://面试管理
                 startActivity(AuditionMangeActivity.class);
                 break;
-            case R.id.ll_mine_contract:
+            case R.id.ll_mine_contract://合约单
                 startActivity(TreatyOrderListActivity.class);
                 break;
-            case R.id.ll_mine_account:
+            case R.id.ll_mine_account://账户管理
                 startActivity(AccountManageActivity.class);
                 break;
-            case R.id.ll_mine_firm:
+            case R.id.ll_mine_firm://企业管理
                 startActivity(FirmManageActivity.class);
                 break;
             case R.id.person_data_private:// 隐私政策

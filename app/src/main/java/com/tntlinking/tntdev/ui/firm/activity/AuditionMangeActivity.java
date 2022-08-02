@@ -27,10 +27,10 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 /**
- * 账单明细列表页面
+ * 面试管理页面
  */
 public final class AuditionMangeActivity extends AppActivity implements OnRefreshLoadMoreListener,
-        BaseAdapter.OnItemClickListener {
+        BaseAdapter.OnItemClickListener, BaseAdapter.OnChildClickListener {
 
 
     private LinearLayout ll_empty;
@@ -56,9 +56,14 @@ public final class AuditionMangeActivity extends AppActivity implements OnRefres
 
         mAdapter = new AuditionManageAdapter(this);
         mAdapter.setOnItemClickListener(this);
-        mRecyclerView.setAdapter(mAdapter);
-
         mRefreshLayout.setOnRefreshLoadMoreListener(this);
+        mAdapter.setOnChildClickListener(R.id.ll_interview_resume, this);
+        mAdapter.setOnChildClickListener(R.id.ll_interview_link, this);
+        mAdapter.setOnChildClickListener(R.id.btn_cancel, this);
+        mAdapter.setOnChildClickListener(R.id.btn_contact, this);
+        mAdapter.setOnChildClickListener(R.id.btn_enter, this);
+
+        mRecyclerView.setAdapter(mAdapter);
 
 
     }
@@ -73,18 +78,13 @@ public final class AuditionMangeActivity extends AppActivity implements OnRefres
     @SingleClick
     @Override
     public void onClick(View view) {
-        new BaseDialog.Builder<>(this)
-                .setContentView(R.layout.check_order_status_dialog)
-                .setAnimStyle(BaseDialog.ANIM_SCALE)
-                .setText(R.id.tv_title, "取消面试")
-                .setText(R.id.tv_content, "是否取消面试")
-                .setText(R.id.btn_dialog_custom_cancel, "否")
-                .setText(R.id.btn_dialog_custom_ok, "是")
-                .setOnClickListener(R.id.btn_dialog_custom_cancel, (BaseDialog.OnClickListener<Button>) (dialog, button) -> dialog.dismiss())
-                .setOnClickListener(R.id.btn_dialog_custom_ok, (dialog, views) -> {
-                    dialog.dismiss();
-                }).show();
 
+
+    }
+
+    @Override
+    public void onRightClick(View view) {
+        startActivity(AuditionHistoryListActivity.class);
     }
 
     private void getBillList(int pageNum) {
@@ -141,6 +141,31 @@ public final class AuditionMangeActivity extends AppActivity implements OnRefres
 //        startActivity(intent);
 
         startActivity(FirmAuditionDetailActivity.class);
+    }
+
+    @Override
+    public void onChildClick(RecyclerView recyclerView, View childView, int position) {
+        if (childView.getId() == R.id.ll_interview_resume) {
+            toast("查看简历");
+        } else if (childView.getId() == R.id.ll_interview_link) {
+            toast("会议连接");
+        } else if (childView.getId() == R.id.btn_cancel) {
+            new BaseDialog.Builder<>(this)
+                    .setContentView(R.layout.check_order_status_dialog)
+                    .setAnimStyle(BaseDialog.ANIM_SCALE)
+                    .setText(R.id.tv_title, "取消面试")
+                    .setText(R.id.tv_content, "是否取消面试")
+                    .setText(R.id.btn_dialog_custom_cancel, "否")
+                    .setText(R.id.btn_dialog_custom_ok, "是")
+                    .setOnClickListener(R.id.btn_dialog_custom_cancel, (BaseDialog.OnClickListener<Button>) (dialog, button) -> dialog.dismiss())
+                    .setOnClickListener(R.id.btn_dialog_custom_ok, (dialog, views) -> {
+                        dialog.dismiss();
+                    }).show();
+        } else if (childView.getId() == R.id.btn_contact) {
+            toast("联系客服");
+        } else if (childView.getId() == R.id.btn_enter) {
+            toast("进入会议");
+        }
     }
 
     /**

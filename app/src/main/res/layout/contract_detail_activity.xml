@@ -13,10 +13,9 @@
         app:leftIcon="@drawable/icon_back_black"
         app:lineVisible="false"
         app:rightBackground="@null"
-        app:rightIcon="@drawable/share_ic"
         app:rightTitleColor="@color/common_accent_color"
         app:rightTitleSize="@dimen/sp_14"
-        app:title="开发者详情"
+        app:title="合约单"
         app:titleStyle="bold" />
 
 
@@ -29,32 +28,38 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/dp_30">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/dp_16"
-                android:layout_marginTop="@dimen/dp_10"
-                android:layout_marginEnd="@dimen/dp_16"
-                android:layout_marginBottom="@dimen/dp_10"
                 android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp_16"
+                    android:text="服务详情"
+                    android:textColor="@color/color_text_color"
+                    android:textSize="@dimen/sp_15"
+                    android:textStyle="bold" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/dp_10"
-                    android:layout_marginEnd="@dimen/dp_10"
-                    android:orientation="vertical"
-                    android:paddingTop="@dimen/dp_20"
-                    android:paddingBottom="@dimen/dp_10">
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:orientation="vertical">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:paddingLeft="@dimen/dp_16"
+                        android:paddingRight="@dimen/dp_16">
 
                         <ImageView
+                            android:id="@+id/iv_avatar"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:src="@drawable/app_logo" />
@@ -63,13 +68,14 @@
                         <LinearLayout
                             android:id="@+id/ll_status"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/dp_10"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="@dimen/dp_12"
+                            android:gravity="center|left"
                             android:orientation="vertical">
 
 
                             <TextView
-                                android:id="@+id/tv_status"
+                                android:id="@+id/tv_name"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="@dimen/dp_4"
@@ -79,22 +85,14 @@
                                 android:textStyle="bold" />
 
                             <TextView
-                                android:id="@+id/tv_position_name"
+                                android:id="@+id/tv_position"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="@dimen/dp_4"
-                                android:text="后端开发 ·工作经验10年"
+                                android:text="后端开发 "
                                 android:textColor="@color/gray"
                                 android:textSize="@dimen/sp_13" />
 
-                            <TextView
-                                android:id="@+id/tv_company_name"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="@dimen/dp_4"
-                                android:text="服务中"
-                                android:textColor="@color/gray"
-                                android:textSize="@dimen/sp_12" />
 
                         </LinearLayout>
 
@@ -110,96 +108,6 @@
                             android:textStyle="bold" />
                     </LinearLayout>
 
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_8"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:id="@+id/tv_work_pattern"
-                            android:layout_width="wrap_content"
-                            android:layout_height="@dimen/dp_21"
-                            android:layout_gravity="center_vertical"
-                            android:layout_marginLeft="@dimen/dp_16"
-                            android:layout_weight="1"
-                            android:background="@drawable/button_circle_selector_white"
-                            android:gravity="center"
-                            android:paddingLeft="@dimen/dp_3"
-                            android:paddingEnd="@dimen/dp_3"
-                            android:text="全日"
-                            android:textSize="@dimen/sp_12" />
-
-                        <TextView
-                            android:id="@+id/tv_academic_degree"
-                            android:layout_width="wrap_content"
-                            android:layout_height="@dimen/dp_21"
-                            android:layout_gravity="center_vertical"
-                            android:layout_marginLeft="@dimen/dp_10"
-                            android:layout_weight="1"
-                            android:background="@drawable/button_circle_selector_white"
-                            android:gravity="center"
-                            android:paddingLeft="@dimen/dp_3"
-                            android:paddingEnd="@dimen/dp_3"
-                            android:text="大专"
-                            android:textSize="@dimen/sp_12" />
-
-                        <TextView
-                            android:id="@+id/tv_work_experience"
-                            android:layout_width="wrap_content"
-                            android:layout_height="@dimen/dp_21"
-                            android:layout_gravity="center_vertical"
-                            android:layout_marginLeft="@dimen/dp_10"
-                            android:layout_weight="1"
-                            android:background="@drawable/button_circle_selector_white"
-                            android:gravity="center"
-                            android:paddingLeft="@dimen/dp_3"
-                            android:paddingEnd="@dimen/dp_3"
-
-                            android:text="3年经验"
-                            android:textSize="@dimen/sp_12" />
-
-                        <TextView
-                            android:id="@+id/tv_job_skills_name"
-                            android:layout_width="wrap_content"
-                            android:layout_height="@dimen/dp_21"
-                            android:layout_gravity="center_vertical"
-                            android:layout_marginLeft="@dimen/dp_10"
-                            android:layout_weight="1"
-                            android:background="@drawable/button_circle_selector_white"
-                            android:gravity="center"
-                            android:text="java"
-                            android:textSize="@dimen/sp_12"
-                            android:visibility="gone" />
-
-                        <TextView
-                            android:id="@+id/tv_job_skills_name2"
-                            android:layout_width="wrap_content"
-                            android:layout_height="@dimen/dp_21"
-                            android:layout_gravity="center_vertical"
-                            android:layout_marginLeft="@dimen/dp_10"
-                            android:layout_weight="1"
-                            android:background="@drawable/button_circle_selector_white"
-                            android:gravity="center"
-                            android:text="java"
-                            android:textSize="@dimen/sp_12"
-                            android:visibility="gone" />
-
-                        <TextView
-                            android:id="@+id/tv_job_skills_name3"
-                            android:layout_width="wrap_content"
-                            android:layout_height="@dimen/dp_21"
-                            android:layout_gravity="center_vertical"
-                            android:layout_marginLeft="@dimen/dp_10"
-                            android:layout_weight="1"
-                            android:background="@drawable/button_circle_selector_white"
-                            android:gravity="center"
-                            android:text="java"
-                            android:textSize="@dimen/sp_12"
-                            android:visibility="gone" />
-
-
-                    </LinearLayout>
                 </LinearLayout>
 
 
@@ -208,24 +116,112 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/dp_15"
+                android:paddingTop="@dimen/dp_15"
+                android:paddingRight="@dimen/dp_15">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="工作方式"
+                    android:textColor="@color/color_hint_color"
+                    android:textSize="@dimen/sp_14" />
+
+                <TextView
+                    android:id="@+id/tv_work_mode"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="全日8小时"
+                    android:textColor="@color/color_202839"
+                    android:textSize="@dimen/sp_13"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/dp_15"
+                android:paddingTop="@dimen/dp_15"
+                android:paddingRight="@dimen/dp_15">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="薪资"
+                    android:textColor="@color/color_hint_color"
+                    android:textSize="@dimen/sp_14" />
+
+                <TextView
+                    android:id="@+id/tv_work_salary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1000/月"
+                    android:textColor="@color/color_202839"
+                    android:textSize="@dimen/sp_13"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_work_time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/dp_15"
+                android:paddingTop="@dimen/dp_15"
+                android:paddingRight="@dimen/dp_15"
+                android:paddingBottom="@dimen/dp_15">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="开始时间"
+                    android:textColor="@color/color_hint_color"
+                    android:textSize="@dimen/sp_14" />
+
+                <TextView
+                    android:id="@+id/tv_work_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableRight="@drawable/icon_arrow_right"
+                    android:gravity="center"
+                    android:text="选择开始时间"
+                    android:textColor="@color/color_202839"
+                    android:textSize="@dimen/sp_13"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_10"
+                android:background="#FFECECEC" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_10"
                 android:orientation="vertical">
 
+
                 <TextView
-                    android:id="@+id/tv_create_time"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:drawableStart="@drawable/icon_time_clock"
-                    android:drawablePadding="@dimen/dp_10"
-                    android:gravity="center"
-                    android:padding="@dimen/dp_10"
-                    android:text="2021.10.10"
+                    android:paddingLeft="@dimen/dp_16"
+                    android:text="支付详情"
+                    android:textColor="@color/color_text_color"
+                    android:textSize="@dimen/sp_15"
                     android:textStyle="bold" />
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/line_size"
                     android:layout_marginLeft="@dimen/dp_15"
+                    android:layout_marginTop="@dimen/dp_15"
                     android:layout_marginRight="@dimen/dp_15"
                     android:background="#FFECECEC" />
 
@@ -242,12 +238,12 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="服务费"
+                        android:text="用人佣金"
                         android:textColor="@color/gray"
                         android:textSize="@dimen/sp_14" />
 
                     <TextView
-                        android:id="@+id/tv_serviceMoney"
+                        android:id="@+id/tv_work_money"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="xxxxxx"
@@ -269,12 +265,12 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="调整费用"
+                        android:text="2022.06.27-2022.06.30"
                         android:textColor="@color/gray"
                         android:textSize="@dimen/sp_14" />
 
                     <TextView
-                        android:id="@+id/tv_deductMoney"
+                        android:id="@+id/tv_work_time_start"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="xxxxx"
@@ -296,12 +292,12 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="个税"
+                        android:text="2022.07.01-2022.08.30"
                         android:textColor="@color/gray"
                         android:textSize="@dimen/sp_14" />
 
                     <TextView
-                        android:id="@+id/tv_personalTax"
+                        android:id="@+id/tv_work_time_end"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="xxxx"
@@ -323,12 +319,12 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="实际发放"
+                        android:text="平台服务费（40%用人服务费）"
                         android:textColor="@color/gray"
                         android:textSize="@dimen/sp_14" />
 
                     <TextView
-                        android:id="@+id/tv_actualMoney"
+                        android:id="@+id/tv_work_service_money"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="xxxxx"
@@ -341,28 +337,53 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:paddingLeft="@dimen/dp_15"
-                    android:paddingTop="@dimen/dp_10"
-                    android:paddingRight="@dimen/dp_15"
-                    android:paddingBottom="@dimen/dp_10">
+                    android:padding="@dimen/dp_15">
 
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="发放日期"
-                        android:textColor="@color/gray"
+                        android:gravity="right"
+                        android:text="实际冻结："
+                        android:textColor="@color/color_text_color"
                         android:textSize="@dimen/sp_14" />
 
                     <TextView
-                        android:id="@+id/tv_actualTime"
+                        android:id="@+id/tv_work_freeze_money"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="xxxxx"
-                        android:textColor="@color/color_202839"
+                        android:text="￥9122.00"
+                        android:textColor="@color/color_F5313D"
                         android:textSize="@dimen/sp_14"
                         android:textStyle="bold" />
                 </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_10"
+                    android:background="#FFECECEC" />
+
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_20"
+                    android:paddingLeft="@dimen/dp_15"
+                    android:paddingRight="@dimen/dp_15"
+                    android:text="提示：每月秒支付，随时可终止"
+                    android:textColor="@color/color_text_color"
+                    android:textSize="@dimen/sp_14"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:paddingLeft="@dimen/dp_15"
+                    android:paddingRight="@dimen/dp_15"
+                    android:text="每月25号24:00前支付下月服务费，请保持账户余额充足随时可协商结束订单（无责任终止）"
+                    android:textColor="@color/color_hint_color"
+                    android:textSize="@dimen/sp_13" />
             </LinearLayout>
         </LinearLayout>
 
@@ -379,12 +400,12 @@
 
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_commit"
+            android:id="@+id/btn_create"
             style="@style/ButtonStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="预约面试(添加企业微信)" />
+            android:text="创建合约单" />
     </LinearLayout>
 
 </LinearLayout>

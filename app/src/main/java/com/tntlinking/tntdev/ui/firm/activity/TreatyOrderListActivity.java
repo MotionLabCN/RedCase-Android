@@ -45,12 +45,10 @@ public final class TreatyOrderListActivity extends AppActivity implements ViewPa
         mPagerAdapter.addFragment(TreatyOrderFragment.newInstance("3"));
         mPagerAdapter.addFragment(TreatyOrderFragment.newInstance("4"));
         mPagerAdapter.addFragment(TreatyOrderFragment.newInstance("5"));
-        mPagerAdapter.addFragment(TreatyOrderFragment.newInstance("6"));
-        mPagerAdapter.addFragment(TreatyOrderFragment.newInstance("7"));
 
         mViewPager.setAdapter(mPagerAdapter);
         mViewPager.addOnPageChangeListener(this);
-        mTabAdapter = new TabAdapter(this, TabAdapter.TAB_MODE_SERVICE, false);
+        mTabAdapter = new TabAdapter(this, TabAdapter.TAB_MODE_SERVICE, true);
         mTabView.setAdapter(mTabAdapter);
 
 
@@ -58,13 +56,11 @@ public final class TreatyOrderListActivity extends AppActivity implements ViewPa
 
     @Override
     protected void initData() {
+        mTabAdapter.addItem("全部");
+        mTabAdapter.addItem("待冻结");
         mTabAdapter.addItem("服务中");
-        mTabAdapter.addItem("待服务1");
-        mTabAdapter.addItem("待服务2");
-        mTabAdapter.addItem("待服务3");
-        mTabAdapter.addItem("待服务4");
-        mTabAdapter.addItem("待服务5");
-        mTabAdapter.addItem("待服务6");
+        mTabAdapter.addItem("已完成");
+        mTabAdapter.addItem("待结算");
         mTabAdapter.setOnTabListener(this);
     }
 

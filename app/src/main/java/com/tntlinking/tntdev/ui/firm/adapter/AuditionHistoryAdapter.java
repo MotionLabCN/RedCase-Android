@@ -29,8 +29,6 @@ public final class AuditionHistoryAdapter extends AppAdapter<developerBillListAp
         private final TextView tv_create_time;
         private final TextView tv_serviceMoney;
         private final TextView tv_deductMoney;
-        private final TextView tv_personalTax;
-        private final TextView tv_actualMoney;
 
 
         private ViewHolder() {
@@ -38,8 +36,7 @@ public final class AuditionHistoryAdapter extends AppAdapter<developerBillListAp
             tv_create_time = findViewById(R.id.tv_create_time);
             tv_serviceMoney = findViewById(R.id.tv_serviceMoney);
             tv_deductMoney = findViewById(R.id.tv_deductMoney);
-            tv_personalTax = findViewById(R.id.tv_personalTax);
-            tv_actualMoney = findViewById(R.id.tv_actualMoney);
+
 
         }
 

@@ -51,7 +51,7 @@ public class TagAliasOperatorHelper {
             }
             logs += ", errorCode:" + jPushMessage.getErrorCode();
             Log.e(TAG, logs);
-            ToastHelper.showOther(context,logs);
+//            ToastHelper.showOther(context,logs);
         }
     }
     public void onCheckTagOperatorResult(Context context, JPushMessage jPushMessage){
@@ -64,7 +64,7 @@ public class TagAliasOperatorHelper {
         }else{
             String logs = "Failed to modify tags, errorCode:" + jPushMessage.getErrorCode();
             Log.e(TAG, logs);
-            ToastHelper.showOther(context,logs);
+//            ToastHelper.showOther(context,logs);
         }
     }
     public void onAliasOperatorResult(Context context, JPushMessage jPushMessage) {
@@ -81,7 +81,7 @@ public class TagAliasOperatorHelper {
         }else{
             String logs = "Failed to modify alias, errorCode:" + jPushMessage.getErrorCode();
             Log.e(TAG, logs);
-            ToastHelper.showOther(context,logs);
+//            ToastHelper.showOther(context,logs);
 //            MMKV.defaultMMKV().putString(AdvActivity.ALIAS_DATA, "");
         }
     }
@@ -95,7 +95,7 @@ public class TagAliasOperatorHelper {
         }else{
             String logs = "Failed to set mobile number, errorCode:" + jPushMessage.getErrorCode();
             Log.e(TAG, logs);
-            ToastHelper.showOther(context,logs);
+//            ToastHelper.showOther(context,logs);
 //            MMKV.defaultMMKV().putString(AdvActivity.MN_DATA, "");
         }
     }

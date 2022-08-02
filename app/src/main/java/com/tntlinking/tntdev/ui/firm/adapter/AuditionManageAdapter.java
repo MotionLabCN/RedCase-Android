@@ -41,6 +41,7 @@ public final class AuditionManageAdapter extends AppAdapter<developerBillListApi
             tv_personalTax = findViewById(R.id.tv_personalTax);
             tv_actualMoney = findViewById(R.id.tv_actualMoney);
 
+
         }
 
         @Override
