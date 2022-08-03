@@ -8,8 +8,8 @@ android {
         minSdkVersion 21
         // 目标适配版本
         targetSdkVersion 30
-        versionName '1.8.2'
-        versionCode 21
+        versionName '1.9.0'
+        versionCode 22
     }
 
     // 支持 Java JDK 8

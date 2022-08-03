@@ -27,17 +27,18 @@ import com.tntlinking.tntdev.aop.SingleClick;
 import com.tntlinking.tntdev.app.TitleBarFragment;
 import com.tntlinking.tntdev.http.api.GetDeveloperJkStatusApi;
 import com.tntlinking.tntdev.http.api.GetDeveloperStatusApi;
+import com.tntlinking.tntdev.http.api.GetHasRead;
 import com.tntlinking.tntdev.http.api.GetSignContractPDFApi;
 import com.tntlinking.tntdev.http.model.HttpData;
+import com.tntlinking.tntdev.manager.ActivityManager;
 import com.tntlinking.tntdev.other.AppConfig;
 import com.tntlinking.tntdev.other.Utils;
-import com.tntlinking.tntdev.ui.activity.AboutAppActivity;
 import com.tntlinking.tntdev.ui.activity.BrowserActivity;
 import com.tntlinking.tntdev.ui.activity.BrowserPrivateActivity;
 import com.tntlinking.tntdev.ui.activity.EnterDeveloperActivity;
 import com.tntlinking.tntdev.ui.activity.EvaluationActivity;
 import com.tntlinking.tntdev.ui.activity.EvaluationNeedsTokNowActivity;
-import com.tntlinking.tntdev.ui.activity.HistoryListActivity;
+import com.tntlinking.tntdev.ui.activity.HistoryOrderListActivity;
 import com.tntlinking.tntdev.ui.activity.IncomeListActivity;
 import com.tntlinking.tntdev.ui.activity.InterviewActivity;
 import com.tntlinking.tntdev.ui.activity.InterviewSettingActivity;
@@ -58,7 +59,7 @@ import androidx.annotation.RequiresApi;
 public final class MineFragment1 extends TitleBarFragment<MainActivity> implements OnRefreshLoadMoreListener {
     private SmartRefreshLayout mRefreshLayout;
 
-//    private SettingBar mPersonDataIncome;
+    //    private SettingBar mPersonDataIncome;
     private SettingBar mPersonDataInterview;
     private SettingBar mPersonDataSetting;
     private SettingBar person_data_private;
@@ -77,6 +78,7 @@ public final class MineFragment1 extends TitleBarFragment<MainActivity> implemen
     private TextView tv_sign_num;
     private TextView tv_profit_total;
     private ImageView iv_message;
+    private View view_dot;
     private LinearLayout ll_income;
 
     public static MineFragment1 newInstance() {
@@ -113,14 +115,15 @@ public final class MineFragment1 extends TitleBarFragment<MainActivity> implemen
         tv_sign_num = findViewById(R.id.tv_sign_num);
         tv_profit_total = findViewById(R.id.tv_profit_total);
         iv_message = findViewById(R.id.iv_message);
+        view_dot = findViewById(R.id.view_dot);
 
         mRefreshLayout = findViewById(R.id.rl_status_refresh);
         mRefreshLayout.setOnRefreshLoadMoreListener(this);
         mRefreshLayout.setEnableLoadMore(false);
 
-        setOnClickListener( mPersonDataSetting, mPersonDataInterview,
+        setOnClickListener(mPersonDataSetting, mPersonDataInterview,
                 person_data_private, person_data_deal, person_data_dev, person_data_evaluation,
-                person_data_about, person_data_recommend, person_data_service,person_data_history,iv_message,ll_income);
+                person_data_about, person_data_recommend, person_data_service, person_data_history, iv_message, ll_income);
 
 
         scroll.setOnScrollChangeListener((v, scrollX, scrollY, oldScrollX, oldScrollY) -> {
@@ -134,7 +137,8 @@ public final class MineFragment1 extends TitleBarFragment<MainActivity> implemen
 
     @Override
     protected void initData() {
-        getData();
+        getHasRead();
+        getPersonData();
     }
 
     private void getDeveloperJkStatus() {
@@ -182,12 +186,14 @@ public final class MineFragment1 extends TitleBarFragment<MainActivity> implemen
         } else if (view == person_data_about) {// 关于天天数链开发者
 //            startActivity(AboutAppActivity.class);
             startActivity(FirmMainActivity.class);
+            ActivityManager.getInstance().finishAllActivities(FirmMainActivity.class);
         } else if (view == person_data_evaluation) {
             getDeveloperJkStatus();
-        }else if (view == person_data_history) {// 历史订单
-            startActivity(HistoryListActivity.class);
-        }else if (view == iv_message) {// 消息界面
+        } else if (view == person_data_history) {// 历史订单
+            startActivity(HistoryOrderListActivity.class);
+        } else if (view == iv_message) {// 消息界面
             startActivity(MessageListActivity.class);
+            view_dot.setVisibility(View.GONE);
         }
 
     }
@@ -200,10 +206,31 @@ public final class MineFragment1 extends TitleBarFragment<MainActivity> implemen
                 .navigationBarColor(R.color.white);
     }
 
+    /**
+     * 是否有未读消息
+     */
+    public void getHasRead() {
+        EasyHttp.get(this)
+                .api(new GetHasRead())
+                .request(new HttpCallback<HttpData<Boolean>>(this) {
+
+                    @SuppressLint("SetTextI18n")
+                    @Override
+                    public void onSucceed(HttpData<Boolean> data) {
+                        Boolean data1 = data.getData();
+                        if (data.getData()) {
+                            view_dot.setVisibility(View.VISIBLE);
+                        } else {
+                            view_dot.setVisibility(View.GONE);
+                        }
+                    }
+                });
+    }
+
     private String mStatus = "1"; //入驻状态 1  待完善 2  待审核 3  审核成功 4  审核失败
     private int mContractStatus = 0; //签约状态 0, "待签约"，1, "签约中" 2, "签约成功" 3, "签约失败"
 
-    public void getData() {
+    public void getPersonData() {
         EasyHttp.get(this)
                 .api(new GetDeveloperStatusApi())
                 .request(new HttpCallback<HttpData<GetDeveloperStatusApi.Bean>>(this) {
@@ -349,7 +376,8 @@ public final class MineFragment1 extends TitleBarFragment<MainActivity> implemen
 
     @Override
     public void onRefresh(@NonNull RefreshLayout refreshLayout) {
-            getData();
+        getPersonData();
+        getHasRead();
     }
     @Override
     public void onLoadMore(@NonNull RefreshLayout refreshLayout) {

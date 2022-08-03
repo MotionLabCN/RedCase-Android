@@ -26,6 +26,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+/**
+ * 日报记录list
+ */
 public final class HistoryDailyListActivity extends AppActivity implements OnRefreshLoadMoreListener {
 
     private TitleBar title_bar;
@@ -76,11 +79,20 @@ public final class HistoryDailyListActivity extends AppActivity implements OnRef
                     @Override
                     public void onSucceed(HttpData<List<GetHistoryListApi.Bean>> data) {
                         if (data.getData().size() > 0) {
+                            ll_empty.setVisibility(View.GONE);
                             mAdapter.setData(data.getData());
 
+                        } else {
+                            ll_empty.setVisibility(View.VISIBLE);
                         }
+                        mRefreshLayout.finishRefresh();
                     }
 
+                    @Override
+                    public void onFail(Exception e) {
+                        super.onFail(e);
+                        ll_empty.setVisibility(View.VISIBLE);
+                    }
                 });
     }
 

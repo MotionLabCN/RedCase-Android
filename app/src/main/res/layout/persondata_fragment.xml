@@ -69,15 +69,32 @@
                     <!--                        android:visibility="gone" />-->
 
                     <!--                </FrameLayout>-->
-                    <ImageView
-                        android:id="@+id/iv_message"
+                    <RelativeLayout
                         android:layout_width="@dimen/dp_30"
                         android:layout_height="@dimen/dp_30"
                         android:layout_gravity="right"
                         android:layout_marginTop="@dimen/dp_24"
-                        android:layout_marginRight="@dimen/dp_16"
-                        android:scaleType="center"
-                        android:src="@drawable/icon_messages" />
+                        android:layout_marginRight="@dimen/dp_16">
+
+                        <ImageView
+                            android:id="@+id/iv_message"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:scaleType="center"
+                            android:src="@drawable/icon_messages" />
+
+                        <View
+                            android:id="@+id/view_dot"
+                            android:layout_width="@dimen/dp_4"
+                            android:layout_height="@dimen/dp_4"
+                            android:layout_alignTop="@+id/iv_message"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginRight="@dimen/dp_8"
+                            android:background="@drawable/dot_oval_red"
+                            android:visibility="gone"/>
+                    </RelativeLayout>
+
 
                     <LinearLayout
                         android:layout_width="wrap_content"

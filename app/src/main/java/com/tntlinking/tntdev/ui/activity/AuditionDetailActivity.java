@@ -86,7 +86,7 @@ public final class AuditionDetailActivity extends AppActivity {
             BrowserActivity.start(getActivity(), tv_interview_url.getText().toString());
         } else if (view == tv_interview_id) {
             ClipboardUtils.copyText(tv_interview_id.getText());
-            toast("复制成功");
+            toast("会议号已复制到剪贴板");
         }
 
     }

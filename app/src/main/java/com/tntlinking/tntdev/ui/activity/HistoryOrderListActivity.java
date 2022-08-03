@@ -29,7 +29,10 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 
-public final class HistoryListActivity extends AppActivity implements OnRefreshLoadMoreListener,
+/**
+ * 历史订单记录list
+ */
+public final class HistoryOrderListActivity extends AppActivity implements OnRefreshLoadMoreListener,
         BaseAdapter.OnItemClickListener {
 
 
@@ -56,7 +59,7 @@ public final class HistoryListActivity extends AppActivity implements OnRefreshL
         tv_empty_tips = findViewById(R.id.tv_empty_tips);
         mRefreshLayout = findViewById(R.id.rl_status_refresh);
         mRecyclerView = findViewById(R.id.rv_status_list);
-        title_bar.setTitle("历史日报");
+        title_bar.setTitle("历史订单");
         mAdapter = new HistoryOrderAdapter(this);
         mAdapter.setOnItemClickListener(this);
         mRecyclerView.setAdapter(mAdapter);
@@ -93,6 +96,11 @@ public final class HistoryListActivity extends AppActivity implements OnRefreshL
                         mRefreshLayout.finishRefresh();
                     }
 
+                    @Override
+                    public void onFail(Exception e) {
+                        super.onFail(e);
+                        ll_empty.setVisibility(View.VISIBLE);
+                    }
                 });
     }
 
@@ -130,25 +138,6 @@ public final class HistoryListActivity extends AppActivity implements OnRefreshL
     @Override
     public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
 
-    }
-
-    /**
-     * 获取历史服务list
-     */
-    private void getList(String orderId) {
-        EasyHttp.get(this)
-                .api(new GetHistoryListApi().setOrderId(orderId).setPageNum(1).setPageSize(20))
-                .request(new HttpCallback<HttpData<List<AppListApi.Bean>>>(this) {
-
-                    @Override
-                    public void onSucceed(HttpData<List<AppListApi.Bean>> data) {
-                        if (data.getData().size() > 0) {
-
-
-                        }
-                    }
-
-                });
     }
 
 }

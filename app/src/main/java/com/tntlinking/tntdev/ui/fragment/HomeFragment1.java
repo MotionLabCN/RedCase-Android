@@ -475,9 +475,7 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity> implemen
                 startActivity(intent);
                 break;
             case R.id.tv_order_switching:
-                startActivity(FirmMainActivity.class);
-                ActivityManager.getInstance().finishAllActivities(FirmMainActivity.class);
-//                checkStatus(getActivity(), mStatus);
+                checkStatus(getActivity(), mStatus);
                 break;
             case R.id.layout_interview:
                 if (!TextUtils.isEmpty(interviewId)) {

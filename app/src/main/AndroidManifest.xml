@@ -597,7 +597,7 @@
             android:screenOrientation="portrait" />
         <!-- 历史订单列表页面 -->
         <activity
-            android:name="com.tntlinking.tntdev.ui.activity.HistoryListActivity"
+            android:name="com.tntlinking.tntdev.ui.activity.HistoryOrderListActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
         <!-- 历史日报列表页面 -->
