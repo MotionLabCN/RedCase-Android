@@ -143,9 +143,9 @@ public final class AppApplication extends Application {
 
         // 友盟统计、登录、分享 SDK
         UmengClient.init(application, AppConfig.isLogEnable());
-        // 初始化极光推送
-        JPushInterface.setDebugMode(AppConfig.isDebug());
-        JPushInterface.init(application);
+//        // 初始化极光推送
+//        JPushInterface.setDebugMode(AppConfig.isDebug());
+//        JPushInterface.init(application);
 //        HeytapPushManager.init(application,AppConfig.isDebug());
         // Bugly 异常捕捉
         CrashReport.initCrashReport(application, AppConfig.getBuglyId(), AppConfig.isDebug());
@@ -214,5 +214,16 @@ public final class AppApplication extends Application {
                 }
             });
         }
+
+        boolean isPrivacyAccepted = SPUtils.getInstance().getBoolean(AppConfig.DEAL_DIALOG, false);
+        if (isPrivacyAccepted) {
+            // 初始化极光推送
+            JPushInterface.setDebugMode(AppConfig.isDebug());
+            JPushInterface.init(application);
+
+        } else {
+
+        }
+
     }
 }

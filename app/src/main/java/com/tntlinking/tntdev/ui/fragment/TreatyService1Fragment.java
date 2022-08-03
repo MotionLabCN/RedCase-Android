@@ -297,7 +297,7 @@ public final class TreatyService1Fragment extends TitleBarFragment<MainActivity>
                     @Override
                     public void onSucceed(HttpData<CreateDailyApi.Bean> data) {
 
-                        getDailyList("572");
+                        getDailyList(orderId);
 
                     }
                 });

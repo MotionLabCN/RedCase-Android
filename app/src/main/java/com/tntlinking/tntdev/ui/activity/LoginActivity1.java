@@ -338,6 +338,10 @@ public final class LoginActivity1 extends AppActivity {
                 .setOnClickListener(R.id.btn_dialog_custom_ok, (dialog, views) -> {
                     dialog.dismiss();
                     getPermissions();
+
+                    // 初始化极光推送
+                    JPushInterface.setDebugMode(AppConfig.isDebug());
+                    JPushInterface.init(this);
                     SPUtils.getInstance().put(AppConfig.DEAL_DIALOG, true);
 
                 });

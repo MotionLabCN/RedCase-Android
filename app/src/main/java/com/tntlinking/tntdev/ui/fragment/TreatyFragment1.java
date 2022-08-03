@@ -134,6 +134,10 @@ public final class TreatyFragment1 extends TitleBarFragment<MainActivity> implem
     private int serviceSize = 0;
     private int noServiceSize = 0;
 
+    /**
+     *
+     * @param status 2 待服务 3 服务中
+     */
     private void getAppList1(int status) {
         EasyHttp.get(this)
                 .api(new AppListApi().setOrderStatus(status))

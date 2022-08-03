@@ -4,7 +4,6 @@ import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import com.tntlinking.tntdev.R;
 import com.tntlinking.tntdev.app.AppAdapter;
 import com.tntlinking.tntdev.http.api.GetMessageListApi;
@@ -45,6 +44,7 @@ public final class MessageAdapter extends AppAdapter<GetMessageListApi.Bean.List
             tv_message_content.setText(item.getMessageStr());
             tv_message_time.setText(item.getCreateTime());
             switch (item.getMessageType()) {// 2 面试邀约 3 面试提醒 4面试取消 5 入驻通过 6 入驻未通过
+                case 2:
                 case 3:
                     view_line.setVisibility(View.VISIBLE);
                     tv_message_status.setVisibility(View.VISIBLE);
@@ -62,7 +62,6 @@ public final class MessageAdapter extends AppAdapter<GetMessageListApi.Bean.List
                     tv_message_status.setVisibility(View.VISIBLE);
                     tv_message_status.setText("去修改");
                     break;
-                case 2:
                 default:
                     view_line.setVisibility(View.GONE);
                     tv_message_status.setVisibility(View.GONE);
