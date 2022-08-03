@@ -137,7 +137,7 @@ public final class JkBrowserActivity extends AppActivity
 
     @Override
     public void onRightClick(View view) {
-        startActivity(EvaluationOutcomeActivity.class);
+        startActivity(EvaluationResultActivity.class);
 
     }
 

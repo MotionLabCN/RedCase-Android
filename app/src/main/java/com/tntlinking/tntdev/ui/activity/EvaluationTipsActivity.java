@@ -10,7 +10,10 @@ import com.tntlinking.tntdev.R;
 import com.tntlinking.tntdev.aop.SingleClick;
 import com.tntlinking.tntdev.app.AppActivity;
 
-public final class EvaluationNeedsTokNowActivity extends AppActivity {
+/**
+ * 测评须知
+ */
+public final class EvaluationTipsActivity extends AppActivity {
     private AppCompatButton btn_out_evaluating;
 
     @Override

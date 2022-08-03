@@ -3,7 +3,6 @@ package com.tntlinking.tntdev.ui.adapter;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Build;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,9 +22,8 @@ import com.tntlinking.tntdev.other.OnItemClickListener;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
-public class PositionRecommendationAdapter extends BaseAdapter {
+public class RecommendationAdapter extends BaseAdapter {
     private final List<String> mStringArrayList = new ArrayList<>();
     private List<GetDeveloperRecommendsApi.Bean> mList;
     private final LayoutInflater layoutInflater;
@@ -37,7 +35,7 @@ public class PositionRecommendationAdapter extends BaseAdapter {
     public void setOnItemClickListener(OnItemClickListener mOnItemSelectListener) {
         this.mOnItemClickListener = mOnItemSelectListener;
     }
-    public PositionRecommendationAdapter(Context context, List<GetDeveloperRecommendsApi.Bean> list) {
+    public RecommendationAdapter(Context context, List<GetDeveloperRecommendsApi.Bean> list) {
         this.mContext = context;
         this.mList = list;
         layoutInflater = LayoutInflater.from(context);
@@ -71,7 +69,7 @@ public class PositionRecommendationAdapter extends BaseAdapter {
     @SuppressLint({"SetTextI18n", "UseCompatLoadingForDrawables", "InflateParams"})
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        PositionRecommendationAdapter.ViewHolder holder;
+        RecommendationAdapter.ViewHolder holder;
         if (convertView == null) {
             convertView = layoutInflater.inflate(R.layout.position_item, null);
             holder = new ViewHolder();
@@ -93,7 +91,7 @@ public class PositionRecommendationAdapter extends BaseAdapter {
             holder.rv_job_requirements = convertView.findViewById(R.id.rv_job_requirements);
             convertView.setTag(holder);
         } else {
-            holder = (PositionRecommendationAdapter.ViewHolder) convertView.getTag();
+            holder = (RecommendationAdapter.ViewHolder) convertView.getTag();
         }
         GetDeveloperRecommendsApi.Bean item = mList.get(position);
         holder.tv_position_name.setText(item.getTitle());

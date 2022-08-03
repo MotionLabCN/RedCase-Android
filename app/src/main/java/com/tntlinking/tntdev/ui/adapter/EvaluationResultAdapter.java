@@ -17,7 +17,7 @@ import java.util.List;
 import me.zhouzhuo.zzhorizontalprogressbar.ZzHorizontalProgressBar;
 
 
-public final class EvaluationOutcomeListAdapter extends RecyclerView.Adapter<EvaluationOutcomeListAdapter.ViewHolder> {
+public final class EvaluationResultAdapter extends RecyclerView.Adapter<EvaluationResultAdapter.ViewHolder> {
    private final List<GetDeveloperJkStatusApi.Bean.stackInfoListBean> mStackInfoList;
    static class ViewHolder extends RecyclerView.ViewHolder{
       TextView tv_skill;
@@ -52,7 +52,7 @@ public final class EvaluationOutcomeListAdapter extends RecyclerView.Adapter<Eva
       }
    }
 
-   public EvaluationOutcomeListAdapter(List<GetDeveloperJkStatusApi.Bean.stackInfoListBean> mStackInfoList) {
+   public EvaluationResultAdapter(List<GetDeveloperJkStatusApi.Bean.stackInfoListBean> mStackInfoList) {
       this.mStackInfoList = mStackInfoList;
    }
 

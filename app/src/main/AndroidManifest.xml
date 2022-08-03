@@ -435,7 +435,7 @@
 
         <!-- 测评须知 页面 -->
         <activity
-            android:name="com.tntlinking.tntdev.ui.activity.EvaluationNeedsTokNowActivity"
+            android:name="com.tntlinking.tntdev.ui.activity.EvaluationTipsActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
         <!-- 工作主页 页面 -->
@@ -517,7 +517,7 @@
         <!-- H5测评计划页-->
         <!-- 测评结果页-->
         <activity
-            android:name="com.tntlinking.tntdev.ui.activity.EvaluationOutcomeActivity"
+            android:name="com.tntlinking.tntdev.ui.activity.EvaluationResultActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
         <!-- 测评结果中页-->

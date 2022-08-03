@@ -228,7 +228,7 @@
                 android:orientation="vertical">
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     tools:ignore="UseCompoundDrawables">
@@ -240,8 +240,7 @@
                         android:layout_marginLeft="@dimen/dp_10"
                         android:ellipsize="none"
                         android:gravity="center"
-                        android:maxLines="100"
-                        android:scrollHorizontally="false"
+                        android:singleLine="true"
                         android:text="柏鑫哈哈·技术"
                         android:textColor="@color/color_444E64"
                         android:textSize="@dimen/sp_13" />
@@ -273,13 +272,14 @@
                 android:id="@+id/iv_close"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
                 android:layout_marginRight="@dimen/dp_16"
                 android:layout_marginBottom="@dimen/dp_2"
-                android:layout_gravity="bottom"
                 android:src="@drawable/icon_close_position" />
 
         </LinearLayout>
     </LinearLayout>
+
     <LinearLayout
         android:id="@+id/ll_settled_material_empty"
         android:layout_width="match_parent"

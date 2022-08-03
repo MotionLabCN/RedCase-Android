@@ -1,7 +1,6 @@
 package com.tntlinking.tntdev.ui.activity;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -17,13 +16,15 @@ import com.tntlinking.tntdev.app.AppActivity;
 import com.tntlinking.tntdev.http.api.GetDeveloperJkStatusApi;
 
 import com.tntlinking.tntdev.http.model.HttpData;
-import com.tntlinking.tntdev.ui.adapter.EvaluationOutcomeListAdapter;
+import com.tntlinking.tntdev.ui.adapter.EvaluationResultAdapter;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public final class EvaluationOutcomeActivity extends AppActivity {
+/**
+ * 测评结果页面
+ */
+public final class EvaluationResultActivity extends AppActivity {
     private List<GetDeveloperJkStatusApi.Bean.stackInfoListBean> mStackInfoList = new ArrayList<>();
 
     private Button btn_out_evaluating;
@@ -32,6 +33,7 @@ public final class EvaluationOutcomeActivity extends AppActivity {
     private int mUserPlanStatus;
     private LinearLayout ll_evaluating;
     private LinearLayout ll_default_page;
+
     /**
      * 获取布局 ID
      */
@@ -62,6 +64,7 @@ public final class EvaluationOutcomeActivity extends AppActivity {
     protected void initData() {
         getDeveloperJkStatus();
     }
+
     private void getDeveloperJkStatus() {
         EasyHttp.get(this)
                 .api(new GetDeveloperJkStatusApi())
@@ -70,26 +73,25 @@ public final class EvaluationOutcomeActivity extends AppActivity {
                     @SuppressLint("SetTextI18n")
                     @Override
                     public void onSucceed(HttpData<GetDeveloperJkStatusApi.Bean> data) {
-                        if (data.getData().getPlanUrl()!=null){
-                            mPlanUrl=data.getData().getPlanUrl();
+                        if (data.getData().getPlanUrl() != null) {
+                            mPlanUrl = data.getData().getPlanUrl();
                         }
                         if (data.getData().getUserPlanStatus() == 2) {
                             ll_evaluating.setVisibility(View.GONE);
                         }
-                        if (!data.getData().getStackInfoList().isEmpty()){
-                            mStackInfoList=data.getData().getStackInfoList();
-                            EvaluationOutcomeListAdapter mEvaluationOutcomeListAdapter = new EvaluationOutcomeListAdapter(mStackInfoList);
-                            rv_outcome_list.setAdapter(mEvaluationOutcomeListAdapter);
-                        }else {
+                        if (!data.getData().getStackInfoList().isEmpty()) {
+                            mStackInfoList = data.getData().getStackInfoList();
+                            EvaluationResultAdapter mEvaluationAdapter = new EvaluationResultAdapter(mStackInfoList);
+                            rv_outcome_list.setAdapter(mEvaluationAdapter);
+                        } else {
                             ll_default_page.setVisibility(View.VISIBLE);
                         }
-
-
 
 
                     }
                 });
     }
+
     @SingleClick
     @Override
     public void onClick(View view) {

@@ -33,13 +33,12 @@ import com.tntlinking.tntdev.http.api.GetDeveloperRecommendsApi;
 import com.tntlinking.tntdev.http.api.GetNewbieApi;
 import com.tntlinking.tntdev.http.api.UpdateServiceStatusApi;
 import com.tntlinking.tntdev.http.model.HttpData;
-import com.tntlinking.tntdev.manager.ActivityManager;
 import com.tntlinking.tntdev.other.AppConfig;
 import com.tntlinking.tntdev.other.HomeChangeListener;
 import com.tntlinking.tntdev.other.Utils;
 import com.tntlinking.tntdev.ui.activity.EnterDeveloperActivity;
 import com.tntlinking.tntdev.ui.activity.EvaluationActivity;
-import com.tntlinking.tntdev.ui.activity.EvaluationNeedsTokNowActivity;
+import com.tntlinking.tntdev.ui.activity.EvaluationTipsActivity;
 import com.tntlinking.tntdev.ui.activity.InterviewActivity;
 import com.tntlinking.tntdev.ui.activity.AuditionDetailActivity;
 import com.tntlinking.tntdev.ui.activity.JkBrowserActivity;
@@ -53,7 +52,6 @@ import com.tntlinking.tntdev.ui.adapter.HomeTaskAdapter;
 import com.tntlinking.tntdev.ui.adapter.ServiceProjectAdapter;
 import com.tntlinking.tntdev.ui.bean.BannerBean;
 import com.tntlinking.tntdev.ui.dialog.AppUpdateDialog;
-import com.tntlinking.tntdev.ui.firm.activity.FirmMainActivity;
 import com.tntlinking.tntdev.widget.MyListView;
 
 import java.util.ArrayList;
@@ -254,8 +252,8 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity> implemen
                 }
             }
         });
-        //造数据
-        PositionRecommendationFragment first = new PositionRecommendationFragment();
+        //职位推荐 和 活动任务
+        RecommendFragment first = new RecommendFragment();
         ActiveTaskFragment second = new ActiveTaskFragment();
         first.setListener(this);
         second.setListener(this);
@@ -423,7 +421,7 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity> implemen
                         if (mStatus.equals("1")) {
                             startActivity(EvaluationActivity.class);
                         } else if (data.getData() != null && data.getData().getUserPlanStatus() == 0) {
-                            startActivity(EvaluationNeedsTokNowActivity.class);
+                            startActivity(EvaluationTipsActivity.class);
                         } else {
                             JkBrowserActivity.start(getActivity(), data.getData().getPlanUrl());
 
@@ -556,8 +554,6 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity> implemen
 
 
     private List<GetNewbieApi.Bean> mTaskList = new ArrayList<>();
-    private List<AppListApi.Bean> mServiceList = new ArrayList<>();
-    private List<AppListApi.Bean> mHistoryList = new ArrayList<>();
 
     private String interviewId;
 

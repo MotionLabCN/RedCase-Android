@@ -24,17 +24,20 @@ import com.tntlinking.tntdev.other.OnItemClickListener;
 import com.tntlinking.tntdev.ui.activity.JobDetailsActivity;
 import com.tntlinking.tntdev.ui.activity.MainActivity;
 
-import com.tntlinking.tntdev.ui.adapter.PositionRecommendationAdapter;
+import com.tntlinking.tntdev.ui.adapter.RecommendationAdapter;
 import com.tntlinking.tntdev.widget.MyListView;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class PositionRecommendationFragment extends TitleBarFragment<MainActivity> {
+/**
+ * 职位推荐 fragment
+ */
+public class RecommendFragment extends TitleBarFragment<MainActivity> {
     private MyListView lv_position;
     private LinearLayout ll_settled_material_empty;
     private TextView tv_name;
-    private PositionRecommendationAdapter mPositionRecommendationAdapter;
+    private RecommendationAdapter mAdapter;
     private final List<GetDeveloperRecommendsApi.Bean> mList = new ArrayList<>();
     private final String Status = SPUtils.getInstance().getString(AppConfig.DEVELOP_STATUS, "1");
     private HomeChangeListener listener;
@@ -43,9 +46,10 @@ public class PositionRecommendationFragment extends TitleBarFragment<MainActivit
         this.listener = listener;
     }
 
-    public static PositionRecommendationFragment newInstance() {
-        return new PositionRecommendationFragment();
+    public static RecommendFragment newInstance() {
+        return new RecommendFragment();
     }
+
     @Override
     protected int getLayoutId() {
         return R.layout.position_recommendation_fragment;
@@ -57,6 +61,7 @@ public class PositionRecommendationFragment extends TitleBarFragment<MainActivit
         tv_name = findViewById(R.id.tv_name);
         ll_settled_material_empty = findViewById(R.id.ll_settled_material_empty);
     }
+
     @Override
     protected void initData() {
         //1->待认证  2->待审核   3->审核成功 4->审核失败
@@ -77,30 +82,30 @@ public class PositionRecommendationFragment extends TitleBarFragment<MainActivit
                 getDeveloperRecommends();
                 break;
         }
-        mPositionRecommendationAdapter = new PositionRecommendationAdapter(getActivity(), mList);
-        lv_position.setAdapter(mPositionRecommendationAdapter);
+        mAdapter = new RecommendationAdapter(getActivity(), mList);
+        lv_position.setAdapter(mAdapter);
         lv_position.setOnItemClickListener((parent, view, position, id) -> {
-            GetDeveloperRecommendsApi.Bean item = mPositionRecommendationAdapter.getItem(position);
+            GetDeveloperRecommendsApi.Bean item = mAdapter.getItem(position);
             Intent intent = new Intent(getActivity(), JobDetailsActivity.class);
             intent.putExtra("positionId", item.getPositionId());
             intent.putExtra("selfRecommendStatus", item.getSelfRecommendStatus());
             startActivityForResult(intent, 1);
         });
-        mPositionRecommendationAdapter.setOnItemClickListener(new OnItemClickListener() {
+        mAdapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                GetDeveloperRecommendsApi.Bean item = mPositionRecommendationAdapter.getItem(position);
+                GetDeveloperRecommendsApi.Bean item = mAdapter.getItem(position);
 
                 new BaseDialog.Builder<>(getActivity())
                         .setContentView(R.layout.check_order_status_dialog)
                         .setAnimStyle(BaseDialog.ANIM_SCALE)
-                        .setText(R.id.tv_title,"关闭职位信息")
-                        .setText(R.id.tv_content,"是否关闭当前职位信息")
+                        .setText(R.id.tv_title, "关闭职位信息")
+                        .setText(R.id.tv_content, "是否关闭当前职位信息")
                         .setText(R.id.btn_dialog_custom_cancel, "取消")
                         .setText(R.id.btn_dialog_custom_ok, "确认")
                         .setOnClickListener(R.id.btn_dialog_custom_cancel, (BaseDialog.OnClickListener<Button>) (dialog, button) -> dialog.dismiss())
                         .setOnClickListener(R.id.btn_dialog_custom_ok, (dialog, views) -> {
-                            deleteDeveloperRecommends(Integer.valueOf(item.getPositionId()), item.getRecommendByOperate(), position, dialog);
+                            deleteRecommends(Integer.valueOf(item.getPositionId()), item.getRecommendByOperate(), position, dialog);
                         }).show();
             }
         });
@@ -118,7 +123,7 @@ public class PositionRecommendationFragment extends TitleBarFragment<MainActivit
                         if (data.getData() != null && data.getData().size() != 0) {
                             mList.clear();
                             mList.addAll(data.getData());
-                            mPositionRecommendationAdapter.setData(mList);
+                            mAdapter.setData(mList);
                             lv_position.post(new Runnable() {
                                 @Override
                                 public void run() {
@@ -145,7 +150,7 @@ public class PositionRecommendationFragment extends TitleBarFragment<MainActivit
      * @param position
      * @param dialog
      */
-    private void deleteDeveloperRecommends(int positionId, boolean operate, int position, BaseDialog dialog) {
+    private void deleteRecommends(int positionId, boolean operate, int position, BaseDialog dialog) {
         EasyHttp.delete(this)
                 .api(new DeleteDeveloperRecommendsApi()
                         .setPositionId(positionId)

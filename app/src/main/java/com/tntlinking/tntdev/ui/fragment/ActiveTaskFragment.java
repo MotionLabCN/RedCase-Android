@@ -15,7 +15,7 @@ import com.tntlinking.tntdev.other.AppConfig;
 import com.tntlinking.tntdev.other.HomeChangeListener;
 import com.tntlinking.tntdev.ui.activity.EnterDeveloperActivity;
 import com.tntlinking.tntdev.ui.activity.EvaluationActivity;
-import com.tntlinking.tntdev.ui.activity.EvaluationNeedsTokNowActivity;
+import com.tntlinking.tntdev.ui.activity.EvaluationTipsActivity;
 import com.tntlinking.tntdev.ui.activity.JkBrowserActivity;
 import com.tntlinking.tntdev.ui.activity.MainActivity;
 import com.tntlinking.tntdev.ui.activity.SaveQRActivity;
@@ -109,7 +109,7 @@ public class ActiveTaskFragment extends TitleBarFragment<MainActivity> {
                         if (mStatus.equals("1")) {
                             startActivity(EvaluationActivity.class);
                         } else if (data.getData() != null && data.getData().getUserPlanStatus() == 0) {
-                            startActivity(EvaluationNeedsTokNowActivity.class);
+                            startActivity(EvaluationTipsActivity.class);
                         } else {
                             JkBrowserActivity.start(getActivity(), data.getData().getPlanUrl());
 

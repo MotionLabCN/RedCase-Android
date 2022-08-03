@@ -37,7 +37,7 @@ import com.tntlinking.tntdev.ui.activity.BrowserActivity;
 import com.tntlinking.tntdev.ui.activity.BrowserPrivateActivity;
 import com.tntlinking.tntdev.ui.activity.EnterDeveloperActivity;
 import com.tntlinking.tntdev.ui.activity.EvaluationActivity;
-import com.tntlinking.tntdev.ui.activity.EvaluationNeedsTokNowActivity;
+import com.tntlinking.tntdev.ui.activity.EvaluationTipsActivity;
 import com.tntlinking.tntdev.ui.activity.HistoryOrderListActivity;
 import com.tntlinking.tntdev.ui.activity.IncomeListActivity;
 import com.tntlinking.tntdev.ui.activity.InterviewActivity;
@@ -152,7 +152,7 @@ public final class MineFragment1 extends TitleBarFragment<MainActivity> implemen
                         if (mStatus.equals("1")) {
                             startActivity(EvaluationActivity.class);
                         } else if (data.getData() != null && data.getData().getUserPlanStatus() == 0) {
-                            startActivity(EvaluationNeedsTokNowActivity.class);
+                            startActivity(EvaluationTipsActivity.class);
                         } else {
                             JkBrowserActivity.start(getActivity(), data.getData().getPlanUrl());
 
