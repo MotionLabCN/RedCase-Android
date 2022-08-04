@@ -63,7 +63,7 @@ public final class AddCareerActivity extends AppActivity {
     private String curSalary = ""; //当前薪资
     private int workDayMode = 1;// 1 全日 2 半日  //默认全日
     private String expectSalary = "";// 期望薪资
-//    private String lowestSalary = "";
+    //    private String lowestSalary = "";
 //    private String highestSalary = "";
     private DeveloperInfoBean mBean;
 
@@ -109,8 +109,8 @@ public final class AddCareerActivity extends AppActivity {
 
                 info_specialisations.setLeftText(TextUtils.isEmpty(careerDto.getCareerDirectionName()) ? "职业方向" : careerDto.getCareerDirectionName());
                 info_work_experience.setLeftText(TextUtils.isEmpty(careerDto.getWorkYearsName()) ? "工作经验" : careerDto.getWorkYearsName());
-                et_salary.setText(TextUtils.isEmpty(careerDto.getCurSalary()) ? "" : careerDto.getCurSalary());
-                et_expect_salary_expect.setText(TextUtils.isEmpty(workModeDtoList.get(0).getExpectSalary()) ? "" : workModeDtoList.get(0).getExpectSalary());
+                et_salary.setText(TextUtils.isEmpty(careerDto.getCurSalary()) ? "" : Utils.StripZeros(careerDto.getCurSalary()));
+                et_expect_salary_expect.setText(TextUtils.isEmpty(workModeDtoList.get(0).getExpectSalary()) ? "" : Utils.StripZeros(workModeDtoList.get(0).getExpectSalary()));
 //                et_expect_salary_high.setText(TextUtils.isEmpty(workModeDtoList.get(0).getHighestSalary()) ? "" : workModeDtoList.get(0).getHighestSalary());
 //                et_expect_salary_high.setText(TextUtils.isEmpty(workModeDtoList.get(0).getHighestSalary()) ? "" : workModeDtoList.get(0).getHighestSalary());
 

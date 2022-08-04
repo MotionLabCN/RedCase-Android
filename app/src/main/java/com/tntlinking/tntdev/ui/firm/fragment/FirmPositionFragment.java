@@ -110,6 +110,14 @@ public final class FirmPositionFragment extends TitleBarFragment<FirmMainActivit
         return data;
     }
 
+    @Override
+    public boolean isStatusBarEnabled() {
+        // 使用沉浸式状态栏
+        return !super.isStatusBarEnabled();
+    }
+
+
+
     @SuppressLint("NonConstantResourceId")
     @SingleClick
     @Override

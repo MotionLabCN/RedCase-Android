@@ -3,6 +3,7 @@ package com.tntlinking.tntdev.ui.adapter;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Build;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -112,6 +113,11 @@ public class RecommendationAdapter extends BaseAdapter {
             holder.tv_name.setText(item.getCompanyRecruiterRealName());
         }
         holder.tv_professional_title.setText(item.getCompanyRecruiterRealName() + "·" + item.getCompanyRecruiterPosition());
+        if (TextUtils.isEmpty(item.getCompanyRecruiterPosition())) {
+            holder.tv_professional_title.setText(item.getCompanyRecruiterRealName());
+        } else {
+            holder.tv_professional_title.setText(item.getCompanyRecruiterRealName() + "·" + item.getCompanyRecruiterPosition());
+        }
         holder.tv_company.setText(item.getCompanyName());
         if (item.getSelfRecommendStatus()) {
             holder.tv_recommend.setVisibility(View.VISIBLE);

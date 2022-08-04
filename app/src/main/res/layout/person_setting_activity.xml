@@ -26,7 +26,7 @@
         app:bar_lineVisible="false"
         app:bar_rightDrawableSize="@dimen/dp_16"
         app:bar_rightDrawable="@drawable/icon_arrow_right"
-        app:bar_rightText="xxxxx" />
+        app:bar_rightText="" />
 
     <com.hjq.widget.layout.SettingBar
         android:id="@+id/setting_cancel_service"

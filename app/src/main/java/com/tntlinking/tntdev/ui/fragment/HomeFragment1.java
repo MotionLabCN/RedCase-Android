@@ -23,6 +23,9 @@ import com.hjq.http.EasyHttp;
 
 import com.hjq.http.listener.HttpCallback;
 
+import com.scwang.smart.refresh.layout.SmartRefreshLayout;
+import com.scwang.smart.refresh.layout.api.RefreshLayout;
+import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener;
 import com.tntlinking.tntdev.R;
 import com.tntlinking.tntdev.app.TitleBarFragment;
 import com.tntlinking.tntdev.http.api.AppListApi;
@@ -68,8 +71,8 @@ import androidx.viewpager2.widget.ViewPager2;
 /**
  * desc   : 首页 Fragment
  */
-public final class HomeFragment1 extends TitleBarFragment<MainActivity> implements HomeChangeListener {
-
+public final class HomeFragment1 extends TitleBarFragment<MainActivity> implements HomeChangeListener, OnRefreshLoadMoreListener {
+    private SmartRefreshLayout mRefreshLayout;
     private TextView tv_avatar;
     private TextView tv_name;
     private TextView tv_status;
@@ -150,6 +153,10 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity> implemen
         tv_interview_salary = findViewById(R.id.tv_interview_salary);
         tv_interview_company = findViewById(R.id.tv_interview_company);
         tv_interview_time = findViewById(R.id.tv_interview_time);
+
+        mRefreshLayout = findViewById(R.id.rl_status_refresh);
+        mRefreshLayout.setOnRefreshLoadMoreListener(this);
+        mRefreshLayout.setEnableLoadMore(false);
 
         tv_avatar.setText(Utils.formatName(name));
         tv_name.setText("你好," + name);
@@ -348,17 +355,14 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity> implemen
     protected void initData() {
         getNewbie();
         String status = SPUtils.getInstance().getString(AppConfig.DEVELOP_STATUS, "1");
-
+        getInterviewAppList();
         if (status.equals("3")) {
             tv_status.setVisibility(View.VISIBLE);
             tv_status.setText("已认证");
 
-            getInterviewAppList();
         } else {
             ll_status.setVisibility(View.VISIBLE); //1、2、4 状态下显示平台介绍和新手任务
-
             tv_status.setVisibility(View.GONE);
-
         }
         //切换接单模式
         if (mStatus == 1) {
@@ -560,12 +564,11 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity> implemen
     /**
      * 获取面试邀约list
      */
-    @SuppressLint("CheckResult")
+    @SuppressLint({"CheckResult", "SetTextI18n"})
     private void getInterviewAppList() {
         EasyHttp.get(this)
                 .api(new AppListInterviewApi())
                 .request(new HttpCallback<HttpData<List<AppListApi.Bean>>>(this) {
-                    @SuppressLint("SetTextI18n")
                     @Override
                     public void onSucceed(HttpData<List<AppListApi.Bean>> data) {
                         if (data.getData().size() > 0) {
@@ -586,6 +589,13 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity> implemen
                             layout_interview.setVisibility(View.GONE);
                             ll_top_tips.setVisibility(View.VISIBLE);
                         }
+                        mRefreshLayout.finishRefresh();
+                    }
+
+                    @Override
+                    public void onFail(Exception e) {
+                        super.onFail(e);
+                        mRefreshLayout.finishRefresh();
                     }
                 });
 
@@ -662,6 +672,17 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity> implemen
     @Override
     public void onDataChanged(int height) {
         updatePagerHeightForChild(height);
+    }
+
+
+    @Override
+    public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
+
+    }
+
+    @Override
+    public void onRefresh(@NonNull RefreshLayout refreshLayout) {
+        initData();
     }
 
 

@@ -42,7 +42,7 @@ public final class MessageAdapter extends AppAdapter<GetMessageListApi.Bean.List
         public void onBindView(int position) {
             GetMessageListApi.Bean.ListBean item = getItem(position);
             tv_message_content.setText(item.getMessageStr());
-            tv_message_time.setText(item.getCreateTime());
+            tv_message_time.setText(item.getSendTime());
             switch (item.getMessageType()) {// 2 面试邀约 3 面试提醒 4面试取消 5 入驻通过 6 入驻未通过
                 case 2:
                 case 3:
