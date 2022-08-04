@@ -17,6 +17,7 @@
         android:paddingBottom="@dimen/dp_10">
 
         <ImageView
+            android:id="@+id/iv_avatar"
             android:layout_width="@dimen/dp_58"
             android:layout_height="@dimen/dp_58"
             android:src="@drawable/app_logo" />

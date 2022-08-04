@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.tntlinking.tntdev.R;
+import com.tntlinking.tntdev.other.GlideUtils;
 
 import java.util.List;
 
@@ -82,6 +83,8 @@ public final class FirmHomeAdapter extends BaseAdapter {
         String item = mList.get(position);
         holder.tv_position.setText(item);
 
+        GlideUtils.loadRoundCorners(mContext, R.drawable.update_app_top_bg, holder.iv_position_avatar,
+                (int) mContext.getResources().getDimension(R.dimen.dp_8));
         return convertView;
     }
 

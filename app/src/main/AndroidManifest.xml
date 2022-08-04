@@ -662,6 +662,11 @@
             android:name="com.tntlinking.tntdev.ui.firm.activity.FirmManageActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
+        <!-- 人员审核页面 -->
+        <activity
+            android:name="com.tntlinking.tntdev.ui.firm.activity.FirmPersonCheckActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
         <!-- 邀请成员 -->
         <activity
             android:name="com.tntlinking.tntdev.ui.firm.activity.InterviewPersonActivity"
@@ -690,6 +695,11 @@
         <!-- 职位搜索页面 -->
         <activity
             android:name="com.tntlinking.tntdev.ui.firm.activity.RecommendPositionActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <!-- 企业认证页面 -->
+        <activity
+            android:name="com.tntlinking.tntdev.ui.firm.activity.FirmCertificationActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
 

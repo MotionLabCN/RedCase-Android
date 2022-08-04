@@ -32,6 +32,7 @@ import com.tntlinking.tntdev.ui.activity.BrowserPrivateActivity;
 import com.tntlinking.tntdev.ui.firm.activity.AccountManageActivity;
 import com.tntlinking.tntdev.ui.firm.activity.AuditionMangeActivity;
 import com.tntlinking.tntdev.ui.firm.activity.ChangeAdminActivity;
+import com.tntlinking.tntdev.ui.firm.activity.FirmCertificationActivity;
 import com.tntlinking.tntdev.ui.firm.activity.FirmMainActivity;
 import com.tntlinking.tntdev.ui.firm.activity.FirmManageActivity;
 import com.tntlinking.tntdev.ui.firm.activity.TreatyOrderListActivity;
@@ -102,7 +103,7 @@ public final class FirmMineFragment extends TitleBarFragment<FirmMainActivity> i
         mRefreshLayout.setOnRefreshLoadMoreListener(this);
         mRefreshLayout.setEnableLoadMore(false);
 
-        setOnClickListener(mPersonDataSetting, person_data_private, person_data_deal, person_data_dev,
+        setOnClickListener(mPersonDataSetting,person_data_service, person_data_private, person_data_deal, person_data_dev,
                 ll_mine_audition, ll_mine_contract, ll_mine_account, ll_mine_firm);
 
 
@@ -130,7 +131,7 @@ public final class FirmMineFragment extends TitleBarFragment<FirmMainActivity> i
                 startActivity(ChangeAdminActivity.class);
                 break;
             case R.id.person_data_service://企业认证
-
+                startActivity(FirmCertificationActivity.class);
                 break;
             case R.id.ll_mine_audition://面试管理
                 startActivity(AuditionMangeActivity.class);

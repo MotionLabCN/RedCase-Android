@@ -7,14 +7,13 @@ import android.widget.TextView;
 import com.tntlinking.tntdev.R;
 import com.tntlinking.tntdev.app.AppAdapter;
 import com.tntlinking.tntdev.http.api.developerBillListApi;
-import com.tntlinking.tntdev.other.Utils;
 
 import androidx.annotation.NonNull;
 
 
-public final class FirmManageAdapter extends AppAdapter<developerBillListApi.Bean.ListBean> {
+public final class FirmPersonCheckAdapter extends AppAdapter<developerBillListApi.Bean.ListBean> {
 
-    public FirmManageAdapter(Context context) {
+    public FirmPersonCheckAdapter(Context context) {
         super(context);
     }
 
@@ -26,7 +25,6 @@ public final class FirmManageAdapter extends AppAdapter<developerBillListApi.Bea
 
     private final class ViewHolder extends AppAdapter<?>.ViewHolder {
 
-        private final TextView tv_create_time;
         private final TextView tv_serviceMoney;
         private final TextView tv_deductMoney;
         private final TextView tv_personalTax;
@@ -34,8 +32,7 @@ public final class FirmManageAdapter extends AppAdapter<developerBillListApi.Bea
 
 
         private ViewHolder() {
-            super(R.layout.item_firm_manage);
-            tv_create_time = findViewById(R.id.tv_create_time);
+            super(R.layout.item_firm_person_check);
             tv_serviceMoney = findViewById(R.id.tv_serviceMoney);
             tv_deductMoney = findViewById(R.id.tv_deductMoney);
             tv_personalTax = findViewById(R.id.tv_personalTax);

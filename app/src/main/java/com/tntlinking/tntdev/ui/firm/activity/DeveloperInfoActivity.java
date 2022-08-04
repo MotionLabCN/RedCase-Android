@@ -18,13 +18,8 @@ import android.widget.TextView;
 
 import com.blankj.utilcode.util.FileUtils;
 import com.blankj.utilcode.util.SPUtils;
-import com.blankj.utilcode.util.UriUtils;
-import com.bumptech.glide.load.MultiTransformation;
-import com.bumptech.glide.load.resource.bitmap.CenterCrop;
-import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.hjq.base.BaseDialog;
 import com.hjq.http.EasyHttp;
-import com.hjq.http.EasyLog;
 import com.hjq.http.listener.HttpCallback;
 import com.tntlinking.tntdev.R;
 import com.tntlinking.tntdev.aop.SingleClick;
@@ -37,31 +32,11 @@ import com.tntlinking.tntdev.http.api.UpdateAvatarApi;
 import com.tntlinking.tntdev.http.glide.GlideApp;
 import com.tntlinking.tntdev.http.model.HttpData;
 import com.tntlinking.tntdev.other.AppConfig;
-import com.tntlinking.tntdev.other.BitmapUtil;
-import com.tntlinking.tntdev.other.FileSizeUtil;
-import com.tntlinking.tntdev.other.TimeUtil;
-import com.tntlinking.tntdev.other.Utils;
-import com.tntlinking.tntdev.ui.activity.AddBaseInfoActivity;
-import com.tntlinking.tntdev.ui.activity.AddCareerActivity;
-import com.tntlinking.tntdev.ui.activity.AddEducationActivityNew;
-import com.tntlinking.tntdev.ui.activity.AddProjectActivityNew;
-import com.tntlinking.tntdev.ui.activity.AddWorkActivity;
-import com.tntlinking.tntdev.ui.activity.ImageSelectActivity;
-import com.tntlinking.tntdev.ui.activity.MDViewActivity;
-import com.tntlinking.tntdev.ui.activity.ResumeAnalysisActivity;
-import com.tntlinking.tntdev.ui.activity.UploadResumeActivity;
-import com.tntlinking.tntdev.ui.adapter.AddEducationAdapter;
-import com.tntlinking.tntdev.ui.adapter.AddProjectAdapter;
-import com.tntlinking.tntdev.ui.adapter.AddWorkAdapter;
+import com.tntlinking.tntdev.other.GlideUtils;
 import com.tntlinking.tntdev.ui.bean.DeveloperInfoBean;
-import com.tntlinking.tntdev.ui.bean.ExperienceBean;
 import com.tntlinking.tntdev.ui.firm.adapter.DevEducationAdapter;
 import com.tntlinking.tntdev.ui.firm.adapter.DevProjectAdapter;
 import com.tntlinking.tntdev.ui.firm.adapter.DevWorkAdapter;
-
-import java.io.File;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 import androidx.annotation.Nullable;
@@ -76,7 +51,10 @@ public final class DeveloperInfoActivity extends AppActivity {
     private AppCompatButton btn_to_interview;
     private ListView lv1, lv2, lv3;
     private ScrollView sv;
-
+    private ImageView iv_avatar;
+    private TextView tv_dev_name;
+    private TextView tv_dev_info;
+    private TextView tv_salary;
     public static final String INTENT_KEY_DEVELOPER_INFO = "DeveloperInfoBean";
 
 
@@ -93,15 +71,21 @@ public final class DeveloperInfoActivity extends AppActivity {
     @Override
     protected void initView() {
         lv1 = findViewById(R.id.lv_1);
+        lv1 = findViewById(R.id.lv_1);
         lv2 = findViewById(R.id.lv_2);
         lv3 = findViewById(R.id.lv_3);
         sv = findViewById(R.id.sv);
+        iv_avatar = findViewById(R.id.iv_avatar);
+        tv_dev_name = findViewById(R.id.tv_dev_name);
+        tv_dev_info = findViewById(R.id.tv_dev_info);
+        tv_salary = findViewById(R.id.tv_salary);
         ll_to_collect = findViewById(R.id.ll_to_collect);
         ll_to_sign = findViewById(R.id.ll_to_sign);
         btn_to_interview = findViewById(R.id.btn_to_interview);
 
         setOnClickListener(ll_to_collect, ll_to_sign, btn_to_interview);
 
+        GlideUtils.loadRoundCorners(this, R.drawable.update_app_top_bg, iv_avatar, (int) getResources().getDimension(R.dimen.dp_8));
     }
 
 

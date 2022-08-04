@@ -72,6 +72,6 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="修改职位" />
+            android:text="邀请职员" />
     </LinearLayout>
 </LinearLayout>

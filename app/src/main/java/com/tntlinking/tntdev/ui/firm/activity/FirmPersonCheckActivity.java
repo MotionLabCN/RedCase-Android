@@ -17,8 +17,8 @@ import com.tntlinking.tntdev.aop.SingleClick;
 import com.tntlinking.tntdev.app.AppActivity;
 import com.tntlinking.tntdev.http.api.developerBillListApi;
 import com.tntlinking.tntdev.http.model.HttpData;
-import com.tntlinking.tntdev.ui.firm.adapter.AuditionHistoryAdapter;
 import com.tntlinking.tntdev.ui.firm.adapter.FirmManageAdapter;
+import com.tntlinking.tntdev.ui.firm.adapter.FirmPersonCheckAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,9 +28,9 @@ import androidx.appcompat.widget.AppCompatButton;
 import androidx.recyclerview.widget.RecyclerView;
 
 /**
- * 企业管理页面
+ * 人员审核页面
  */
-public final class FirmManageActivity extends AppActivity implements OnRefreshLoadMoreListener,
+public final class FirmPersonCheckActivity extends AppActivity implements OnRefreshLoadMoreListener,
         BaseAdapter.OnItemClickListener, BaseAdapter.OnChildClickListener {
 
 
@@ -39,7 +39,7 @@ public final class FirmManageActivity extends AppActivity implements OnRefreshLo
     private WrapRecyclerView mRecyclerView;
     private AppCompatButton btn_commit;
 
-    private FirmManageAdapter mAdapter;
+    private FirmPersonCheckAdapter mAdapter;
     private List<developerBillListApi.Bean.ListBean> mList = new ArrayList<>();
     private int pageNum = 1;
 
@@ -57,20 +57,15 @@ public final class FirmManageActivity extends AppActivity implements OnRefreshLo
         mRecyclerView = findViewById(R.id.rv_status_list);
         btn_commit = findViewById(R.id.btn_commit);
 
-        mAdapter = new FirmManageAdapter(this);
+        mAdapter = new FirmPersonCheckAdapter(this);
         mAdapter.setOnItemClickListener(this);
         mAdapter.setOnChildClickListener(R.id.btn_hand_over, this);
         mAdapter.setOnChildClickListener(R.id.btn_remove, this);
         mRecyclerView.setAdapter(mAdapter);
 
         mRefreshLayout.setOnRefreshLoadMoreListener(this);
+        btn_commit.setVisibility(View.GONE);
 
-        btn_commit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(InterviewPersonActivity.class);
-            }
-        });
     }
 
     @Override
@@ -89,7 +84,7 @@ public final class FirmManageActivity extends AppActivity implements OnRefreshLo
     @Override
     public void onRightClick(View view) {
         super.onRightClick(view);
-        startActivity(FirmPersonCheckActivity.class);
+
     }
 
     private void getBillList(int pageNum) {
@@ -151,29 +146,9 @@ public final class FirmManageActivity extends AppActivity implements OnRefreshLo
     @Override
     public void onChildClick(RecyclerView recyclerView, View childView, int position) {
         if (childView.getId() == R.id.btn_hand_over) {
-            new BaseDialog.Builder<>(this)
-                    .setContentView(R.layout.check_order_status_dialog)
-                    .setAnimStyle(BaseDialog.ANIM_SCALE)
-                    .setText(R.id.tv_title, "移交管理员")
-                    .setText(R.id.tv_content, "是否移交管理员给小王")
-                    .setText(R.id.btn_dialog_custom_cancel, "否")
-                    .setText(R.id.btn_dialog_custom_ok, "是")
-                    .setOnClickListener(R.id.btn_dialog_custom_cancel, (BaseDialog.OnClickListener<Button>) (dialog, button) -> dialog.dismiss())
-                    .setOnClickListener(R.id.btn_dialog_custom_ok, (dialog, views) -> {
-                        dialog.dismiss();
-                    }).show();
+            toast("已拒绝");
         } else if (childView.getId() == R.id.btn_remove) {
-            new BaseDialog.Builder<>(this)
-                    .setContentView(R.layout.check_order_status_dialog)
-                    .setAnimStyle(BaseDialog.ANIM_SCALE)
-                    .setText(R.id.tv_title, "移除")
-                    .setText(R.id.tv_content, "是否移除小王")
-                    .setText(R.id.btn_dialog_custom_cancel, "否")
-                    .setText(R.id.btn_dialog_custom_ok, "是")
-                    .setOnClickListener(R.id.btn_dialog_custom_cancel, (BaseDialog.OnClickListener<Button>) (dialog, button) -> dialog.dismiss())
-                    .setOnClickListener(R.id.btn_dialog_custom_ok, (dialog, views) -> {
-                        dialog.dismiss();
-                    }).show();
+            toast("已同意");
         }
     }
 
@@ -193,4 +168,5 @@ public final class FirmManageActivity extends AppActivity implements OnRefreshLo
         getBillList(pageNum);
 
     }
+
 }

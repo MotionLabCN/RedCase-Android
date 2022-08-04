@@ -24,6 +24,7 @@ import com.tntlinking.tntdev.http.api.AppListApi;
 import com.tntlinking.tntdev.http.model.HttpData;
 import com.tntlinking.tntdev.other.AppConfig;
 import com.tntlinking.tntdev.ui.activity.HistoryDailyListActivity;
+import com.tntlinking.tntdev.ui.activity.StatusActivity;
 import com.tntlinking.tntdev.ui.firm.activity.DeveloperInfoActivity;
 import com.tntlinking.tntdev.ui.firm.activity.FirmInfoActivity;
 import com.tntlinking.tntdev.ui.firm.activity.FirmMainActivity;
@@ -48,6 +49,7 @@ public final class FirmPositionFragment extends TitleBarFragment<FirmMainActivit
     private LinearLayout ll_empty;
     private LinearLayout ll_daily;
     private SmartRefreshLayout mRefreshLayout;
+    private AppCompatButton btn_commit;
 
 
     private List<AppListApi.Bean> mServiceList = new ArrayList<>();
@@ -69,6 +71,7 @@ public final class FirmPositionFragment extends TitleBarFragment<FirmMainActivit
 
         ll_empty = findViewById(R.id.ll_empty);
         ll_daily = findViewById(R.id.ll_daily);
+        btn_commit = findViewById(R.id.btn_commit);
 
 
         mRefreshLayout = findViewById(R.id.rl_status_refresh);
@@ -88,7 +91,13 @@ public final class FirmPositionFragment extends TitleBarFragment<FirmMainActivit
                 }
             }
         });
+        btn_commit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+                startActivity(SendPositionActivity.class);
+            }
+        });
 
     }
 
@@ -115,7 +124,6 @@ public final class FirmPositionFragment extends TitleBarFragment<FirmMainActivit
         // 使用沉浸式状态栏
         return !super.isStatusBarEnabled();
     }
-
 
 
     @SuppressLint("NonConstantResourceId")
