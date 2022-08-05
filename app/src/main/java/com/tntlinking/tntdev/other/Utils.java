@@ -392,19 +392,34 @@ public class Utils {
     }
 
     /**
-     * 从给到的时间数据 切割只要年月份 2022-10-30 00:00:00 -> 00:00:00
-     *
+     * 从给到的时间数据 切割只要年月份 2022-10-30 00:00:00 -> 2022-10-30
+     * 得到前面的年月日
      * @param date
      * @return
      */
-    public static String getTimeFromDate(String date) {
+    public static String splitDateToDay(String date) {
+        if (!TextUtils.isEmpty(date) && date.contains(" ")) {
+            String time = date.split(" ")[0];
+            return time;
+        } else {
+            return date;
+        }
+
+    }
+
+    /**
+     * 从给到的时间数据 切割只要年月份 2022-10-30 00:00:00 -> 00:00:00
+     * 得到后面的时间
+     * @param date
+     * @return
+     */
+    public static String splitDateToTime(String date) {
         if (!TextUtils.isEmpty(date) && date.contains(" ")) {
             String time = date.split(" ")[1];
             return time;
         } else {
             return date;
         }
-
     }
 
 

@@ -112,7 +112,6 @@ public class RecommendationAdapter extends BaseAdapter {
         } else {
             holder.tv_name.setText(item.getCompanyRecruiterRealName());
         }
-        holder.tv_professional_title.setText(item.getCompanyRecruiterRealName() + "·" + item.getCompanyRecruiterPosition());
         if (TextUtils.isEmpty(item.getCompanyRecruiterPosition())) {
             holder.tv_professional_title.setText(item.getCompanyRecruiterRealName());
         } else {

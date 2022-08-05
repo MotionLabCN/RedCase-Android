@@ -114,7 +114,7 @@ public class RecommendFragment extends TitleBarFragment<MainActivity> {
     /**
      * 开发者_推荐
      */
-    private void getDeveloperRecommends() {
+    public  void getDeveloperRecommends() {
         EasyHttp.get(this)
                 .api(new GetDeveloperRecommendsApi())
                 .request(new HttpCallback<HttpData<List<GetDeveloperRecommendsApi.Bean>>>(this) {

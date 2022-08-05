@@ -67,10 +67,9 @@ public final class AuditionDetailActivity extends AppActivity {
                         tv_interview_way.setText(bean.getInterviewWayName());
                         String interviewStartDate = bean.getInterviewStartDate();
                         String interviewEndDate = bean.getInterviewEndDate();
-                        String year = Utils.getYearFromDate(interviewStartDate);
-                        String startTime = Utils.getHoursAndMin(interviewStartDate);
-                        String endTime = Utils.getHoursAndMin(interviewEndDate);
-                        tv_interview_time.setText(year + " " + startTime + "-" + endTime);
+                        String endTime = Utils.splitDateToTime(interviewEndDate);
+                        tv_interview_time.setText(interviewStartDate + "-" + endTime);
+
                         tv_interview_id.setText(bean.getMeetingCode());
                         tv_interview_url.setText(bean.getMeetingUrl());
 

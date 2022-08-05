@@ -114,6 +114,8 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity> implemen
 
     private int mStatus = SPUtils.getInstance().getInt(AppConfig.SERVICE_STATUS, 1); // 接单状态 1 默认可接单 2 不可接单
 
+    private RecommendFragment recommendFragment;
+    private ActiveTaskFragment activeTaskFragment;
 
     public static HomeFragment1 newInstance() {
         return new HomeFragment1();
@@ -260,12 +262,12 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity> implemen
             }
         });
         //职位推荐 和 活动任务
-        RecommendFragment first = new RecommendFragment();
-        ActiveTaskFragment second = new ActiveTaskFragment();
-        first.setListener(this);
-        second.setListener(this);
-        fragmentList.add(first);
-        fragmentList.add(second);
+        recommendFragment = new RecommendFragment();
+        activeTaskFragment = new ActiveTaskFragment();
+        recommendFragment.setListener(this);
+        activeTaskFragment.setListener(this);
+        fragmentList.add(recommendFragment);
+        fragmentList.add(activeTaskFragment);
         TabLayout tabs = findViewById(R.id.tab_position);
         viewPager2 = findViewById(R.id.vp_position);
         tabs.setSelectedTabIndicatorHeight(0);
@@ -683,6 +685,8 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity> implemen
     @Override
     public void onRefresh(@NonNull RefreshLayout refreshLayout) {
         initData();
+        recommendFragment.getDeveloperRecommends();
+
     }
 
 
