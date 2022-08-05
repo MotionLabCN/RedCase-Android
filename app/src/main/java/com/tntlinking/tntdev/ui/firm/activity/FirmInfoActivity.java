@@ -8,8 +8,7 @@ import com.hjq.base.BaseDialog;
 import com.tntlinking.tntdev.R;
 import com.tntlinking.tntdev.aop.SingleClick;
 import com.tntlinking.tntdev.app.AppActivity;
-import com.tntlinking.tntdev.ui.dialog.BottomDialog;
-import com.tntlinking.tntdev.ui.dialog.InputDialog;
+
 
 import androidx.appcompat.widget.AppCompatButton;
 
@@ -56,12 +55,15 @@ public final class FirmInfoActivity extends AppActivity {
                 startActivity(SendPositionActivity.class);
                 break;
             case R.id.btn_contact:
-                new BottomDialog.Builder(this).setListener(new BottomDialog.OnListener() {
-                    @Override
-                    public void onSelected(BaseDialog dialog) {
 
-                    }
-                }).show();
+                new BaseDialog.Builder<>(this)
+                        .setContentView(R.layout.bottom_dialog)
+                        .setAnimStyle(BaseDialog.ANIM_BOTTOM)
+                        //.setText(id, "我是预设置的文本")
+                        .setOnClickListener(R.id.iv_close, (dialog, views) -> dialog.dismiss())
+                        .setOnClickListener(R.id.btn_commit, (dialog, views) -> {
+
+                        }).show();
                 break;
         }
 

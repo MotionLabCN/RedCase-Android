@@ -40,6 +40,7 @@ public final class InterviewPersonActivity extends AppActivity {
         et_position = findViewById(R.id.et_position);
         et_email = findViewById(R.id.et_email);
         et_address = findViewById(R.id.et_address);
+        btn_commit = findViewById(R.id.btn_commit);
 
         setOnClickListener(btn_commit);
 
@@ -60,12 +61,9 @@ public final class InterviewPersonActivity extends AppActivity {
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.info_specialisations:
-
-                break;
 
             case R.id.btn_commit:
-
+                startActivity(InterviewPersonActivity.class);
                 break;
 
         }

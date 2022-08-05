@@ -103,8 +103,8 @@ public final class FirmMineFragment extends TitleBarFragment<FirmMainActivity> i
         mRefreshLayout.setOnRefreshLoadMoreListener(this);
         mRefreshLayout.setEnableLoadMore(false);
 
-        setOnClickListener(mPersonDataSetting,person_data_service, person_data_private, person_data_deal, person_data_dev,
-                ll_mine_audition, ll_mine_contract, ll_mine_account, ll_mine_firm);
+        setOnClickListener(mPersonDataSetting, person_data_service, person_data_private, person_data_deal, person_data_dev,
+                ll_mine_audition, ll_mine_contract, ll_mine_account, ll_mine_firm, person_data_about);
 
 
         scroll.setOnScrollChangeListener((v, scrollX, scrollY, oldScrollX, oldScrollY) -> {
@@ -143,6 +143,9 @@ public final class FirmMineFragment extends TitleBarFragment<FirmMainActivity> i
                 startActivity(AccountManageActivity.class);
                 break;
             case R.id.ll_mine_firm://企业管理
+                startActivity(FirmManageActivity.class);
+                break;
+            case R.id.person_data_setting://账户设置
                 startActivity(FirmManageActivity.class);
                 break;
             case R.id.person_data_private:// 隐私政策

@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.blankj.utilcode.util.SPUtils;
 import com.hjq.base.BaseDialog;
@@ -26,6 +27,7 @@ import com.tntlinking.tntdev.http.api.UpdateDailyApi;
 import com.tntlinking.tntdev.http.model.HttpData;
 import com.tntlinking.tntdev.other.AppConfig;
 import com.tntlinking.tntdev.other.HomeChangeListener;
+import com.tntlinking.tntdev.other.TimeUtil;
 import com.tntlinking.tntdev.ui.activity.HistoryDailyListActivity;
 import com.tntlinking.tntdev.ui.activity.MainActivity;
 import com.tntlinking.tntdev.ui.adapter.DailyWriteAdapter;
@@ -47,6 +49,7 @@ public final class TreatyService1Fragment extends TitleBarFragment<MainActivity>
     private LinearLayout ll_empty;
     private LinearLayout ll_daily;
     private SmartRefreshLayout mRefreshLayout;
+    private TextView tv_time;
     private LinearLayout ll_history;
     private LinearLayout ll_done, ll_running, ll_future, ll_help;
     private MyListView my_lv_1, my_lv_2, my_lv_3, my_lv_4;
@@ -79,6 +82,7 @@ public final class TreatyService1Fragment extends TitleBarFragment<MainActivity>
         ll_empty = findViewById(R.id.ll_empty);
         ll_daily = findViewById(R.id.ll_daily);
         ll_history = findViewById(R.id.ll_history);
+        tv_time = findViewById(R.id.tv_time);
         ll_done = findViewById(R.id.ll_done);
         ll_running = findViewById(R.id.ll_running);
         ll_future = findViewById(R.id.ll_future);
@@ -103,6 +107,7 @@ public final class TreatyService1Fragment extends TitleBarFragment<MainActivity>
         my_lv_4.setAdapter(mAdapter4);
 
         lv_1.setAdapter(mServiceAdapter);
+        tv_time.setText("写日报 " + TimeUtil.getTimeString("yyyy-MM-dd"));
 
         lv_1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

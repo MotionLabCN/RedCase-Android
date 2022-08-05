@@ -23,6 +23,7 @@ import com.tntlinking.tntdev.app.TitleBarFragment;
 import com.tntlinking.tntdev.http.api.AppListApi;
 import com.tntlinking.tntdev.http.model.HttpData;
 import com.tntlinking.tntdev.other.AppConfig;
+import com.tntlinking.tntdev.other.OnItemClickListener;
 import com.tntlinking.tntdev.ui.activity.HistoryDailyListActivity;
 import com.tntlinking.tntdev.ui.activity.StatusActivity;
 import com.tntlinking.tntdev.ui.firm.activity.DeveloperInfoActivity;
@@ -89,6 +90,13 @@ public final class FirmPositionFragment extends TitleBarFragment<FirmMainActivit
                 } else {
                     startActivity(RecommendPositionActivity.class);
                 }
+            }
+        });
+        mAdapter.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                String item = (String) mAdapter.getItem(position);
+                toast(item);
             }
         });
         btn_commit.setOnClickListener(new View.OnClickListener() {

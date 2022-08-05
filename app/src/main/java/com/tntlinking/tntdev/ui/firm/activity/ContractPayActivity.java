@@ -4,9 +4,11 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ScrollView;
 
 import com.blankj.utilcode.util.SPUtils;
+import com.hjq.base.BaseDialog;
 import com.hjq.http.EasyHttp;
 import com.hjq.http.listener.HttpCallback;
 import com.tntlinking.tntdev.R;
@@ -60,10 +62,18 @@ public final class ContractPayActivity extends AppActivity {
     public void onClick(View view) {
         Intent intent = new Intent();
         switch (view.getId()) {
-            case R.id.ll_add_photo:
-                break;
-            case R.id.ll_add_base_info:
-
+            case R.id.btn_commit:
+                new BaseDialog.Builder<>(getActivity())
+                        .setContentView(R.layout.check_order_status_dialog)
+                        .setAnimStyle(BaseDialog.ANIM_SCALE)
+                        .setText(R.id.tv_title, "订单支付")
+                        .setText(R.id.tv_content, "您有订单还未支付，是否退出！")
+                        .setText(R.id.btn_dialog_custom_cancel, "取消支付")
+                        .setText(R.id.btn_dialog_custom_ok, "继续支付")
+                        .setOnClickListener(R.id.btn_dialog_custom_cancel, (BaseDialog.OnClickListener<Button>) (dialog, button) -> dialog.dismiss())
+                        .setOnClickListener(R.id.btn_dialog_custom_ok, (dialog, views) -> {
+                            toast("继续支付");
+                        }).show();
                 break;
             case R.id.ll_import_resume:
                 startActivity(UploadResumeActivity.class);
@@ -97,15 +107,5 @@ public final class ContractPayActivity extends AppActivity {
                 });
     }
 
-
-
-
-    /**
-     * 简历解析页面跳转过来的，直接填充相关数据
-     */
-    @SuppressLint("SetTextI18n")
-    public void setDeveloperInfo(DeveloperInfoBean data) {
-
-    }
 
 }

@@ -1,11 +1,10 @@
-package com.tntlinking.tntdev.ui.activity;
+package com.tntlinking.tntdev.ui.firm.activity;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -22,13 +21,14 @@ import com.tntlinking.tntdev.http.api.CancellationApi;
 import com.tntlinking.tntdev.http.api.GetCancellationApi;
 import com.tntlinking.tntdev.http.model.HttpData;
 import com.tntlinking.tntdev.manager.ActivityManager;
+import com.tntlinking.tntdev.ui.activity.SignStatusActivity;
 import com.tntlinking.tntdev.ui.adapter.CancelServiceAdapter;
 
 import java.util.List;
 
 import androidx.appcompat.widget.AppCompatButton;
 
-public final class CancelServiceActivity extends AppActivity {
+public final class DeleteFirmActivity extends AppActivity {
 
     private ListView list_view;
     private TextView tv_tips;
@@ -38,7 +38,7 @@ public final class CancelServiceActivity extends AppActivity {
 
     @Override
     protected int getLayoutId() {
-        return R.layout.cancel_service_activity;
+        return R.layout.delete_firm_activity;
     }
 
     @Override
@@ -66,7 +66,7 @@ public final class CancelServiceActivity extends AppActivity {
     @Override
     public void onClick(View view) {
         if (view == mCommitView) {
-            new BaseDialog.Builder<>(CancelServiceActivity.this)
+            new BaseDialog.Builder<>(DeleteFirmActivity.this)
                     .setContentView(R.layout.write_daily_delete_dialog)
                     .setAnimStyle(BaseDialog.ANIM_SCALE)
                     .setText(R.id.tv_title, "确定注销账户吗？")
@@ -93,7 +93,7 @@ public final class CancelServiceActivity extends AppActivity {
                             list_view.setVisibility(View.VISIBLE);
                             ll_task_empty.setVisibility(View.GONE);
 
-                            mAdapter = new CancelServiceAdapter(CancelServiceActivity.this, data.getData());
+                            mAdapter = new CancelServiceAdapter(DeleteFirmActivity.this, data.getData());
                             list_view.setAdapter(mAdapter);
 
                             for (GetCancellationApi.ListBean index : data.getData()) {
@@ -125,7 +125,7 @@ public final class CancelServiceActivity extends AppActivity {
 
                     @Override
                     public void onSucceed(HttpData<Void> data) {
-                        Intent intent = new Intent(CancelServiceActivity.this, SignStatusActivity.class);
+                        Intent intent = new Intent(DeleteFirmActivity.this, SignStatusActivity.class);
                         intent.putExtra("status", "success");
                         startActivity(intent);
                         dialog.dismiss();
@@ -137,7 +137,7 @@ public final class CancelServiceActivity extends AppActivity {
                     @Override
                     public void onFail(Exception e) {
                         super.onFail(e);
-                        Intent intent = new Intent(CancelServiceActivity.this, SignStatusActivity.class);
+                        Intent intent = new Intent(DeleteFirmActivity.this, SignStatusActivity.class);
                         intent.putExtra("status", "fail");
                         startActivity(intent);
                         dialog.dismiss();

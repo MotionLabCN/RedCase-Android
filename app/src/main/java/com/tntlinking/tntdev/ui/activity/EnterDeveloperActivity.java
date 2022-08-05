@@ -61,7 +61,7 @@ import androidx.appcompat.widget.AppCompatButton;
  * 用户信息填写页面3
  */
 public final class EnterDeveloperActivity extends AppActivity {
-    private AppCompatButton mCommit;
+    private AppCompatButton btn_commit;
     private ListView lv1, lv2, lv3;
     private ScrollView sv;
     private LinearLayout ll_add_base_info, ll_base_info, ll_add_career_info, ll_career_info;
@@ -138,8 +138,8 @@ public final class EnterDeveloperActivity extends AppActivity {
         tv_add_worK_tips = findViewById(R.id.tv_add_worK_tips);
         tv_add_project_tips = findViewById(R.id.tv_add_project_tips);
 
-        mCommit = findViewById(R.id.btn_commit);
-        setOnClickListener(mCommit, ll_add_base_info, ll_base_info, ll_add_career_info, ll_career_info,
+        btn_commit = findViewById(R.id.btn_commit);
+        setOnClickListener(btn_commit, ll_add_base_info, ll_base_info, ll_add_career_info, ll_career_info,
                 ll_add_education, ll_add_work, ll_add_project, ll_add_photo, fl_add_photo, tv_photo_skills, ll_import_resume);
 
         lv1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -794,9 +794,9 @@ public final class EnterDeveloperActivity extends AppActivity {
             ll_progress.setVisibility(View.GONE);
 
             if (isResume) {
-                mCommit.setVisibility(View.VISIBLE);
+                btn_commit.setVisibility(View.VISIBLE);
             } else {
-                mCommit.setVisibility(View.GONE);
+                btn_commit.setVisibility(View.GONE);
             }
         }
 

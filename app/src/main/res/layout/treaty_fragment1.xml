@@ -100,7 +100,7 @@
                             android:layout_weight="1"
                             android:drawablePadding="@dimen/dp_4"
                             android:gravity="center|left"
-                            android:text="写日报 2022.07.13"
+                            android:text="写日报 20xx.xx.xx"
                             android:textColor="@color/black"
                             android:textSize="@dimen/sp_15" />
 

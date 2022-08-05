@@ -74,7 +74,7 @@ public final class PersonSettingActivity extends AppActivity {
         if (view == mSettingPhone) {
             startActivity(ChangePhoneActivity.class);
         } else if (view == mSettingCancelService) {
-            startActivity(CancelServiceActivity.class);
+            startActivity(DeleteDeveloperActivity.class);
 
         } else if (view == mOutLogin) {
             new BaseDialog.Builder<>(PersonSettingActivity.this)

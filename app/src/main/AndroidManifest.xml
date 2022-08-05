@@ -581,7 +581,7 @@
             android:screenOrientation="portrait" />
         <!-- 注销确认页面-->
         <activity
-            android:name="com.tntlinking.tntdev.ui.activity.CancelServiceActivity"
+            android:name="com.tntlinking.tntdev.ui.activity.DeleteDeveloperActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
         <!-- 首页 -->
@@ -700,6 +700,11 @@
         <!-- 企业认证页面 -->
         <activity
             android:name="com.tntlinking.tntdev.ui.firm.activity.FirmCertificationActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <!-- 注销企业页面 -->
+        <activity
+            android:name="com.tntlinking.tntdev.ui.firm.activity.DeleteFirmActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
 

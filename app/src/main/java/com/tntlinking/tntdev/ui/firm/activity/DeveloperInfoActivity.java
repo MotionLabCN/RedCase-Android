@@ -34,9 +34,12 @@ import com.tntlinking.tntdev.http.model.HttpData;
 import com.tntlinking.tntdev.other.AppConfig;
 import com.tntlinking.tntdev.other.GlideUtils;
 import com.tntlinking.tntdev.ui.bean.DeveloperInfoBean;
+import com.tntlinking.tntdev.ui.dialog.BottomListDialog;
 import com.tntlinking.tntdev.ui.firm.adapter.DevEducationAdapter;
 import com.tntlinking.tntdev.ui.firm.adapter.DevProjectAdapter;
 import com.tntlinking.tntdev.ui.firm.adapter.DevWorkAdapter;
+
+import java.util.ArrayList;
 import java.util.List;
 
 import androidx.annotation.Nullable;
@@ -114,7 +117,23 @@ public final class DeveloperInfoActivity extends AppActivity {
                 break;
             case R.id.ll_to_sign:
                 toast("去签约");
-                startActivity(ContractDetailActivity.class);
+//                startActivity(ContractDetailActivity.class);
+
+//                new BaseDialog.Builder<>(getActivity())
+//                        .setContentView(R.layout.bottom_common_dialog)
+//                        .setAnimStyle(BaseDialog.ANIM_BOTTOM)
+//                        //.setText(id, "我是预设置的文本")
+//                        .setOnClickListener(R.id.iv_close, (dialog, views) -> dialog.dismiss())
+//                        .setOnClickListener(R.id.btn_commit, (dialog, views) -> {
+//
+//                        }).show();
+
+                new BottomListDialog.Builder(this).setData(analogData()).setListener(new BottomListDialog.OnListener() {
+                    @Override
+                    public void onSelected(BaseDialog dialog) {
+
+                    }
+                }).show();
                 break;
             case R.id.btn_to_interview:
 
@@ -127,6 +146,17 @@ public final class DeveloperInfoActivity extends AppActivity {
                 break;
         }
 
+    }
+
+    /**
+     * 模拟数据
+     */
+    private List<String> analogData() {
+        List<String> data = new ArrayList<>();
+        for (int i = 0; i < 20; i++) {
+            data.add("我是第" + i + "条目");
+        }
+        return data;
     }
 
 

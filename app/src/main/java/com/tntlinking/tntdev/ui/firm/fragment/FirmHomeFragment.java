@@ -6,6 +6,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 
+import com.gyf.immersionbar.ImmersionBar;
 import com.hjq.bar.TitleBar;
 import com.hjq.base.FragmentPagerAdapter;
 import com.hjq.http.EasyLog;
@@ -27,10 +28,10 @@ public final class FirmHomeFragment extends TitleBarFragment<FirmMainActivity> i
     private RecyclerView mTabView;
     private TabAdapter mTabAdapter;
     private FragmentPagerAdapter<AppFragment<?>> mPagerAdapter;
-    private TitleBar title_bar;
     private LinearLayout ll_empty;
     private LinearLayout ll_tab;
     private TextView tv_refresh;
+    private LinearLayout ll_title;
 
     public static FirmHomeFragment newInstance() {
         return new FirmHomeFragment();
@@ -45,12 +46,13 @@ public final class FirmHomeFragment extends TitleBarFragment<FirmMainActivity> i
     @Override
     protected void initView() {
 
-        title_bar = findViewById(R.id.title_bar);
         ll_empty = findViewById(R.id.ll_empty);
         ll_tab = findViewById(R.id.ll_tab);
         tv_refresh = findViewById(R.id.tv_refresh);
+        ll_title = findViewById(R.id.ll_title);
 
         mTabView = findViewById(R.id.rv_home_tab);
+        ImmersionBar.setTitleBar(this, ll_title);
         mViewPager = findViewById(R.id.vp_home_pager);
         mPagerAdapter = new FragmentPagerAdapter<>(this);
         mPagerAdapter.addFragment(PositionFragment.newInstance("1"));
@@ -64,12 +66,6 @@ public final class FirmHomeFragment extends TitleBarFragment<FirmMainActivity> i
         mTabAdapter = new TabAdapter(getAttachActivity(), TabAdapter.TAB_MODE_SERVICE, false);
         mTabView.setAdapter(mTabAdapter);
 
-        title_bar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
     }
 
 

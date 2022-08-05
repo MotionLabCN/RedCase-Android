@@ -2,7 +2,6 @@ package com.tntlinking.tntdev.ui.firm.adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,25 +10,19 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.tntlinking.tntdev.R;
-import com.tntlinking.tntdev.other.OnItemClickListener;
-
 
 import java.util.List;
 
+import androidx.appcompat.widget.AppCompatButton;
 
 
-public final class FirmPositionAdapter extends BaseAdapter {
+public final class BottomPositionAdapter extends BaseAdapter {
 
     private List<String> mList;
     private LayoutInflater layoutInflater;
     private Context mContext;
-    private OnItemClickListener mOnItemClickListener;
 
-    public void setOnItemClickListener(OnItemClickListener mOnItemSelectListener) {
-        this.mOnItemClickListener = mOnItemSelectListener;
-    }
-
-    public FirmPositionAdapter(Context context) {
+    public BottomPositionAdapter(Context context) {
         this.mContext = context;
         layoutInflater = LayoutInflater.from(context);
     }
@@ -71,48 +64,28 @@ public final class FirmPositionAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder holder = null;
         if (convertView == null) {
-            convertView = layoutInflater.inflate(R.layout.item_firm_position, null);
+            convertView = layoutInflater.inflate(R.layout.item_bottom_position, null);
             holder = new ViewHolder();
-            holder.tv_position = convertView.findViewById(R.id.tv_position);
+            holder.tv_dev_position = convertView.findViewById(R.id.tv_dev_position);
+            holder.tv_dev_info = convertView.findViewById(R.id.tv_dev_info);
             holder.tv_salary = convertView.findViewById(R.id.tv_salary);
-            holder.view_dot = convertView.findViewById(R.id.view_dot);
-            holder.tv_status = convertView.findViewById(R.id.tv_status);
-            holder.ll_status = convertView.findViewById(R.id.ll_status);
-            holder.tv_company_name = convertView.findViewById(R.id.tv_company_name);
-            holder.tv_position_desc = convertView.findViewById(R.id.tv_position_desc);
-            holder.tv_reason = convertView.findViewById(R.id.tv_reason);
 
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
         String item = mList.get(position);
-        holder.tv_company_name.setText(item);
-        holder.tv_reason.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mOnItemClickListener != null) {
-                    mOnItemClickListener.onItemClick(position);
-                }
-            }
-        });
+        holder.tv_dev_position.setText(item);
+
         return convertView;
     }
 
     class ViewHolder {
-
-        TextView tv_position;
-        View view_dot;
-        TextView tv_status;
-        LinearLayout ll_status;
-        TextView tv_company_name;
+        TextView tv_dev_position;
+        TextView tv_dev_info;
         TextView tv_salary;
-        TextView tv_position_desc;
-        TextView tv_reason;
-
 
     }
-
 
 }
 
