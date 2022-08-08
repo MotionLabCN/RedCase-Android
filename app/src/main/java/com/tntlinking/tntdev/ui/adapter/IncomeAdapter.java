@@ -1,5 +1,6 @@
 package com.tntlinking.tntdev.ui.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -43,19 +44,26 @@ public final class IncomeAdapter extends AppAdapter<developerBillListApi.Bean.Li
             tv_actualTime = findViewById(R.id.tv_actualTime);
         }
 
+        @SuppressLint("SetTextI18n")
         @Override
         public void onBindView(int position) {
             developerBillListApi.Bean.ListBean item = getItem(position);
             tv_create_time.setText(Utils.getYearFromDate(item.getCreateDate()));
-            tv_serviceMoney.setText("¥"+item.getServiceMoney());
+//            tv_serviceMoney.setText("¥" + item.getServiceMoney());
+            tv_serviceMoney.setText("+" + Utils.formatMoney(item.getServiceMoney()));
             tv_actualTime.setText(item.getGrantDate());
-            if (item.getDeductMoney()>0){
-                tv_deductMoney.setText("+¥"+item.getDeductMoney());
-            }else {
-                tv_deductMoney.setText("-¥"+Math.abs(item.getDeductMoney()));
+            if (item.getDeductMoney() > 0) {
+//                tv_deductMoney.setText("+¥"+item.getDeductMoney());
+                tv_deductMoney.setText("+¥" + Utils.formatMoney(item.getDeductMoney() + ""));
+            } else {
+//                tv_deductMoney.setText("-¥"+Math.abs(item.getDeductMoney()));
+                tv_deductMoney.setText("-¥" + Utils.formatMoney(item.getDeductMoney() + ""));
             }
-            tv_personalTax.setText("¥"+item.getPersonalTax());
-            tv_actualMoney.setText("¥"+item.getActualMoney());
+//            tv_personalTax.setText("¥" + item.getPersonalTax());
+//            tv_actualMoney.setText("¥" + item.getActualMoney());
+
+            tv_personalTax.setText("¥" + Utils.formatMoney(item.getPersonalTax()));
+            tv_actualMoney.setText("¥" + Utils.formatMoney(item.getActualMoney()));
         }
     }
 }

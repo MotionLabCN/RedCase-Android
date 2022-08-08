@@ -251,7 +251,8 @@ public final class MineFragment1 extends TitleBarFragment<MainActivity> implemen
                         }
 
                         tv_sign_num.setText(data.getData().getSignContractNum() + "次");
-                        tv_profit_total.setText("¥" + data.getData().getProfitTotal());
+                        tv_profit_total.setText("¥" + Utils.formatMoney(data.getData().getProfitTotal()));
+
                         mStatus = data.getData().getStatus();
                         mContractStatus = data.getData().getContractStatus();
                         if (mContractStatus == 0) {

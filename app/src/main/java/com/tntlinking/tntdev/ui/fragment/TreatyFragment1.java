@@ -77,8 +77,8 @@ public final class TreatyFragment1 extends TitleBarFragment<MainActivity> implem
         mTabAdapter.addItem("服务中");
         mTabAdapter.addItem("待服务");
         mTabAdapter.setOnTabListener(this);
-        getAppList1(2);
-        getAppList2(3);
+        getAppList2(2);
+        getAppList3(3);
 
     }
 
@@ -135,42 +135,41 @@ public final class TreatyFragment1 extends TitleBarFragment<MainActivity> implem
     private int noServiceSize = 0;
 
     /**
-     *
      * @param status 2 待服务 3 服务中
      */
-    private void getAppList1(int status) {
-        EasyHttp.get(this)
-                .api(new AppListApi().setOrderStatus(status))
-                .request(new HttpCallback<HttpData<List<AppListApi.Bean>>>(this) {
-                    @Override
-                    public void onSucceed(HttpData<List<AppListApi.Bean>> data) {
-                        if (data.getData().size() > 0) {
-                            serviceSize = data.getData().size();
-                            getAppList2(3);
-                        }
-
-                    }
-                });
-    }
-
     private void getAppList2(int status) {
         EasyHttp.get(this)
                 .api(new AppListApi().setOrderStatus(status))
                 .request(new HttpCallback<HttpData<List<AppListApi.Bean>>>(this) {
                     @Override
                     public void onSucceed(HttpData<List<AppListApi.Bean>> data) {
-                        if (data.getData().size() > 0) {
-                            noServiceSize = data.getData().size();
-                            if (serviceSize + noServiceSize == 0) {
-                                ll_tab.setVisibility(View.GONE);
-                                ll_empty.setVisibility(View.VISIBLE);
-                            } else {
-                                ll_tab.setVisibility(View.VISIBLE);
-                                ll_empty.setVisibility(View.GONE);
-
-                            }
+                        if (data.getData().size() == 0) {
+                            getAppList3(3);
                         }
 
+                    }
+
+                    @Override
+                    public void onFail(Exception e) {
+                        super.onFail(e);
+                        getAppList3(3);
+                    }
+                });
+    }
+
+    private void getAppList3(int status) {
+        EasyHttp.get(this)
+                .api(new AppListApi().setOrderStatus(status))
+                .request(new HttpCallback<HttpData<List<AppListApi.Bean>>>(this) {
+                    @Override
+                    public void onSucceed(HttpData<List<AppListApi.Bean>> data) {
+                        if (data.getData().size() == 0) {
+                            ll_tab.setVisibility(View.GONE);
+                            ll_empty.setVisibility(View.VISIBLE);
+                        } else {
+                            ll_tab.setVisibility(View.VISIBLE);
+                            ll_empty.setVisibility(View.GONE);
+                        }
                     }
 
                     @Override

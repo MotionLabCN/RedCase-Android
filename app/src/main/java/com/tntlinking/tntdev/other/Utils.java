@@ -394,6 +394,7 @@ public class Utils {
     /**
      * 从给到的时间数据 切割只要年月份 2022-10-30 00:00:00 -> 2022-10-30
      * 得到前面的年月日
+     *
      * @param date
      * @return
      */
@@ -410,6 +411,7 @@ public class Utils {
     /**
      * 从给到的时间数据 切割只要年月份 2022-10-30 00:00:00 -> 00:00:00
      * 得到后面的时间
+     *
      * @param date
      * @return
      */
@@ -528,6 +530,18 @@ public class Utils {
         return format;
     }
 
+    public static String formatMoney(String str) {
+        if (!TextUtils.isEmpty(str)) {
+            if (Double.valueOf(str) != 0) {
+                Double aDouble = Double.valueOf(str);
+                DecimalFormat df = new DecimalFormat("###,####,###.00");
+                String format = df.format(aDouble);
+                return format;
+            }
+
+        }
+        return "0.00";
+    }
 
     /**
      * 获取单个文件的MD5值！
