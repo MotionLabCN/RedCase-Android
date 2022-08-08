@@ -77,7 +77,12 @@ public final class InterviewDetailAdapter extends BaseAdapter {
             holder.tv_interview_salary.setText(bean.getWorkDaysModeName() + "·" +
                     Utils.formatMoney(startPay) + "-" + Utils.formatMoney(endPay) + "k/月");
             holder.tv_interview_company.setText(bean.getCompanyName());
-            holder.tv_interview_time.setText(bean.getInterviewStartDate());
+//            holder.tv_interview_time.setText(bean.getInterviewStartDate());
+
+            String year = Utils.getYearFromDate(bean.getInterviewStartDate());
+            String start = Utils.getHoursAndMin(bean.getInterviewStartDate());
+            String end = Utils.getHoursAndMin(bean.getInterviewEndDate());
+            holder.tv_interview_time.setText(year + " " + start + "-" + end);
 
         }
         return convertView;

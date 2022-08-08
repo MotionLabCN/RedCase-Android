@@ -586,7 +586,10 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity> implemen
                             tv_interview_salary.setText(bean.getWorkDaysModeName() + "·" +
                                     Utils.formatMoney(startPay) + "-" + Utils.formatMoney(endPay) + "k/月");
                             tv_interview_company.setText(bean.getCompanyName());
-                            tv_interview_time.setText(bean.getInterviewStartDate());
+                            String year = Utils.getYearFromDate(bean.getInterviewStartDate());
+                            String start = Utils.getHoursAndMin(bean.getInterviewStartDate());
+                            String end = Utils.getHoursAndMin(bean.getInterviewEndDate());
+                            tv_interview_time.setText(year + " " + start + "-" + end);
                         } else {
                             layout_interview.setVisibility(View.GONE);
                             ll_top_tips.setVisibility(View.VISIBLE);

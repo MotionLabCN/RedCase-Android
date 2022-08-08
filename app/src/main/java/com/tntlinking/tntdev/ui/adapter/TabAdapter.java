@@ -2,6 +2,7 @@ package com.tntlinking.tntdev.ui.adapter;
 
 import android.animation.ValueAnimator;
 import android.content.Context;
+import android.graphics.Typeface;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,8 +19,7 @@ import com.tntlinking.tntdev.R;
 import com.tntlinking.tntdev.app.AppAdapter;
 
 /**
- *
- *    desc   : Tab 适配器
+ * desc   : Tab 适配器
  */
 public final class TabAdapter extends AppAdapter<String> implements BaseAdapter.OnItemClickListener {
 
@@ -27,17 +27,25 @@ public final class TabAdapter extends AppAdapter<String> implements BaseAdapter.
     public static final int TAB_MODE_SLIDING = 2;
     public static final int TAB_MODE_SERVICE = 3;
 
-    /** 当前选中条目位置 */
+    /**
+     * 当前选中条目位置
+     */
     private int mSelectedPosition = 0;
 
-    /** 导航栏监听对象 */
+    /**
+     * 导航栏监听对象
+     */
     @Nullable
     private OnTabListener mListener;
 
-    /** Tab 样式 */
+    /**
+     * Tab 样式
+     */
     private final int mTabMode;
 
-    /** Tab 宽度是否固定 */
+    /**
+     * Tab 宽度是否固定
+     */
     private final boolean mFixed;
 
     public TabAdapter(Context context) {
@@ -241,6 +249,14 @@ public final class TabAdapter extends AppAdapter<String> implements BaseAdapter.
         @Override
         public void onBindView(int position) {
             mTitleView.setText(getItem(position));
+            if (mSelectedPosition == position) {
+                //设置为加粗
+                mTitleView.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
+            } else {
+                mTitleView.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL));
+            }
+//
+//            mTitleView.setTypeface(Typeface.defaultFromStyle(mSelectedPosition == position ? Typeface.BOLD : Typeface.NORMAL));
             mTitleView.setSelected(mSelectedPosition == position);
             mLineView.setVisibility(mSelectedPosition == position ? View.VISIBLE : View.INVISIBLE);
         }
@@ -257,10 +273,12 @@ public final class TabAdapter extends AppAdapter<String> implements BaseAdapter.
         }
 
         @Override
-        public void onItemRangeChanged(int positionStart, int itemCount, Object payload) {}
+        public void onItemRangeChanged(int positionStart, int itemCount, Object payload) {
+        }
 
         @Override
-        public void onItemRangeChanged(int positionStart, int itemCount) {}
+        public void onItemRangeChanged(int positionStart, int itemCount) {
+        }
 
         @Override
         public void onItemRangeInserted(int positionStart, int itemCount) {
@@ -276,7 +294,8 @@ public final class TabAdapter extends AppAdapter<String> implements BaseAdapter.
         }
 
         @Override
-        public void onItemRangeMoved(int fromPosition, int toPosition, int itemCount) {}
+        public void onItemRangeMoved(int fromPosition, int toPosition, int itemCount) {
+        }
 
         private void refreshLayoutManager() {
             if (!mFixed) {

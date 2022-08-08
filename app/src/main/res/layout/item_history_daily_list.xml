@@ -37,10 +37,11 @@
         android:textColor="@color/black"
         android:textSize="@dimen/sp_15" />
 
-    <ListView
+    <com.tntlinking.tntdev.widget.MyListView
         android:id="@+id/lv_1"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:divider="@null" />
 
     <TextView
         android:layout_width="match_parent"
@@ -54,7 +55,7 @@
         android:textColor="@color/black"
         android:textSize="@dimen/sp_15" />
 
-    <ListView
+    <com.tntlinking.tntdev.widget.MyListView
         android:id="@+id/lv_2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -72,7 +73,7 @@
         android:textColor="@color/black"
         android:textSize="@dimen/sp_15" />
 
-    <ListView
+    <com.tntlinking.tntdev.widget.MyListView
         android:id="@+id/lv_3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -91,15 +92,15 @@
         android:textColor="@color/black"
         android:textSize="@dimen/sp_15" />
 
-    <ListView
+    <com.tntlinking.tntdev.widget.MyListView
         android:id="@+id/lv_4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:divider="@null"
-        android:layout_marginBottom="@dimen/dp_10"/>
+        android:layout_marginBottom="@dimen/dp_10"
+        android:divider="@null" />
 
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_8"
-        android:background="@color/common_line_color" />
+        android:background="@color/color_F6F6FC" />
 </LinearLayout>

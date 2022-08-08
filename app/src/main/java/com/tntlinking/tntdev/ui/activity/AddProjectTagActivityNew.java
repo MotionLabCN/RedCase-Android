@@ -172,17 +172,24 @@ public final class AddProjectTagActivityNew extends AppActivity {
         fl_skill_tag_1.setOnTagClickListener(new FlowTagLayout.OnTagClickListener() {
             @Override
             public void onItemClick(FlowTagLayout parent, View view, int position) {
-                GetTagListApi.Bean.ChildrenBean childrenBean = mTagAdapter1.getData().get(position);
-                childrenBean.setType(1);
-                int pos = positionList(mSelectList, childrenBean);
-                if (view.isSelected()) {
-                    mSelectList.add(childrenBean);
-                } else {
+
+                if (mSelectList.size() < 4) {
+                    GetTagListApi.Bean.ChildrenBean childrenBean = mTagAdapter1.getData().get(position);
+                    childrenBean.setType(1);
+                    int pos = positionList(mSelectList, childrenBean);
+                    if (view.isSelected()) {
+                        mSelectList.add(childrenBean);
+                    } else {
 //                    mSelectList.remove(childrenBean);
-                    mSelectList.remove(pos);
+                        mSelectList.remove(pos);
+                    }
+
+                    mTagAdapterSelect.onlyAddAll(mSelectList);
+                } else {
+                    fl_skill_tag_1.clearOption(position);
+                    toast("最多只能选取4个标签");
                 }
 
-                mTagAdapterSelect.onlyAddAll(mSelectList);
             }
         });
 
@@ -193,17 +200,22 @@ public final class AddProjectTagActivityNew extends AppActivity {
         fl_skill_tag_2.setOnTagClickListener(new FlowTagLayout.OnTagClickListener() {
             @Override
             public void onItemClick(FlowTagLayout parent, View view, int position) {
-                GetTagListApi.Bean.ChildrenBean childrenBean = mTagAdapter2.getData().get(position);
-                childrenBean.setType(2);
-                int pos = positionList(mSelectList, childrenBean);
-                if (view.isSelected()) {
-                    mSelectList.add(childrenBean);
-                } else {
+                if (mSelectList.size() < 4) {
+                    GetTagListApi.Bean.ChildrenBean childrenBean = mTagAdapter2.getData().get(position);
+                    childrenBean.setType(2);
+                    int pos = positionList(mSelectList, childrenBean);
+                    if (view.isSelected()) {
+                        mSelectList.add(childrenBean);
+                    } else {
 //                    mSelectList.remove(childrenBean);
-                    mSelectList.remove(pos);
-                }
+                        mSelectList.remove(pos);
+                    }
 
-                mTagAdapterSelect.onlyAddAll(mSelectList);
+                    mTagAdapterSelect.onlyAddAll(mSelectList);
+                } else {
+                    fl_skill_tag_2.clearOption(position);
+                    toast("最多只能选取4个标签");
+                }
             }
         });
 //        fl_skill_tag_2.setOnTagSelectListener(new FlowTagLayout.OnTagSelectListener() {
@@ -220,17 +232,21 @@ public final class AddProjectTagActivityNew extends AppActivity {
         fl_skill_tag_3.setOnTagClickListener(new FlowTagLayout.OnTagClickListener() {
             @Override
             public void onItemClick(FlowTagLayout parent, View view, int position) {
-                GetTagListApi.Bean.ChildrenBean childrenBean = mTagAdapter3.getData().get(position);
-                childrenBean.setType(3);
-                int pos = positionList(mSelectList, childrenBean);
-                if (view.isSelected()) {
-                    mSelectList.add(childrenBean);
-                } else {
+                if (mSelectList.size() < 4) {
+                    GetTagListApi.Bean.ChildrenBean childrenBean = mTagAdapter3.getData().get(position);
+                    childrenBean.setType(3);
+                    int pos = positionList(mSelectList, childrenBean);
+                    if (view.isSelected()) {
+                        mSelectList.add(childrenBean);
+                    } else {
 //                    mSelectList.remove(childrenBean);
-                    mSelectList.remove(pos);
+                        mSelectList.remove(pos);
+                    }
+                    mTagAdapterSelect.onlyAddAll(mSelectList);
+                } else {
+                    fl_skill_tag_3.clearOption(position);
+                    toast("最多只能选取4个标签");
                 }
-
-                mTagAdapterSelect.onlyAddAll(mSelectList);
             }
         });
 //        fl_skill_tag_3.setOnTagSelectListener(new FlowTagLayout.OnTagSelectListener() {
@@ -247,17 +263,21 @@ public final class AddProjectTagActivityNew extends AppActivity {
         fl_skill_tag_4.setOnTagClickListener(new FlowTagLayout.OnTagClickListener() {
             @Override
             public void onItemClick(FlowTagLayout parent, View view, int position) {
-                GetTagListApi.Bean.ChildrenBean childrenBean = mTagAdapter4.getData().get(position);
-                childrenBean.setType(4);
-                int pos = positionList(mSelectList, childrenBean);
-                if (view.isSelected()) {
-                    mSelectList.add(childrenBean);
-                } else {
+                if (mSelectList.size() < 4) {
+                    GetTagListApi.Bean.ChildrenBean childrenBean = mTagAdapter4.getData().get(position);
+                    childrenBean.setType(4);
+                    int pos = positionList(mSelectList, childrenBean);
+                    if (view.isSelected()) {
+                        mSelectList.add(childrenBean);
+                    } else {
 //                    mSelectList.remove(childrenBean);
-                    mSelectList.remove(pos);
+                        mSelectList.remove(pos);
+                    }
+                    mTagAdapterSelect.onlyAddAll(mSelectList);
+                } else {
+                    fl_skill_tag_4.clearOption(position);
+                    toast("最多只能选取4个标签");
                 }
-
-                mTagAdapterSelect.onlyAddAll(mSelectList);
             }
         });
 //        fl_skill_tag_4.setOnTagSelectListener(new FlowTagLayout.OnTagSelectListener() {
@@ -273,17 +293,21 @@ public final class AddProjectTagActivityNew extends AppActivity {
         fl_skill_tag_5.setOnTagClickListener(new FlowTagLayout.OnTagClickListener() {
             @Override
             public void onItemClick(FlowTagLayout parent, View view, int position) {
-                GetTagListApi.Bean.ChildrenBean childrenBean = mTagAdapter5.getData().get(position);
-                childrenBean.setType(5);
-                int pos = positionList(mSelectList, childrenBean);
-                if (view.isSelected()) {
-                    mSelectList.add(childrenBean);
-                } else {
+                if (mSelectList.size() < 4) {
+                    GetTagListApi.Bean.ChildrenBean childrenBean = mTagAdapter5.getData().get(position);
+                    childrenBean.setType(5);
+                    int pos = positionList(mSelectList, childrenBean);
+                    if (view.isSelected()) {
+                        mSelectList.add(childrenBean);
+                    } else {
 //                    mSelectList.remove(childrenBean);
-                    mSelectList.remove(pos);
+                        mSelectList.remove(pos);
+                    }
+                    mTagAdapterSelect.onlyAddAll(mSelectList);
+                } else {
+                    fl_skill_tag_5.clearOption(position);
+                    toast("最多只能选取4个标签");
                 }
-
-                mTagAdapterSelect.onlyAddAll(mSelectList);
             }
         });
 
@@ -293,17 +317,21 @@ public final class AddProjectTagActivityNew extends AppActivity {
         fl_skill_tag_6.setOnTagClickListener(new FlowTagLayout.OnTagClickListener() {
             @Override
             public void onItemClick(FlowTagLayout parent, View view, int position) {
-                GetTagListApi.Bean.ChildrenBean childrenBean = mTagAdapter6.getData().get(position);
-                childrenBean.setType(6);
-                int pos = positionList(mSelectList, childrenBean);
-                if (view.isSelected()) {
-                    mSelectList.add(childrenBean);
-                } else {
+                if (mSelectList.size() < 4) {
+                    GetTagListApi.Bean.ChildrenBean childrenBean = mTagAdapter6.getData().get(position);
+                    childrenBean.setType(6);
+                    int pos = positionList(mSelectList, childrenBean);
+                    if (view.isSelected()) {
+                        mSelectList.add(childrenBean);
+                    } else {
 //                    mSelectList.remove(childrenBean);
-                    mSelectList.remove(pos);
+                        mSelectList.remove(pos);
+                    }
+                    mTagAdapterSelect.onlyAddAll(mSelectList);
+                } else {
+                    fl_skill_tag_6.clearOption(position);
+                    toast("最多只能选取4个标签");
                 }
-
-                mTagAdapterSelect.onlyAddAll(mSelectList);
             }
         });
 
@@ -313,17 +341,22 @@ public final class AddProjectTagActivityNew extends AppActivity {
         fl_skill_tag_7.setOnTagClickListener(new FlowTagLayout.OnTagClickListener() {
             @Override
             public void onItemClick(FlowTagLayout parent, View view, int position) {
-                GetTagListApi.Bean.ChildrenBean childrenBean = mTagAdapter7.getData().get(position);
-                childrenBean.setType(7);
-                int pos = positionList(mSelectList, childrenBean);
-                if (view.isSelected()) {
-                    mSelectList.add(childrenBean);
-                } else {
+                if (mSelectList.size() < 4) {
+                    GetTagListApi.Bean.ChildrenBean childrenBean = mTagAdapter7.getData().get(position);
+                    childrenBean.setType(7);
+                    int pos = positionList(mSelectList, childrenBean);
+                    if (view.isSelected()) {
+                        mSelectList.add(childrenBean);
+                    } else {
 //                    mSelectList.remove(childrenBean);
-                    mSelectList.remove(pos);
+                        mSelectList.remove(pos);
+                    }
+                    mTagAdapterSelect.onlyAddAll(mSelectList);
+                } else {
+                    fl_skill_tag_7.clearOption(position);
+                    toast("最多只能选取4个标签");
                 }
 
-                mTagAdapterSelect.onlyAddAll(mSelectList);
             }
         });
 
@@ -954,7 +987,7 @@ public final class AddProjectTagActivityNew extends AppActivity {
                                 mTagAdapterSelect.onlyAddAll(mSelectList);
                             }
 
-                        }else if (dataBean.size() == 7) {
+                        } else if (dataBean.size() == 7) {
                             ll_skill_tag_1.setVisibility(View.VISIBLE);
                             ll_skill_tag_2.setVisibility(View.VISIBLE);
                             ll_skill_tag_3.setVisibility(View.VISIBLE);
@@ -1049,7 +1082,7 @@ public final class AddProjectTagActivityNew extends AppActivity {
                                                 continue;
                                             }
                                         }
-                                    }else if (mSelectList.get(i).getType() == 0) {
+                                    } else if (mSelectList.get(i).getType() == 0) {
                                         int position1 = positionList(dataBean.get(0).getChildren(), mSelectList.get(i));
                                         if (position1 != -1) {
                                             fl_skill_tag_1.getChildAt(position1).setSelected(true);

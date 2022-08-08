@@ -9,15 +9,16 @@
     app:shape="rectangle"
     app:shape_radius="@dimen/dp_10"
     app:shape_shadowColor="@color/black25"
-    app:shape_shadowSize="23dp"
+    app:shape_shadowSize="20dp"
     app:shape_solidColor="@color/white90">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/dp_16"
-        android:layout_marginTop="@dimen/dp_20"
+        android:layout_marginTop="@dimen/dp_10"
         android:layout_marginEnd="@dimen/dp_16"
+        android:layout_marginBottom="@dimen/dp_10"
         android:background="@drawable/bg_grey_stroke"
         android:orientation="vertical">
 
@@ -35,41 +36,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:text="测试工程师"
+                android:ellipsize="end"
+                android:maxEms="13"
+                android:maxLines="1"
+                android:text="测试工程师测试工程师"
                 android:textSize="@dimen/sp_15"
                 android:textStyle="bold" />
 
-            <LinearLayout
-                android:id="@+id/ll_status"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/dp_4"
-                android:background="@drawable/bg_green_radius_3"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:paddingLeft="@dimen/dp_9"
-                android:paddingTop="@dimen/dp_3"
-                android:paddingRight="@dimen/dp_9"
-                android:paddingBottom="@dimen/dp_3">
-
-
-                <View
-                    android:id="@+id/view_dot"
-                    android:layout_width="@dimen/dp_5"
-                    android:layout_height="@dimen/dp_5"
-                    android:background="@drawable/dot_oval_green" />
-
-                <TextView
-                    android:id="@+id/tv_interview_status"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/dp_4"
-                    android:text="今日面试"
-                    android:textColor="@color/color_5CE28A"
-                    android:textSize="@dimen/sp_12" />
-
-
-            </LinearLayout>
 
             <TextView
                 android:id="@+id/tv_interview_salary"
@@ -125,10 +98,42 @@
             android:gravity="center"
             android:orientation="horizontal">
 
+            <LinearLayout
+                android:id="@+id/ll_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_green_radius_3"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/dp_6"
+                android:paddingTop="@dimen/dp_3"
+                android:paddingRight="@dimen/dp_6"
+                android:paddingBottom="@dimen/dp_3">
+
+
+                <View
+                    android:id="@+id/view_dot"
+                    android:layout_width="@dimen/dp_5"
+                    android:layout_height="@dimen/dp_5"
+                    android:background="@drawable/dot_oval_green" />
+
+                <TextView
+                    android:id="@+id/tv_interview_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp_4"
+                    android:text="今日面试"
+                    android:textColor="@color/color_5CE28A"
+                    android:textSize="@dimen/sp_12" />
+
+
+            </LinearLayout>
+
             <TextView
                 android:id="@+id/tv_interview_time"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_6"
                 android:layout_weight="1"
                 android:text="2021.10.16 15:00-16:30"
                 android:textColor="@color/color_hint_color"
@@ -136,8 +141,8 @@
 
             <TextView
                 android:id="@+id/tv_interview_detail"
-                android:layout_width="@dimen/dp_80"
-                android:layout_height="@dimen/dp_33"
+                android:layout_width="@dimen/dp_74"
+                android:layout_height="@dimen/dp_30"
                 android:layout_gravity="center"
                 android:background="@drawable/btn_blue_radius_10"
                 android:gravity="center"

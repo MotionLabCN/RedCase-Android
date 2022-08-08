@@ -10,7 +10,6 @@
     app:shape_radius="@dimen/dp_10"
     app:shape_shadowColor="@color/black25"
     app:shape_shadowSize="20dp"
-
     app:shape_solidColor="@color/white90">
 
     <LinearLayout
