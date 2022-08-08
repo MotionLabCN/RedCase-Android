@@ -216,6 +216,6 @@
         android:layout_height="@dimen/line_size"
         android:layout_marginLeft="@dimen/dp_16"
         android:layout_marginRight="@dimen/dp_16"
-        android:background="@color/common_line_color" />
+        android:background="@color/color_F6F6FC" />
 </LinearLayout>
 

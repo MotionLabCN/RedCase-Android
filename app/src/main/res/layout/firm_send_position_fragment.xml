@@ -19,31 +19,6 @@
         app:leftTitleStyle="bold"
         app:lineVisible="false" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/dp_16"
-        android:layout_marginRight="@dimen/dp_16"
-        android:gravity="center"
-        android:orientation="vertical">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="您想要的职位，都满足你"
-            android:textColor="@color/color_hint_color"
-            android:textSize="@dimen/sp_15" />
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_commit"
-            style="@style/ButtonStyle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_30"
-            android:layout_weight="1"
-            android:text="发布职位" />
-    </LinearLayout>
-
 
     <com.scwang.smart.refresh.layout.SmartRefreshLayout
         android:id="@+id/rl_status_refresh"
@@ -61,6 +36,30 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp_16"
+                    android:layout_marginRight="@dimen/dp_16"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="您想要的职位，都满足你"
+                        android:textColor="@color/color_hint_color"
+                        android:textSize="@dimen/sp_15" />
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/btn_commit"
+                        style="@style/ButtonStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_30"
+                        android:layout_weight="1"
+                        android:text="发布职位" />
+                </LinearLayout>
 
                 <com.tntlinking.tntdev.widget.MyListView
                     android:id="@+id/lv_1"

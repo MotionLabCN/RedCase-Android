@@ -199,7 +199,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_10"
-                android:background="#FFECECEC" />
+                android:background="@color/color_F6F6FC" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -361,7 +361,7 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dp_10"
-                    android:background="#FFECECEC" />
+                    android:background="@color/color_F6F6FC" />
 
                 <TextView
 

@@ -3,8 +3,10 @@ package com.tntlinking.tntdev.ui.firm.activity;
 import android.content.Intent;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import com.blankj.utilcode.util.SPUtils;
+import com.hjq.base.BaseDialog;
 import com.hjq.http.EasyHttp;
 import com.hjq.http.listener.HttpCallback;
 import com.scwang.smart.refresh.layout.SmartRefreshLayout;
@@ -16,6 +18,8 @@ import com.tntlinking.tntdev.app.AppActivity;
 import com.tntlinking.tntdev.http.api.AppListApi;
 import com.tntlinking.tntdev.http.model.HttpData;
 import com.tntlinking.tntdev.other.AppConfig;
+import com.tntlinking.tntdev.other.Utils;
+import com.tntlinking.tntdev.ui.dialog.DateSelectDialog;
 import com.tntlinking.tntdev.ui.firm.adapter.FreezeAdapter;
 import com.tntlinking.tntdev.widget.MyListView;
 import java.util.ArrayList;
@@ -28,6 +32,7 @@ import androidx.annotation.NonNull;
  */
 public final class AccountManageActivity extends AppActivity implements OnRefreshLoadMoreListener {
 
+    private ImageView iv_select;
     private MyListView lv_1;
     private LinearLayout ll_empty;
 
@@ -46,10 +51,10 @@ public final class AccountManageActivity extends AppActivity implements OnRefres
 
     @Override
     protected void initView() {
+        iv_select = findViewById(R.id.iv_select);
         lv_1 = findViewById(R.id.lv_1);
 
         ll_empty = findViewById(R.id.ll_empty);
-
 
 
         mRefreshLayout = findViewById(R.id.rl_status_refresh);
@@ -60,12 +65,21 @@ public final class AccountManageActivity extends AppActivity implements OnRefres
 
 
         lv_1.setAdapter(mServiceAdapter);
-//        btn_commit.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                startActivity(SendPositionActivity.class);
-//            }
-//        });
+        iv_select.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new DateSelectDialog.Builder(AccountManageActivity.this).setTitle("筛选时间").setIgnoreDay().setListener(new DateSelectDialog.OnListener() {
+                    @Override
+                    public void onSelected(BaseDialog dialog, int year, int month, int day) {
+                        String mInTime = year + "-" + Utils.formatDate(month);
+
+                        toast("===year==" + year + "===month=" + month);
+
+                    }
+
+                }).show();
+            }
+        });
         lv_1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
