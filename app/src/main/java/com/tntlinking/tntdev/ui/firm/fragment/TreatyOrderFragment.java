@@ -6,8 +6,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.LinearLayout;
-
-import com.blankj.utilcode.util.SPUtils;
 import com.hjq.http.EasyHttp;
 import com.hjq.http.listener.HttpCallback;
 import com.scwang.smart.refresh.layout.SmartRefreshLayout;
@@ -16,10 +14,8 @@ import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener;
 import com.tntlinking.tntdev.R;
 import com.tntlinking.tntdev.aop.SingleClick;
 import com.tntlinking.tntdev.app.TitleBarFragment;
-import com.tntlinking.tntdev.http.api.AppListApi;
+import com.tntlinking.tntdev.http.api.GetFirmOrderListApi;
 import com.tntlinking.tntdev.http.model.HttpData;
-import com.tntlinking.tntdev.other.AppConfig;
-import com.tntlinking.tntdev.ui.activity.HistoryDailyListActivity;
 import com.tntlinking.tntdev.ui.firm.activity.FirmMainActivity;
 import com.tntlinking.tntdev.ui.firm.adapter.TreatyOrderAdapter;
 import com.tntlinking.tntdev.widget.MyListView;
@@ -38,17 +34,14 @@ public final class TreatyOrderFragment extends TitleBarFragment<FirmMainActivity
     private LinearLayout ll_empty;
     private LinearLayout ll_daily;
     private SmartRefreshLayout mRefreshLayout;
+    private TreatyOrderAdapter mAdapter;
 
 
-
-    private List<AppListApi.Bean> mServiceList = new ArrayList<>();
-    private TreatyOrderAdapter mServiceAdapter;
-
-
-    private String orderId;
-
+    private String orderStatus = "";
+    private int mPageNum = 1;
     private static final String INTENT_KEY_POSITION = "position";
 
+    private List<GetFirmOrderListApi.Bean.ListBean> mList = new ArrayList<>();
 
     public static TreatyOrderFragment newInstance(String url) {
         TreatyOrderFragment fragment = new TreatyOrderFragment();
@@ -71,15 +64,14 @@ public final class TreatyOrderFragment extends TitleBarFragment<FirmMainActivity
         ll_daily = findViewById(R.id.ll_daily);
 
 
-
         mRefreshLayout = findViewById(R.id.rl_status_refresh);
         mRefreshLayout.setOnRefreshLoadMoreListener(this);
         mRefreshLayout.setEnableLoadMore(false);
 
-        mServiceAdapter = new TreatyOrderAdapter(getActivity(), mServiceList);
+        mAdapter = new TreatyOrderAdapter(getActivity());
 
 
-        lv_1.setAdapter(mServiceAdapter);
+        lv_1.setAdapter(mAdapter);
 
         lv_1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -94,9 +86,8 @@ public final class TreatyOrderFragment extends TitleBarFragment<FirmMainActivity
 
     @Override
     protected void initData() {
-        String status = SPUtils.getInstance().getString(AppConfig.DEVELOP_STATUS, "1");
-        String string = getString(INTENT_KEY_POSITION);
-        getAppList();
+        orderStatus = getString(INTENT_KEY_POSITION);
+        GetDeveloperList(orderStatus, mPageNum);
     }
 
     @SuppressLint("NonConstantResourceId")
@@ -105,59 +96,59 @@ public final class TreatyOrderFragment extends TitleBarFragment<FirmMainActivity
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.ll_history:
-                Intent intent = new Intent(getActivity(), HistoryDailyListActivity.class);
-                intent.putExtra("orderId", orderId);
-                startActivity(intent);
+//                Intent intent = new Intent(getActivity(), HistoryDailyListActivity.class);
+//                intent.putExtra("orderId", orderId);
+//                startActivity(intent);
                 break;
         }
     }
 
-
     /**
-     * 获取在服务企业list //2 待服务，3 服务中
+     * 获取职业方向
      */
-    private void getAppList() {
+    public void GetDeveloperList(String orderStatus, int pageNum) {
         EasyHttp.get(this)
-                .api(new AppListApi().setOrderStatus(3))
-                .request(new HttpCallback<HttpData<List<AppListApi.Bean>>>(this) {
+                .api(new GetFirmOrderListApi().setOrderStatus(orderStatus).setPageNum(pageNum).setPageSize(20))
+                .request(new HttpCallback<HttpData<GetFirmOrderListApi.Bean>>(this) {
                     @Override
-                    public void onSucceed(HttpData<List<AppListApi.Bean>> data) {
-                        if (data.getData().size() > 0) {
+                    public void onSucceed(HttpData<GetFirmOrderListApi.Bean> data) {
+
+                        if (data.getData().getList().size() >= 0) {
                             ll_empty.setVisibility(View.GONE);
-
-
-                            mServiceList.addAll(data.getData());
-                            mServiceAdapter.setData(mServiceList);
-                            orderId = mServiceList.get(0).getId();// 服务项目只会有一个
-
-                        } else {
-                            ll_empty.setVisibility(View.VISIBLE);
+                            if (pageNum == 1) {
+                                if (data.getData().getList().size() == 0) {
+                                    ll_empty.setVisibility(View.VISIBLE);
+                                } else {
+                                    mList.clear();
+                                    mList.addAll(data.getData().getList());
+                                    mAdapter.setData(mList);
+                                }
+                                mRefreshLayout.finishRefresh();
+                            } else {
+                                if (pageNum == data.getData().getPageNum()) { //当前pageNum 是否等于后台传过来的当前页pagenum 数
+                                    mList.addAll(data.getData().getList());
+                                    mAdapter.setData(mList);
+                                }
+                                mRefreshLayout.finishLoadMore();
+                            }
 
                         }
-                    }
 
-                    @Override
-                    public void onFail(Exception e) {
-                        super.onFail(e);
                     }
                 });
     }
 
 
-
-
     @Override
     public void onRefresh(@NonNull RefreshLayout refreshLayout) {
-        mServiceList.clear();
-        String status = SPUtils.getInstance().getString(AppConfig.DEVELOP_STATUS, "1");
-        if (status.equals("3")) {
-            getAppList();
-        }
+        mPageNum = 1;
+        GetDeveloperList(orderStatus, mPageNum);
     }
 
     @Override
     public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
-
+        mPageNum++;
+        GetDeveloperList(orderStatus, mPageNum);
     }
 
 

@@ -1,39 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="@dimen/dp_10"
     android:layout_marginBottom="1px"
-    android:background="@drawable/bg_white_radius_6"
+    android:background="@color/white"
     android:orientation="vertical">
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_10"
+        android:background="@color/color_F6F6FC" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:paddingLeft="@dimen/dp_15"
-        android:paddingTop="@dimen/dp_10"
+        android:paddingTop="@dimen/dp_15"
         android:paddingRight="@dimen/dp_15"
         android:paddingBottom="@dimen/dp_10">
 
         <TextView
+            android:id="@+id/tv_order_num"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="订单号"
-            android:textColor="@color/gray"
-            android:textSize="@dimen/sp_14" />
+            android:textColor="@color/color_hint_color"
+            android:textSize="@dimen/sp_13" />
 
         <TextView
-            android:id="@+id/tv_position_name"
+            android:id="@+id/tv_order_status"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="xxxxxx"
             android:textColor="@color/color_202839"
-            android:textSize="@dimen/sp_14"
+            android:textSize="@dimen/sp_13"
             android:textStyle="bold" />
     </LinearLayout>
 
@@ -42,7 +44,7 @@
         android:layout_height="@dimen/line_size"
         android:layout_marginLeft="@dimen/dp_15"
         android:layout_marginRight="@dimen/dp_15"
-        android:background="#FFECECEC" />
+        android:background="@color/color_F6F6FC" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -58,16 +60,16 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="开始时间"
-            android:textColor="@color/gray"
-            android:textSize="@dimen/sp_14" />
+            android:textColor="@color/color_hint_color"
+            android:textSize="@dimen/sp_13" />
 
         <TextView
-            android:id="@+id/tv_company_name"
+            android:id="@+id/tv_order_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="xxxxxx"
             android:textColor="@color/color_202839"
-            android:textSize="@dimen/sp_14"
+            android:textSize="@dimen/sp_13"
             android:textStyle="bold" />
     </LinearLayout>
 
@@ -85,11 +87,11 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="开发者"
-            android:textColor="@color/gray"
-            android:textSize="@dimen/sp_14" />
+            android:textColor="@color/color_hint_color"
+            android:textSize="@dimen/sp_13" />
 
         <TextView
-            android:id="@+id/tv_deductMoney"
+            android:id="@+id/tv_order_dev_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="xxxxx"
@@ -105,23 +107,23 @@
         android:paddingLeft="@dimen/dp_15"
         android:paddingTop="@dimen/dp_10"
         android:paddingRight="@dimen/dp_15"
-        android:paddingBottom="@dimen/dp_10">
+        android:paddingBottom="@dimen/dp_15">
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="职业"
-            android:textColor="@color/gray"
-            android:textSize="@dimen/sp_14" />
+            android:textColor="@color/color_hint_color"
+            android:textSize="@dimen/sp_13" />
 
         <TextView
-            android:id="@+id/tv_personalTax"
+            android:id="@+id/tv_order_dev_position"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="xxxx"
             android:textColor="@color/color_202839"
-            android:textSize="@dimen/sp_14"
+            android:textSize="@dimen/sp_13"
             android:textStyle="bold" />
     </LinearLayout>
 

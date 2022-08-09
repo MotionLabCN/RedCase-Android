@@ -29,8 +29,7 @@
                     android:id="@+id/lv_1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:divider="@null"
-                    android:dividerHeight="@dimen/dp_1" />
+                    android:divider="@null" />
                 <!--                    tools:listitem="@layout/item_app_list" />-->
 
                 <LinearLayout
@@ -40,44 +39,24 @@
                     android:background="@color/white"
                     android:gravity="center"
                     android:orientation="vertical"
-                    android:paddingTop="@dimen/dp_20"
+                    android:paddingTop="@dimen/dp_40"
                     android:visibility="gone">
 
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/bg_home_work_empty" />
+                        android:src="@drawable/bg_no_developer" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_10"
-                        android:text="暂无工作"
+                        android:layout_marginTop="@dimen/dp_28"
+                        android:text="暂无开发者"
                         android:textColor="@color/black"
                         android:textSize="@dimen/sp_15"
                         android:textStyle="bold" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_10"
-                        android:text="联系客服人员尽快匹配新工作"
-                        android:textColor="#7E89A3"
-                        android:textSize="@dimen/sp_12" />
 
-                    <TextView
-                        android:id="@+id/tv_refresh"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_10"
-                        android:background="@drawable/btn_blue_radius_10"
-                        android:paddingLeft="@dimen/dp_40"
-                        android:paddingTop="@dimen/dp_8"
-                        android:paddingRight="@dimen/dp_40"
-                        android:paddingBottom="@dimen/dp_8"
-                        android:text="刷新"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/sp_12" />
                 </LinearLayout>
             </LinearLayout>
 

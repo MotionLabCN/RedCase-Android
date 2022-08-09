@@ -46,13 +46,13 @@ public final class SelectAdminActivity extends AppActivity {
     @Override  //请求头loginRole ：Developer 开发者  Recruiter 企业者
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.ll_firm:
-                EasyConfig.getInstance().addHeader("loginRole", "Developer");
+            case R.id.ll_firm://企业
+                EasyConfig.getInstance().addHeader("loginRole", "Recruiter");
                 startActivity(FirmMainActivity.class);
                 ActivityManager.getInstance().finishAllActivities();
                 break;
-            case R.id.ll_dev:
-                EasyConfig.getInstance().addHeader("loginRole", "Recruiter");
+            case R.id.ll_dev://开发者
+                EasyConfig.getInstance().addHeader("loginRole", "Developer");
                 startActivity(FirmMainActivity.class);
                 ActivityManager.getInstance().finishAllActivities();
                 break;

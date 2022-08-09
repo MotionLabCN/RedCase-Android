@@ -232,10 +232,6 @@ public final class TreatyService1Fragment extends TitleBarFragment<MainActivity>
         if (status.equals("3")) {
 //            mRefreshLayout.autoRefresh();
             getAppList();
-        } else {
-            toast("您还没有认证");
-            ll_empty.setVisibility(View.VISIBLE);
-            ll_daily.setVisibility(View.GONE);
         }
 
     }

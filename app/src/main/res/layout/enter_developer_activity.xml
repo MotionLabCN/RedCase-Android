@@ -288,7 +288,8 @@
                         android:layout_weight="1"
                         android:text="*请填充"
                         android:textColor="@color/color_F5313D"
-                        android:textSize="@dimen/sp_14" />
+                        android:textSize="@dimen/sp_14"
+                        android:visibility="invisible" />
 
                     <ImageView
                         android:layout_width="@dimen/dp_16"
@@ -381,7 +382,8 @@
                         android:layout_weight="1"
                         android:text="*请填充"
                         android:textColor="@color/color_F5313D"
-                        android:textSize="@dimen/sp_14" />
+                        android:textSize="@dimen/sp_14"
+                        android:visibility="invisible" />
 
                     <ImageView
                         android:layout_width="@dimen/dp_16"
@@ -475,7 +477,8 @@
                     android:layout_weight="1"
                     android:text="*请填充"
                     android:textColor="@color/color_F5313D"
-                    android:textSize="@dimen/sp_14" />
+                    android:textSize="@dimen/sp_14"
+                    android:visibility="invisible" />
 
                 <ImageView
                     android:layout_width="@dimen/dp_16"
@@ -531,7 +534,8 @@
                     android:layout_weight="1"
                     android:text="*请填充"
                     android:textColor="@color/color_F5313D"
-                    android:textSize="@dimen/sp_14" />
+                    android:textSize="@dimen/sp_14"
+                    android:visibility="invisible" />
 
                 <ImageView
                     android:layout_width="@dimen/dp_16"
@@ -587,7 +591,8 @@
                     android:layout_weight="1"
                     android:text="*请填充"
                     android:textColor="@color/color_F5313D"
-                    android:textSize="@dimen/sp_14" />
+                    android:textSize="@dimen/sp_14"
+                    android:visibility="invisible" />
 
                 <ImageView
                     android:layout_width="@dimen/dp_16"

@@ -22,7 +22,6 @@ import com.tntlinking.tntdev.other.AppConfig;
 import com.tntlinking.tntdev.ui.activity.HistoryDailyListActivity;
 import com.tntlinking.tntdev.ui.firm.activity.FirmMainActivity;
 import com.tntlinking.tntdev.ui.firm.adapter.RecommendPositionAdapter;
-import com.tntlinking.tntdev.ui.firm.adapter.TreatyOrderAdapter;
 import com.tntlinking.tntdev.widget.MyListView;
 
 import java.util.ArrayList;

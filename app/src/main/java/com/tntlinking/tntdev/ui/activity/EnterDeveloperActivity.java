@@ -832,7 +832,11 @@ public final class EnterDeveloperActivity extends AppActivity {
         }
 
         if (educationDtoList.size() == 0) {
-            tv_add_education_tips.setVisibility(View.VISIBLE);
+            if (isResume) {
+                tv_add_education_tips.setVisibility(View.VISIBLE);
+            } else {
+                tv_add_education_tips.setVisibility(View.INVISIBLE);
+            }
         } else {
             for (int i = 0; i < educationDtoList.size(); i++) {
                 if (TextUtils.isEmpty(educationDtoList.get(i).getCollegeName()) ||
@@ -855,7 +859,11 @@ public final class EnterDeveloperActivity extends AppActivity {
         }
 
         if (workExperienceDtoList.size() == 0) {
-            tv_add_worK_tips.setVisibility(View.VISIBLE);
+            if (isResume) {
+                tv_add_worK_tips.setVisibility(View.VISIBLE);
+            } else {
+                tv_add_worK_tips.setVisibility(View.INVISIBLE);
+            }
         } else {
             for (int i = 0; i < workExperienceDtoList.size(); i++) {
                 if (TextUtils.isEmpty(workExperienceDtoList.get(i).getCompanyName()) ||
@@ -877,7 +885,11 @@ public final class EnterDeveloperActivity extends AppActivity {
         }
 
         if (projectDtoList.size() == 0) {
-            tv_add_project_tips.setVisibility(View.VISIBLE);
+            if (isResume) {
+                tv_add_project_tips.setVisibility(View.VISIBLE);
+            } else {
+                tv_add_project_tips.setVisibility(View.INVISIBLE);
+            }
         } else {
             for (int i = 0; i < projectDtoList.size(); i++) {
                 if (TextUtils.isEmpty(projectDtoList.get(i).getProjectName()) ||

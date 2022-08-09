@@ -98,14 +98,9 @@ public final class TreatyServiced2Fragment extends TitleBarFragment<MainActivity
     @Override
     protected void initData() {
         String status = SPUtils.getInstance().getString(AppConfig.DEVELOP_STATUS, "1");
-
         if (status.equals("3")) {
             getAppList();
-        } else {
-            toast("您还没有认证");
-            ll_empty.setVisibility(View.VISIBLE);
         }
-
     }
 
 

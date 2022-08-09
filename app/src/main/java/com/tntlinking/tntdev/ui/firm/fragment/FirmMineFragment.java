@@ -32,6 +32,7 @@ import com.tntlinking.tntdev.ui.activity.BrowserPrivateActivity;
 import com.tntlinking.tntdev.ui.firm.activity.AccountManageActivity;
 import com.tntlinking.tntdev.ui.firm.activity.AuditionMangeActivity;
 import com.tntlinking.tntdev.ui.firm.activity.ChangeAdminActivity;
+import com.tntlinking.tntdev.ui.firm.activity.DeleteFirmActivity;
 import com.tntlinking.tntdev.ui.firm.activity.FirmCertificationActivity;
 import com.tntlinking.tntdev.ui.firm.activity.FirmMainActivity;
 import com.tntlinking.tntdev.ui.firm.activity.FirmManageActivity;
@@ -146,7 +147,7 @@ public final class FirmMineFragment extends TitleBarFragment<FirmMainActivity> i
                 startActivity(FirmManageActivity.class);
                 break;
             case R.id.person_data_setting://账户设置
-                startActivity(FirmManageActivity.class);
+                startActivity(DeleteFirmActivity.class);
                 break;
             case R.id.person_data_private:// 隐私政策
                 BrowserPrivateActivity.start(getActivity(), AppConfig.PRIVATE_URL);

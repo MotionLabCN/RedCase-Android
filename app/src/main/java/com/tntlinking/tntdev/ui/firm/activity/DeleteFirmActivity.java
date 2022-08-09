@@ -19,6 +19,7 @@ import com.tntlinking.tntdev.aop.SingleClick;
 import com.tntlinking.tntdev.app.AppActivity;
 import com.tntlinking.tntdev.http.api.CancellationApi;
 import com.tntlinking.tntdev.http.api.GetCancellationApi;
+import com.tntlinking.tntdev.http.api.GetFirmConditionApi;
 import com.tntlinking.tntdev.http.model.HttpData;
 import com.tntlinking.tntdev.manager.ActivityManager;
 import com.tntlinking.tntdev.ui.activity.SignStatusActivity;
@@ -84,7 +85,7 @@ public final class DeleteFirmActivity extends AppActivity {
 
     private void getCancelDescription() {
         EasyHttp.get(this)
-                .api(new GetCancellationApi())
+                .api(new GetFirmConditionApi())
                 .request(new HttpCallback<HttpData<List<GetCancellationApi.ListBean>>>(this) {
 
                     @Override

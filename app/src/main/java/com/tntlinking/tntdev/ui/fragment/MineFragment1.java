@@ -33,6 +33,7 @@ import com.tntlinking.tntdev.http.model.HttpData;
 import com.tntlinking.tntdev.manager.ActivityManager;
 import com.tntlinking.tntdev.other.AppConfig;
 import com.tntlinking.tntdev.other.Utils;
+import com.tntlinking.tntdev.ui.activity.AboutAppActivity;
 import com.tntlinking.tntdev.ui.activity.BrowserActivity;
 import com.tntlinking.tntdev.ui.activity.BrowserPrivateActivity;
 import com.tntlinking.tntdev.ui.activity.EnterDeveloperActivity;

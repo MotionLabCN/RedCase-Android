@@ -33,7 +33,6 @@ public final class PositionFragment extends TitleBarFragment<FirmMainActivity> i
 
     private MyListView lv_1;
     private LinearLayout ll_empty;
-    private LinearLayout ll_daily;
     private SmartRefreshLayout mRefreshLayout;
     private FirmHomeAdapter mAdapter;
     private static final String INTENT_KEY_POSITION = "position";
@@ -60,7 +59,7 @@ public final class PositionFragment extends TitleBarFragment<FirmMainActivity> i
         lv_1 = findViewById(R.id.lv_1);
 
         ll_empty = findViewById(R.id.ll_empty);
-        ll_daily = findViewById(R.id.ll_daily);
+
 
 
         mRefreshLayout = findViewById(R.id.rl_status_refresh);

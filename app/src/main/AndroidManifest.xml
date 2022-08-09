@@ -652,6 +652,11 @@
             android:name="com.tntlinking.tntdev.ui.firm.activity.TreatyOrderListActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
+        <!-- 合约订单搜索页面 -->
+        <activity
+            android:name="com.tntlinking.tntdev.ui.firm.activity.TreatyOrderSearchActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
         <!-- 账户管理页面 -->
         <activity
             android:name="com.tntlinking.tntdev.ui.firm.activity.AccountManageActivity"
