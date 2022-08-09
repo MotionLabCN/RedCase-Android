@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- 选中状态 -->
+    <item android:drawable="@drawable/bg_blue_stroke_8" android:state_checked="true" />
+    <item android:drawable="@drawable/bg_blue_stroke_8" android:state_selected="true" />
+
+    <!-- 默认状态-->
+    <item android:drawable="@drawable/bg_gray_stroke_8" />
+
+</selector>

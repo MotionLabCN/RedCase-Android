@@ -1,18 +1,12 @@
 package com.tntlinking.tntdev.ui.firm.fragment;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.LinearLayout;
 
-import com.blankj.utilcode.util.SPUtils;
-import com.hjq.base.BaseDialog;
 import com.hjq.http.EasyHttp;
-import com.hjq.http.EasyLog;
 import com.hjq.http.listener.HttpCallback;
 import com.scwang.smart.refresh.layout.SmartRefreshLayout;
 import com.scwang.smart.refresh.layout.api.RefreshLayout;
@@ -20,18 +14,11 @@ import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener;
 import com.tntlinking.tntdev.R;
 import com.tntlinking.tntdev.aop.SingleClick;
 import com.tntlinking.tntdev.app.TitleBarFragment;
-import com.tntlinking.tntdev.http.api.AppListApi;
-
+import com.tntlinking.tntdev.http.api.GetFirmDevApi;
 import com.tntlinking.tntdev.http.model.HttpData;
-import com.tntlinking.tntdev.other.AppConfig;
-import com.tntlinking.tntdev.other.HomeChangeListener;
-import com.tntlinking.tntdev.ui.activity.HistoryDailyListActivity;
-
 import com.tntlinking.tntdev.ui.firm.activity.DeveloperInfoActivity;
 import com.tntlinking.tntdev.ui.firm.activity.FirmMainActivity;
 import com.tntlinking.tntdev.ui.firm.adapter.FirmHomeAdapter;
-import com.tntlinking.tntdev.ui.firm.adapter.FirmPositionAdapter;
-import com.tntlinking.tntdev.ui.fragment.BrowserFragment;
 import com.tntlinking.tntdev.widget.MyListView;
 
 import java.util.ArrayList;
@@ -48,21 +35,17 @@ public final class PositionFragment extends TitleBarFragment<FirmMainActivity> i
     private LinearLayout ll_empty;
     private LinearLayout ll_daily;
     private SmartRefreshLayout mRefreshLayout;
-
-
-    private List<AppListApi.Bean> mServiceList = new ArrayList<>();
     private FirmHomeAdapter mAdapter;
-
-
-    private String orderId;
-
     private static final String INTENT_KEY_POSITION = "position";
+    private List<GetFirmDevApi.Bean.ListBean> mList = new ArrayList<>();
+    private int mId;
+    private int mPageNum = 1;
 
 
-    public static PositionFragment newInstance(String url) {
+    public static PositionFragment newInstance(int id) {
         PositionFragment fragment = new PositionFragment();
         Bundle bundle = new Bundle();
-        bundle.putString(INTENT_KEY_POSITION, url);
+        bundle.putInt(INTENT_KEY_POSITION, id);
         fragment.setArguments(bundle);
         return fragment;
     }
@@ -91,7 +74,9 @@ public final class PositionFragment extends TitleBarFragment<FirmMainActivity> i
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                startActivity(DeveloperInfoActivity.class);
+                Intent intent = new Intent(getActivity(), DeveloperInfoActivity.class);
+                intent.putExtra("developerId", mList.get(position).getId());
+                startActivity(intent);
 
             }
         });
@@ -101,9 +86,9 @@ public final class PositionFragment extends TitleBarFragment<FirmMainActivity> i
 
     @Override
     protected void initData() {
+        mId = getInt(INTENT_KEY_POSITION);
+        GetDeveloperList(mId, mPageNum);
 
-        mAdapter.setData(analogData());
-//        getAppList();
     }
 
     /**
@@ -117,63 +102,62 @@ public final class PositionFragment extends TitleBarFragment<FirmMainActivity> i
         return data;
     }
 
-    @SuppressLint("NonConstantResourceId")
     @SingleClick
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.ll_history:
-                Intent intent = new Intent(getActivity(), HistoryDailyListActivity.class);
-                intent.putExtra("orderId", orderId);
-                startActivity(intent);
+
                 break;
         }
     }
 
 
     /**
-     * 获取在服务企业list //2 待服务，3 服务中
+     * 获取职业方向
      */
-    private void getAppList() {
+    public void GetDeveloperList(int orderId, int pageNum) {
         EasyHttp.get(this)
-                .api(new AppListApi().setOrderStatus(3))
-                .request(new HttpCallback<HttpData<List<AppListApi.Bean>>>(this) {
+                .api(new GetFirmDevApi().setOrderId(orderId).setPageNum(pageNum).setPageSize(20))
+                .request(new HttpCallback<HttpData<GetFirmDevApi.Bean>>(this) {
                     @Override
-                    public void onSucceed(HttpData<List<AppListApi.Bean>> data) {
-//                        if (data.getData().size() > 0) {
-//                            ll_empty.setVisibility(View.GONE);
-//
-//
-//                            mServiceList.addAll(data.getData());
-//                            mServiceAdapter.setData(mServiceList);
-//                            orderId = mServiceList.get(0).getId();// 服务项目只会有一个
-//
-//                        } else {
-//                            ll_empty.setVisibility(View.VISIBLE);
-//
-//                        }
-                    }
+                    public void onSucceed(HttpData<GetFirmDevApi.Bean> data) {
 
-                    @Override
-                    public void onFail(Exception e) {
-                        super.onFail(e);
+                        if (data.getData().getList().size() >= 0) {
+                            ll_empty.setVisibility(View.GONE);
+                            if (pageNum == 1) {
+                                if (data.getData().getList().size() == 0) {
+                                    ll_empty.setVisibility(View.VISIBLE);
+                                } else {
+                                    mList.clear();
+                                    mList.addAll(data.getData().getList());
+                                    mAdapter.setData(mList);
+                                }
+                                mRefreshLayout.finishRefresh();
+                            } else {
+                                if (pageNum == data.getData().getPageNum()) { //当前pageNum 是否等于后台传过来的当前页pagenum 数
+                                    mList.addAll(data.getData().getList());
+                                    mAdapter.setData(mList);
+                                }
+                                mRefreshLayout.finishLoadMore();
+                            }
+
+                        }
+
                     }
                 });
     }
 
-
     @Override
     public void onRefresh(@NonNull RefreshLayout refreshLayout) {
-        mServiceList.clear();
-        String status = SPUtils.getInstance().getString(AppConfig.DEVELOP_STATUS, "1");
-        if (status.equals("3")) {
-            getAppList();
-        }
+        mPageNum = 1;
+        GetDeveloperList(mId, 1);
     }
 
     @Override
     public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
-
+        mPageNum++;
+        GetDeveloperList(mId, mPageNum);
     }
 
 

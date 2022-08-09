@@ -4,9 +4,11 @@ import android.content.Intent;
 import android.view.View;
 import android.widget.LinearLayout;
 
+import com.hjq.http.EasyConfig;
 import com.tntlinking.tntdev.R;
 import com.tntlinking.tntdev.aop.SingleClick;
 import com.tntlinking.tntdev.app.AppActivity;
+import com.tntlinking.tntdev.manager.ActivityManager;
 
 /**
  * 角色切换页面
@@ -41,14 +43,18 @@ public final class SelectAdminActivity extends AppActivity {
 
 
     @SingleClick
-    @Override
+    @Override  //请求头loginRole ：Developer 开发者  Recruiter 企业者
     public void onClick(View view) {
-        Intent intent = new Intent();
         switch (view.getId()) {
             case R.id.ll_firm:
+                EasyConfig.getInstance().addHeader("loginRole", "Developer");
+                startActivity(FirmMainActivity.class);
+                ActivityManager.getInstance().finishAllActivities();
                 break;
             case R.id.ll_dev:
-
+                EasyConfig.getInstance().addHeader("loginRole", "Recruiter");
+                startActivity(FirmMainActivity.class);
+                ActivityManager.getInstance().finishAllActivities();
                 break;
         }
 

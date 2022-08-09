@@ -34,7 +34,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
 /**
- * desc   : 首页界面
+ * desc   : 企业端首页界面
  */
 public final class FirmMainActivity extends AppActivity
         implements NavigationAdapter.OnNavigationListener {

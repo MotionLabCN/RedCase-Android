@@ -653,6 +653,7 @@ public final class EnterDeveloperActivity extends AppActivity {
         progress = 0;
         bean = data;
         String realName = bean.getRealName();
+        SPUtils.getInstance().put(AppConfig.DEVELOP_NAME, realName);
         int sex = bean.getSex();
         if (!TextUtils.isEmpty(bean.getAvatarUrl())) {
             ll_add_photo.setVisibility(View.GONE);
@@ -807,7 +808,11 @@ public final class EnterDeveloperActivity extends AppActivity {
                 TextUtils.isEmpty(bean.getCityName()) ||
                 TextUtils.isEmpty(bean.getAreasName()) ||
                 TextUtils.isEmpty(bean.getRemoteWorkReasonStr())) {
-            tv_add_base_info_tips.setVisibility(View.VISIBLE);
+            if (isResume) {
+                tv_add_base_info_tips.setVisibility(View.VISIBLE);
+            } else {
+                tv_add_base_info_tips.setVisibility(View.INVISIBLE);
+            }
         } else {
             tv_add_base_info_tips.setVisibility(View.INVISIBLE);
         }
@@ -816,7 +821,12 @@ public final class EnterDeveloperActivity extends AppActivity {
                 TextUtils.isEmpty(careerDto.getCareerDirectionName()) ||
                 TextUtils.isEmpty(careerDto.getWorkYearsName()) ||
                 TextUtils.isEmpty(careerDto.getCurSalary())) {
-            tv_add_career_info_tips.setVisibility(View.VISIBLE);
+
+            if (isResume) {
+                tv_add_career_info_tips.setVisibility(View.VISIBLE);
+            } else {
+                tv_add_career_info_tips.setVisibility(View.INVISIBLE);
+            }
         } else {
             tv_add_career_info_tips.setVisibility(View.INVISIBLE);
         }
@@ -832,7 +842,11 @@ public final class EnterDeveloperActivity extends AppActivity {
                         TextUtils.isEmpty(educationDtoList.get(i).getInSchoolStartTime()) ||
                         TextUtils.isEmpty(educationDtoList.get(i).getInSchoolEndTime())) {
 
-                    tv_add_education_tips.setVisibility(View.VISIBLE);
+                    if (isResume) {
+                        tv_add_education_tips.setVisibility(View.VISIBLE);
+                    } else {
+                        tv_add_education_tips.setVisibility(View.INVISIBLE);
+                    }
                     break;
                 } else {
                     tv_add_education_tips.setVisibility(View.INVISIBLE);
@@ -850,7 +864,11 @@ public final class EnterDeveloperActivity extends AppActivity {
                         TextUtils.isEmpty(workExperienceDtoList.get(i).getWorkStartTime()) ||
                         TextUtils.isEmpty(workExperienceDtoList.get(i).getWorkEndTime())) {
 
-                    tv_add_worK_tips.setVisibility(View.VISIBLE);
+                    if (isResume) {
+                        tv_add_worK_tips.setVisibility(View.VISIBLE);
+                    } else {
+                        tv_add_worK_tips.setVisibility(View.INVISIBLE);
+                    }
                     break;
                 } else {
                     tv_add_worK_tips.setVisibility(View.INVISIBLE);
@@ -871,7 +889,11 @@ public final class EnterDeveloperActivity extends AppActivity {
                         TextUtils.isEmpty(projectDtoList.get(i).getDescription()) ||
                         projectDtoList.get(i).getProjectSkillList().size() == 0) {
 
-                    tv_add_project_tips.setVisibility(View.VISIBLE);
+                    if (isResume) {
+                        tv_add_project_tips.setVisibility(View.VISIBLE);
+                    } else {
+                        tv_add_project_tips.setVisibility(View.INVISIBLE);
+                    }
                     break;
                 } else {
                     tv_add_project_tips.setVisibility(View.INVISIBLE);

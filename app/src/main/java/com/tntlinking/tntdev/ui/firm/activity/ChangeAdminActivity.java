@@ -28,7 +28,8 @@ public final class ChangeAdminActivity extends AppActivity {
 
         setOnClickListener(ll_firm, ll_dev);
 
-
+        ll_firm.setSelected(true);
+        ll_dev.setSelected(false);
     }
 
 
@@ -44,8 +45,13 @@ public final class ChangeAdminActivity extends AppActivity {
         Intent intent = new Intent();
         switch (view.getId()) {
             case R.id.ll_firm:
+                ll_firm.setSelected(true);
+                ll_dev.setSelected(false);
+
                 break;
             case R.id.ll_dev:
+                ll_firm.setSelected(false);
+                ll_dev.setSelected(true);
 
                 break;
         }

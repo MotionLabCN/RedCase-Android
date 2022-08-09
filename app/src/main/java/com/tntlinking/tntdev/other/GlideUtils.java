@@ -8,6 +8,7 @@ import com.bumptech.glide.load.MultiTransformation;
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.bumptech.glide.load.resource.bitmap.CircleCrop;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.tntlinking.tntdev.R;
 import com.tntlinking.tntdev.http.glide.GlideApp;
 
 import androidx.annotation.NonNull;
@@ -127,7 +128,7 @@ public class GlideUtils {
         // 显示圆角的 ImageView
         GlideApp.with(activity)
                 .load(res)
-                .transform(new MultiTransformation<>(new CenterCrop(), new RoundedCorners((int)roundedCorners)))
+                .transform(new MultiTransformation<>(new CenterCrop(), new RoundedCorners((int) roundedCorners)))
                 .into(view);
     }
 
@@ -135,7 +136,7 @@ public class GlideUtils {
         // 显示圆角的 ImageView
         GlideApp.with(activity)
                 .load(res)
-                .transform(new MultiTransformation<>(new CenterCrop(), new RoundedCorners((int)roundedCorners)))
+                .transform(new MultiTransformation<>(new CenterCrop(), new RoundedCorners((int) roundedCorners)))
                 .into(view);
     }
 
@@ -143,7 +144,7 @@ public class GlideUtils {
         // 显示圆角的 ImageView
         GlideApp.with(activity)
                 .load(res)
-                .transform(new MultiTransformation<>(new CenterCrop(), new RoundedCorners((int)roundedCorners)))
+                .transform(new MultiTransformation<>(new CenterCrop(), new RoundedCorners((int) roundedCorners)))
                 .into(view);
     }
 
@@ -151,6 +152,7 @@ public class GlideUtils {
         // 显示圆角的 ImageView
         GlideApp.with(activity)
                 .load(res)
+                .error(R.drawable.app_logo)
                 .transform(new MultiTransformation<>(new CenterCrop(), new RoundedCorners((int) roundedCorners)))
                 .into(view);
     }
@@ -159,6 +161,7 @@ public class GlideUtils {
         // 显示圆角的 ImageView
         GlideApp.with(activity)
                 .load(res)
+                .error(R.drawable.app_logo)
                 .transform(new MultiTransformation<>(new CenterCrop(), new RoundedCorners((int) roundedCorners)))
                 .into(view);
     }
@@ -167,6 +170,7 @@ public class GlideUtils {
         // 显示圆角的 ImageView
         GlideApp.with(activity)
                 .load(res)
+                .error(R.drawable.app_logo)
                 .transform(new MultiTransformation<>(new CenterCrop(), new RoundedCorners((int) roundedCorners)))
                 .into(view);
     }
@@ -175,6 +179,7 @@ public class GlideUtils {
         // 显示圆角的 ImageView
         GlideApp.with(activity)
                 .load(res)
+                .error(R.drawable.app_logo)
                 .transform(new MultiTransformation<>(new CenterCrop(), new RoundedCorners((int) roundedCorners)))
                 .into(view);
     }

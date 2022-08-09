@@ -108,7 +108,7 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity> implemen
     private HomeTaskAdapter mTaskAdapter;
     private ServiceProjectAdapter mServiceAdapter;
     private HistoryProjectAdapter mHistoryAdapter;
-    String name = SPUtils.getInstance().getString(AppConfig.DEVELOP_NAME, "朋友");
+
     private String[] titles = {"职位推荐", "活动任务"};
     private List<Fragment> fragmentList = new ArrayList<>();
 
@@ -160,8 +160,6 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity> implemen
         mRefreshLayout.setOnRefreshLoadMoreListener(this);
         mRefreshLayout.setEnableLoadMore(false);
 
-        tv_avatar.setText(Utils.formatName(name));
-        tv_name.setText("你好," + name);
         ImmersionBar.setTitleBar(this, ll_title);
         setOnClickListener(tv_order_switching, tv_avatar, ll_cooperation, ll_service, ll_question, ll_contact, layout_interview);
 
@@ -355,6 +353,9 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity> implemen
 
     @Override
     protected void initData() {
+        String name = SPUtils.getInstance().getString(AppConfig.DEVELOP_NAME, "朋友");
+        tv_avatar.setText(Utils.formatName(name));
+        tv_name.setText("你好," + name);
         getNewbie();
         String status = SPUtils.getInstance().getString(AppConfig.DEVELOP_STATUS, "1");
         getInterviewAppList();
@@ -746,4 +747,5 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity> implemen
     public void onDestroy() {
         super.onDestroy();
     }
+
 }

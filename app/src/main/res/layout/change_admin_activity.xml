@@ -42,12 +42,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_30"
-            android:background="@drawable/bg_blue_stroke_8"
+            android:background="@drawable/selector_change_admin_store"
             android:orientation="horizontal"
             android:paddingLeft="@dimen/dp_20"
-            android:paddingTop="@dimen/dp_30"
+            android:paddingTop="@dimen/dp_25"
             android:paddingRight="@dimen/dp_20"
-            android:paddingBottom="@dimen/dp_30">
+            android:paddingBottom="@dimen/dp_25">
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -78,12 +78,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_10"
-            android:background="@drawable/bg_gray_stroke_8"
+            android:background="@drawable/selector_change_admin_store"
             android:orientation="horizontal"
             android:paddingLeft="@dimen/dp_20"
-            android:paddingTop="@dimen/dp_30"
+            android:paddingTop="@dimen/dp_25"
             android:paddingRight="@dimen/dp_20"
-            android:paddingBottom="@dimen/dp_30">
+            android:paddingBottom="@dimen/dp_25">
 
             <ImageView
                 android:layout_width="wrap_content"

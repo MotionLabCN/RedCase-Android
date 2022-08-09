@@ -25,13 +25,8 @@ import com.tntlinking.tntdev.R;
 import com.tntlinking.tntdev.aop.SingleClick;
 import com.tntlinking.tntdev.app.AppActivity;
 import com.tntlinking.tntdev.http.api.GetDeveloperDetailApi;
-import com.tntlinking.tntdev.http.api.GetProvinceApi;
-import com.tntlinking.tntdev.http.api.ParseResumeApi;
-import com.tntlinking.tntdev.http.api.SubmitDeveloperApi;
-import com.tntlinking.tntdev.http.api.UpdateAvatarApi;
-import com.tntlinking.tntdev.http.glide.GlideApp;
+import com.tntlinking.tntdev.http.api.GetFirmDevDetailApi;
 import com.tntlinking.tntdev.http.model.HttpData;
-import com.tntlinking.tntdev.other.AppConfig;
 import com.tntlinking.tntdev.other.GlideUtils;
 import com.tntlinking.tntdev.ui.bean.DeveloperInfoBean;
 import com.tntlinking.tntdev.ui.dialog.BottomListDialog;
@@ -88,22 +83,14 @@ public final class DeveloperInfoActivity extends AppActivity {
 
         setOnClickListener(ll_to_collect, ll_to_sign, btn_to_interview);
 
-        GlideUtils.loadRoundCorners(this, R.drawable.update_app_top_bg, iv_avatar, (int) getResources().getDimension(R.dimen.dp_8));
+
     }
 
 
     @Override
-    protected void initData() {// 一个是从简历解析传过来的，一个是进入页面接口请求显示数据的
-        DeveloperInfoBean bean = getSerializable(INTENT_KEY_DEVELOPER_INFO);
-        if (bean != null) {
-            if (!TextUtils.isEmpty(bean.getRealName())) {
-                setDeveloperInfo(bean);
-            }
-        } else {
-            int developId = SPUtils.getInstance().getInt(AppConfig.DEVELOPER_ID);
-            getDeveloperDetail(developId);
-
-        }
+    protected void initData() {
+        int developerId = getInt("developerId");
+        getFirmDevDetail(developerId);
     }
 
 
@@ -159,17 +146,32 @@ public final class DeveloperInfoActivity extends AppActivity {
         return data;
     }
 
+    /**
+     * 获取职业方向
+     */
+    public void getFirmDevDetail(int developerId) {
+        EasyHttp.get(this)
+                .api(new GetFirmDevDetailApi().setDeveloperId(developerId))
+                .request(new HttpCallback<HttpData<DeveloperInfoBean>>(this) {
+                    @Override
+                    public void onSucceed(HttpData<DeveloperInfoBean> data) {
+                        setDeveloperInfo(data.getData());
+
+                    }
+                });
+    }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
-            int developId = SPUtils.getInstance().getInt(AppConfig.DEVELOPER_ID);
-            getDeveloperDetail(developId);
+
+
         }
     }
 
-    private int progress = 0;
+
     private DeveloperInfoBean bean;
 
     @SuppressLint("SetTextI18n")
@@ -185,55 +187,34 @@ public final class DeveloperInfoActivity extends AppActivity {
                 });
     }
 
-    public void submitDeveloper() {
-        EasyHttp.post(this)
-                .api(new SubmitDeveloperApi())
-                .request(new HttpCallback<HttpData<List<GetProvinceApi.ProvinceBean>>>(this) {
-
-                    @Override
-                    public void onSucceed(HttpData<List<GetProvinceApi.ProvinceBean>> data) {
-//                        startActivity(SaveQRActivity.class);
-//                        finish();
-                        SPUtils.getInstance().put(AppConfig.RESUME_ANALYSIS, false);
-                        toast("提交成功");
-                        onResume();
-                    }
-                });
-    }
-
 
     /**
      * 简历解析页面跳转过来的，直接填充相关数据
      */
     @SuppressLint("SetTextI18n")
     public void setDeveloperInfo(DeveloperInfoBean data) {
-
-        progress = 0;
         bean = data;
-        String realName = bean.getRealName();
-
+        GlideUtils.loadRoundCorners(this, data.getAvatarUrl(), iv_avatar, (int) getResources().getDimension(R.dimen.dp_8));
+        tv_dev_name.setText(data.getRealName());
 
         DeveloperInfoBean.DeveloperCareer careerDto = bean.getCareerDto();
         List<DeveloperInfoBean.WorkMode> workModeDtoList = bean.getWorkModeDtoList();
-
-
+        if (workModeDtoList.size() != 0) {
+            tv_salary.setText(workModeDtoList.get(0).getExpectSalary());
+        }
+        tv_dev_info.setText(careerDto.getCareerDirectionName() + "·工作经验" + careerDto.getWorkYearsName());
         List<DeveloperInfoBean.DeveloperEducation> educationDtoList = bean.getEducationDtoList();
         List<DeveloperInfoBean.DeveloperWork> workExperienceDtoList = bean.getWorkExperienceDtoList();
         List<DeveloperInfoBean.DeveloperProject> projectDtoList = bean.getProjectDtoList();
-        if (educationDtoList.size() != 0) {
-            progress++;
-        }
+
         addEducationAdapter = new DevEducationAdapter(DeveloperInfoActivity.this, educationDtoList);
         lv1.setAdapter(addEducationAdapter);
 
-        if (workExperienceDtoList.size() != 0) {
-            progress++;
-        }
+
         addWorkAdapter = new DevWorkAdapter(DeveloperInfoActivity.this, workExperienceDtoList);
         lv2.setAdapter(addWorkAdapter);
-        if (projectDtoList.size() >= 1) {
-            progress++;
-        }
+
+
         addProjectAdapter = new DevProjectAdapter(DeveloperInfoActivity.this, projectDtoList);
         lv3.setAdapter(addProjectAdapter);
 
