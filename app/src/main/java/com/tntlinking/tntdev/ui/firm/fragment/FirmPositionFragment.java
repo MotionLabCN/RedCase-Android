@@ -21,6 +21,7 @@ import com.tntlinking.tntdev.R;
 import com.tntlinking.tntdev.aop.SingleClick;
 import com.tntlinking.tntdev.app.TitleBarFragment;
 import com.tntlinking.tntdev.http.api.AppListApi;
+import com.tntlinking.tntdev.http.api.GetFirmPositionApi;
 import com.tntlinking.tntdev.http.model.HttpData;
 import com.tntlinking.tntdev.other.AppConfig;
 import com.tntlinking.tntdev.other.OnItemClickListener;
@@ -42,10 +43,9 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatButton;
 
 /**
- * desc   : 首页 Fragment
+ * desc   : 发布职位fragment
  */
 public final class FirmPositionFragment extends TitleBarFragment<FirmMainActivity> implements OnRefreshLoadMoreListener {
-
     private MyListView lv_1;
     private LinearLayout ll_empty;
     private LinearLayout ll_daily;
@@ -53,9 +53,9 @@ public final class FirmPositionFragment extends TitleBarFragment<FirmMainActivit
     private AppCompatButton btn_commit;
 
 
-    private List<AppListApi.Bean> mServiceList = new ArrayList<>();
+    private List<GetFirmPositionApi.Bean.ListBean> mList = new ArrayList<>();
     private FirmPositionAdapter mAdapter;
-
+    private int mPageNum = 1;
 
     public static FirmPositionFragment newInstance() {
         return new FirmPositionFragment();
@@ -77,7 +77,6 @@ public final class FirmPositionFragment extends TitleBarFragment<FirmMainActivit
 
         mRefreshLayout = findViewById(R.id.rl_status_refresh);
         mRefreshLayout.setOnRefreshLoadMoreListener(this);
-        mRefreshLayout.setEnableLoadMore(false);
 
         mAdapter = new FirmPositionAdapter(getActivity());
         lv_1.setAdapter(mAdapter);
@@ -111,9 +110,7 @@ public final class FirmPositionFragment extends TitleBarFragment<FirmMainActivit
 
     @Override
     protected void initData() {
-
-        mAdapter.setData(analogData());
-//        getAppList();
+        getAppList(mPageNum);
     }
 
     /**
@@ -150,24 +147,32 @@ public final class FirmPositionFragment extends TitleBarFragment<FirmMainActivit
     /**
      * 获取在服务企业list //2 待服务，3 服务中
      */
-    private void getAppList() {
+    private void getAppList(int pageNum) {
         EasyHttp.get(this)
-                .api(new AppListApi().setOrderStatus(3))
-                .request(new HttpCallback<HttpData<List<AppListApi.Bean>>>(this) {
+                .api(new GetFirmPositionApi().setStatus(1).setPageNum(pageNum))
+                .request(new HttpCallback<HttpData<GetFirmPositionApi.Bean>>(this) {
                     @Override
-                    public void onSucceed(HttpData<List<AppListApi.Bean>> data) {
-//                        if (data.getData().size() > 0) {
-//                            ll_empty.setVisibility(View.GONE);
-//
-//
-//                            mServiceList.addAll(data.getData());
-//                            mServiceAdapter.setData(mServiceList);
-//                            orderId = mServiceList.get(0).getId();// 服务项目只会有一个
-//
-//                        } else {
-//                            ll_empty.setVisibility(View.VISIBLE);
-//
-//                        }
+                    public void onSucceed(HttpData<GetFirmPositionApi.Bean> data) {
+                        if (data.getData().getList().size() >= 0) {
+                            ll_empty.setVisibility(View.GONE);
+                            if (pageNum == 1) {
+                                if (data.getData().getList().size() == 0) {
+                                    ll_empty.setVisibility(View.VISIBLE);
+                                } else {
+                                    mList.clear();
+                                    mList.addAll(data.getData().getList());
+                                    mAdapter.setData(mList);
+                                }
+                                mRefreshLayout.finishRefresh();
+                            } else {
+                                if (pageNum == data.getData().getPageNum()) { //当前pageNum 是否等于后台传过来的当前页pagenum 数
+                                    mList.addAll(data.getData().getList());
+                                    mAdapter.setData(mList);
+                                }
+                                mRefreshLayout.finishLoadMore();
+                            }
+
+                        }
                     }
 
                     @Override
@@ -180,16 +185,14 @@ public final class FirmPositionFragment extends TitleBarFragment<FirmMainActivit
 
     @Override
     public void onRefresh(@NonNull RefreshLayout refreshLayout) {
-        mServiceList.clear();
-        String status = SPUtils.getInstance().getString(AppConfig.DEVELOP_STATUS, "1");
-        if (status.equals("3")) {
-            getAppList();
-        }
+        mPageNum = 1;
+        getAppList(1);
     }
 
     @Override
     public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
-
+        mPageNum++;
+        getAppList(mPageNum);
     }
 
 

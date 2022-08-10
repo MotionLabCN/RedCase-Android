@@ -26,6 +26,8 @@ import com.hjq.base.BaseDialog;
 import com.hjq.http.EasyHttp;
 import com.hjq.http.EasyLog;
 import com.hjq.http.listener.HttpCallback;
+import com.hjq.permissions.Permission;
+import com.hjq.permissions.XXPermissions;
 import com.leon.lfilepickerlibrary.utils.Constant;
 import com.tntlinking.tntdev.R;
 import com.tntlinking.tntdev.aop.SingleClick;
@@ -40,6 +42,7 @@ import com.tntlinking.tntdev.http.model.HttpData;
 import com.tntlinking.tntdev.other.AppConfig;
 import com.tntlinking.tntdev.other.BitmapUtil;
 import com.tntlinking.tntdev.other.FileSizeUtil;
+import com.tntlinking.tntdev.other.PermissionCallback;
 import com.tntlinking.tntdev.other.TimeUtil;
 import com.tntlinking.tntdev.other.Utils;
 import com.tntlinking.tntdev.ui.adapter.AddEducationAdapter;
@@ -192,20 +195,35 @@ public final class EnterDeveloperActivity extends AppActivity {
             String type = getIntent().getType();//类型
             //类型 /*&& "video/mp4".equals(type)*/
             if (Intent.ACTION_SEND.equals(action) && type != null) {
-                Uri uri = getIntent().getParcelableExtra(Intent.EXTRA_STREAM);
-                //通过Uri获取文件在本地存储的真实路径
-                File file = UriUtils.uri2File(uri);
 
-                //截取_之后字符串
-                String str1 = type.substring(0, type.indexOf("/"));
-                String str2 = type.substring(str1.length() + 1, type.length());
-                Log.d("str2", ">>>" + str2);
-                EasyLog.print("======文件路径==file=" + file);
-                if (FileUtils.isFile(file) && str2.equals("pdf")) {
-                    parseResume(file);
-                } else {
-                    toast("分享简历格式只支持PDF类型,其他类型暂不支撑");
-                }
+                XXPermissions.with(EnterDeveloperActivity.this)
+                        .permission(Permission.READ_EXTERNAL_STORAGE)
+                        .permission(Permission.WRITE_EXTERNAL_STORAGE)
+                        .request(new PermissionCallback() {
+
+                            @Override
+                            public void onGranted(List<String> permissions, boolean all) {
+                                if (all) {
+
+                                    Uri uri = getIntent().getParcelableExtra(Intent.EXTRA_STREAM);
+                                    //通过Uri获取文件在本地存储的真实路径
+                                    File file = UriUtils.uri2File(uri);
+                                    //截取_之后字符串
+                                    String str1 = type.substring(0, type.indexOf("/"));
+                                    String str2 = type.substring(str1.length() + 1, type.length());
+                                    Log.d("str2", ">>>" + str2);
+                                    EasyLog.print("======文件路径==file=" + file);
+                                    if (FileUtils.isFile(file) && str2.equals("pdf")) {
+                                        parseResume(file);
+                                    } else {
+                                        toast("分享简历格式只支持PDF类型,其他类型暂不支撑");
+                                    }
+                                } else {
+                                    toast("您还没有同意文件读写取权限");
+                                }
+                            }
+                        });
+
             }
         }
     }
@@ -548,7 +566,7 @@ public final class EnterDeveloperActivity extends AppActivity {
                     public void onSucceed(HttpData<List<GetProvinceApi.ProvinceBean>> data) {
 //                        startActivity(SaveQRActivity.class);
 //                        finish();
-                        SPUtils.getInstance().put(AppConfig.RESUME_ANALYSIS, false);
+
                         toast("提交成功");
                         onResume();
                     }
@@ -913,6 +931,7 @@ public final class EnterDeveloperActivity extends AppActivity {
             }
         }
         sv.smoothScrollTo(0, 0);
+        SPUtils.getInstance().put(AppConfig.RESUME_ANALYSIS, false);
     }
 
     /**

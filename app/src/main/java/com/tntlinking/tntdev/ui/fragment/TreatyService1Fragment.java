@@ -388,6 +388,7 @@ public final class TreatyService1Fragment extends TitleBarFragment<MainActivity>
                         } else {
                             ll_empty.setVisibility(View.VISIBLE);
                             ll_daily.setVisibility(View.GONE);
+                            mRefreshLayout.finishRefresh();
                         }
                     }
 

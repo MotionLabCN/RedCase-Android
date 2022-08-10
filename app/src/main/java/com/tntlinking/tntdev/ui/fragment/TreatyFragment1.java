@@ -78,7 +78,7 @@ public final class TreatyFragment1 extends TitleBarFragment<MainActivity> implem
         mTabAdapter.addItem("待服务");
         mTabAdapter.setOnTabListener(this);
         getAppList2(2);
-        getAppList3(3);
+
 
     }
 

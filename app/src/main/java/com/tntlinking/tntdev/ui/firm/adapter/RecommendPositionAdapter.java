@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.tntlinking.tntdev.R;
 import com.tntlinking.tntdev.http.api.AppListApi;
+import com.tntlinking.tntdev.http.api.GetFirmRecommendsApi;
 import com.tntlinking.tntdev.other.GlideUtils;
 
 import java.util.List;
@@ -18,20 +19,23 @@ import java.util.List;
 
 public final class RecommendPositionAdapter extends BaseAdapter {
 
-    private List<AppListApi.Bean> mList;
+    private List<GetFirmRecommendsApi.Bean.ListBean> mList;
     private LayoutInflater layoutInflater;
     private Context mContext;
 
-    public RecommendPositionAdapter(Context context, List<AppListApi.Bean> list) {
+    public RecommendPositionAdapter(Context context) {
         this.mContext = context;
-        this.mList = list;
         layoutInflater = LayoutInflater.from(context);
     }
 
     @Override
     public int getCount() {
+        if (mList == null) {
+            return 0;
+        }
         return mList.size();
     }
+
 
     @Override
     public Object getItem(int position) {
@@ -43,7 +47,7 @@ public final class RecommendPositionAdapter extends BaseAdapter {
         return 0;
     }
 
-    public void setData(List<AppListApi.Bean> list) {
+    public void setData(List<GetFirmRecommendsApi.Bean.ListBean> list) {
         if (list != null) {
             this.mList = list;
             notifyDataSetChanged();
@@ -61,18 +65,18 @@ public final class RecommendPositionAdapter extends BaseAdapter {
             holder = new ViewHolder();
             holder.iv_avatar = convertView.findViewById(R.id.iv_avatar);
             holder.tv_name = convertView.findViewById(R.id.tv_name);
-            holder.tv_position = convertView.findViewById(R.id.tv_position);
+            holder.tv_position_desc = convertView.findViewById(R.id.tv_position_desc);
             holder.tv_salary = convertView.findViewById(R.id.tv_salary);
 
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-        AppListApi.Bean item = mList.get(position);
-        holder.tv_name.setText(item.getPositionName());
-        holder.tv_position.setText(item.getCompanyName());
-
-        GlideUtils.loadRoundCorners(mContext, R.drawable.update_app_top_bg, holder.iv_avatar,
+        GetFirmRecommendsApi.Bean.ListBean item = mList.get(position);
+        holder.tv_name.setText(item.getRealName());
+        holder.tv_salary.setText(item.getExpectSalary());
+        holder.tv_position_desc.setText(item.getCareerDirectionName() + "-" + item.getEducationName() + "-" + item.getWorkYearsName());
+        GlideUtils.loadRoundCorners(mContext, item.getAvatarUrl(), holder.iv_avatar,
                 (int) mContext.getResources().getDimension(R.dimen.dp_8));
         return convertView;
     }
@@ -80,7 +84,7 @@ public final class RecommendPositionAdapter extends BaseAdapter {
     class ViewHolder {
         ImageView iv_avatar;
         TextView tv_name;
-        TextView tv_position;
+        TextView tv_position_desc;
         TextView tv_salary;
 
 

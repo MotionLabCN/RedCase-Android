@@ -11,16 +11,16 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.tntlinking.tntdev.R;
+import com.tntlinking.tntdev.http.api.GetFirmPositionApi;
 import com.tntlinking.tntdev.other.OnItemClickListener;
 
 
 import java.util.List;
 
 
-
 public final class FirmPositionAdapter extends BaseAdapter {
 
-    private List<String> mList;
+    private List<GetFirmPositionApi.Bean.ListBean> mList;
     private LayoutInflater layoutInflater;
     private Context mContext;
     private OnItemClickListener mOnItemClickListener;
@@ -53,11 +53,11 @@ public final class FirmPositionAdapter extends BaseAdapter {
         return 0;
     }
 
-    public List<String> getData() {
+    public List<GetFirmPositionApi.Bean.ListBean> getData() {
         return mList;
     }
 
-    public void setData(List<String> list) {
+    public void setData(List<GetFirmPositionApi.Bean.ListBean> list) {
         if (list != null) {
             this.mList = list;
             notifyDataSetChanged();
@@ -86,8 +86,13 @@ public final class FirmPositionAdapter extends BaseAdapter {
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-        String item = mList.get(position);
-        holder.tv_company_name.setText(item);
+        GetFirmPositionApi.Bean.ListBean item = mList.get(position);
+        holder.tv_position.setText(item.getCareerDirection());
+        holder.tv_salary.setText(item.getStartPay() + "-" + item.getEndPay());
+        holder.tv_company_name.setText(item.getCareerDirection());
+        holder.tv_position_desc.setText(item.getWorkDaysMode() + "-" + item.getEducation() + "-" + item.getWorkYears());
+
+
         holder.tv_reason.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -110,9 +115,6 @@ public final class FirmPositionAdapter extends BaseAdapter {
         TextView tv_position_desc;
         TextView tv_reason;
 
-
     }
-
-
 }
 
