@@ -194,30 +194,40 @@ public final class AddProjectActivityNew extends AppActivity {
 
     @Override
     public void onLeftClick(View view) {
-        super.onLeftClick(view);
+//        super.onLeftClick(view);
 //        if (getBoolean(IS_FIRST_RESUME)) {
-//            new BaseDialog.Builder<>(this)
-//                    .setContentView(R.layout.check_order_status_dialog)
-//                    .setAnimStyle(BaseDialog.ANIM_SCALE)
-//                    .setText(R.id.tv_title, "简历解析")
-//                    .setText(R.id.tv_content, "是否返回到简历解析页面")
-//                    .setText(R.id.btn_dialog_custom_cancel, "否")
-//                    .setText(R.id.btn_dialog_custom_ok, "是")
-//                    .setOnClickListener(R.id.btn_dialog_custom_cancel, (BaseDialog.OnClickListener<Button>) (dialog, button) -> dialog.dismiss())
-//                    .setOnClickListener(R.id.btn_dialog_custom_ok, (dialog, views) -> {
-//                        Intent intent = new Intent(this, EnterDeveloperActivity.class);
-//                        intent.putExtra(INTENT_KEY_DEVELOPER_INFO, mBean);
-//                        startActivity(intent);
-//                        dialog.dismiss();
-//                        ActivityManager.getInstance().finishAllActivities();
-//                    }).show();
+//            Intent intent = new Intent(this, EnterDeveloperActivity.class);
+//            intent.putExtra(INTENT_KEY_DEVELOPER_INFO, mBean);
+//            startActivity(intent);
+//            ActivityManager.getInstance().finishAllActivities(EnterDeveloperActivity.class, MainActivity.class);
 //        }
+        backToDialog();
+    }
 
+    @Override
+    public void onBackPressed() {
+        backToDialog();
+    }
+
+
+    public void backToDialog() {
         if (getBoolean(IS_FIRST_RESUME)) {
-            Intent intent = new Intent(this, EnterDeveloperActivity.class);
-            intent.putExtra(INTENT_KEY_DEVELOPER_INFO, mBean);
-            startActivity(intent);
-            ActivityManager.getInstance().finishAllActivities(EnterDeveloperActivity.class, MainActivity.class);
+            new BaseDialog.Builder<>(this)
+                    .setContentView(R.layout.check_order_status_dialog)
+                    .setAnimStyle(BaseDialog.ANIM_SCALE)
+                    .setText(R.id.tv_title, "简历解析")
+                    .setText(R.id.tv_content, "是否返回到简历解析页面")
+                    .setText(R.id.btn_dialog_custom_cancel, "否")
+                    .setText(R.id.btn_dialog_custom_ok, "是")
+                    .setOnClickListener(R.id.btn_dialog_custom_cancel, (BaseDialog.OnClickListener<Button>) (dialog, button) -> dialog.dismiss())
+                    .setOnClickListener(R.id.btn_dialog_custom_ok, (dialog, views) -> {
+                        Intent intent = new Intent(this, EnterDeveloperActivity.class);
+                        intent.putExtra(INTENT_KEY_DEVELOPER_INFO, mBean);
+                        startActivity(intent);
+                        ActivityManager.getInstance().finishAllActivities(EnterDeveloperActivity.class, MainActivity.class);
+                    }).show();
+        } else {
+            finish();
         }
     }
 
@@ -424,17 +434,23 @@ public final class AddProjectActivityNew extends AppActivity {
                 }
 
 
-                if (btn_commit.getText().equals("完成")) {
-                    Intent intent = new Intent(this, EnterDeveloperActivity.class);
-                    intent.putExtra(INTENT_KEY_DEVELOPER_INFO, mBean);
-                    startActivity(intent);
-                    ActivityManager.getInstance().finishAllActivities(EnterDeveloperActivity.class, MainActivity.class);
+//                if (btn_commit.getText().equals("完成")) {
+//                    Intent intent = new Intent(this, EnterDeveloperActivity.class);
+//                    intent.putExtra(INTENT_KEY_DEVELOPER_INFO, mBean);
+//                    startActivity(intent);
+//                    ActivityManager.getInstance().finishAllActivities(EnterDeveloperActivity.class, MainActivity.class);
+
+//                } else {
+//                    if (mId == 0) { // 0 添加教育  不等于0 是编辑教育
+//                        addProject(false);
+//                    } else {
+//                        updateProject(mId);
+//                    }
+//                }
+                if (mId == 0) { // 0 添加教育  不等于0 是编辑教育
+                    addProject(false);
                 } else {
-                    if (mId == 0) { // 0 添加教育  不等于0 是编辑教育
-                        addProject(false);
-                    } else {
-                        updateProject(mId);
-                    }
+                    updateProject(mId);
                 }
                 break;
         }
@@ -536,6 +552,7 @@ public final class AddProjectActivityNew extends AppActivity {
                             developerProject.setDescription(description);
                             developerProject.setProjectSkillList(mSelectList);
                             checkDeveloper(singleton);
+
 
                         } else if (isBack) {
                             setResult(RESULT_OK);
@@ -653,7 +670,8 @@ public final class AddProjectActivityNew extends AppActivity {
         if (!isJumpProject(bean)) {
             setNextData(bean);
         } else {
-            btn_commit.setText("完成");
+//            btn_commit.setText("完成");
+
         }
 
     }
@@ -661,6 +679,12 @@ public final class AddProjectActivityNew extends AppActivity {
 
     // 项目资料全部没写就跳过，返回true，其他情况都要展示false
     public boolean isJumpProject(DeveloperInfoBean bean) {
+        if (btn_commit.getText().equals("完成")) {
+            Intent intent = new Intent(AddProjectActivityNew.this, EnterDeveloperActivity.class);
+            intent.putExtra(INTENT_KEY_DEVELOPER_INFO, mBean);
+            startActivity(intent);
+            ActivityManager.getInstance().finishAllActivities(EnterDeveloperActivity.class, MainActivity.class);
+        }
         List<DeveloperInfoBean.DeveloperProject> projectDtoList = bean.getProjectDtoList();
         boolean mTag = true;
         if (projectDtoList.size() == 0) {
@@ -680,12 +704,15 @@ public final class AddProjectActivityNew extends AppActivity {
                         projectDtoList.get(i).getProjectSkillList().size() == 0) {
 
                     position = i;
-
                     mTag = true;
                     break;
                 } else {
                     position = i;
-
+                    if (position + 1 == projectDtoList.size()) {
+                        btn_commit.setText("完成");
+                    } else {
+                        btn_commit.setText("下一步");
+                    }
                     mTag = false;
                     break;
                 }
@@ -702,7 +729,8 @@ public final class AddProjectActivityNew extends AppActivity {
 
             if (bean.getProjectDtoList().size() != 0) {
                 tv_title.setText("编辑项目经历");
-                btn_commit.setText("下一步");
+//                btn_commit.setText("下一步");
+
                 btn_delete.setVisibility(View.GONE);
 
                 et_project_name.setText(TextUtils.isEmpty(developerProject.getProjectName()) ? "" : developerProject.getProjectName());

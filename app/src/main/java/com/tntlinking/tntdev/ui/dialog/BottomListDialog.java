@@ -2,6 +2,7 @@ package com.tntlinking.tntdev.ui.dialog;
 
 import android.content.Context;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -9,6 +10,8 @@ import android.widget.TextView;
 import com.hjq.base.BaseDialog;
 import com.tntlinking.tntdev.R;
 import com.tntlinking.tntdev.aop.SingleClick;
+import com.tntlinking.tntdev.http.api.GetFirmPositionApi;
+import com.tntlinking.tntdev.other.OnItemClickListener;
 import com.tntlinking.tntdev.ui.firm.adapter.BottomPositionAdapter;
 
 import java.util.List;
@@ -27,13 +30,13 @@ public final class BottomListDialog {
         private BottomPositionAdapter mAdapter;
         private OnListener mListener;
         private boolean mAutoDismiss = true;
-
+        private OnItemClickListener onItemClickListener;
 
         public Builder(Context context) {
             super(context);
 
             setContentView(R.layout.bottom_list_dialog);
-            setHeight(getResources().getDisplayMetrics().heightPixels * 2/3);
+            setHeight(getResources().getDisplayMetrics().heightPixels * 2 / 3);
 
             list_view = findViewById(R.id.list_view);
             iv_close = findViewById(R.id.iv_close);
@@ -43,6 +46,15 @@ public final class BottomListDialog {
             mAdapter = new BottomPositionAdapter(context);
             list_view.setAdapter(mAdapter);
             setOnClickListener(iv_close, btn_commit);
+            list_view.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                    if (onItemClickListener != null) {
+                        onItemClickListener.onItemClick(position);
+                    }
+                }
+            });
         }
 
         public Builder setListener(OnListener listener) {
@@ -50,7 +62,12 @@ public final class BottomListDialog {
             return this;
         }
 
-        public BottomListDialog.Builder setData(List<String> str) {
+        public Builder setOnItemListener(OnItemClickListener listener) {
+            onItemClickListener = listener;
+            return this;
+        }
+
+        public BottomListDialog.Builder setData(List<GetFirmPositionApi.Bean.ListBean> str) {
             mAdapter.setData(str);
             return this;
 

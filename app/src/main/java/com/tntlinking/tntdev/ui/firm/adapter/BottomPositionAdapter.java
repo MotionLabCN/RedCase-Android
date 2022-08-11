@@ -6,19 +6,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.tntlinking.tntdev.R;
+import com.tntlinking.tntdev.http.api.GetFirmPositionApi;
 
 import java.util.List;
-
-import androidx.appcompat.widget.AppCompatButton;
 
 
 public final class BottomPositionAdapter extends BaseAdapter {
 
-    private List<String> mList;
+    private List<GetFirmPositionApi.Bean.ListBean> mList;
     private LayoutInflater layoutInflater;
     private Context mContext;
 
@@ -46,11 +44,11 @@ public final class BottomPositionAdapter extends BaseAdapter {
         return 0;
     }
 
-    public List<String> getData() {
+    public List<GetFirmPositionApi.Bean.ListBean> getData() {
         return mList;
     }
 
-    public void setData(List<String> list) {
+    public void setData(List<GetFirmPositionApi.Bean.ListBean> list) {
         if (list != null) {
             this.mList = list;
             notifyDataSetChanged();
@@ -74,8 +72,11 @@ public final class BottomPositionAdapter extends BaseAdapter {
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-        String item = mList.get(position);
-        holder.tv_dev_position.setText(item);
+        GetFirmPositionApi.Bean.ListBean item = mList.get(position);
+        holder.tv_dev_position.setText(item.getCareerDirection());
+        holder.tv_salary.setText(item.getStartPay() + "-" + item.getEndPay());
+        holder.tv_dev_info.setText(item.getWorkDaysMode() + "-" + item.getEducation() + "-" + item.getWorkYears());
+
 
         return convertView;
     }

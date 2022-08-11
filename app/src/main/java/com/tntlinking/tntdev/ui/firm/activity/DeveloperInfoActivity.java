@@ -26,8 +26,10 @@ import com.tntlinking.tntdev.aop.SingleClick;
 import com.tntlinking.tntdev.app.AppActivity;
 import com.tntlinking.tntdev.http.api.GetDeveloperDetailApi;
 import com.tntlinking.tntdev.http.api.GetFirmDevDetailApi;
+import com.tntlinking.tntdev.http.api.GetFirmPositionApi;
 import com.tntlinking.tntdev.http.model.HttpData;
 import com.tntlinking.tntdev.other.GlideUtils;
+import com.tntlinking.tntdev.other.OnItemClickListener;
 import com.tntlinking.tntdev.ui.bean.DeveloperInfoBean;
 import com.tntlinking.tntdev.ui.dialog.BottomListDialog;
 import com.tntlinking.tntdev.ui.firm.adapter.DevEducationAdapter;
@@ -91,6 +93,8 @@ public final class DeveloperInfoActivity extends AppActivity {
     protected void initData() {
         int developerId = getInt("developerId");
         getFirmDevDetail(developerId);
+
+        getAppList(1);
     }
 
 
@@ -115,9 +119,15 @@ public final class DeveloperInfoActivity extends AppActivity {
 //
 //                        }).show();
 
-                new BottomListDialog.Builder(this).setData(analogData()).setListener(new BottomListDialog.OnListener() {
+                new BottomListDialog.Builder(this).setData(mList).setListener(new BottomListDialog.OnListener() {
                     @Override
                     public void onSelected(BaseDialog dialog) {
+
+                        startActivity(SendPositionActivity.class);
+                    }
+                }).setOnItemListener(new OnItemClickListener() {
+                    @Override
+                    public void onItemClick(int position) {
 
                     }
                 }).show();
@@ -174,19 +184,27 @@ public final class DeveloperInfoActivity extends AppActivity {
 
     private DeveloperInfoBean bean;
 
-    @SuppressLint("SetTextI18n")
-    public void getDeveloperDetail(int parentId) {
-        EasyHttp.get(this)
-                .api(new GetDeveloperDetailApi().setParentId(parentId))
-                .request(new HttpCallback<HttpData<DeveloperInfoBean>>(this) {
-                    @Override
-                    public void onSucceed(HttpData<DeveloperInfoBean> data) {
-                        setDeveloperInfo(data.getData());
+    private List<GetFirmPositionApi.Bean.ListBean> mList = new ArrayList<>();
 
+    private void getAppList(int pageNum) {
+        EasyHttp.get(this)
+                .api(new GetFirmPositionApi().setStatus(1).setPageNum(pageNum))
+                .request(new HttpCallback<HttpData<GetFirmPositionApi.Bean>>(this) {
+                    @Override
+                    public void onSucceed(HttpData<GetFirmPositionApi.Bean> data) {
+                        if (data.getData().getList().size() >= 0) {
+                            mList.clear();
+                            mList.addAll(data.getData().getList());
+
+                        }
+                    }
+
+                    @Override
+                    public void onFail(Exception e) {
+                        super.onFail(e);
                     }
                 });
     }
-
 
     /**
      * 简历解析页面跳转过来的，直接填充相关数据

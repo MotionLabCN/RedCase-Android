@@ -52,7 +52,7 @@ public final class HistoryDailyItemAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder holder = null;
         if (convertView == null) {
-            convertView = layoutInflater.inflate(R.layout.item_write_daily, null);
+            convertView = layoutInflater.inflate(R.layout.item_write_daily_view, null);
             holder = new ViewHolder();
             holder.tv_tab_left = convertView.findViewById(R.id.tv_tab_left);
 

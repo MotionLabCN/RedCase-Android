@@ -185,9 +185,9 @@ public final class MineFragment1 extends TitleBarFragment<MainActivity> implemen
         } else if (view == mPersonDataSetting) {// 账户设置
             startActivity(PersonSettingActivity.class);
         } else if (view == person_data_about) {// 关于天天数链开发者
-//            startActivity(AboutAppActivity.class);
-            startActivity(FirmMainActivity.class);
-            ActivityManager.getInstance().finishAllActivities(FirmMainActivity.class);
+            startActivity(AboutAppActivity.class);
+//            startActivity(FirmMainActivity.class);
+//            ActivityManager.getInstance().finishAllActivities(FirmMainActivity.class);
         } else if (view == person_data_evaluation) {
             getDeveloperJkStatus();
         } else if (view == person_data_history) {// 历史订单

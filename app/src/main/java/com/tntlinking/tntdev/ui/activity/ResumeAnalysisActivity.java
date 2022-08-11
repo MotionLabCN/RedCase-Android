@@ -14,6 +14,7 @@ import com.blankj.utilcode.util.SPUtils;
 import com.github.barteksc.pdfviewer.PDFView;
 import com.hjq.base.BaseDialog;
 import com.hjq.http.EasyHttp;
+import com.hjq.http.EasyLog;
 import com.hjq.http.listener.HttpCallback;
 import com.tntlinking.tntdev.R;
 import com.tntlinking.tntdev.app.AppActivity;
@@ -137,6 +138,11 @@ public final class ResumeAnalysisActivity extends AppActivity {
         });
     }
 
+    @Override
+    public void onLeftClick(View view) {
+        super.onLeftClick(view);
+        SPUtils.getInstance().put(AppConfig.RESUME_ANALYSIS, false);
+    }
 
     private void parseResume(String fileName) {
         EasyHttp.post(this)
@@ -144,7 +150,7 @@ public final class ResumeAnalysisActivity extends AppActivity {
                 .request(new HttpCallback<HttpData<DeveloperInfoBean>>(this) {
                     @Override
                     public void onSucceed(HttpData<DeveloperInfoBean> data) {
-                        SPUtils.getInstance().put(AppConfig.RESUME_ANALYSIS, true);//简历解析成功
+
 
 //                        Intent intent = new Intent(ResumeAnalysisActivity.this, EnterDeveloperActivity.class);
 //                        intent.putExtra(INTENT_KEY_DEVELOPER_INFO, data.getData());
@@ -155,6 +161,8 @@ public final class ResumeAnalysisActivity extends AppActivity {
                                 .setContentView(R.layout.show_resume_status_dialog)
                                 .setAnimStyle(BaseDialog.ANIM_SCALE)
                                 .setOnClickListener(R.id.btn_dialog_custom_ok, (dialog, views) -> {
+                                    SPUtils.getInstance().put(AppConfig.RESUME_ANALYSIS, true);//简历解析成功
+
                                     checkDeveloper(data.getData());
                                     DeveloperInfoBean.getSingleton().setDeveloperInfoBean(data.getData());
                                     finish();

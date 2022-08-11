@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Build;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.blankj.utilcode.util.GsonUtils;
@@ -149,13 +150,41 @@ public final class AddCareerActivity extends AppActivity {
 
     @Override
     public void onLeftClick(View view) {
-        super.onLeftClick(view);
+//        super.onLeftClick(view);
+//        if (getBoolean(IS_FIRST_RESUME)) {
+//            Intent intent = new Intent(this, EnterDeveloperActivity.class);
+//            intent.putExtra(INTENT_KEY_DEVELOPER_INFO, mBean);
+//            startActivity(intent);
+//            ActivityManager.getInstance().finishAllActivities(EnterDeveloperActivity.class, MainActivity.class);
+//        }
+        backToDialog();
+    }
+    @Override
+    public void onBackPressed() {
+        backToDialog();
+    }
+
+
+    public void backToDialog() {
         if (getBoolean(IS_FIRST_RESUME)) {
-            Intent intent = new Intent(this, EnterDeveloperActivity.class);
-            intent.putExtra(INTENT_KEY_DEVELOPER_INFO, mBean);
-            startActivity(intent);
-            ActivityManager.getInstance().finishAllActivities(EnterDeveloperActivity.class, MainActivity.class);
+            new BaseDialog.Builder<>(this)
+                    .setContentView(R.layout.check_order_status_dialog)
+                    .setAnimStyle(BaseDialog.ANIM_SCALE)
+                    .setText(R.id.tv_title, "简历解析")
+                    .setText(R.id.tv_content, "是否返回到简历解析页面")
+                    .setText(R.id.btn_dialog_custom_cancel, "否")
+                    .setText(R.id.btn_dialog_custom_ok, "是")
+                    .setOnClickListener(R.id.btn_dialog_custom_cancel, (BaseDialog.OnClickListener<Button>) (dialog, button) -> dialog.dismiss())
+                    .setOnClickListener(R.id.btn_dialog_custom_ok, (dialog, views) -> {
+                        Intent intent = new Intent(this, EnterDeveloperActivity.class);
+                        intent.putExtra(INTENT_KEY_DEVELOPER_INFO, mBean);
+                        startActivity(intent);
+                        ActivityManager.getInstance().finishAllActivities(EnterDeveloperActivity.class, MainActivity.class);
+                    }).show();
+        } else {
+            finish();
         }
+
     }
 
     @RequiresApi(api = Build.VERSION_CODES.M)

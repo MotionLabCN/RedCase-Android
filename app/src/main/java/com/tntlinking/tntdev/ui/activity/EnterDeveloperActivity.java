@@ -931,7 +931,7 @@ public final class EnterDeveloperActivity extends AppActivity {
             }
         }
         sv.smoothScrollTo(0, 0);
-        SPUtils.getInstance().put(AppConfig.RESUME_ANALYSIS, false);
+
     }
 
     /**

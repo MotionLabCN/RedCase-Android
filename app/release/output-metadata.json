@@ -10,9 +10,9 @@
     {
       "type": "SINGLE",
       "filters": [],
-      "versionCode": 21,
-      "versionName": "1.8.2",
-      "outputFile": "RedCase-Android_v1.8.2_release_0713.apk"
+      "versionCode": 22,
+      "versionName": "1.9.0",
+      "outputFile": "RedCase-Android_v1.9.0_release_0811.apk"
     }
   ]
 }
