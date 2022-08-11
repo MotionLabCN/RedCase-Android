@@ -12,6 +12,7 @@ import java.util.List;
  */
 
 public class DeveloperInfoBean implements Serializable {
+    private int id;
     private String realName;//名字
     private int status;
     private int sex = 0; //性别 0->男 1->女
@@ -536,6 +537,14 @@ public class DeveloperInfoBean implements Serializable {
         public void setWorkEndTime(String workEndTime) {
             this.workEndTime = workEndTime;
         }
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getRealName() {

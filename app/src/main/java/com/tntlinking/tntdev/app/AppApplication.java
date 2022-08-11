@@ -177,6 +177,9 @@ public final class AppApplication extends Application {
                     if (!TextUtils.isEmpty(SPUtils.getInstance().getString(AppConfig.ACCESS_TOKEN))) {
                         headers.put("Authorization", SPUtils.getInstance().getString(AppConfig.ACCESS_TOKEN));
                     }
+                    if (!TextUtils.isEmpty(SPUtils.getInstance().getString(AppConfig.ACCESS_ROLE))) {
+                        headers.put("loginRole", SPUtils.getInstance().getString(AppConfig.ACCESS_ROLE));
+                    }
                     // 添加全局请求参数
                     // params.put("6666666", "6666666");
                 })

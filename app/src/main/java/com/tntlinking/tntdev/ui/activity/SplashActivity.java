@@ -27,10 +27,8 @@ import com.tntlinking.tntdev.other.AppConfig;
 import com.hjq.http.EasyHttp;
 import com.hjq.http.listener.HttpCallback;
 import com.hjq.widget.view.SlantedTextView;
-import com.tntlinking.tntdev.other.TimeUtil;
-import com.umeng.commonsdk.debug.E;
+import com.tntlinking.tntdev.ui.firm.activity.FirmMainActivity;
 
-import java.util.logging.Handler;
 
 /**
  * desc   : 闪屏界面
@@ -99,9 +97,19 @@ public final class SplashActivity extends AppActivity {
 //                        } else {
 //                            startActivity(CheckDeveloperFailActivity.class);
 //                        }
-                        startActivity(MainActivity.class);
+                        if (SPUtils.getInstance().getBoolean(AppConfig.LOGIN_ROLE)){
+                            startActivity(FirmMainActivity.class);
+                        }else {
+                            startActivity(MainActivity.class);
+                        }
+//                        startActivity(MainActivity.class);
                     } else {
-                        startActivity(LoginActivity1.class);
+//                        startActivity(LoginActivity1.class);
+                        if (SPUtils.getInstance().getBoolean(AppConfig.LOGIN_ROLE)){
+                            startActivity(FirmMainActivity.class);
+                        }else {
+                            startActivity(MainActivity.class);
+                        }
                     }
                     finish();
                 } else {
@@ -120,10 +128,24 @@ public final class SplashActivity extends AppActivity {
                                         SPUtils.getInstance().put(AppConfig.DEVELOPER_ID, data.getData().getId());
                                         SPUtils.getInstance().put(AppConfig.SERVICE_STATUS,data.getData().getServiceStatus());
 
-                                        startActivity(MainActivity.class);
+//                                        startActivity(MainActivity.class);
+//                                        finish();
+
+                                        if (SPUtils.getInstance().getBoolean(AppConfig.LOGIN_ROLE)){
+                                            startActivity(FirmMainActivity.class);
+                                        }else {
+                                            startActivity(MainActivity.class);
+                                        }
                                         finish();
                                     } else {
-                                        startActivity(MainActivity.class);
+//                                        startActivity(MainActivity.class);
+//                                        finish();
+
+                                        if (SPUtils.getInstance().getBoolean(AppConfig.LOGIN_ROLE)){
+                                            startActivity(FirmMainActivity.class);
+                                        }else {
+                                            startActivity(MainActivity.class);
+                                        }
                                         finish();
                                     }
 

@@ -142,7 +142,10 @@ public final class AppConfig {
      * access_token  登陆成功返回的token
      */
     public static String ACCESS_TOKEN = "access_token";
-
+    /**
+     * access_token  登陆角色
+     */
+    public static String ACCESS_ROLE = "loginRole";
     /**
      * 开发者的id
      */
@@ -200,5 +203,17 @@ public final class AppConfig {
      */
     public static String RESUME_ANALYSIS = "resume_analysis";
 
+    /**
+     * 登陆角色 true 是企业端， false 是开发者端
+     */
+    public static String LOGIN_ROLE = "login_role";
+    /**
+     * 开发登陆者角色
+     */
+    public static String ROLE_DEV = "dev";
+    /**
+     * 企业登陆角色
+     */
+    public static String ROLE_FIRM = "firm";
 
 }

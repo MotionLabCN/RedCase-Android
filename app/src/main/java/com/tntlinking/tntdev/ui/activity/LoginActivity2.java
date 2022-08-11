@@ -31,6 +31,7 @@ import com.hjq.http.EasyConfig;
 import com.hjq.http.EasyHttp;
 import com.hjq.http.listener.HttpCallback;
 import com.hjq.widget.view.CountdownView;
+import com.tntlinking.tntdev.ui.firm.activity.SelectAdminActivity;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
@@ -193,8 +194,9 @@ public final class LoginActivity2 extends AppActivity implements TextView.OnEdit
                         SPUtils.getInstance().put(AppConfig.DEVELOPER_ID, data.getData().getId());
                         SPUtils.getInstance().put(AppConfig.SERVICE_STATUS, data.getData().getServiceStatus());
                         JPushInterface.setAlias(getActivity(), 1001, "ttsl_" + data.getData().getId());
-                        startActivity(MainActivity.class);
-                        ActivityManager.getInstance().finishAllActivities();
+//                        startActivity(MainActivity.class);
+//                        ActivityManager.getInstance().finishAllActivities();
+                        startActivity(SelectAdminActivity.class);
                     }
                 });
 

@@ -101,7 +101,7 @@ public final class DeveloperInfoActivity extends AppActivity {
     @SingleClick
     @Override
     public void onClick(View view) {
-        Intent intent = new Intent();
+
         switch (view.getId()) {
             case R.id.ll_to_collect:
                 toast("收藏");
@@ -128,7 +128,16 @@ public final class DeveloperInfoActivity extends AppActivity {
                 }).setOnItemListener(new OnItemClickListener() {
                     @Override
                     public void onItemClick(int position) {
+                        GetFirmPositionApi.Bean.ListBean listBean = mList.get(position);
+                        Intent intent = new Intent();
+                        intent.setClass(DeveloperInfoActivity.this, ContractDetailActivity.class);
 
+                        intent.putExtra("orderId", listBean.getId());
+                        intent.putExtra("developerId", bean.getId());
+                        intent.putExtra("name", bean.getRealName());
+                        intent.putExtra("avatarUrl", bean.getAvatarUrl());
+
+                        startActivity(intent);
                     }
                 }).show();
                 break;
