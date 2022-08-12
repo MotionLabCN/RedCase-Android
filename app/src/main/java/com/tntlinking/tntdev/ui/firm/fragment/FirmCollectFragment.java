@@ -70,7 +70,7 @@ public final class FirmCollectFragment extends TitleBarFragment<FirmMainActivity
 
         mRefreshLayout = findViewById(R.id.rl_status_refresh);
         mRefreshLayout.setOnRefreshLoadMoreListener(this);
-        mRefreshLayout.setEnableLoadMore(false);
+
 
         mAdapter = new CollectPositionAdapter(getActivity());
 

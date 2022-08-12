@@ -16,6 +16,8 @@ import com.tntlinking.tntdev.R;
 import com.tntlinking.tntdev.aop.SingleClick;
 import com.tntlinking.tntdev.app.AppActivity;
 import com.tntlinking.tntdev.http.api.AppListApi;
+import com.tntlinking.tntdev.http.api.GetFirmFreezeRecordApi;
+import com.tntlinking.tntdev.http.api.GetFirmInterviewListApi;
 import com.tntlinking.tntdev.http.model.HttpData;
 import com.tntlinking.tntdev.other.AppConfig;
 import com.tntlinking.tntdev.other.Utils;
@@ -59,7 +61,7 @@ public final class AccountManageActivity extends AppActivity implements OnRefres
 
         mRefreshLayout = findViewById(R.id.rl_status_refresh);
         mRefreshLayout.setOnRefreshLoadMoreListener(this);
-        mRefreshLayout.setEnableLoadMore(false);
+
 
         mServiceAdapter = new FreezeAdapter(getActivity(), mServiceList);
 
@@ -93,8 +95,9 @@ public final class AccountManageActivity extends AppActivity implements OnRefres
 
 
     @Override
-    protected void initData() {// 一个是从简历解析传过来的，一个是进入页面接口请求显示数据的
-        getAppList();
+    protected void initData() {
+//        getAppList();
+        getFirmFreezeRecord();
     }
 
 
@@ -111,6 +114,18 @@ public final class AccountManageActivity extends AppActivity implements OnRefres
         }
 
     }
+
+    public void getFirmFreezeRecord() {
+        EasyHttp.get(this)
+                .api(new GetFirmFreezeRecordApi().setDate("2022-8").setPageNum(1).setPageNum(20))
+                .request(new HttpCallback<HttpData<Void>>(this) {
+
+                    @Override
+                    public void onSucceed(HttpData<Void> data) {
+                    }
+                });
+    }
+
 
     /**
      * 获取在服务企业list //2 待服务，3 服务中

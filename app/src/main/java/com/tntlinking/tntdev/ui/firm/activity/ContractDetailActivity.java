@@ -19,9 +19,11 @@ import com.hjq.http.listener.HttpCallback;
 import com.tntlinking.tntdev.R;
 import com.tntlinking.tntdev.aop.SingleClick;
 import com.tntlinking.tntdev.app.AppActivity;
+import com.tntlinking.tntdev.http.api.CreateOrderApi;
 import com.tntlinking.tntdev.http.api.GetDeveloperDetailApi;
 import com.tntlinking.tntdev.http.api.GetProvinceApi;
 import com.tntlinking.tntdev.http.api.PostCalculateApi;
+import com.tntlinking.tntdev.http.api.PreOrderInfoApi;
 import com.tntlinking.tntdev.http.api.SendPositionApi;
 import com.tntlinking.tntdev.http.model.HttpData;
 import com.tntlinking.tntdev.other.GlideUtils;
@@ -54,6 +56,10 @@ public final class ContractDetailActivity extends AppActivity {
     private TextView tv_work_freeze_money;
     private AppCompatButton btn_create;
 
+    private int positionId;
+    private int developerId;
+    private String selectTime;
+
     @Override
     protected int getLayoutId() {
         return R.layout.contract_detail_activity;
@@ -84,23 +90,25 @@ public final class ContractDetailActivity extends AppActivity {
 
     }
 
-    int positionId;
-    int developerId;
 
     @Override
     protected void initData() {
-        positionId = getInt("orderId");
+        positionId = getInt("positionId");
         developerId = getInt("developerId");
         String name = getString("name");
         String avatarUrl = getString("avatarUrl");
 
-        GlideUtils.loadRoundCorners(this, avatarUrl, iv_avatar,
-                (int) getResources().getDimension(R.dimen.dp_8));
+        GlideUtils.loadRoundCorners(this, avatarUrl, iv_avatar, (int) getResources().getDimension(R.dimen.dp_8));
 
         tv_name.setText(name);
         String nowTime = TimeUtil.getTimeString("yyyy-MM-dd");
+        tv_work_time.setText(nowTime);
         EasyConfig.getInstance().addHeader("loginRole", "Recruiter");
         postCalculate(nowTime);
+
+        if (getInt("orderId") != 0) {
+            getOrderInfo(getInt("orderId"));
+        }
     }
 
 
@@ -113,15 +121,17 @@ public final class ContractDetailActivity extends AppActivity {
                 new DateSelectDialog.Builder(this).setTitle("选择日期").setListener(new DateSelectDialog.OnListener() {
                     @Override
                     public void onSelected(BaseDialog dialog, int year, int month, int day) {
-                        String mInTime = year + "-" + Utils.formatDate(month) + "-" + day;
-                        toast(mInTime);
-                        postCalculate(mInTime);
+                        selectTime = year + "-" + Utils.formatDate(month) + "-" + day;
+                        tv_work_time.setText(selectTime);
+
+                        postCalculate(selectTime);
                     }
 
                 }).show();
                 break;
             case R.id.btn_create:
-                startActivity(ContractPayActivity.class);
+
+                createOrder(selectTime);
                 break;
         }
 
@@ -140,7 +150,7 @@ public final class ContractDetailActivity extends AppActivity {
                     @Override
                     public void onSucceed(HttpData<PostCalculateApi.Bean> data) {
                         List<PostCalculateApi.Bean.PreListBean> preList = data.getData().getPreList();
-                        if (preList.size() != 0) {
+                        if (preList != null && preList.size() != 0) {
                             if (preList.size() == 1) {
                                 PostCalculateApi.Bean.PreListBean bean = preList.get(0);
                                 tv_work_time_start.setText(bean.getWorkStartDate() + "-" + bean.getWorkEndDate());
@@ -160,6 +170,40 @@ public final class ContractDetailActivity extends AppActivity {
                             tv_work_service_money.setText(data.getData().getServiceAmount() + "");
                             tv_work_freeze_money.setText(data.getData().getFreezeAmount() + "");
                         }
+                    }
+                });
+    }
+
+
+    //订单创建
+    public void createOrder(String date) {
+        EasyHttp.post(this)
+                .api(new CreateOrderApi()
+                        .setDeveloperId(developerId)
+                        .setPositionId(positionId)
+                        .setWorkStartDate(date))
+                .request(new HttpCallback<HttpData<CreateOrderApi.Bean>>(this) {
+
+                    @Override
+                    public void onSucceed(HttpData<CreateOrderApi.Bean> data) {
+                        CreateOrderApi.Bean bean = data.getData();
+                        Intent intent = new Intent(ContractDetailActivity.this, ContractPayActivity.class);
+                        intent.putExtra("PayInfoBean", bean);
+                        startActivity(intent);
+                    }
+                });
+    }
+
+
+    //获取订单详情
+    public void getOrderInfo(int orderId) {
+        EasyHttp.get(this)
+                .api(new PreOrderInfoApi().setOrderId(orderId))
+                .request(new HttpCallback<HttpData<PreOrderInfoApi.Bean>>(this) {
+                    @Override
+                    public void onSucceed(HttpData<PreOrderInfoApi.Bean> data) {
+
+
                     }
                 });
     }

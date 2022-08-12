@@ -24,6 +24,8 @@ import com.hjq.http.listener.HttpCallback;
 import com.tntlinking.tntdev.R;
 import com.tntlinking.tntdev.aop.SingleClick;
 import com.tntlinking.tntdev.app.AppActivity;
+import com.tntlinking.tntdev.http.api.CollectDeveloperApi;
+import com.tntlinking.tntdev.http.api.CreateOrderApi;
 import com.tntlinking.tntdev.http.api.GetDeveloperDetailApi;
 import com.tntlinking.tntdev.http.api.GetFirmDevDetailApi;
 import com.tntlinking.tntdev.http.api.GetFirmPositionApi;
@@ -43,7 +45,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatButton;
 
 /**
- * 用户信息填写页面3
+ * 开发者详情页面
  */
 public final class DeveloperInfoActivity extends AppActivity {
     private LinearLayout ll_to_collect;
@@ -52,11 +54,13 @@ public final class DeveloperInfoActivity extends AppActivity {
     private ListView lv1, lv2, lv3;
     private ScrollView sv;
     private ImageView iv_avatar;
+    private ImageView iv_collect;
     private TextView tv_dev_name;
     private TextView tv_dev_info;
     private TextView tv_salary;
-    public static final String INTENT_KEY_DEVELOPER_INFO = "DeveloperInfoBean";
 
+    private DeveloperInfoBean bean;
+    private List<GetFirmPositionApi.Bean.ListBean> mList = new ArrayList<>();
 
     private DevEducationAdapter addEducationAdapter;
     private DevWorkAdapter addWorkAdapter;
@@ -80,6 +84,7 @@ public final class DeveloperInfoActivity extends AppActivity {
         tv_dev_info = findViewById(R.id.tv_dev_info);
         tv_salary = findViewById(R.id.tv_salary);
         ll_to_collect = findViewById(R.id.ll_to_collect);
+        iv_collect = findViewById(R.id.iv_collect);
         ll_to_sign = findViewById(R.id.ll_to_sign);
         btn_to_interview = findViewById(R.id.btn_to_interview);
 
@@ -104,7 +109,7 @@ public final class DeveloperInfoActivity extends AppActivity {
 
         switch (view.getId()) {
             case R.id.ll_to_collect:
-                toast("收藏");
+                collectDeveloper(getInt("developerId"));
                 break;
             case R.id.ll_to_sign:
                 toast("去签约");
@@ -132,7 +137,7 @@ public final class DeveloperInfoActivity extends AppActivity {
                         Intent intent = new Intent();
                         intent.setClass(DeveloperInfoActivity.this, ContractDetailActivity.class);
 
-                        intent.putExtra("orderId", listBean.getId());
+                        intent.putExtra("positionId", listBean.getId());
                         intent.putExtra("developerId", bean.getId());
                         intent.putExtra("name", bean.getRealName());
                         intent.putExtra("avatarUrl", bean.getAvatarUrl());
@@ -191,10 +196,11 @@ public final class DeveloperInfoActivity extends AppActivity {
     }
 
 
-    private DeveloperInfoBean bean;
-
-    private List<GetFirmPositionApi.Bean.ListBean> mList = new ArrayList<>();
-
+    /**
+     * 端职位列表(分页)
+     *
+     * @param
+     */
     private void getAppList(int pageNum) {
         EasyHttp.get(this)
                 .api(new GetFirmPositionApi().setStatus(1).setPageNum(pageNum))
@@ -211,6 +217,25 @@ public final class DeveloperInfoActivity extends AppActivity {
                     @Override
                     public void onFail(Exception e) {
                         super.onFail(e);
+                    }
+                });
+    }
+
+
+    /**
+     * 收藏开发者
+     *
+     * @param developerId
+     */
+    public void collectDeveloper(int developerId) {
+        EasyHttp.post(this)
+                .api(new CollectDeveloperApi().setDeveloperId(developerId))
+                .request(new HttpCallback<HttpData<Void>>(this) {
+
+                    @Override
+                    public void onSucceed(HttpData<Void> data) {
+                        toast("收藏成功");
+                        iv_collect.setImageResource(R.drawable.icon_collected);
                     }
                 });
     }

@@ -329,8 +329,8 @@ public final class LoginActivity1 extends AppActivity {
                 .setCancelable(false)
                 .setCanceledOnTouchOutside(false)
                 .setText(R.id.tv_title, "spannableStringBuilder")
-                .setText(R.id.btn_dialog_custom_ok, "同意")
-                .setText(R.id.btn_dialog_custom_cancel, "不同意")
+                .setText(R.id.btn_dialog_custom_ok, "接受")
+                .setText(R.id.btn_dialog_custom_cancel, "拒绝")
                 .setOnClickListener(R.id.btn_dialog_custom_cancel, (BaseDialog.OnClickListener<Button>) (dialog, button) -> {
                     dialog.dismiss();
                     ActivityManager.getInstance().finishAllActivities();//退出程序
@@ -352,14 +352,14 @@ public final class LoginActivity1 extends AppActivity {
 
             @Override
             public void onClick(@NonNull View widget) {
-                BrowserPrivateActivity.start(getActivity(), AppConfig.PRIVATE_URL);
+                BrowserPrivateActivity.start(LoginActivity1.this, AppConfig.PRIVATE_URL);
             }
         }).setForegroundColor(getColor(R.color.color_text_color)).append("和")
                 .setForegroundColor(getColor(R.color.color_text_color)).append("《用户协议》").setClickSpan(new ClickableSpan() {
 
             @Override
             public void onClick(@NonNull View widget) {
-                BrowserPrivateActivity.start(getActivity(), AppConfig.AGREEMENT_URL);
+                BrowserPrivateActivity.start(LoginActivity1.this, AppConfig.AGREEMENT_URL);
             }
         }).setForegroundColor(getColor(R.color.color_text_color)).append("的全部条款，同意后可开始使用我们的服务。")
                 .setForegroundColor(getColor(R.color.color_text_color)).create();

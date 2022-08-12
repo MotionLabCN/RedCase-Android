@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.tntlinking.tntdev.R;
 import com.tntlinking.tntdev.http.api.AppListApi;
 import com.tntlinking.tntdev.http.api.GetFirmOrderListApi;
+import com.tntlinking.tntdev.other.OnItemClickListener;
 
 import java.util.List;
 
@@ -20,6 +21,11 @@ public final class TreatyOrderAdapter extends BaseAdapter {
     private List<GetFirmOrderListApi.Bean.ListBean> mList;
     private LayoutInflater layoutInflater;
     private Context mContext;
+    private OnItemClickListener listener;
+
+    public void setOnItemClickListener(OnItemClickListener mOnItemSelectListener) {
+        this.listener = mOnItemSelectListener;
+    }
 
     public TreatyOrderAdapter(Context context) {
         this.mContext = context;
@@ -37,7 +43,7 @@ public final class TreatyOrderAdapter extends BaseAdapter {
 
 
     @Override
-    public Object getItem(int position) {
+    public GetFirmOrderListApi.Bean.ListBean getItem(int position) {
         return mList.get(position);
     }
 
@@ -67,6 +73,7 @@ public final class TreatyOrderAdapter extends BaseAdapter {
             holder.tv_order_time = convertView.findViewById(R.id.tv_order_time);
             holder.tv_order_dev_name = convertView.findViewById(R.id.tv_order_dev_name);
             holder.tv_order_dev_position = convertView.findViewById(R.id.tv_order_dev_position);
+            holder.tv_to_pay = convertView.findViewById(R.id.tv_to_pay);
 
             convertView.setTag(holder);
         } else {
@@ -79,24 +86,30 @@ public final class TreatyOrderAdapter extends BaseAdapter {
         holder.tv_order_time.setText(item.getWorkStartDate());
         holder.tv_order_dev_name.setText(item.getRealName());
         holder.tv_order_dev_position.setText(item.getCareerDirectionName());
+//        holder.tv_to_pay.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (listener != null) {
+//                    listener.onItemClick(position);
+//                }
+//            }
+//        });
+        holder.tv_to_pay.setVisibility(item.getOrderStatus() == 1 ? View.VISIBLE : View.GONE);
+        //1、待支付 2、待服务 3、服务中  4、待结算 5、已完成 6、已取消
         switch (item.getOrderStatus()) {
-            case 1:
-                holder.tv_order_status.setTextColor(mContext.getResources().getColor(R.color.color_hint_color));
-                break;
-            case 2:
+            case 1:// 1、待支付
+            case 2:// 2、待服务
+            case 5:// 5、已完成
                 holder.tv_order_status.setTextColor(mContext.getResources().getColor(R.color.color_FB8B39));
                 break;
-            case 3:
-                holder.tv_order_status.setTextColor(mContext.getResources().getColor(R.color.color_C1C6D2));
-                break;
-            case 4:
-                holder.tv_order_status.setTextColor(mContext.getResources().getColor(R.color.color_5CE28A));
-                break;
-            case 5:
+            case 3://3、服务中
                 holder.tv_order_status.setTextColor(mContext.getResources().getColor(R.color.color_F5313D));
                 break;
-            case 6:
-                holder.tv_order_status.setTextColor(mContext.getResources().getColor(R.color.color_4850FF));
+            case 4://4、待结算
+                holder.tv_order_status.setTextColor(mContext.getResources().getColor(R.color.color_5CE28A));
+                break;
+            case 6://6、已取消
+                holder.tv_order_status.setTextColor(mContext.getResources().getColor(R.color.color_b5bed3));
                 break;
         }
 
@@ -109,10 +122,9 @@ public final class TreatyOrderAdapter extends BaseAdapter {
         TextView tv_order_time;
         TextView tv_order_dev_name;
         TextView tv_order_dev_position;
-
+        TextView tv_to_pay;
 
     }
-
 
 }
 

@@ -16,6 +16,9 @@ import com.tntlinking.tntdev.aop.SingleClick;
 import com.tntlinking.tntdev.app.TitleBarFragment;
 import com.tntlinking.tntdev.http.api.GetFirmOrderListApi;
 import com.tntlinking.tntdev.http.model.HttpData;
+import com.tntlinking.tntdev.other.OnItemClickListener;
+import com.tntlinking.tntdev.ui.firm.activity.ContractDetailActivity;
+import com.tntlinking.tntdev.ui.firm.activity.ContractPayActivity;
 import com.tntlinking.tntdev.ui.firm.activity.FirmMainActivity;
 import com.tntlinking.tntdev.ui.firm.adapter.TreatyOrderAdapter;
 import com.tntlinking.tntdev.widget.MyListView;
@@ -26,7 +29,7 @@ import java.util.List;
 import androidx.annotation.NonNull;
 
 /**
- * desc   : 服务 Fragment
+ * desc   :我的tab页面  合约单 Fragment
  */
 public final class TreatyOrderFragment extends TitleBarFragment<FirmMainActivity> implements OnRefreshLoadMoreListener {
 
@@ -66,17 +69,20 @@ public final class TreatyOrderFragment extends TitleBarFragment<FirmMainActivity
 
         mRefreshLayout = findViewById(R.id.rl_status_refresh);
         mRefreshLayout.setOnRefreshLoadMoreListener(this);
-        mRefreshLayout.setEnableLoadMore(false);
+
 
         mAdapter = new TreatyOrderAdapter(getActivity());
-
 
         lv_1.setAdapter(mAdapter);
 
         lv_1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+                if (mAdapter.getItem(position).getOrderStatus() == 1) {
+                    Intent intent = new Intent(getActivity(), ContractDetailActivity.class);
+                    intent.putExtra("orderId", mAdapter.getItem(position).getId());
+                    startActivity(intent);
+                }
 
             }
         });

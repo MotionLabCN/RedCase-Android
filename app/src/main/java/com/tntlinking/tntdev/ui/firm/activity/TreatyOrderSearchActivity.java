@@ -1,5 +1,6 @@
 package com.tntlinking.tntdev.ui.firm.activity;
 
+import android.content.Intent;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -131,11 +132,11 @@ public final class TreatyOrderSearchActivity extends AppActivity implements OnRe
      */
     @Override
     public void onItemClick(RecyclerView recyclerView, View itemView, int position) {
-//        Intent intent = new Intent(this, IncomeDetailActivity.class);
-//        intent.putExtra("orderId", mAdapter.getItem(position).getId());
-//        startActivity(intent);
-
-//        startActivity(FirmAuditionDetailActivity.class);
+        if (mAdapter.getData().get(position).getOrderStatus() == 1) {
+            Intent intent = new Intent(getActivity(), ContractDetailActivity.class);
+            intent.putExtra("orderId", mAdapter.getData().get(position).getId());
+            startActivity(intent);
+        }
     }
 
     /**

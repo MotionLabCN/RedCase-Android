@@ -110,7 +110,7 @@ public final class SendPositionActivity extends AppActivity {
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void initData() {
-        mCompanyList = getDictionaryList("1");//所属行业
+//        mCompanyList = getDictionaryList("1");//所属行业
         mWorkYearsIdList = getDictionaryList("4");//工作经验
         mEducationList = getDictionaryList("5");//学历
         mCareerIdList = getDictionaryList("6");//职业方向
@@ -185,16 +185,16 @@ public final class SendPositionActivity extends AppActivity {
                         }).show();
                 break;
             case R.id.position_industry_id:
-                new IndustrySelectDialog.Builder(this).setTitle("选择所在行业")
-                        .setListener(new IndustrySelectDialog.OnListener() {
-                            @Override
-                            public void onSelected(BaseDialog dialog, GetDictionaryApi.DictionaryBean bean, GetDictionaryApi.ChildrenBean childrenBean) {
-                                position_industry_id.setLeftText(bean.getName() + "-" + childrenBean.getName());
-                                industryId = childrenBean.getId();
-
-                                industryName = bean.getName() + "-" + childrenBean.getName();
-                            }
-                        }).show();
+//                new IndustrySelectDialog.Builder(this).setTitle("选择所在行业")
+//                        .setListener(new IndustrySelectDialog.OnListener() {
+//                            @Override
+//                            public void onSelected(BaseDialog dialog, GetDictionaryApi.DictionaryBean bean, GetDictionaryApi.ChildrenBean childrenBean) {
+//                                position_industry_id.setLeftText(bean.getName() + "-" + childrenBean.getName());
+//                                industryId = childrenBean.getId();
+//
+//                                industryName = bean.getName() + "-" + childrenBean.getName();
+//                            }
+//                        }).show();
                 break;
             case R.id.btn_commit:
                 careerPosition = et_position_name.getText().toString();

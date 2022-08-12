@@ -627,6 +627,11 @@
             android:name="com.tntlinking.tntdev.ui.firm.activity.ContractPayActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
+        <!-- 合约单支付验证码页面 -->
+        <activity
+            android:name="com.tntlinking.tntdev.ui.firm.activity.ContractPayCodeActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
         <!-- 发布职位页面 -->
         <activity
             android:name="com.tntlinking.tntdev.ui.firm.activity.SendPositionActivity"

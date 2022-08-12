@@ -16,6 +16,8 @@ import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener;
 import com.tntlinking.tntdev.R;
 import com.tntlinking.tntdev.aop.SingleClick;
 import com.tntlinking.tntdev.app.AppActivity;
+import com.tntlinking.tntdev.http.api.CollectDeveloperApi;
+import com.tntlinking.tntdev.http.api.GetFirmInterviewListApi;
 import com.tntlinking.tntdev.http.api.developerBillListApi;
 import com.tntlinking.tntdev.http.model.HttpData;
 import com.tntlinking.tntdev.ui.firm.adapter.AuditionManageAdapter;
@@ -72,6 +74,7 @@ public final class AuditionMangeActivity extends AppActivity implements OnRefres
     protected void initData() {
 
         getBillList(pageNum);
+        collectDeveloper();
     }
 
 
@@ -119,6 +122,16 @@ public final class AuditionMangeActivity extends AppActivity implements OnRefres
                 });
     }
 
+    public void collectDeveloper() {
+        EasyHttp.post(this)
+                .api(new GetFirmInterviewListApi())
+                .request(new HttpCallback<HttpData<Void>>(this) {
+
+                    @Override
+                    public void onSucceed(HttpData<Void> data) {
+                    }
+                });
+    }
 
     /**
      * 模拟数据

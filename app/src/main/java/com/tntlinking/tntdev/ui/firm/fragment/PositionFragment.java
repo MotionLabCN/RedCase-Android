@@ -64,7 +64,7 @@ public final class PositionFragment extends TitleBarFragment<FirmMainActivity> i
 
         mRefreshLayout = findViewById(R.id.rl_status_refresh);
         mRefreshLayout.setOnRefreshLoadMoreListener(this);
-        mRefreshLayout.setEnableLoadMore(false);
+
 
         mAdapter = new FirmHomeAdapter(getActivity());
         lv_1.setAdapter(mAdapter);
