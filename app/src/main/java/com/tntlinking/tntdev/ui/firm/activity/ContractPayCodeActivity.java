@@ -1,38 +1,27 @@
 package com.tntlinking.tntdev.ui.firm.activity;
-
-import android.annotation.SuppressLint;
-import android.content.Intent;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-
-import com.blankj.utilcode.util.SPUtils;
-import com.hjq.base.BaseDialog;
 import com.hjq.http.EasyHttp;
 import com.hjq.http.listener.HttpCallback;
 import com.hjq.widget.view.CountdownView;
 import com.tntlinking.tntdev.R;
-import com.tntlinking.tntdev.aop.SingleClick;
 import com.tntlinking.tntdev.app.AppActivity;
-import com.tntlinking.tntdev.http.api.CreateOrderApi;
 import com.tntlinking.tntdev.http.api.GetAdminPhoneApi;
-import com.tntlinking.tntdev.http.api.GetDeveloperDetailApi;
+import com.tntlinking.tntdev.http.api.OrderPayApi;
 import com.tntlinking.tntdev.http.api.SendAdminSmsApi;
 import com.tntlinking.tntdev.http.model.HttpData;
-import com.tntlinking.tntdev.other.AppConfig;
 import com.tntlinking.tntdev.other.Utils;
-import com.tntlinking.tntdev.ui.bean.DeveloperInfoBean;
+import com.tntlinking.tntdev.widget.PasswordInputView;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.widget.AppCompatButton;
-import androidx.appcompat.widget.AppCompatEditText;
 
 /**
  *
  */
 public final class ContractPayCodeActivity extends AppActivity {
     private TextView tv_iphone;
-    private AppCompatEditText et_safe_code;
+    private PasswordInputView pwd_input;
     private CountdownView cv_countdown;
 
 
@@ -46,15 +35,24 @@ public final class ContractPayCodeActivity extends AppActivity {
     protected void initView() {
 
         tv_iphone = findViewById(R.id.tv_iphone);
-        et_safe_code = findViewById(R.id.et_safe_code);
         cv_countdown = findViewById(R.id.cv_countdown);
-
+        pwd_input = findViewById(R.id.pwd_input);
         cv_countdown.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 sendAdminSms(getString("orderIds"));
             }
         });
+        pwd_input.setInputListener(new PasswordInputView.InputListener() {
+            @Override
+            public void onInputCompleted(String text) {
+
+                if (!TextUtils.isEmpty(text)) {
+                    orderPay(getString("orderIds"), text);
+                }
+            }
+        });
+
     }
 
 
@@ -91,6 +89,27 @@ public final class ContractPayCodeActivity extends AppActivity {
                     @Override
                     public void onSucceed(HttpData<Void> data) {
 
+
+                    }
+                });
+    }
+
+    /**
+     * 订单支付
+     */
+    public void orderPay(String orderId, String smscode) {
+        EasyHttp.post(this)
+                .api(new OrderPayApi().setOrders(orderId).setSmsCode(smscode))
+                .request(new HttpCallback<HttpData<Void>>(this) {
+                    @Override
+                    public void onSucceed(HttpData<Void> data) {
+
+
+                    }
+
+                    @Override
+                    public void onFail(Exception e) {
+                        super.onFail(e);
 
                     }
                 });

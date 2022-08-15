@@ -6,13 +6,14 @@ import android.widget.TextView;
 
 import com.tntlinking.tntdev.R;
 import com.tntlinking.tntdev.app.AppAdapter;
+import com.tntlinking.tntdev.http.api.GetFirmInterviewListApi;
 import com.tntlinking.tntdev.http.api.developerBillListApi;
 import com.tntlinking.tntdev.other.Utils;
 
 import androidx.annotation.NonNull;
 
 
-public final class AuditionHistoryAdapter extends AppAdapter<developerBillListApi.Bean.ListBean> {
+public final class AuditionHistoryAdapter extends AppAdapter<GetFirmInterviewListApi.Bean.ListBean> {
 
     public AuditionHistoryAdapter(Context context) {
         super(context);
@@ -42,7 +43,7 @@ public final class AuditionHistoryAdapter extends AppAdapter<developerBillListAp
 
         @Override
         public void onBindView(int position) {
-            developerBillListApi.Bean.ListBean item = getItem(position);
+            GetFirmInterviewListApi.Bean.ListBean item = getItem(position);
             tv_create_time.setText(Utils.getYearFromDate(item.getCreateDate()));
             tv_serviceMoney.setText("¥"+item.getServiceMoney());
         }

@@ -45,7 +45,7 @@
             android:textSize="@dimen/sp_14" />
 
         <TextView
-            android:id="@+id/tv_serviceMoney"
+            android:id="@+id/tv_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="xxxxxx"
@@ -72,7 +72,7 @@
             android:textSize="@dimen/sp_14" />
 
         <TextView
-            android:id="@+id/tv_deductMoney"
+            android:id="@+id/tv_position"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="xxxxx"
@@ -100,6 +100,7 @@
             android:textSize="@dimen/sp_13" />
 
         <TextView
+            android:id="@+id/tv_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="xxxx"
@@ -108,6 +109,7 @@
             android:textStyle="bold" />
 
         <TextView
+            android:id="@+id/tv_look_audition"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/dp_5"
@@ -135,10 +137,10 @@
             android:textSize="@dimen/sp_13" />
 
         <TextView
-            android:id="@+id/tv_actualMoney"
+            android:id="@+id/tv_link"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:drawableRight="@drawable/icon_contract"
+            android:drawableRight="@drawable/icon_copy"
             android:text="xxxxx"
             android:textColor="@color/color_202839"
             android:textSize="@dimen/sp_13"

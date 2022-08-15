@@ -1,26 +1,26 @@
 package com.tntlinking.tntdev.http.api;
-
 import com.hjq.http.config.IRequestApi;
+
 
 import java.util.List;
 
-//获取企业端面试列表
-public final class GetFirmInterviewListApi implements IRequestApi {
+//企业端获取历史面试者列表
+public final class GetFirmInterviewHistoryApi implements IRequestApi {
 
     @Override
     public String getApi() {
-        return "interview/getInterviewList";
+        return "interview/getInterviewHistory";
     }
 
     private int pageNum;
     private int pageSize;
 
-    public GetFirmInterviewListApi setPageNum(int pageNum) {
+    public GetFirmInterviewHistoryApi setPageNum(int pageNum) {
         this.pageNum = pageNum;
         return this;
     }
 
-    public GetFirmInterviewListApi setPageSize(int pageSize) {
+    public GetFirmInterviewHistoryApi setPageSize(int pageSize) {
         this.pageSize = pageSize;
         return this;
     }

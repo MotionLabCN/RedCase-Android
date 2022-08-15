@@ -16,6 +16,7 @@ import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener;
 import com.tntlinking.tntdev.R;
 import com.tntlinking.tntdev.aop.SingleClick;
 import com.tntlinking.tntdev.app.AppActivity;
+import com.tntlinking.tntdev.http.api.CancelInterviewApi;
 import com.tntlinking.tntdev.http.api.CollectDeveloperApi;
 import com.tntlinking.tntdev.http.api.GetFirmInterviewListApi;
 import com.tntlinking.tntdev.http.api.developerBillListApi;
@@ -40,7 +41,7 @@ public final class AuditionMangeActivity extends AppActivity implements OnRefres
     private WrapRecyclerView mRecyclerView;
 
     private AuditionManageAdapter mAdapter;
-    private List<developerBillListApi.Bean.ListBean> mList = new ArrayList<>();
+    private List<GetFirmInterviewListApi.Bean.ListBean> mList = new ArrayList<>();
     private int pageNum = 1;
 
     @Override
@@ -73,8 +74,7 @@ public final class AuditionMangeActivity extends AppActivity implements OnRefres
     @Override
     protected void initData() {
 
-        getBillList(pageNum);
-        collectDeveloper();
+        getFirmInterviewList();
     }
 
 
@@ -90,13 +90,14 @@ public final class AuditionMangeActivity extends AppActivity implements OnRefres
         startActivity(AuditionHistoryListActivity.class);
     }
 
-    private void getBillList(int pageNum) {
+    public void getFirmInterviewList() {
         EasyHttp.get(this)
-                .api(new developerBillListApi().setPageNum(pageNum).setPageSize(20))
-                .request(new HttpCallback<HttpData<developerBillListApi.Bean>>(this) {
+                .api(new GetFirmInterviewListApi())
+                .request(new HttpCallback<HttpData<GetFirmInterviewListApi.Bean>>(this) {
 
                     @Override
-                    public void onSucceed(HttpData<developerBillListApi.Bean> data) {
+                    public void onSucceed(HttpData<GetFirmInterviewListApi.Bean> data) {
+
                         if (data.getData().getList().size() >= 0) {
                             ll_empty.setVisibility(View.GONE);
                             if (pageNum == 1) {
@@ -117,18 +118,6 @@ public final class AuditionMangeActivity extends AppActivity implements OnRefres
                             }
 
                         }
-
-                    }
-                });
-    }
-
-    public void collectDeveloper() {
-        EasyHttp.post(this)
-                .api(new GetFirmInterviewListApi())
-                .request(new HttpCallback<HttpData<Void>>(this) {
-
-                    @Override
-                    public void onSucceed(HttpData<Void> data) {
                     }
                 });
     }
@@ -172,13 +161,29 @@ public final class AuditionMangeActivity extends AppActivity implements OnRefres
                     .setText(R.id.btn_dialog_custom_ok, "是")
                     .setOnClickListener(R.id.btn_dialog_custom_cancel, (BaseDialog.OnClickListener<Button>) (dialog, button) -> dialog.dismiss())
                     .setOnClickListener(R.id.btn_dialog_custom_ok, (dialog, views) -> {
+
                         dialog.dismiss();
+                        cancelInterview(100, dialog);
                     }).show();
         } else if (childView.getId() == R.id.btn_contact) {
             toast("联系客服");
         } else if (childView.getId() == R.id.btn_enter) {
             toast("进入会议");
         }
+    }
+
+
+    public void cancelInterview(int interviewId, BaseDialog dialog) {
+        EasyHttp.get(this)
+                .api(new CancelInterviewApi().setInterviewId(interviewId))
+                .request(new HttpCallback<HttpData<GetFirmInterviewListApi.Bean>>(this) {
+
+                    @Override
+                    public void onSucceed(HttpData<GetFirmInterviewListApi.Bean> data) {
+
+                        dialog.dismiss();
+                    }
+                });
     }
 
     /**
@@ -188,13 +193,12 @@ public final class AuditionMangeActivity extends AppActivity implements OnRefres
     @Override
     public void onRefresh(@NonNull RefreshLayout refreshLayout) {
         pageNum = 1;
-        getBillList(pageNum);
+
     }
 
     @Override
     public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
         pageNum++;
-        getBillList(pageNum);
 
     }
 }

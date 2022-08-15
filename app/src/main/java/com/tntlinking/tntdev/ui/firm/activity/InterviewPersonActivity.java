@@ -4,11 +4,17 @@ package com.tntlinking.tntdev.ui.firm.activity;
 import android.os.Build;
 import android.view.View;
 
+import com.hjq.http.EasyHttp;
+import com.hjq.http.listener.HttpCallback;
 import com.hjq.widget.layout.SettingBar;
 import com.hjq.widget.view.ClearEditText;
 import com.tntlinking.tntdev.R;
 import com.tntlinking.tntdev.aop.SingleClick;
 import com.tntlinking.tntdev.app.AppActivity;
+import com.tntlinking.tntdev.http.api.FirmMemberListApi;
+import com.tntlinking.tntdev.http.api.InviteMembersApi;
+import com.tntlinking.tntdev.http.api.developerBillListApi;
+import com.tntlinking.tntdev.http.model.HttpData;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.widget.AppCompatButton;
@@ -63,12 +69,34 @@ public final class InterviewPersonActivity extends AppActivity {
         switch (view.getId()) {
 
             case R.id.btn_commit:
-                startActivity(InterviewPersonActivity.class);
+                String mName = et_name.getText().toString();
+                String mPhone = et_phone.getText().toString();
+                String mPosition = et_position.getText().toString();
+                String mEmail = et_email.getText().toString();
+
+                InviteMember(mEmail, mPhone, mPosition, mName);
                 break;
 
         }
 
     }
 
+    private void InviteMember(String email, String mobile, String position, String name) {
+        EasyHttp.post(this)
+                .api(new InviteMembersApi()
+                        .setEmail(email)
+                        .setMobile(mobile)
+                        .setPosition(position)
+                        .setRealName(name))
+                .request(new HttpCallback<HttpData<developerBillListApi.Bean>>(this) {
+
+                    @Override
+                    public void onSucceed(HttpData<developerBillListApi.Bean> data) {
+                        toast("邀请已发出");
+                        finish();
+                    }
+
+                });
+    }
 
 }

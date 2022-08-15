@@ -5,7 +5,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import com.blankj.utilcode.util.SPUtils;
+import android.widget.TextView;
 import com.hjq.base.BaseDialog;
 import com.hjq.http.EasyHttp;
 import com.hjq.http.listener.HttpCallback;
@@ -18,6 +18,7 @@ import com.tntlinking.tntdev.app.AppActivity;
 import com.tntlinking.tntdev.http.api.AppListApi;
 import com.tntlinking.tntdev.http.api.GetFirmFreezeRecordApi;
 import com.tntlinking.tntdev.http.api.GetFirmInterviewListApi;
+import com.tntlinking.tntdev.http.api.GetFirmWalletCurrentApi;
 import com.tntlinking.tntdev.http.model.HttpData;
 import com.tntlinking.tntdev.other.AppConfig;
 import com.tntlinking.tntdev.other.Utils;
@@ -33,14 +34,12 @@ import androidx.annotation.NonNull;
  * 账户管理
  */
 public final class AccountManageActivity extends AppActivity implements OnRefreshLoadMoreListener {
-
     private ImageView iv_select;
     private MyListView lv_1;
     private LinearLayout ll_empty;
-
-
     private SmartRefreshLayout mRefreshLayout;
-
+    private TextView tv_balance_money;
+    private TextView tv_freeze_money;
 
     private List<AppListApi.Bean> mServiceList = new ArrayList<>();
     private FreezeAdapter mServiceAdapter;
@@ -54,19 +53,16 @@ public final class AccountManageActivity extends AppActivity implements OnRefres
     @Override
     protected void initView() {
         iv_select = findViewById(R.id.iv_select);
+        tv_balance_money = findViewById(R.id.tv_balance_money);
+        tv_freeze_money = findViewById(R.id.tv_freeze_money);
         lv_1 = findViewById(R.id.lv_1);
-
         ll_empty = findViewById(R.id.ll_empty);
-
-
         mRefreshLayout = findViewById(R.id.rl_status_refresh);
         mRefreshLayout.setOnRefreshLoadMoreListener(this);
 
-
         mServiceAdapter = new FreezeAdapter(getActivity(), mServiceList);
-
-
         lv_1.setAdapter(mServiceAdapter);
+
         iv_select.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -96,7 +92,7 @@ public final class AccountManageActivity extends AppActivity implements OnRefres
 
     @Override
     protected void initData() {
-//        getAppList();
+        getFirmWalletCurrent();
         getFirmFreezeRecord();
     }
 
@@ -104,15 +100,22 @@ public final class AccountManageActivity extends AppActivity implements OnRefres
     @SingleClick
     @Override
     public void onClick(View view) {
-        Intent intent = new Intent();
-        switch (view.getId()) {
-            case R.id.ll_add_photo:
-                break;
-            case R.id.ll_add_base_info:
-                break;
+    }
 
-        }
+    /**
+     * 获取账户余额
+     */
+    public void getFirmWalletCurrent() {
+        EasyHttp.get(this)
+                .api(new GetFirmWalletCurrentApi())
+                .request(new HttpCallback<HttpData<GetFirmWalletCurrentApi.Bean>>(this) {
 
+                    @Override
+                    public void onSucceed(HttpData<GetFirmWalletCurrentApi.Bean> data) {
+                        tv_balance_money.setText(data.getData().getBalance());
+                        tv_freeze_money.setText(data.getData().getFreezeMoney());
+                    }
+                });
     }
 
     public void getFirmFreezeRecord() {
@@ -127,45 +130,9 @@ public final class AccountManageActivity extends AppActivity implements OnRefres
     }
 
 
-    /**
-     * 获取在服务企业list //2 待服务，3 服务中
-     */
-    private void getAppList() {
-        EasyHttp.get(this)
-                .api(new AppListApi().setOrderStatus(3))
-                .request(new HttpCallback<HttpData<List<AppListApi.Bean>>>(this) {
-                    @Override
-                    public void onSucceed(HttpData<List<AppListApi.Bean>> data) {
-                        if (data.getData().size() > 0) {
-                            ll_empty.setVisibility(View.GONE);
-
-
-                            mServiceList.addAll(data.getData());
-                            mServiceAdapter.setData(mServiceList);
-
-
-                        } else {
-                            ll_empty.setVisibility(View.VISIBLE);
-
-                        }
-                        mRefreshLayout.finishRefresh();
-                    }
-
-                    @Override
-                    public void onFail(Exception e) {
-                        super.onFail(e);
-                    }
-                });
-    }
-
-
     @Override
     public void onRefresh(@NonNull RefreshLayout refreshLayout) {
-        mServiceList.clear();
-        String status = SPUtils.getInstance().getString(AppConfig.DEVELOP_STATUS, "1");
-        if (status.equals("3")) {
-            getAppList();
-        }
+
     }
 
     @Override

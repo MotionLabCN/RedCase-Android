@@ -31,6 +31,7 @@
         android:textColor="@color/color_hint_color"
         android:textSize="@dimen/sp_13" />
 
+
     <ListView
         android:id="@+id/list_view"
         android:layout_width="match_parent"
@@ -59,9 +60,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_10"
             android:text="暂无数据"
-            android:textStyle="bold"
             android:textColor="@color/color_hint_color"
-            android:textSize="@dimen/sp_15" />
+            android:textSize="@dimen/sp_15"
+            android:textStyle="bold" />
 
 
     </LinearLayout>
@@ -69,11 +70,11 @@
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_commit"
         style="@style/ButtonStyle"
-        android:enabled="false"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/dp_16"
         android:layout_marginVertical="@dimen/dp_30"
+        android:enabled="false"
         android:text="立即注销" />
 
 </LinearLayout>

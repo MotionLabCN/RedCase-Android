@@ -108,7 +108,7 @@ public final class ContractPayActivity extends AppActivity {
                 Intent intent = new Intent(this, ContractPayCodeActivity.class);
                 CreateOrderApi.Bean bean = getSerializable("PayInfoBean");
                 intent.putExtra("orderIds", bean.getOrderIds());
-                startActivity(ContractPayCodeActivity.class);
+                startActivity(intent);
                 break;
 
         }

@@ -15,6 +15,7 @@ import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener;
 import com.tntlinking.tntdev.R;
 import com.tntlinking.tntdev.aop.SingleClick;
 import com.tntlinking.tntdev.app.AppActivity;
+import com.tntlinking.tntdev.http.api.FirmMemberListApi;
 import com.tntlinking.tntdev.http.api.developerBillListApi;
 import com.tntlinking.tntdev.http.model.HttpData;
 import com.tntlinking.tntdev.ui.firm.adapter.AuditionHistoryAdapter;
@@ -76,7 +77,7 @@ public final class FirmManageActivity extends AppActivity implements OnRefreshLo
     @Override
     protected void initData() {
 
-        getBillList(pageNum);
+        getFirmMemberList(pageNum);
     }
 
 
@@ -92,9 +93,9 @@ public final class FirmManageActivity extends AppActivity implements OnRefreshLo
         startActivity(FirmPersonCheckActivity.class);
     }
 
-    private void getBillList(int pageNum) {
+    private void getFirmMemberList(int pageNum) {
         EasyHttp.get(this)
-                .api(new developerBillListApi().setPageNum(pageNum).setPageSize(20))
+                .api(new FirmMemberListApi().setCompanyId(00).setPageNum(pageNum).setPageSize(20))
                 .request(new HttpCallback<HttpData<developerBillListApi.Bean>>(this) {
 
                     @Override
@@ -103,7 +104,7 @@ public final class FirmManageActivity extends AppActivity implements OnRefreshLo
                             ll_empty.setVisibility(View.GONE);
                             if (pageNum == 1) {
                                 if (data.getData().getList().size() == 0) {
-                                    ll_empty.setVisibility(View.VISIBLE);
+//                                    ll_empty.setVisibility(View.VISIBLE);
                                 } else {
                                     mList.clear();
                                     mList.addAll(data.getData().getList());
@@ -184,13 +185,13 @@ public final class FirmManageActivity extends AppActivity implements OnRefreshLo
     @Override
     public void onRefresh(@NonNull RefreshLayout refreshLayout) {
         pageNum = 1;
-        getBillList(pageNum);
+
     }
 
     @Override
     public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
         pageNum++;
-        getBillList(pageNum);
+
 
     }
 }

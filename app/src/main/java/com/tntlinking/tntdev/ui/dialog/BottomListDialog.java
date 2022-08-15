@@ -53,6 +53,7 @@ public final class BottomListDialog {
                     if (onItemClickListener != null) {
                         onItemClickListener.onItemClick(position);
                     }
+                    dismiss();
                 }
             });
         }
