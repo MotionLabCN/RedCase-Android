@@ -10,7 +10,7 @@ public final class GetFirmFreezeRecordApi implements IRequestApi {
 
     @Override
     public String getApi() {
-        return "company/wallet/freeze_record";
+        return "manpower-rest-api/company/wallet/freeze_record";
     }
 
     private String date;

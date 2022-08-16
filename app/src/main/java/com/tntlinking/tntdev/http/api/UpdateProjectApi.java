@@ -13,7 +13,7 @@ public final class UpdateProjectApi implements IRequestApi, IRequestType {
 
     @Override
     public String getApi() {
-        return "developer/v2/save/project";
+        return "manpower-rest-api/developer/v2/save/project";
     }
 
 

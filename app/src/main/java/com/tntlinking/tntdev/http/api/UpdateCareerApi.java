@@ -9,7 +9,7 @@ public final class UpdateCareerApi implements IRequestApi, IRequestType {
 
     @Override
     public String getApi() {
-        return "developer/update/career/info";
+        return "manpower-rest-api/developer/update/career/info";
     }
 
 

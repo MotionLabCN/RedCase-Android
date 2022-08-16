@@ -6,7 +6,7 @@ public final class DeleteDailyApi implements IRequestApi {
 
     @Override
     public String getApi() {
-        return "orderSchedule/delete";
+        return "manpower-rest-api/orderSchedule/delete";
     }
 
     private int orderScheduleId;

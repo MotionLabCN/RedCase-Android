@@ -9,7 +9,7 @@ public final class AppScheduleApi implements IRequestApi {
 
     @Override
     public String getApi() {
-        return "interviewSchedule/appSchedule";
+        return "manpower-rest-api/interviewSchedule/appSchedule";
     }
     private String date;
 

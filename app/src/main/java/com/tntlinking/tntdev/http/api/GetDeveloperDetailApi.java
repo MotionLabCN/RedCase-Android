@@ -8,7 +8,7 @@ public final class GetDeveloperDetailApi implements IRequestApi {
 
     @Override
     public String getApi() {
-        return "developer/detail/"+parentId;
+        return "manpower-rest-api/developer/detail/"+parentId;
     }
 
 

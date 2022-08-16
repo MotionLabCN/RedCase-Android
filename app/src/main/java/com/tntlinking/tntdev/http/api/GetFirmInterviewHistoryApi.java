@@ -9,7 +9,7 @@ public final class GetFirmInterviewHistoryApi implements IRequestApi {
 
     @Override
     public String getApi() {
-        return "interview/getInterviewHistory";
+        return "manpower-rest-api/interview/getInterviewHistory";
     }
 
     private int pageNum;

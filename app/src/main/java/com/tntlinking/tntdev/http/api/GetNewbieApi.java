@@ -8,7 +8,7 @@ public final class GetNewbieApi implements IRequestApi {
 
     @Override
     public String getApi() {
-        return "task/get/newbie";
+        return "manpower-rest-api/task/get/newbie";
     }
 
 

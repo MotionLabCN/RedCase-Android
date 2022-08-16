@@ -9,7 +9,7 @@ public final class GetFirmRecommendsApi implements IRequestApi {
 
     @Override
     public String getApi() {
-        return "position/app/recommends";
+        return "manpower-rest-api/position/app/recommends";
     }
 
 

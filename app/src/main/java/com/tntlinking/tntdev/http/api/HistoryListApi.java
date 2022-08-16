@@ -7,7 +7,7 @@ public final class HistoryListApi implements IRequestApi {
 
     @Override
     public String getApi() {
-        return "order/appHistoryList";
+        return "manpower-rest-api/order/appHistoryList";
     }
 
 

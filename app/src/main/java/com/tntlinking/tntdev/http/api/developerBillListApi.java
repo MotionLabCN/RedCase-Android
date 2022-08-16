@@ -9,7 +9,7 @@ public final class developerBillListApi implements IRequestApi {
 
     @Override
     public String getApi() {
-        return "developerBill/list";
+        return "manpower-rest-api/developerBill/list";
     }
 
 

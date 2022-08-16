@@ -9,7 +9,7 @@ public final class GetFirmDevDetailApi implements IRequestApi {
 
     @Override
     public String getApi() {
-        return "developerReveal/getDeveloperDetail";
+        return "manpower-rest-api/developerReveal/getDeveloperDetail";
     }
 
 

@@ -8,7 +8,7 @@ public final class JobDetailsApi implements IRequestApi {
 
     @Override
     public String getApi() {
-        return "developer_recommends/position_info";
+        return "manpower-rest-api/developer_recommends/position_info";
     }
 
     private String positionId;

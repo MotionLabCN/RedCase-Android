@@ -9,7 +9,7 @@ public final class GetAppListDateApi implements IRequestApi {
 
     @Override
     public String getApi() {
-        return "interview/appListDate";
+        return "manpower-rest-api/interview/appListDate";
     }
     private String interviewDate;
 

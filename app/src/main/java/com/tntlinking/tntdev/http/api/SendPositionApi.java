@@ -11,7 +11,7 @@ public final class SendPositionApi implements IRequestApi, IRequestType {
 
     @Override
     public String getApi() {
-        return "position/publish";
+        return "manpower-rest-api/position/publish";
     }
 
 

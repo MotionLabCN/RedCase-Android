@@ -9,7 +9,7 @@ public final class ChangePhoneApi implements IRequestApi , IRequestType {
 
     @Override
     public String getApi() {
-        return "developer/update/mobile";
+        return "manpower-rest-api/developer/update/mobile";
     }
 
     private String code;

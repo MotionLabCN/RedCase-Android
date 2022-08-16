@@ -7,7 +7,7 @@ public final class AddTagSearchApi implements IRequestApi {
 
     @Override
     public String getApi() {
-        return "skill/list/developer/search";
+        return "manpower-rest-api/skill/list/developer/search";
     }
 
 

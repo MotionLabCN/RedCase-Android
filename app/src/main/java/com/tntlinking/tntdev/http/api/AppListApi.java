@@ -7,7 +7,7 @@ public final class AppListApi implements IRequestApi {
 
     @Override
     public String getApi() {
-        return "order/appList";
+        return "manpower-rest-api/order/appList";
     }
 
     private int orderStatus; //2 待服务，3 服务中

@@ -9,7 +9,7 @@ public final class CancellationApi implements IRequestApi {
 
     @Override
     public String getApi() {
-        return "developer/cancellation";
+        return "manpower-rest-api/developer/cancellation";
     }
 
 

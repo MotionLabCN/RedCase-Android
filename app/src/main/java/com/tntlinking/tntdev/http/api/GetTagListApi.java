@@ -9,7 +9,7 @@ public final class GetTagListApi implements IRequestApi {
 
     @Override
     public String getApi() {
-        return "skill/tree/developer";
+        return "manpower-rest-api/skill/tree/developer";
     }
 
     public String careerDirectionId;

@@ -9,7 +9,7 @@ public final class UpdateDailyApi implements IRequestApi, IRequestType {
 
     @Override
     public String getApi() {
-        return "orderSchedule/update";
+        return "manpower-rest-api/orderSchedule/update";
     }
 
     private String createDate;

@@ -10,7 +10,7 @@ public final class GetFirmWalletCurrentApi implements IRequestApi {
 
     @Override
     public String getApi() {
-        return "company/wallet/current";
+        return "manpower-rest-api/company/wallet/current";
     }
 
 

@@ -9,7 +9,7 @@ public final class CancelInterviewApi implements IRequestApi {
 
     @Override
     public String getApi() {
-        return "interview/cancel";
+        return "manpower-rest-api/interview/cancel";
     }
 
     private int interviewId;

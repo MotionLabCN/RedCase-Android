@@ -12,7 +12,7 @@ public final class UpdateImageApi implements IRequestApi {
 
     @Override
     public String getApi() {
-        return "update/image";
+        return "manpower-rest-api/update/image";
     }
 
     /** 图片文件 */

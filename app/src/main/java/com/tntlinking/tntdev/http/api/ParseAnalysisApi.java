@@ -12,7 +12,7 @@ public final class ParseAnalysisApi implements IRequestApi {
 
     @Override
     public String getApi() {
-        return "developer/parse_resume/" + fileName;
+        return "manpower-rest-api/developer/parse_resume/" + fileName;
     }
 
 

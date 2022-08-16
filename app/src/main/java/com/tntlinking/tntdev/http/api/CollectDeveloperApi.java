@@ -11,7 +11,7 @@ public final class CollectDeveloperApi implements IRequestApi {
 
     @Override
     public String getApi() {
-        return "companyRecruiterFavorite/favoriteDeveloper";
+        return "manpower-rest-api/companyRecruiterFavorite/favoriteDeveloper";
     }
 
 

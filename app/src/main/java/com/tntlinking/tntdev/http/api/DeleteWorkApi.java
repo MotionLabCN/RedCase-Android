@@ -9,7 +9,7 @@ public final class DeleteWorkApi implements IRequestApi{
 
     @Override
     public String getApi() {
-        return "developer/v2/delete/work/"+workExperienceId;
+        return "manpower-rest-api/developer/v2/delete/work/"+workExperienceId;
     }
 
 

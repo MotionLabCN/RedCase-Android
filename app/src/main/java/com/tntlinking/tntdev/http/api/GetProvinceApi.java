@@ -9,7 +9,7 @@ public final class GetProvinceApi implements IRequestApi {
 
     @Override
     public String getApi() {
-        return "dictionary/region/tree";
+        return "manpower-rest-api/dictionary/region/tree";
     }
 
 

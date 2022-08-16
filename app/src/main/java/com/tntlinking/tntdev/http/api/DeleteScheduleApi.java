@@ -8,7 +8,7 @@ public final class DeleteScheduleApi implements IRequestApi{
 
     @Override
     public String getApi() {
-        return "interviewSchedule/delete";
+        return "manpower-rest-api/interviewSchedule/delete";
     }
 
 

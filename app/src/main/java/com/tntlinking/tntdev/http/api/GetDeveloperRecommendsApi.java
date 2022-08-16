@@ -9,7 +9,7 @@ public final class GetDeveloperRecommendsApi implements IRequestApi {
 
     @Override
     public String getApi() {
-        return "developer_recommends/position";
+        return "manpower-rest-api/developer_recommends/position";
     }
 
     public final static class Bean implements Serializable {

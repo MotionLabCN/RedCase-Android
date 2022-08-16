@@ -9,7 +9,7 @@ public final class UpdateServiceStatusApi implements IRequestApi, IRequestType {
 
     @Override
     public String getApi() {
-        return "developer/updateServiceStatus";
+        return "manpower-rest-api/developer/updateServiceStatus";
     }
 
 

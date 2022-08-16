@@ -13,7 +13,7 @@ public final  class SelfReCommendApi implements IRequestApi {
     */
    @Override
    public String getApi() {
-      return "developer_recommends/self_recommend/"+positionId;
+      return "manpower-rest-api/developer_recommends/self_recommend/"+positionId;
    }
 
 

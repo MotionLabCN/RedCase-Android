@@ -7,7 +7,7 @@ public final class GetSignParamApi implements IRequestApi {
 
     @Override
     public String getApi() {
-        return "developer/signContract/getSignParam";
+        return "manpower-rest-api/developer/signContract/getSignParam";
     }
 
 

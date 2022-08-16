@@ -7,7 +7,7 @@ public final class AddTagApi implements IRequestApi {
 
     @Override
     public String getApi() {
-        return "skill/new";
+        return "manpower-rest-api/skill/new";
     }
 
 

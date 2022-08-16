@@ -8,7 +8,7 @@ public final class DeleteEducationApi implements IRequestApi {
 
     @Override
     public String getApi() {
-        return "developer/v2/delete/education/"+educationId;
+        return "manpower-rest-api/developer/v2/delete/education/"+educationId;
     }
 
 

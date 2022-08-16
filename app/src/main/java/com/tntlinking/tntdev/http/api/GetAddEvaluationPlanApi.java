@@ -13,7 +13,7 @@ public final  class GetAddEvaluationPlanApi implements IRequestApi , IRequestTyp
     */
    @Override
    public String getApi() {
-      return "jk/add_evaluation_plan";
+      return "manpower-rest-api/jk/add_evaluation_plan";
    }
 
 

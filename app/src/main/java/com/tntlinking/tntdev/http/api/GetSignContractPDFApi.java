@@ -9,7 +9,7 @@ public final class GetSignContractPDFApi implements IRequestApi {
 
     @Override
     public String getApi() {
-        return "developer/signContract/getPDFUrl";
+        return "manpower-rest-api/developer/signContract/getPDFUrl";
     }
 
 

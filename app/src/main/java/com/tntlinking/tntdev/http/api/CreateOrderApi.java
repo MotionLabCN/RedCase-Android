@@ -12,7 +12,7 @@ public final class CreateOrderApi implements IRequestApi, IRequestType {
 
     @Override
     public String getApi() {
-        return "businessOrder/createOrder";
+        return "manpower-rest-api/businessOrder/createOrder";
     }
 
 

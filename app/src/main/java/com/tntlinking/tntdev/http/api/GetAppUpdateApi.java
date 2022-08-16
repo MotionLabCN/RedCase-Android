@@ -8,7 +8,7 @@ public final class GetAppUpdateApi implements IRequestApi {
 
     @Override
     public String getApi() {
-        return "appversion/latest";
+        return "manpower-rest-api/appversion/latest";
     }
 
 

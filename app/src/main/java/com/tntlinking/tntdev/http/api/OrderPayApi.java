@@ -9,7 +9,7 @@ public final class OrderPayApi implements IRequestApi {
 
     @Override
     public String getApi() {
-        return "businessOrder/orderPay";
+        return "manpower-rest-api/businessOrder/orderPay";
     }
 
     private String orders;

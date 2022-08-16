@@ -11,7 +11,7 @@ public final class AddProjectApi implements IRequestApi, IRequestType {
 
     @Override
     public String getApi() {
-        return "developer/project";
+        return "manpower-rest-api/developer/project";
     }
 
 

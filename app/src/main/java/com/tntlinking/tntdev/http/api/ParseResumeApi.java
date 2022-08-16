@@ -18,7 +18,7 @@ public final class ParseResumeApi implements IRequestApi{
 
     @Override
     public String getApi() {
-        return "developer/upload_resume";
+        return "manpower-rest-api/developer/upload_resume";
     }
 
     /** 图片文件 */

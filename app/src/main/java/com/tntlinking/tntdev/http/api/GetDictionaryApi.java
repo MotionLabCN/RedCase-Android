@@ -10,7 +10,7 @@ public final class GetDictionaryApi implements IRequestApi {
 
     @Override
     public String getApi() {
-        return "dictionary/getByParentId/"+parentId;
+        return "manpower-rest-api/dictionary/getByParentId/"+parentId;
     }
 
     @HttpIgnore

@@ -67,7 +67,8 @@ public final class AppConfig {
      * 请求地址
      */
 //    public static String HOST_URL = BuildConfig.HOST_URL + "/api/new_manpower/";
-    public static String HOST_URL = BuildConfig.HOST_URL + "/api/new_gateway/manpower-rest-api/";
+//    public static String HOST_URL = BuildConfig.HOST_URL + "/api/new_gateway/manpower-rest-api/";
+    public static String HOST_URL = BuildConfig.HOST_URL + "/api/new_gateway/";
 
 //    /**
 //     * 用户协议    https://talent-business.stage-ttchain.tntlinking.com

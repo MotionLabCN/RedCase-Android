@@ -11,7 +11,7 @@ public final class PreOrderInfoApi implements IRequestApi, IRequestType {
 
     @Override
     public String getApi() {
-        return "businessOrder/preOrderInfo";
+        return "manpower-rest-api/businessOrder/preOrderInfo";
     }
 
     private int orderId;   //

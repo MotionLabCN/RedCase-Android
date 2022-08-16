@@ -7,7 +7,7 @@ public final class InvitationUrlApi implements IRequestApi {
 
     @Override
     public String getApi() {
-        return "developer/invitation/url";
+        return "manpower-rest-api/developer/invitation/url";
     }
 
     public final static class Bean {

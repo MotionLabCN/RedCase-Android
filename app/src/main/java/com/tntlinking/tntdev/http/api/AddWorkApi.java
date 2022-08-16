@@ -9,7 +9,7 @@ public final class AddWorkApi implements IRequestApi, IRequestType {
 
     @Override
     public String getApi() {
-        return "developer/add/work";
+        return "manpower-rest-api/developer/add/work";
     }
 
 

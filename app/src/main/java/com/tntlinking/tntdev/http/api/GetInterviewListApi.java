@@ -9,7 +9,7 @@ public final class GetInterviewListApi implements IRequestApi {
 
     @Override
     public String getApi() {
-        return "interview/getInterview";
+        return "manpower-rest-api/interview/getInterview";
     }
     private String queryDate;
 

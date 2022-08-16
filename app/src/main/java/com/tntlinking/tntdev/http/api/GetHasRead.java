@@ -7,7 +7,7 @@ public final class GetHasRead implements IRequestApi {
 
     @Override
     public String getApi() {
-        return "jpush/getHasRead";
+        return "manpower-rest-api/jpush/getHasRead";
     }
 
 

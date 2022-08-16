@@ -8,7 +8,7 @@ public final class JKSelectJobsApi implements IRequestApi {
     */
    @Override
    public String getApi() {
-      return "jk/select_jobs";
+      return "manpower-rest-api/jk/select_jobs";
    }
    public final static class Bean {
       private String description;

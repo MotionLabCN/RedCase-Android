@@ -7,7 +7,7 @@ public final class GetCareerDirectionApi implements IRequestApi {
 
     @Override
     public String getApi() {
-        return "developerReveal/getCareerDirection";
+        return "manpower-rest-api/developerReveal/getCareerDirection";
     }
 
 

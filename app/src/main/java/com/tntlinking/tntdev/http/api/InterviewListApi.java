@@ -7,7 +7,7 @@ public final class InterviewListApi implements IRequestApi {
 
     @Override
     public String getApi() {
-        return "interviewSchedule/appList";
+        return "manpower-rest-api/interviewSchedule/appList";
     }
 
 

@@ -11,7 +11,7 @@ public final  class GetDeveloperJkStatusApi implements IRequestApi {
     */
    @Override
    public String getApi() {
-      return "jk/getDeveloperJkStatus";
+      return "manpower-rest-api/jk/getDeveloperJkStatus";
    }
 
    public final static class Bean implements Serializable{

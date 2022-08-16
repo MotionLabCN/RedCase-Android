@@ -9,7 +9,7 @@ public final class GetFirmOrderListApi implements IRequestApi {
 
     @Override
     public String getApi() {
-        return "businessOrder/getOrderList";
+        return "manpower-rest-api/businessOrder/getOrderList";
     }
 
 

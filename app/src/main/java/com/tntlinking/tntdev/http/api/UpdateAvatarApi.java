@@ -12,7 +12,7 @@ public final class UpdateAvatarApi implements IRequestApi {
 
     @Override
     public String getApi() {
-        return "developer/modify/avatar";
+        return "manpower-rest-api/developer/modify/avatar";
     }
 
     /** 图片文件 */

@@ -10,7 +10,7 @@ public final class SendDeveloperApi implements IRequestApi , IRequestType {
 
     @Override
     public String getApi() {
-        return "developer/settled";
+        return "manpower-rest-api/developer/settled";
     }
 
     private String realName = "";//名字

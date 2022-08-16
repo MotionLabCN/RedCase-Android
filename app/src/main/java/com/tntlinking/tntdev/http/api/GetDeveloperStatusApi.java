@@ -7,7 +7,7 @@ public final class GetDeveloperStatusApi implements IRequestApi {
 
     @Override
     public String getApi() {
-        return "developer/info";
+        return "manpower-rest-api/developer/info";
     }
 
 

@@ -10,7 +10,7 @@ public final class UpdateEducationApi implements IRequestApi, IRequestType {
     @Override
     public String getApi() {
 //        return "developer/update/education";
-        return "developer/v2/save/education";
+        return "manpower-rest-api/developer/v2/save/education";
     }
 
 

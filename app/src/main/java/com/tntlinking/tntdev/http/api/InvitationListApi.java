@@ -7,7 +7,7 @@ public final class InvitationListApi implements IRequestApi {
 
     @Override
     public String getApi() {
-        return "developer/invitation/list";
+        return "manpower-rest-api/developer/invitation/list";
     }
 
 

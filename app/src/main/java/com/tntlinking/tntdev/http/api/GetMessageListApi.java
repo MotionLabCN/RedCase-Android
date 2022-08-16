@@ -9,7 +9,7 @@ public final class GetMessageListApi implements IRequestApi {
 
     @Override
     public String getApi() {
-        return "jpush/getMessageList";
+        return "manpower-rest-api/jpush/getMessageList";
     }
 
     private int pageNum;

@@ -9,7 +9,7 @@ public final class DeleteDeveloperRecommendsApi implements IRequestApi {
 
     @Override
     public String getApi() {
-        return "developer_recommends/delete_position";
+        return "manpower-rest-api/developer_recommends/delete_position";
     }
 
 

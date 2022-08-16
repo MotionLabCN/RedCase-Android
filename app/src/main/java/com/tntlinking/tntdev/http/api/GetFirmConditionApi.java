@@ -9,7 +9,7 @@ public final class GetFirmConditionApi implements IRequestApi {
 
     @Override
     public String getApi() {
-        return "company/cancellation/condition";
+        return "manpower-rest-api/company/cancellation/condition";
     }
 
     public static class ListBean {

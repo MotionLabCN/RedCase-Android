@@ -10,7 +10,7 @@ public final class UpdateWorkApi implements IRequestApi, IRequestType {
     @Override
     public String getApi() {
 //        return "developer/update/work";
-        return "developer/v2/save/work";
+        return "manpower-rest-api/developer/v2/save/work";
     }
 
 

@@ -10,6 +10,6 @@ public final class LogoutApi implements IRequestApi {
 
     @Override
     public String getApi() {
-        return "system/logout";
+        return "manpower-rest-api/system/logout";
     }
 }

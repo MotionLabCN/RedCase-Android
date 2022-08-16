@@ -8,7 +8,7 @@ public final class GetDailyListApi implements IRequestApi {
 
     @Override
     public String getApi() {
-        return "orderSchedule/list";
+        return "manpower-rest-api/orderSchedule/list";
     }
 
     private String orderId;

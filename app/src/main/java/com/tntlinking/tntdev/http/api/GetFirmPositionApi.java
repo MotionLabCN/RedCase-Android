@@ -9,7 +9,7 @@ public final class GetFirmPositionApi implements IRequestApi {
 
     @Override
     public String getApi() {
-        return "position/app/page";
+        return "manpower-rest-api/position/app/page";
     }
 
 

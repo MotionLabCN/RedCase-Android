@@ -9,7 +9,7 @@ public final class UpdateBasicInfoApi implements IRequestApi, IRequestType {
 
     @Override
     public String getApi() {
-        return "developer/update/basic/info";
+        return "manpower-rest-api/developer/update/basic/info";
     }
 
 

@@ -9,7 +9,7 @@ public final class GetCancellationApi implements IRequestApi {
 
     @Override
     public String getApi() {
-        return "developer/cancellation/condition";
+        return "manpower-rest-api/developer/cancellation/condition";
     }
 
     public static class ListBean {

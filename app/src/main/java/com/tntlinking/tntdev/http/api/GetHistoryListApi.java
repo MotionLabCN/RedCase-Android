@@ -9,7 +9,7 @@ public final class GetHistoryListApi implements IRequestApi {
 
     @Override
     public String getApi() {
-        return "orderSchedule/historyList";
+        return "manpower-rest-api/orderSchedule/historyList";
     }
 
     private String orderId;

@@ -9,7 +9,7 @@ public final class SearchDeveloperApi implements IRequestApi {
 
     @Override
     public String getApi() {
-        return "developerReveal/searchDeveloper";
+        return "manpower-rest-api/developerReveal/searchDeveloper";
     }
 
 

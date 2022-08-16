@@ -13,7 +13,7 @@ public final class SendAdminSmsApi implements IRequestApi {
 
     @Override
     public String getApi() {
-        return "businessOrder/sendAdminSms";
+        return "manpower-rest-api/businessOrder/sendAdminSms";
     }
 
     private String orderIds;

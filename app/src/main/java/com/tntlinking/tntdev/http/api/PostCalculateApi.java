@@ -11,7 +11,7 @@ public final class PostCalculateApi implements IRequestApi, IRequestType {
 
     @Override
     public String getApi() {
-        return "businessOrder/pre/calculate";
+        return "manpower-rest-api/businessOrder/pre/calculate";
     }
 
 

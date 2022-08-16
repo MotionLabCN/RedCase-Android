@@ -9,7 +9,7 @@ public final class AddScheduleApi implements IRequestApi, IRequestType {
 
     @Override
     public String getApi() {
-        return "interviewSchedule/add";
+        return "manpower-rest-api/interviewSchedule/add";
     }
 
 

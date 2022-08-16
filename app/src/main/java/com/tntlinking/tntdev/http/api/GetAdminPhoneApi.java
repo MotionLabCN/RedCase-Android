@@ -9,7 +9,7 @@ public final class GetAdminPhoneApi implements IRequestApi {
 
     @Override
     public String getApi() {
-        return "businessOrder/getAdminPhone";
+        return "manpower-rest-api/businessOrder/getAdminPhone";
     }
 
 }
