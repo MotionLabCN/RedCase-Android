@@ -2,6 +2,7 @@ package com.tntlinking.tntdev.http.api;
 
 import com.hjq.http.config.IRequestApi;
 
+import java.io.Serializable;
 import java.util.List;
 
 //APP端职位列表(分页)
@@ -34,226 +35,253 @@ public final class GetFirmPositionApi implements IRequestApi {
 
     public final static class Bean {
 
-            private Integer total;
-            private Integer pageNum;
-            private List<ListBean> list;
+        private Integer total;
+        private Integer pageNum;
+        private List<ListBean> list;
 
-            public Integer getTotal() {
-                return total;
+        public Integer getTotal() {
+            return total;
+        }
+
+        public void setTotal(Integer total) {
+            this.total = total;
+        }
+
+        public Integer getPageNum() {
+            return pageNum;
+        }
+
+        public void setPageNum(Integer pageNum) {
+            this.pageNum = pageNum;
+        }
+
+        public List<ListBean> getList() {
+            return list;
+        }
+
+        public void setList(List<ListBean> list) {
+            this.list = list;
+        }
+
+        public static class ListBean  implements Serializable {
+
+            private int id;
+            private int companyId;
+            private int recruiterId;
+            private String careerDirection;
+            private String title;
+            private String description;
+            private int recruitCount;
+            private String workOper;
+            private String education;
+            private String trainingMode;
+            private String workYears;
+            private String createDate;
+            private int status;
+            private String workDaysMode;
+            private double startPay;
+            private double endPay;
+            private Boolean industryMandatory;
+            private List<String> skills;
+            private String companyName;
+            private String industryName;
+            private int auditStatus;//1 是通过，0 是审核中 2 是未通过
+            private String auditFailReason;//审核失败原因
+            private int countRecommends;// 系统推荐人数
+            private int countSelfRecommends;//自我推荐人数
+
+            public int getId() {
+                return id;
             }
 
-            public void setTotal(Integer total) {
-                this.total = total;
+            public void setId(int id) {
+                this.id = id;
             }
 
-            public Integer getPageNum() {
-                return pageNum;
+            public int getCompanyId() {
+                return companyId;
             }
 
-            public void setPageNum(Integer pageNum) {
-                this.pageNum = pageNum;
+            public void setCompanyId(int companyId) {
+                this.companyId = companyId;
             }
 
-            public List<ListBean> getList() {
-                return list;
+            public int getRecruiterId() {
+                return recruiterId;
             }
 
-            public void setList(List<ListBean> list) {
-                this.list = list;
+            public void setRecruiterId(int recruiterId) {
+                this.recruiterId = recruiterId;
             }
 
-            public static class ListBean {
+            public String getCareerDirection() {
+                return careerDirection;
+            }
 
-                private int id;
-                private int companyId;
-                private int recruiterId;
-                private String careerDirection;
-                private String title;
-                private String description;
-                private int recruitCount;
-                private String workOper;
-                private String education;
-                private String trainingMode;
-                private String workYears;
-                private String createDate;
-                private int status;
-                private String workDaysMode;
-                private Double startPay;
-                private Double endPay;
-                private Boolean industryMandatory;
-                private List<String> skills;
-                private int auditStatus;
-                private int countRecommends;
-                private int countSelfRecommends;
+            public void setCareerDirection(String careerDirection) {
+                this.careerDirection = careerDirection;
+            }
 
-                public int getId() {
-                    return id;
-                }
+            public String getTitle() {
+                return title;
+            }
 
-                public void setId(int id) {
-                    this.id = id;
-                }
+            public void setTitle(String title) {
+                this.title = title;
+            }
 
-                public int getCompanyId() {
-                    return companyId;
-                }
+            public String getDescription() {
+                return description;
+            }
 
-                public void setCompanyId(int companyId) {
-                    this.companyId = companyId;
-                }
+            public void setDescription(String description) {
+                this.description = description;
+            }
 
-                public int getRecruiterId() {
-                    return recruiterId;
-                }
+            public int getRecruitCount() {
+                return recruitCount;
+            }
 
-                public void setRecruiterId(int recruiterId) {
-                    this.recruiterId = recruiterId;
-                }
+            public void setRecruitCount(int recruitCount) {
+                this.recruitCount = recruitCount;
+            }
 
-                public String getCareerDirection() {
-                    return careerDirection;
-                }
+            public String getWorkOper() {
+                return workOper;
+            }
 
-                public void setCareerDirection(String careerDirection) {
-                    this.careerDirection = careerDirection;
-                }
+            public void setWorkOper(String workOper) {
+                this.workOper = workOper;
+            }
 
-                public String getTitle() {
-                    return title;
-                }
+            public String getEducation() {
+                return education;
+            }
 
-                public void setTitle(String title) {
-                    this.title = title;
-                }
+            public void setEducation(String education) {
+                this.education = education;
+            }
 
-                public String getDescription() {
-                    return description;
-                }
+            public String getTrainingMode() {
+                return trainingMode;
+            }
 
-                public void setDescription(String description) {
-                    this.description = description;
-                }
+            public void setTrainingMode(String trainingMode) {
+                this.trainingMode = trainingMode;
+            }
 
-                public int getRecruitCount() {
-                    return recruitCount;
-                }
+            public String getWorkYears() {
+                return workYears;
+            }
 
-                public void setRecruitCount(int recruitCount) {
-                    this.recruitCount = recruitCount;
-                }
+            public void setWorkYears(String workYears) {
+                this.workYears = workYears;
+            }
 
-                public String getWorkOper() {
-                    return workOper;
-                }
+            public String getCreateDate() {
+                return createDate;
+            }
 
-                public void setWorkOper(String workOper) {
-                    this.workOper = workOper;
-                }
+            public void setCreateDate(String createDate) {
+                this.createDate = createDate;
+            }
 
-                public String getEducation() {
-                    return education;
-                }
+            public int getStatus() {
+                return status;
+            }
 
-                public void setEducation(String education) {
-                    this.education = education;
-                }
+            public void setStatus(int status) {
+                this.status = status;
+            }
 
-                public String getTrainingMode() {
-                    return trainingMode;
-                }
+            public String getWorkDaysMode() {
+                return workDaysMode;
+            }
 
-                public void setTrainingMode(String trainingMode) {
-                    this.trainingMode = trainingMode;
-                }
+            public void setWorkDaysMode(String workDaysMode) {
+                this.workDaysMode = workDaysMode;
+            }
 
-                public String getWorkYears() {
-                    return workYears;
-                }
+            public double getStartPay() {
+                return startPay;
+            }
 
-                public void setWorkYears(String workYears) {
-                    this.workYears = workYears;
-                }
+            public void setStartPay(double startPay) {
+                this.startPay = startPay;
+            }
 
-                public String getCreateDate() {
-                    return createDate;
-                }
+            public double getEndPay() {
+                return endPay;
+            }
 
-                public void setCreateDate(String createDate) {
-                    this.createDate = createDate;
-                }
+            public void setEndPay(double endPay) {
+                this.endPay = endPay;
+            }
 
-                public int getStatus() {
-                    return status;
-                }
+            public Boolean getIndustryMandatory() {
+                return industryMandatory;
+            }
 
-                public void setStatus(int status) {
-                    this.status = status;
-                }
+            public void setIndustryMandatory(Boolean industryMandatory) {
+                this.industryMandatory = industryMandatory;
+            }
 
-                public String getWorkDaysMode() {
-                    return workDaysMode;
-                }
+            public List<String> getSkills() {
+                return skills;
+            }
 
-                public void setWorkDaysMode(String workDaysMode) {
-                    this.workDaysMode = workDaysMode;
-                }
+            public void setSkills(List<String> skills) {
+                this.skills = skills;
+            }
 
-                public Double getStartPay() {
-                    return startPay;
-                }
+            public int getAuditStatus() {
+                return auditStatus;
+            }
 
-                public void setStartPay(Double startPay) {
-                    this.startPay = startPay;
-                }
+            public void setAuditStatus(int auditStatus) {
+                this.auditStatus = auditStatus;
+            }
 
-                public Double getEndPay() {
-                    return endPay;
-                }
+            public int getCountRecommends() {
+                return countRecommends;
+            }
 
-                public void setEndPay(Double endPay) {
-                    this.endPay = endPay;
-                }
+            public void setCountRecommends(int countRecommends) {
+                this.countRecommends = countRecommends;
+            }
 
-                public Boolean getIndustryMandatory() {
-                    return industryMandatory;
-                }
+            public int getCountSelfRecommends() {
+                return countSelfRecommends;
+            }
 
-                public void setIndustryMandatory(Boolean industryMandatory) {
-                    this.industryMandatory = industryMandatory;
-                }
+            public void setCountSelfRecommends(int countSelfRecommends) {
+                this.countSelfRecommends = countSelfRecommends;
+            }
 
-                public List<String> getSkills() {
-                    return skills;
-                }
+            public String getCompanyName() {
+                return companyName;
+            }
 
-                public void setSkills(List<String> skills) {
-                    this.skills = skills;
-                }
+            public void setCompanyName(String companyName) {
+                this.companyName = companyName;
+            }
 
-                public Integer getAuditStatus() {
-                    return auditStatus;
-                }
+            public String getAuditFailReason() {
+                return auditFailReason;
+            }
 
-                public void setAuditStatus(Integer auditStatus) {
-                    this.auditStatus = auditStatus;
-                }
+            public void setAuditFailReason(String auditFailReason) {
+                this.auditFailReason = auditFailReason;
+            }
 
-                public Integer getCountRecommends() {
-                    return countRecommends;
-                }
+            public String getIndustryName() {
+                return industryName;
+            }
 
-                public void setCountRecommends(Integer countRecommends) {
-                    this.countRecommends = countRecommends;
-                }
-
-                public Integer getCountSelfRecommends() {
-                    return countSelfRecommends;
-                }
-
-                public void setCountSelfRecommends(Integer countSelfRecommends) {
-                    this.countSelfRecommends = countSelfRecommends;
-                }
+            public void setIndustryName(String industryName) {
+                this.industryName = industryName;
             }
         }
+    }
 
 }

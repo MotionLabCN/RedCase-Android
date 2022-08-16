@@ -129,19 +129,22 @@
         android:paddingBottom="@dimen/dp_10">
 
         <TextView
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_marginRight="@dimen/dp_16"
             android:text="会议链接"
             android:textColor="@color/gray"
             android:textSize="@dimen/sp_13" />
 
         <TextView
             android:id="@+id/tv_link"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:drawableRight="@drawable/icon_copy"
-            android:text="xxxxx"
+            android:layout_weight="1"
+            android:drawableRight="@drawable/icon_blue_copy"
+            android:drawablePadding="@dimen/dp_4"
+            android:gravity="right|center"
+            android:text="xxxxxxxxxx"
             android:textColor="@color/color_202839"
             android:textSize="@dimen/sp_13"
             android:textStyle="bold" />

@@ -58,6 +58,7 @@ public final class DeveloperInfoActivity extends AppActivity {
     private TextView tv_dev_name;
     private TextView tv_dev_info;
     private TextView tv_salary;
+    private LinearLayout ll_bottom;
 
     private DeveloperInfoBean bean;
     private List<GetFirmPositionApi.Bean.ListBean> mList = new ArrayList<>();
@@ -87,6 +88,7 @@ public final class DeveloperInfoActivity extends AppActivity {
         iv_collect = findViewById(R.id.iv_collect);
         ll_to_sign = findViewById(R.id.ll_to_sign);
         btn_to_interview = findViewById(R.id.btn_to_interview);
+        ll_bottom = findViewById(R.id.ll_bottom);
 
         setOnClickListener(ll_to_collect, ll_to_sign, btn_to_interview);
 
@@ -98,8 +100,13 @@ public final class DeveloperInfoActivity extends AppActivity {
     protected void initData() {
         int developerId = getInt("developerId");
         getFirmDevDetail(developerId);
+        if (!TextUtils.isEmpty(getString("from"))) {
+            ll_bottom.setVisibility(View.GONE);
+        } else {
+            getAppList(1);
+            ll_bottom.setVisibility(View.VISIBLE);
+        }
 
-        getAppList(1);
     }
 
 
@@ -198,6 +205,7 @@ public final class DeveloperInfoActivity extends AppActivity {
 
     /**
      * 端职位列表(分页)
+     * 底部签约列表list
      *
      * @param
      */

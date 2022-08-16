@@ -123,7 +123,7 @@
                         android:id="@+id/iv_select"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/icon_deal" />
+                        android:src="@drawable/icon_date_select" />
 
                 </LinearLayout>
 

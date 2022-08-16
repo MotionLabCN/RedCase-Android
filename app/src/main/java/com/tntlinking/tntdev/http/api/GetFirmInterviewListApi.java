@@ -55,33 +55,16 @@ public final class GetFirmInterviewListApi implements IRequestApi {
         }
 
         public static class ListBean {
-
-            private int id;
-            private Object orderId;
             private int developerId;
-            private double serviceMoney;
-            private double deductMoney;
-            private double personalTax;
-            private double actualMoney;
-            private String createDate;
-            private int status;
-            private String grantDate;
-
-            public int getId() {
-                return id;
-            }
-
-            public void setId(int id) {
-                this.id = id;
-            }
-
-            public Object getOrderId() {
-                return orderId;
-            }
-
-            public void setOrderId(Object orderId) {
-                this.orderId = orderId;
-            }
+            private int positionId;
+            private int interviewId;
+            private String interviewStartDate;
+            private String interviewEndDate;
+            private String realName;
+            private String title;
+            private String meetingCode;
+            private String meetingUrl;
+            private String dayType;
 
             public int getDeveloperId() {
                 return developerId;
@@ -91,60 +74,76 @@ public final class GetFirmInterviewListApi implements IRequestApi {
                 this.developerId = developerId;
             }
 
-            public double getServiceMoney() {
-                return serviceMoney;
+            public int getPositionId() {
+                return positionId;
             }
 
-            public void setServiceMoney(double serviceMoney) {
-                this.serviceMoney = serviceMoney;
+            public void setPositionId(int positionId) {
+                this.positionId = positionId;
             }
 
-            public double getDeductMoney() {
-                return deductMoney;
+            public String getInterviewStartDate() {
+                return interviewStartDate;
             }
 
-            public void setDeductMoney(double deductMoney) {
-                this.deductMoney = deductMoney;
+            public void setInterviewStartDate(String interviewStartDate) {
+                this.interviewStartDate = interviewStartDate;
             }
 
-            public double getPersonalTax() {
-                return personalTax;
+            public String getInterviewEndDate() {
+                return interviewEndDate;
             }
 
-            public void setPersonalTax(double personalTax) {
-                this.personalTax = personalTax;
+            public void setInterviewEndDate(String interviewEndDate) {
+                this.interviewEndDate = interviewEndDate;
             }
 
-            public double getActualMoney() {
-                return actualMoney;
+            public String getRealName() {
+                return realName;
             }
 
-            public void setActualMoney(double actualMoney) {
-                this.actualMoney = actualMoney;
+            public void setRealName(String realName) {
+                this.realName = realName;
             }
 
-            public String getCreateDate() {
-                return createDate;
+            public String getTitle() {
+                return title;
             }
 
-            public void setCreateDate(String createDate) {
-                this.createDate = createDate;
+            public void setTitle(String title) {
+                this.title = title;
             }
 
-            public int getStatus() {
-                return status;
+            public String getMeetingCode() {
+                return meetingCode;
             }
 
-            public void setStatus(int status) {
-                this.status = status;
+            public void setMeetingCode(String meetingCode) {
+                this.meetingCode = meetingCode;
             }
 
-            public String getGrantDate() {
-                return grantDate;
+            public String getMeetingUrl() {
+                return meetingUrl;
             }
 
-            public void setGrantDate(String grantDate) {
-                this.grantDate = grantDate;
+            public void setMeetingUrl(String meetingUrl) {
+                this.meetingUrl = meetingUrl;
+            }
+
+            public String getDayType() {
+                return dayType;
+            }
+
+            public void setDayType(String dayType) {
+                this.dayType = dayType;
+            }
+
+            public int getInterviewId() {
+                return interviewId;
+            }
+
+            public void setInterviewId(int interviewId) {
+                this.interviewId = interviewId;
             }
         }
     }

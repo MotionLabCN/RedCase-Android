@@ -11,7 +11,7 @@ public final class InviteMembersApi implements IRequestApi, IRequestType {
 
     @Override
     public String getApi() {
-        return "tntlinking-member/sso/company/invite/members";
+        return "tntlinking-member/sso/app/companyMember/invite/members";
     }
 
 

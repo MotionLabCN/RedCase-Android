@@ -44,7 +44,7 @@ public final class FirmPositionAdapter extends BaseAdapter {
 
 
     @Override
-    public Object getItem(int position) {
+    public GetFirmPositionApi.Bean.ListBean getItem(int position) {
         return mList.get(position);
     }
 
@@ -81,6 +81,7 @@ public final class FirmPositionAdapter extends BaseAdapter {
             holder.tv_company_name = convertView.findViewById(R.id.tv_company_name);
             holder.tv_position_desc = convertView.findViewById(R.id.tv_position_desc);
             holder.tv_reason = convertView.findViewById(R.id.tv_reason);
+            holder.tv_position_recommend = convertView.findViewById(R.id.tv_position_recommend);
 
             convertView.setTag(holder);
         } else {
@@ -92,7 +93,7 @@ public final class FirmPositionAdapter extends BaseAdapter {
         holder.tv_company_name.setText(item.getCareerDirection());
         holder.tv_position_desc.setText(item.getWorkDaysMode() + "-" + item.getEducation() + "-" + item.getWorkYears());
 
-
+        holder.tv_position_recommend.setText("已有" + item.getCountRecommends() + "人推荐，" + item.getCountSelfRecommends() + "人自荐");
         holder.tv_reason.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -101,6 +102,18 @@ public final class FirmPositionAdapter extends BaseAdapter {
                 }
             }
         });
+
+        if (item.getAuditStatus() == 2) {//1 是通过，0 是审核中 2 是未通过
+            holder.ll_status.setVisibility(View.VISIBLE);
+            holder.tv_reason.setVisibility(View.VISIBLE);
+            holder.tv_position_recommend.setVisibility(View.GONE);
+        } else {
+            holder.ll_status.setVisibility(View.GONE);
+            holder.tv_reason.setVisibility(View.GONE);
+            holder.tv_position_recommend.setVisibility(View.VISIBLE);
+        }
+
+
         return convertView;
     }
 
@@ -114,6 +127,7 @@ public final class FirmPositionAdapter extends BaseAdapter {
         TextView tv_salary;
         TextView tv_position_desc;
         TextView tv_reason;
+        TextView tv_position_recommend;
 
     }
 }

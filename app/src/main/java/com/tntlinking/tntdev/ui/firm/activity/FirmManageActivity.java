@@ -15,7 +15,9 @@ import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener;
 import com.tntlinking.tntdev.R;
 import com.tntlinking.tntdev.aop.SingleClick;
 import com.tntlinking.tntdev.app.AppActivity;
+import com.tntlinking.tntdev.http.api.DeleteMembersApi;
 import com.tntlinking.tntdev.http.api.FirmMemberListApi;
+import com.tntlinking.tntdev.http.api.ModifyAdminApi;
 import com.tntlinking.tntdev.http.api.developerBillListApi;
 import com.tntlinking.tntdev.http.model.HttpData;
 import com.tntlinking.tntdev.ui.firm.adapter.AuditionHistoryAdapter;
@@ -41,7 +43,7 @@ public final class FirmManageActivity extends AppActivity implements OnRefreshLo
     private AppCompatButton btn_commit;
 
     private FirmManageAdapter mAdapter;
-    private List<developerBillListApi.Bean.ListBean> mList = new ArrayList<>();
+    private List<FirmMemberListApi.Bean.ListBean> mList = new ArrayList<>();
     private int pageNum = 1;
 
     @Override
@@ -93,18 +95,23 @@ public final class FirmManageActivity extends AppActivity implements OnRefreshLo
         startActivity(FirmPersonCheckActivity.class);
     }
 
+    /**
+     * 获取公司下面成员列表
+     *
+     * @param pageNum
+     */
     private void getFirmMemberList(int pageNum) {
         EasyHttp.get(this)
-                .api(new FirmMemberListApi().setCompanyId(00).setPageNum(pageNum).setPageSize(20))
-                .request(new HttpCallback<HttpData<developerBillListApi.Bean>>(this) {
+                .api(new FirmMemberListApi().setPageNum(pageNum).setPageSize(20))
+                .request(new HttpCallback<HttpData<FirmMemberListApi.Bean>>(this) {
 
                     @Override
-                    public void onSucceed(HttpData<developerBillListApi.Bean> data) {
+                    public void onSucceed(HttpData<FirmMemberListApi.Bean> data) {
                         if (data.getData().getList().size() >= 0) {
                             ll_empty.setVisibility(View.GONE);
                             if (pageNum == 1) {
                                 if (data.getData().getList().size() == 0) {
-//                                    ll_empty.setVisibility(View.VISIBLE);
+                                    ll_empty.setVisibility(View.VISIBLE);
                                 } else {
                                     mList.clear();
                                     mList.addAll(data.getData().getList());
@@ -120,7 +127,12 @@ public final class FirmManageActivity extends AppActivity implements OnRefreshLo
                             }
 
                         }
+                    }
 
+                    @Override
+                    public void onFail(Exception e) {
+                        super.onFail(e);
+                        ll_empty.setVisibility(View.VISIBLE);
                     }
                 });
     }
@@ -151,31 +163,82 @@ public final class FirmManageActivity extends AppActivity implements OnRefreshLo
 
     @Override
     public void onChildClick(RecyclerView recyclerView, View childView, int position) {
+        FirmMemberListApi.Bean.ListBean item = mAdapter.getItem(position);
         if (childView.getId() == R.id.btn_hand_over) {
             new BaseDialog.Builder<>(this)
                     .setContentView(R.layout.check_order_status_dialog)
                     .setAnimStyle(BaseDialog.ANIM_SCALE)
                     .setText(R.id.tv_title, "移交管理员")
-                    .setText(R.id.tv_content, "是否移交管理员给小王")
+                    .setText(R.id.tv_content, "是否移交管理员给" + item.getRealName())
                     .setText(R.id.btn_dialog_custom_cancel, "否")
                     .setText(R.id.btn_dialog_custom_ok, "是")
                     .setOnClickListener(R.id.btn_dialog_custom_cancel, (BaseDialog.OnClickListener<Button>) (dialog, button) -> dialog.dismiss())
                     .setOnClickListener(R.id.btn_dialog_custom_ok, (dialog, views) -> {
-                        dialog.dismiss();
+
+                        modifyAdmin(item.getId(), dialog);
                     }).show();
         } else if (childView.getId() == R.id.btn_remove) {
             new BaseDialog.Builder<>(this)
                     .setContentView(R.layout.check_order_status_dialog)
                     .setAnimStyle(BaseDialog.ANIM_SCALE)
                     .setText(R.id.tv_title, "移除")
-                    .setText(R.id.tv_content, "是否移除小王")
+                    .setText(R.id.tv_content, "是否移除小王" + item.getRealName())
                     .setText(R.id.btn_dialog_custom_cancel, "否")
                     .setText(R.id.btn_dialog_custom_ok, "是")
                     .setOnClickListener(R.id.btn_dialog_custom_cancel, (BaseDialog.OnClickListener<Button>) (dialog, button) -> dialog.dismiss())
                     .setOnClickListener(R.id.btn_dialog_custom_ok, (dialog, views) -> {
-                        dialog.dismiss();
+
+                        removeMember(item.getId(), dialog);
                     }).show();
         }
+    }
+
+
+    /**
+     * 移交管理员
+     *
+     * @param memberId
+     */
+    private void modifyAdmin(int memberId, BaseDialog dialog) {
+        EasyHttp.post(this)
+                .api(new ModifyAdminApi().setMemberId(memberId))
+                .request(new HttpCallback<HttpData<FirmMemberListApi.Bean>>(this) {
+                    @Override
+                    public void onSucceed(HttpData<FirmMemberListApi.Bean> data) {
+                        dialog.dismiss();
+                        getFirmMemberList(1);
+                    }
+
+                    @Override
+                    public void onFail(Exception e) {
+                        super.onFail(e);
+                        dialog.dismiss();
+                    }
+                });
+    }
+
+    /**
+     * 移除成员
+     *
+     * @param memberId
+     */
+    private void removeMember(int memberId, BaseDialog dialog) {
+        EasyHttp.delete(this)
+                .api(new DeleteMembersApi().setMemberId(memberId))
+                .request(new HttpCallback<HttpData<FirmMemberListApi.Bean>>(this) {
+                    @Override
+                    public void onSucceed(HttpData<FirmMemberListApi.Bean> data) {
+
+                        dialog.dismiss();
+                        getFirmMemberList(1);
+                    }
+
+                    @Override
+                    public void onFail(Exception e) {
+                        super.onFail(e);
+                        dialog.dismiss();
+                    }
+                });
     }
 
     /**
@@ -185,13 +248,12 @@ public final class FirmManageActivity extends AppActivity implements OnRefreshLo
     @Override
     public void onRefresh(@NonNull RefreshLayout refreshLayout) {
         pageNum = 1;
-
+        getFirmMemberList(pageNum);
     }
 
     @Override
     public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
         pageNum++;
-
-
+        getFirmMemberList(pageNum);
     }
 }

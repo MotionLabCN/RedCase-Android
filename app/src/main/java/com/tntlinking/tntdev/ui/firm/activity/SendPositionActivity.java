@@ -5,8 +5,10 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Build;
 import android.view.View;
+
 import com.blankj.utilcode.util.GsonUtils;
 import com.blankj.utilcode.util.SPUtils;
+import com.hjq.bar.TitleBar;
 import com.hjq.base.BaseDialog;
 import com.hjq.http.EasyHttp;
 
@@ -17,6 +19,8 @@ import com.tntlinking.tntdev.R;
 import com.tntlinking.tntdev.aop.SingleClick;
 import com.tntlinking.tntdev.app.AppActivity;
 import com.tntlinking.tntdev.http.api.GetDictionaryApi;
+import com.tntlinking.tntdev.http.api.GetFirmPositionApi;
+import com.tntlinking.tntdev.http.api.GetPositionOriginalApi;
 import com.tntlinking.tntdev.http.api.GetProvinceApi;
 import com.tntlinking.tntdev.http.api.GetTagListApi;
 import com.tntlinking.tntdev.http.api.SendPositionApi;
@@ -37,6 +41,7 @@ import androidx.appcompat.widget.AppCompatButton;
  * 发布职位信息
  */
 public final class SendPositionActivity extends AppActivity {
+    private TitleBar title_bar;
     private SettingBar position_career_id;
     private SettingBar position_skill_id;
     private SettingBar position_education_id;
@@ -87,6 +92,7 @@ public final class SendPositionActivity extends AppActivity {
     @Override
     protected void initView() {
 
+        title_bar = findViewById(R.id.title_bar);
         position_career_id = findViewById(R.id.position_career_id);
         position_skill_id = findViewById(R.id.position_skill_id);
         position_education_id = findViewById(R.id.position_education_id);
@@ -115,6 +121,37 @@ public final class SendPositionActivity extends AppActivity {
         mEducationList = getDictionaryList("5");//学历
         mCareerIdList = getDictionaryList("6");//职业方向
         mTrainingList = getDictionaryList("7");//培养方式
+
+        GetFirmPositionApi.Bean.ListBean bean = getSerializable("position_bean");
+        GetPositionOriginalApi.Bean beanIds = getSerializable("position_bean_ids");
+        if (bean != null) {
+            title_bar.setTitle("修改职位");
+
+            position_career_id.setLeftText(bean.getCareerDirection());
+            et_position_name.setText(bean.getTitle());
+            position_education_id.setLeftText(bean.getEducation());
+            position_training_mode_id.setLeftText(bean.getTrainingMode());
+            position_work_year_id.setLeftText(bean.getWorkYears());
+            et_expect_salary_low.setText(bean.getStartPay() + "");
+            et_expect_salary_high.setText(bean.getEndPay() + "");
+            et_recruit_count.setText(bean.getRecruitCount() + "");
+            et_description.setText(bean.getDescription());
+
+            careerDirectionName = bean.getCareerDirection();
+            careerDirectionId = beanIds.getCareerDirectionId();
+            workYearsName = bean.getWorkYears();
+            workYearsId = beanIds.getWorkYearsId();
+            educationName = bean.getEducation();
+            educationId = beanIds.getEducationId();
+            trainingName = bean.getTrainingMode();
+            trainingId = beanIds.getTrainingModeId();
+
+            careerPosition = bean.getTitle();
+            startPay = bean.getStartPay() + "";
+            endPay = bean.getEndPay() + "";
+            mCount = bean.getRecruitCount() + "";
+            mDescription = bean.getDescription();
+        }
     }
 
 

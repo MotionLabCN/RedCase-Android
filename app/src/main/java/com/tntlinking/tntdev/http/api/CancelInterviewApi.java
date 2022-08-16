@@ -13,7 +13,6 @@ public final class CancelInterviewApi implements IRequestApi {
     }
 
     private int interviewId;
-    private int pageSize;
 
     public CancelInterviewApi setInterviewId(int interviewId) {
         this.interviewId = interviewId;

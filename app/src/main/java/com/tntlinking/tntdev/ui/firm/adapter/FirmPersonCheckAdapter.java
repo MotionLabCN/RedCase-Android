@@ -6,12 +6,12 @@ import android.widget.TextView;
 
 import com.tntlinking.tntdev.R;
 import com.tntlinking.tntdev.app.AppAdapter;
-import com.tntlinking.tntdev.http.api.developerBillListApi;
+import com.tntlinking.tntdev.http.api.FirmMemberToBeAuditedApi;
 
 import androidx.annotation.NonNull;
 
 
-public final class FirmPersonCheckAdapter extends AppAdapter<developerBillListApi.Bean.ListBean> {
+public final class FirmPersonCheckAdapter extends AppAdapter<FirmMemberToBeAuditedApi.Bean.ListBean> {
 
     public FirmPersonCheckAdapter(Context context) {
         super(context);
@@ -25,25 +25,25 @@ public final class FirmPersonCheckAdapter extends AppAdapter<developerBillListAp
 
     private final class ViewHolder extends AppAdapter<?>.ViewHolder {
 
-        private final TextView tv_serviceMoney;
-        private final TextView tv_deductMoney;
-        private final TextView tv_personalTax;
-        private final TextView tv_actualMoney;
+        private final TextView tv_name;
+        private final TextView tv_position;
+        private final TextView tv_mobile;
 
 
         private ViewHolder() {
             super(R.layout.item_firm_person_check);
-            tv_serviceMoney = findViewById(R.id.tv_serviceMoney);
-            tv_deductMoney = findViewById(R.id.tv_deductMoney);
-            tv_personalTax = findViewById(R.id.tv_personalTax);
-            tv_actualMoney = findViewById(R.id.tv_actualMoney);
+            tv_name = findViewById(R.id.tv_name);
+            tv_position = findViewById(R.id.tv_position);
+            tv_mobile = findViewById(R.id.tv_mobile);
 
         }
 
         @Override
         public void onBindView(int position) {
-            developerBillListApi.Bean.ListBean item = getItem(position);
-            tv_serviceMoney.setText("¥"+item.getServiceMoney());
+            FirmMemberToBeAuditedApi.Bean.ListBean item = getItem(position);
+            tv_name.setText(item.getRealName());
+            tv_position.setText(item.getPositionName());
+            tv_mobile.setText(item.getMobile());
         }
     }
 }

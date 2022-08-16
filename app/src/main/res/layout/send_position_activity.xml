@@ -11,6 +11,7 @@
     tools:layoutAnimation="@null">
 
     <com.hjq.bar.TitleBar
+        android:id="@+id/title_bar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_50"
         app:leftIcon="@drawable/icon_back_black"

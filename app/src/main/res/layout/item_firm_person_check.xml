@@ -28,7 +28,7 @@
             android:textSize="@dimen/sp_14" />
 
         <TextView
-            android:id="@+id/tv_serviceMoney"
+            android:id="@+id/tv_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="xxxxxx"
@@ -55,7 +55,7 @@
             android:textSize="@dimen/sp_14" />
 
         <TextView
-            android:id="@+id/tv_deductMoney"
+            android:id="@+id/tv_position"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="xxxxx"
@@ -82,7 +82,7 @@
             android:textSize="@dimen/sp_14" />
 
         <TextView
-            android:id="@+id/tv_personalTax"
+            android:id="@+id/tv_mobile"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="xxxx"
@@ -106,7 +106,7 @@
             android:layout_weight="2" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_hand_over"
+            android:id="@+id/btn_disagree"
             style="@style/ButtonStyleNo"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -115,7 +115,7 @@
             android:text="拒绝" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_remove"
+            android:id="@+id/btn_agree"
             style="@style/ButtonStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

@@ -66,8 +66,8 @@
             android:id="@+id/btn_modify"
             style="@style/ButtonStyle"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_16"
+            android:layout_height="@dimen/dp_36"
+            android:layout_marginTop="@dimen/dp_24"
             android:paddingLeft="@dimen/dp_28"
             android:paddingRight="@dimen/dp_28"
             android:text="修改" />
@@ -82,8 +82,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
         android:layout_marginTop="@dimen/dp_30"
+        android:gravity="center"
         android:orientation="vertical">
 
 
@@ -102,6 +102,7 @@
             android:textStyle="bold" />
 
         <TextView
+            android:id="@+id/tv_reason"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_6"
@@ -112,8 +113,8 @@
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_contact"
             style="@style/ButtonStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/dp_110"
+            android:layout_height="@dimen/dp_42"
             android:layout_marginTop="@dimen/dp_16"
             android:text="联系运营" />
     </LinearLayout>

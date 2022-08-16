@@ -29,6 +29,7 @@ import java.util.List;
 
 import androidx.appcompat.widget.AppCompatButton;
 
+//注销企业端
 public final class DeleteFirmActivity extends AppActivity {
 
     private ListView list_view;

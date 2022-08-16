@@ -1,29 +1,27 @@
 package com.tntlinking.tntdev.http.api;
 
 import com.hjq.http.config.IRequestApi;
-import com.hjq.http.config.IRequestServer;
-import com.tntlinking.tntdev.BuildConfig;
 
 import java.util.List;
 
-//获取公司下成员列表
-public final class FirmMemberListApi implements IRequestApi {
+//获取公司下待审核成员
+public final class FirmMemberToBeAuditedApi implements IRequestApi {
 
     @Override
     public String getApi() {
-        return "tntlinking-member/sso/app/companyMember/member/page";
+        return "tntlinking-member/sso/app/companyMember/getToBeAuditedMembers/page";
     }
 
     private int pageNum;
     private int pageSize = 20;
 
 
-    public FirmMemberListApi setPageNum(int pageNum) {
+    public FirmMemberToBeAuditedApi setPageNum(int pageNum) {
         this.pageNum = pageNum;
         return this;
     }
 
-    public FirmMemberListApi setPageSize(int pageSize) {
+    public FirmMemberToBeAuditedApi setPageSize(int pageSize) {
         this.pageSize = pageSize;
         return this;
     }

@@ -30,7 +30,7 @@
                     android:id="@+id/tv_position"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="前端开发"
+                    android:text="xxx开发"
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_15"
                     android:textStyle="bold" />
@@ -40,7 +40,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/dp_10"
-                    android:background="@drawable/bg_gray_radius_3"
+                    android:background="@drawable/bg_red_radius_3"
                     android:gravity="center_vertical"
                     android:orientation="horizontal"
                     android:paddingLeft="@dimen/dp_9"
@@ -53,15 +53,15 @@
                         android:id="@+id/view_dot"
                         android:layout_width="@dimen/dp_5"
                         android:layout_height="@dimen/dp_5"
-                        android:background="@drawable/dot_oval_gray" />
+                        android:background="@drawable/dot_oval_red" />
 
                     <TextView
                         android:id="@+id/tv_status"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/dp_4"
-                        android:text="服务中"
-                        android:textColor="@color/gray"
+                        android:text="未通过"
+                        android:textColor="@color/color_F5313D"
                         android:textSize="@dimen/sp_12" />
 
 
@@ -73,7 +73,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_6"
-                android:text="上海TTSL科技有限公司"
+                android:text="上海xxx科技有限公司"
                 android:textColor="@color/color_hint_color"
                 android:textSize="@dimen/sp_13" />
 
@@ -91,7 +91,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_6"
-                android:text="已有100人推荐，50人自荐"
+                android:text="已有xx人推荐，xx人自荐"
                 android:textColor="@color/color_FB8B39"
                 android:textSize="@dimen/sp_13" />
 

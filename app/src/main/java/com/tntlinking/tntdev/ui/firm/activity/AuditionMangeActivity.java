@@ -30,7 +30,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 /**
- * 面试管理页面
+ * 面试管理列表页面
  */
 public final class AuditionMangeActivity extends AppActivity implements OnRefreshLoadMoreListener,
         BaseAdapter.OnItemClickListener, BaseAdapter.OnChildClickListener {
@@ -51,8 +51,6 @@ public final class AuditionMangeActivity extends AppActivity implements OnRefres
 
     @Override
     protected void initView() {
-
-
         ll_empty = findViewById(R.id.ll_empty);
         mRefreshLayout = findViewById(R.id.rl_status_refresh);
         mRecyclerView = findViewById(R.id.rv_status_list);
@@ -60,8 +58,8 @@ public final class AuditionMangeActivity extends AppActivity implements OnRefres
         mAdapter = new AuditionManageAdapter(this);
         mAdapter.setOnItemClickListener(this);
         mRefreshLayout.setOnRefreshLoadMoreListener(this);
-        mAdapter.setOnChildClickListener(R.id.ll_interview_resume, this);
-        mAdapter.setOnChildClickListener(R.id.ll_interview_link, this);
+        mAdapter.setOnChildClickListener(R.id.tv_look_audition, this);
+        mAdapter.setOnChildClickListener(R.id.tv_link, this);
         mAdapter.setOnChildClickListener(R.id.btn_cancel, this);
         mAdapter.setOnChildClickListener(R.id.btn_contact, this);
         mAdapter.setOnChildClickListener(R.id.btn_enter, this);
@@ -74,7 +72,7 @@ public final class AuditionMangeActivity extends AppActivity implements OnRefres
     @Override
     protected void initData() {
 
-        getFirmInterviewList();
+        getFirmInterviewList(pageNum);
     }
 
 
@@ -87,12 +85,13 @@ public final class AuditionMangeActivity extends AppActivity implements OnRefres
 
     @Override
     public void onRightClick(View view) {
+
         startActivity(AuditionHistoryListActivity.class);
     }
 
-    public void getFirmInterviewList() {
+    public void getFirmInterviewList(int pageNum) {
         EasyHttp.get(this)
-                .api(new GetFirmInterviewListApi())
+                .api(new GetFirmInterviewListApi().setPageNum(pageNum).setPageSize(20))
                 .request(new HttpCallback<HttpData<GetFirmInterviewListApi.Bean>>(this) {
 
                     @Override
@@ -138,18 +137,23 @@ public final class AuditionMangeActivity extends AppActivity implements OnRefres
      */
     @Override
     public void onItemClick(RecyclerView recyclerView, View itemView, int position) {
-//        Intent intent = new Intent(this, IncomeDetailActivity.class);
-//        intent.putExtra("orderId", mAdapter.getItem(position).getId());
-//        startActivity(intent);
+        Intent intent = new Intent(this, FirmAuditionDetailActivity.class);
+        intent.putExtra("name", mAdapter.getItem(position).getRealName());
+        intent.putExtra("time", mAdapter.getItem(position).getInterviewStartDate());
+        intent.putExtra("position", mAdapter.getItem(position).getTitle());
+        intent.putExtra("code", mAdapter.getItem(position).getMeetingCode());
+        startActivity(intent);
 
-        startActivity(FirmAuditionDetailActivity.class);
     }
 
     @Override
     public void onChildClick(RecyclerView recyclerView, View childView, int position) {
-        if (childView.getId() == R.id.ll_interview_resume) {
-            toast("查看简历");
-        } else if (childView.getId() == R.id.ll_interview_link) {
+        if (childView.getId() == R.id.tv_look_audition) {
+            Intent intent = new Intent(getActivity(), DeveloperInfoActivity.class);
+            intent.putExtra("developerId", mList.get(position).getDeveloperId());
+            intent.putExtra("from", "audition_manage");
+            startActivity(intent);
+        } else if (childView.getId() == R.id.tv_link) {
             toast("会议连接");
         } else if (childView.getId() == R.id.btn_cancel) {
             new BaseDialog.Builder<>(this)
@@ -162,8 +166,7 @@ public final class AuditionMangeActivity extends AppActivity implements OnRefres
                     .setOnClickListener(R.id.btn_dialog_custom_cancel, (BaseDialog.OnClickListener<Button>) (dialog, button) -> dialog.dismiss())
                     .setOnClickListener(R.id.btn_dialog_custom_ok, (dialog, views) -> {
 
-                        dialog.dismiss();
-                        cancelInterview(100, dialog);
+                        cancelInterview(mAdapter.getItem(position).getInterviewId(), dialog);
                     }).show();
         } else if (childView.getId() == R.id.btn_contact) {
             toast("联系客服");
@@ -172,9 +175,9 @@ public final class AuditionMangeActivity extends AppActivity implements OnRefres
         }
     }
 
-
+    //取消面试
     public void cancelInterview(int interviewId, BaseDialog dialog) {
-        EasyHttp.get(this)
+        EasyHttp.post(this)
                 .api(new CancelInterviewApi().setInterviewId(interviewId))
                 .request(new HttpCallback<HttpData<GetFirmInterviewListApi.Bean>>(this) {
 
@@ -182,6 +185,7 @@ public final class AuditionMangeActivity extends AppActivity implements OnRefres
                     public void onSucceed(HttpData<GetFirmInterviewListApi.Bean> data) {
 
                         dialog.dismiss();
+                        getFirmInterviewList(1);
                     }
                 });
     }
@@ -193,12 +197,12 @@ public final class AuditionMangeActivity extends AppActivity implements OnRefres
     @Override
     public void onRefresh(@NonNull RefreshLayout refreshLayout) {
         pageNum = 1;
-
+        getFirmInterviewList(pageNum);
     }
 
     @Override
     public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
         pageNum++;
-
+        getFirmInterviewList(pageNum);
     }
 }

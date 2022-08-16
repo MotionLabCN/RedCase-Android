@@ -1,5 +1,6 @@
 package com.tntlinking.tntdev.ui.firm.activity;
 
+import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -30,7 +31,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 /**
- * 历史面试页面
+ * 历史面试列表页面
  */
 public final class AuditionHistoryListActivity extends AppActivity implements OnRefreshLoadMoreListener,
         BaseAdapter.OnItemClickListener, BaseAdapter.OnChildClickListener {
@@ -60,7 +61,7 @@ public final class AuditionHistoryListActivity extends AppActivity implements On
 
         mAdapter = new AuditionHistoryAdapter(this);
         mAdapter.setOnItemClickListener(this);
-        mAdapter.setOnChildClickListener(R.id.ll_interview_resume, this);
+        mAdapter.setOnChildClickListener(R.id.tv_look_audition, this);
         mRecyclerView.setAdapter(mAdapter);
 
         mRefreshLayout.setOnRefreshLoadMoreListener(this);
@@ -69,9 +70,7 @@ public final class AuditionHistoryListActivity extends AppActivity implements On
 
     @Override
     protected void initData() {
-
-
-        getFirmInterviewList();
+        getFirmInterviewHistoryList(pageNum);
     }
 
 
@@ -81,9 +80,9 @@ public final class AuditionHistoryListActivity extends AppActivity implements On
 
     }
 
-    public void getFirmInterviewList() {
+    public void getFirmInterviewHistoryList(int pageNum) {
         EasyHttp.get(this)
-                .api(new GetFirmInterviewHistoryApi())
+                .api(new GetFirmInterviewHistoryApi().setPageNum(pageNum).setPageSize(20))
                 .request(new HttpCallback<HttpData<GetFirmInterviewListApi.Bean>>(this) {
 
                     @Override
@@ -130,31 +129,37 @@ public final class AuditionHistoryListActivity extends AppActivity implements On
      */
     @Override
     public void onItemClick(RecyclerView recyclerView, View itemView, int position) {
-//        Intent intent = new Intent(this, IncomeDetailActivity.class);
-//        intent.putExtra("orderId", mAdapter.getItem(position).getId());
-//        startActivity(intent);
-
-        startActivity(FirmAuditionDetailActivity.class);
-    }
-
-    /**
-     * {@link OnRefreshLoadMoreListener}
-     */
-
-    @Override
-    public void onRefresh(@NonNull RefreshLayout refreshLayout) {
-        pageNum = 1;
-
-    }
-
-    @Override
-    public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
-        pageNum++;
+        Intent intent = new Intent(this, FirmAuditionDetailActivity.class);
+        intent.putExtra("name", mAdapter.getItem(position).getRealName());
+        intent.putExtra("time", mAdapter.getItem(position).getInterviewStartDate());
+        intent.putExtra("position", mAdapter.getItem(position).getTitle());
+        intent.putExtra("code", mAdapter.getItem(position).getMeetingCode());
+        startActivity(intent);
 
     }
 
     @Override
     public void onChildClick(RecyclerView recyclerView, View childView, int position) {
-        toast("面试简历");
+        Intent intent = new Intent(getActivity(), DeveloperInfoActivity.class);
+        intent.putExtra("developerId", mAdapter.getItem(position).getDeveloperId());
+        intent.putExtra("from", "audition_manage");
+        startActivity(intent);
     }
+
+    /**
+     * {@link OnRefreshLoadMoreListener}
+     */
+    @Override
+    public void onRefresh(@NonNull RefreshLayout refreshLayout) {
+        pageNum = 1;
+        getFirmInterviewHistoryList(pageNum);
+    }
+
+    @Override
+    public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
+        pageNum++;
+        getFirmInterviewHistoryList(pageNum);
+    }
+
+
 }

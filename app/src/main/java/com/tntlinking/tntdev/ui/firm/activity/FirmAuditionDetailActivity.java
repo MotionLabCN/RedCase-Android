@@ -1,32 +1,21 @@
 package com.tntlinking.tntdev.ui.firm.activity;
-
-import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.text.TextUtils;
 import android.view.View;
-import android.widget.ScrollView;
-
-import com.blankj.utilcode.util.SPUtils;
-import com.hjq.http.EasyHttp;
-import com.hjq.http.listener.HttpCallback;
+import android.widget.TextView;
 import com.tntlinking.tntdev.R;
 import com.tntlinking.tntdev.aop.SingleClick;
 import com.tntlinking.tntdev.app.AppActivity;
-import com.tntlinking.tntdev.http.api.GetDeveloperDetailApi;
-import com.tntlinking.tntdev.http.model.HttpData;
-import com.tntlinking.tntdev.other.AppConfig;
-import com.tntlinking.tntdev.ui.activity.UploadResumeActivity;
-import com.tntlinking.tntdev.ui.bean.DeveloperInfoBean;
-
-import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatButton;
 
 /**
- * 合约单页面
+ * 面试详情页面
  */
 public final class FirmAuditionDetailActivity extends AppActivity {
     private AppCompatButton mCommit;
-    private ScrollView sv;
+    private TextView tv_time;
+    private TextView tv_position;
+    private TextView tv_name;
+    private TextView tv_meeting_code;
 
 
     @Override
@@ -37,8 +26,10 @@ public final class FirmAuditionDetailActivity extends AppActivity {
 
     @Override
     protected void initView() {
-
-        sv = findViewById(R.id.sv);
+        tv_time = findViewById(R.id.tv_time);
+        tv_position = findViewById(R.id.tv_position);
+        tv_name = findViewById(R.id.tv_name);
+        tv_meeting_code = findViewById(R.id.tv_meeting_code);
 
 
         mCommit = findViewById(R.id.btn_commit);
@@ -49,8 +40,16 @@ public final class FirmAuditionDetailActivity extends AppActivity {
 
 
     @Override
-    protected void initData() {// 一个是从简历解析传过来的，一个是进入页面接口请求显示数据的
+    protected void initData() {
+        String name = getString("name");
+        String position = getString("position");
+        String time = getString("time");
+        String code = getString("code");
 
+        tv_time.setText(time);
+        tv_position.setText(position);
+        tv_name.setText(name);
+        tv_meeting_code.setText(code);
     }
 
 
@@ -59,52 +58,12 @@ public final class FirmAuditionDetailActivity extends AppActivity {
     public void onClick(View view) {
         Intent intent = new Intent();
         switch (view.getId()) {
-            case R.id.ll_add_photo:
-                break;
-            case R.id.ll_add_base_info:
+            case R.id.btn_commit:
 
-                break;
-            case R.id.ll_import_resume:
-                startActivity(UploadResumeActivity.class);
-                finish();
                 break;
         }
 
     }
 
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_OK) {
-            int developId = SPUtils.getInstance().getInt(AppConfig.DEVELOPER_ID);
-            getDeveloperDetail(developId);
-        }
-    }
-
-
-    @SuppressLint("SetTextI18n")
-    public void getDeveloperDetail(int parentId) {
-        EasyHttp.get(this)
-                .api(new GetDeveloperDetailApi().setParentId(parentId))
-                .request(new HttpCallback<HttpData<DeveloperInfoBean>>(this) {
-                    @Override
-                    public void onSucceed(HttpData<DeveloperInfoBean> data) {
-
-
-                    }
-                });
-    }
-
-
-
-
-    /**
-     * 简历解析页面跳转过来的，直接填充相关数据
-     */
-    @SuppressLint("SetTextI18n")
-    public void setDeveloperInfo(DeveloperInfoBean data) {
-
-    }
 
 }

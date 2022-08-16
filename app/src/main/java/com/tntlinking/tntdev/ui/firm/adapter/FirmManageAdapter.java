@@ -6,13 +6,14 @@ import android.widget.TextView;
 
 import com.tntlinking.tntdev.R;
 import com.tntlinking.tntdev.app.AppAdapter;
+import com.tntlinking.tntdev.http.api.FirmMemberListApi;
 import com.tntlinking.tntdev.http.api.developerBillListApi;
 import com.tntlinking.tntdev.other.Utils;
 
 import androidx.annotation.NonNull;
 
 
-public final class FirmManageAdapter extends AppAdapter<developerBillListApi.Bean.ListBean> {
+public final class FirmManageAdapter extends AppAdapter<FirmMemberListApi.Bean.ListBean> {
 
     public FirmManageAdapter(Context context) {
         super(context);
@@ -26,27 +27,25 @@ public final class FirmManageAdapter extends AppAdapter<developerBillListApi.Bea
 
     private final class ViewHolder extends AppAdapter<?>.ViewHolder {
 
-        private final TextView tv_create_time;
-        private final TextView tv_serviceMoney;
-        private final TextView tv_deductMoney;
-        private final TextView tv_personalTax;
-        private final TextView tv_actualMoney;
+        private final TextView tv_name;
+        private final TextView tv_position;
+        private final TextView tv_mobile;
 
 
         private ViewHolder() {
             super(R.layout.item_firm_manage);
-            tv_create_time = findViewById(R.id.tv_create_time);
-            tv_serviceMoney = findViewById(R.id.tv_serviceMoney);
-            tv_deductMoney = findViewById(R.id.tv_deductMoney);
-            tv_personalTax = findViewById(R.id.tv_personalTax);
-            tv_actualMoney = findViewById(R.id.tv_actualMoney);
+            tv_name = findViewById(R.id.tv_name);
+            tv_position = findViewById(R.id.tv_position);
+            tv_mobile = findViewById(R.id.tv_mobile);
 
         }
 
         @Override
         public void onBindView(int position) {
-            developerBillListApi.Bean.ListBean item = getItem(position);
-            tv_serviceMoney.setText("¥"+item.getServiceMoney());
+            FirmMemberListApi.Bean.ListBean item = getItem(position);
+            tv_name.setText(item.getRealName());
+            tv_position.setText(item.getPositionName());
+            tv_mobile.setText(item.getMobile());
         }
     }
 }

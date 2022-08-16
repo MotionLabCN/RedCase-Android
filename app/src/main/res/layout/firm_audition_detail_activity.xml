@@ -60,7 +60,7 @@
                 android:textSize="@dimen/sp_14" />
 
             <TextView
-                android:id="@+id/tv_serviceMoney"
+                android:id="@+id/tv_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="xxxxxx"
@@ -87,7 +87,7 @@
                 android:textSize="@dimen/sp_14" />
 
             <TextView
-                android:id="@+id/tv_deductMoney"
+                android:id="@+id/tv_position"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="xxxxx"
@@ -114,7 +114,7 @@
                 android:textSize="@dimen/sp_14" />
 
             <TextView
-                android:id="@+id/tv_personalTax"
+                android:id="@+id/tv_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="xxxx"
@@ -141,7 +141,7 @@
                 android:textSize="@dimen/sp_14" />
 
             <TextView
-                android:id="@+id/tv_actualMoney"
+                android:id="@+id/tv_meeting_code"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="xxxxx"
