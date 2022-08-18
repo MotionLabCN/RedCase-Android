@@ -15,7 +15,7 @@ public final class GetFirmSelfRecommendsApi implements IRequestApi {
 
     private int positionId;
     private int pageNum;
-    private int pageSize;
+    private int pageSize = 20;
 
     public GetFirmSelfRecommendsApi setPositionId(int positionId) {
         this.positionId = positionId;

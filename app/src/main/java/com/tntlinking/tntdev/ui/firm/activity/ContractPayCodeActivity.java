@@ -103,7 +103,8 @@ public final class ContractPayCodeActivity extends AppActivity {
                 .request(new HttpCallback<HttpData<Void>>(this) {
                     @Override
                     public void onSucceed(HttpData<Void> data) {
-
+                        startActivity(FreezeMoneyStatusActivity.class);
+                        finish();
 
                     }
 

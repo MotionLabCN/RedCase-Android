@@ -13,6 +13,7 @@ import com.tntlinking.tntdev.R;
 import com.tntlinking.tntdev.http.api.AppListApi;
 import com.tntlinking.tntdev.http.api.GetFirmRecommendsApi;
 import com.tntlinking.tntdev.other.GlideUtils;
+import com.tntlinking.tntdev.other.Utils;
 
 import java.util.List;
 
@@ -74,7 +75,9 @@ public final class RecommendPositionAdapter extends BaseAdapter {
         }
         GetFirmRecommendsApi.Bean.ListBean item = mList.get(position);
         holder.tv_name.setText(item.getRealName());
-        holder.tv_salary.setText(item.getExpectSalary());
+//        holder.tv_salary.setText(item.getExpectSalary());
+        double expectSalary = Double.parseDouble(item.getExpectSalary());
+        holder.tv_salary.setText(Utils.formatMoney(expectSalary) + "/月");
         holder.tv_position_desc.setText(item.getCareerDirectionName() + "-" + item.getEducationName() + "-工作经验" + item.getWorkYearsName());
         GlideUtils.loadRoundCorners(mContext, item.getAvatarUrl(), holder.iv_avatar, (int) mContext.getResources().getDimension(R.dimen.dp_8));
         return convertView;

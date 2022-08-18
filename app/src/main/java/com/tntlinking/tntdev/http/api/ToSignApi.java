@@ -9,7 +9,7 @@ public final class ToSignApi implements IRequestApi, IRequestType {
 
     @Override
     public String getApi() {
-        return "developer/signContract/sign";
+        return "manpower-rest-api/developer/signContract/sign";
     }
 
     private String bankCardId;

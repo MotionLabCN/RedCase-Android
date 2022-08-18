@@ -14,13 +14,13 @@ import androidx.appcompat.widget.AppCompatButton;
 /**
  * 发布职位信息
  */
-public final class SendPositionSuccessActivity extends AppActivity {
+public final class FreezeMoneyStatusActivity extends AppActivity {
     private TitleBar title_bar;
     private AppCompatButton btn_commit;
 
     @Override
     protected int getLayoutId() {
-        return R.layout.send_position_success_activity;
+        return R.layout.freeze_money_status_activity;
     }
 
     @Override

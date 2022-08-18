@@ -18,8 +18,6 @@ import androidx.appcompat.widget.AppCompatButton;
 public final class FirmCertificationActivity extends AppActivity {
 
 
-
-
     private AppCompatButton btn_commit;
 
 
@@ -57,7 +55,7 @@ public final class FirmCertificationActivity extends AppActivity {
                 break;
 
             case R.id.btn_commit:
-
+                startActivity(MyCompanyActivity.class);
                 break;
 
         }

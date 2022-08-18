@@ -13,6 +13,7 @@ import com.hjq.http.EasyLog;
 import com.tntlinking.tntdev.R;
 import com.tntlinking.tntdev.http.api.GetFirmDevApi;
 import com.tntlinking.tntdev.other.GlideUtils;
+import com.tntlinking.tntdev.other.Utils;
 import com.tntlinking.tntdev.ui.adapter.TagAdapter;
 import com.tntlinking.tntdev.widget.FlowTagLayout;
 
@@ -87,7 +88,7 @@ public final class FirmHomeAdapter extends BaseAdapter {
                 (int) mContext.getResources().getDimension(R.dimen.dp_8));
         holder.tv_name.setText(item.getRealName());
         holder.tv_all_day.setText(item.getWorkDayModeName());
-        holder.tv_salary.setText(item.getExpectSalary() + "");
+        holder.tv_salary.setText((Utils.formatMoney(item.getExpectSalary() / 1000) + "k/月"));
         holder.tv_position.setText(item.getCareerDirectionName() + "·工作经验" + item.getWorkYearsName());
 
         TagFirmAdapter adapter = new TagFirmAdapter(mContext, 2);

@@ -48,12 +48,14 @@ public final class ContractDetailActivity extends AppActivity {
     private LinearLayout ll_work_time;
     private TextView tv_work_time;
     private TextView tv_work_money;
-    private TextView tv_work_time_start;
-    private TextView tv_work_time_start_money;
-    private TextView tv_work_time_end;
-    private TextView tv_work_time_end_money;
+    private TextView tv_work_time_1;
+    private TextView tv_work_time_money_1;
+    private TextView tv_work_time_2;
+    private TextView tv_work_time_money_2;
     private TextView tv_work_service_money;
     private TextView tv_work_freeze_money;
+    private LinearLayout ll_date_1;
+    private LinearLayout ll_date_2;
     private AppCompatButton btn_create;
 
     private int positionId;
@@ -77,12 +79,14 @@ public final class ContractDetailActivity extends AppActivity {
         ll_work_time = findViewById(R.id.ll_work_time);
         tv_work_time = findViewById(R.id.tv_work_time);
         tv_work_money = findViewById(R.id.tv_work_money);
-        tv_work_time_start = findViewById(R.id.tv_work_time_start);
-        tv_work_time_start_money = findViewById(R.id.tv_work_time_start_money);
-        tv_work_time_end = findViewById(R.id.tv_work_time_end);
-        tv_work_time_end_money = findViewById(R.id.tv_work_time_end_money);
+        tv_work_time_1 = findViewById(R.id.tv_work_time_1);
+        tv_work_time_money_1 = findViewById(R.id.tv_work_time_money_1);
+        tv_work_time_2 = findViewById(R.id.tv_work_time_2);
+        tv_work_time_money_2 = findViewById(R.id.tv_work_time_money_2);
         tv_work_freeze_money = findViewById(R.id.tv_work_freeze_money);
         tv_work_service_money = findViewById(R.id.tv_work_service_money);
+        ll_date_1 = findViewById(R.id.ll_date_1);
+        ll_date_2 = findViewById(R.id.ll_date_2);
         btn_create = findViewById(R.id.btn_create);
 
         setOnClickListener(ll_work_time, btn_create);
@@ -153,22 +157,22 @@ public final class ContractDetailActivity extends AppActivity {
                         if (preList != null && preList.size() != 0) {
                             if (preList.size() == 1) {
                                 PostCalculateApi.Bean.PreListBean bean = preList.get(0);
-                                tv_work_time_start.setText(bean.getWorkStartDate() + "-" + bean.getWorkEndDate());
-                                tv_work_time_start_money.setText(bean.getServiceMoney() + "");
-                                tv_work_time_end.setVisibility(View.GONE);
-                                tv_work_time_end_money.setVisibility(View.GONE);
+                                tv_work_time_1.setText(bean.getWorkStartDate() + "-" + bean.getWorkEndDate());
+                                tv_work_time_money_1.setText(Utils.formatMoney(bean.getServiceMoney() + ""));
+                                ll_date_2.setVisibility(View.GONE);
                             } else if (preList.size() == 2) {
                                 PostCalculateApi.Bean.PreListBean bean1 = preList.get(0);
-                                tv_work_time_start.setText(bean1.getWorkStartDate() + "-" + bean1.getWorkEndDate());
-                                tv_work_time_start_money.setText(bean1.getServiceMoney() + "");
+                                ll_date_2.setVisibility(View.VISIBLE);
+                                tv_work_time_1.setText(bean1.getWorkStartDate() + "-" + bean1.getWorkEndDate());
+                                tv_work_time_money_1.setText(Utils.formatMoney(bean1.getServiceMoney() + ""));
                                 PostCalculateApi.Bean.PreListBean bean2 = preList.get(1);
-                                tv_work_time_end.setText(bean2.getWorkStartDate() + "-" + bean2.getWorkEndDate());
-                                tv_work_time_end_money.setText(bean2.getServiceMoney() + "");
+                                tv_work_time_2.setText(bean2.getWorkStartDate() + "-" + bean2.getWorkEndDate());
+                                tv_work_time_money_2.setText(Utils.formatMoney(bean2.getServiceMoney() + ""));
 
                             }
-                            tv_work_money.setText(data.getData().getTotalAmount() + "");
-                            tv_work_service_money.setText(data.getData().getServiceAmount() + "");
-                            tv_work_freeze_money.setText(data.getData().getFreezeAmount() + "");
+                            tv_work_money.setText(Utils.formatMoney(data.getData().getTotalAmount() + ""));
+                            tv_work_service_money.setText(Utils.formatMoney(data.getData().getServiceAmount() + ""));
+                            tv_work_freeze_money.setText(Utils.formatMoney(data.getData().getFreezeAmount() + ""));
                         }
                     }
                 });

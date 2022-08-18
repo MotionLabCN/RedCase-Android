@@ -253,6 +253,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/ll_date_1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
@@ -262,7 +263,7 @@
                     android:paddingBottom="@dimen/dp_10">
 
                     <TextView
-                        android:id="@+id/tv_work_time_start"
+                        android:id="@+id/tv_work_time_1"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -271,7 +272,7 @@
                         android:textSize="@dimen/sp_14" />
 
                     <TextView
-                        android:id="@+id/tv_work_time_start_money"
+                        android:id="@+id/tv_work_time_money_1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="xxxxx"
@@ -281,6 +282,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/ll_date_2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
@@ -290,7 +292,7 @@
                     android:paddingBottom="@dimen/dp_10">
 
                     <TextView
-                        android:id="@+id/tv_work_time_end"
+                        android:id="@+id/tv_work_time_2"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -299,7 +301,7 @@
                         android:textSize="@dimen/sp_14" />
 
                     <TextView
-                        android:id="@+id/tv_work_time_end_money"
+                        android:id="@+id/tv_work_time_money_2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="xxxx"

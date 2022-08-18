@@ -1,13 +1,9 @@
 package com.tntlinking.tntdev.ui.firm.fragment;
 
-import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.LinearLayout;
-
-import com.blankj.utilcode.util.SPUtils;
 import com.hjq.http.EasyHttp;
 import com.hjq.http.EasyLog;
 import com.hjq.http.listener.HttpCallback;
@@ -15,7 +11,6 @@ import com.scwang.smart.refresh.layout.SmartRefreshLayout;
 import com.scwang.smart.refresh.layout.api.RefreshLayout;
 import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener;
 import com.tntlinking.tntdev.R;
-import com.tntlinking.tntdev.aop.SingleClick;
 import com.tntlinking.tntdev.app.TitleBarFragment;
 import com.tntlinking.tntdev.http.api.GetFirmRecommendsApi;
 import com.tntlinking.tntdev.http.api.GetFirmSelfRecommendsApi;
@@ -26,7 +21,6 @@ import com.tntlinking.tntdev.widget.MyListView;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import androidx.annotation.NonNull;
 
 /**
@@ -68,17 +62,12 @@ public final class RecommendPositionFragment extends TitleBarFragment<FirmMainAc
     @Override
     protected void initView() {
         lv_1 = findViewById(R.id.lv_1);
-
         ll_empty = findViewById(R.id.ll_empty);
         ll_daily = findViewById(R.id.ll_daily);
 
-
         mRefreshLayout = findViewById(R.id.rl_status_refresh);
         mRefreshLayout.setOnRefreshLoadMoreListener(this);
-
         mAdapter = new RecommendPositionAdapter(getActivity());
-
-
         lv_1.setAdapter(mAdapter);
 
         lv_1.setOnItemClickListener(new AdapterView.OnItemClickListener() {

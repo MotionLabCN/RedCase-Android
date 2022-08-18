@@ -162,7 +162,8 @@
                                 android:layout_marginTop="@dimen/dp_10"
                                 android:text="面试管理"
                                 android:textColor="@color/color_text_color"
-                                android:textSize="@dimen/sp_12" />
+                                android:textSize="@dimen/sp_12"
+                                android:textStyle="bold" />
                         </LinearLayout>
 
 
@@ -186,7 +187,8 @@
                                 android:layout_marginTop="@dimen/dp_10"
                                 android:text="合约单"
                                 android:textColor="@color/color_text_color"
-                                android:textSize="@dimen/sp_12" />
+                                android:textSize="@dimen/sp_12"
+                                android:textStyle="bold" />
                         </LinearLayout>
 
                         <LinearLayout
@@ -209,7 +211,8 @@
                                 android:layout_marginTop="@dimen/dp_10"
                                 android:text="账户管理"
                                 android:textColor="@color/color_text_color"
-                                android:textSize="@dimen/sp_12" />
+                                android:textSize="@dimen/sp_12"
+                                android:textStyle="bold" />
                         </LinearLayout>
 
 
@@ -232,7 +235,8 @@
                                 android:layout_marginTop="@dimen/dp_10"
                                 android:text="企业管理"
                                 android:textColor="@color/color_text_color"
-                                android:textSize="@dimen/sp_12" />
+                                android:textSize="@dimen/sp_12"
+                                android:textStyle="bold" />
                         </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>

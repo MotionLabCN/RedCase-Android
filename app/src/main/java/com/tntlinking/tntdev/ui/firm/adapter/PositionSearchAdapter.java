@@ -1,5 +1,6 @@
 package com.tntlinking.tntdev.ui.firm.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -9,6 +10,7 @@ import com.tntlinking.tntdev.R;
 import com.tntlinking.tntdev.app.AppAdapter;
 import com.tntlinking.tntdev.http.api.GetFirmDevApi;
 import com.tntlinking.tntdev.other.GlideUtils;
+import com.tntlinking.tntdev.other.Utils;
 import com.tntlinking.tntdev.widget.FlowTagLayout;
 
 import java.util.Arrays;
@@ -48,6 +50,7 @@ public final class PositionSearchAdapter extends AppAdapter<GetFirmDevApi.Bean.L
             tag_flow_layout = findViewById(R.id.tag_flow_layout);
         }
 
+        @SuppressLint("SetTextI18n")
         @Override
         public void onBindView(int position) {
             GetFirmDevApi.Bean.ListBean item = getItem(position);
@@ -57,7 +60,7 @@ public final class PositionSearchAdapter extends AppAdapter<GetFirmDevApi.Bean.L
                     (int) getContext().getResources().getDimension(R.dimen.dp_8));
             tv_name.setText(item.getRealName());
             tv_all_day.setText(item.getWorkDayModeName());
-            tv_salary.setText(item.getExpectSalary() + "");
+            tv_salary.setText((Utils.formatMoney(item.getExpectSalary() / 1000) + "k/月"));
             tv_position.setText(item.getCareerDirectionName() + "·工作经验" + item.getWorkYearsName());
 
             TagFirmAdapter adapter = new TagFirmAdapter(getContext(), 2);

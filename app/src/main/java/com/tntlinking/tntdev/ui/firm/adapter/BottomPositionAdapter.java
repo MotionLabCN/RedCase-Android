@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.tntlinking.tntdev.R;
 import com.tntlinking.tntdev.http.api.GetFirmPositionApi;
+import com.tntlinking.tntdev.other.Utils;
 
 import java.util.List;
 
@@ -74,7 +75,10 @@ public final class BottomPositionAdapter extends BaseAdapter {
         }
         GetFirmPositionApi.Bean.ListBean item = mList.get(position);
         holder.tv_dev_position.setText(item.getCareerDirection());
-        holder.tv_salary.setText(item.getStartPay() + "-" + item.getEndPay());
+//        holder.tv_salary.setText(item.getStartPay() + "-" + item.getEndPay());
+        String mStart = Utils.formatMoney(item.getStartPay() / 1000) + "k";
+        String mEnd = Utils.formatMoney(item.getEndPay() / 1000) + "k";
+        holder.tv_salary.setText(mStart + "-" + mEnd);
         holder.tv_dev_info.setText(item.getWorkDaysMode() + "-" + item.getEducation() + "-" + item.getWorkYears());
 
 

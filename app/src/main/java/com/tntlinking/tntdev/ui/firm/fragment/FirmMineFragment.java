@@ -30,6 +30,7 @@ import com.tntlinking.tntdev.other.AppConfig;
 import com.tntlinking.tntdev.other.Utils;
 import com.tntlinking.tntdev.ui.activity.AboutAppActivity;
 import com.tntlinking.tntdev.ui.activity.BrowserPrivateActivity;
+import com.tntlinking.tntdev.ui.activity.MessageListActivity;
 import com.tntlinking.tntdev.ui.firm.activity.AccountManageActivity;
 import com.tntlinking.tntdev.ui.firm.activity.AuditionMangeActivity;
 import com.tntlinking.tntdev.ui.firm.activity.ChangeAdminActivity;
@@ -41,7 +42,6 @@ import com.tntlinking.tntdev.ui.firm.activity.TreatyOrderListActivity;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
-
 
 
 /**
@@ -106,7 +106,7 @@ public final class FirmMineFragment extends TitleBarFragment<FirmMainActivity> i
         mRefreshLayout.setOnRefreshLoadMoreListener(this);
         mRefreshLayout.setEnableLoadMore(false);
 
-        setOnClickListener(mPersonDataSetting, person_data_service, person_data_private, person_data_deal, person_data_dev,
+        setOnClickListener(iv_message, mPersonDataSetting, person_data_service, person_data_private, person_data_deal, person_data_dev,
                 ll_mine_audition, ll_mine_contract, ll_mine_account, ll_mine_firm, person_data_about);
 
 
@@ -131,6 +131,9 @@ public final class FirmMineFragment extends TitleBarFragment<FirmMainActivity> i
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
+            case R.id.iv_message://消息
+                startActivity(MessageListActivity.class);
+                break;
             case R.id.person_data_dev://身份切换
                 startActivity(ChangeAdminActivity.class);
                 break;
@@ -222,12 +225,28 @@ public final class FirmMineFragment extends TitleBarFragment<FirmMainActivity> i
     private void getFirmInfo() {
         EasyHttp.get(this)
                 .api(new GetFirmInfoApi())
-                .request(new HttpCallback<HttpData<GetDeveloperStatusApi.Bean>>(this) {
+                .request(new HttpCallback<HttpData<GetFirmInfoApi.Bean>>(this) {
 
                     @Override
-                    public void onSucceed(HttpData<GetDeveloperStatusApi.Bean> data) {
-
-
+                    public void onSucceed(HttpData<GetFirmInfoApi.Bean> data) {
+                        switch (data.getData().getStatus()) { //1待审核 2在审核 3已认证 4审核失败
+                            case 1:
+                                person_data_service.setRightText("去认证");
+                                person_data_service.setRightTextColor(getResources().getColor(R.color.color_4850FF));
+                                break;
+                            case 2:
+                                person_data_service.setRightText("审核中");
+                                person_data_service.setRightTextColor(getResources().getColor(R.color.color_FB8B39));
+                                break;
+                            case 3:
+                                person_data_service.setRightText("已认证");
+                                person_data_service.setRightTextColor(getResources().getColor(R.color.color_7E89A3));
+                                break;
+                            case 4:
+                                person_data_service.setRightText("不通过重新认证");
+                                person_data_service.setRightTextColor(getResources().getColor(R.color.color_F5313D));
+                                break;
+                        }
                     }
                 });
 
@@ -236,7 +255,7 @@ public final class FirmMineFragment extends TitleBarFragment<FirmMainActivity> i
     @Override
     public void onRefresh(@NonNull RefreshLayout refreshLayout) {
         getData();
-        getFirmInfo();//1待审核 2在审核 3已认证 4审核失败
+        getFirmInfo();
     }
 
     @Override

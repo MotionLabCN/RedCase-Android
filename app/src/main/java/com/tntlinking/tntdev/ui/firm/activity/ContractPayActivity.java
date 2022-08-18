@@ -5,23 +5,17 @@ import android.content.Intent;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.blankj.utilcode.util.SPUtils;
 import com.hjq.base.BaseDialog;
-import com.hjq.http.EasyHttp;
-import com.hjq.http.listener.HttpCallback;
 import com.tntlinking.tntdev.R;
 import com.tntlinking.tntdev.aop.SingleClick;
 import com.tntlinking.tntdev.app.AppActivity;
 import com.tntlinking.tntdev.http.api.CreateOrderApi;
-import com.tntlinking.tntdev.http.api.GetDeveloperDetailApi;
-import com.tntlinking.tntdev.http.model.HttpData;
-import com.tntlinking.tntdev.other.AppConfig;
-import com.tntlinking.tntdev.ui.bean.DeveloperInfoBean;
-
-import androidx.annotation.Nullable;
+import com.tntlinking.tntdev.other.Utils;
 import androidx.appcompat.widget.AppCompatButton;
 
 /**
@@ -29,10 +23,12 @@ import androidx.appcompat.widget.AppCompatButton;
  */
 public final class ContractPayActivity extends AppActivity {
     private TextView tv_work_money;
-    private TextView tv_work_time_start;
-    private TextView tv_work_time_start_money;
-    private TextView tv_work_time_end;
-    private TextView tv_work_time_end_money;
+    private TextView tv_work_time_1;
+    private TextView tv_work_time_money_1;
+    private TextView tv_work_time_2;
+    private TextView tv_work_time_money_2;
+    private LinearLayout ll_date_1;
+    private LinearLayout ll_date_2;
     private TextView tv_work_service_money;
     private TextView tv_work_freeze_money;
     private AppCompatButton btn_commit;
@@ -44,14 +40,17 @@ public final class ContractPayActivity extends AppActivity {
     }
 
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void initView() {
 
         tv_work_money = findViewById(R.id.tv_work_money);
-        tv_work_time_start = findViewById(R.id.tv_work_time_start);
-        tv_work_time_start_money = findViewById(R.id.tv_work_time_start_money);
-        tv_work_time_end = findViewById(R.id.tv_work_time_end);
-        tv_work_time_end_money = findViewById(R.id.tv_work_time_end_money);
+        tv_work_time_1 = findViewById(R.id.tv_work_time_1);
+        tv_work_time_money_1 = findViewById(R.id.tv_work_time_money_1);
+        tv_work_time_2 = findViewById(R.id.tv_work_time_2);
+        tv_work_time_money_2 = findViewById(R.id.tv_work_time_money_2);
+        ll_date_1 = findViewById(R.id.ll_date_1);
+        ll_date_2 = findViewById(R.id.ll_date_2);
         tv_work_freeze_money = findViewById(R.id.tv_work_freeze_money);
         tv_work_service_money = findViewById(R.id.tv_work_service_money);
         btn_commit = findViewById(R.id.btn_commit);
@@ -60,24 +59,24 @@ public final class ContractPayActivity extends AppActivity {
         CreateOrderApi.Bean.PayInfoBean payInfo = bean.getPayInfo();
         if (payInfo.getPreOrderList().size() != 0) {
             if (payInfo.getPreOrderList().size() == 1) {
-                CreateOrderApi.Bean.PayInfoBean.PreOrderListBean preOrderListBean = payInfo.getPreOrderList().get(0);
-
-                tv_work_time_start.setText(preOrderListBean.getWorkStartDate() + "-" + preOrderListBean.getWorkEndDate());
-                tv_work_time_start_money.setText(preOrderListBean.getServiceMoney() + "");
-                tv_work_time_end.setVisibility(View.GONE);
-                tv_work_time_end_money.setVisibility(View.GONE);
+                CreateOrderApi.Bean.PayInfoBean.PreOrderListBean preBean0 = payInfo.getPreOrderList().get(0);
+                tv_work_time_1.setText(preBean0.getWorkStartDate() + "-" + preBean0.getWorkEndDate());
+                tv_work_time_money_1.setText(Utils.formatMoney(preBean0.getServiceMoney() + ""));
+                ll_date_2.setVisibility(View.GONE);
             } else if (payInfo.getPreOrderList().size() == 2) {
-                CreateOrderApi.Bean.PayInfoBean.PreOrderListBean preBean1 = payInfo.getPreOrderList().get(0);
-                tv_work_time_start.setText(preBean1.getWorkStartDate() + "-" + preBean1.getWorkEndDate());
-                tv_work_time_start_money.setText(preBean1.getServiceMoney() + "");
-                CreateOrderApi.Bean.PayInfoBean.PreOrderListBean preBean2 = payInfo.getPreOrderList().get(1);
-                tv_work_time_end.setText(preBean2.getWorkStartDate() + "-" + preBean2.getWorkEndDate());
-                tv_work_time_end_money.setText(preBean2.getServiceMoney() + "");
+                ll_date_2.setVisibility(View.VISIBLE);
+                CreateOrderApi.Bean.PayInfoBean.PreOrderListBean preBean0 = payInfo.getPreOrderList().get(0);
+                tv_work_time_1.setText(preBean0.getWorkStartDate() + "-" + preBean0.getWorkEndDate());
+                tv_work_time_money_1.setText(Utils.formatMoney(preBean0.getServiceMoney() + ""));
+                CreateOrderApi.Bean.PayInfoBean.PreOrderListBean preBean1 = payInfo.getPreOrderList().get(1);
+                tv_work_time_2.setText(preBean1.getWorkStartDate() + "-" + preBean1.getWorkEndDate());
+                tv_work_time_money_2.setText(Utils.formatMoney(preBean1.getServiceMoney() + ""));
 
             }
-            tv_work_money.setText(payInfo.getTotalAmount() + "");
-            tv_work_service_money.setText(payInfo.getServiceAmount() + "");
-            tv_work_freeze_money.setText(payInfo.getFreezeAmount() + "");
+
+            tv_work_money.setText(Utils.formatMoney(payInfo.getTotalAmount() + ""));
+            tv_work_service_money.setText(Utils.formatMoney(payInfo.getServiceAmount() + ""));
+            tv_work_freeze_money.setText(Utils.formatMoney(payInfo.getFreezeAmount() + ""));
         }
         setOnClickListener(btn_commit);
 
@@ -132,28 +131,7 @@ public final class ContractPayActivity extends AppActivity {
                 }).show();
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_OK) {
-            int developId = SPUtils.getInstance().getInt(AppConfig.DEVELOPER_ID);
-            getDeveloperDetail(developId);
-        }
-    }
 
-
-    @SuppressLint("SetTextI18n")
-    public void getDeveloperDetail(int parentId) {
-        EasyHttp.get(this)
-                .api(new GetDeveloperDetailApi().setParentId(parentId))
-                .request(new HttpCallback<HttpData<DeveloperInfoBean>>(this) {
-                    @Override
-                    public void onSucceed(HttpData<DeveloperInfoBean> data) {
-
-
-                    }
-                });
-    }
 
 
 }

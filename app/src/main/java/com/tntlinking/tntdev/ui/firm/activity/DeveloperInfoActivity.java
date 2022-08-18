@@ -31,6 +31,7 @@ import com.tntlinking.tntdev.http.api.GetFirmPositionApi;
 import com.tntlinking.tntdev.http.model.HttpData;
 import com.tntlinking.tntdev.other.GlideUtils;
 import com.tntlinking.tntdev.other.OnItemClickListener;
+import com.tntlinking.tntdev.other.Utils;
 import com.tntlinking.tntdev.ui.bean.DeveloperInfoBean;
 import com.tntlinking.tntdev.ui.dialog.BottomListDialog;
 import com.tntlinking.tntdev.ui.firm.adapter.DevEducationAdapter;
@@ -170,7 +171,7 @@ public final class DeveloperInfoActivity extends AppActivity {
     }
 
     /**
-     * 获取职业方向
+     * 获取开发者详情
      */
     public void getFirmDevDetail(int developerId) {
         EasyHttp.get(this)
@@ -182,16 +183,6 @@ public final class DeveloperInfoActivity extends AppActivity {
 
                     }
                 });
-    }
-
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_OK) {
-
-
-        }
     }
 
 
@@ -207,7 +198,7 @@ public final class DeveloperInfoActivity extends AppActivity {
                 .request(new HttpCallback<HttpData<GetFirmPositionApi.Bean>>(this) {
                     @Override
                     public void onSucceed(HttpData<GetFirmPositionApi.Bean> data) {
-                        if (data.getData().getList().size() >= 0) {
+                        if (data.getData().getList() != null && data.getData().getList().size() >= 0) {
                             mList.clear();
                             mList.addAll(data.getData().getList());
 
@@ -259,7 +250,7 @@ public final class DeveloperInfoActivity extends AppActivity {
     }
 
     /**
-     * 简历解析页面跳转过来的，直接填充相关数据
+     * 填充开发者信息
      */
     @SuppressLint("SetTextI18n")
     public void setDeveloperInfo(DeveloperInfoBean data) {
@@ -270,7 +261,9 @@ public final class DeveloperInfoActivity extends AppActivity {
         DeveloperInfoBean.DeveloperCareer careerDto = bean.getCareerDto();
         List<DeveloperInfoBean.WorkMode> workModeDtoList = bean.getWorkModeDtoList();
         if (workModeDtoList.size() != 0) {
-            tv_salary.setText(workModeDtoList.get(0).getExpectSalary());
+            double expectSalary = Double.parseDouble(workModeDtoList.get(0).getExpectSalary()) / 1000;
+            tv_salary.setText((Utils.formatMoney(expectSalary) + "k/月"));
+//            tv_salary.setText(workModeDtoList.get(0).getExpectSalary());
         }
         tv_dev_info.setText(careerDto.getCareerDirectionName() + "·工作经验" + careerDto.getWorkYearsName());
 
@@ -282,7 +275,7 @@ public final class DeveloperInfoActivity extends AppActivity {
             skill.add(developerSkillDtoList.get(i).getSkillName());
         }
         adapter.onlyAddAll(skill);
-        
+
         List<DeveloperInfoBean.DeveloperEducation> educationDtoList = bean.getEducationDtoList();
         List<DeveloperInfoBean.DeveloperWork> workExperienceDtoList = bean.getWorkExperienceDtoList();
         List<DeveloperInfoBean.DeveloperProject> projectDtoList = bean.getProjectDtoList();

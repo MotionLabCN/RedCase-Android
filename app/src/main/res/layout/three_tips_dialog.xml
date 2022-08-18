@@ -29,13 +29,32 @@
             android:textSize="@dimen/sp_20"
             android:textStyle="bold" />
 
-
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_content"
+            android:id="@+id/tv_tips_1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="left"
-            android:layout_marginTop="@dimen/dp_20"
+            android:layout_marginTop="@dimen/dp_16"
+            android:text="xxxxxxxxxxx"
+            android:textColor="@color/color_hint_color"
+            android:textSize="@dimen/sp_13" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_tips_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginTop="@dimen/dp_16"
+            android:text="xxxxxxxxxxx"
+            android:textColor="@color/color_hint_color"
+            android:textSize="@dimen/sp_13" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_tips_3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginTop="@dimen/dp_16"
             android:text="xxxxxxxxxxx"
             android:textColor="@color/color_hint_color"
             android:textSize="@dimen/sp_13" />

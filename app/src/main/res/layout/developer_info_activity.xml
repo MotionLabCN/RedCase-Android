@@ -72,8 +72,10 @@
 
                             <TextView
                                 android:id="@+id/tv_dev_name"
-                                android:layout_width="wrap_content"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:ellipsize="end"
+                                android:singleLine="true"
                                 android:text="韩风"
                                 android:textColor="@color/color_text_color"
                                 android:textSize="@dimen/sp_20"
@@ -99,8 +101,8 @@
                             android:maxLines="1"
                             android:singleLine="true"
                             android:text="11k/月"
-                            android:textSize="@dimen/sp_15"
                             android:textColor="@color/main_color"
+                            android:textSize="@dimen/sp_15"
                             android:textStyle="bold" />
                     </LinearLayout>
 
@@ -223,10 +225,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginVertical="@dimen/dp_10"
-        android:paddingRight="@dimen/dp_16"
-        android:paddingLeft="@dimen/dp_16"
         android:gravity="center"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/dp_16"
+        android:paddingRight="@dimen/dp_16">
 
         <LinearLayout
             android:layout_width="0dp"
