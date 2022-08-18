@@ -23,6 +23,7 @@ import com.tntlinking.tntdev.R;
 import com.tntlinking.tntdev.aop.SingleClick;
 import com.tntlinking.tntdev.app.TitleBarFragment;
 import com.tntlinking.tntdev.http.api.GetDeveloperStatusApi;
+import com.tntlinking.tntdev.http.api.GetFirmInfoApi;
 import com.tntlinking.tntdev.http.api.GetSignContractPDFApi;
 import com.tntlinking.tntdev.http.model.HttpData;
 import com.tntlinking.tntdev.other.AppConfig;
@@ -32,14 +33,15 @@ import com.tntlinking.tntdev.ui.activity.BrowserPrivateActivity;
 import com.tntlinking.tntdev.ui.firm.activity.AccountManageActivity;
 import com.tntlinking.tntdev.ui.firm.activity.AuditionMangeActivity;
 import com.tntlinking.tntdev.ui.firm.activity.ChangeAdminActivity;
-import com.tntlinking.tntdev.ui.firm.activity.DeleteFirmActivity;
 import com.tntlinking.tntdev.ui.firm.activity.FirmCertificationActivity;
 import com.tntlinking.tntdev.ui.firm.activity.FirmMainActivity;
 import com.tntlinking.tntdev.ui.firm.activity.FirmManageActivity;
+import com.tntlinking.tntdev.ui.firm.activity.FirmSettingActivity;
 import com.tntlinking.tntdev.ui.firm.activity.TreatyOrderListActivity;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
+
 
 
 /**
@@ -120,6 +122,7 @@ public final class FirmMineFragment extends TitleBarFragment<FirmMainActivity> i
     @Override
     protected void initData() {
         getData();
+        getFirmInfo();
     }
 
 
@@ -147,7 +150,7 @@ public final class FirmMineFragment extends TitleBarFragment<FirmMainActivity> i
                 startActivity(FirmManageActivity.class);
                 break;
             case R.id.person_data_setting://账户设置
-                startActivity(DeleteFirmActivity.class);
+                startActivity(FirmSettingActivity.class);
                 break;
             case R.id.person_data_private:// 隐私政策
                 BrowserPrivateActivity.start(getActivity(), AppConfig.PRIVATE_URL);
@@ -216,9 +219,24 @@ public final class FirmMineFragment extends TitleBarFragment<FirmMainActivity> i
                 });
     }
 
+    private void getFirmInfo() {
+        EasyHttp.get(this)
+                .api(new GetFirmInfoApi())
+                .request(new HttpCallback<HttpData<GetDeveloperStatusApi.Bean>>(this) {
+
+                    @Override
+                    public void onSucceed(HttpData<GetDeveloperStatusApi.Bean> data) {
+
+
+                    }
+                });
+
+    }
+
     @Override
     public void onRefresh(@NonNull RefreshLayout refreshLayout) {
         getData();
+        getFirmInfo();//1待审核 2在审核 3已认证 4审核失败
     }
 
     @Override

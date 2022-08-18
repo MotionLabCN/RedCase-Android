@@ -9,6 +9,10 @@ import com.tntlinking.tntdev.R;
 import com.tntlinking.tntdev.app.AppAdapter;
 import com.tntlinking.tntdev.http.api.GetFirmDevApi;
 import com.tntlinking.tntdev.other.GlideUtils;
+import com.tntlinking.tntdev.widget.FlowTagLayout;
+
+import java.util.Arrays;
+import java.util.List;
 
 import androidx.annotation.NonNull;
 
@@ -32,7 +36,7 @@ public final class PositionSearchAdapter extends AppAdapter<GetFirmDevApi.Bean.L
         private final TextView tv_position;
         private final TextView tv_all_day;
         private final TextView tv_salary;
-
+        private final FlowTagLayout tag_flow_layout;
 
         private ViewHolder() {
             super(R.layout.item_firm_home);
@@ -41,6 +45,7 @@ public final class PositionSearchAdapter extends AppAdapter<GetFirmDevApi.Bean.L
             tv_position = findViewById(R.id.tv_position);
             tv_all_day = findViewById(R.id.tv_all_day);
             tv_salary = findViewById(R.id.tv_salary);
+            tag_flow_layout = findViewById(R.id.tag_flow_layout);
         }
 
         @Override
@@ -54,6 +59,21 @@ public final class PositionSearchAdapter extends AppAdapter<GetFirmDevApi.Bean.L
             tv_all_day.setText(item.getWorkDayModeName());
             tv_salary.setText(item.getExpectSalary() + "");
             tv_position.setText(item.getCareerDirectionName() + "·工作经验" + item.getWorkYearsName());
+
+            TagFirmAdapter adapter = new TagFirmAdapter(getContext(), 2);
+            tag_flow_layout.setAdapter(adapter);
+            if (item.getSkillName().contains(",")) {
+                String[] split = item.getSkillName().split(",");
+                List<String> strings = Arrays.asList(split);
+                if (strings.size() > 4) {
+                    adapter.onlyAddAll(strings.subList(0, 4));
+                } else {
+                    adapter.onlyAddAll(strings);
+                }
+
+            } else {
+                adapter.onlyAddAll(Arrays.asList(item.getSkillName()));
+            }
         }
     }
 }

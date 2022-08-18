@@ -9,6 +9,7 @@ import android.widget.LinearLayout;
 
 import com.blankj.utilcode.util.SPUtils;
 import com.hjq.http.EasyHttp;
+import com.hjq.http.EasyLog;
 import com.hjq.http.listener.HttpCallback;
 import com.scwang.smart.refresh.layout.SmartRefreshLayout;
 import com.scwang.smart.refresh.layout.api.RefreshLayout;
@@ -17,6 +18,7 @@ import com.tntlinking.tntdev.R;
 import com.tntlinking.tntdev.aop.SingleClick;
 import com.tntlinking.tntdev.app.TitleBarFragment;
 import com.tntlinking.tntdev.http.api.GetFirmRecommendsApi;
+import com.tntlinking.tntdev.http.api.GetFirmSelfRecommendsApi;
 import com.tntlinking.tntdev.http.model.HttpData;
 import com.tntlinking.tntdev.ui.firm.activity.FirmMainActivity;
 import com.tntlinking.tntdev.ui.firm.adapter.RecommendPositionAdapter;
@@ -38,19 +40,22 @@ public final class RecommendPositionFragment extends TitleBarFragment<FirmMainAc
     private SmartRefreshLayout mRefreshLayout;
 
 
-    private List<GetFirmRecommendsApi.Bean.ListBean> mList = new ArrayList<>();
+    private List<GetFirmRecommendsApi.Bean.ListBean> mList1 = new ArrayList<>();
+    private List<GetFirmRecommendsApi.Bean.ListBean> mList2 = new ArrayList<>();
     private RecommendPositionAdapter mAdapter;
 
     private int mPageNum = 1;
-    private int positionId=227;
 
-    private static final String INTENT_KEY_POSITION = "position";
+    private static final String POSITION = "position";
+    private static final String POSITION_ID = "position_id";
+    private int mPosition = 1;// 1 是推荐 2 是自荐
+    private int mPositionId = 0;
 
-
-    public static RecommendPositionFragment newInstance(String url) {
+    public static RecommendPositionFragment newInstance(int position, int positionId) {
         RecommendPositionFragment fragment = new RecommendPositionFragment();
         Bundle bundle = new Bundle();
-        bundle.putString(INTENT_KEY_POSITION, url);
+        bundle.putInt(POSITION, position);
+        bundle.putInt(POSITION_ID, positionId);
         fragment.setArguments(bundle);
         return fragment;
     }
@@ -89,25 +94,21 @@ public final class RecommendPositionFragment extends TitleBarFragment<FirmMainAc
 
     @Override
     protected void initData() {
-        getRecommendList(positionId, mPageNum);
-    }
-
-    @SuppressLint("NonConstantResourceId")
-    @SingleClick
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.ll_history:
-//                Intent intent = new Intent(getActivity(), HistoryDailyListActivity.class);
-//                intent.putExtra("orderId", orderId);
-//                startActivity(intent);
-                break;
+        mPosition = getInt(POSITION);
+        mPositionId = getInt(POSITION_ID);
+        EasyLog.print("=====mPosition===" + mPosition);
+        EasyLog.print("=====mPositionId===" + mPositionId);
+        if (mPosition == 1) {
+            getRecommendList(mPositionId, mPageNum);
+        } else {
+            getRecommendSelfList(mPositionId, mPageNum);
         }
+
     }
 
 
     /**
-     * 获取在服务企业list
+     * 获取推荐列表
      */
     private void getRecommendList(int position, int pageNum) {
         EasyHttp.get(this)
@@ -115,25 +116,27 @@ public final class RecommendPositionFragment extends TitleBarFragment<FirmMainAc
                 .request(new HttpCallback<HttpData<GetFirmRecommendsApi.Bean>>(this) {
                     @Override
                     public void onSucceed(HttpData<GetFirmRecommendsApi.Bean> data) {
-                        if (data.getData().getList().size() >= 0) {
+                        if (data.getData().getList() != null && data.getData().getList().size() >= 0) {
                             ll_empty.setVisibility(View.GONE);
                             if (pageNum == 1) {
                                 if (data.getData().getList().size() == 0) {
                                     ll_empty.setVisibility(View.VISIBLE);
                                 } else {
-                                    mList.clear();
-                                    mList.addAll(data.getData().getList());
-                                    mAdapter.setData(mList);
+                                    mList1.clear();
+                                    mList1.addAll(data.getData().getList());
+                                    mAdapter.setData(mList1);
                                 }
                                 mRefreshLayout.finishRefresh();
                             } else {
                                 if (pageNum == data.getData().getPageNum()) {
-                                    mList.addAll(data.getData().getList());
-                                    mAdapter.setData(mList);
+                                    mList1.addAll(data.getData().getList());
+                                    mAdapter.setData(mList1);
                                 }
                                 mRefreshLayout.finishLoadMore();
                             }
 
+                        } else {
+                            ll_empty.setVisibility(View.VISIBLE);
                         }
                     }
 
@@ -146,33 +149,35 @@ public final class RecommendPositionFragment extends TitleBarFragment<FirmMainAc
 
 
     /**
-     * 获取在服务企业list
+     * 获取自荐列表
      */
     private void getRecommendSelfList(int position, int pageNum) {
         EasyHttp.get(this)
-                .api(new GetFirmRecommendsApi().setPositionId(position).setPageNum(pageNum))
+                .api(new GetFirmSelfRecommendsApi().setPositionId(position).setPageNum(pageNum))
                 .request(new HttpCallback<HttpData<GetFirmRecommendsApi.Bean>>(this) {
                     @Override
                     public void onSucceed(HttpData<GetFirmRecommendsApi.Bean> data) {
-                        if (data.getData().getList().size() >= 0) {
+                        if (data.getData().getList() != null && data.getData().getList().size() >= 0) {
                             ll_empty.setVisibility(View.GONE);
                             if (pageNum == 1) {
                                 if (data.getData().getList().size() == 0) {
                                     ll_empty.setVisibility(View.VISIBLE);
                                 } else {
-                                    mList.clear();
-                                    mList.addAll(data.getData().getList());
-                                    mAdapter.setData(mList);
+                                    mList2.clear();
+                                    mList2.addAll(data.getData().getList());
+                                    mAdapter.setData(mList2);
                                 }
                                 mRefreshLayout.finishRefresh();
                             } else {
                                 if (pageNum == data.getData().getPageNum()) {
-                                    mList.addAll(data.getData().getList());
-                                    mAdapter.setData(mList);
+                                    mList2.addAll(data.getData().getList());
+                                    mAdapter.setData(mList2);
                                 }
                                 mRefreshLayout.finishLoadMore();
                             }
 
+                        } else {
+                            ll_empty.setVisibility(View.VISIBLE);
                         }
                     }
 
@@ -186,13 +191,21 @@ public final class RecommendPositionFragment extends TitleBarFragment<FirmMainAc
     @Override
     public void onRefresh(@NonNull RefreshLayout refreshLayout) {
         mPageNum = 1;
-        getRecommendList(positionId, 1);
+        if (mPosition == 1) {
+            getRecommendList(mPositionId, mPageNum);
+        } else {
+            getRecommendSelfList(mPositionId, mPageNum);
+        }
     }
 
     @Override
     public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
         mPageNum++;
-        getRecommendList(positionId, mPageNum);
+        if (mPosition == 1) {
+            getRecommendList(mPositionId, mPageNum);
+        } else {
+            getRecommendSelfList(mPositionId, mPageNum);
+        }
     }
 
 

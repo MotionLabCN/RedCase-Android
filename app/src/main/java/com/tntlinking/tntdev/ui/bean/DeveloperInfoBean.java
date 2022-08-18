@@ -44,7 +44,7 @@ public class DeveloperInfoBean implements Serializable {
     private List<DeveloperEducation> educationDtoList = new ArrayList<>();
     private List<DeveloperProject> projectDtoList = new ArrayList<>();
     private List<DeveloperWork> workExperienceDtoList = new ArrayList<>();
-
+    private List<DeveloperSkillDto> developerSkillDtoList = new ArrayList<>();
 
     public static class DeveloperCareer implements Serializable {
         private int careerDirectionId = 163; //职业方向id
@@ -539,6 +539,45 @@ public class DeveloperInfoBean implements Serializable {
         }
     }
 
+    public static class DeveloperSkillDto implements Serializable {
+
+        private int id;
+        private int developerId;
+        private int skillId;
+        private String skillName;
+
+        public int getId() {
+            return id;
+        }
+
+        public void setId(int id) {
+            this.id = id;
+        }
+
+        public int getDeveloperId() {
+            return developerId;
+        }
+
+        public void setDeveloperId(int developerId) {
+            this.developerId = developerId;
+        }
+
+        public int getSkillId() {
+            return skillId;
+        }
+
+        public void setSkillId(int skillId) {
+            this.skillId = skillId;
+        }
+
+        public String getSkillName() {
+            return skillName;
+        }
+
+        public void setSkillName(String skillName) {
+            this.skillName = skillName;
+        }
+    }
     public int getId() {
         return id;
     }
@@ -762,6 +801,14 @@ public class DeveloperInfoBean implements Serializable {
 
     public void setWorkExperienceDtoList(List<DeveloperWork> workExperienceDtoList) {
         this.workExperienceDtoList = workExperienceDtoList;
+    }
+
+    public List<DeveloperSkillDto> getDeveloperSkillDtoList() {
+        return developerSkillDtoList;
+    }
+
+    public void setDeveloperSkillDtoList(List<DeveloperSkillDto> developerSkillDtoList) {
+        this.developerSkillDtoList = developerSkillDtoList;
     }
 
     public void setDeveloperInfoBean(DeveloperInfoBean bean) {

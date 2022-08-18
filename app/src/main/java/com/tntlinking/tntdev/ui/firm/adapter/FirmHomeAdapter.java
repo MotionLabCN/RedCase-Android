@@ -9,10 +9,15 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.hjq.http.EasyLog;
 import com.tntlinking.tntdev.R;
 import com.tntlinking.tntdev.http.api.GetFirmDevApi;
 import com.tntlinking.tntdev.other.GlideUtils;
+import com.tntlinking.tntdev.ui.adapter.TagAdapter;
+import com.tntlinking.tntdev.widget.FlowTagLayout;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -71,7 +76,7 @@ public final class FirmHomeAdapter extends BaseAdapter {
             holder.tv_position = convertView.findViewById(R.id.tv_position);
             holder.tv_all_day = convertView.findViewById(R.id.tv_all_day);
             holder.tv_salary = convertView.findViewById(R.id.tv_salary);
-
+            holder.tag_flow_layout = convertView.findViewById(R.id.tag_flow_layout);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
@@ -84,6 +89,22 @@ public final class FirmHomeAdapter extends BaseAdapter {
         holder.tv_all_day.setText(item.getWorkDayModeName());
         holder.tv_salary.setText(item.getExpectSalary() + "");
         holder.tv_position.setText(item.getCareerDirectionName() + "·工作经验" + item.getWorkYearsName());
+
+        TagFirmAdapter adapter = new TagFirmAdapter(mContext, 2);
+        holder.tag_flow_layout.setAdapter(adapter);
+        if (item.getSkillName().contains(",")) {
+            String[] split = item.getSkillName().split(",");
+            List<String> strings = Arrays.asList(split);
+            if (strings.size() > 4) {
+                adapter.onlyAddAll(strings.subList(0, 4));
+            } else {
+                adapter.onlyAddAll(strings);
+            }
+
+        } else {
+            adapter.onlyAddAll(Arrays.asList(item.getSkillName()));
+        }
+
         return convertView;
     }
 
@@ -93,9 +114,8 @@ public final class FirmHomeAdapter extends BaseAdapter {
         TextView tv_position;
         TextView tv_all_day;
         TextView tv_salary;
-
+        FlowTagLayout tag_flow_layout;
     }
-
 
 }
 

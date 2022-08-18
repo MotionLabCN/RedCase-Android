@@ -72,7 +72,7 @@
                 android:id="@+id/tv_company_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_6"
+                android:layout_marginTop="@dimen/dp_12"
                 android:text="上海xxx科技有限公司"
                 android:textColor="@color/color_hint_color"
                 android:textSize="@dimen/sp_13" />
@@ -81,7 +81,7 @@
                 android:id="@+id/tv_position_desc"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_6"
+                android:layout_marginTop="@dimen/dp_8"
                 android:text="全日·本科·3-4年·汽车"
                 android:textColor="@color/color_hint_color"
                 android:textSize="@dimen/sp_13" />
@@ -90,7 +90,7 @@
                 android:id="@+id/tv_position_recommend"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_6"
+                android:layout_marginTop="@dimen/dp_8"
                 android:text="已有xx人推荐，xx人自荐"
                 android:textColor="@color/color_FB8B39"
                 android:textSize="@dimen/sp_13" />

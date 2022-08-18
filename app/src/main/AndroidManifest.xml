@@ -637,6 +637,11 @@
             android:name="com.tntlinking.tntdev.ui.firm.activity.SendPositionActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
+        <!-- 发布职位成功页面 -->
+        <activity
+            android:name="com.tntlinking.tntdev.ui.firm.activity.SendPositionSuccessActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
         <!-- 面试管理页面 -->
         <activity
             android:name="com.tntlinking.tntdev.ui.firm.activity.AuditionMangeActivity"
@@ -710,6 +715,11 @@
         <!-- 企业认证页面 -->
         <activity
             android:name="com.tntlinking.tntdev.ui.firm.activity.FirmCertificationActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <!-- 账户管理页面 -->
+        <activity
+            android:name="com.tntlinking.tntdev.ui.firm.activity.FirmSettingActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
         <!-- 注销企业页面 -->

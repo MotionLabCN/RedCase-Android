@@ -180,26 +180,27 @@ public final class LoginActivity2 extends AppActivity implements TextView.OnEdit
     }
 
     private void toLogin() {
-        EasyHttp.get(this)
-                .api(new GetDeveloperStatusApi())
-                .request(new HttpCallback<HttpData<GetDeveloperStatusApi.Bean>>(this) {
-
-                    @Override
-                    public void onSucceed(HttpData<GetDeveloperStatusApi.Bean> data) {
-                        // 1->待认证  2->待审核   3->审核成功 4->审核失败
-                        SPUtils.getInstance().put(AppConfig.HAS_LOGIN, true);
-                        SPUtils.getInstance().put(AppConfig.DEVELOP_MOBILE, data.getData().getMobile());
-                        SPUtils.getInstance().put(AppConfig.DEVELOP_STATUS, data.getData().getStatus());
-                        SPUtils.getInstance().put(AppConfig.DEVELOP_NAME, data.getData().getRealName());
-                        SPUtils.getInstance().put(AppConfig.DEVELOPER_ID, data.getData().getId());
-                        SPUtils.getInstance().put(AppConfig.SERVICE_STATUS, data.getData().getServiceStatus());
-                        JPushInterface.setAlias(getActivity(), 1001, "ttsl_" + data.getData().getId());
-//                        startActivity(MainActivity.class);
-//                        ActivityManager.getInstance().finishAllActivities();
-                        startActivity(SelectAdminActivity.class);
-                    }
-                });
-
+//        EasyHttp.get(this)
+//                .api(new GetDeveloperStatusApi())
+//                .request(new HttpCallback<HttpData<GetDeveloperStatusApi.Bean>>(this) {
+//
+//                    @Override
+//                    public void onSucceed(HttpData<GetDeveloperStatusApi.Bean> data) {
+//                        // 1->待认证  2->待审核   3->审核成功 4->审核失败
+//                        SPUtils.getInstance().put(AppConfig.HAS_LOGIN, true);
+//                        SPUtils.getInstance().put(AppConfig.DEVELOP_MOBILE, data.getData().getMobile());
+//                        SPUtils.getInstance().put(AppConfig.DEVELOP_STATUS, data.getData().getStatus());
+//                        SPUtils.getInstance().put(AppConfig.DEVELOP_NAME, data.getData().getRealName());
+//                        SPUtils.getInstance().put(AppConfig.DEVELOPER_ID, data.getData().getId());
+//                        SPUtils.getInstance().put(AppConfig.SERVICE_STATUS, data.getData().getServiceStatus());
+//                        JPushInterface.setAlias(getActivity(), 1001, "ttsl_" + data.getData().getId());
+////                        startActivity(MainActivity.class);
+////                        ActivityManager.getInstance().finishAllActivities();
+//                        startActivity(SelectAdminActivity.class);
+//                    }
+//                });
+        SPUtils.getInstance().put(AppConfig.HAS_LOGIN, true);
+        startActivity(SelectAdminActivity.class);
     }
 
 

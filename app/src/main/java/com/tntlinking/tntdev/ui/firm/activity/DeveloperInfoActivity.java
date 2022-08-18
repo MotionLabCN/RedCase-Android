@@ -24,9 +24,8 @@ import com.hjq.http.listener.HttpCallback;
 import com.tntlinking.tntdev.R;
 import com.tntlinking.tntdev.aop.SingleClick;
 import com.tntlinking.tntdev.app.AppActivity;
+import com.tntlinking.tntdev.http.api.CancelCollectDeveloperApi;
 import com.tntlinking.tntdev.http.api.CollectDeveloperApi;
-import com.tntlinking.tntdev.http.api.CreateOrderApi;
-import com.tntlinking.tntdev.http.api.GetDeveloperDetailApi;
 import com.tntlinking.tntdev.http.api.GetFirmDevDetailApi;
 import com.tntlinking.tntdev.http.api.GetFirmPositionApi;
 import com.tntlinking.tntdev.http.model.HttpData;
@@ -37,6 +36,8 @@ import com.tntlinking.tntdev.ui.dialog.BottomListDialog;
 import com.tntlinking.tntdev.ui.firm.adapter.DevEducationAdapter;
 import com.tntlinking.tntdev.ui.firm.adapter.DevProjectAdapter;
 import com.tntlinking.tntdev.ui.firm.adapter.DevWorkAdapter;
+import com.tntlinking.tntdev.ui.firm.adapter.TagFirmAdapter;
+import com.tntlinking.tntdev.widget.FlowTagLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,9 +49,7 @@ import androidx.appcompat.widget.AppCompatButton;
  * 开发者详情页面
  */
 public final class DeveloperInfoActivity extends AppActivity {
-    private LinearLayout ll_to_collect;
-    private LinearLayout ll_to_sign;
-    private AppCompatButton btn_to_interview;
+
     private ListView lv1, lv2, lv3;
     private ScrollView sv;
     private ImageView iv_avatar;
@@ -58,7 +57,11 @@ public final class DeveloperInfoActivity extends AppActivity {
     private TextView tv_dev_name;
     private TextView tv_dev_info;
     private TextView tv_salary;
+    private FlowTagLayout tag_flow_layout;
     private LinearLayout ll_bottom;
+    private LinearLayout ll_to_collect;
+    private LinearLayout ll_to_sign;
+    private AppCompatButton btn_to_interview;
 
     private DeveloperInfoBean bean;
     private List<GetFirmPositionApi.Bean.ListBean> mList = new ArrayList<>();
@@ -84,6 +87,7 @@ public final class DeveloperInfoActivity extends AppActivity {
         tv_dev_name = findViewById(R.id.tv_dev_name);
         tv_dev_info = findViewById(R.id.tv_dev_info);
         tv_salary = findViewById(R.id.tv_salary);
+        tag_flow_layout = findViewById(R.id.tag_flow_layout);
         ll_to_collect = findViewById(R.id.ll_to_collect);
         iv_collect = findViewById(R.id.iv_collect);
         ll_to_sign = findViewById(R.id.ll_to_sign);
@@ -110,27 +114,16 @@ public final class DeveloperInfoActivity extends AppActivity {
     }
 
 
+    @SuppressLint("NonConstantResourceId")
     @SingleClick
     @Override
     public void onClick(View view) {
-
         switch (view.getId()) {
             case R.id.ll_to_collect:
                 collectDeveloper(getInt("developerId"));
+//                cancelCollectDeveloper(getInt("developerId"));
                 break;
             case R.id.ll_to_sign:
-                toast("去签约");
-//                startActivity(ContractDetailActivity.class);
-
-//                new BaseDialog.Builder<>(getActivity())
-//                        .setContentView(R.layout.bottom_common_dialog)
-//                        .setAnimStyle(BaseDialog.ANIM_BOTTOM)
-//                        //.setText(id, "我是预设置的文本")
-//                        .setOnClickListener(R.id.iv_close, (dialog, views) -> dialog.dismiss())
-//                        .setOnClickListener(R.id.btn_commit, (dialog, views) -> {
-//
-//                        }).show();
-
                 new BottomListDialog.Builder(this).setData(mList).setListener(new BottomListDialog.OnListener() {
                     @Override
                     public void onSelected(BaseDialog dialog) {
@@ -154,7 +147,6 @@ public final class DeveloperInfoActivity extends AppActivity {
                 }).show();
                 break;
             case R.id.btn_to_interview:
-
                 new BaseDialog.Builder<>(this)
                         .setContentView(R.layout.to_add_service_dialog)
                         .setAnimStyle(BaseDialog.ANIM_SCALE)
@@ -249,6 +241,24 @@ public final class DeveloperInfoActivity extends AppActivity {
     }
 
     /**
+     * 取消收藏开发者
+     *
+     * @param developerId
+     */
+    public void cancelCollectDeveloper(int developerId) {
+        EasyHttp.post(this)
+                .api(new CancelCollectDeveloperApi().setDeveloperId(developerId))
+                .request(new HttpCallback<HttpData<Void>>(this) {
+
+                    @Override
+                    public void onSucceed(HttpData<Void> data) {
+                        toast("取消收藏");
+                        iv_collect.setImageResource(R.drawable.icon_collect);
+                    }
+                });
+    }
+
+    /**
      * 简历解析页面跳转过来的，直接填充相关数据
      */
     @SuppressLint("SetTextI18n")
@@ -263,6 +273,16 @@ public final class DeveloperInfoActivity extends AppActivity {
             tv_salary.setText(workModeDtoList.get(0).getExpectSalary());
         }
         tv_dev_info.setText(careerDto.getCareerDirectionName() + "·工作经验" + careerDto.getWorkYearsName());
+
+        TagFirmAdapter adapter = new TagFirmAdapter(getContext(), 2);
+        tag_flow_layout.setAdapter(adapter);
+        List<DeveloperInfoBean.DeveloperSkillDto> developerSkillDtoList = bean.getDeveloperSkillDtoList();
+        List<String> skill = new ArrayList<>();
+        for (int i = 0; i < developerSkillDtoList.size(); i++) {
+            skill.add(developerSkillDtoList.get(i).getSkillName());
+        }
+        adapter.onlyAddAll(skill);
+        
         List<DeveloperInfoBean.DeveloperEducation> educationDtoList = bean.getEducationDtoList();
         List<DeveloperInfoBean.DeveloperWork> workExperienceDtoList = bean.getWorkExperienceDtoList();
         List<DeveloperInfoBean.DeveloperProject> projectDtoList = bean.getProjectDtoList();

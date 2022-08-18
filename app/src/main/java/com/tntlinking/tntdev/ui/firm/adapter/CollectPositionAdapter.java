@@ -2,6 +2,7 @@ package com.tntlinking.tntdev.ui.firm.adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,14 +12,16 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.tntlinking.tntdev.R;
+import com.tntlinking.tntdev.http.api.GetFavoriteDeveloperApi;
 import com.tntlinking.tntdev.other.GlideUtils;
+import com.tntlinking.tntdev.widget.FlowTagLayout;
 
 import java.util.List;
 
 
 public final class CollectPositionAdapter extends BaseAdapter {
 
-    private List<String> mList;
+    private List<GetFavoriteDeveloperApi.Bean.ListBean> mList;
     private LayoutInflater layoutInflater;
     private Context mContext;
 
@@ -36,7 +39,7 @@ public final class CollectPositionAdapter extends BaseAdapter {
     }
 
     @Override
-    public Object getItem(int position) {
+    public GetFavoriteDeveloperApi.Bean.ListBean getItem(int position) {
         return mList.get(position);
     }
 
@@ -45,11 +48,11 @@ public final class CollectPositionAdapter extends BaseAdapter {
         return 0;
     }
 
-    public List<String> getData() {
+    public List<GetFavoriteDeveloperApi.Bean.ListBean> getData() {
         return mList;
     }
 
-    public void setData(List<String> list) {
+    public void setData(List<GetFavoriteDeveloperApi.Bean.ListBean> list) {
         if (list != null) {
             this.mList = list;
             notifyDataSetChanged();
@@ -73,17 +76,39 @@ public final class CollectPositionAdapter extends BaseAdapter {
             holder.tv_all_day = convertView.findViewById(R.id.tv_all_day);
             holder.tv_salary = convertView.findViewById(R.id.tv_salary);
             holder.tv_position = convertView.findViewById(R.id.tv_position);
-
+            holder.tag_flow_layout = convertView.findViewById(R.id.tag_flow_layout);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-        String item = mList.get(position);
-        holder.tv_position.setText(item);
+        GetFavoriteDeveloperApi.Bean.ListBean item = mList.get(position);
+        GlideUtils.loadRoundCorners(mContext, item.getAvatarUrl(), holder.iv_position_avatar, (int) mContext.getResources().getDimension(R.dimen.dp_8));
+        holder.tv_name.setText(item.getRealName());
+        holder.tv_position.setText(item.getCareerDirectionName() + "-工作经验" + item.getWorkYears());
+        holder.tv_salary.setText(item.getExpectSalary() + "");
+        holder.tv_all_day.setText(item.getWorkMode());
+        if (!TextUtils.isEmpty(item.getStatus())) {
+            holder.tv_status.setText(item.getStatus());
+            if (item.getStatus().equals("已签单")) {
+                holder.tv_status.setTextColor(mContext.getResources().getColor(R.color.color_5CE28A));
+                holder.view_dot.setBackgroundResource(R.drawable.dot_oval_green);
+                holder.ll_status.setBackgroundResource(R.drawable.bg_green_radius_3);
+            } else if (item.getStatus().equals("待签单")) {
+                holder.tv_status.setTextColor(mContext.getResources().getColor(R.color.color_FB8B39));
+                holder.view_dot.setBackgroundResource(R.drawable.dot_oval_orange);
+                holder.ll_status.setBackgroundResource(R.drawable.bg_orange_radius_3);
+            }
 
-        GlideUtils.loadRoundCorners(mContext, R.drawable.update_app_top_bg, holder.iv_position_avatar,
-                (int) mContext.getResources().getDimension(R.dimen.dp_8));
-
+        }
+        TagFirmAdapter adapter = new TagFirmAdapter(mContext, 2);
+        holder.tag_flow_layout.setAdapter(adapter);
+        //标签显示最多4个
+        if (item.getSkillNameList().size() > 4) {
+            List<String> strings = item.getSkillNameList().subList(0, 4);
+            adapter.onlyAddAll(strings);
+        } else {
+            adapter.onlyAddAll(item.getSkillNameList());
+        }
         return convertView;
     }
 
@@ -96,8 +121,7 @@ public final class CollectPositionAdapter extends BaseAdapter {
         TextView tv_all_day;
         TextView tv_salary;
         TextView tv_position;
-
-
+        FlowTagLayout tag_flow_layout;
     }
 
 

@@ -72,7 +72,7 @@ public final class AccountManageActivity extends AppActivity implements OnRefres
                         String mInTime = year + "-" + Utils.formatDate(month);
 
                         toast("===year==" + year + "===month=" + month);
-
+                        getFirmFreezeRecord(mInTime);
                     }
 
                 }).show();
@@ -93,7 +93,7 @@ public final class AccountManageActivity extends AppActivity implements OnRefres
     @Override
     protected void initData() {
         getFirmWalletCurrent();
-        getFirmFreezeRecord();
+
     }
 
 
@@ -118,9 +118,10 @@ public final class AccountManageActivity extends AppActivity implements OnRefres
                 });
     }
 
-    public void getFirmFreezeRecord() {
+    // 查询某个时间段的记录
+    public void getFirmFreezeRecord(String date) {
         EasyHttp.get(this)
-                .api(new GetFirmFreezeRecordApi().setDate("2022-8").setPageNum(1).setPageNum(20))
+                .api(new GetFirmFreezeRecordApi().setDate(date).setPageNum(1).setPageNum(20))
                 .request(new HttpCallback<HttpData<Void>>(this) {
 
                     @Override

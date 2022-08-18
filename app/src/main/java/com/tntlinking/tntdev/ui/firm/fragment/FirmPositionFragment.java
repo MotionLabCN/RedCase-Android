@@ -84,13 +84,11 @@ public final class FirmPositionFragment extends TitleBarFragment<FirmMainActivit
         lv_1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                startActivity(RecommendPositionActivity.class);
-
                 GetFirmPositionApi.Bean.ListBean item = mAdapter.getItem(position);
-                Intent intent = new Intent(getActivity(), FirmInfoActivity.class);
+                Intent intent = new Intent(getActivity(), RecommendPositionActivity.class);
                 intent.putExtra("position_bean", item);
                 startActivity(intent);
-            }
+             }
         });
         mAdapter.setOnItemClickListener(new OnItemClickListener() {
             @Override

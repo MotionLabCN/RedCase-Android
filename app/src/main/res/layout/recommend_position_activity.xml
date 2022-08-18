@@ -23,6 +23,7 @@
         android:padding="@dimen/dp_16">
 
         <TextView
+            android:id="@+id/tv_position"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="前端开发"
@@ -31,27 +32,28 @@
             android:textStyle="bold" />
 
         <TextView
+            android:id="@+id/tv_company_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_16"
+            android:layout_marginTop="@dimen/dp_10"
             android:text="上海TTSL科技有限公司"
-            android:textColor="@color/color_hint_color"
+            android:textColor="@color/color_444E64"
             android:textSize="@dimen/sp_13" />
 
         <TextView
+            android:id="@+id/tv_position_desc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_6"
             android:text="全日·本科·3-4年·汽车"
             android:textColor="@color/color_hint_color"
-            android:textSize="@dimen/sp_13"
-            android:textStyle="bold" />
+            android:textSize="@dimen/sp_13"/>
     </LinearLayout>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_10"
-        android:background="@color/common_line_color" />
+        android:background="@color/color_F6F6FC" />
 
     <LinearLayout
         android:id="@+id/ll_tab"

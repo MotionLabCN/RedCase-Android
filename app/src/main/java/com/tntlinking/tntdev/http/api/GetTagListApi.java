@@ -40,24 +40,48 @@ public final class GetTagListApi implements IRequestApi {
                 return id;
             }
 
+            public void setId(int id) {
+                this.id = id;
+            }
+
             public String getSkillName() {
                 return skillName;
+            }
+
+            public void setSkillName(String skillName) {
+                this.skillName = skillName;
             }
 
             public String getParentId() {
                 return parentId;
             }
 
+            public void setParentId(String parentId) {
+                this.parentId = parentId;
+            }
+
             public String getCreateDate() {
                 return createDate;
+            }
+
+            public void setCreateDate(String createDate) {
+                this.createDate = createDate;
             }
 
             public String getTypeId() {
                 return typeId;
             }
 
+            public void setTypeId(String typeId) {
+                this.typeId = typeId;
+            }
+
             public String getChildren() {
                 return children;
+            }
+
+            public void setChildren(String children) {
+                this.children = children;
             }
 
             public int getType() {

@@ -15,7 +15,7 @@
         app:rightBackground="@null"
         app:rightTitleColor="@color/common_accent_color"
         app:rightTitleSize="@dimen/sp_14"
-        app:title="切换身份"
+        app:title="企业信息"
         app:titleStyle="bold" />
 
 
@@ -38,16 +38,16 @@
                 android:layout_height="wrap_content"
                 android:text="前端开发"
                 android:textColor="@color/black"
-                android:textSize="@dimen/sp_15"
+                android:textSize="@dimen/sp_20"
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/tv_company_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_6"
+                android:layout_marginTop="@dimen/dp_10"
                 android:text="上海TTSL科技有限公司"
-                android:textColor="@color/color_hint_color"
+                android:textColor="@color/color_444E64"
                 android:textSize="@dimen/sp_13" />
 
             <TextView
@@ -67,7 +67,7 @@
             style="@style/ButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/dp_36"
-            android:layout_marginTop="@dimen/dp_24"
+            android:layout_marginTop="@dimen/dp_30"
             android:paddingLeft="@dimen/dp_28"
             android:paddingRight="@dimen/dp_28"
             android:text="修改" />

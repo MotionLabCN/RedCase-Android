@@ -61,7 +61,7 @@ public final class FirmInfoActivity extends AppActivity {
         if (bean != null) {
             tv_position.setText(bean.getCareerDirection());
             tv_company_name.setText(bean.getCompanyName());
-            tv_position_desc.setText(bean.getTrainingMode() + "-" + bean.getEducation() + "-" + bean.getWorkYears() + "" + bean.getIndustryName());
+            tv_position_desc.setText(bean.getTrainingMode() + "-" + bean.getEducation() + "-" + bean.getWorkYears() + "-" + bean.getIndustryName());
             tv_reason.setText(bean.getAuditFailReason());
 
             getPositionOriginal(bean.getId());

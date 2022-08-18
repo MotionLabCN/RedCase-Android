@@ -1,24 +1,20 @@
 package com.tntlinking.tntdev.http.api;
 
 import com.hjq.http.config.IRequestApi;
-import com.hjq.http.config.IRequestType;
-import com.hjq.http.model.BodyType;
 
-import java.util.List;
-
-//收藏开发者
-public final class CollectDeveloperApi implements IRequestApi {
+//取消收藏开发者
+public final class CancelCollectDeveloperApi implements IRequestApi {
 
     @Override
     public String getApi() {
-        return "manpower-rest-api/companyRecruiterFavorite/favoriteDeveloper";
+        return "manpower-rest-api/companyRecruiterFavorite/cancelFavorite";
     }
 
 
     private int developerId;
 
 
-    public CollectDeveloperApi setDeveloperId(int developerId) {
+    public CancelCollectDeveloperApi setDeveloperId(int developerId) {
         this.developerId = developerId;
         return this;
     }

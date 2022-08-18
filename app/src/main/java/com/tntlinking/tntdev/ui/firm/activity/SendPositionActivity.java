@@ -4,6 +4,7 @@ package com.tntlinking.tntdev.ui.firm.activity;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Build;
+import android.text.TextUtils;
 import android.view.View;
 
 import com.blankj.utilcode.util.GsonUtils;
@@ -12,6 +13,7 @@ import com.hjq.bar.TitleBar;
 import com.hjq.base.BaseDialog;
 import com.hjq.http.EasyHttp;
 
+import com.hjq.http.EasyLog;
 import com.hjq.http.listener.HttpCallback;
 import com.hjq.widget.layout.SettingBar;
 import com.hjq.widget.view.ClearEditText;
@@ -24,9 +26,11 @@ import com.tntlinking.tntdev.http.api.GetPositionOriginalApi;
 import com.tntlinking.tntdev.http.api.GetProvinceApi;
 import com.tntlinking.tntdev.http.api.GetTagListApi;
 import com.tntlinking.tntdev.http.api.SendPositionApi;
+import com.tntlinking.tntdev.http.api.UpdatePositionApi;
 import com.tntlinking.tntdev.http.model.HttpData;
 import com.tntlinking.tntdev.ui.activity.AddProjectTagActivityNew;
 import com.tntlinking.tntdev.ui.dialog.DictionarySelectDialog;
+import com.tntlinking.tntdev.ui.dialog.GenderSelectDialog;
 import com.tntlinking.tntdev.ui.dialog.IndustrySelectDialog;
 
 import java.io.Serializable;
@@ -70,8 +74,8 @@ public final class SendPositionActivity extends AppActivity {
     private String educationName = "";//学历
     private int trainingId = 1;//培养方式id
     private String trainingName = "";//培养方式
-    private int industryId;//行业id
-    private String industryName = "";
+    private int industryMandatory;//行业强制性
+    private String industryMandatoryName = "";
     private String major = "";//专业名字
 
     private String careerPosition = "";
@@ -79,7 +83,7 @@ public final class SendPositionActivity extends AppActivity {
     private String endPay = "";
     private String mCount = "0";
     private String mDescription;
-
+    private int mId;
 
     private List<GetTagListApi.Bean.ChildrenBean> mSelectList = new ArrayList<>();
     private List<Integer> mTagIntList = new ArrayList<>();
@@ -126,16 +130,39 @@ public final class SendPositionActivity extends AppActivity {
         GetPositionOriginalApi.Bean beanIds = getSerializable("position_bean_ids");
         if (bean != null) {
             title_bar.setTitle("修改职位");
+            btn_commit.setText("修改职位");
 
             position_career_id.setLeftText(bean.getCareerDirection());
             et_position_name.setText(bean.getTitle());
             position_education_id.setLeftText(bean.getEducation());
             position_training_mode_id.setLeftText(bean.getTrainingMode());
             position_work_year_id.setLeftText(bean.getWorkYears());
+            position_industry_id.setLeftText(bean.getIndustryMandatory() ? "是" : "否");
             et_expect_salary_low.setText(bean.getStartPay() + "");
             et_expect_salary_high.setText(bean.getEndPay() + "");
             et_recruit_count.setText(bean.getRecruitCount() + "");
             et_description.setText(bean.getDescription());
+
+            if (bean.getSkills() != null && bean.getSkills().size() > 0) {
+                StringBuilder sb = new StringBuilder();
+                mTagIntList.clear();
+                mSelectList.clear();
+                for (String i : bean.getSkills()) {
+                    sb.append(i);
+                    sb.append(",");
+                }
+                for (int i = 0; i < beanIds.getSkillIds().size(); i++) {
+                    GetTagListApi.Bean.ChildrenBean childrenBean = new GetTagListApi.Bean.ChildrenBean();
+                    childrenBean.setId(beanIds.getSkillIds().get(i));
+                    mSelectList.add(childrenBean);
+                    mTagIntList.add(beanIds.getSkillIds().get(i));
+                }
+                for (int i = 0; i < bean.getSkills().size(); i++) {
+                    mSelectList.get(i).setSkillName(bean.getSkills().get(i));
+                }
+                position_skill_id.setLeftText(sb.toString());
+            }
+
 
             careerDirectionName = bean.getCareerDirection();
             careerDirectionId = beanIds.getCareerDirectionId();
@@ -145,12 +172,15 @@ public final class SendPositionActivity extends AppActivity {
             educationId = beanIds.getEducationId();
             trainingName = bean.getTrainingMode();
             trainingId = beanIds.getTrainingModeId();
+            industryMandatory = beanIds.getIndustryMandatory();
 
             careerPosition = bean.getTitle();
             startPay = bean.getStartPay() + "";
             endPay = bean.getEndPay() + "";
             mCount = bean.getRecruitCount() + "";
             mDescription = bean.getDescription();
+
+            mId = beanIds.getId();
         }
     }
 
@@ -222,16 +252,17 @@ public final class SendPositionActivity extends AppActivity {
                         }).show();
                 break;
             case R.id.position_industry_id:
-//                new IndustrySelectDialog.Builder(this).setTitle("选择所在行业")
-//                        .setListener(new IndustrySelectDialog.OnListener() {
-//                            @Override
-//                            public void onSelected(BaseDialog dialog, GetDictionaryApi.DictionaryBean bean, GetDictionaryApi.ChildrenBean childrenBean) {
-//                                position_industry_id.setLeftText(bean.getName() + "-" + childrenBean.getName());
-//                                industryId = childrenBean.getId();
-//
-//                                industryName = bean.getName() + "-" + childrenBean.getName();
-//                            }
-//                        }).show();
+                new GenderSelectDialog.Builder(this)
+                        .setTitle("是否行业匹配")
+                        .setList("是", "否").setListener(new GenderSelectDialog.OnListener() {
+                            @Override
+                            public void onSelected(BaseDialog dialog, int type) {
+                                EasyLog.print("==type=====" + type);
+                                industryMandatoryName = type == 0 ? "是" : "否";
+                                industryMandatory = type;
+                                position_industry_id.setLeftText(industryMandatoryName);
+                            }
+                        }).show();
                 break;
             case R.id.btn_commit:
                 careerPosition = et_position_name.getText().toString();
@@ -239,7 +270,32 @@ public final class SendPositionActivity extends AppActivity {
                 endPay = et_expect_salary_high.getText().toString();
                 mCount = et_recruit_count.getText().toString();
                 mDescription = et_description.getText().toString();
-                submitDeveloper();
+                if (TextUtils.isEmpty(careerPosition)) {
+                    toast("职位名称填写错误");
+                    return;
+                }
+                if (TextUtils.isEmpty(startPay)) {
+                    toast("最低服务价格填写有误");
+                    return;
+                }
+                if (TextUtils.isEmpty(endPay)) {
+                    toast("最高服务价格填写有误");
+                    return;
+                }
+                if (TextUtils.isEmpty(mCount)) {
+                    toast("需求数量填写有误");
+                    return;
+                }
+                if (TextUtils.isEmpty(mDescription)) {
+                    toast("职位描述填写有误");
+                    return;
+                }
+
+                if (btn_commit.getText().equals("发布职位")) {
+                    submitDeveloper();
+                } else {
+                    UpdateDeveloper();
+                }
                 break;
 
         }
@@ -260,21 +316,46 @@ public final class SendPositionActivity extends AppActivity {
                         .setWorkDaysMode(1)
                         .setStartPay(startPay)
                         .setEndPay(endPay)
-                        .setIndustryMandatory(industryId)
+                        .setIndustryMandatory(industryMandatory)
                         .setSkillIds(mTagIntList))
                 .request(new HttpCallback<HttpData<List<GetProvinceApi.ProvinceBean>>>(this) {
 
                     @Override
                     public void onSucceed(HttpData<List<GetProvinceApi.ProvinceBean>> data) {
-//                        startActivity(SaveQRActivity.class);
-//                        finish();
-//                        SPUtils.getInstance().put(AppConfig.RESUME_ANALYSIS, false);
                         toast("提交成功");
-
+                        startActivity(SendPositionSuccessActivity.class);
+                        finish();
                     }
                 });
     }
 
+    public void UpdateDeveloper() {
+        EasyHttp.put(this)
+                .api(new UpdatePositionApi()
+                        .setId(mId)
+                        .setCareerDirectionId(careerDirectionId)
+                        .setTitle(careerPosition)
+                        .setDescription(mDescription)
+                        .setRecruitCount(mCount)
+                        .setWorkOperId(301)
+                        .setWorkYearsId(workYearsId)
+                        .setEducationId(educationId)
+                        .setTrainingModeId(trainingId)
+                        .setWorkDaysMode(1)
+                        .setStartPay(startPay)
+                        .setEndPay(endPay)
+                        .setIndustryMandatory(industryMandatory)
+                        .setSkillIds(mTagIntList))
+                .request(new HttpCallback<HttpData<List<GetProvinceApi.ProvinceBean>>>(this) {
+
+                    @Override
+                    public void onSucceed(HttpData<List<GetProvinceApi.ProvinceBean>> data) {
+                        toast("提交成功");
+                        startActivity(SendPositionSuccessActivity.class);
+                        finish();
+                    }
+                });
+    }
 
     /**
      * (1->行业 || 2->人员规模 || 3->常用协作工具 || 4->经验要求 || 5->学历要求 6->职业方向
