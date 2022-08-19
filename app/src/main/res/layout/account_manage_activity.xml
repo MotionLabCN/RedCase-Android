@@ -36,7 +36,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/dp_16"
-                    android:layout_marginTop="@dimen/dp_24"
+                    android:layout_marginTop="@dimen/dp_20"
                     android:layout_marginRight="@dimen/dp_16"
                     android:background="@drawable/bg_blue_bottom_radius_6"
                     android:gravity="center"
@@ -152,13 +152,13 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/bg_home_work_empty" />
+                        android:src="@drawable/bg_empty_income" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/dp_10"
-                        android:text="暂无工作"
+                        android:text="暂无数据"
                         android:textColor="@color/black"
                         android:textSize="@dimen/sp_15"
                         android:textStyle="bold" />
@@ -167,7 +167,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/dp_10"
-                        android:text="联系客服人员尽快匹配新工作"
+                        android:text=""
                         android:textColor="#7E89A3"
                         android:textSize="@dimen/sp_12" />
 

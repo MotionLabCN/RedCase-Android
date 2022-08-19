@@ -99,11 +99,13 @@ public final class FirmCollectFragment extends TitleBarFragment<FirmMainActivity
                 .request(new HttpCallback<HttpData<GetFavoriteDeveloperApi.Bean>>(this) {
                     @Override
                     public void onSucceed(HttpData<GetFavoriteDeveloperApi.Bean> data) {
+                        mRefreshLayout.setEnableLoadMore(true);
                         if (data.getData().getList().size() >= 0) {
                             ll_empty.setVisibility(View.GONE);
                             if (pageNum == 1) {
                                 if (data.getData().getList().size() == 0) {
                                     ll_empty.setVisibility(View.VISIBLE);
+                                    mRefreshLayout.setEnableLoadMore(false);
                                 } else {
                                     mList.clear();
                                     mList.addAll(data.getData().getList());

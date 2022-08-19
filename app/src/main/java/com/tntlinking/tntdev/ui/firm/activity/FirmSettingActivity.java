@@ -13,6 +13,7 @@ import com.hjq.widget.layout.SettingBar;
 import com.tntlinking.tntdev.R;
 import com.tntlinking.tntdev.aop.SingleClick;
 import com.tntlinking.tntdev.app.AppActivity;
+import com.tntlinking.tntdev.http.api.FirmLogoutApi;
 import com.tntlinking.tntdev.http.api.LogoutApi;
 import com.tntlinking.tntdev.http.model.HttpData;
 import com.tntlinking.tntdev.manager.ActivityManager;
@@ -98,7 +99,7 @@ public final class FirmSettingActivity extends AppActivity {
     public void loginOut(BaseDialog dialog) {
         // 退出登录
         EasyHttp.get(this)
-                .api(new LogoutApi())
+                .api(new FirmLogoutApi())
                 .request(new HttpCallback<HttpData<Void>>(this) {
 
                     @Override
@@ -106,6 +107,7 @@ public final class FirmSettingActivity extends AppActivity {
                         dialog.dismiss();
                         SPUtils.getInstance().clear();
                         EasyConfig.getInstance().removeHeader("Authorization");
+                        EasyConfig.getInstance().removeHeader("loginRole");
                         startActivity(LoginActivity1.class);
                         JPushInterface.deleteAlias(FirmSettingActivity.this, 1001);
                         // 进行内存优化，销毁除登录页之外的所有界面

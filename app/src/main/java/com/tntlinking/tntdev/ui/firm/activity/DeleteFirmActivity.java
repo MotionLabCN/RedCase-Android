@@ -17,7 +17,7 @@ import com.hjq.http.listener.HttpCallback;
 import com.tntlinking.tntdev.R;
 import com.tntlinking.tntdev.aop.SingleClick;
 import com.tntlinking.tntdev.app.AppActivity;
-import com.tntlinking.tntdev.http.api.CancellationApi;
+import com.tntlinking.tntdev.http.api.CancelFirmApi;
 import com.tntlinking.tntdev.http.api.GetCancellationApi;
 import com.tntlinking.tntdev.http.api.GetFirmConditionApi;
 import com.tntlinking.tntdev.http.model.HttpData;
@@ -122,7 +122,7 @@ public final class DeleteFirmActivity extends AppActivity {
 
     private void cancellation(Dialog dialog) {
         EasyHttp.post(this)
-                .api(new CancellationApi())
+                .api(new CancelFirmApi())
                 .request(new HttpCallback<HttpData<Void>>(this) {
 
                     @Override
@@ -133,6 +133,7 @@ public final class DeleteFirmActivity extends AppActivity {
                         dialog.dismiss();
                         SPUtils.getInstance().clear();
                         EasyConfig.getInstance().removeHeader("Authorization");
+                        EasyConfig.getInstance().removeHeader("loginRole");
                         ActivityManager.getInstance().finishAllActivities(SignStatusActivity.class);
                     }
 

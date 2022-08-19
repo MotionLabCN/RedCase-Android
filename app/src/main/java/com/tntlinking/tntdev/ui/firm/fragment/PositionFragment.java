@@ -121,12 +121,13 @@ public final class PositionFragment extends TitleBarFragment<FirmMainActivity> i
                 .request(new HttpCallback<HttpData<GetFirmDevApi.Bean>>(this) {
                     @Override
                     public void onSucceed(HttpData<GetFirmDevApi.Bean> data) {
-
+                        mRefreshLayout.setEnableLoadMore(true);
                         if (data.getData().getList().size() >= 0) {
                             ll_empty.setVisibility(View.GONE);
                             if (pageNum == 1) {
                                 if (data.getData().getList().size() == 0) {
                                     ll_empty.setVisibility(View.VISIBLE);
+                                    mRefreshLayout.setEnableLoadMore(false);
                                 } else {
                                     mList.clear();
                                     mList.addAll(data.getData().getList());

@@ -3,9 +3,9 @@ package com.tntlinking.tntdev.http.api;
 import com.hjq.http.config.IRequestApi;
 
 /**
- * desc   : 注销
+ * desc   : 注销开发者
  */
-public final class CancellationApi implements IRequestApi {
+public final class CancelDevApi implements IRequestApi {
 
     @Override
     public String getApi() {

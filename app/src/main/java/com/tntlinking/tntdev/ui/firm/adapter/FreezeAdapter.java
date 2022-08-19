@@ -10,26 +10,31 @@ import android.widget.TextView;
 
 import com.tntlinking.tntdev.R;
 import com.tntlinking.tntdev.http.api.AppListApi;
+import com.tntlinking.tntdev.http.api.GetFirmFreezeRecordApi;
 
 import java.util.List;
 
 
 public final class FreezeAdapter extends BaseAdapter {
 
-    private List<AppListApi.Bean> mList;
+    private List<GetFirmFreezeRecordApi.Bean.ListBean> mList;
     private LayoutInflater layoutInflater;
     private Context mContext;
 
-    public FreezeAdapter(Context context, List<AppListApi.Bean> list) {
+    public FreezeAdapter(Context context) {
         this.mContext = context;
-        this.mList = list;
         layoutInflater = LayoutInflater.from(context);
     }
 
+
     @Override
     public int getCount() {
+        if (mList == null) {
+            return 0;
+        }
         return mList.size();
     }
+
 
     @Override
     public Object getItem(int position) {
@@ -41,7 +46,7 @@ public final class FreezeAdapter extends BaseAdapter {
         return 0;
     }
 
-    public void setData(List<AppListApi.Bean> list) {
+    public void setData(List<GetFirmFreezeRecordApi.Bean.ListBean> list) {
         if (list != null) {
             this.mList = list;
             notifyDataSetChanged();
@@ -59,14 +64,17 @@ public final class FreezeAdapter extends BaseAdapter {
             holder = new ViewHolder();
             holder.tv_freeze_money = convertView.findViewById(R.id.tv_freeze_money);
             holder.tv_freeze_num = convertView.findViewById(R.id.tv_freeze_num);
+            holder.tv_freeze_time = convertView.findViewById(R.id.tv_freeze_time);
 
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-        AppListApi.Bean item = mList.get(position);
-        holder.tv_freeze_money.setText(item.getPositionName());
-        holder.tv_freeze_num.setText(item.getCompanyName());
+        GetFirmFreezeRecordApi.Bean.ListBean item = mList.get(position);
+        holder.tv_freeze_money.setText(item.getMoney() + "");
+        holder.tv_freeze_num.setText("合约单号：" + item.getOrderNo());
+        holder.tv_freeze_time.setText(item.getCreateDate());
+
 
 
         return convertView;

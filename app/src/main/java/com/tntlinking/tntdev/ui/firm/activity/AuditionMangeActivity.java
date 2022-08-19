@@ -96,12 +96,13 @@ public final class AuditionMangeActivity extends AppActivity implements OnRefres
 
                     @Override
                     public void onSucceed(HttpData<GetFirmInterviewListApi.Bean> data) {
-
+                        mRefreshLayout.setEnableLoadMore(true);
                         if (data.getData().getList().size() >= 0) {
                             ll_empty.setVisibility(View.GONE);
                             if (pageNum == 1) {
                                 if (data.getData().getList().size() == 0) {
                                     ll_empty.setVisibility(View.VISIBLE);
+                                    mRefreshLayout.setEnableLoadMore(false);
                                 } else {
                                     mList.clear();
                                     mList.addAll(data.getData().getList());

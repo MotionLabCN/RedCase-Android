@@ -17,7 +17,7 @@ import com.hjq.http.listener.HttpCallback;
 import com.tntlinking.tntdev.R;
 import com.tntlinking.tntdev.aop.SingleClick;
 import com.tntlinking.tntdev.app.AppActivity;
-import com.tntlinking.tntdev.http.api.CancellationApi;
+import com.tntlinking.tntdev.http.api.CancelDevApi;
 import com.tntlinking.tntdev.http.api.GetCancellationApi;
 import com.tntlinking.tntdev.http.model.HttpData;
 import com.tntlinking.tntdev.manager.ActivityManager;
@@ -119,7 +119,7 @@ public final class DeleteDeveloperActivity extends AppActivity {
 
     private void cancellation(Dialog dialog) {
         EasyHttp.post(this)
-                .api(new CancellationApi())
+                .api(new CancelDevApi())
                 .request(new HttpCallback<HttpData<Void>>(this) {
 
                     @Override

@@ -3,7 +3,7 @@ package com.tntlinking.tntdev.http.api;
 import com.hjq.http.config.IRequestApi;
 
 /**
- * desc   : 开发者注销条件查询
+ * desc   : 企业端注销条件查询
  */
 public final class GetFirmConditionApi implements IRequestApi {
 

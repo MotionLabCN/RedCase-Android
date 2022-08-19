@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:paddingLeft="@dimen/dp_15"
-        android:paddingTop="@dimen/dp_10"
+        android:paddingTop="@dimen/dp_20"
         android:paddingRight="@dimen/dp_15"
         android:paddingBottom="@dimen/dp_10">
 
@@ -20,7 +20,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="¥1000000"
+            android:text="¥xxxx"
             android:textColor="@color/black"
             android:textSize="@dimen/sp_20"
             android:textStyle="bold" />
@@ -29,7 +29,7 @@
             android:id="@+id/tv_freeze_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="2020.11.1"
+            android:text="xxxx.xx.xx"
             android:textColor="@color/color_hint_color"
             android:textSize="@dimen/sp_14" />
     </LinearLayout>
@@ -48,17 +48,10 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="合约单：xxxxx"
+            android:text="合约单号：xxxxx"
             android:textColor="@color/color_text_color"
             android:textSize="@dimen/sp_14" />
 
-        <TextView
-            android:id="@+id/tv_company_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="xxxxxx"
-            android:textColor="@color/color_hint_color"
-            android:textSize="@dimen/sp_14" />
     </LinearLayout>
 
     <View

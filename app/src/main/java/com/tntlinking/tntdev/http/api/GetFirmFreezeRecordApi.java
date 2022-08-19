@@ -15,7 +15,7 @@ public final class GetFirmFreezeRecordApi implements IRequestApi {
 
     private String date;
     private int pageNum;
-    private int pageSize;
+    private int pageSize = 20;
 
     public GetFirmFreezeRecordApi setDate(String createDate) {
         this.date = createDate;
@@ -64,17 +64,17 @@ public final class GetFirmFreezeRecordApi implements IRequestApi {
         }
 
         public static class ListBean {
-            private int afterBalance;
+            private double afterBalance;
             private int changeType;
             private int companyId;
-            private String createDate;
+            private String createDate = "";
             private int id;
-            private int money;
+            private double money;
             private int orderId;
-            private String orderNo;
-            private String remark;
+            private String orderNo = "";
+            private String remark = "";
 
-            public int getAfterBalance() {
+            public double getAfterBalance() {
                 return afterBalance;
             }
 
@@ -114,7 +114,7 @@ public final class GetFirmFreezeRecordApi implements IRequestApi {
                 this.id = id;
             }
 
-            public int getMoney() {
+            public double getMoney() {
                 return money;
             }
 

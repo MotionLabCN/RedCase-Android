@@ -107,9 +107,11 @@ public final class RecommendPositionFragment extends TitleBarFragment<FirmMainAc
                     public void onSucceed(HttpData<GetFirmRecommendsApi.Bean> data) {
                         if (data.getData().getList() != null && data.getData().getList().size() >= 0) {
                             ll_empty.setVisibility(View.GONE);
+                            mRefreshLayout.setEnableLoadMore(true);
                             if (pageNum == 1) {
                                 if (data.getData().getList().size() == 0) {
                                     ll_empty.setVisibility(View.VISIBLE);
+                                    mRefreshLayout.setEnableLoadMore(false);
                                 } else {
                                     mList1.clear();
                                     mList1.addAll(data.getData().getList());
@@ -148,9 +150,11 @@ public final class RecommendPositionFragment extends TitleBarFragment<FirmMainAc
                     public void onSucceed(HttpData<GetFirmRecommendsApi.Bean> data) {
                         if (data.getData().getList() != null && data.getData().getList().size() >= 0) {
                             ll_empty.setVisibility(View.GONE);
+                            mRefreshLayout.setEnableLoadMore(true);
                             if (pageNum == 1) {
                                 if (data.getData().getList().size() == 0) {
                                     ll_empty.setVisibility(View.VISIBLE);
+                                    mRefreshLayout.setEnableLoadMore(false);
                                 } else {
                                     mList2.clear();
                                     mList2.addAll(data.getData().getList());
