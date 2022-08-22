@@ -717,6 +717,16 @@
             android:name="com.tntlinking.tntdev.ui.firm.activity.FirmCertificationActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
+        <!-- 新建公司页面 -->
+        <activity
+            android:name="com.tntlinking.tntdev.ui.firm.activity.NewCompanyActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <!-- 选择公司页面 -->
+        <activity
+            android:name="com.tntlinking.tntdev.ui.firm.activity.SearchCompanySelectActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
         <!-- 账户管理页面 -->
         <activity
             android:name="com.tntlinking.tntdev.ui.firm.activity.FirmSettingActivity"

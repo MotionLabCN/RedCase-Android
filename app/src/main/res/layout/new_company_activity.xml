@@ -16,7 +16,7 @@
         app:leftIcon="@drawable/icon_back_black"
         app:lineVisible="false"
         app:rightBackground="@null"
-        app:title="升级企业账户"
+        app:title="新建公司"
         app:titleStyle="bold" />
 
     <ScrollView
@@ -31,71 +31,89 @@
             android:orientation="vertical">
 
 
-            <com.hjq.widget.view.ClearEditText
-                android:id="@+id/et_name"
-                style="@style/EditTextStyleNew"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_20"
-                android:hint="请输入您的真实姓名"
-                android:paddingLeft="@dimen/dp_15"
-                android:paddingTop="@dimen/dp_15"
-                android:paddingBottom="@dimen/dp_15"
-                android:singleLine="true" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/line_size"
-                android:layout_marginLeft="@dimen/dp_16"
-                android:layout_marginRight="@dimen/dp_16"
-                android:background="#FFECECEC" />
-
             <LinearLayout
+                android:id="@+id/ll_add_photo"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/white"
-                android:orientation="horizontal">
+                android:layout_height="@dimen/dp_180"
+                android:layout_marginLeft="@dimen/dp_15"
+                android:layout_marginTop="@dimen/dp_15"
+                android:layout_marginRight="@dimen/dp_15"
+                android:background="@drawable/bg_grey_stroke"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="@dimen/dp_26"
+                    android:layout_height="@dimen/dp_26"
+                    android:src="@drawable/icon_add_photo" />
 
                 <TextView
-                    android:id="@+id/tv_company_name"
-                    style="@style/EditTextStyleNew"
-                    android:layout_width="0px"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@color/white"
-                    android:hint="请选择所属公司"
-                    android:imeOptions="actionDone"
-                    android:inputType="number"
-                    android:maxLength="6"
-                    android:paddingHorizontal="@dimen/dp_18"
-                    android:paddingVertical="@dimen/dp_18"
-                    android:singleLine="true" />
-
-                <TextView
-                    android:id="@+id/tv_new_company"
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginEnd="@dimen/dp_15"
-                    android:gravity="center"
-                    android:text="新建公司"
-                    android:textColor="@color/common_accent_color" />
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_17"
+                    android:text="上传高清营业执照图片"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp_12"
+                    android:textStyle="bold" />
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_4"
+                    android:text="大小5M以内，支持JPG/PNG格式"
+                    android:textColor="@color/color_hint_color"
+                    android:textSize="@dimen/sp_12" />
             </LinearLayout>
 
-            <View
+
+            <FrameLayout
+                android:id="@+id/fl_add_photo"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/line_size"
-                android:layout_marginLeft="@dimen/dp_16"
-                android:layout_marginRight="@dimen/dp_16"
-                android:background="#FFECECEC" />
+                android:layout_height="@dimen/dp_180"
+                android:layout_marginLeft="@dimen/dp_15"
+                android:layout_marginTop="@dimen/dp_15"
+                android:layout_marginRight="@dimen/dp_15"
+                android:visibility="gone">
+
+                <ImageView
+                    android:id="@+id/iv_photo_avatar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:scaleType="centerCrop"/>
 
 
-            <com.hjq.widget.view.ClearEditText
-                android:id="@+id/et_position"
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:background="@drawable/bg_white_gradient_radius"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/icon_edit_photo" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/dp_25"
+                        android:layout_marginLeft="@dimen/dp_4"
+                        android:gravity="center"
+                        android:text="编辑图片"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/sp_12" />
+                </LinearLayout>
+
+
+            </FrameLayout>
+
+            <TextView
+                android:id="@+id/tv_social_credit_code"
                 style="@style/EditTextStyleNew"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="请输入您当前的职位(可选)"
+                android:hint="统一社会信用代码"
                 android:paddingLeft="@dimen/dp_15"
                 android:paddingTop="@dimen/dp_15"
                 android:paddingBottom="@dimen/dp_15"
@@ -108,55 +126,18 @@
                 android:layout_marginRight="@dimen/dp_16"
                 android:background="#FFECECEC" />
 
-            <com.hjq.widget.view.ClearEditText
-                android:id="@+id/et_mobile"
+            <TextView
+                android:id="@+id/tv_full_company_name"
                 style="@style/EditTextStyleNew"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="手机"
+                android:hint="公司全称"
                 android:inputType="number"
                 android:paddingLeft="@dimen/dp_15"
                 android:paddingTop="@dimen/dp_15"
                 android:paddingBottom="@dimen/dp_15"
                 android:singleLine="true" />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/line_size"
-                android:layout_marginLeft="@dimen/dp_16"
-                android:layout_marginRight="@dimen/dp_16"
-                android:background="#FFECECEC" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/white"
-                android:orientation="horizontal">
-
-                <com.hjq.widget.view.ClearEditText
-                    android:id="@+id/et_email"
-                    style="@style/EditTextStyleNew"
-                    android:layout_width="0px"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@color/white"
-                    android:hint="邮箱"
-                    android:imeOptions="actionDone"
-                    android:inputType="textEmailAddress"
-                    android:paddingHorizontal="@dimen/dp_18"
-                    android:paddingVertical="@dimen/dp_18"
-                    android:singleLine="true" />
-
-                <com.hjq.widget.view.CountdownView
-                    android:id="@+id/cv_countdown"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginEnd="@dimen/dp_15"
-                    android:gravity="center"
-                    android:text="获取验证码"
-                    android:textColor="@color/common_accent_color" />
-
-            </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
@@ -166,13 +147,11 @@
                 android:background="#FFECECEC" />
 
             <com.hjq.widget.view.ClearEditText
-                android:id="@+id/et_email_code"
+                android:id="@+id/et_as_company_name"
                 style="@style/EditTextStyleNew"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="请输入您的邮箱验证码"
-                android:inputType="number"
-                android:maxLength="6"
+                android:hint="请输入公司简称"
                 android:paddingLeft="@dimen/dp_15"
                 android:paddingTop="@dimen/dp_15"
                 android:paddingBottom="@dimen/dp_15"
@@ -186,11 +165,11 @@
                 android:background="#FFECECEC" />
 
             <com.hjq.widget.layout.SettingBar
-                android:id="@+id/sb_area"
+                android:id="@+id/sb_company_industry"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_20"
-                app:bar_leftText="请选择所在地区"
+                app:bar_leftText="请选择公司行业"
                 app:bar_lineVisible="false"
                 app:bar_rightDrawable="@drawable/icon_arrow_right"
                 app:bar_rightDrawableSize="@dimen/dp_16" />
@@ -202,24 +181,31 @@
                 android:layout_marginRight="@dimen/dp_16"
                 android:background="#FFECECEC" />
 
-            <TextView
-                android:layout_width="wrap_content"
+            <com.hjq.widget.layout.SettingBar
+                android:id="@+id/sb_company_person_num"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/dp_15"
-                android:layout_marginTop="@dimen/dp_4"
-                android:drawableLeft="@drawable/icon_sign_v"
-                android:gravity="center"
-                android:text="如填写公司邮箱可快速验证身份加入企业"
-                android:textColor="@color/color_FB8B39"
-                android:textSize="@dimen/sp_12" />
+                android:layout_marginTop="@dimen/dp_20"
+                app:bar_leftText="请选择人员规模"
+                app:bar_lineVisible="false"
+                app:bar_rightDrawable="@drawable/icon_arrow_right"
+                app:bar_rightDrawableSize="@dimen/dp_16" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/line_size"
+                android:layout_marginLeft="@dimen/dp_16"
+                android:layout_marginRight="@dimen/dp_16"
+                android:background="#FFECECEC" />
+
 
             <com.hjq.widget.view.ClearEditText
-                android:id="@+id/et_address"
+                android:id="@+id/et_email"
                 style="@style/EditTextStyleNew"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_20"
-                android:hint="请输入详细地址"
+                android:hint="请输入企业邮箱后缀（可选）"
                 android:paddingLeft="@dimen/dp_15"
                 android:paddingTop="@dimen/dp_15"
                 android:singleLine="true" />
@@ -237,7 +223,7 @@
                 android:layout_marginLeft="@dimen/dp_15"
                 android:layout_marginTop="@dimen/dp_4"
                 android:gravity="center"
-                android:text="该地址作为联系您和寄回纸质协议等使用"
+                android:text="用于自动审核加入公司申请"
                 android:textColor="@color/color_FB8B39"
                 android:textSize="@dimen/sp_12" />
         </LinearLayout>
