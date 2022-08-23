@@ -17,7 +17,7 @@
         android:gravity="center_horizontal"
         android:orientation="vertical"
         android:paddingHorizontal="@dimen/dp_20"
-        android:paddingVertical="@dimen/dp_15">
+        android:paddingVertical="@dimen/dp_20">
 
         <ImageView
             android:id="@+id/iv_close"
@@ -29,13 +29,13 @@
         <ImageView
             android:layout_width="@dimen/dp_200"
             android:layout_height="@dimen/dp_200"
-            android:src="@drawable/bg_check_status" />
+            android:src="@drawable/icon_kf_qr" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_16"
             android:text="手机截图二维码"
             android:textSize="@dimen/sp_20"
             android:textStyle="bold" />
@@ -45,6 +45,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_10"
+
             android:text="微信扫描添加客服咨询"
             android:textSize="@dimen/sp_13" />
 

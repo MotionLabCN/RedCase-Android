@@ -2,19 +2,19 @@ package com.tntlinking.tntdev.http.api;
 
 import com.hjq.http.config.IRequestApi;
 
-//取消收藏开发者
-public final class CancelCollectDeveloperApi implements IRequestApi {
+//判断收藏状态
+public final class CollectDeveloperStatusApi implements IRequestApi {
 
     @Override
     public String getApi() {
-        return "manpower-rest-api/companyRecruiterFavorite/cancelFavorite";
+        return "manpower-rest-api/companyRecruiterFavorite/judgeFavoriteStatus";
     }
 
 
     private int developerId;
 
 
-    public CancelCollectDeveloperApi setDeveloperId(int developerId) {
+    public CollectDeveloperStatusApi setDeveloperId(int developerId) {
         this.developerId = developerId;
         return this;
     }

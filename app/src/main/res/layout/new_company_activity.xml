@@ -11,6 +11,7 @@
     tools:layoutAnimation="@null">
 
     <com.hjq.bar.TitleBar
+        android:id="@+id/title_bar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_50"
         app:leftIcon="@drawable/icon_back_black"
@@ -45,7 +46,7 @@
                 <ImageView
                     android:layout_width="@dimen/dp_26"
                     android:layout_height="@dimen/dp_26"
-                    android:src="@drawable/icon_add_photo" />
+                    android:src="@drawable/icon_black_select_pic" />
 
                 <TextView
                     android:layout_width="wrap_content"

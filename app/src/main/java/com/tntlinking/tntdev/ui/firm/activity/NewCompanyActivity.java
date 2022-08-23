@@ -16,6 +16,7 @@ import com.blankj.utilcode.util.SPUtils;
 import com.bumptech.glide.load.MultiTransformation;
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.hjq.bar.TitleBar;
 import com.hjq.base.BaseDialog;
 import com.hjq.http.EasyHttp;
 import com.hjq.http.EasyLog;
@@ -26,6 +27,7 @@ import com.tntlinking.tntdev.R;
 import com.tntlinking.tntdev.aop.SingleClick;
 import com.tntlinking.tntdev.app.AppActivity;
 import com.tntlinking.tntdev.http.api.CreateNewCompanyApi;
+import com.tntlinking.tntdev.http.api.CreateNewCompanyChangeApi;
 import com.tntlinking.tntdev.http.api.FirmCertificationApi;
 import com.tntlinking.tntdev.http.api.GetDictionaryApi;
 import com.tntlinking.tntdev.http.api.UpdateCompanyImageApi;
@@ -50,6 +52,7 @@ import androidx.appcompat.widget.AppCompatButton;
  * 新建公司页面
  */
 public final class NewCompanyActivity extends AppActivity {
+    private TitleBar title_bar;
     private LinearLayout ll_add_photo;
     private FrameLayout fl_add_photo;
     private ImageView iv_photo_avatar;
@@ -72,6 +75,7 @@ public final class NewCompanyActivity extends AppActivity {
     private String mEmailSuffix;
 
     private List<GetDictionaryApi.DictionaryBean> mDictionaryList;
+    private boolean isChange = false;
 
     @Override
     protected int getLayoutId() {
@@ -80,6 +84,7 @@ public final class NewCompanyActivity extends AppActivity {
 
     @Override
     protected void initView() {
+        title_bar = findViewById(R.id.title_bar);
         ll_add_photo = findViewById(R.id.ll_add_photo);
         fl_add_photo = findViewById(R.id.fl_add_photo);
         iv_photo_avatar = findViewById(R.id.iv_photo_avatar);
@@ -103,6 +108,15 @@ public final class NewCompanyActivity extends AppActivity {
     protected void initData() {
         getDictionaryList("1");//1->行业 所属行业
         mDictionaryList = getDictionaryList("2");// 2->人员规模
+
+        isChange = getBoolean("isChange");
+        if (isChange) {// 从我的公司页面跳转过来的，
+            title_bar.setTitle("更换公司");
+            btn_commit.setText("更换");
+        } else {// 新建公司过来的，
+            title_bar.setTitle("新建公司");
+            btn_commit.setText("新建");
+        }
     }
 
 
@@ -176,15 +190,20 @@ public final class NewCompanyActivity extends AppActivity {
             case R.id.btn_commit:
                 mShortName = et_as_company_name.getText().toString();
                 mEmailSuffix = et_email.getText().toString();
-                createNewCompany();
 //                startActivity(MyCompanyActivity.class);
+
+                if (isChange) {
+                    changeNewCompany();
+                } else {
+                    createNewCompany();
+                }
                 break;
 
         }
 
     }
 
-
+    // 新建企业
     public void createNewCompany() {
         EasyHttp.post(this)
                 .api(new CreateNewCompanyApi()
@@ -200,7 +219,29 @@ public final class NewCompanyActivity extends AppActivity {
                     @Override
                     public void onSucceed(HttpData<DeveloperInfoBean.DeveloperWork> data) {
 
-                        toast("申请成功");
+                        toast("新建成功");
+                        finish();
+                    }
+                });
+    }
+
+    // 更换企业
+    public void changeNewCompany() {
+        EasyHttp.post(this)
+                .api(new CreateNewCompanyChangeApi()
+                        .setBusinessLicense(mBusinessLicense)
+                        .setCompanyName(mCompanyName)
+                        .setEmailSuffix(mEmailSuffix)
+                        .setIndustryId(mIndustryId)
+                        .setPersonSizeId(mPersonSizeId)
+                        .setShortName(mShortName)
+                        .setTaxInvoice(mTaxInvoice))
+                .request(new HttpCallback<HttpData<DeveloperInfoBean.DeveloperWork>>(this) {
+
+                    @Override
+                    public void onSucceed(HttpData<DeveloperInfoBean.DeveloperWork> data) {
+
+                        toast("更换成功");
                         finish();
                     }
                 });

@@ -84,19 +84,12 @@
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
 
-                        <TextView
-                            android:id="@+id/tv_avatar"
+                        <ImageView
+                            android:id="@+id/iv_avatar"
                             android:layout_width="@dimen/dp_48"
                             android:layout_height="@dimen/dp_48"
                             android:layout_marginLeft="@dimen/dp_16"
-                            android:background="@drawable/avatar_oval_black"
-                            android:ellipsize="end"
-                            android:gravity="center"
-                            android:singleLine="true"
-                            android:text="某某"
-                            android:textColor="@color/white"
-                            android:textSize="@dimen/sp_12"
-                            android:textStyle="bold" />
+                            android:src="@drawable/app_logo" />
 
                         <LinearLayout
                             android:layout_width="wrap_content"
@@ -110,7 +103,7 @@
                                 android:id="@+id/tv_name"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="某某某"
+                                android:text="未命名"
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/sp_20"
                                 android:textStyle="bold" />

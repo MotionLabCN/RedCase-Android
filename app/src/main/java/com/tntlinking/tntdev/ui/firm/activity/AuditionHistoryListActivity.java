@@ -47,7 +47,7 @@ public final class AuditionHistoryListActivity extends AppActivity implements On
 
     @Override
     protected int getLayoutId() {
-        return R.layout.audition_manage_activity;
+        return R.layout.audition_manage_history_activity;
     }
 
     @Override
@@ -56,8 +56,6 @@ public final class AuditionHistoryListActivity extends AppActivity implements On
         ll_empty = findViewById(R.id.ll_empty);
         mRefreshLayout = findViewById(R.id.rl_status_refresh);
         mRecyclerView = findViewById(R.id.rv_status_list);
-        title_bar.setTitle("历史面试");
-        title_bar.clearRightIconTint();
 
         mAdapter = new AuditionHistoryAdapter(this);
         mAdapter.setOnItemClickListener(this);

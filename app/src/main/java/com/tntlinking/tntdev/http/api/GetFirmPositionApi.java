@@ -16,7 +16,7 @@ public final class GetFirmPositionApi implements IRequestApi {
 
     private int status;// 默认传1
     private int pageNum;
-    private int pageSize;
+    private int pageSize = 20;
 
     public GetFirmPositionApi setStatus(int status) {
         this.status = status;
@@ -63,7 +63,7 @@ public final class GetFirmPositionApi implements IRequestApi {
             this.list = list;
         }
 
-        public static class ListBean  implements Serializable {
+        public static class ListBean implements Serializable {
 
             private int id;
             private int companyId;

@@ -8,30 +8,26 @@ import java.io.Serializable;
 import java.util.List;
 
 
-public final class CreateOrderApi implements IRequestApi, IRequestType {
+public final class CreateOrderUpdateApi implements IRequestApi, IRequestType {
 
     @Override
     public String getApi() {
-        return "manpower-rest-api/businessOrder/createOrder";
+        return "manpower-rest-api/businessOrder/updateOrderWorkTime";
     }
 
 
-    private int developerId;   //
-    private int positionId;   //
+    private int orderId;   //
     private String workStartDate;//
 
 
-    public CreateOrderApi setDeveloperId(int developerId) {
-        this.developerId = developerId;
+    public CreateOrderUpdateApi setOrderId(int orderId) {
+        this.orderId = orderId;
         return this;
     }
 
-    public CreateOrderApi setPositionId(int positionId) {
-        this.positionId = positionId;
-        return this;
-    }
 
-    public CreateOrderApi setWorkStartDate(String workStartDate) {
+
+    public CreateOrderUpdateApi setWorkStartDate(String workStartDate) {
         this.workStartDate = workStartDate;
         return this;
     }

@@ -21,6 +21,13 @@ import androidx.fragment.app.FragmentActivity;
 
 public class GlideUtils {
 
+    /**
+     * 加载图片
+     *
+     * @param activity
+     * @param url
+     * @param view
+     */
     public static void loadImage(@NonNull Activity activity, String url, ImageView view) {
         GlideApp.with(activity).load(url).into(view);
     }
@@ -50,10 +57,18 @@ public class GlideUtils {
     }
 
 
+    /**
+     * 圆形图片
+     *
+     * @param activity
+     * @param url
+     * @param view
+     */
     public static void loadCircle(@NonNull Activity activity, String url, ImageView view) {
         // 显示圆形的 ImageView
         GlideApp.with(activity)
                 .load(url)
+                .error(R.drawable.icon_default_avatar)
                 .transform(new MultiTransformation<>(new CenterCrop(), new CircleCrop()))
                 .into(view);
     }
@@ -62,6 +77,7 @@ public class GlideUtils {
         // 显示圆形的 ImageView
         GlideApp.with(activity)
                 .load(url)
+                .error(R.drawable.icon_default_avatar)
                 .transform(new MultiTransformation<>(new CenterCrop(), new CircleCrop()))
                 .into(view);
     }
@@ -70,6 +86,7 @@ public class GlideUtils {
         // 显示圆形的 ImageView
         GlideApp.with(activity)
                 .load(url)
+                .error(R.drawable.icon_default_avatar)
                 .transform(new MultiTransformation<>(new CenterCrop(), new CircleCrop()))
                 .into(view);
     }
@@ -78,6 +95,7 @@ public class GlideUtils {
         // 显示圆形的 ImageView
         GlideApp.with(activity)
                 .load(url)
+                .error(R.drawable.icon_default_avatar)
                 .transform(new MultiTransformation<>(new CenterCrop(), new CircleCrop()))
                 .into(view);
     }
@@ -87,6 +105,7 @@ public class GlideUtils {
         // 显示圆形的 ImageView
         GlideApp.with(activity)
                 .load(res)
+                .error(R.drawable.icon_default_avatar)
                 .transform(new MultiTransformation<>(new CenterCrop(), new CircleCrop()))
                 .into(view);
     }
@@ -95,6 +114,7 @@ public class GlideUtils {
         // 显示圆形的 ImageView
         GlideApp.with(activity)
                 .load(res)
+                .error(R.drawable.icon_default_avatar)
                 .transform(new MultiTransformation<>(new CenterCrop(), new CircleCrop()))
                 .into(view);
     }
@@ -103,6 +123,7 @@ public class GlideUtils {
         // 显示圆形的 ImageView
         GlideApp.with(activity)
                 .load(res)
+                .error(R.drawable.icon_default_avatar)
                 .transform(new MultiTransformation<>(new CenterCrop(), new CircleCrop()))
                 .into(view);
     }
@@ -111,11 +132,19 @@ public class GlideUtils {
         // 显示圆形的 ImageView
         GlideApp.with(activity)
                 .load(res)
+                .error(R.drawable.icon_default_avatar)
                 .transform(new MultiTransformation<>(new CenterCrop(), new CircleCrop()))
                 .into(view);
     }
 
-
+    /**
+     * 圆角 的图片
+     *
+     * @param activity
+     * @param res
+     * @param view
+     * @param roundedCorners
+     */
     public static void loadRoundCorners(@NonNull Activity activity, int res, ImageView view, int roundedCorners) {
         // 显示圆角的 ImageView
         GlideApp.with(activity)

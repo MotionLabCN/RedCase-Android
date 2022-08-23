@@ -2,9 +2,11 @@ package com.tntlinking.tntdev.ui.firm.activity;
 
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.hjq.bar.TitleBar;
@@ -22,13 +24,14 @@ import com.tntlinking.tntdev.ui.activity.BrowserActivity;
 import androidx.appcompat.widget.AppCompatButton;
 
 /**
- * 发布职位信息
+ * 我的公司
  */
 public final class MyCompanyActivity extends AppActivity {
     private TitleBar title_bar;
     private TextView tv_company_name;
     private TextView tv_company;
     private TextView tv_company_desc;
+    private LinearLayout ll_bottom;
     private AppCompatButton btn_leave;
     private AppCompatButton btn_change;
 
@@ -45,6 +48,7 @@ public final class MyCompanyActivity extends AppActivity {
         tv_company_desc = findViewById(R.id.tv_company_desc);
         btn_leave = findViewById(R.id.btn_leave);
         btn_change = findViewById(R.id.btn_change);
+        ll_bottom = findViewById(R.id.ll_bottom);
 
 
         btn_leave.setOnClickListener(new View.OnClickListener() {
@@ -62,7 +66,7 @@ public final class MyCompanyActivity extends AppActivity {
                         .setOnClickListener(R.id.btn_dialog_custom_cancel, (BaseDialog.OnClickListener<Button>) (dialog, button) -> dialog.dismiss())
                         .setOnClickListener(R.id.btn_dialog_custom_ok, (dialog, views) -> {
 
-
+                            quitCompany();
                         }).show();
             }
         });
@@ -71,8 +75,9 @@ public final class MyCompanyActivity extends AppActivity {
         btn_change.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                startActivity(FirmCertificationActivity.class);
+                Intent intent = new Intent(MyCompanyActivity.this, NewCompanyActivity.class);
+                intent.putExtra("isChange", true);
+                startActivity(intent);
                 finish();
 
             }
@@ -82,6 +87,12 @@ public final class MyCompanyActivity extends AppActivity {
 
     @Override
     protected void initData() {
+        int status = getInt("status");
+        if (status == 2) {// 2  审核中。。
+            ll_bottom.setVisibility(View.GONE);
+        } else {
+            ll_bottom.setVisibility(View.VISIBLE);
+        }
         getCompanyInfo();
     }
 

@@ -33,8 +33,9 @@ public final class SendPositionSuccessActivity extends AppActivity {
         btn_commit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(FirmMainActivity.class);
                 ActivityManager.getInstance().finishAllActivities();
+                startActivity(FirmMainActivity.class);
+
             }
         });
 

@@ -1,6 +1,7 @@
 package com.tntlinking.tntdev.ui.firm.fragment;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Build;
 import android.text.TextUtils;
 import android.view.View;
@@ -27,6 +28,7 @@ import com.tntlinking.tntdev.http.api.GetFirmInfoApi;
 import com.tntlinking.tntdev.http.api.GetSignContractPDFApi;
 import com.tntlinking.tntdev.http.model.HttpData;
 import com.tntlinking.tntdev.other.AppConfig;
+import com.tntlinking.tntdev.other.GlideUtils;
 import com.tntlinking.tntdev.other.Utils;
 import com.tntlinking.tntdev.ui.activity.AboutAppActivity;
 import com.tntlinking.tntdev.ui.activity.BrowserPrivateActivity;
@@ -38,6 +40,7 @@ import com.tntlinking.tntdev.ui.firm.activity.FirmCertificationActivity;
 import com.tntlinking.tntdev.ui.firm.activity.FirmMainActivity;
 import com.tntlinking.tntdev.ui.firm.activity.FirmManageActivity;
 import com.tntlinking.tntdev.ui.firm.activity.FirmSettingActivity;
+import com.tntlinking.tntdev.ui.firm.activity.MyCompanyActivity;
 import com.tntlinking.tntdev.ui.firm.activity.TreatyOrderListActivity;
 
 import androidx.annotation.NonNull;
@@ -45,13 +48,10 @@ import androidx.annotation.RequiresApi;
 
 
 /**
- * desc   : 首页 Fragment
+ * desc   : 我的页面 Fragment
  */
 public final class FirmMineFragment extends TitleBarFragment<FirmMainActivity> implements OnRefreshLoadMoreListener {
-
     private SmartRefreshLayout mRefreshLayout;
-
-
     private SettingBar mPersonDataSetting;
     private SettingBar person_data_private;
     private SettingBar person_data_deal;
@@ -65,10 +65,11 @@ public final class FirmMineFragment extends TitleBarFragment<FirmMainActivity> i
     private LinearLayout ll_mine_firm;
 
     private TitleBar title_bar;
-    private TextView tv_avatar;
+    private ImageView iv_avatar;
     private TextView tv_name;
     private ImageView iv_message;
 
+    private int mStatus = 1; //企业认证状态  1待审核 2审核中 3已认证 4审核失败
 
     public static FirmMineFragment newInstance() {
         return new FirmMineFragment();
@@ -98,7 +99,7 @@ public final class FirmMineFragment extends TitleBarFragment<FirmMainActivity> i
 
         ScrollView scroll = findViewById(R.id.scroll);
         title_bar = findViewById(R.id.title_bar);
-        tv_avatar = findViewById(R.id.tv_avatar);
+        iv_avatar = findViewById(R.id.iv_avatar);
         tv_name = findViewById(R.id.tv_name);
         iv_message = findViewById(R.id.iv_message);
 
@@ -121,15 +122,14 @@ public final class FirmMineFragment extends TitleBarFragment<FirmMainActivity> i
 
     @Override
     protected void initData() {
-        getData();
         getFirmInfo();
     }
-
 
     @SuppressLint("NonConstantResourceId")
     @SingleClick
     @Override
     public void onClick(View view) {
+        Intent intent = new Intent();
         switch (view.getId()) {
             case R.id.iv_message://消息
                 startActivity(MessageListActivity.class);
@@ -138,7 +138,15 @@ public final class FirmMineFragment extends TitleBarFragment<FirmMainActivity> i
                 startActivity(ChangeAdminActivity.class);
                 break;
             case R.id.person_data_service://企业认证
-                startActivity(FirmCertificationActivity.class);
+                if (mStatus == 2) {
+                    intent.setClass(getActivity(), MyCompanyActivity.class);
+                    intent.putExtra("status", mStatus);
+                    startActivity(intent);
+                } else if (mStatus == 3) {
+                    startActivity(MyCompanyActivity.class);
+                } else {
+                    startActivity(FirmCertificationActivity.class);
+                }
                 break;
             case R.id.ll_mine_audition://面试管理
                 startActivity(AuditionMangeActivity.class);
@@ -176,31 +184,29 @@ public final class FirmMineFragment extends TitleBarFragment<FirmMainActivity> i
                 .navigationBarColor(R.color.white);
     }
 
-    private String mStatus = "1"; //入驻状态 1  待完善 2  待审核 3  审核成功 4  审核失败
-    private int mContractStatus = 0; //签约状态 0, "待签约"，1, "签约中" 2, "签约成功" 3, "签约失败"
 
-    public void getData() {
-        EasyHttp.get(this)
-                .api(new GetDeveloperStatusApi())
-                .request(new HttpCallback<HttpData<GetDeveloperStatusApi.Bean>>(this) {
-
-                    @SuppressLint("SetTextI18n")
-                    @Override
-                    public void onSucceed(HttpData<GetDeveloperStatusApi.Bean> data) {
-                        SPUtils.getInstance().put(AppConfig.CAREER_ID, data.getData().getCareerDirectionId());
-                        mRefreshLayout.finishRefresh();
-                        if (TextUtils.isEmpty(data.getData().getRealName())) {
-                            tv_avatar.setText("朋友");
-                            tv_name.setText("你好，新朋友");
-
-                        } else {
-                            tv_avatar.setText(Utils.formatName(data.getData().getRealName()));
-                            tv_name.setText(data.getData().getRealName());
-
-                        }
-                    }
-                });
-    }
+//    public void getData() {
+//        EasyHttp.get(this)
+//                .api(new GetDeveloperStatusApi())
+//                .request(new HttpCallback<HttpData<GetDeveloperStatusApi.Bean>>(this) {
+//
+//                    @SuppressLint("SetTextI18n")
+//                    @Override
+//                    public void onSucceed(HttpData<GetDeveloperStatusApi.Bean> data) {
+//                        SPUtils.getInstance().put(AppConfig.CAREER_ID, data.getData().getCareerDirectionId());
+//                        mRefreshLayout.finishRefresh();
+//                        if (TextUtils.isEmpty(data.getData().getRealName())) {
+//                            tv_avatar.setText("朋友");
+//                            tv_name.setText("你好，新朋友");
+//
+//                        } else {
+//                            tv_avatar.setText(Utils.formatName(data.getData().getRealName()));
+//                            tv_name.setText(data.getData().getRealName());
+//
+//                        }
+//                    }
+//                });
+//    }
 
 
     private String PDFUrl = "";
@@ -229,7 +235,9 @@ public final class FirmMineFragment extends TitleBarFragment<FirmMainActivity> i
 
                     @Override
                     public void onSucceed(HttpData<GetFirmInfoApi.Bean> data) {
-                        switch (data.getData().getStatus()) { //1待审核 2在审核 3已认证 4审核失败
+                        mRefreshLayout.finishRefresh();
+                        mStatus = data.getData().getStatus();
+                        switch (data.getData().getStatus()) { //1待审核 2审核中 3已认证 4审核失败
                             case 1:
                                 person_data_service.setRightText("去认证");
                                 person_data_service.setRightTextColor(getResources().getColor(R.color.color_4850FF));
@@ -247,6 +255,13 @@ public final class FirmMineFragment extends TitleBarFragment<FirmMainActivity> i
                                 person_data_service.setRightTextColor(getResources().getColor(R.color.color_F5313D));
                                 break;
                         }
+
+                        if (TextUtils.isEmpty(data.getData().getRealName())) {
+                            tv_name.setText("你好，新朋友");
+                        } else {
+                            tv_name.setText(data.getData().getRealName());
+                        }
+                        GlideUtils.loadCircle(getActivity(), data.getData().getAvatarUrl(), iv_avatar);
                     }
                 });
 
@@ -254,7 +269,6 @@ public final class FirmMineFragment extends TitleBarFragment<FirmMainActivity> i
 
     @Override
     public void onRefresh(@NonNull RefreshLayout refreshLayout) {
-        getData();
         getFirmInfo();
     }
 

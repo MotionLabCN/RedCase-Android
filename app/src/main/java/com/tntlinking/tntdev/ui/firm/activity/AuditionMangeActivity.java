@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
+import com.blankj.utilcode.util.ClipboardUtils;
 import com.hjq.base.BaseAdapter;
 import com.hjq.base.BaseDialog;
 import com.hjq.http.EasyHttp;
@@ -155,7 +156,8 @@ public final class AuditionMangeActivity extends AppActivity implements OnRefres
             intent.putExtra("from", "audition_manage");
             startActivity(intent);
         } else if (childView.getId() == R.id.tv_link) {
-            toast("会议连接");
+            ClipboardUtils.copyText(mAdapter.getItem(position).getMeetingUrl());
+            toast("会议连接已复制到剪贴板");
         } else if (childView.getId() == R.id.btn_cancel) {
             new BaseDialog.Builder<>(this)
                     .setContentView(R.layout.check_order_status_dialog)

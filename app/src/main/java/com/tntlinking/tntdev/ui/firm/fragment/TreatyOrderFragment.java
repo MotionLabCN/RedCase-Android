@@ -6,7 +6,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.LinearLayout;
+
 import com.hjq.http.EasyHttp;
+import com.hjq.http.EasyLog;
 import com.hjq.http.listener.HttpCallback;
 import com.scwang.smart.refresh.layout.SmartRefreshLayout;
 import com.scwang.smart.refresh.layout.api.RefreshLayout;
@@ -17,6 +19,7 @@ import com.tntlinking.tntdev.app.TitleBarFragment;
 import com.tntlinking.tntdev.http.api.GetFirmOrderListApi;
 import com.tntlinking.tntdev.http.model.HttpData;
 import com.tntlinking.tntdev.other.OnItemClickListener;
+import com.tntlinking.tntdev.other.TimeUtil;
 import com.tntlinking.tntdev.ui.firm.activity.ContractDetailActivity;
 import com.tntlinking.tntdev.ui.firm.activity.ContractPayActivity;
 import com.tntlinking.tntdev.ui.firm.activity.FirmMainActivity;
@@ -79,9 +82,20 @@ public final class TreatyOrderFragment extends TitleBarFragment<FirmMainActivity
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if (mAdapter.getItem(position).getOrderStatus() == 1) {
-                    Intent intent = new Intent(getActivity(), ContractDetailActivity.class);
-                    intent.putExtra("orderId", mAdapter.getItem(position).getId());
-                    startActivity(intent);
+                    String workStartDate = mAdapter.getItem(position).getWorkStartDate();
+                    long workTime = TimeUtil.getTimeLong("yyyy-MM-dd", workStartDate);
+                    long nowTime = TimeUtil.getTimeLong();
+
+                    if (workTime > nowTime) { // 开始时间大于当前时间跳转到支付页面
+                        Intent intent = new Intent(getActivity(), ContractPayActivity.class);
+                        intent.putExtra("orderId", mAdapter.getItem(position).getId());
+                        startActivity(intent);
+                    } else {// 开始时间小于当前时间 跳转到修改合约单页面
+                        Intent intent = new Intent(getActivity(), ContractDetailActivity.class);
+                        intent.putExtra("orderId", mAdapter.getItem(position).getId());
+                        startActivity(intent);
+                    }
+
                 }
 
             }

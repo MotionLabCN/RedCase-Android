@@ -20,8 +20,7 @@ import com.tntlinking.tntdev.R;
 import com.tntlinking.tntdev.aop.SingleClick;
 import com.tntlinking.tntdev.app.AppActivity;
 import com.tntlinking.tntdev.http.api.CreateOrderApi;
-import com.tntlinking.tntdev.http.api.GetDeveloperDetailApi;
-import com.tntlinking.tntdev.http.api.GetProvinceApi;
+import com.tntlinking.tntdev.http.api.CreateOrderUpdateApi;
 import com.tntlinking.tntdev.http.api.PostCalculateApi;
 import com.tntlinking.tntdev.http.api.PreOrderInfoApi;
 import com.tntlinking.tntdev.http.api.SendPositionApi;
@@ -29,7 +28,6 @@ import com.tntlinking.tntdev.http.model.HttpData;
 import com.tntlinking.tntdev.other.GlideUtils;
 import com.tntlinking.tntdev.other.TimeUtil;
 import com.tntlinking.tntdev.other.Utils;
-import com.tntlinking.tntdev.ui.bean.DeveloperInfoBean;
 import com.tntlinking.tntdev.ui.dialog.DateSelectDialog;
 
 import java.util.List;
@@ -97,21 +95,29 @@ public final class ContractDetailActivity extends AppActivity {
 
     @Override
     protected void initData() {
-        positionId = getInt("positionId");
-        developerId = getInt("developerId");
-        String name = getString("name");
-        String avatarUrl = getString("avatarUrl");
-
-        GlideUtils.loadRoundCorners(this, avatarUrl, iv_avatar, (int) getResources().getDimension(R.dimen.dp_8));
-
-        tv_name.setText(name);
-        String nowTime = TimeUtil.getTimeString("yyyy-MM-dd");
-        tv_work_time.setText(nowTime);
-        EasyConfig.getInstance().addHeader("loginRole", "Recruiter");
-        postCalculate(nowTime);
-
-        if (getInt("orderId") != 0) {
+        if (getInt("orderId") != 0) {// 合约单 待支付页面 跳转过来的，
             getOrderInfo(getInt("orderId"));
+            btn_create.setText("修改合约单");
+        } else {
+            btn_create.setText("创建合约单");
+            positionId = getInt("positionId");
+            developerId = getInt("developerId");
+            String name = getString("name");
+            String positionName = getString("positionName");
+            String expectSalary = getString("expectSalary");
+            String avatarUrl = getString("avatarUrl");
+
+            GlideUtils.loadRoundCorners(this, avatarUrl, iv_avatar, (int) getResources().getDimension(R.dimen.dp_8));
+            tv_name.setText(name);
+            tv_position.setText(positionName);
+            tv_work_mode.setText("全日8小时");
+            double eSalary = Double.parseDouble(expectSalary) / 1000;
+            tv_work_salary.setText((Utils.formatMoney(eSalary) + "k/月"));
+            selectTime = TimeUtil.getTimeString("yyyy-MM-dd");
+            tv_work_time.setText(selectTime);
+
+            EasyConfig.getInstance().addHeader("loginRole", "Recruiter");
+            postCalculate(selectTime);
         }
     }
 
@@ -119,7 +125,6 @@ public final class ContractDetailActivity extends AppActivity {
     @SingleClick
     @Override
     public void onClick(View view) {
-
         switch (view.getId()) {
             case R.id.ll_work_time:
                 new DateSelectDialog.Builder(this).setTitle("选择日期").setListener(new DateSelectDialog.OnListener() {
@@ -134,14 +139,23 @@ public final class ContractDetailActivity extends AppActivity {
                 }).show();
                 break;
             case R.id.btn_create:
+                if (TextUtils.isEmpty(selectTime)) {
+                    toast("你还没有选择时间");
+                    return;
+                }
 
-                createOrder(selectTime);
+                if (getInt("orderId") == 0) {//orderId不等于0 就是修改合约单，等于0 就是创新新的合约单
+                    createOrder(selectTime);
+                } else {
+                    updateOrder(getInt("orderId"), selectTime);
+                }
                 break;
         }
 
     }
 
     //订单前置计算
+    @SuppressLint("SetTextI18n")
     public void postCalculate(String date) {
         EasyHttp.post(this)
                 .api(new PostCalculateApi()
@@ -150,7 +164,6 @@ public final class ContractDetailActivity extends AppActivity {
                         .setWorkStartDate(date))
                 .request(new HttpCallback<HttpData<PostCalculateApi.Bean>>(this) {
 
-                    @SuppressLint("SetTextI18n")
                     @Override
                     public void onSucceed(HttpData<PostCalculateApi.Bean> data) {
                         List<PostCalculateApi.Bean.PreListBean> preList = data.getData().getPreList();
@@ -198,16 +211,64 @@ public final class ContractDetailActivity extends AppActivity {
                 });
     }
 
+    //修改订单
+    public void updateOrder(int orderId, String date) {
+        EasyHttp.post(this)
+                .api(new CreateOrderUpdateApi()
+                        .setOrderId(orderId)
+                        .setWorkStartDate(date))
+                .request(new HttpCallback<HttpData<CreateOrderApi.Bean>>(this) {
+
+                    @Override
+                    public void onSucceed(HttpData<CreateOrderApi.Bean> data) {
+                        CreateOrderApi.Bean bean = data.getData();
+                        Intent intent = new Intent(ContractDetailActivity.this, ContractPayActivity.class);
+                        intent.putExtra("PayInfoBean", bean);
+                        startActivity(intent);
+                    }
+                });
+    }
 
     //获取订单详情
     public void getOrderInfo(int orderId) {
         EasyHttp.get(this)
                 .api(new PreOrderInfoApi().setOrderId(orderId))
                 .request(new HttpCallback<HttpData<PreOrderInfoApi.Bean>>(this) {
+                    @SuppressLint("SetTextI18n")
                     @Override
                     public void onSucceed(HttpData<PreOrderInfoApi.Bean> data) {
+                        PreOrderInfoApi.Bean bean = data.getData();
+                        GlideUtils.loadRoundCorners(getActivity(), bean.getAvatarUrl(),
+                                iv_avatar, (int) getResources().getDimension(R.dimen.dp_8));
+                        tv_name.setText(bean.getRealName());
+                        tv_position.setText(bean.getCareerDirectionName());
+                        tv_work_mode.setText(bean.getWorkDayModeName() + "8小时");
+                        double eSalary = bean.getExpectSalary() / 1000;
+                        tv_work_salary.setText((Utils.formatMoney(eSalary) + "k/月"));
 
+                        developerId = bean.getDeveloperId();
+                        positionId = bean.getPositionId();
+                        List<PreOrderInfoApi.Bean.PreOrderListBean> preOrderList = bean.getPreOrderList();
+                        if (preOrderList != null && preOrderList.size() != 0) {
+                            if (preOrderList.size() == 1) {
+                                PreOrderInfoApi.Bean.PreOrderListBean preBean0 = preOrderList.get(0);
+                                tv_work_time_1.setText(preBean0.getWorkStartDate() + "-" + preBean0.getWorkEndDate());
+                                tv_work_time_money_1.setText(Utils.formatMoney(preBean0.getServiceMoney() + ""));
+                                ll_date_2.setVisibility(View.GONE);
+                            } else if (preOrderList.size() == 2) {
+                                PreOrderInfoApi.Bean.PreOrderListBean preBean0 = preOrderList.get(0);
+                                ll_date_2.setVisibility(View.VISIBLE);
+                                tv_work_time_1.setText(preBean0.getWorkStartDate() + "-" + preBean0.getWorkEndDate());
+                                tv_work_time_money_1.setText(Utils.formatMoney(preBean0.getServiceMoney() + ""));
+                                PreOrderInfoApi.Bean.PreOrderListBean preBean1 = preOrderList.get(1);
+                                tv_work_time_2.setText(preBean1.getWorkStartDate() + "-" + preBean1.getWorkEndDate());
+                                tv_work_time_money_2.setText(Utils.formatMoney(preBean1.getServiceMoney() + ""));
 
+                            }
+                            tv_work_money.setText(Utils.formatMoney(data.getData().getTotalAmount() + ""));
+                            tv_work_service_money.setText(Utils.formatMoney(data.getData().getServiceAmount() + ""));
+                            tv_work_freeze_money.setText(Utils.formatMoney(data.getData().getFreezeAmount() + ""));
+                        }
                     }
                 });
     }

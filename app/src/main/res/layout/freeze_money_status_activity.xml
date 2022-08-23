@@ -34,7 +34,7 @@
             android:id="@+id/iv_status_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/icon_empty_service" />
+            android:src="@drawable/icon_freeze_fail" />
 
         <TextView
             android:id="@+id/tv_status"

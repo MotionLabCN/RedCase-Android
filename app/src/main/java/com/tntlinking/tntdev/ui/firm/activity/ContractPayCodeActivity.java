@@ -1,4 +1,6 @@
 package com.tntlinking.tntdev.ui.firm.activity;
+
+import android.content.Intent;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -21,6 +23,7 @@ import com.tntlinking.tntdev.widget.PasswordInputView;
  */
 public final class ContractPayCodeActivity extends AppActivity {
     private TextView tv_iphone;
+    private TextView tv_error;
     private PasswordInputView pwd_input;
     private CountdownView cv_countdown;
 
@@ -36,6 +39,7 @@ public final class ContractPayCodeActivity extends AppActivity {
 
         tv_iphone = findViewById(R.id.tv_iphone);
         cv_countdown = findViewById(R.id.cv_countdown);
+        tv_error = findViewById(R.id.tv_error);
         pwd_input = findViewById(R.id.pwd_input);
         cv_countdown.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -46,7 +50,6 @@ public final class ContractPayCodeActivity extends AppActivity {
         pwd_input.setInputListener(new PasswordInputView.InputListener() {
             @Override
             public void onInputCompleted(String text) {
-
                 if (!TextUtils.isEmpty(text)) {
                     orderPay(getString("orderIds"), text);
                 }
@@ -58,7 +61,6 @@ public final class ContractPayCodeActivity extends AppActivity {
 
     @Override
     protected void initData() {
-
         getAdminPhone();
     }
 
@@ -88,7 +90,13 @@ public final class ContractPayCodeActivity extends AppActivity {
                 .request(new HttpCallback<HttpData<Void>>(this) {
                     @Override
                     public void onSucceed(HttpData<Void> data) {
+                        tv_error.setVisibility(View.INVISIBLE);
+                        cv_countdown.start();
+                    }
 
+                    @Override
+                    public void onFail(Exception e) {
+                        super.onFail(e);
 
                     }
                 });
@@ -100,18 +108,21 @@ public final class ContractPayCodeActivity extends AppActivity {
     public void orderPay(String orderId, String smscode) {
         EasyHttp.post(this)
                 .api(new OrderPayApi().setOrders(orderId).setSmsCode(smscode))
-                .request(new HttpCallback<HttpData<Void>>(this) {
+                .request(new HttpCallback<HttpData<String>>(this) {
                     @Override
-                    public void onSucceed(HttpData<Void> data) {
-                        startActivity(FreezeMoneyStatusActivity.class);
-                        finish();
-
+                    public void onSucceed(HttpData<String> data) {
+                        if (!TextUtils.isEmpty(data.getData())) {
+                            Intent intent = new Intent(ContractPayCodeActivity.this, FreezeMoneyStatusActivity.class);
+                            intent.putExtra("freezeStatus", data.getData());
+                            startActivity(intent);
+                            finish();
+                        }
                     }
 
                     @Override
                     public void onFail(Exception e) {
                         super.onFail(e);
-
+                        tv_error.setVisibility(View.VISIBLE);
                     }
                 });
     }

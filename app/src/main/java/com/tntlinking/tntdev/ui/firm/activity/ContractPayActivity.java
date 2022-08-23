@@ -8,14 +8,17 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
-
-import com.blankj.utilcode.util.SPUtils;
 import com.hjq.base.BaseDialog;
+import com.hjq.http.EasyHttp;
+import com.hjq.http.listener.HttpCallback;
 import com.tntlinking.tntdev.R;
 import com.tntlinking.tntdev.aop.SingleClick;
 import com.tntlinking.tntdev.app.AppActivity;
 import com.tntlinking.tntdev.http.api.CreateOrderApi;
+import com.tntlinking.tntdev.http.api.PreOrderInfoApi;
+import com.tntlinking.tntdev.http.model.HttpData;
 import com.tntlinking.tntdev.other.Utils;
+import java.util.List;
 import androidx.appcompat.widget.AppCompatButton;
 
 /**
@@ -32,7 +35,7 @@ public final class ContractPayActivity extends AppActivity {
     private TextView tv_work_service_money;
     private TextView tv_work_freeze_money;
     private AppCompatButton btn_commit;
-
+    private String orderIds;
 
     @Override
     protected int getLayoutId() {
@@ -43,7 +46,6 @@ public final class ContractPayActivity extends AppActivity {
     @SuppressLint("SetTextI18n")
     @Override
     protected void initView() {
-
         tv_work_money = findViewById(R.id.tv_work_money);
         tv_work_time_1 = findViewById(R.id.tv_work_time_1);
         tv_work_time_money_1 = findViewById(R.id.tv_work_time_money_1);
@@ -55,48 +57,55 @@ public final class ContractPayActivity extends AppActivity {
         tv_work_service_money = findViewById(R.id.tv_work_service_money);
         btn_commit = findViewById(R.id.btn_commit);
 
-        CreateOrderApi.Bean bean = getSerializable("PayInfoBean");
-        CreateOrderApi.Bean.PayInfoBean payInfo = bean.getPayInfo();
-        if (payInfo.getPreOrderList().size() != 0) {
-            if (payInfo.getPreOrderList().size() == 1) {
-                CreateOrderApi.Bean.PayInfoBean.PreOrderListBean preBean0 = payInfo.getPreOrderList().get(0);
-                tv_work_time_1.setText(preBean0.getWorkStartDate() + "-" + preBean0.getWorkEndDate());
-                tv_work_time_money_1.setText(Utils.formatMoney(preBean0.getServiceMoney() + ""));
-                ll_date_2.setVisibility(View.GONE);
-            } else if (payInfo.getPreOrderList().size() == 2) {
-                ll_date_2.setVisibility(View.VISIBLE);
-                CreateOrderApi.Bean.PayInfoBean.PreOrderListBean preBean0 = payInfo.getPreOrderList().get(0);
-                tv_work_time_1.setText(preBean0.getWorkStartDate() + "-" + preBean0.getWorkEndDate());
-                tv_work_time_money_1.setText(Utils.formatMoney(preBean0.getServiceMoney() + ""));
-                CreateOrderApi.Bean.PayInfoBean.PreOrderListBean preBean1 = payInfo.getPreOrderList().get(1);
-                tv_work_time_2.setText(preBean1.getWorkStartDate() + "-" + preBean1.getWorkEndDate());
-                tv_work_time_money_2.setText(Utils.formatMoney(preBean1.getServiceMoney() + ""));
-
-            }
-
-            tv_work_money.setText(Utils.formatMoney(payInfo.getTotalAmount() + ""));
-            tv_work_service_money.setText(Utils.formatMoney(payInfo.getServiceAmount() + ""));
-            tv_work_freeze_money.setText(Utils.formatMoney(payInfo.getFreezeAmount() + ""));
-        }
         setOnClickListener(btn_commit);
-
     }
 
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void initData() {
+        int orderId = getInt("orderId"); //从合约单 列表页面点击过来的
+        orderIds = orderId + "";
+        if (orderId != 0) {
+            getOrderInfo(orderId);
+        } else {//从合约单支付详情页面过来的
+            CreateOrderApi.Bean bean = getSerializable("PayInfoBean");
+            orderIds = bean.getOrderIds();
+            CreateOrderApi.Bean.PayInfoBean payInfo = bean.getPayInfo();
+            if (payInfo.getPreOrderList().size() != 0) {
+                if (payInfo.getPreOrderList().size() == 1) {
+                    CreateOrderApi.Bean.PayInfoBean.PreOrderListBean preBean0 = payInfo.getPreOrderList().get(0);
+                    tv_work_time_1.setText(preBean0.getWorkStartDate() + "-" + preBean0.getWorkEndDate());
+                    tv_work_time_money_1.setText("¥" + Utils.formatMoney(preBean0.getServiceMoney() + ""));
+                    ll_date_2.setVisibility(View.GONE);
+                } else if (payInfo.getPreOrderList().size() == 2) {
+                    ll_date_2.setVisibility(View.VISIBLE);
+                    CreateOrderApi.Bean.PayInfoBean.PreOrderListBean preBean0 = payInfo.getPreOrderList().get(0);
+                    tv_work_time_1.setText(preBean0.getWorkStartDate() + "-" + preBean0.getWorkEndDate());
+                    tv_work_time_money_1.setText("¥" + Utils.formatMoney(preBean0.getServiceMoney() + ""));
+                    CreateOrderApi.Bean.PayInfoBean.PreOrderListBean preBean1 = payInfo.getPreOrderList().get(1);
+                    tv_work_time_2.setText(preBean1.getWorkStartDate() + "-" + preBean1.getWorkEndDate());
+                    tv_work_time_money_2.setText("¥" + Utils.formatMoney(preBean1.getServiceMoney() + ""));
 
+                }
+
+                tv_work_money.setText("¥" + Utils.formatMoney(payInfo.getTotalAmount() + ""));
+                tv_work_service_money.setText("¥" + Utils.formatMoney(payInfo.getServiceAmount() + ""));
+                tv_work_freeze_money.setText("¥" + Utils.formatMoney(payInfo.getFreezeAmount() + ""));
+                btn_commit.setText("支付¥" + Utils.formatMoney(payInfo.getFreezeAmount() + ""));
+            }
+        }
 
     }
 
     @Override
     public void onLeftClick(View view) {
-        showDialog();
+        showTipsDialog();
     }
 
     @Override
     public void onBackPressed() {
-        showDialog();
+        showTipsDialog();
     }
 
     @SingleClick
@@ -105,8 +114,7 @@ public final class ContractPayActivity extends AppActivity {
         switch (view.getId()) {
             case R.id.btn_commit:
                 Intent intent = new Intent(this, ContractPayCodeActivity.class);
-                CreateOrderApi.Bean bean = getSerializable("PayInfoBean");
-                intent.putExtra("orderIds", bean.getOrderIds());
+                intent.putExtra("orderIds", orderIds);
                 startActivity(intent);
                 break;
 
@@ -114,7 +122,7 @@ public final class ContractPayActivity extends AppActivity {
 
     }
 
-    public void showDialog() {
+    public void showTipsDialog() {
         new BaseDialog.Builder<>(getActivity())
                 .setContentView(R.layout.check_order_status_dialog)
                 .setAnimStyle(BaseDialog.ANIM_SCALE)
@@ -132,6 +140,39 @@ public final class ContractPayActivity extends AppActivity {
     }
 
 
+    //获取订单详情
+    public void getOrderInfo(int orderId) {
+        EasyHttp.get(this)
+                .api(new PreOrderInfoApi().setOrderId(orderId))
+                .request(new HttpCallback<HttpData<PreOrderInfoApi.Bean>>(this) {
+                    @SuppressLint("SetTextI18n")
+                    @Override
+                    public void onSucceed(HttpData<PreOrderInfoApi.Bean> data) {
+                        PreOrderInfoApi.Bean bean = data.getData();
+                        List<PreOrderInfoApi.Bean.PreOrderListBean> preOrderList = bean.getPreOrderList();
+                        if (preOrderList != null && preOrderList.size() != 0) {
+                            if (preOrderList.size() == 1) {
+                                PreOrderInfoApi.Bean.PreOrderListBean preBean0 = preOrderList.get(0);
+                                tv_work_time_1.setText(preBean0.getWorkStartDate() + "-" + preBean0.getWorkEndDate());
+                                tv_work_time_money_1.setText("¥" + Utils.formatMoney(preBean0.getServiceMoney() + ""));
+                                ll_date_2.setVisibility(View.GONE);
+                            } else if (preOrderList.size() == 2) {
+                                PreOrderInfoApi.Bean.PreOrderListBean preBean0 = preOrderList.get(0);
+                                ll_date_2.setVisibility(View.VISIBLE);
+                                tv_work_time_1.setText(preBean0.getWorkStartDate() + "-" + preBean0.getWorkEndDate());
+                                tv_work_time_money_1.setText("¥" + Utils.formatMoney(preBean0.getServiceMoney() + ""));
+                                PreOrderInfoApi.Bean.PreOrderListBean preBean1 = preOrderList.get(1);
+                                tv_work_time_2.setText(preBean1.getWorkStartDate() + "-" + preBean1.getWorkEndDate());
+                                tv_work_time_money_2.setText("¥" + Utils.formatMoney(preBean1.getServiceMoney() + ""));
 
+                            }
+                            tv_work_money.setText("¥" + Utils.formatMoney(data.getData().getTotalAmount() + ""));
+                            tv_work_service_money.setText("¥" + Utils.formatMoney(data.getData().getServiceAmount() + ""));
+                            tv_work_freeze_money.setText("¥" + Utils.formatMoney(data.getData().getFreezeAmount() + ""));
+                            btn_commit.setText("支付¥" + Utils.formatMoney(data.getData().getFreezeAmount() + ""));
+                        }
+                    }
+                });
+    }
 
 }

@@ -2,30 +2,23 @@ package com.tntlinking.tntdev.ui.firm.activity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.net.Uri;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.ProgressBar;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
-import com.blankj.utilcode.util.FileUtils;
-import com.blankj.utilcode.util.SPUtils;
 import com.hjq.base.BaseDialog;
 import com.hjq.http.EasyHttp;
 import com.hjq.http.listener.HttpCallback;
 import com.tntlinking.tntdev.R;
 import com.tntlinking.tntdev.aop.SingleClick;
 import com.tntlinking.tntdev.app.AppActivity;
-import com.tntlinking.tntdev.http.api.CancelCollectDeveloperApi;
+import com.tntlinking.tntdev.http.api.CollectDeveloperCancelApi;
 import com.tntlinking.tntdev.http.api.CollectDeveloperApi;
+import com.tntlinking.tntdev.http.api.CollectDeveloperStatusApi;
 import com.tntlinking.tntdev.http.api.GetFirmDevDetailApi;
 import com.tntlinking.tntdev.http.api.GetFirmPositionApi;
 import com.tntlinking.tntdev.http.model.HttpData;
@@ -43,7 +36,6 @@ import com.tntlinking.tntdev.widget.FlowTagLayout;
 import java.util.ArrayList;
 import java.util.List;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatButton;
 
 /**
@@ -70,6 +62,7 @@ public final class DeveloperInfoActivity extends AppActivity {
     private DevEducationAdapter addEducationAdapter;
     private DevWorkAdapter addWorkAdapter;
     private DevProjectAdapter addProjectAdapter;
+    private boolean isCollect = false;//是否收藏
 
     @Override
     protected int getLayoutId() {
@@ -105,6 +98,7 @@ public final class DeveloperInfoActivity extends AppActivity {
     protected void initData() {
         int developerId = getInt("developerId");
         getFirmDevDetail(developerId);
+        getCollectStatus(developerId);
         if (!TextUtils.isEmpty(getString("from"))) {
             ll_bottom.setVisibility(View.GONE);
         } else {
@@ -114,6 +108,18 @@ public final class DeveloperInfoActivity extends AppActivity {
 
     }
 
+    @Override
+    public void onRightClick(View view) {
+        new BaseDialog.Builder<>(this)
+                .setContentView(R.layout.bottom_dialog_share_wx)
+                .setAnimStyle(BaseDialog.ANIM_BOTTOM)
+                //.setText(id, "我是预设置的文本")
+                .setOnClickListener(R.id.iv_close, (dialog, views) -> dialog.dismiss())
+                .setOnClickListener(R.id.iv_logo, (dialog, views) -> {
+
+                }).show();
+
+    }
 
     @SuppressLint("NonConstantResourceId")
     @SingleClick
@@ -121,14 +127,16 @@ public final class DeveloperInfoActivity extends AppActivity {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.ll_to_collect:
-                collectDeveloper(getInt("developerId"));
-//                cancelCollectDeveloper(getInt("developerId"));
+                if (isCollect) {
+                    cancelCollectDeveloper(getInt("developerId"));
+                } else {
+                    collectDeveloper(getInt("developerId"));
+                }
                 break;
             case R.id.ll_to_sign:
                 new BottomListDialog.Builder(this).setData(mList).setListener(new BottomListDialog.OnListener() {
                     @Override
                     public void onSelected(BaseDialog dialog) {
-
                         startActivity(SendPositionActivity.class);
                     }
                 }).setOnItemListener(new OnItemClickListener() {
@@ -137,12 +145,13 @@ public final class DeveloperInfoActivity extends AppActivity {
                         GetFirmPositionApi.Bean.ListBean listBean = mList.get(position);
                         Intent intent = new Intent();
                         intent.setClass(DeveloperInfoActivity.this, ContractDetailActivity.class);
-
                         intent.putExtra("positionId", listBean.getId());
+
+                        intent.putExtra("positionName", bean.getCareerDto().getCareerDirection());
+                        intent.putExtra("expectSalary", bean.getWorkModeDtoList().get(0).getExpectSalary());
                         intent.putExtra("developerId", bean.getId());
                         intent.putExtra("name", bean.getRealName());
                         intent.putExtra("avatarUrl", bean.getAvatarUrl());
-
                         startActivity(intent);
                     }
                 }).show();
@@ -189,8 +198,6 @@ public final class DeveloperInfoActivity extends AppActivity {
     /**
      * 端职位列表(分页)
      * 底部签约列表list
-     *
-     * @param
      */
     private void getAppList(int pageNum) {
         EasyHttp.get(this)
@@ -212,6 +219,29 @@ public final class DeveloperInfoActivity extends AppActivity {
                 });
     }
 
+    /**
+     * 判断收藏状态 true  false
+     *
+     * @param developerId
+     */
+    public void getCollectStatus(int developerId) {
+        EasyHttp.get(this)
+                .api(new CollectDeveloperStatusApi().setDeveloperId(developerId))
+                .request(new HttpCallback<HttpData<Boolean>>(this) {
+
+                    @Override
+                    public void onSucceed(HttpData<Boolean> data) {
+                        isCollect = data.getData();
+                        if (isCollect) {
+                            iv_collect.setImageResource(R.drawable.icon_collected);
+                        } else {
+                            iv_collect.setImageResource(R.drawable.icon_collect);
+                        }
+
+                    }
+                });
+    }
+
 
     /**
      * 收藏开发者
@@ -225,8 +255,9 @@ public final class DeveloperInfoActivity extends AppActivity {
 
                     @Override
                     public void onSucceed(HttpData<Void> data) {
-                        toast("收藏成功");
+                        isCollect = true;
                         iv_collect.setImageResource(R.drawable.icon_collected);
+                        toast("收藏成功");
                     }
                 });
     }
@@ -238,13 +269,14 @@ public final class DeveloperInfoActivity extends AppActivity {
      */
     public void cancelCollectDeveloper(int developerId) {
         EasyHttp.post(this)
-                .api(new CancelCollectDeveloperApi().setDeveloperId(developerId))
+                .api(new CollectDeveloperCancelApi().setDeveloperId(developerId))
                 .request(new HttpCallback<HttpData<Void>>(this) {
 
                     @Override
                     public void onSucceed(HttpData<Void> data) {
-                        toast("取消收藏");
+                        isCollect = false;
                         iv_collect.setImageResource(R.drawable.icon_collect);
+                        toast("取消收藏");
                     }
                 });
     }
@@ -271,10 +303,12 @@ public final class DeveloperInfoActivity extends AppActivity {
         tag_flow_layout.setAdapter(adapter);
         List<DeveloperInfoBean.DeveloperSkillDto> developerSkillDtoList = bean.getDeveloperSkillDtoList();
         List<String> skill = new ArrayList<>();
-        for (int i = 0; i < developerSkillDtoList.size(); i++) {
-            skill.add(developerSkillDtoList.get(i).getSkillName());
+        if (developerSkillDtoList != null && developerSkillDtoList.size() != 0) {
+            for (int i = 0; i < developerSkillDtoList.size(); i++) {
+                skill.add(developerSkillDtoList.get(i).getSkillName());
+            }
+            adapter.onlyAddAll(skill);
         }
-        adapter.onlyAddAll(skill);
 
         List<DeveloperInfoBean.DeveloperEducation> educationDtoList = bean.getEducationDtoList();
         List<DeveloperInfoBean.DeveloperWork> workExperienceDtoList = bean.getWorkExperienceDtoList();
