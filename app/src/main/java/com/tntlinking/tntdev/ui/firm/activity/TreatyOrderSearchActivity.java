@@ -18,11 +18,9 @@ import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener;
 import com.tntlinking.tntdev.R;
 import com.tntlinking.tntdev.aop.SingleClick;
 import com.tntlinking.tntdev.app.AppActivity;
-import com.tntlinking.tntdev.http.api.GetFirmDevApi;
 import com.tntlinking.tntdev.http.api.GetFirmOrderListApi;
-import com.tntlinking.tntdev.http.api.SearchDeveloperApi;
 import com.tntlinking.tntdev.http.model.HttpData;
-import com.tntlinking.tntdev.ui.firm.adapter.PositionSearchAdapter;
+import com.tntlinking.tntdev.other.TimeUtil;
 import com.tntlinking.tntdev.ui.firm.adapter.TreatyOrderSearchAdapter;
 
 import java.util.ArrayList;
@@ -132,10 +130,21 @@ public final class TreatyOrderSearchActivity extends AppActivity implements OnRe
      */
     @Override
     public void onItemClick(RecyclerView recyclerView, View itemView, int position) {
-        if (mAdapter.getData().get(position).getOrderStatus() == 1) {
-            Intent intent = new Intent(getActivity(), ContractDetailActivity.class);
-            intent.putExtra("orderId", mAdapter.getData().get(position).getId());
-            startActivity(intent);
+        if (mAdapter.getItem(position).getOrderStatus() == 1) {
+            String workStartDate = mAdapter.getItem(position).getWorkStartDate();
+            long workTime = TimeUtil.getTimeLong("yyyy-MM-dd", workStartDate);
+            long nowTime = TimeUtil.getTimeLong();
+
+            if (workTime > nowTime) { // 开始时间大于当前时间跳转到支付页面
+                Intent intent = new Intent(getActivity(), ContractPayActivity.class);
+                intent.putExtra("orderId", mAdapter.getItem(position).getId());
+                startActivity(intent);
+            } else {// 开始时间小于当前时间 跳转到修改合约单页面
+                Intent intent = new Intent(getActivity(), ContractDetailActivity.class);
+                intent.putExtra("orderId", mAdapter.getItem(position).getId());
+                startActivity(intent);
+            }
+
         }
     }
 

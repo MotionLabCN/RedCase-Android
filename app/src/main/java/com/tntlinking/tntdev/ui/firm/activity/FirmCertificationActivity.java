@@ -44,7 +44,7 @@ public final class FirmCertificationActivity extends AppActivity {
     private TextView tv_company_name;
     private TextView tv_new_company;
     private ClearEditText et_position;
-    private ClearEditText et_mobile;
+    private TextView tv_mobile;
     private ClearEditText et_email;
     private CountdownView cv_countdown;
     private ClearEditText et_email_code;
@@ -75,7 +75,7 @@ public final class FirmCertificationActivity extends AppActivity {
         tv_company_name = findViewById(R.id.tv_company_name);
         tv_new_company = findViewById(R.id.tv_new_company);
         et_position = findViewById(R.id.et_position);
-        et_mobile = findViewById(R.id.et_mobile);
+        tv_mobile = findViewById(R.id.tv_mobile);
         et_email = findViewById(R.id.et_email);
         cv_countdown = findViewById(R.id.cv_countdown);
         et_email_code = findViewById(R.id.et_email_code);
@@ -96,7 +96,8 @@ public final class FirmCertificationActivity extends AppActivity {
         if (TextUtils.isEmpty(SPUtils.getInstance().getString("province"))) {
             GetProvince();
         }
-
+        mMobile = getString("mobile");
+        tv_mobile.setText(mMobile);
     }
 
 
@@ -114,6 +115,10 @@ public final class FirmCertificationActivity extends AppActivity {
                 startActivity(NewCompanyActivity.class);
                 break;
             case R.id.cv_countdown:
+                if (TextUtils.isEmpty(et_email.getText().toString())) {
+                    toast("你还没有填写邮箱");
+                    return;
+                }
                 getEmailCode(et_email.getText().toString());
                 break;
             case R.id.sb_area:
@@ -146,15 +151,30 @@ public final class FirmCertificationActivity extends AppActivity {
                     toast("你还没有填写真实姓名");
                     return;
                 }
+                if (mCompanyId == 0) {
+                    toast("你还没有填写所属公司");
+                    return;
+                }
+                if (TextUtils.isEmpty(mPosition)) {
+                    toast("你还没有填写当前职位");
+                    return;
+                }
                 if (TextUtils.isEmpty(mEmail)) {
-                    toast("你还没有填写真实姓名");
+                    toast("你还没有填写邮箱");
+                    return;
+                }
+                if (TextUtils.isEmpty(mEmailCode)) {
+                    toast("你还没有填写邮箱验证码");
+                    return;
+                }
+                if (mProvinceId == 0) {
+                    toast("你还没有选择所在地区");
                     return;
                 }
                 if (TextUtils.isEmpty(mAddress)) {
-                    toast("你还没有填写详情地址");
+                    toast("你还没有填写详细地址");
                     return;
                 }
-
                 firmCertification();
                 break;
 

@@ -1,5 +1,7 @@
 package com.tntlinking.tntdev.ui.firm.activity;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -8,6 +10,8 @@ import com.hjq.base.BaseAdapter;
 import com.hjq.base.BaseDialog;
 import com.hjq.http.EasyHttp;
 import com.hjq.http.listener.HttpCallback;
+import com.hjq.permissions.Permission;
+import com.hjq.permissions.XXPermissions;
 import com.hjq.widget.layout.WrapRecyclerView;
 import com.scwang.smart.refresh.layout.SmartRefreshLayout;
 import com.scwang.smart.refresh.layout.api.RefreshLayout;
@@ -19,17 +23,12 @@ import com.tntlinking.tntdev.http.api.AgreeJoinApi;
 import com.tntlinking.tntdev.http.api.DisagreeJoinApi;
 import com.tntlinking.tntdev.http.api.FirmMemberListApi;
 import com.tntlinking.tntdev.http.api.FirmMemberToBeAuditedApi;
-import com.tntlinking.tntdev.http.api.ModifyAdminApi;
-import com.tntlinking.tntdev.http.api.developerBillListApi;
 import com.tntlinking.tntdev.http.model.HttpData;
-import com.tntlinking.tntdev.ui.firm.adapter.FirmManageAdapter;
+import com.tntlinking.tntdev.other.PermissionCallback;
 import com.tntlinking.tntdev.ui.firm.adapter.FirmPersonCheckAdapter;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import androidx.annotation.NonNull;
-import androidx.appcompat.widget.AppCompatButton;
 import androidx.recyclerview.widget.RecyclerView;
 
 /**
@@ -62,6 +61,7 @@ public final class FirmPersonCheckActivity extends AppActivity implements OnRefr
         mAdapter.setOnItemClickListener(this);
         mAdapter.setOnChildClickListener(R.id.btn_disagree, this);
         mAdapter.setOnChildClickListener(R.id.btn_agree, this);
+        mAdapter.setOnChildClickListener(R.id.tv_mobile, this);
         mRecyclerView.setAdapter(mAdapter);
 
         mRefreshLayout.setOnRefreshLoadMoreListener(this);
@@ -150,6 +150,20 @@ public final class FirmPersonCheckActivity extends AppActivity implements OnRefr
             disagreeJoin(item.getId());
         } else if (childView.getId() == R.id.btn_agree) {
             agreeJoin(item.getId());
+        } else if (childView.getId() == R.id.tv_mobile) {
+            XXPermissions.with(this)
+                    .permission(Permission.CALL_PHONE)
+                    .request(new PermissionCallback() {
+                        @Override
+                        public void onGranted(List<String> permissions, boolean all) {
+                            if (all) {
+                                Intent intent = new Intent(Intent.ACTION_CALL);
+                                Uri data = Uri.parse("tel:" + item.getMobile());
+                                intent.setData(data);
+                                startActivity(intent);
+                            }
+                        }
+                    });
         }
     }
 

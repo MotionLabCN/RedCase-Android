@@ -2,6 +2,7 @@ package com.tntlinking.tntdev.ui.firm.activity;
 
 
 import android.os.Build;
+import android.text.TextUtils;
 import android.view.View;
 
 import com.hjq.http.EasyHttp;
@@ -23,14 +24,11 @@ import androidx.appcompat.widget.AppCompatButton;
  * 邀请成员
  */
 public final class InterviewPersonActivity extends AppActivity {
-
     private ClearEditText et_name;
     private ClearEditText et_phone;
     private ClearEditText et_position;
     private ClearEditText et_email;
     private ClearEditText et_address;
-
-
     private AppCompatButton btn_commit;
 
 
@@ -50,7 +48,6 @@ public final class InterviewPersonActivity extends AppActivity {
 
         setOnClickListener(btn_commit);
 
-
     }
 
 
@@ -67,12 +64,28 @@ public final class InterviewPersonActivity extends AppActivity {
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-
             case R.id.btn_commit:
                 String mName = et_name.getText().toString();
                 String mPhone = et_phone.getText().toString();
                 String mPosition = et_position.getText().toString();
                 String mEmail = et_email.getText().toString();
+                String mAddress = et_address.getText().toString();
+                if (TextUtils.isEmpty(mName)) {
+                    toast("请输入正确名字");
+                    return;
+                }
+                if (TextUtils.isEmpty(mPhone)) {
+                    toast("请输入正确手机号");
+                    return;
+                }
+                if (TextUtils.isEmpty(mPosition)) {
+                    toast("请输入职位");
+                    return;
+                }
+                if (TextUtils.isEmpty(mEmail)) {
+                    toast("请输入正确邮箱号");
+                    return;
+                }
 
                 InviteMember(mEmail, mPhone, mPosition, mName);
                 break;
@@ -92,7 +105,7 @@ public final class InterviewPersonActivity extends AppActivity {
 
                     @Override
                     public void onSucceed(HttpData<developerBillListApi.Bean> data) {
-                        toast("邀请已发出");
+                        toast("邀请已发送");
                         finish();
                     }
 

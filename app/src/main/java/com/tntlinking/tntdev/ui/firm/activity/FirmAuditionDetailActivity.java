@@ -2,9 +2,14 @@ package com.tntlinking.tntdev.ui.firm.activity;
 import android.content.Intent;
 import android.view.View;
 import android.widget.TextView;
+import com.hjq.http.EasyHttp;
+import com.hjq.http.listener.HttpCallback;
 import com.tntlinking.tntdev.R;
 import com.tntlinking.tntdev.aop.SingleClick;
 import com.tntlinking.tntdev.app.AppActivity;
+import com.tntlinking.tntdev.http.api.GetAuditionDetailApi;
+import com.tntlinking.tntdev.http.model.HttpData;
+
 import androidx.appcompat.widget.AppCompatButton;
 
 /**
@@ -31,25 +36,29 @@ public final class FirmAuditionDetailActivity extends AppActivity {
         tv_name = findViewById(R.id.tv_name);
         tv_meeting_code = findViewById(R.id.tv_meeting_code);
 
-
         mCommit = findViewById(R.id.btn_commit);
         setOnClickListener(mCommit);
-
-
     }
 
 
     @Override
     protected void initData() {
-        String name = getString("name");
-        String position = getString("position");
-        String time = getString("time");
-        String code = getString("code");
+        int interviewId = getInt("interviewId");
 
-        tv_time.setText(time);
-        tv_position.setText(position);
-        tv_name.setText(name);
-        tv_meeting_code.setText(code);
+        if (interviewId == 0) {//从面试列表过来的，
+            String name = getString("name");
+            String position = getString("position");
+            String time = getString("time");
+            String code = getString("code");
+
+            tv_time.setText(time);
+            tv_position.setText(position);
+            tv_name.setText(name);
+            tv_meeting_code.setText(code);
+        } else { //从消息页面过来的，
+            getDetail(interviewId);
+        }
+
     }
 
 
@@ -65,5 +74,24 @@ public final class FirmAuditionDetailActivity extends AppActivity {
 
     }
 
+    /**
+     * @param id 获取会议详情
+     */
+    public void getDetail(int id) {
+        EasyHttp.get(this)
+                .api(new GetAuditionDetailApi().setInterviewId(id))
+                .request(new HttpCallback<HttpData<GetAuditionDetailApi.Bean>>(this) {
 
+                    @Override
+                    public void onSucceed(HttpData<GetAuditionDetailApi.Bean> data) {
+                        GetAuditionDetailApi.Bean bean = data.getData();
+                        if (bean != null) {
+                            tv_time.setText(bean.getInterviewStartDate());
+                            tv_position.setText(bean.getPositionName());
+                            tv_name.setText(bean.getDeveloperName());
+                            tv_meeting_code.setText(bean.getMeetingCode());
+                        }
+                    }
+                });
+    }
 }

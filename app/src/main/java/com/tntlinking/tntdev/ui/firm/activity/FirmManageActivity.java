@@ -1,5 +1,7 @@
 package com.tntlinking.tntdev.ui.firm.activity;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -8,6 +10,8 @@ import com.hjq.base.BaseAdapter;
 import com.hjq.base.BaseDialog;
 import com.hjq.http.EasyHttp;
 import com.hjq.http.listener.HttpCallback;
+import com.hjq.permissions.Permission;
+import com.hjq.permissions.XXPermissions;
 import com.hjq.widget.layout.WrapRecyclerView;
 import com.scwang.smart.refresh.layout.SmartRefreshLayout;
 import com.scwang.smart.refresh.layout.api.RefreshLayout;
@@ -20,7 +24,7 @@ import com.tntlinking.tntdev.http.api.FirmMemberListApi;
 import com.tntlinking.tntdev.http.api.ModifyAdminApi;
 import com.tntlinking.tntdev.http.api.developerBillListApi;
 import com.tntlinking.tntdev.http.model.HttpData;
-import com.tntlinking.tntdev.ui.firm.adapter.AuditionHistoryAdapter;
+import com.tntlinking.tntdev.other.PermissionCallback;
 import com.tntlinking.tntdev.ui.firm.adapter.FirmManageAdapter;
 
 import java.util.ArrayList;
@@ -64,6 +68,7 @@ public final class FirmManageActivity extends AppActivity implements OnRefreshLo
         mAdapter.setOnItemClickListener(this);
         mAdapter.setOnChildClickListener(R.id.btn_hand_over, this);
         mAdapter.setOnChildClickListener(R.id.btn_remove, this);
+        mAdapter.setOnChildClickListener(R.id.tv_mobile, this);
         mRecyclerView.setAdapter(mAdapter);
 
         mRefreshLayout.setOnRefreshLoadMoreListener(this);
@@ -157,8 +162,6 @@ public final class FirmManageActivity extends AppActivity implements OnRefreshLo
 //        Intent intent = new Intent(this, IncomeDetailActivity.class);
 //        intent.putExtra("orderId", mAdapter.getItem(position).getId());
 //        startActivity(intent);
-
-
     }
 
     @Override
@@ -169,7 +172,7 @@ public final class FirmManageActivity extends AppActivity implements OnRefreshLo
                     .setContentView(R.layout.check_order_status_dialog)
                     .setAnimStyle(BaseDialog.ANIM_SCALE)
                     .setText(R.id.tv_title, "移交管理员")
-                    .setText(R.id.tv_content, "是否移交管理员给" + item.getRealName())
+                    .setText(R.id.tv_content, "是否移交管理员给“" + item.getRealName() + "”")
                     .setText(R.id.btn_dialog_custom_cancel, "否")
                     .setText(R.id.btn_dialog_custom_ok, "是")
                     .setOnClickListener(R.id.btn_dialog_custom_cancel, (BaseDialog.OnClickListener<Button>) (dialog, button) -> dialog.dismiss())
@@ -182,7 +185,7 @@ public final class FirmManageActivity extends AppActivity implements OnRefreshLo
                     .setContentView(R.layout.check_order_status_dialog)
                     .setAnimStyle(BaseDialog.ANIM_SCALE)
                     .setText(R.id.tv_title, "移除")
-                    .setText(R.id.tv_content, "是否移除小王" + item.getRealName())
+                    .setText(R.id.tv_content, "是否移除“" + item.getRealName() + "”")
                     .setText(R.id.btn_dialog_custom_cancel, "否")
                     .setText(R.id.btn_dialog_custom_ok, "是")
                     .setOnClickListener(R.id.btn_dialog_custom_cancel, (BaseDialog.OnClickListener<Button>) (dialog, button) -> dialog.dismiss())
@@ -190,6 +193,23 @@ public final class FirmManageActivity extends AppActivity implements OnRefreshLo
 
                         removeMember(item.getId(), dialog);
                     }).show();
+        } else if (childView.getId() == R.id.tv_mobile) {
+            XXPermissions.with(FirmManageActivity.this)
+                    .permission(Permission.CALL_PHONE)
+                    .request(new PermissionCallback() {
+
+                        @Override
+                        public void onGranted(List<String> permissions, boolean all) {
+                            if (all) {
+                                Intent intent = new Intent(Intent.ACTION_CALL);
+                                Uri data = Uri.parse("tel:" + item.getMobile());
+                                intent.setData(data);
+                                startActivity(intent);
+                            }
+                        }
+                    });
+
+
         }
     }
 

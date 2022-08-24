@@ -71,11 +71,9 @@ public final class FreezeAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
         GetFirmFreezeRecordApi.Bean.ListBean item = mList.get(position);
-        holder.tv_freeze_money.setText(item.getMoney() + "");
+        holder.tv_freeze_money.setText("¥" + item.getMoney());
         holder.tv_freeze_num.setText("合约单号：" + item.getOrderNo());
         holder.tv_freeze_time.setText(item.getCreateDate());
-
-
 
         return convertView;
     }

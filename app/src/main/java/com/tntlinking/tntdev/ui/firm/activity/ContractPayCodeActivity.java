@@ -3,7 +3,6 @@ package com.tntlinking.tntdev.ui.firm.activity;
 import android.content.Intent;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 import com.hjq.http.EasyHttp;
 import com.hjq.http.listener.HttpCallback;
@@ -112,7 +111,7 @@ public final class ContractPayCodeActivity extends AppActivity {
                     @Override
                     public void onSucceed(HttpData<String> data) {
                         if (!TextUtils.isEmpty(data.getData())) {
-                            Intent intent = new Intent(ContractPayCodeActivity.this, FreezeMoneyStatusActivity.class);
+                            Intent intent = new Intent(ContractPayCodeActivity.this, ContractResultStatusActivity.class);
                             intent.putExtra("freezeStatus", data.getData());
                             startActivity(intent);
                             finish();

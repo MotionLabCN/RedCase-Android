@@ -1,5 +1,6 @@
 package com.tntlinking.tntdev.ui.firm.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,6 +42,7 @@ public final class TreatyOrderSearchAdapter extends AppAdapter<GetFirmOrderListA
             tv_to_pay = findViewById(R.id.tv_to_pay);
         }
 
+        @SuppressLint("SetTextI18n")
         @Override
         public void onBindView(int position) {
             GetFirmOrderListApi.Bean.ListBean item = getItem(position);
@@ -48,7 +50,7 @@ public final class TreatyOrderSearchAdapter extends AppAdapter<GetFirmOrderListA
             tv_order_num.setText("订单号：" + item.getOrderNo());
             tv_order_status.setText(item.getOrderStatusName());
             tv_order_time.setText(item.getWorkStartDate());
-            tv_order_dev_name.setText(item.getRealName());
+            tv_order_dev_name.setText(item.getRealName()+"("+item.getWorkDaysModeName()+")");
             tv_order_dev_position.setText(item.getCareerDirectionName());
             tv_to_pay.setVisibility(item.getOrderStatus() == 1 ? View.VISIBLE : View.GONE);
             switch (item.getOrderStatus()) {

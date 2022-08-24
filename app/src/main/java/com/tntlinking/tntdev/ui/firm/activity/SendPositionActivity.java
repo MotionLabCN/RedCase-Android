@@ -257,7 +257,7 @@ public final class SendPositionActivity extends AppActivity {
                         .setList("是", "否").setListener(new GenderSelectDialog.OnListener() {
                             @Override
                             public void onSelected(BaseDialog dialog, int type) {
-                                EasyLog.print("==type=====" + type);
+
                                 industryMandatoryName = type == 0 ? "是" : "否";
                                 industryMandatory = type;
                                 position_industry_id.setLeftText(industryMandatoryName);
@@ -270,8 +270,29 @@ public final class SendPositionActivity extends AppActivity {
                 endPay = et_expect_salary_high.getText().toString();
                 mCount = et_recruit_count.getText().toString();
                 mDescription = et_description.getText().toString();
+
+                if (careerDirectionId == 0) {
+                    toast("你还没有选择职业方向");
+                    return;
+                }
                 if (TextUtils.isEmpty(careerPosition)) {
                     toast("职位名称填写错误");
+                    return;
+                }
+                if (mTagIntList.size() == 0) {
+                    toast("你还没有选择职业技能");
+                    return;
+                }
+                if (educationId == 0) {
+                    toast("你还没有选择学历");
+                    return;
+                }
+                if (trainingId == 0) {
+                    toast("你还没有选择培养方式");
+                    return;
+                }
+                if (workYearsId == 0) {
+                    toast("你还没有选择工作年限");
                     return;
                 }
                 if (TextUtils.isEmpty(startPay)) {

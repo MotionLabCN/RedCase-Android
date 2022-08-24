@@ -87,6 +87,7 @@
             android:layout_height="wrap_content"
             android:text="xxxx"
             android:textColor="@color/color_202839"
+            android:drawableRight="@drawable/icon_call_phone"
             android:textSize="@dimen/sp_14"
             android:textStyle="bold" />
     </LinearLayout>

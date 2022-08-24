@@ -39,6 +39,7 @@ import com.tntlinking.tntdev.ui.firm.activity.ChangeAdminActivity;
 import com.tntlinking.tntdev.ui.firm.activity.FirmCertificationActivity;
 import com.tntlinking.tntdev.ui.firm.activity.FirmMainActivity;
 import com.tntlinking.tntdev.ui.firm.activity.FirmManageActivity;
+import com.tntlinking.tntdev.ui.firm.activity.FirmMessageListActivity;
 import com.tntlinking.tntdev.ui.firm.activity.FirmSettingActivity;
 import com.tntlinking.tntdev.ui.firm.activity.MyCompanyActivity;
 import com.tntlinking.tntdev.ui.firm.activity.TreatyOrderListActivity;
@@ -48,7 +49,7 @@ import androidx.annotation.RequiresApi;
 
 
 /**
- * desc   : 我的页面 Fragment
+ * desc   : 企业端我的页面 Fragment
  */
 public final class FirmMineFragment extends TitleBarFragment<FirmMainActivity> implements OnRefreshLoadMoreListener {
     private SmartRefreshLayout mRefreshLayout;
@@ -70,6 +71,7 @@ public final class FirmMineFragment extends TitleBarFragment<FirmMainActivity> i
     private ImageView iv_message;
 
     private int mStatus = 1; //企业认证状态  1待审核 2审核中 3已认证 4审核失败
+    private String mMobile;
 
     public static FirmMineFragment newInstance() {
         return new FirmMineFragment();
@@ -132,20 +134,22 @@ public final class FirmMineFragment extends TitleBarFragment<FirmMainActivity> i
         Intent intent = new Intent();
         switch (view.getId()) {
             case R.id.iv_message://消息
-                startActivity(MessageListActivity.class);
+                startActivity(FirmMessageListActivity.class);
                 break;
             case R.id.person_data_dev://身份切换
                 startActivity(ChangeAdminActivity.class);
                 break;
             case R.id.person_data_service://企业认证
-                if (mStatus == 2) {
+                if (mStatus == 2) {  // 2 审核中 不能离开更换公司
                     intent.setClass(getActivity(), MyCompanyActivity.class);
                     intent.putExtra("status", mStatus);
                     startActivity(intent);
-                } else if (mStatus == 3) {
+                } else if (mStatus == 3) { // 3 审核通过 能离开和更换公司
                     startActivity(MyCompanyActivity.class);
                 } else {
-                    startActivity(FirmCertificationActivity.class);
+                    intent.setClass(getActivity(), FirmCertificationActivity.class);
+                    intent.putExtra("mobile", mMobile);
+                    startActivity(intent);
                 }
                 break;
             case R.id.ll_mine_audition://面试管理
@@ -209,25 +213,6 @@ public final class FirmMineFragment extends TitleBarFragment<FirmMainActivity> i
 //    }
 
 
-    private String PDFUrl = "";
-
-    public void getContactPDF() {
-        EasyHttp.get(this)
-                .api(new GetSignContractPDFApi())
-                .request(new HttpCallback<HttpData<GetSignContractPDFApi.Bean>>(this) {
-
-                    @Override
-                    public void onSucceed(HttpData<GetSignContractPDFApi.Bean> data) {
-                        if (data.getData() != null) {
-                            if (!TextUtils.isEmpty(data.getData().getPdfUrl())) {
-                                PDFUrl = data.getData().getPdfUrl();
-                            }
-                        }
-
-                    }
-                });
-    }
-
     private void getFirmInfo() {
         EasyHttp.get(this)
                 .api(new GetFirmInfoApi())
@@ -257,10 +242,11 @@ public final class FirmMineFragment extends TitleBarFragment<FirmMainActivity> i
                         }
 
                         if (TextUtils.isEmpty(data.getData().getRealName())) {
-                            tv_name.setText("你好，新朋友");
+                            tv_name.setText("未命名");
                         } else {
                             tv_name.setText(data.getData().getRealName());
                         }
+                        mMobile = data.getData().getMobile();
                         GlideUtils.loadCircle(getActivity(), data.getData().getAvatarUrl(), iv_avatar);
                     }
                 });

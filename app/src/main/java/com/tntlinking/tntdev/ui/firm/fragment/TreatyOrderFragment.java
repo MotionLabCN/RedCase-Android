@@ -110,18 +110,7 @@ public final class TreatyOrderFragment extends TitleBarFragment<FirmMainActivity
         GetDeveloperList(orderStatus, mPageNum);
     }
 
-    @SuppressLint("NonConstantResourceId")
-    @SingleClick
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.ll_history:
-//                Intent intent = new Intent(getActivity(), HistoryDailyListActivity.class);
-//                intent.putExtra("orderId", orderId);
-//                startActivity(intent);
-                break;
-        }
-    }
+
 
     /**
      * 获取职业方向

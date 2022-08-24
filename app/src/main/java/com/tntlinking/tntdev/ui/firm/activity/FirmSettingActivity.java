@@ -48,7 +48,7 @@ public final class FirmSettingActivity extends AppActivity {
 
         setOnClickListener(mSettingPhone, mSettingCancelService, mOutLogin);
 
-
+        mSettingPhone.setVisibility(View.GONE);
     }
 
     @Override
@@ -65,10 +65,10 @@ public final class FirmSettingActivity extends AppActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        if (!TextUtils.isEmpty(SPUtils.getInstance().getString(AppConfig.DEVELOP_MOBILE, ""))) {
-            String mobile = Utils.changPhoneNumber(SPUtils.getInstance().getString(AppConfig.DEVELOP_MOBILE));
-            mSettingPhone.setRightText(mobile);
-        }
+//        if (!TextUtils.isEmpty(SPUtils.getInstance().getString(AppConfig.DEVELOP_MOBILE, ""))) {
+//            String mobile = Utils.changPhoneNumber(SPUtils.getInstance().getString(AppConfig.DEVELOP_MOBILE));
+//            mSettingPhone.setRightText(mobile);
+//        }
     }
 
     @SingleClick
@@ -85,8 +85,7 @@ public final class FirmSettingActivity extends AppActivity {
                     .setText(R.id.tv_title, "是否退出登录？")
                     .setOnClickListener(R.id.btn_dialog_custom_cancel, (BaseDialog.OnClickListener<Button>) (dialog, button) -> dialog.dismiss())
                     .setOnClickListener(R.id.btn_dialog_custom_ok, (dialog, views) -> {
-                        //删除极光推送别名
-                        JPushInterface.deleteAlias(FirmSettingActivity.this, sequence++);
+
                         loginOut(dialog);
                     })
                     .show();
@@ -109,6 +108,7 @@ public final class FirmSettingActivity extends AppActivity {
                         EasyConfig.getInstance().removeHeader("Authorization");
                         EasyConfig.getInstance().removeHeader("loginRole");
                         startActivity(LoginActivity1.class);
+                        //删除极光推送别名
                         JPushInterface.deleteAlias(FirmSettingActivity.this, 1001);
                         // 进行内存优化，销毁除登录页之外的所有界面
                         ActivityManager.getInstance().finishAllActivities(LoginActivity1.class);

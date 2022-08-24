@@ -2,16 +2,20 @@ package com.tntlinking.tntdev.ui.firm.activity;
 
 import android.os.Build;
 import android.text.TextUtils;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import com.tntlinking.tntdev.R;
 import com.tntlinking.tntdev.app.AppActivity;
+import com.tntlinking.tntdev.manager.ActivityManager;
+
 import androidx.annotation.RequiresApi;
 
 /**
- * 冻结结果页面
+ * 合约单支付结果页面
  */
-public final class FreezeMoneyStatusActivity extends AppActivity {
+public final class ContractResultStatusActivity extends AppActivity {
     private ImageView iv_status_icon;
     private TextView tv_status;
     private TextView tv_status_tips;
@@ -50,5 +54,15 @@ public final class FreezeMoneyStatusActivity extends AppActivity {
 
     }
 
+    @Override
+    public void onLeftClick(View view) {
+        ActivityManager.getInstance().finishAllActivities();
+        startActivity(FirmMainActivity.class);
+    }
 
+    @Override
+    public void onBackPressed() {
+        ActivityManager.getInstance().finishAllActivities();
+        startActivity(FirmMainActivity.class);
+    }
 }

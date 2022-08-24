@@ -108,8 +108,8 @@
                 android:layout_marginRight="@dimen/dp_16"
                 android:background="#FFECECEC" />
 
-            <com.hjq.widget.view.ClearEditText
-                android:id="@+id/et_mobile"
+            <TextView
+                android:id="@+id/tv_mobile"
                 style="@style/EditTextStyleNew"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

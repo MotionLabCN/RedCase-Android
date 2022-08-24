@@ -35,6 +35,8 @@
 
     <!-- 拍照权限 -->
     <uses-permission android:name="android.permission.CAMERA" />
+    <!-- 打电话权限 -->
+    <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <!-- 安装权限 -->
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
@@ -740,7 +742,7 @@
 
         <!--冻结结果页面 -->
         <activity
-            android:name="com.tntlinking.tntdev.ui.firm.activity.FreezeMoneyStatusActivity"
+            android:name="com.tntlinking.tntdev.ui.firm.activity.ContractResultStatusActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
 
@@ -749,6 +751,17 @@
             android:name="com.tntlinking.tntdev.ui.firm.activity.MyCompanyActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
+        <!--消息页面 -->
+        <activity
+            android:name="com.tntlinking.tntdev.ui.firm.activity.FirmMessageListActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <!--消息详情页面 -->
+        <activity
+            android:name="com.tntlinking.tntdev.ui.firm.activity.FirmMessageDetailActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+
 
         <!-- 微信回调（请注意这个 Activity 放置的包名要和当前项目的包名保持一致，否则将不能正常回调） -->
         <activity

@@ -84,7 +84,7 @@ public final class TreatyOrderAdapter extends BaseAdapter {
         holder.tv_order_num.setText("订单号：" + item.getOrderNo());
         holder.tv_order_status.setText(item.getOrderStatusName());
         holder.tv_order_time.setText(item.getWorkStartDate());
-        holder.tv_order_dev_name.setText(item.getRealName());
+        holder.tv_order_dev_name.setText(item.getRealName()+"("+item.getWorkDaysModeName()+")");
         holder.tv_order_dev_position.setText(item.getCareerDirectionName());
 //        holder.tv_to_pay.setOnClickListener(new View.OnClickListener() {
 //            @Override
