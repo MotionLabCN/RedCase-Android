@@ -14,6 +14,7 @@ import com.tntlinking.tntdev.aop.SingleClick;
 import com.tntlinking.tntdev.app.AppActivity;
 import com.tntlinking.tntdev.http.api.ChangePhoneApi;
 import com.tntlinking.tntdev.http.api.GetCodeApi;
+import com.tntlinking.tntdev.http.api.GetCodeChangeApi;
 import com.tntlinking.tntdev.http.model.HttpData;
 import com.tntlinking.tntdev.manager.InputTextManager;
 import com.tntlinking.tntdev.other.AppConfig;
@@ -83,12 +84,12 @@ public final class ChangePhoneActivity extends AppActivity
 
             // 获取验证码
             EasyHttp.get(this)
-                    .api(new GetCodeApi()
+                    .api(new GetCodeChangeApi()
                             .setPhone(mPhoneView.getText().toString()))
-                    .request(new HttpCallback<HttpData<Void>>(this) {
+                    .request(new HttpCallback<HttpData<Boolean>>(this) {
 
                         @Override
-                        public void onSucceed(HttpData<Void> data) {
+                        public void onSucceed(HttpData<Boolean> data) {
                             toast(R.string.common_code_send_hint);
                             mCountdownView.start();
                         }
@@ -102,6 +103,7 @@ public final class ChangePhoneActivity extends AppActivity
                 toast("验证码错误");
                 return;
             }
+
             EasyHttp.post(this)
                     .api(new ChangePhoneApi()
                             .setMobile(mPhoneView.getText().toString())

@@ -398,8 +398,9 @@ public final class MineFragment1 extends TitleBarFragment<MainActivity> implemen
 
     @Override
     public void onRefresh(@NonNull RefreshLayout refreshLayout) {
-        getPersonData();
-        getHasRead();
+//        getPersonData();
+//        getHasRead();
+        initData();
     }
     @Override
     public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
