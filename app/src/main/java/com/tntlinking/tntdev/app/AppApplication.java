@@ -141,8 +141,8 @@ public final class AppApplication extends Application {
         // 本地异常捕捉
         CrashHandler.register(application);
 
-        // 友盟统计、登录、分享 SDK
-        UmengClient.init(application, AppConfig.isLogEnable());
+//        // 友盟统计、登录、分享 SDK
+//        UmengClient.init(application, AppConfig.isLogEnable());
 //        // 初始化极光推送
 //        JPushInterface.setDebugMode(AppConfig.isDebug());
 //        JPushInterface.init(application);
@@ -220,7 +220,8 @@ public final class AppApplication extends Application {
             // 初始化极光推送
             JPushInterface.setDebugMode(AppConfig.isDebug());
             JPushInterface.init(application);
-
+            // 友盟统计、登录、分享 SDK
+            UmengClient.init(application, AppConfig.isLogEnable());
         } else {
 
         }

@@ -20,6 +20,7 @@ import com.hjq.http.EasyHttp;
 import com.hjq.http.listener.HttpCallback;
 import com.hjq.permissions.Permission;
 import com.hjq.permissions.XXPermissions;
+import com.hjq.umeng.UmengClient;
 import com.tntlinking.tntdev.BuildConfig;
 import com.tntlinking.tntdev.R;
 import com.tntlinking.tntdev.aop.SingleClick;
@@ -343,7 +344,8 @@ public final class LoginActivity1 extends AppActivity {
                     JPushInterface.setDebugMode(AppConfig.isDebug());
                     JPushInterface.init(this);
                     SPUtils.getInstance().put(AppConfig.DEAL_DIALOG, true);
-
+                    // 友盟统计、登录、分享 SDK
+                    UmengClient.init(getApplication(), AppConfig.isLogEnable());
                 });
 
         TextView viewById = builder.findViewById(R.id.tv_title);

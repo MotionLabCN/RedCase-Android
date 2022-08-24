@@ -29,6 +29,7 @@ import com.tntlinking.tntdev.http.api.GetDeveloperJkStatusApi;
 import com.tntlinking.tntdev.http.api.GetDeveloperStatusApi;
 import com.tntlinking.tntdev.http.api.GetHasRead;
 import com.tntlinking.tntdev.http.api.GetSignContractPDFApi;
+import com.tntlinking.tntdev.http.api.GetTaskStatusApi;
 import com.tntlinking.tntdev.http.model.HttpData;
 import com.tntlinking.tntdev.manager.ActivityManager;
 import com.tntlinking.tntdev.other.AppConfig;
@@ -140,6 +141,7 @@ public final class MineFragment1 extends TitleBarFragment<MainActivity> implemen
     protected void initData() {
         getHasRead();
         getPersonData();
+        getTaskStatus();
     }
 
     private void getDeveloperJkStatus() {
@@ -223,6 +225,24 @@ public final class MineFragment1 extends TitleBarFragment<MainActivity> implemen
                             view_dot.setVisibility(View.VISIBLE);
                         } else {
                             view_dot.setVisibility(View.GONE);
+                        }
+                    }
+                });
+    }
+
+    /**
+     * 是否显示推荐有礼
+     */
+    public void getTaskStatus() {
+        EasyHttp.get(this)
+                .api(new GetTaskStatusApi())
+                .request(new HttpCallback<HttpData<Boolean>>(this) {
+                    @Override
+                    public void onSucceed(HttpData<Boolean> data) { //返回true代表'推荐有礼'任务是开的，否则是关的
+                        if (data.getData()) {
+                            person_data_recommend.setVisibility(View.VISIBLE);
+                        } else {
+                            person_data_recommend.setVisibility(View.GONE);
                         }
                     }
                 });

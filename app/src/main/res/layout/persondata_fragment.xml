@@ -92,7 +92,7 @@
                             android:layout_alignParentRight="true"
                             android:layout_marginRight="@dimen/dp_8"
                             android:background="@drawable/dot_oval_red"
-                            android:visibility="gone"/>
+                            android:visibility="gone" />
                     </RelativeLayout>
 
 
@@ -301,6 +301,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_4"
+                    android:visibility="gone"
                     app:bar_leftDrawable="@drawable/icon_recommend"
                     app:bar_leftText="推荐有礼"
                     app:bar_leftTextSize="@dimen/sp_13"
