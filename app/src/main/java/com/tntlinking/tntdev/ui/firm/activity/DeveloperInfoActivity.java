@@ -13,6 +13,8 @@ import android.widget.TextView;
 import com.hjq.base.BaseDialog;
 import com.hjq.http.EasyHttp;
 import com.hjq.http.listener.HttpCallback;
+import com.hjq.umeng.Platform;
+import com.hjq.umeng.UmengShare;
 import com.tntlinking.tntdev.R;
 import com.tntlinking.tntdev.aop.SingleClick;
 import com.tntlinking.tntdev.app.AppActivity;
@@ -27,11 +29,14 @@ import com.tntlinking.tntdev.other.OnItemClickListener;
 import com.tntlinking.tntdev.other.Utils;
 import com.tntlinking.tntdev.ui.bean.DeveloperInfoBean;
 import com.tntlinking.tntdev.ui.dialog.BottomListDialog;
+import com.tntlinking.tntdev.ui.dialog.ShareAppDialog;
 import com.tntlinking.tntdev.ui.firm.adapter.DevEducationAdapter;
 import com.tntlinking.tntdev.ui.firm.adapter.DevProjectAdapter;
 import com.tntlinking.tntdev.ui.firm.adapter.DevWorkAdapter;
 import com.tntlinking.tntdev.ui.firm.adapter.TagFirmAdapter;
 import com.tntlinking.tntdev.widget.FlowTagLayout;
+import com.umeng.socialize.media.UMImage;
+import com.umeng.socialize.media.UMWeb;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -110,14 +115,46 @@ public final class DeveloperInfoActivity extends AppActivity {
 
     @Override
     public void onRightClick(View view) {
-        new BaseDialog.Builder<>(this)
-                .setContentView(R.layout.bottom_dialog_share_wx)
-                .setAnimStyle(BaseDialog.ANIM_BOTTOM)
-                //.setText(id, "我是预设置的文本")
-                .setOnClickListener(R.id.iv_close, (dialog, views) -> dialog.dismiss())
-                .setOnClickListener(R.id.iv_logo, (dialog, views) -> {
+//        new BaseDialog.Builder<>(this)
+//                .setContentView(R.layout.bottom_dialog_share_wx)
+//                .setAnimStyle(BaseDialog.ANIM_BOTTOM)
+//                //.setText(id, "我是预设置的文本")
+//                .setOnClickListener(R.id.iv_close, (dialog, views) -> dialog.dismiss())
+//                .setOnClickListener(R.id.iv_logo, (dialog, views) -> {
+//                    String shareUrl = "http://192.168.31.231:8080/#/developer-details?developerId=174";
+//                    UMWeb content = new UMWeb(shareUrl);
+//                    content.setTitle(getString(R.string.app_name));
+//                    content.setThumb(new UMImage(this, R.mipmap.app_logo));
+//                    content.setDescription(getString(R.string.app_name));
+//
+//                }).show();
 
-                }).show();
+        String shareUrl = "http://192.168.31.231:8080/#/developer-details?developerId=174";
+        UMWeb content = new UMWeb(shareUrl);
+        content.setTitle(getString(R.string.app_name));
+        content.setThumb(new UMImage(this, R.mipmap.app_logo));
+        content.setDescription(getString(R.string.app_name));
+        // 分享对话框
+        new ShareAppDialog.Builder(this)
+                .setShareLink(content)
+                .setListener(new UmengShare.OnShareListener() {
+
+                    @Override
+                    public void onSucceed(Platform platform) {
+                        toast("分享成功");
+                    }
+
+                    @Override
+                    public void onError(Platform platform, Throwable t) {
+                        toast(t.getMessage());
+                    }
+
+                    @Override
+                    public void onCancel(Platform platform) {
+                        toast("分享取消");
+                    }
+                })
+                .show();
 
     }
 

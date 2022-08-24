@@ -42,6 +42,32 @@
                 android:layout_height="wrap_content"
                 android:src="@drawable/icon_close" />
         </LinearLayout>
+        <LinearLayout
+            android:id="@+id/ll_empty"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:gravity="center|top"
+            android:orientation="vertical"
+            android:paddingTop="@dimen/dp_20"
+            android:visibility="gone">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/bg_home_work_empty" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_10"
+                android:text="请创建好职位，在进行签单"
+                android:textColor="#7E89A3"
+                android:textSize="@dimen/sp_12" />
+
+
+        </LinearLayout>
 
         <ListView
             android:id="@+id/list_view"

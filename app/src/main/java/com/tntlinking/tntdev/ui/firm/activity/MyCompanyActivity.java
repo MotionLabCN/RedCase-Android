@@ -67,6 +67,7 @@ public final class MyCompanyActivity extends AppActivity {
                         .setOnClickListener(R.id.btn_dialog_custom_ok, (dialog, views) -> {
 
                             quitCompany();
+                            dialog.dismiss();
                         }).show();
             }
         });
@@ -129,7 +130,7 @@ public final class MyCompanyActivity extends AppActivity {
 
                     @Override
                     public void onSucceed(HttpData<GetFirmCompanyInfoApi.Bean> data) {
-
+                        finish();
                     }
                 });
     }

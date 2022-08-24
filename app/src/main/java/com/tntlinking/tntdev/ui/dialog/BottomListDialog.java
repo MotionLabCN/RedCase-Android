@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -26,6 +27,7 @@ public final class BottomListDialog {
         private final ImageView iv_close;
         private final TextView tv_name;
         private final TextView tv_company_name;
+        private final LinearLayout ll_empty;
         private final AppCompatButton btn_commit;
         private BottomPositionAdapter mAdapter;
         private OnListener mListener;
@@ -42,6 +44,7 @@ public final class BottomListDialog {
             iv_close = findViewById(R.id.iv_close);
             tv_name = findViewById(R.id.tv_name);
             tv_company_name = findViewById(R.id.tv_company_name);
+            ll_empty = findViewById(R.id.ll_empty);
             btn_commit = findViewById(R.id.btn_commit);
             mAdapter = new BottomPositionAdapter(context);
             list_view.setAdapter(mAdapter);
@@ -68,8 +71,14 @@ public final class BottomListDialog {
             return this;
         }
 
-        public BottomListDialog.Builder setData(List<GetFirmPositionApi.Bean.ListBean> str) {
-            mAdapter.setData(str);
+        public BottomListDialog.Builder setData(List<GetFirmPositionApi.Bean.ListBean> list) {
+            mAdapter.setData(list);
+            if (list.size() == 0) {
+                ll_empty.setVisibility(View.VISIBLE);
+                list_view.setVisibility(View.GONE);
+                btn_commit.setText("创建职位");
+                setHeight(getResources().getDisplayMetrics().heightPixels * 2 / 5);
+            }
             return this;
 
         }
