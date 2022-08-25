@@ -2,6 +2,8 @@ package com.tntlinking.tntdev.ui.fragment;
 
 import android.annotation.SuppressLint;
 import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.blankj.utilcode.util.SPUtils;
 import com.hjq.http.EasyHttp;
@@ -31,6 +33,9 @@ public class ActiveTaskFragment extends TitleBarFragment<MainActivity> {
     private final List<GetNewbieApi.Bean> mTaskList = new ArrayList<>();
     private HomeChangeListener listener;
     private MyListView lv_task;
+    private LinearLayout ll_empty;
+    private TextView tv_tips;
+
     public void setListener(HomeChangeListener listener) {
         this.listener = listener;
     }
@@ -46,6 +51,8 @@ public class ActiveTaskFragment extends TitleBarFragment<MainActivity> {
     @Override
     protected void initView() {
         lv_task = findViewById(R.id.lv_task);
+        ll_empty = findViewById(R.id.ll_empty);
+        tv_tips = findViewById(R.id.tv_tips);
         mTaskAdapter = new HomeTaskAdapter(getActivity(), mTaskList);
         lv_task.setAdapter(mTaskAdapter);
 
@@ -79,6 +86,10 @@ public class ActiveTaskFragment extends TitleBarFragment<MainActivity> {
                     @Override
                     public void onSucceed(HttpData<List<GetNewbieApi.Bean>> data) {
                         if (data.getData() != null && data.getData().size() != 0) {
+                            lv_task.setVisibility(View.VISIBLE);
+                            tv_tips.setVisibility(View.VISIBLE);
+                            ll_empty.setVisibility(View.GONE);
+
                             mTaskList.clear();
                             mTaskList.addAll(data.getData());
                             mTaskAdapter.setData(mTaskList);
@@ -90,10 +101,16 @@ public class ActiveTaskFragment extends TitleBarFragment<MainActivity> {
                                     listener.onDataChanged(lv_task.getMeasuredHeight());
                                 }
                             });
+                        } else {
+                            lv_task.setVisibility(View.GONE);
+                            tv_tips.setVisibility(View.GONE);
+                            ll_empty.setVisibility(View.VISIBLE);
+
                         }
                     }
                 });
     }
+
 
 
     private void getDeveloperJkStatus() {

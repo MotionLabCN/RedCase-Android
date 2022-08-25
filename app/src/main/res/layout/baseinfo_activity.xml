@@ -38,6 +38,7 @@
         android:hint="姓名"
         android:paddingLeft="@dimen/dp_15"
         android:paddingTop="@dimen/dp_15"
+        android:maxLength="8"
         android:paddingBottom="@dimen/dp_15"
         android:singleLine="true" />
 
