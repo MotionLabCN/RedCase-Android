@@ -127,7 +127,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="工作方式"
-                    android:textColor="@color/color_hint_color"
+                    android:textColor="@color/color_444E64"
                     android:textSize="@dimen/sp_14" />
 
                 <TextView
@@ -153,7 +153,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="薪资"
-                    android:textColor="@color/color_hint_color"
+                    android:textColor="@color/color_444E64"
                     android:textSize="@dimen/sp_14" />
 
                 <TextView
@@ -181,7 +181,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="开始时间"
-                    android:textColor="@color/color_hint_color"
+                    android:textColor="@color/color_444E64"
                     android:textSize="@dimen/sp_14" />
 
                 <TextView
@@ -240,7 +240,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="用人佣金"
-                        android:textColor="@color/gray"
+                        android:textColor="@color/color_444E64"
                         android:textSize="@dimen/sp_14" />
 
                     <TextView
@@ -269,7 +269,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="2022.06.27-2022.06.30"
-                        android:textColor="@color/gray"
+                        android:textColor="@color/color_444E64"
                         android:textSize="@dimen/sp_14" />
 
                     <TextView
@@ -298,7 +298,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="2022.07.01-2022.08.30"
-                        android:textColor="@color/gray"
+                        android:textColor="@color/color_444E64"
                         android:textSize="@dimen/sp_14" />
 
                     <TextView
@@ -325,7 +325,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="平台服务费（40%用人服务费）"
-                        android:textColor="@color/gray"
+                        android:textColor="@color/color_444E64"
                         android:textSize="@dimen/sp_14" />
 
                     <TextView

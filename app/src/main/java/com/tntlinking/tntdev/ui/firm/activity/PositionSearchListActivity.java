@@ -68,8 +68,8 @@ public final class PositionSearchListActivity extends AppActivity implements OnR
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-//                    //关闭软键盘
-//                    YUtils.closeSoftKeyboard();
+                    // 隐藏软键盘
+                    hideKeyboard(getCurrentFocus());
                     mSearch = v.getText().toString();
                     searchDeveloper(mSearch, 1);
                     return true;

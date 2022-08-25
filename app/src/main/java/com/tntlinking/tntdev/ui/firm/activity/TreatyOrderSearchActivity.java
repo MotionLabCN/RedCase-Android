@@ -62,13 +62,13 @@ public final class TreatyOrderSearchActivity extends AppActivity implements OnRe
         mRecyclerView.setAdapter(mAdapter);
 
         mRefreshLayout.setOnRefreshLoadMoreListener(this);
-
+        et_search.setHint("搜索开发者/订单号");
         et_search.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-//                    //关闭软键盘
-//                    YUtils.closeSoftKeyboard();
+                    // 隐藏软键盘
+                    hideKeyboard(getCurrentFocus());
                     mSearch = v.getText().toString();
                     searchDeveloper(mSearch, 1);
                     return true;

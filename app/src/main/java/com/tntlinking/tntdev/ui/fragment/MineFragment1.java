@@ -49,6 +49,7 @@ import com.tntlinking.tntdev.ui.activity.MessageListActivity;
 import com.tntlinking.tntdev.ui.activity.PDFViewActivity;
 import com.tntlinking.tntdev.ui.activity.PersonSettingActivity;
 import com.tntlinking.tntdev.ui.activity.SignContactActivity;
+import com.tntlinking.tntdev.ui.firm.activity.ChangeAdminActivity;
 import com.tntlinking.tntdev.ui.firm.activity.FirmMainActivity;
 
 import androidx.annotation.NonNull;
@@ -71,6 +72,7 @@ public final class MineFragment1 extends TitleBarFragment<MainActivity> implemen
     private SettingBar person_data_service;
     private SettingBar person_data_evaluation;
     private SettingBar person_data_history;
+    private SettingBar person_data_change;
 
     private TitleBar title_bar;
     private TextView tv_avatar;
@@ -106,6 +108,7 @@ public final class MineFragment1 extends TitleBarFragment<MainActivity> implemen
         person_data_service = findViewById(R.id.person_data_service);
         person_data_evaluation = findViewById(R.id.person_data_evaluation);
         person_data_history = findViewById(R.id.person_data_history);
+        person_data_change = findViewById(R.id.person_data_change);
         ll_income = findViewById(R.id.ll_income);
 
         ScrollView scroll = findViewById(R.id.scroll);
@@ -124,7 +127,7 @@ public final class MineFragment1 extends TitleBarFragment<MainActivity> implemen
 
         setOnClickListener(mPersonDataSetting, mPersonDataInterview,
                 person_data_private, person_data_deal, person_data_dev, person_data_evaluation,
-                person_data_about, person_data_recommend, person_data_service, person_data_history, iv_message, ll_income);
+                person_data_about, person_data_recommend, person_data_service, person_data_history, person_data_change, iv_message, ll_income);
 
 
         scroll.setOnScrollChangeListener((v, scrollX, scrollY, oldScrollX, oldScrollY) -> {
@@ -195,6 +198,11 @@ public final class MineFragment1 extends TitleBarFragment<MainActivity> implemen
         } else if (view == iv_message) {// 消息界面
             startActivity(MessageListActivity.class);
             view_dot.setVisibility(View.GONE);
+        } else if (view == person_data_change) {// 消息界面
+            Intent intent = new Intent();
+            intent.setClass(getActivity(), ChangeAdminActivity.class);
+            intent.putExtra("isFirm", false);
+            startActivity(intent);
         }
 
     }

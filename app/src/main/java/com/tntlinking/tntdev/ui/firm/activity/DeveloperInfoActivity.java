@@ -129,7 +129,7 @@ public final class DeveloperInfoActivity extends AppActivity {
 //
 //                }).show();
 
-        String shareUrl = "http://192.168.31.231:8080/#/developer-details?developerId=174";
+        String shareUrl = "http://192.168.31.231:8080/#/developer-details?developerId=" + getString("developerId");
         UMWeb content = new UMWeb(shareUrl);
         content.setTitle(getString(R.string.app_name));
         content.setThumb(new UMImage(this, R.mipmap.app_logo));

@@ -83,88 +83,30 @@ public final class SplashActivity extends AppActivity {
         }
 
 
-        postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                if (TextUtils.isEmpty(SPUtils.getInstance().getString(AppConfig.ACCESS_TOKEN))) {
-                    if (SPUtils.getInstance().getBoolean(AppConfig.HAS_LOGIN, false)) {
-//                        if (SPUtils.getInstance().getString(AppConfig.DEVELOP_STATUS, "1").equals("1")) {
-//                            startActivity(HomeStatusActivity.class);
-//                        } else if (SPUtils.getInstance().getString(AppConfig.DEVELOP_STATUS, "1").equals("3")) {
-//                            startActivity(HomeStatusActivity.class);
-//                        } else if (SPUtils.getInstance().getString(AppConfig.DEVELOP_STATUS, "1").equals("2")) {
-//                            startActivity(HomeStatusActivity.class);
-//                        } else {
-//                            startActivity(CheckDeveloperFailActivity.class);
-//                        }
-                        if (SPUtils.getInstance().getBoolean(AppConfig.LOGIN_ROLE)){
-                            startActivity(FirmMainActivity.class);
-                        }else {
-                            startActivity(MainActivity.class);
-                        }
-//                        startActivity(MainActivity.class);
-                    } else {
-//                        startActivity(LoginActivity1.class);
-                        if (SPUtils.getInstance().getBoolean(AppConfig.LOGIN_ROLE)){
-                            startActivity(FirmMainActivity.class);
-                        }else {
-                            startActivity(MainActivity.class);
-                        }
-                    }
-                    finish();
+//        postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//
+//
+//            }
+//        }, 2000);
+
+
+        if (TextUtils.isEmpty(SPUtils.getInstance().getString(AppConfig.ACCESS_TOKEN))) {
+            startActivity(LoginActivity1.class);
+        } else {
+            if (SPUtils.getInstance().getBoolean(AppConfig.HAS_LOGIN, false)) {
+                if (SPUtils.getInstance().getBoolean(AppConfig.LOGIN_ROLE)) {
+                    startActivity(FirmMainActivity.class);
                 } else {
-//                    startActivity(HomeStatusActivity.class);
-                    EasyHttp.get(SplashActivity.this)
-                            .api(new GetDeveloperStatusApi())
-                            .request(new HttpCallback<HttpData<GetDeveloperStatusApi.Bean>>(SplashActivity.this) {
-
-                                @Override
-                                public void onSucceed(HttpData<GetDeveloperStatusApi.Bean> data) {
-
-                                    if (data != null) {
-                                        // 1->待认证  2->待审核   3->审核成功 4->审核失败
-                                        SPUtils.getInstance().put(AppConfig.DEVELOP_STATUS, data.getData().getStatus());
-                                        SPUtils.getInstance().put(AppConfig.DEVELOP_NAME, data.getData().getRealName());
-                                        SPUtils.getInstance().put(AppConfig.DEVELOPER_ID, data.getData().getId());
-                                        SPUtils.getInstance().put(AppConfig.SERVICE_STATUS,data.getData().getServiceStatus());
-
-//                                        startActivity(MainActivity.class);
-//                                        finish();
-
-                                        if (SPUtils.getInstance().getBoolean(AppConfig.LOGIN_ROLE)){
-                                            startActivity(FirmMainActivity.class);
-                                        }else {
-                                            startActivity(MainActivity.class);
-                                        }
-                                        finish();
-                                    } else {
-//                                        startActivity(MainActivity.class);
-//                                        finish();
-
-                                        if (SPUtils.getInstance().getBoolean(AppConfig.LOGIN_ROLE)){
-                                            startActivity(FirmMainActivity.class);
-                                        }else {
-                                            startActivity(MainActivity.class);
-                                        }
-                                        finish();
-                                    }
-
-
-                                }
-
-                                @Override
-                                public void onFail(Exception e) {
-                                    super.onFail(e);
-                                    startActivity(LoginActivity1.class);
-
-                                }
-                            });
-
+                    startActivity(MainActivity.class);
                 }
-
+            } else {
+                startActivity(LoginActivity1.class);
             }
-        }, 2000);
+        }
 
+        finish();
     }
 
     @NonNull

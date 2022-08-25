@@ -4,6 +4,7 @@ package com.tntlinking.tntdev.ui.firm.activity;
 import android.annotation.SuppressLint;
 import android.net.Uri;
 import android.os.Build;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -191,6 +192,30 @@ public final class NewCompanyActivity extends AppActivity {
                 mShortName = et_as_company_name.getText().toString();
                 mEmailSuffix = et_email.getText().toString();
 //                startActivity(MyCompanyActivity.class);
+                if (TextUtils.isEmpty(mBusinessLicense)) {
+                    toast("你还没有上传营业执照");
+                    return;
+                }
+                if (TextUtils.isEmpty(mTaxInvoice)) {
+                    toast("你还没有填写信用代码");
+                    return;
+                }
+                if (TextUtils.isEmpty(mCompanyName)) {
+                    toast("你还没有填写公司全称");
+                    return;
+                }
+                if (TextUtils.isEmpty(mShortName)) {
+                    toast("你还没有填写公司简称");
+                    return;
+                }
+                if (mIndustryId == 0) {
+                    toast("你还没有选择公司行业");
+                    return;
+                }
+                if (mPersonSizeId == 0) {
+                    toast("你还没有选择公司规模");
+                    return;
+                }
 
                 if (isChange) {
                     changeNewCompany();

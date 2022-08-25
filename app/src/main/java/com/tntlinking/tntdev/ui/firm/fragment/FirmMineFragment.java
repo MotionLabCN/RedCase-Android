@@ -137,7 +137,9 @@ public final class FirmMineFragment extends TitleBarFragment<FirmMainActivity> i
                 startActivity(FirmMessageListActivity.class);
                 break;
             case R.id.person_data_dev://身份切换
-                startActivity(ChangeAdminActivity.class);
+                intent.setClass(getActivity(), ChangeAdminActivity.class);
+                intent.putExtra("isFirm", true);
+                startActivity(intent);
                 break;
             case R.id.person_data_service://企业认证
                 if (mStatus == 2) {  // 2 审核中 不能离开更换公司
@@ -174,7 +176,11 @@ public final class FirmMineFragment extends TitleBarFragment<FirmMainActivity> i
                 BrowserPrivateActivity.start(getActivity(), AppConfig.AGREEMENT_URL);
                 break;
             case R.id.person_data_about: // 关于天天数链开发者
-                startActivity(AboutAppActivity.class);
+//                startActivity(AboutAppActivity.class);
+
+                intent.setClass(getActivity(), FirmCertificationActivity.class);
+                intent.putExtra("mobile", mMobile);
+                startActivity(intent);
                 break;
         }
 

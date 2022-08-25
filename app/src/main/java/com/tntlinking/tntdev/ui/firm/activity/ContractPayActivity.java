@@ -2,6 +2,7 @@ package com.tntlinking.tntdev.ui.firm.activity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.os.CountDownTimer;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -25,6 +26,7 @@ import androidx.appcompat.widget.AppCompatButton;
  * 签约支付页面
  */
 public final class ContractPayActivity extends AppActivity {
+    private TextView tv_count_down_time;
     private TextView tv_work_money;
     private TextView tv_work_time_1;
     private TextView tv_work_time_money_1;
@@ -46,6 +48,7 @@ public final class ContractPayActivity extends AppActivity {
     @SuppressLint("SetTextI18n")
     @Override
     protected void initView() {
+        tv_count_down_time = findViewById(R.id.tv_count_down_time);
         tv_work_money = findViewById(R.id.tv_work_money);
         tv_work_time_1 = findViewById(R.id.tv_work_time_1);
         tv_work_time_money_1 = findViewById(R.id.tv_work_time_money_1);
@@ -94,6 +97,9 @@ public final class ContractPayActivity extends AppActivity {
                 tv_work_freeze_money.setText("¥" + Utils.formatMoney(payInfo.getFreezeAmount() + ""));
                 btn_commit.setText("支付¥" + Utils.formatMoney(payInfo.getFreezeAmount() + ""));
             }
+
+            timeStemp = Integer.valueOf(bean.getTime());
+            getCountDownTime();
         }
 
     }
@@ -171,8 +177,46 @@ public final class ContractPayActivity extends AppActivity {
                             tv_work_freeze_money.setText("¥" + Utils.formatMoney(data.getData().getFreezeAmount() + ""));
                             btn_commit.setText("支付¥" + Utils.formatMoney(data.getData().getFreezeAmount() + ""));
                         }
+
+                        timeStemp = Integer.valueOf(bean.getTime());
+                        getCountDownTime();
                     }
                 });
     }
 
+    //24小时换算成毫秒
+    private int timeStemp = 86400000;
+    private CountDownTimer timer;
+
+
+    private void getCountDownTime() {
+
+        timer = new CountDownTimer(timeStemp, 1000) {
+            @Override
+            public void onTick(long l) {
+
+                long day = l / (1000 * 24 * 60 * 60); //单位天
+                long hour = (l - day * (1000 * 24 * 60 * 60)) / (1000 * 60 * 60); //单位时
+                long minute = (l - day * (1000 * 24 * 60 * 60) - hour * (1000 * 60 * 60)) / (1000 * 60); //单位分
+                long second = (l - day * (1000 * 24 * 60 * 60) - hour * (1000 * 60 * 60) - minute * (1000 * 60)) / 1000;//单位秒
+
+                tv_count_down_time.setText("支付剩余时间  " + hour + ":" + minute + ":" + second);
+            }
+
+            @Override
+            public void onFinish() {
+                finish();
+                //倒计时为0时执行此方法
+
+            }
+        };
+
+        timer.start();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        timer.onFinish();
+    }
 }

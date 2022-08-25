@@ -31,6 +31,7 @@ import com.tntlinking.tntdev.manager.ActivityManager;
 import com.tntlinking.tntdev.other.AppConfig;
 import com.tntlinking.tntdev.other.PermissionCallback;
 import com.tntlinking.tntdev.ui.dialog.LoginDialog;
+import com.tntlinking.tntdev.ui.firm.activity.SelectAdminActivity;
 import com.tntlinking.tntdev.widget.CustomVideoView;
 import com.tntlinking.tntdev.widget.config.AuthPageConfig;
 import com.tntlinking.tntdev.widget.config.BaseUIConfig;
@@ -278,7 +279,8 @@ public final class LoginActivity1 extends AppActivity {
                         SPUtils.getInstance().put(AppConfig.ACCESS_TOKEN, "Bearer " + data.getData().getAccessToken());
                         EasyConfig.getInstance().addHeader("Authorization", "Bearer " + data.getData().getAccessToken());
 
-                        toLogin();
+//                        toLogin();
+                        startActivity(SelectAdminActivity.class);
                     }
                 });
     }
@@ -299,13 +301,9 @@ public final class LoginActivity1 extends AppActivity {
                         SPUtils.getInstance().put(AppConfig.DEVELOPER_ID, data.getData().getId());
 
 
-//                        SPUtils.getInstance().getBoolean(AppConfig.GUIDE_VIEW, true);
-//                        startActivity(LoginActivityView.class);
-//                        SPUtils.getInstance().put(AppConfig.GUIDE_VIEW, false);
-//                        ActivityManager.getInstance().finishAllActivities();
                         JPushInterface.setAlias(getActivity(), 1001, "ttsl_" + data.getData().getId());
-                        startActivity(MainActivity.class);
                         ActivityManager.getInstance().finishAllActivities();
+                        startActivity(MainActivity.class);
 
                     }
                 });

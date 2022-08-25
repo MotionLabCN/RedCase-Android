@@ -63,8 +63,8 @@ public final class SearchCompanySelectActivity extends AppActivity implements On
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-//                    //关闭软键盘
-//                    YUtils.closeSoftKeyboard();
+                    // 隐藏软键盘
+                    hideKeyboard(getCurrentFocus());
                     mSearch = v.getText().toString();
                     searchCompany(mSearch);
                     return true;

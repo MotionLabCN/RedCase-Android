@@ -27,7 +27,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="@dimen/dp_15"
-        android:text="很遗憾，天天数链无法继续为您提供服务，感谢您一直以来的陪伴。注销账号前，我们对以下信息进行审核，已保证您的账号安全。"
+        android:text="很遗憾，天天数链无法继续为您提供服务，感谢您一直以来的陪伴。注销账号前，我们会对以下信息进行审核，以保证您的账号安全。"
         android:textColor="@color/color_hint_color"
         android:textSize="@dimen/sp_13" />
 

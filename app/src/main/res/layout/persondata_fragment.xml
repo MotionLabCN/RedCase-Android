@@ -92,7 +92,7 @@
                             android:layout_alignParentRight="true"
                             android:layout_marginRight="@dimen/dp_8"
                             android:background="@drawable/dot_oval_red"
-                            android:visibility="gone"/>
+                            android:visibility="gone" />
                     </RelativeLayout>
 
 
@@ -360,6 +360,21 @@
                     android:text="其他"
                     android:textColor="@color/color_hint_color"
                     tools:ignore="UseCompatTextViewDrawableXml" />
+
+                <com.hjq.widget.layout.SettingBar
+                    android:id="@+id/person_data_change"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_4"
+                    app:bar_leftDrawable="@drawable/icon_check"
+                    app:bar_leftText="身份切换"
+                    app:bar_leftTextSize="@dimen/sp_13"
+                    app:bar_lineVisible="false"
+                    app:bar_rightDrawable="@drawable/icon_arrow_right"
+                    app:bar_rightDrawableSize="@dimen/dp_16"
+                    app:bar_rightText="当前开发者端"
+                    app:bar_rightTextColor="@color/color_hint_color"
+                    app:bar_rightTextSize="@dimen/sp_13" />
 
                 <com.hjq.widget.layout.SettingBar
                     android:id="@+id/person_data_private"

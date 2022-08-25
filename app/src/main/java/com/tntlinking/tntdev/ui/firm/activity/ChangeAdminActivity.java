@@ -22,6 +22,7 @@ public final class ChangeAdminActivity extends AppActivity {
     private LinearLayout ll_firm;
     private LinearLayout ll_dev;
 
+    private boolean isFirm;
 
     @Override
     protected int getLayoutId() {
@@ -41,7 +42,14 @@ public final class ChangeAdminActivity extends AppActivity {
 
     @Override
     protected void initData() {
-
+        isFirm = getBoolean("isFirm");
+        if (isFirm) {
+            ll_firm.setSelected(true);
+            ll_dev.setSelected(false);
+        } else {
+            ll_firm.setSelected(false);
+            ll_dev.setSelected(true);
+        }
     }
 
 
@@ -58,7 +66,12 @@ public final class ChangeAdminActivity extends AppActivity {
 //                startActivity(FirmMainActivity.class);
 //                ActivityManager.getInstance().finishAllActivities();
 //                checkDialog(true);
-                toast("目前已经是企业角色");
+
+                if (ll_firm.isSelected()) {
+                    toast("目前已经是企业角色");
+                } else {
+                    checkDialog(true);
+                }
                 break;
             case R.id.ll_dev:
 //                ll_firm.setSelected(false);
@@ -68,7 +81,13 @@ public final class ChangeAdminActivity extends AppActivity {
 //                SPUtils.getInstance().put(AppConfig.LOGIN_ROLE, false);
 //                startActivity(MainActivity.class);
 //                ActivityManager.getInstance().finishAllActivities();
-                checkDialog(false);
+
+                if (ll_dev.isSelected()) {
+                    toast("目前已经是开发者角色");
+                } else {
+                    checkDialog(false);
+                }
+
                 break;
         }
 
@@ -86,18 +105,23 @@ public final class ChangeAdminActivity extends AppActivity {
                 .setOnClickListener(R.id.btn_dialog_custom_cancel, (BaseDialog.OnClickListener<Button>) (dialog, button) -> dialog.dismiss())
                 .setOnClickListener(R.id.btn_dialog_custom_ok, (dialog, views) -> {
                     if (isFirm) { // 企业账户
+                        ll_firm.setSelected(true);
+                        ll_dev.setSelected(false);
                         SPUtils.getInstance().put(AppConfig.ACCESS_ROLE, "Recruiter");
                         EasyConfig.getInstance().addHeader(AppConfig.ACCESS_ROLE, "Recruiter");
                         SPUtils.getInstance().put(AppConfig.LOGIN_ROLE, true);
-                        finish();
+
+                        ActivityManager.getInstance().finishAllActivities();
+                        startActivity(FirmMainActivity.class);
                     } else {// 开发者账户
                         ll_firm.setSelected(false);
                         ll_dev.setSelected(true);
                         SPUtils.getInstance().put(AppConfig.ACCESS_ROLE, "Developer");
                         EasyConfig.getInstance().addHeader(AppConfig.ACCESS_ROLE, "Developer");
                         SPUtils.getInstance().put(AppConfig.LOGIN_ROLE, false);
-                        startActivity(MainActivity.class);
+
                         ActivityManager.getInstance().finishAllActivities();
+                        startActivity(MainActivity.class);
                     }
                 }).show();
     }

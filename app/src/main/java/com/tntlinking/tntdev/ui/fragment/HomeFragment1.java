@@ -33,6 +33,7 @@ import com.tntlinking.tntdev.http.api.AppListInterviewApi;
 import com.tntlinking.tntdev.http.api.GetAppUpdateApi;
 import com.tntlinking.tntdev.http.api.GetDeveloperJkStatusApi;
 import com.tntlinking.tntdev.http.api.GetDeveloperRecommendsApi;
+import com.tntlinking.tntdev.http.api.GetDeveloperStatusApi;
 import com.tntlinking.tntdev.http.api.GetNewbieApi;
 import com.tntlinking.tntdev.http.api.UpdateServiceStatusApi;
 import com.tntlinking.tntdev.http.model.HttpData;
@@ -353,20 +354,20 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity> implemen
 
     @Override
     protected void initData() {
-        String name = SPUtils.getInstance().getString(AppConfig.DEVELOP_NAME, "朋友");
-        tv_avatar.setText(Utils.formatName(name));
-        tv_name.setText("你好," + name);
-        getNewbie();
-        String status = SPUtils.getInstance().getString(AppConfig.DEVELOP_STATUS, "1");
-        getInterviewAppList();
-        if (status.equals("3")) {
-            tv_status.setVisibility(View.VISIBLE);
-            tv_status.setText("已认证");
+//        String name = SPUtils.getInstance().getString(AppConfig.DEVELOP_NAME, "朋友");
+//        tv_avatar.setText(Utils.formatName(name));
+//        tv_name.setText("你好," + name);
+//
+//        String status = SPUtils.getInstance().getString(AppConfig.DEVELOP_STATUS, "1");
+//        if (status.equals("3")) {
+//            tv_status.setVisibility(View.VISIBLE);
+//            tv_status.setText("已认证");
+//        } else {
+//            ll_status.setVisibility(View.VISIBLE); //1、2、4 状态下显示平台介绍和新手任务
+//            tv_status.setVisibility(View.GONE);
+//        }
+        getDeveloperInfo();
 
-        } else {
-            ll_status.setVisibility(View.VISIBLE); //1、2、4 状态下显示平台介绍和新手任务
-            tv_status.setVisibility(View.GONE);
-        }
         //切换接单模式
         if (mStatus == 1) {
             tv_order_switching.setText("可接单");
@@ -387,6 +388,9 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity> implemen
             ll_tab.setVisibility(View.GONE);
             ll_task.setVisibility(View.VISIBLE);
         }
+
+        getNewbie();
+        getInterviewAppList();
         getAppUpdate();
     }
 
@@ -673,6 +677,40 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity> implemen
                     }
                 });
 
+    }
+
+
+    public void getDeveloperInfo() {
+        EasyHttp.get(this)
+                .api(new GetDeveloperStatusApi())
+                .request(new HttpCallback<HttpData<GetDeveloperStatusApi.Bean>>(this) {
+
+                    @Override
+                    public void onSucceed(HttpData<GetDeveloperStatusApi.Bean> data) {
+                        if (data != null) {
+                            //  status 1->待认证  2->待审核   3->审核成功 4->审核失败
+                            SPUtils.getInstance().put(AppConfig.DEVELOP_STATUS, data.getData().getStatus());
+                            SPUtils.getInstance().put(AppConfig.DEVELOP_NAME, data.getData().getRealName());
+                            SPUtils.getInstance().put(AppConfig.DEVELOPER_ID, data.getData().getId());
+                            SPUtils.getInstance().put(AppConfig.SERVICE_STATUS, data.getData().getServiceStatus());
+
+                            String name = SPUtils.getInstance().getString(AppConfig.DEVELOP_NAME, "朋友");
+                            tv_avatar.setText(Utils.formatName(name));
+                            tv_name.setText("你好," + name);
+
+                            if (data.getData().getStatus().equals("3")) {
+                                tv_status.setVisibility(View.VISIBLE);
+                                tv_status.setText("已认证");
+                            } else {
+                                ll_status.setVisibility(View.VISIBLE); //1、2、4 状态下显示平台介绍和新手任务
+                                tv_status.setVisibility(View.GONE);
+                            }
+
+                        }
+
+                    }
+
+                });
     }
 
     @Override

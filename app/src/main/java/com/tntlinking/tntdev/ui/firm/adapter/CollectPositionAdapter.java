@@ -91,6 +91,7 @@ public final class CollectPositionAdapter extends BaseAdapter {
         holder.tv_all_day.setText(item.getWorkMode());
         if (!TextUtils.isEmpty(item.getStatus())) {
             holder.tv_status.setText(item.getStatus());
+            holder.ll_status.setVisibility(View.VISIBLE);
             if (item.getStatus().equals("已签单")) {
                 holder.tv_status.setTextColor(mContext.getResources().getColor(R.color.color_5CE28A));
                 holder.view_dot.setBackgroundResource(R.drawable.dot_oval_green);
@@ -100,7 +101,8 @@ public final class CollectPositionAdapter extends BaseAdapter {
                 holder.view_dot.setBackgroundResource(R.drawable.dot_oval_orange);
                 holder.ll_status.setBackgroundResource(R.drawable.bg_orange_radius_3);
             }
-
+        }else {
+            holder.ll_status.setVisibility(View.GONE);
         }
         TagFirmAdapter adapter = new TagFirmAdapter(mContext, 2);
         holder.tag_flow_layout.setAdapter(adapter);
