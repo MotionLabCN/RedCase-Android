@@ -1,5 +1,6 @@
 package com.tntlinking.tntdev.ui.firm.activity;
 
+import android.annotation.SuppressLint;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -64,6 +65,7 @@ public final class RecommendPositionActivity extends AppActivity implements View
 
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void initData() {
         mTabAdapter.addItem("为您推荐");
@@ -74,7 +76,7 @@ public final class RecommendPositionActivity extends AppActivity implements View
         if (bean != null) {
             tv_position.setText(bean.getCareerDirection());
             tv_company_name.setText(bean.getCompanyName());
-            tv_position_desc.setText(bean.getTrainingMode() + "-" + bean.getEducation() + "-" + bean.getWorkYears() + "-" + bean.getIndustryName());
+            tv_position_desc.setText(bean.getTrainingMode() + "·" + bean.getEducation() + "·" + bean.getWorkYears() + "·" + bean.getIndustryName());
         }
 
         mPagerAdapter.addFragment(RecommendPositionFragment.newInstance(1, bean.getId()));
@@ -111,7 +113,6 @@ public final class RecommendPositionActivity extends AppActivity implements View
 
     @Override
     public void onPageScrollStateChanged(int state) {
-        EasyLog.print("====state==" + state);
     }
 
     @Override

@@ -171,21 +171,21 @@ public final class ContractDetailActivity extends AppActivity {
                             if (preList.size() == 1) {
                                 PostCalculateApi.Bean.PreListBean bean = preList.get(0);
                                 tv_work_time_1.setText(bean.getWorkStartDate() + "-" + bean.getWorkEndDate());
-                                tv_work_time_money_1.setText(Utils.formatMoney(bean.getServiceMoney() + ""));
+                                tv_work_time_money_1.setText("¥ " + Utils.formatMoney(bean.getServiceMoney() + ""));
                                 ll_date_2.setVisibility(View.GONE);
                             } else if (preList.size() == 2) {
                                 PostCalculateApi.Bean.PreListBean bean1 = preList.get(0);
                                 ll_date_2.setVisibility(View.VISIBLE);
                                 tv_work_time_1.setText(bean1.getWorkStartDate() + "-" + bean1.getWorkEndDate());
-                                tv_work_time_money_1.setText(Utils.formatMoney(bean1.getServiceMoney() + ""));
+                                tv_work_time_money_1.setText("¥ " + Utils.formatMoney(bean1.getServiceMoney() + ""));
                                 PostCalculateApi.Bean.PreListBean bean2 = preList.get(1);
                                 tv_work_time_2.setText(bean2.getWorkStartDate() + "-" + bean2.getWorkEndDate());
-                                tv_work_time_money_2.setText(Utils.formatMoney(bean2.getServiceMoney() + ""));
+                                tv_work_time_money_2.setText("¥ " + Utils.formatMoney(bean2.getServiceMoney() + ""));
 
                             }
-                            tv_work_money.setText(Utils.formatMoney(data.getData().getTotalAmount() + ""));
-                            tv_work_service_money.setText(Utils.formatMoney(data.getData().getServiceAmount() + ""));
-                            tv_work_freeze_money.setText(Utils.formatMoney(data.getData().getFreezeAmount() + ""));
+                            tv_work_money.setText("¥ " + Utils.formatMoney(data.getData().getTotalAmount() + ""));
+                            tv_work_service_money.setText("¥ " + Utils.formatMoney(data.getData().getServiceAmount() + ""));
+                            tv_work_freeze_money.setText("¥ " + Utils.formatMoney(data.getData().getFreezeAmount() + ""));
                         }
                     }
                 });

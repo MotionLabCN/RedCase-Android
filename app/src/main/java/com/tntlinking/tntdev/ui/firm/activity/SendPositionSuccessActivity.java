@@ -42,6 +42,11 @@ public final class SendPositionSuccessActivity extends AppActivity {
 
     }
 
+    @Override
+    public void onLeftClick(View view) {
+        ActivityManager.getInstance().finishAllActivities();
+        startActivity(FirmMainActivity.class);
+    }
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override

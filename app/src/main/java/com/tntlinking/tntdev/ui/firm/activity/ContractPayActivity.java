@@ -79,23 +79,23 @@ public final class ContractPayActivity extends AppActivity {
                 if (payInfo.getPreOrderList().size() == 1) {
                     CreateOrderApi.Bean.PayInfoBean.PreOrderListBean preBean0 = payInfo.getPreOrderList().get(0);
                     tv_work_time_1.setText(preBean0.getWorkStartDate() + "-" + preBean0.getWorkEndDate());
-                    tv_work_time_money_1.setText("¥" + Utils.formatMoney(preBean0.getServiceMoney() + ""));
+                    tv_work_time_money_1.setText("¥ " + Utils.formatMoney(preBean0.getServiceMoney() + ""));
                     ll_date_2.setVisibility(View.GONE);
                 } else if (payInfo.getPreOrderList().size() == 2) {
                     ll_date_2.setVisibility(View.VISIBLE);
                     CreateOrderApi.Bean.PayInfoBean.PreOrderListBean preBean0 = payInfo.getPreOrderList().get(0);
                     tv_work_time_1.setText(preBean0.getWorkStartDate() + "-" + preBean0.getWorkEndDate());
-                    tv_work_time_money_1.setText("¥" + Utils.formatMoney(preBean0.getServiceMoney() + ""));
+                    tv_work_time_money_1.setText("¥ " + Utils.formatMoney(preBean0.getServiceMoney() + ""));
                     CreateOrderApi.Bean.PayInfoBean.PreOrderListBean preBean1 = payInfo.getPreOrderList().get(1);
                     tv_work_time_2.setText(preBean1.getWorkStartDate() + "-" + preBean1.getWorkEndDate());
-                    tv_work_time_money_2.setText("¥" + Utils.formatMoney(preBean1.getServiceMoney() + ""));
+                    tv_work_time_money_2.setText("¥ " + Utils.formatMoney(preBean1.getServiceMoney() + ""));
 
                 }
 
-                tv_work_money.setText("¥" + Utils.formatMoney(payInfo.getTotalAmount() + ""));
-                tv_work_service_money.setText("¥" + Utils.formatMoney(payInfo.getServiceAmount() + ""));
-                tv_work_freeze_money.setText("¥" + Utils.formatMoney(payInfo.getFreezeAmount() + ""));
-                btn_commit.setText("支付¥" + Utils.formatMoney(payInfo.getFreezeAmount() + ""));
+                tv_work_money.setText("¥ " + Utils.formatMoney(payInfo.getTotalAmount() + ""));
+                tv_work_service_money.setText("¥ " + Utils.formatMoney(payInfo.getServiceAmount() + ""));
+                tv_work_freeze_money.setText("¥ " + Utils.formatMoney(payInfo.getFreezeAmount() + ""));
+                btn_commit.setText("支付¥ " + Utils.formatMoney(payInfo.getFreezeAmount() + ""));
             }
 
             timeStemp = Integer.valueOf(bean.getTime());

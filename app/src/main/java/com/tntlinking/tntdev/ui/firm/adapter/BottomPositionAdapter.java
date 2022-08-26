@@ -79,7 +79,8 @@ public final class BottomPositionAdapter extends BaseAdapter {
         String mStart = Utils.formatMoney(item.getStartPay() / 1000) + "k";
         String mEnd = Utils.formatMoney(item.getEndPay() / 1000) + "k";
         holder.tv_salary.setText(mStart + "-" + mEnd);
-        holder.tv_dev_info.setText(item.getWorkDaysMode() + "-" + item.getEducation() + "-" + item.getWorkYears());
+        holder.tv_dev_info.setText(item.getWorkDaysMode() + "·" + item.getEducation()
+                + "·" + item.getWorkYears() + "·" + item.getIndustryName());
 
 
         return convertView;

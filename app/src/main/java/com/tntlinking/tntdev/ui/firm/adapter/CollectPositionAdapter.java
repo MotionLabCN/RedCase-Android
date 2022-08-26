@@ -85,7 +85,7 @@ public final class CollectPositionAdapter extends BaseAdapter {
         GetFavoriteDeveloperApi.Bean.ListBean item = mList.get(position);
         GlideUtils.loadRoundCorners(mContext, item.getAvatarUrl(), holder.iv_position_avatar, (int) mContext.getResources().getDimension(R.dimen.dp_8));
         holder.tv_name.setText(item.getRealName());
-        holder.tv_position.setText(item.getCareerDirectionName() + "-工作经验" + item.getWorkYears());
+        holder.tv_position.setText(item.getCareerDirectionName() + "·工作经验" + item.getWorkYears());
 //        holder.tv_salary.setText(item.getExpectSalary() + "");
         holder.tv_salary.setText((Utils.formatMoney(item.getExpectSalary() / 1000) + "k/月"));
         holder.tv_all_day.setText(item.getWorkMode());

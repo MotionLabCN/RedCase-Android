@@ -183,11 +183,8 @@ public final class FirmMineFragment extends TitleBarFragment<FirmMainActivity> i
                 BrowserPrivateActivity.start(getActivity(), AppConfig.AGREEMENT_URL);
                 break;
             case R.id.person_data_about: // 关于天天数链开发者
-//                startActivity(AboutAppActivity.class);
+                startActivity(AboutAppActivity.class);
 
-                intent.setClass(getActivity(), FirmCertificationActivity.class);
-                intent.putExtra("mobile", mMobile);
-                startActivity(intent);
                 break;
         }
 
