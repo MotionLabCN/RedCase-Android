@@ -23,8 +23,9 @@ import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener;
 import com.tntlinking.tntdev.R;
 import com.tntlinking.tntdev.aop.SingleClick;
 import com.tntlinking.tntdev.app.TitleBarFragment;
-import com.tntlinking.tntdev.http.api.GetDeveloperStatusApi;
+import com.tntlinking.tntdev.http.api.GetCompanyInfoApi;
 import com.tntlinking.tntdev.http.api.GetFirmInfoApi;
+import com.tntlinking.tntdev.http.api.GetJudgeAdminApi;
 import com.tntlinking.tntdev.http.api.GetSignContractPDFApi;
 import com.tntlinking.tntdev.http.model.HttpData;
 import com.tntlinking.tntdev.other.AppConfig;
@@ -72,6 +73,7 @@ public final class FirmMineFragment extends TitleBarFragment<FirmMainActivity> i
 
     private int mStatus = 1; //企业认证状态  1待审核 2审核中 3已认证 4审核失败
     private String mMobile;
+    private boolean isFirmAdmin;//是否是企业管理员
 
     public static FirmMineFragment newInstance() {
         return new FirmMineFragment();
@@ -125,6 +127,8 @@ public final class FirmMineFragment extends TitleBarFragment<FirmMainActivity> i
     @Override
     protected void initData() {
         getFirmInfo();
+        GetJudgeAdmin();
+
     }
 
     @SuppressLint("NonConstantResourceId")
@@ -145,14 +149,13 @@ public final class FirmMineFragment extends TitleBarFragment<FirmMainActivity> i
                 if (mStatus == 2) {  // 2 审核中 不能离开更换公司
                     intent.setClass(getActivity(), MyCompanyActivity.class);
                     intent.putExtra("status", mStatus);
-                    startActivity(intent);
                 } else if (mStatus == 3) { // 3 审核通过 能离开和更换公司
-                    startActivity(MyCompanyActivity.class);
+                    intent.setClass(getActivity(), MyCompanyActivity.class);
                 } else {
                     intent.setClass(getActivity(), FirmCertificationActivity.class);
-                    intent.putExtra("mobile", mMobile);
-                    startActivity(intent);
                 }
+                intent.putExtra("mobile", mMobile);
+                startActivity(intent);
                 break;
             case R.id.ll_mine_audition://面试管理
                 startActivity(AuditionMangeActivity.class);
@@ -164,7 +167,11 @@ public final class FirmMineFragment extends TitleBarFragment<FirmMainActivity> i
                 startActivity(AccountManageActivity.class);
                 break;
             case R.id.ll_mine_firm://企业管理
-                startActivity(FirmManageActivity.class);
+                if (isFirmAdmin) {
+                    startActivity(FirmManageActivity.class);
+                } else {
+                    toast("你还不是企业管理员");
+                }
                 break;
             case R.id.person_data_setting://账户设置
                 startActivity(FirmSettingActivity.class);
@@ -193,30 +200,6 @@ public final class FirmMineFragment extends TitleBarFragment<FirmMainActivity> i
                 // 指定导航栏背景颜色
                 .navigationBarColor(R.color.white);
     }
-
-
-//    public void getData() {
-//        EasyHttp.get(this)
-//                .api(new GetDeveloperStatusApi())
-//                .request(new HttpCallback<HttpData<GetDeveloperStatusApi.Bean>>(this) {
-//
-//                    @SuppressLint("SetTextI18n")
-//                    @Override
-//                    public void onSucceed(HttpData<GetDeveloperStatusApi.Bean> data) {
-//                        SPUtils.getInstance().put(AppConfig.CAREER_ID, data.getData().getCareerDirectionId());
-//                        mRefreshLayout.finishRefresh();
-//                        if (TextUtils.isEmpty(data.getData().getRealName())) {
-//                            tv_avatar.setText("朋友");
-//                            tv_name.setText("你好，新朋友");
-//
-//                        } else {
-//                            tv_avatar.setText(Utils.formatName(data.getData().getRealName()));
-//                            tv_name.setText(data.getData().getRealName());
-//
-//                        }
-//                    }
-//                });
-//    }
 
 
     private void getFirmInfo() {
@@ -257,6 +240,46 @@ public final class FirmMineFragment extends TitleBarFragment<FirmMainActivity> i
                     }
                 });
 
+    }
+
+
+    /**
+     * 判断是否为管理员
+     */
+    private void GetJudgeAdmin() {
+        EasyHttp.get(this)
+                .api(new GetJudgeAdminApi())
+                .request(new HttpCallback<HttpData<Boolean>>(this) {
+
+                    @Override
+                    public void onSucceed(HttpData<Boolean> data) {
+                        isFirmAdmin = data.getData();
+
+                    }
+                });
+
+    }
+
+
+//    private void GetCompanyInfoApi() {
+//        EasyHttp.get(this)
+//                .api(new GetCompanyInfoApi())
+//                .request(new HttpCallback<HttpData<Boolean>>(this) {
+//
+//                    @Override
+//                    public void onSucceed(HttpData<Boolean> data) {
+//
+//
+//                    }
+//                });
+//
+//    }
+
+
+    @Override
+    protected void onFragmentResume(boolean first) {
+        super.onFragmentResume(first);
+        GetJudgeAdmin();
     }
 
     @Override

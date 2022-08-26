@@ -30,6 +30,7 @@ import com.tntlinking.tntdev.other.Utils;
 import com.tntlinking.tntdev.ui.bean.DeveloperInfoBean;
 import com.tntlinking.tntdev.ui.dialog.BottomListDialog;
 import com.tntlinking.tntdev.ui.dialog.ShareAppDialog;
+import com.tntlinking.tntdev.ui.dialog.ShareToWXDialog;
 import com.tntlinking.tntdev.ui.firm.adapter.DevEducationAdapter;
 import com.tntlinking.tntdev.ui.firm.adapter.DevProjectAdapter;
 import com.tntlinking.tntdev.ui.firm.adapter.DevWorkAdapter;
@@ -115,27 +116,13 @@ public final class DeveloperInfoActivity extends AppActivity {
 
     @Override
     public void onRightClick(View view) {
-//        new BaseDialog.Builder<>(this)
-//                .setContentView(R.layout.bottom_dialog_share_wx)
-//                .setAnimStyle(BaseDialog.ANIM_BOTTOM)
-//                //.setText(id, "我是预设置的文本")
-//                .setOnClickListener(R.id.iv_close, (dialog, views) -> dialog.dismiss())
-//                .setOnClickListener(R.id.iv_logo, (dialog, views) -> {
-//                    String shareUrl = "http://192.168.31.231:8080/#/developer-details?developerId=174";
-//                    UMWeb content = new UMWeb(shareUrl);
-//                    content.setTitle(getString(R.string.app_name));
-//                    content.setThumb(new UMImage(this, R.mipmap.app_logo));
-//                    content.setDescription(getString(R.string.app_name));
-//
-//                }).show();
-
-        String shareUrl = "http://192.168.31.231:8080/#/developer-details?developerId=" + getString("developerId");
+        String shareUrl = "http://talent.staging.tntlinking.com/#/developer-details?developerId=" + bean.getId();
         UMWeb content = new UMWeb(shareUrl);
-        content.setTitle(getString(R.string.app_name));
+        content.setTitle(bean.getRealName());
+        content.setDescription(bean.getCareerDto().getCareerDirectionName());
         content.setThumb(new UMImage(this, R.mipmap.app_logo));
-        content.setDescription(getString(R.string.app_name));
-        // 分享对话框
-        new ShareAppDialog.Builder(this)
+
+        new ShareToWXDialog.Builder(this)
                 .setShareLink(content)
                 .setListener(new UmengShare.OnShareListener() {
 
@@ -184,7 +171,7 @@ public final class DeveloperInfoActivity extends AppActivity {
                         intent.setClass(DeveloperInfoActivity.this, ContractDetailActivity.class);
                         intent.putExtra("positionId", listBean.getId());
 
-                        intent.putExtra("positionName", bean.getCareerDto().getCareerDirection());
+                        intent.putExtra("positionName", bean.getCareerDto().getCareerDirectionName());
                         intent.putExtra("expectSalary", bean.getWorkModeDtoList().get(0).getExpectSalary());
                         intent.putExtra("developerId", bean.getId());
                         intent.putExtra("name", bean.getRealName());

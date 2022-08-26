@@ -5,7 +5,7 @@ import com.hjq.http.config.IRequestType;
 import com.hjq.http.model.BodyType;
 
 /**
- * 新建企业(给更换企业使用)
+ * 更换公司
  */
 public final class CreateNewCompanyChangeApi implements IRequestApi, IRequestType {
 

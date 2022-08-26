@@ -21,12 +21,10 @@ import com.tntlinking.tntdev.R;
 import com.tntlinking.tntdev.aop.SingleClick;
 import com.tntlinking.tntdev.app.AppActivity;
 import com.tntlinking.tntdev.http.api.FirmCertificationApi;
+import com.tntlinking.tntdev.http.api.FirmCertificationChangeApi;
 import com.tntlinking.tntdev.http.api.GetProvinceApi;
 import com.tntlinking.tntdev.http.api.SendCompanyEmailApi;
 import com.tntlinking.tntdev.http.model.HttpData;
-import com.tntlinking.tntdev.other.AppConfig;
-import com.tntlinking.tntdev.ui.activity.AddEducationActivityNew;
-import com.tntlinking.tntdev.ui.activity.EnterDeveloperActivity;
 import com.tntlinking.tntdev.ui.bean.DeveloperInfoBean;
 import com.tntlinking.tntdev.ui.dialog.ProvinceSelectDialog;
 
@@ -62,6 +60,7 @@ public final class FirmCertificationActivity extends AppActivity {
     private int mCityId = 0;
     private int mAreasId = 0;
     private String mAddress;
+    private boolean isChange; //是否是 更换企业，默认是不跟换 false
 
     @Override
     protected int getLayoutId() {
@@ -70,7 +69,6 @@ public final class FirmCertificationActivity extends AppActivity {
 
     @Override
     protected void initView() {
-
         et_name = findViewById(R.id.et_name);
         tv_company_name = findViewById(R.id.tv_company_name);
         tv_new_company = findViewById(R.id.tv_new_company);
@@ -83,9 +81,7 @@ public final class FirmCertificationActivity extends AppActivity {
         et_address = findViewById(R.id.et_address);
         btn_commit = findViewById(R.id.btn_commit);
 
-
         setOnClickListener(tv_company_name, tv_new_company, cv_countdown, sb_area, btn_commit);
-
 
     }
 
@@ -96,6 +92,7 @@ public final class FirmCertificationActivity extends AppActivity {
         if (TextUtils.isEmpty(SPUtils.getInstance().getString("province"))) {
             GetProvince();
         }
+        isChange = getBoolean("isChange");
         mMobile = getString("mobile");
         tv_mobile.setText(mMobile);
     }
@@ -112,7 +109,9 @@ public final class FirmCertificationActivity extends AppActivity {
                 getActivity().startActivityForResult(intent, 10000);
                 break;
             case R.id.tv_new_company://新建公司
-                startActivity(NewCompanyActivity.class);
+                Intent intent1 = new Intent(this, NewCompanyActivity.class);
+                intent1.putExtra("isChange", isChange);
+                startActivity(intent1);
                 break;
             case R.id.cv_countdown:
                 if (TextUtils.isEmpty(et_email.getText().toString())) {
@@ -120,6 +119,7 @@ public final class FirmCertificationActivity extends AppActivity {
                     return;
                 }
                 getEmailCode(et_email.getText().toString());
+                cv_countdown.start();
                 break;
             case R.id.sb_area:
                 if (TextUtils.isEmpty(SPUtils.getInstance().getString("province"))) {
@@ -146,7 +146,7 @@ public final class FirmCertificationActivity extends AppActivity {
                 mEmail = et_email.getText().toString();
                 mEmailCode = et_email_code.getText().toString();
                 mAddress = et_address.getText().toString();
-//                startActivity(MyCompanyActivity.class);
+
                 if (TextUtils.isEmpty(mRealName)) {
                     toast("你还没有填写真实姓名");
                     return;
@@ -175,7 +175,11 @@ public final class FirmCertificationActivity extends AppActivity {
                     toast("你还没有填写详细地址");
                     return;
                 }
-                firmCertification();
+                if (isChange) {
+                    firmCertificationChange();
+                } else {
+                    firmCertification();
+                }
                 break;
 
         }
@@ -213,9 +217,38 @@ public final class FirmCertificationActivity extends AppActivity {
                 });
     }
 
+    /**
+     * 第一次认证接口
+     */
     public void firmCertification() {
         EasyHttp.post(this)
                 .api(new FirmCertificationApi()
+                        .setRealName(mRealName)
+                        .setCompanyId(mCompanyId)
+                        .setPositionName(mPosition)
+                        .setEmail(mEmail)
+                        .setEmailCode(mEmailCode)
+                        .setProvinceId(mProvinceId)
+                        .setCityId(mCityId)
+                        .setAreaId(mAreasId)
+                        .setAddress(mAddress))
+                .request(new HttpCallback<HttpData<DeveloperInfoBean.DeveloperWork>>(this) {
+
+                    @Override
+                    public void onSucceed(HttpData<DeveloperInfoBean.DeveloperWork> data) {
+
+                        toast("申请成功");
+                        finish();
+                    }
+                });
+    }
+
+    /**
+     * 更新认证接口
+     */
+    public void firmCertificationChange() {
+        EasyHttp.post(this)
+                .api(new FirmCertificationChangeApi()
                         .setRealName(mRealName)
                         .setCompanyId(mCompanyId)
                         .setPositionName(mPosition)

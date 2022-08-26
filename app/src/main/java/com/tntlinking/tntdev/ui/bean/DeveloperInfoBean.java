@@ -55,7 +55,7 @@ public class DeveloperInfoBean implements Serializable {
         private String lowestSalary; // 期望最低薪资
         private String highestSalary; // 期望最高薪资
         private String expectSalary; //薪资
-        private String careerDirection; //职业方向
+
         private String workYearsName; //工作年限
 
         public int getCareerDirectionId() {
@@ -120,14 +120,6 @@ public class DeveloperInfoBean implements Serializable {
 
         public void setExpectSalary(String expectSalary) {
             this.expectSalary = expectSalary;
-        }
-
-        public String getCareerDirection() {
-            return careerDirection;
-        }
-
-        public void setCareerDirection(String careerDirection) {
-            this.careerDirection = careerDirection;
         }
 
         public String getWorkYearsName() {

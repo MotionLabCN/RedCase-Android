@@ -12,14 +12,13 @@ import android.widget.TextView;
 import com.hjq.bar.TitleBar;
 import com.hjq.base.BaseDialog;
 import com.hjq.http.EasyHttp;
+import com.hjq.http.EasyLog;
 import com.hjq.http.listener.HttpCallback;
 import com.tntlinking.tntdev.R;
 import com.tntlinking.tntdev.app.AppActivity;
 import com.tntlinking.tntdev.http.api.GetFirmCompanyInfoApi;
 import com.tntlinking.tntdev.http.api.QuitCompanyApi;
-import com.tntlinking.tntdev.http.api.ToSignApi;
 import com.tntlinking.tntdev.http.model.HttpData;
-import com.tntlinking.tntdev.ui.activity.BrowserActivity;
 
 import androidx.appcompat.widget.AppCompatButton;
 
@@ -34,6 +33,7 @@ public final class MyCompanyActivity extends AppActivity {
     private LinearLayout ll_bottom;
     private AppCompatButton btn_leave;
     private AppCompatButton btn_change;
+    private String mMobile;
 
     @Override
     protected int getLayoutId() {
@@ -76,8 +76,9 @@ public final class MyCompanyActivity extends AppActivity {
         btn_change.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MyCompanyActivity.this, NewCompanyActivity.class);
+                Intent intent = new Intent(MyCompanyActivity.this, FirmCertificationActivity.class);
                 intent.putExtra("isChange", true);
+                intent.putExtra("mobile", mMobile);
                 startActivity(intent);
                 finish();
 
@@ -89,6 +90,7 @@ public final class MyCompanyActivity extends AppActivity {
     @Override
     protected void initData() {
         int status = getInt("status");
+        mMobile = getString("mobile");
         if (status == 2) {// 2  审核中。。
             ll_bottom.setVisibility(View.GONE);
         } else {

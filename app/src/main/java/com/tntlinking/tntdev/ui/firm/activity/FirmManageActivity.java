@@ -226,13 +226,14 @@ public final class FirmManageActivity extends AppActivity implements OnRefreshLo
                     @Override
                     public void onSucceed(HttpData<FirmMemberListApi.Bean> data) {
                         dialog.dismiss();
-                        getFirmMemberList(1);
+                        finish();
                     }
 
                     @Override
                     public void onFail(Exception e) {
                         super.onFail(e);
                         dialog.dismiss();
+                        finish();
                     }
                 });
     }

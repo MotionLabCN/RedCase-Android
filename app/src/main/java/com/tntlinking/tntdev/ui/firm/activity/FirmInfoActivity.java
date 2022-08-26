@@ -14,6 +14,7 @@ import com.tntlinking.tntdev.app.AppActivity;
 import com.tntlinking.tntdev.http.api.GetFirmPositionApi;
 import com.tntlinking.tntdev.http.api.GetPositionOriginalApi;
 import com.tntlinking.tntdev.http.model.HttpData;
+import com.tntlinking.tntdev.ui.activity.SaveQRActivity;
 
 
 import java.io.Serializable;
@@ -77,7 +78,7 @@ public final class FirmInfoActivity extends AppActivity {
         switch (view.getId()) {
             case R.id.btn_modify:
                 GetFirmPositionApi.Bean.ListBean bean = getSerializable("position_bean");
-                Intent intent = new Intent(getActivity(), SendPositionActivity.class);
+                Intent intent = new Intent(this, SendPositionActivity.class);
                 intent.putExtra("position_bean", bean);
                 intent.putExtra("position_bean_ids", beanIds);
                 startActivity(intent);
@@ -89,7 +90,10 @@ public final class FirmInfoActivity extends AppActivity {
                         //.setText(id, "我是预设置的文本")
                         .setOnClickListener(R.id.iv_close, (dialog, views) -> dialog.dismiss())
                         .setOnClickListener(R.id.btn_commit, (dialog, views) -> {
-
+                            Intent intent1 = new Intent();
+                            intent1.setClass(this, SaveQRActivity.class);
+                            intent1.putExtra("contact", "contact");
+                            startActivity(intent1);
                         }).show();
                 break;
         }

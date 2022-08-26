@@ -4,16 +4,14 @@ import com.hjq.http.config.IRequestApi;
 import com.hjq.http.config.IRequestType;
 import com.hjq.http.model.BodyType;
 
-import java.util.List;
-
 /**
- * 企业认证审核
+ * 企业认证更换操作
  */
-public final class FirmCertificationApi implements IRequestApi, IRequestType {
+public final class FirmCertificationChangeApi implements IRequestApi, IRequestType {
 
     @Override
     public String getApi() {
-        return "tntlinking-member/sso/app/companyMember/upgradeAccount";
+        return "tntlinking-member/sso/app/companyMember/change";
     }
 
     private String address = "";
@@ -27,47 +25,47 @@ public final class FirmCertificationApi implements IRequestApi, IRequestType {
     private String realName;
 
 
-    public FirmCertificationApi setAddress(String address) {
+    public FirmCertificationChangeApi setAddress(String address) {
         this.address = address;
         return this;
     }
 
-    public FirmCertificationApi setProvinceId(int provinceId) {
+    public FirmCertificationChangeApi setProvinceId(int provinceId) {
         this.provinceId = provinceId;
         return this;
     }
 
-    public FirmCertificationApi setCityId(int cityId) {
+    public FirmCertificationChangeApi setCityId(int cityId) {
         this.cityId = cityId;
         return this;
     }
 
-    public FirmCertificationApi setAreaId(int areasId) {
+    public FirmCertificationChangeApi setAreaId(int areasId) {
         this.areaId = areasId;
         return this;
     }
 
-    public FirmCertificationApi setCompanyId(int companyId) {
+    public FirmCertificationChangeApi setCompanyId(int companyId) {
         this.companyId = companyId;
         return this;
     }
 
-    public FirmCertificationApi setEmail(String email) {
+    public FirmCertificationChangeApi setEmail(String email) {
         this.email = email;
         return this;
     }
 
-    public FirmCertificationApi setEmailCode(String emailCode) {
+    public FirmCertificationChangeApi setEmailCode(String emailCode) {
         this.emailCode = emailCode;
         return this;
     }
 
-    public FirmCertificationApi setPositionName(String positionName) {
+    public FirmCertificationChangeApi setPositionName(String positionName) {
         this.positionName = positionName;
         return this;
     }
 
-    public FirmCertificationApi setRealName(String realName) {
+    public FirmCertificationChangeApi setRealName(String realName) {
         this.realName = realName;
         return this;
     }

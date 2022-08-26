@@ -1,5 +1,7 @@
 package com.tntlinking.tntdev.ui.firm.activity;
+
 import android.content.Intent;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
 import com.hjq.http.EasyHttp;
@@ -9,6 +11,7 @@ import com.tntlinking.tntdev.aop.SingleClick;
 import com.tntlinking.tntdev.app.AppActivity;
 import com.tntlinking.tntdev.http.api.GetAuditionDetailApi;
 import com.tntlinking.tntdev.http.model.HttpData;
+import com.tntlinking.tntdev.ui.activity.BrowserActivity;
 
 import androidx.appcompat.widget.AppCompatButton;
 
@@ -22,6 +25,7 @@ public final class FirmAuditionDetailActivity extends AppActivity {
     private TextView tv_name;
     private TextView tv_meeting_code;
 
+    private String meetingUrl;
 
     @Override
     protected int getLayoutId() {
@@ -68,7 +72,9 @@ public final class FirmAuditionDetailActivity extends AppActivity {
         Intent intent = new Intent();
         switch (view.getId()) {
             case R.id.btn_commit:
-
+                if (!TextUtils.isEmpty(meetingUrl)) {
+                    BrowserActivity.start(getActivity(), meetingUrl);
+                }
                 break;
         }
 
@@ -90,6 +96,7 @@ public final class FirmAuditionDetailActivity extends AppActivity {
                             tv_position.setText(bean.getPositionName());
                             tv_name.setText(bean.getDeveloperName());
                             tv_meeting_code.setText(bean.getMeetingCode());
+                            meetingUrl = bean.getMeetingUrl();
                         }
                     }
                 });

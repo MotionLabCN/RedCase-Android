@@ -84,10 +84,11 @@ public final class SelectAdminActivity extends AppActivity {
                 .request(new HttpCallback<HttpData<GetFirmInfoApi.Bean>>(this) {
                     @Override
                     public void onSucceed(HttpData<GetFirmInfoApi.Bean> data) {
+                        SPUtils.getInstance().put(AppConfig.DEVELOP_MOBILE, data.getData().getMobile());
 
                         JPushInterface.setAlias(getActivity(), 1001, "ttsl_recruiter_" + data.getData().getId());
-                        startActivity(FirmMainActivity.class);
                         ActivityManager.getInstance().finishAllActivities();
+                        startActivity(FirmMainActivity.class);
                     }
                 });
 

@@ -261,7 +261,7 @@
                     app:bar_lineVisible="false"
                     app:bar_rightDrawable="@drawable/icon_arrow_right"
                     app:bar_rightDrawableSize="@dimen/dp_16"
-                    app:bar_rightText="不通过重新认证"
+                    app:bar_rightText="去认证"
                     app:bar_rightTextColor="@color/color_hint_color"
                     app:bar_rightTextSize="@dimen/sp_13" />
 

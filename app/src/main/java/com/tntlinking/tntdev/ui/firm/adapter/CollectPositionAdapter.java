@@ -101,18 +101,21 @@ public final class CollectPositionAdapter extends BaseAdapter {
                 holder.view_dot.setBackgroundResource(R.drawable.dot_oval_orange);
                 holder.ll_status.setBackgroundResource(R.drawable.bg_orange_radius_3);
             }
-        }else {
+        } else {
             holder.ll_status.setVisibility(View.GONE);
         }
         TagFirmAdapter adapter = new TagFirmAdapter(mContext, 2);
         holder.tag_flow_layout.setAdapter(adapter);
         //标签显示最多4个
-        if (item.getSkillNameList().size() > 4) {
-            List<String> strings = item.getSkillNameList().subList(0, 4);
-            adapter.onlyAddAll(strings);
-        } else {
-            adapter.onlyAddAll(item.getSkillNameList());
+        if (item.getSkillNameList() != null && item.getSkillNameList().size() != 0) {
+            if (item.getSkillNameList().size() > 4) {
+                List<String> strings = item.getSkillNameList().subList(0, 4);
+                adapter.onlyAddAll(strings);
+            } else {
+                adapter.onlyAddAll(item.getSkillNameList());
+            }
         }
+
         return convertView;
     }
 
