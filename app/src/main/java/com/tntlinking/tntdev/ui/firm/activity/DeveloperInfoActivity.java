@@ -69,7 +69,7 @@ public final class DeveloperInfoActivity extends AppActivity {
     private DevWorkAdapter addWorkAdapter;
     private DevProjectAdapter addProjectAdapter;
     private boolean isCollect = false;//是否收藏
-
+    private int mDeveloperId;
     @Override
     protected int getLayoutId() {
         return R.layout.developer_info_activity;
@@ -102,9 +102,9 @@ public final class DeveloperInfoActivity extends AppActivity {
 
     @Override
     protected void initData() {
-        int developerId = getInt("developerId");
-        getFirmDevDetail(developerId);
-        getCollectStatus(developerId);
+        mDeveloperId = getInt("developerId");
+        getFirmDevDetail(mDeveloperId);
+        getCollectStatus(mDeveloperId);
         if (!TextUtils.isEmpty(getString("from"))) {
             ll_bottom.setVisibility(View.GONE);
         } else {
@@ -152,16 +152,20 @@ public final class DeveloperInfoActivity extends AppActivity {
         switch (view.getId()) {
             case R.id.ll_to_collect:
                 if (isCollect) {
-                    cancelCollectDeveloper(getInt("developerId"));
+                    cancelCollectDeveloper(mDeveloperId);
                 } else {
-                    collectDeveloper(getInt("developerId"));
+                    collectDeveloper(mDeveloperId);
                 }
                 break;
             case R.id.ll_to_sign:
                 new BottomListDialog.Builder(this).setData(mList).setListener(new BottomListDialog.OnListener() {
                     @Override
                     public void onSelected(BaseDialog dialog) {
-                        startActivity(SendPositionActivity.class);
+//                        startActivity(SendPositionActivity.class);
+                        Intent intent = new Intent();
+                        intent.setClass(DeveloperInfoActivity.this, SendPositionActivity.class);
+                        intent.putExtra("developerId", mDeveloperId);
+                        startActivity(intent);
                     }
                 }).setOnItemListener(new OnItemClickListener() {
                     @Override
@@ -174,7 +178,7 @@ public final class DeveloperInfoActivity extends AppActivity {
                         intent.putExtra("positionName", bean.getCareerDto().getCareerDirectionName());
                         intent.putExtra("expectSalary", bean.getWorkModeDtoList().get(0).getExpectSalary());
                         intent.putExtra("developerId", bean.getId());
-                        intent.putExtra("name", bean.getRealName());
+                        intent.putExtra("realName", bean.getRealName());
                         intent.putExtra("avatarUrl", bean.getAvatarUrl());
                         startActivity(intent);
                     }

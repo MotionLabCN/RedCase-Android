@@ -122,7 +122,7 @@ public final class ChangeAdminActivity extends AppActivity {
                         //删除极光推送别名
                         JPushInterface.deleteAlias(ChangeAdminActivity.this, 1001);
 
-                        JPushInterface.setAlias(getActivity(), 1001, "ttsl_recruiter_" + data.getData().getId());
+                        JPushInterface.setAlias(getActivity(), 1001, AppConfig.JPUSH_FIRM + data.getData().getId());
                         ActivityManager.getInstance().finishAllActivities();
                         startActivity(FirmMainActivity.class);
                     }
@@ -149,7 +149,7 @@ public final class ChangeAdminActivity extends AppActivity {
                         //删除极光推送别名
                         JPushInterface.deleteAlias(ChangeAdminActivity.this, 1001);
 
-                        JPushInterface.setAlias(getActivity(), 1001, "ttsl_" + data.getData().getId());
+                        JPushInterface.setAlias(getActivity(), 1001, AppConfig.JPUSH_DEV + data.getData().getId());
                         ActivityManager.getInstance().finishAllActivities();
                         startActivity(MainActivity.class);
 

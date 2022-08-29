@@ -217,4 +217,12 @@ public final class AppConfig {
      */
     public static String ROLE_FIRM = "firm";
 
+    /**
+     * 开发者端 极光推送前缀
+     */
+    public static String JPUSH_DEV = "ttsl_";
+    /**
+     * 企业端 极光推送前缀
+     */
+    public static String JPUSH_FIRM = "ttsl_recruiter_app_";
 }

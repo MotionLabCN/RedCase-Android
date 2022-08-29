@@ -258,19 +258,7 @@ public final class FirmMineFragment extends TitleBarFragment<FirmMainActivity> i
     }
 
 
-//    private void GetCompanyInfoApi() {
-//        EasyHttp.get(this)
-//                .api(new GetCompanyInfoApi())
-//                .request(new HttpCallback<HttpData<Boolean>>(this) {
-//
-//                    @Override
-//                    public void onSucceed(HttpData<Boolean> data) {
-//
-//
-//                    }
-//                });
-//
-//    }
+
 
 
     @Override

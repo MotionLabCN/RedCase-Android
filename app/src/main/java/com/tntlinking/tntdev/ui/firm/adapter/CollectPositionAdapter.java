@@ -89,20 +89,19 @@ public final class CollectPositionAdapter extends BaseAdapter {
 //        holder.tv_salary.setText(item.getExpectSalary() + "");
         holder.tv_salary.setText((Utils.formatMoney(item.getExpectSalary() / 1000) + "k/月"));
         holder.tv_all_day.setText(item.getWorkMode());
-        if (!TextUtils.isEmpty(item.getStatus())) {
-            holder.tv_status.setText(item.getStatus());
-            holder.ll_status.setVisibility(View.VISIBLE);
-            if (item.getStatus().equals("已签单")) {
-                holder.tv_status.setTextColor(mContext.getResources().getColor(R.color.color_5CE28A));
-                holder.view_dot.setBackgroundResource(R.drawable.dot_oval_green);
-                holder.ll_status.setBackgroundResource(R.drawable.bg_green_radius_3);
-            } else if (item.getStatus().equals("待签单")) {
-                holder.tv_status.setTextColor(mContext.getResources().getColor(R.color.color_FB8B39));
-                holder.view_dot.setBackgroundResource(R.drawable.dot_oval_orange);
-                holder.ll_status.setBackgroundResource(R.drawable.bg_orange_radius_3);
-            }
+
+        //2 3 4 显示已签单  其他 显示待签单
+        if (item.getStatus() == 2 || item.getStatus() == 3 || item.getStatus() == 4) {
+            holder.tv_status.setTextColor(mContext.getResources().getColor(R.color.color_5CE28A));
+            holder.view_dot.setBackgroundResource(R.drawable.dot_oval_green);
+            holder.ll_status.setBackgroundResource(R.drawable.bg_green_radius_3);
+            holder.tv_status.setText("已签单");
         } else {
-            holder.ll_status.setVisibility(View.GONE);
+            holder.tv_status.setTextColor(mContext.getResources().getColor(R.color.color_FB8B39));
+            holder.view_dot.setBackgroundResource(R.drawable.dot_oval_orange);
+            holder.ll_status.setBackgroundResource(R.drawable.bg_orange_radius_3);
+            holder.tv_status.setText("待签单");
+
         }
         TagFirmAdapter adapter = new TagFirmAdapter(mContext, 2);
         holder.tag_flow_layout.setAdapter(adapter);

@@ -28,6 +28,7 @@ public final class UpdateCompanyImageApi implements IRequestApi {
         private String companyName;
         private String taxInvoice;
         private String businessLicense;
+        private String address;
 
         public String getCompanyName() {
             return companyName;
@@ -51,6 +52,14 @@ public final class UpdateCompanyImageApi implements IRequestApi {
 
         public void setBusinessLicense(String businessLicense) {
             this.businessLicense = businessLicense;
+        }
+
+        public String getAddress() {
+            return address;
+        }
+
+        public void setAddress(String address) {
+            this.address = address;
         }
     }
 }

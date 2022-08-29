@@ -64,7 +64,7 @@ public final class GetFavoriteDeveloperApi implements IRequestApi {
             private int developerId;
             private String avatarUrl;
             private String realName;
-            private String status;
+            private int status;
             private String workMode;
             private double expectSalary;
             private String careerDirectionName;
@@ -96,11 +96,11 @@ public final class GetFavoriteDeveloperApi implements IRequestApi {
                 this.realName = realName;
             }
 
-            public String getStatus() {
+            public int getStatus() {
                 return status;
             }
 
-            public void setStatus(String status) {
+            public void setStatus(int status) {
                 this.status = status;
             }
 

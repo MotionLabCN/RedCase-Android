@@ -46,6 +46,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_20"
                 android:hint="请输入姓名"
+                android:maxLength="8"
                 android:paddingLeft="@dimen/dp_15"
                 android:paddingTop="@dimen/dp_15"
                 android:paddingBottom="@dimen/dp_15"
@@ -67,6 +68,7 @@
                 android:layout_marginTop="@dimen/dp_20"
                 android:hint="请输入手机号"
                 android:inputType="number"
+                android:maxLength="11"
                 android:paddingLeft="@dimen/dp_15"
                 android:paddingTop="@dimen/dp_15"
                 android:paddingBottom="@dimen/dp_15"
@@ -86,6 +88,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_20"
                 android:hint="请输入职位"
+                android:maxLength="12"
                 android:paddingLeft="@dimen/dp_15"
                 android:paddingTop="@dimen/dp_15"
                 android:paddingBottom="@dimen/dp_15"
@@ -105,6 +108,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_20"
                 android:hint="请输入邮箱"
+                android:maxLength="20"
                 android:paddingLeft="@dimen/dp_15"
                 android:paddingTop="@dimen/dp_15"
                 android:paddingBottom="@dimen/dp_15"
@@ -117,17 +121,17 @@
                 android:layout_marginRight="@dimen/dp_16"
                 android:background="#FFECECEC" />
 
-            <com.hjq.widget.view.ClearEditText
-                android:id="@+id/et_address"
-                style="@style/EditTextStyleNew"
+            <TextView
+                android:id="@+id/tv_address"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_20"
-                android:hint="请输入地址"
                 android:paddingLeft="@dimen/dp_15"
                 android:paddingTop="@dimen/dp_15"
+                android:textColor="@color/color_text_color"
                 android:paddingBottom="@dimen/dp_15"
-                android:singleLine="true" />
+                android:singleLine="true"
+                android:text="地址" />
         </LinearLayout>
 
     </ScrollView>

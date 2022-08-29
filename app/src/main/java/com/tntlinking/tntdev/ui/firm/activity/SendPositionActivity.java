@@ -84,6 +84,7 @@ public final class SendPositionActivity extends AppActivity {
     private String mCount = "0";
     private String mDescription;
     private int mId;
+    private int mDeveloperId;//从开发者页面传过来的，
 
     private List<GetTagListApi.Bean.ChildrenBean> mSelectList = new ArrayList<>();
     private List<Integer> mTagIntList = new ArrayList<>();
@@ -120,6 +121,7 @@ public final class SendPositionActivity extends AppActivity {
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void initData() {
+        mDeveloperId = getInt("developerId");
 //        mCompanyList = getDictionaryList("1");//所属行业
         mWorkYearsIdList = getDictionaryList("4");//工作经验
         mEducationList = getDictionaryList("5");//学历
@@ -339,12 +341,19 @@ public final class SendPositionActivity extends AppActivity {
                         .setEndPay(endPay)
                         .setIndustryMandatory(industryMandatory)
                         .setSkillIds(mTagIntList))
-                .request(new HttpCallback<HttpData<List<GetProvinceApi.ProvinceBean>>>(this) {
+                .request(new HttpCallback<HttpData<Integer>>(this) {
 
                     @Override
-                    public void onSucceed(HttpData<List<GetProvinceApi.ProvinceBean>> data) {
-                        toast("提交成功");
-                        startActivity(SendPositionSuccessActivity.class);
+                    public void onSucceed(HttpData<Integer> data) {
+//                        toast("提交成功");
+//                        startActivity(SendPositionSuccessActivity.class);
+//                        finish();
+
+                        Intent intent = new Intent();
+                        intent.setClass(SendPositionActivity.this, SendPositionSuccessActivity.class);
+                        intent.putExtra("developerId", mDeveloperId);
+                        intent.putExtra("positionId", data.getData());
+                        startActivity(intent);
                         finish();
                     }
                 });
@@ -367,12 +376,19 @@ public final class SendPositionActivity extends AppActivity {
                         .setEndPay(endPay)
                         .setIndustryMandatory(industryMandatory)
                         .setSkillIds(mTagIntList))
-                .request(new HttpCallback<HttpData<List<GetProvinceApi.ProvinceBean>>>(this) {
+                .request(new HttpCallback<HttpData<Integer>>(this) {
 
                     @Override
-                    public void onSucceed(HttpData<List<GetProvinceApi.ProvinceBean>> data) {
-                        toast("提交成功");
-                        startActivity(SendPositionSuccessActivity.class);
+                    public void onSucceed(HttpData<Integer> data) {
+//                        toast("提交成功");
+//                        startActivity(SendPositionSuccessActivity.class);
+//                        finish();
+
+                        Intent intent = new Intent();
+                        intent.setClass(SendPositionActivity.this, SendPositionSuccessActivity.class);
+                        intent.putExtra("developerId", mDeveloperId);
+                        intent.putExtra("positionId", data.getData());
+                        startActivity(intent);
                         finish();
                     }
                 });

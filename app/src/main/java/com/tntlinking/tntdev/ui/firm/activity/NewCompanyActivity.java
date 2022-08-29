@@ -68,6 +68,7 @@ public final class NewCompanyActivity extends AppActivity {
     private String mBusinessLicense;
     private String mCompanyName;
     private String mTaxInvoice;
+    private String mAddress;
     private String mShortName;
     private int mIndustryId;
     private String mIndustryName;
@@ -238,7 +239,8 @@ public final class NewCompanyActivity extends AppActivity {
                         .setIndustryId(mIndustryId)
                         .setPersonSizeId(mPersonSizeId)
                         .setShortName(mShortName)
-                        .setTaxInvoice(mTaxInvoice))
+                        .setTaxInvoice(mTaxInvoice)
+                        .setAddress(mAddress))
                 .request(new HttpCallback<HttpData<DeveloperInfoBean.DeveloperWork>>(this) {
 
                     @Override
@@ -260,7 +262,8 @@ public final class NewCompanyActivity extends AppActivity {
                         .setIndustryId(mIndustryId)
                         .setPersonSizeId(mPersonSizeId)
                         .setShortName(mShortName)
-                        .setTaxInvoice(mTaxInvoice))
+                        .setTaxInvoice(mTaxInvoice)
+                        .setAddress(mAddress))
                 .request(new HttpCallback<HttpData<DeveloperInfoBean.DeveloperWork>>(this) {
 
                     @Override
@@ -306,6 +309,7 @@ public final class NewCompanyActivity extends AppActivity {
                         mCompanyName = bean.getCompanyName();
                         mTaxInvoice = bean.getTaxInvoice();
                         mBusinessLicense = bean.getBusinessLicense();
+                        mAddress = bean.getAddress();
                         GlideApp.with(getActivity())
                                 .load(file)
                                 .transform(new MultiTransformation<>(new CenterCrop(), new RoundedCorners((int) getResources().getDimension(R.dimen.dp_8))))

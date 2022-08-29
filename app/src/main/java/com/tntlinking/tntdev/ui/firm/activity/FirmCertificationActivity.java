@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.blankj.utilcode.util.GsonUtils;
 import com.blankj.utilcode.util.SPUtils;
+import com.hjq.bar.TitleBar;
 import com.hjq.base.BaseDialog;
 import com.hjq.http.EasyHttp;
 import com.hjq.http.EasyLog;
@@ -38,6 +39,7 @@ import androidx.appcompat.widget.AppCompatButton;
  * 企业认证页面
  */
 public final class FirmCertificationActivity extends AppActivity {
+    private TitleBar title_bar;
     private ClearEditText et_name;
     private TextView tv_company_name;
     private TextView tv_new_company;
@@ -69,6 +71,7 @@ public final class FirmCertificationActivity extends AppActivity {
 
     @Override
     protected void initView() {
+        title_bar = findViewById(R.id.title_bar);
         et_name = findViewById(R.id.et_name);
         tv_company_name = findViewById(R.id.tv_company_name);
         tv_new_company = findViewById(R.id.tv_new_company);
@@ -95,6 +98,11 @@ public final class FirmCertificationActivity extends AppActivity {
         isChange = getBoolean("isChange");
         mMobile = getString("mobile");
         tv_mobile.setText(mMobile);
+        if (isChange) {
+            title_bar.setTitle("升级企业账户");
+        } else {
+            title_bar.setTitle("更换企业账户");
+        }
     }
 
 

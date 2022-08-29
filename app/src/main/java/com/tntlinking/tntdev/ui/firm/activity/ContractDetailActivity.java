@@ -102,7 +102,7 @@ public final class ContractDetailActivity extends AppActivity {
             btn_create.setText("创建合约单");
             positionId = getInt("positionId");
             developerId = getInt("developerId");
-            String name = getString("name");
+            String name = getString("realName");
             String positionName = getString("positionName");
             String expectSalary = getString("expectSalary");
             String avatarUrl = getString("avatarUrl");

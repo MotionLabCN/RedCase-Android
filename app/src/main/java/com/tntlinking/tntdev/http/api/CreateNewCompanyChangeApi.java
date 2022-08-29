@@ -21,6 +21,8 @@ public final class CreateNewCompanyChangeApi implements IRequestApi, IRequestTyp
     private int personSizeId;
     private String shortName;
     private String taxInvoice;
+    private String address;
+
 
 
     public CreateNewCompanyChangeApi setBusinessLicense(String businessLicense) {
@@ -55,6 +57,11 @@ public final class CreateNewCompanyChangeApi implements IRequestApi, IRequestTyp
 
     public CreateNewCompanyChangeApi setTaxInvoice(String taxInvoice) {
         this.taxInvoice = taxInvoice;
+        return this;
+    }
+
+    public CreateNewCompanyChangeApi setAddress(String address) {
+        this.address = address;
         return this;
     }
 

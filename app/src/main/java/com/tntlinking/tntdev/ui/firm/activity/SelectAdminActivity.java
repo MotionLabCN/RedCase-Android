@@ -86,7 +86,7 @@ public final class SelectAdminActivity extends AppActivity {
                     public void onSucceed(HttpData<GetFirmInfoApi.Bean> data) {
                         SPUtils.getInstance().put(AppConfig.DEVELOP_MOBILE, data.getData().getMobile());
 
-                        JPushInterface.setAlias(getActivity(), 1001, "ttsl_recruiter_" + data.getData().getId());
+                        JPushInterface.setAlias(getActivity(), 1001, AppConfig.JPUSH_FIRM + data.getData().getId());
                         ActivityManager.getInstance().finishAllActivities();
                         startActivity(FirmMainActivity.class);
                     }
@@ -112,7 +112,7 @@ public final class SelectAdminActivity extends AppActivity {
                         SPUtils.getInstance().put(AppConfig.DEVELOPER_ID, data.getData().getId());
 
 
-                        JPushInterface.setAlias(getActivity(), 1001, "ttsl_" + data.getData().getId());
+                        JPushInterface.setAlias(getActivity(), 1001, AppConfig.JPUSH_DEV + data.getData().getId());
                         ActivityManager.getInstance().finishAllActivities();
                         startActivity(MainActivity.class);
 
