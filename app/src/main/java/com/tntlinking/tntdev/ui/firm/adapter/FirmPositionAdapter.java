@@ -94,8 +94,8 @@ public final class FirmPositionAdapter extends BaseAdapter {
         String mStart = Utils.formatMoney(item.getStartPay() / 1000) + "k";
         String mEnd = Utils.formatMoney(item.getEndPay() / 1000) + "k";
         holder.tv_salary.setText(mStart + "-" + mEnd);
-        holder.tv_company_name.setText(item.getCareerDirection());
-        holder.tv_position_desc.setText(item.getWorkDaysMode() + "·" + item.getEducation() + "·工作经验" + item.getWorkYears());
+        holder.tv_company_name.setText(item.getCompanyName());
+        holder.tv_position_desc.setText(item.getWorkDaysMode() + "·" + item.getEducation() + "·工作经验" + item.getWorkYears() + "·" + item.getIndustryName());
 
         holder.tv_position_recommend.setText("已有" + item.getCountRecommends() + "人推荐，" + item.getCountSelfRecommends() + "人自荐");
         holder.tv_reason.setOnClickListener(new View.OnClickListener() {
@@ -107,14 +107,29 @@ public final class FirmPositionAdapter extends BaseAdapter {
             }
         });
 
-        if (item.getAuditStatus() == 2) {//1 是通过，0 是审核中 2 是未通过
+        if (item.getAuditStatus() == 0) {//0 是审核中,1 是通过， 2 是未通过
             holder.ll_status.setVisibility(View.VISIBLE);
-            holder.tv_reason.setVisibility(View.VISIBLE);
+            holder.tv_reason.setVisibility(View.GONE);
             holder.tv_position_recommend.setVisibility(View.GONE);
-        } else {
+
+            holder.tv_status.setTextColor(mContext.getResources().getColor(R.color.color_FB8B39));
+            holder.view_dot.setBackgroundResource(R.drawable.dot_oval_orange);
+            holder.ll_status.setBackgroundResource(R.drawable.bg_orange_radius_3);
+            holder.tv_status.setText("审核中");
+
+        } else if (item.getAuditStatus() == 1){
             holder.ll_status.setVisibility(View.GONE);
             holder.tv_reason.setVisibility(View.GONE);
             holder.tv_position_recommend.setVisibility(View.VISIBLE);
+        }else {
+            holder.ll_status.setVisibility(View.VISIBLE);
+            holder.tv_reason.setVisibility(View.VISIBLE);
+            holder.tv_position_recommend.setVisibility(View.GONE);
+
+            holder.tv_status.setTextColor(mContext.getResources().getColor(R.color.color_F5313D));
+            holder.view_dot.setBackgroundResource(R.drawable.dot_oval_red);
+            holder.ll_status.setBackgroundResource(R.drawable.bg_red_radius_3);
+            holder.tv_status.setText("未通过");
         }
 
 

@@ -1,5 +1,6 @@
 package com.tntlinking.tntdev.ui.firm.activity;
 
+import android.content.Intent;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -97,33 +98,33 @@ public final class PositionSearchListActivity extends AppActivity implements OnR
         EasyHttp.get(this)
                 .api(new SearchDeveloperApi().setSearch(str).setPageNum(pageNum).setPageSize(20))
                 .request(new HttpCallback<HttpData<GetFirmDevApi.Bean>>(this) {
-            @Override
-            public void onSucceed(HttpData<GetFirmDevApi.Bean> data) {
-                mRefreshLayout.setEnableLoadMore(true);
-                if (data.getData().getList().size() >= 0) {
-                    ll_empty.setVisibility(View.GONE);
-                    if (pageNum == 1) {
-                        if (data.getData().getList().size() == 0) {
-                            ll_empty.setVisibility(View.VISIBLE);
-                            mRefreshLayout.setEnableLoadMore(false);
-                        } else {
-                            mList.clear();
-                            mList.addAll(data.getData().getList());
-                            mAdapter.setData(mList);
+                    @Override
+                    public void onSucceed(HttpData<GetFirmDevApi.Bean> data) {
+                        mRefreshLayout.setEnableLoadMore(true);
+                        if (data.getData().getList().size() >= 0) {
+                            ll_empty.setVisibility(View.GONE);
+                            if (pageNum == 1) {
+                                if (data.getData().getList().size() == 0) {
+                                    ll_empty.setVisibility(View.VISIBLE);
+                                    mRefreshLayout.setEnableLoadMore(false);
+                                } else {
+                                    mList.clear();
+                                    mList.addAll(data.getData().getList());
+                                    mAdapter.setData(mList);
+                                }
+                                mRefreshLayout.finishRefresh();
+                            } else {
+                                if (pageNum == data.getData().getPageNum()) { //当前pageNum 是否等于后台传过来的当前页pagenum 数
+                                    mList.addAll(data.getData().getList());
+                                    mAdapter.setData(mList);
+                                }
+                                mRefreshLayout.finishLoadMore();
+                            }
+
                         }
-                        mRefreshLayout.finishRefresh();
-                    } else {
-                        if (pageNum == data.getData().getPageNum()) { //当前pageNum 是否等于后台传过来的当前页pagenum 数
-                            mList.addAll(data.getData().getList());
-                            mAdapter.setData(mList);
-                        }
-                        mRefreshLayout.finishLoadMore();
+
                     }
-
-                }
-
-            }
-        });
+                });
     }
 
 
@@ -132,11 +133,9 @@ public final class PositionSearchListActivity extends AppActivity implements OnR
      */
     @Override
     public void onItemClick(RecyclerView recyclerView, View itemView, int position) {
-//        Intent intent = new Intent(this, IncomeDetailActivity.class);
-//        intent.putExtra("orderId", mAdapter.getItem(position).getId());
-//        startActivity(intent);
-
-        startActivity(FirmAuditionDetailActivity.class);
+        Intent intent = new Intent(getActivity(), DeveloperInfoActivity.class);
+        intent.putExtra("developerId", mList.get(position).getId());
+        startActivity(intent);
     }
 
     /**

@@ -77,7 +77,7 @@ public final class FirmPositionFragment extends TitleBarFragment<FirmMainActivit
                 Intent intent = new Intent(getActivity(), RecommendPositionActivity.class);
                 intent.putExtra("position_bean", item);
                 startActivity(intent);
-             }
+            }
         });
         mAdapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
@@ -144,7 +144,8 @@ public final class FirmPositionFragment extends TitleBarFragment<FirmMainActivit
                     @Override
                     public void onSucceed(HttpData<GetFirmPositionApi.Bean> data) {
                         mRefreshLayout.setEnableLoadMore(true);
-                        if (data.getData().getList().size() >= 0) {
+
+                        if (data.getData().getList() != null && data.getData().getList().size() >= 0) {
                             ll_empty.setVisibility(View.GONE);
                             if (pageNum == 1) {
                                 if (data.getData().getList().size() == 0) {
@@ -164,6 +165,10 @@ public final class FirmPositionFragment extends TitleBarFragment<FirmMainActivit
                                 mRefreshLayout.finishLoadMore();
                             }
 
+                        } else {
+                            ll_empty.setVisibility(View.VISIBLE);
+                            mRefreshLayout.setEnableLoadMore(false);
+                            mRefreshLayout.finishRefresh();
                         }
                     }
 

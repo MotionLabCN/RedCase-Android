@@ -70,11 +70,11 @@ public final class SendPositionActivity extends AppActivity {
     private String careerDirectionName = "";
     private int workYearsId = 0;//工作年限id
     private String workYearsName = "";
-    private int educationId = 1;//学历id
+    private int educationId = 0;//学历id
     private String educationName = "";//学历
-    private int trainingId = 1;//培养方式id
+    private int trainingId = 0;//培养方式id
     private String trainingName = "";//培养方式
-    private int industryMandatory;//行业强制性
+    private int industryMandatory = -1;//行业强制性
     private String industryMandatoryName = "";
     private String major = "";//专业名字
 
@@ -256,11 +256,11 @@ public final class SendPositionActivity extends AppActivity {
             case R.id.position_industry_id:
                 new GenderSelectDialog.Builder(this)
                         .setTitle("是否行业匹配")
-                        .setList("是", "否").setListener(new GenderSelectDialog.OnListener() {
+                        .setList("否", "是").setListener(new GenderSelectDialog.OnListener() {
                             @Override
                             public void onSelected(BaseDialog dialog, int type) {
-
-                                industryMandatoryName = type == 0 ? "是" : "否";
+                                // 0 否 1 是
+                                industryMandatoryName = type == 0 ? "否" : "是";
                                 industryMandatory = type;
                                 position_industry_id.setLeftText(industryMandatoryName);
                             }
@@ -303,6 +303,14 @@ public final class SendPositionActivity extends AppActivity {
                 }
                 if (TextUtils.isEmpty(endPay)) {
                     toast("最高服务价格填写有误");
+                    return;
+                }
+                if (Double.parseDouble(startPay) > Double.parseDouble(endPay)) {
+                    toast("低服务价格不能高于最高服务价格");
+                    return;
+                }
+                if (industryMandatory == -1) {
+                    toast("你还没有选择行业匹配");
                     return;
                 }
                 if (TextUtils.isEmpty(mCount)) {

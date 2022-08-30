@@ -1,9 +1,11 @@
 package com.tntlinking.tntdev.ui.firm.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.LinearLayout;
+
 import com.hjq.http.EasyHttp;
 import com.hjq.http.EasyLog;
 import com.hjq.http.listener.HttpCallback;
@@ -15,16 +17,18 @@ import com.tntlinking.tntdev.app.TitleBarFragment;
 import com.tntlinking.tntdev.http.api.GetFirmRecommendsApi;
 import com.tntlinking.tntdev.http.api.GetFirmSelfRecommendsApi;
 import com.tntlinking.tntdev.http.model.HttpData;
+import com.tntlinking.tntdev.ui.firm.activity.DeveloperInfoActivity;
 import com.tntlinking.tntdev.ui.firm.activity.FirmMainActivity;
 import com.tntlinking.tntdev.ui.firm.adapter.RecommendPositionAdapter;
 import com.tntlinking.tntdev.widget.MyListView;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import androidx.annotation.NonNull;
 
 /**
- * desc   : 服务 Fragment
+ * desc   : 推荐 Fragment
  */
 public final class RecommendPositionFragment extends TitleBarFragment<FirmMainActivity> implements OnRefreshLoadMoreListener {
 
@@ -73,7 +77,13 @@ public final class RecommendPositionFragment extends TitleBarFragment<FirmMainAc
         lv_1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+                Intent intent = new Intent(getActivity(), DeveloperInfoActivity.class);
+                if (mPosition == 1) {
+                    intent.putExtra("developerId", mList1.get(position).getId());
+                } else {
+                    intent.putExtra("developerId", mList2.get(position).getId());
+                }
+                startActivity(intent);
 
             }
         });
@@ -85,8 +95,7 @@ public final class RecommendPositionFragment extends TitleBarFragment<FirmMainAc
     protected void initData() {
         mPosition = getInt(POSITION);
         mPositionId = getInt(POSITION_ID);
-        EasyLog.print("=====mPosition===" + mPosition);
-        EasyLog.print("=====mPositionId===" + mPositionId);
+
         if (mPosition == 1) {
             getRecommendList(mPositionId, mPageNum);
         } else {

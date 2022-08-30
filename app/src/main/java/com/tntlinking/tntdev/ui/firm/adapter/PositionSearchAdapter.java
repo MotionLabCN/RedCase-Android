@@ -61,7 +61,7 @@ public final class PositionSearchAdapter extends AppAdapter<GetFirmDevApi.Bean.L
             tv_name.setText(item.getRealName());
             tv_all_day.setText(item.getWorkDayModeName());
             tv_salary.setText((Utils.formatMoney(item.getExpectSalary() / 1000) + "k/月"));
-            tv_position.setText(item.getCareerDirectionName() + "·工作经验" + item.getWorkYearsName());
+            tv_position.setText(item.getCareerDirectionName() + "·工作经验" + item.getWorkYearsName() + "·" + item.getEducationName());
 
             TagFirmAdapter adapter = new TagFirmAdapter(getContext(), 2);
             tag_flow_layout.setAdapter(adapter);

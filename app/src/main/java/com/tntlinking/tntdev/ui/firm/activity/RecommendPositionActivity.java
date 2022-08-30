@@ -1,16 +1,23 @@
 package com.tntlinking.tntdev.ui.firm.activity;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.blankj.utilcode.util.SPUtils;
 import com.hjq.base.FragmentPagerAdapter;
+import com.hjq.http.EasyHttp;
 import com.hjq.http.EasyLog;
+import com.hjq.http.listener.HttpCallback;
 import com.tntlinking.tntdev.R;
 import com.tntlinking.tntdev.app.AppActivity;
 import com.tntlinking.tntdev.app.AppFragment;
 import com.tntlinking.tntdev.http.api.GetFirmPositionApi;
+import com.tntlinking.tntdev.http.api.GetPositionOriginalApi;
+import com.tntlinking.tntdev.http.model.HttpData;
+import com.tntlinking.tntdev.other.Utils;
 import com.tntlinking.tntdev.ui.adapter.TabAdapter;
 import com.tntlinking.tntdev.ui.firm.fragment.RecommendPositionFragment;
 import com.tntlinking.tntdev.ui.firm.fragment.TreatyOrderFragment;
@@ -19,7 +26,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
 /**
- * 账单明细列表页面
+ * 推荐列表页面
  */
 public final class RecommendPositionActivity extends AppActivity implements ViewPager.OnPageChangeListener, TabAdapter.OnTabListener {
 
@@ -31,8 +38,9 @@ public final class RecommendPositionActivity extends AppActivity implements View
     private LinearLayout ll_tab;
     private TextView tv_refresh;
     private TextView tv_position;
-    private TextView tv_company_name;
+    private TextView tv_salary;
     private TextView tv_position_desc;
+    private LinearLayout ll_recommend;
 
     @Override
     protected int getLayoutId() {
@@ -47,8 +55,9 @@ public final class RecommendPositionActivity extends AppActivity implements View
         ll_tab = findViewById(R.id.ll_tab);
         tv_refresh = findViewById(R.id.tv_refresh);
         tv_position = findViewById(R.id.tv_position);
-        tv_company_name = findViewById(R.id.tv_company_name);
+        tv_salary = findViewById(R.id.tv_salary);
         tv_position_desc = findViewById(R.id.tv_position_desc);
+        ll_recommend = findViewById(R.id.ll_recommend);
 
         mTabView = findViewById(R.id.rv_home_tab);
         mViewPager = findViewById(R.id.vp_home_pager);
@@ -62,6 +71,16 @@ public final class RecommendPositionActivity extends AppActivity implements View
         mTabAdapter = new TabAdapter(this, TabAdapter.TAB_MODE_SERVICE, true);
         mTabView.setAdapter(mTabAdapter);
 
+        ll_recommend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                GetFirmPositionApi.Bean.ListBean bean = getSerializable("position_bean");
+                Intent intent = new Intent(RecommendPositionActivity.this, SendPositionActivity.class);
+                intent.putExtra("position_bean", bean);
+                intent.putExtra("position_bean_ids", beanIds);
+                startActivity(intent);
+            }
+        });
 
     }
 
@@ -75,14 +94,35 @@ public final class RecommendPositionActivity extends AppActivity implements View
         GetFirmPositionApi.Bean.ListBean bean = getSerializable("position_bean");
         if (bean != null) {
             tv_position.setText(bean.getCareerDirection());
-            tv_company_name.setText(bean.getCompanyName());
-            tv_position_desc.setText(bean.getTrainingMode() + "·" + bean.getEducation() + "·" + bean.getWorkYears() + "·" + bean.getIndustryName());
+            tv_position_desc.setText(bean.getTrainingMode() + "·" + bean.getEducation() + "·工作经验" + bean.getWorkYears() + "·" + bean.getIndustryName());
+            double startPay = bean.getStartPay() / 1000;
+            double endPay = bean.getEndPay() / 1000;
+            tv_salary.setText((Utils.formatMoney(startPay) + "k") + "-" + (Utils.formatMoney(endPay) + "k"));
+
+            getPositionOriginal(bean.getId());
         }
+
 
         mPagerAdapter.addFragment(RecommendPositionFragment.newInstance(1, bean.getId()));
         mPagerAdapter.addFragment(RecommendPositionFragment.newInstance(2, bean.getId()));
         mViewPager.setAdapter(mPagerAdapter);
 
+    }
+
+    GetPositionOriginalApi.Bean beanIds;
+
+    //获取职位相关id
+    private void getPositionOriginal(int positionId) {
+        EasyHttp.get(this)
+                .api(new GetPositionOriginalApi().setPositionId(positionId))
+                .request(new HttpCallback<HttpData<GetPositionOriginalApi.Bean>>(this) {
+                    @Override
+                    public void onSucceed(HttpData<GetPositionOriginalApi.Bean> data) {
+                        beanIds = data.getData();
+
+                    }
+
+                });
     }
 
     /**

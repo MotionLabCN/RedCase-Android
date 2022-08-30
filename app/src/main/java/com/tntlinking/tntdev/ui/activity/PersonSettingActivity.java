@@ -106,6 +106,10 @@ public final class PersonSettingActivity extends AppActivity {
                         SPUtils.getInstance().clear();
                         EasyConfig.getInstance().removeHeader("Authorization");
                         startActivity(LoginActivity1.class);
+                        //退出登录之后重新登录不需要选择角色
+                        SPUtils.getInstance().put(AppConfig.HAS_SELECT_ROLE, true);
+                        SPUtils.getInstance().put(AppConfig.LOGIN_ROLE, false);
+                        //删除极光推送别名
                         JPushInterface.deleteAlias(PersonSettingActivity.this, 1001);
                         // 进行内存优化，销毁除登录页之外的所有界面
                         ActivityManager.getInstance().finishAllActivities(LoginActivity1.class);

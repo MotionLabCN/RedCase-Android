@@ -97,7 +97,7 @@ public final class FirmSettingActivity extends AppActivity {
 
     public void loginOut(BaseDialog dialog) {
         // 退出登录
-        EasyHttp.get(this)
+        EasyHttp.post(this)
                 .api(new FirmLogoutApi())
                 .request(new HttpCallback<HttpData<Void>>(this) {
 
@@ -108,6 +108,9 @@ public final class FirmSettingActivity extends AppActivity {
                         EasyConfig.getInstance().removeHeader("Authorization");
                         EasyConfig.getInstance().removeHeader("loginRole");
                         startActivity(LoginActivity1.class);
+                        //退出登录之后重新登录不需要选择角色
+                        SPUtils.getInstance().put(AppConfig.HAS_SELECT_ROLE, true);
+                        SPUtils.getInstance().put(AppConfig.LOGIN_ROLE, true);
                         //删除极光推送别名
                         JPushInterface.deleteAlias(FirmSettingActivity.this, 1001);
                         // 进行内存优化，销毁除登录页之外的所有界面

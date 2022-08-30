@@ -54,19 +54,20 @@ public final class SelectAdminActivity extends AppActivity {
     @SingleClick
     @Override  //请求头loginRole ：Developer 开发者  Recruiter 企业者
     public void onClick(View view) {
+        SPUtils.getInstance().put(AppConfig.HAS_SELECT_ROLE, true);
         switch (view.getId()) {
             case R.id.ll_firm://企业
-                SPUtils.getInstance().put(AppConfig.ACCESS_ROLE, "Recruiter");
-                EasyConfig.getInstance().addHeader(AppConfig.ACCESS_ROLE, "Recruiter");
-                SPUtils.getInstance().put(AppConfig.LOGIN_ROLE, true);
+//                SPUtils.getInstance().put(AppConfig.ACCESS_ROLE, "Recruiter");
+//                EasyConfig.getInstance().addHeader(AppConfig.ACCESS_ROLE, "Recruiter");
+//                SPUtils.getInstance().put(AppConfig.LOGIN_ROLE, true);
 //                startActivity(FirmMainActivity.class);
 //                ActivityManager.getInstance().finishAllActivities();
                 getFirmInfo();
                 break;
             case R.id.ll_dev://开发者
-                SPUtils.getInstance().put(AppConfig.ACCESS_ROLE, "Developer");
-                EasyConfig.getInstance().addHeader(AppConfig.ACCESS_ROLE, "Developer");
-                SPUtils.getInstance().put(AppConfig.LOGIN_ROLE, false);
+//                SPUtils.getInstance().put(AppConfig.ACCESS_ROLE, "Developer");
+//                EasyConfig.getInstance().addHeader(AppConfig.ACCESS_ROLE, "Developer");
+//                SPUtils.getInstance().put(AppConfig.LOGIN_ROLE, false);
 //                startActivity(MainActivity.class);
 //                ActivityManager.getInstance().finishAllActivities();
                 getDeveloperInfo();
@@ -84,6 +85,9 @@ public final class SelectAdminActivity extends AppActivity {
                 .request(new HttpCallback<HttpData<GetFirmInfoApi.Bean>>(this) {
                     @Override
                     public void onSucceed(HttpData<GetFirmInfoApi.Bean> data) {
+                        SPUtils.getInstance().put(AppConfig.ACCESS_ROLE, "Recruiter");
+                        EasyConfig.getInstance().addHeader(AppConfig.ACCESS_ROLE, "Recruiter");
+                        SPUtils.getInstance().put(AppConfig.LOGIN_ROLE, true);
                         SPUtils.getInstance().put(AppConfig.DEVELOP_MOBILE, data.getData().getMobile());
 
                         JPushInterface.setAlias(getActivity(), 1001, AppConfig.JPUSH_FIRM + data.getData().getId());
@@ -111,6 +115,9 @@ public final class SelectAdminActivity extends AppActivity {
                         SPUtils.getInstance().put(AppConfig.DEVELOP_NAME, data.getData().getRealName());
                         SPUtils.getInstance().put(AppConfig.DEVELOPER_ID, data.getData().getId());
 
+                        SPUtils.getInstance().put(AppConfig.ACCESS_ROLE, "Developer");
+                        EasyConfig.getInstance().addHeader(AppConfig.ACCESS_ROLE, "Developer");
+                        SPUtils.getInstance().put(AppConfig.LOGIN_ROLE, false);
 
                         JPushInterface.setAlias(getActivity(), 1001, AppConfig.JPUSH_DEV + data.getData().getId());
                         ActivityManager.getInstance().finishAllActivities();

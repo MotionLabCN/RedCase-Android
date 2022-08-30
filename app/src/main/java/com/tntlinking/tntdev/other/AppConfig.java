@@ -208,6 +208,12 @@ public final class AppConfig {
      * 登陆角色 true 是企业端， false 是开发者端
      */
     public static String LOGIN_ROLE = "login_role";
+
+    /**
+     * 是否选择了登陆角色  默认是没有，true是选择了
+     *
+     */
+    public static String HAS_SELECT_ROLE = "select_role";
     /**
      * 开发登陆者角色
      */

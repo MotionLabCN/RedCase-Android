@@ -25,12 +25,14 @@ import com.tntlinking.tntdev.R;
 import com.tntlinking.tntdev.aop.SingleClick;
 import com.tntlinking.tntdev.app.AppActivity;
 import com.tntlinking.tntdev.http.api.GetDeveloperStatusApi;
+import com.tntlinking.tntdev.http.api.GetFirmInfoApi;
 import com.tntlinking.tntdev.http.api.OneClickLoginApi;
 import com.tntlinking.tntdev.http.model.HttpData;
 import com.tntlinking.tntdev.manager.ActivityManager;
 import com.tntlinking.tntdev.other.AppConfig;
 import com.tntlinking.tntdev.other.PermissionCallback;
 import com.tntlinking.tntdev.ui.dialog.LoginDialog;
+import com.tntlinking.tntdev.ui.firm.activity.FirmMainActivity;
 import com.tntlinking.tntdev.ui.firm.activity.SelectAdminActivity;
 import com.tntlinking.tntdev.widget.CustomVideoView;
 import com.tntlinking.tntdev.widget.config.AuthPageConfig;
@@ -280,7 +282,16 @@ public final class LoginActivity1 extends AppActivity {
                         EasyConfig.getInstance().addHeader("Authorization", "Bearer " + data.getData().getAccessToken());
 
 //                        toLogin();
-                        startActivity(SelectAdminActivity.class);
+                        if (SPUtils.getInstance().getBoolean(AppConfig.HAS_SELECT_ROLE)) {
+                            if (SPUtils.getInstance().getBoolean(AppConfig.LOGIN_ROLE)) {
+                                getFirmInfo();
+                            } else {
+                                getDeveloperInfo();
+                            }
+                        } else {
+                            startActivity(SelectAdminActivity.class);
+                        }
+
                     }
                 });
     }
@@ -348,18 +359,18 @@ public final class LoginActivity1 extends AppActivity {
         SpanUtils.with(viewById).append("我已阅读并同意").setForegroundColor(getColor(R.color.color_text_color))
                 .append("《隐私权限》").setClickSpan(new ClickableSpan() {
 
-            @Override
-            public void onClick(@NonNull View widget) {
-                BrowserPrivateActivity.start(LoginActivity1.this, AppConfig.PRIVATE_URL);
-            }
-        }).setForegroundColor(getColor(R.color.color_text_color)).append("和")
+                    @Override
+                    public void onClick(@NonNull View widget) {
+                        BrowserPrivateActivity.start(LoginActivity1.this, AppConfig.PRIVATE_URL);
+                    }
+                }).setForegroundColor(getColor(R.color.color_text_color)).append("和")
                 .setForegroundColor(getColor(R.color.color_text_color)).append("《用户协议》").setClickSpan(new ClickableSpan() {
 
-            @Override
-            public void onClick(@NonNull View widget) {
-                BrowserPrivateActivity.start(LoginActivity1.this, AppConfig.AGREEMENT_URL);
-            }
-        }).setForegroundColor(getColor(R.color.color_text_color)).append("的全部条款，同意后可开始使用我们的服务。")
+                    @Override
+                    public void onClick(@NonNull View widget) {
+                        BrowserPrivateActivity.start(LoginActivity1.this, AppConfig.AGREEMENT_URL);
+                    }
+                }).setForegroundColor(getColor(R.color.color_text_color)).append("的全部条款，同意后可开始使用我们的服务。")
                 .setForegroundColor(getColor(R.color.color_text_color)).create();
 
         builder.show();
@@ -379,5 +390,58 @@ public final class LoginActivity1 extends AppActivity {
                         }
                     }
                 });
+    }
+
+
+    /**
+     * 企业端
+     */
+    private void getFirmInfo() {
+        EasyHttp.get(this)
+                .api(new GetFirmInfoApi())
+                .request(new HttpCallback<HttpData<GetFirmInfoApi.Bean>>(this) {
+                    @Override
+                    public void onSucceed(HttpData<GetFirmInfoApi.Bean> data) {
+                        SPUtils.getInstance().put(AppConfig.ACCESS_ROLE, "Recruiter");
+                        EasyConfig.getInstance().addHeader(AppConfig.ACCESS_ROLE, "Recruiter");
+                        SPUtils.getInstance().put(AppConfig.LOGIN_ROLE, true);
+                        SPUtils.getInstance().put(AppConfig.DEVELOP_MOBILE, data.getData().getMobile());
+
+                        JPushInterface.setAlias(getActivity(), 1001, AppConfig.JPUSH_FIRM + data.getData().getId());
+                        ActivityManager.getInstance().finishAllActivities();
+                        startActivity(FirmMainActivity.class);
+                    }
+                });
+
+    }
+
+    /**
+     * 开发者端
+     */
+    private void getDeveloperInfo() {
+        EasyHttp.get(this)
+                .api(new GetDeveloperStatusApi())
+                .request(new HttpCallback<HttpData<GetDeveloperStatusApi.Bean>>(this) {
+
+                    @Override
+                    public void onSucceed(HttpData<GetDeveloperStatusApi.Bean> data) {
+                        // 1->待认证  2->待审核   3->审核成功 4->审核失败
+                        SPUtils.getInstance().put(AppConfig.HAS_LOGIN, true);
+                        SPUtils.getInstance().put(AppConfig.DEVELOP_MOBILE, data.getData().getMobile());
+                        SPUtils.getInstance().put(AppConfig.DEVELOP_STATUS, data.getData().getStatus());
+                        SPUtils.getInstance().put(AppConfig.DEVELOP_NAME, data.getData().getRealName());
+                        SPUtils.getInstance().put(AppConfig.DEVELOPER_ID, data.getData().getId());
+
+                        SPUtils.getInstance().put(AppConfig.ACCESS_ROLE, "Developer");
+                        EasyConfig.getInstance().addHeader(AppConfig.ACCESS_ROLE, "Developer");
+                        SPUtils.getInstance().put(AppConfig.LOGIN_ROLE, false);
+
+                        JPushInterface.setAlias(getActivity(), 1001, AppConfig.JPUSH_DEV + data.getData().getId());
+                        ActivityManager.getInstance().finishAllActivities();
+                        startActivity(MainActivity.class);
+
+                    }
+                });
+
     }
 }
