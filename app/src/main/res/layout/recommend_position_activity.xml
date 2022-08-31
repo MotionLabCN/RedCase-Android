@@ -68,74 +68,102 @@
         android:layout_height="@dimen/dp_10"
         android:background="@color/color_F6F6FC" />
 
-    <LinearLayout
-        android:id="@+id/ll_tab"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_home_tab"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingLeft="@dimen/dp_5"
-            tools:itemCount="2"
-            tools:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-            tools:listitem="@layout/tab_item_design"
-            tools:spanCount="2" />
 
-        <com.hjq.widget.layout.NoScrollViewPager
-            android:id="@+id/vp_home_pager"
+        <LinearLayout
+            android:id="@+id/ll_tab"
             android:layout_width="match_parent"
-            android:layout_height="0px"
-            android:layout_weight="1" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/ll_empty"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/white"
-        android:gravity="center|top"
-        android:orientation="vertical"
-        android:paddingTop="@dimen/dp_100"
-        android:visibility="gone">
-
-        <ImageView
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/icon_empty_service" />
+            android:orientation="vertical">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_10"
-            android:text="暂无公司"
-            android:textColor="@color/color_text_color"
-            android:textSize="@dimen/sp_15"
-            android:textStyle="bold" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_home_tab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingLeft="@dimen/dp_5"
+                tools:itemCount="2"
+                tools:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                tools:listitem="@layout/tab_item_design"
+                tools:spanCount="2" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_10"
-            android:text="优化简历获取更多职位推荐"
-            android:textColor="#7E89A3"
-            android:textSize="@dimen/sp_13" />
+            <com.hjq.widget.layout.NoScrollViewPager
+                android:id="@+id/vp_home_pager"
+                android:layout_width="match_parent"
+                android:layout_height="0px"
+                android:layout_weight="1" />
+        </LinearLayout>
 
-        <TextView
-            android:id="@+id/tv_refresh"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/ll_empty"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:gravity="center|top"
+            android:orientation="vertical"
+            android:paddingTop="@dimen/dp_100"
+            android:visibility="gone">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/icon_empty_service" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_10"
+                android:text="暂无公司"
+                android:textColor="@color/color_text_color"
+                android:textSize="@dimen/sp_15"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_10"
+                android:text="优化简历获取更多职位推荐"
+                android:textColor="#7E89A3"
+                android:textSize="@dimen/sp_13" />
+
+            <TextView
+                android:id="@+id/tv_refresh"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_10"
+                android:background="@drawable/btn_blue_radius_10"
+                android:paddingLeft="@dimen/dp_30"
+                android:paddingTop="@dimen/dp_10"
+                android:paddingRight="@dimen/dp_30"
+                android:paddingBottom="@dimen/dp_10"
+                android:text="去优化"
+                android:textColor="@color/white"
+                android:textSize="@dimen/sp_12" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_10"
-            android:background="@drawable/btn_blue_radius_10"
-            android:paddingLeft="@dimen/dp_30"
-            android:paddingTop="@dimen/dp_10"
-            android:paddingRight="@dimen/dp_30"
-            android:paddingBottom="@dimen/dp_10"
-            android:text="去优化"
-            android:textColor="@color/white"
-            android:textSize="@dimen/sp_12" />
-    </LinearLayout>
+            android:layout_gravity="bottom"
+            android:layout_marginVertical="@dimen/dp_16"
+            android:layout_marginLeft="@dimen/dp_16"
+            android:layout_marginRight="@dimen/dp_16"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_commit"
+                style="@style/ButtonStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="关闭职位" />
+        </LinearLayout>
+    </FrameLayout>
+
+
 </LinearLayout>

@@ -3,6 +3,7 @@ package com.tntlinking.tntdev.ui.firm.activity;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -16,12 +17,14 @@ import com.tntlinking.tntdev.app.AppActivity;
 import com.tntlinking.tntdev.app.AppFragment;
 import com.tntlinking.tntdev.http.api.GetFirmPositionApi;
 import com.tntlinking.tntdev.http.api.GetPositionOriginalApi;
+import com.tntlinking.tntdev.http.api.PutPositionStatusApi;
 import com.tntlinking.tntdev.http.model.HttpData;
 import com.tntlinking.tntdev.other.Utils;
 import com.tntlinking.tntdev.ui.adapter.TabAdapter;
 import com.tntlinking.tntdev.ui.firm.fragment.RecommendPositionFragment;
 import com.tntlinking.tntdev.ui.firm.fragment.TreatyOrderFragment;
 
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
@@ -41,6 +44,9 @@ public final class RecommendPositionActivity extends AppActivity implements View
     private TextView tv_salary;
     private TextView tv_position_desc;
     private LinearLayout ll_recommend;
+    private AppCompatButton btn_commit;
+
+    private int mPositionId;
 
     @Override
     protected int getLayoutId() {
@@ -58,6 +64,8 @@ public final class RecommendPositionActivity extends AppActivity implements View
         tv_salary = findViewById(R.id.tv_salary);
         tv_position_desc = findViewById(R.id.tv_position_desc);
         ll_recommend = findViewById(R.id.ll_recommend);
+
+        btn_commit = findViewById(R.id.btn_commit);
 
         mTabView = findViewById(R.id.rv_home_tab);
         mViewPager = findViewById(R.id.vp_home_pager);
@@ -82,6 +90,13 @@ public final class RecommendPositionActivity extends AppActivity implements View
             }
         });
 
+        btn_commit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                closePosition(mPositionId, 0);
+            }
+        });
     }
 
     @SuppressLint("SetTextI18n")
@@ -99,6 +114,7 @@ public final class RecommendPositionActivity extends AppActivity implements View
             double endPay = bean.getEndPay() / 1000;
             tv_salary.setText((Utils.formatMoney(startPay) + "k") + "-" + (Utils.formatMoney(endPay) + "k"));
 
+            mPositionId = bean.getId();
             getPositionOriginal(bean.getId());
         }
 
@@ -123,6 +139,35 @@ public final class RecommendPositionActivity extends AppActivity implements View
                     }
 
                 });
+    }
+
+
+    //关闭职位   //0关1开
+    private void closePosition(int positionId, int status) {
+        EasyHttp.put(this)
+                .api(new PutPositionStatusApi().setPositionId(positionId).setStatus(status))
+                .request(new HttpCallback<HttpData<Void>>(this) {
+                    @Override
+                    public void onSucceed(HttpData<Void> data) {
+
+                        finish();
+                    }
+
+                });
+    }
+
+
+    private void updatePagerHeight(View view, ViewPager pager) {
+        view.post(() -> {
+            int wMeasureSpec = View.MeasureSpec.makeMeasureSpec(view.getWidth(), View.MeasureSpec.EXACTLY);
+            int hMeasureSpec = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
+            view.measure(wMeasureSpec, hMeasureSpec);
+            if (pager.getLayoutParams().height != view.getMeasuredHeight()) {
+                ViewGroup.LayoutParams layoutParams = pager.getLayoutParams();
+                layoutParams.height = view.getMeasuredHeight();
+                pager.setLayoutParams(layoutParams);
+            }
+        });
     }
 
     /**

@@ -46,17 +46,22 @@ public final class SendPositionSuccessActivity extends AppActivity {
         btn_commit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent();
-                intent.setClass(SendPositionSuccessActivity.this, ContractDetailActivity.class);
-                intent.putExtra("positionId", mPositionId);
+                if (mDeveloperId == 0) {
+                    finish();
+                } else {
+                    Intent intent = new Intent();
+                    intent.setClass(SendPositionSuccessActivity.this, ContractDetailActivity.class);
+                    intent.putExtra("positionId", mPositionId);
 
-                intent.putExtra("positionName", mPositionName);
-                intent.putExtra("expectSalary", mExpectSalary);
-                intent.putExtra("developerId", mDeveloperId);
-                intent.putExtra("realName", mRealName);
-                intent.putExtra("avatarUrl", mAvatarUrl);
-                startActivity(intent);
-                finish();
+                    intent.putExtra("positionName", mPositionName);
+                    intent.putExtra("expectSalary", mExpectSalary);
+                    intent.putExtra("developerId", mDeveloperId);
+                    intent.putExtra("realName", mRealName);
+                    intent.putExtra("avatarUrl", mAvatarUrl);
+                    startActivity(intent);
+                    finish();
+                }
+
             }
         });
 

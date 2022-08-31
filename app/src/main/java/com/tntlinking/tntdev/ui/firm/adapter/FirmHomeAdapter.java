@@ -89,7 +89,7 @@ public final class FirmHomeAdapter extends BaseAdapter {
         holder.tv_name.setText(item.getRealName());
         holder.tv_all_day.setText(item.getWorkDayModeName());
         holder.tv_salary.setText((Utils.formatMoney(item.getExpectSalary() / 1000) + "k/月"));
-        holder.tv_position.setText(item.getCareerDirectionName() + "·工作经验" + item.getWorkYearsName()+ "·" + item.getEducationName());
+        holder.tv_position.setText(item.getCareerDirectionName() + "·工作经验" + item.getWorkYearsName() + "·" + item.getEducationName());
 
         TagFirmAdapter adapter = new TagFirmAdapter(mContext, 2);
         holder.tag_flow_layout.setAdapter(adapter);

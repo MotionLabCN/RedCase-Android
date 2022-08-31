@@ -16,6 +16,8 @@ import com.tntlinking.tntdev.R;
 import com.tntlinking.tntdev.app.TitleBarFragment;
 import com.tntlinking.tntdev.http.api.GetFirmRecommendsApi;
 import com.tntlinking.tntdev.http.api.GetFirmSelfRecommendsApi;
+import com.tntlinking.tntdev.http.api.GetPositionOriginalApi;
+import com.tntlinking.tntdev.http.api.PutPositionStatusApi;
 import com.tntlinking.tntdev.http.model.HttpData;
 import com.tntlinking.tntdev.ui.firm.activity.DeveloperInfoActivity;
 import com.tntlinking.tntdev.ui.firm.activity.FirmMainActivity;
@@ -26,6 +28,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.AppCompatButton;
 
 /**
  * desc   : 推荐 Fragment
@@ -36,6 +39,7 @@ public final class RecommendPositionFragment extends TitleBarFragment<FirmMainAc
     private LinearLayout ll_empty;
     private LinearLayout ll_daily;
     private SmartRefreshLayout mRefreshLayout;
+
 
 
     private List<GetFirmRecommendsApi.Bean.ListBean> mList1 = new ArrayList<>();
@@ -68,6 +72,7 @@ public final class RecommendPositionFragment extends TitleBarFragment<FirmMainAc
         lv_1 = findViewById(R.id.lv_1);
         ll_empty = findViewById(R.id.ll_empty);
         ll_daily = findViewById(R.id.ll_daily);
+
 
         mRefreshLayout = findViewById(R.id.rl_status_refresh);
         mRefreshLayout.setOnRefreshLoadMoreListener(this);
@@ -136,6 +141,8 @@ public final class RecommendPositionFragment extends TitleBarFragment<FirmMainAc
                             }
 
                         } else {
+                            mRefreshLayout.finishRefresh();
+                            mRefreshLayout.setEnableLoadMore(false);
                             ll_empty.setVisibility(View.VISIBLE);
                         }
                     }
@@ -179,6 +186,8 @@ public final class RecommendPositionFragment extends TitleBarFragment<FirmMainAc
                             }
 
                         } else {
+                            mRefreshLayout.finishRefresh();
+                            mRefreshLayout.setEnableLoadMore(false);
                             ll_empty.setVisibility(View.VISIBLE);
                         }
                     }
@@ -189,6 +198,8 @@ public final class RecommendPositionFragment extends TitleBarFragment<FirmMainAc
                     }
                 });
     }
+
+
 
     @Override
     public void onRefresh(@NonNull RefreshLayout refreshLayout) {

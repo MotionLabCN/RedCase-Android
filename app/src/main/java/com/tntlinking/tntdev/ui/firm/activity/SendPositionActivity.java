@@ -278,7 +278,7 @@ public final class SendPositionActivity extends AppActivity {
                     return;
                 }
                 if (TextUtils.isEmpty(careerPosition)) {
-                    toast("职位名称填写错误");
+                    toast("职位名称未填写");
                     return;
                 }
                 if (mTagIntList.size() == 0) {
@@ -298,11 +298,11 @@ public final class SendPositionActivity extends AppActivity {
                     return;
                 }
                 if (TextUtils.isEmpty(startPay)) {
-                    toast("最低服务价格填写有误");
+                    toast("最低服务价格未填写");
                     return;
                 }
                 if (TextUtils.isEmpty(endPay)) {
-                    toast("最高服务价格填写有误");
+                    toast("最高服务价格未填写");
                     return;
                 }
                 if (Double.parseDouble(startPay) > Double.parseDouble(endPay)) {
@@ -314,11 +314,11 @@ public final class SendPositionActivity extends AppActivity {
                     return;
                 }
                 if (TextUtils.isEmpty(mCount)) {
-                    toast("需求数量填写有误");
+                    toast("需求数量未填写");
                     return;
                 }
                 if (TextUtils.isEmpty(mDescription)) {
-                    toast("职位描述填写有误");
+                    toast("职位描述未填写");
                     return;
                 }
 
@@ -357,12 +357,14 @@ public final class SendPositionActivity extends AppActivity {
 //                        startActivity(SendPositionSuccessActivity.class);
 //                        finish();
 
+                        int positionId = data.getData();
                         Intent intent = new Intent();
                         intent.setClass(SendPositionActivity.this, SendPositionSuccessActivity.class);
                         intent.putExtra("developerId", mDeveloperId);
-                        intent.putExtra("positionId", data.getData());
+                        intent.putExtra("positionId", positionId);
                         startActivity(intent);
                         finish();
+
                     }
                 });
     }
@@ -392,10 +394,11 @@ public final class SendPositionActivity extends AppActivity {
 //                        startActivity(SendPositionSuccessActivity.class);
 //                        finish();
 
+                        int positionId = data.getData();
                         Intent intent = new Intent();
                         intent.setClass(SendPositionActivity.this, SendPositionSuccessActivity.class);
                         intent.putExtra("developerId", mDeveloperId);
-                        intent.putExtra("positionId", data.getData());
+                        intent.putExtra("positionId", positionId);
                         startActivity(intent);
                         finish();
                     }

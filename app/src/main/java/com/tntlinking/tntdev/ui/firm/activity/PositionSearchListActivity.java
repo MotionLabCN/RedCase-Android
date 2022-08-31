@@ -1,6 +1,7 @@
 package com.tntlinking.tntdev.ui.firm.activity;
 
 import android.content.Intent;
+import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -8,6 +9,9 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.blankj.utilcode.util.GsonUtils;
+import com.blankj.utilcode.util.SPUtils;
+import com.google.gson.reflect.TypeToken;
 import com.hjq.base.BaseAdapter;
 import com.hjq.http.EasyHttp;
 import com.hjq.http.listener.HttpCallback;
@@ -24,8 +28,12 @@ import com.tntlinking.tntdev.http.api.developerBillListApi;
 import com.tntlinking.tntdev.http.model.HttpData;
 import com.tntlinking.tntdev.ui.firm.adapter.AuditionHistoryAdapter;
 import com.tntlinking.tntdev.ui.firm.adapter.PositionSearchAdapter;
+import com.tntlinking.tntdev.ui.firm.adapter.TagFirmAdapter;
+import com.tntlinking.tntdev.widget.FlowTagLayout;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import androidx.annotation.NonNull;
@@ -39,11 +47,15 @@ public final class PositionSearchListActivity extends AppActivity implements OnR
     private EditText et_search;
     private SmartRefreshLayout mRefreshLayout;
     private WrapRecyclerView mRecyclerView;
+    private LinearLayout ll_history;
+    private FlowTagLayout fl_search;
 
     private PositionSearchAdapter mAdapter;
     private List<GetFirmDevApi.Bean.ListBean> mList = new ArrayList<>();
     private int pageNum = 1;
     private String mSearch = "";
+    private  List<String> stringList = new ArrayList<>();
+    private TagFirmAdapter tagAdapter;
 
     @Override
     protected int getLayoutId() {
@@ -58,13 +70,28 @@ public final class PositionSearchListActivity extends AppActivity implements OnR
         et_search = findViewById(R.id.et_search);
         mRefreshLayout = findViewById(R.id.rl_status_refresh);
         mRecyclerView = findViewById(R.id.rv_status_list);
+        ll_history = findViewById(R.id.ll_history);
+        fl_search = findViewById(R.id.fl_search);
+
+
+        tagAdapter = new TagFirmAdapter(this, 2);
+        fl_search.setAdapter(tagAdapter);
+        tagAdapter.onlyAddAll(stringList);
+        fl_search.setOnTagClickListener(new FlowTagLayout.OnTagClickListener() {
+            @Override
+            public void onItemClick(FlowTagLayout parent, View view, int position) {
+                mSearch = stringList.get(position);
+                et_search.setText(mSearch);
+//                searchDeveloper(mSearch, 1);
+            }
+        });
+
 
         mAdapter = new PositionSearchAdapter(this);
         mAdapter.setOnItemClickListener(this);
         mRecyclerView.setAdapter(mAdapter);
 
         mRefreshLayout.setOnRefreshLoadMoreListener(this);
-
         et_search.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
@@ -72,7 +99,9 @@ public final class PositionSearchListActivity extends AppActivity implements OnR
                     // 隐藏软键盘
                     hideKeyboard(getCurrentFocus());
                     mSearch = v.getText().toString();
-                    searchDeveloper(mSearch, 1);
+                    if (!TextUtils.isEmpty(mSearch)) {
+                        searchDeveloper(mSearch, 1);
+                    }
                     return true;
                 }
                 return false;
@@ -83,7 +112,15 @@ public final class PositionSearchListActivity extends AppActivity implements OnR
 
     @Override
     protected void initData() {
-
+        String position_search = SPUtils.getInstance().getString("position_search");
+        if (!TextUtils.isEmpty(position_search)) {
+            ll_history.setVisibility(View.VISIBLE);
+            stringList = GsonUtils.fromJson(position_search, new TypeToken<List<String>>() {}.getType());
+            Collections.reverse(stringList);
+            tagAdapter.onlyAddAll(stringList);
+        } else {
+            ll_history.setVisibility(View.GONE);
+        }
 //        getBillList(pageNum);
     }
 
@@ -123,6 +160,12 @@ public final class PositionSearchListActivity extends AppActivity implements OnR
 
                         }
 
+                        ll_history.setVisibility(View.GONE);
+                        stringList.add(str);
+                        String s = GsonUtils.toJson(stringList);
+                        SPUtils.getInstance().put("position_search", s);
+                        Collections.reverse(stringList);
+                        tagAdapter.onlyAddAll(stringList);
                     }
                 });
     }
