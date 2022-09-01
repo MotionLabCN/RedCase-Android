@@ -4,10 +4,12 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.blankj.utilcode.util.SPUtils;
+import com.hjq.base.BaseDialog;
 import com.hjq.base.FragmentPagerAdapter;
 import com.hjq.http.EasyHttp;
 import com.hjq.http.EasyLog;
@@ -94,7 +96,17 @@ public final class RecommendPositionActivity extends AppActivity implements View
             @Override
             public void onClick(View v) {
 
-                closePosition(mPositionId, 0);
+                new BaseDialog.Builder<>(RecommendPositionActivity.this)
+                        .setContentView(R.layout.write_daily_delete_dialog)
+                        .setAnimStyle(BaseDialog.ANIM_SCALE)
+                        .setText(R.id.tv_title, "确定要关闭职位？")
+                        .setOnClickListener(R.id.btn_dialog_custom_cancel, (BaseDialog.OnClickListener<Button>) (dialog, button) -> dialog.dismiss())
+                        .setOnClickListener(R.id.btn_dialog_custom_ok, (dialog, views) -> {
+                            closePosition(mPositionId, 0);
+                        })
+                        .show();
+
+
             }
         });
     }
@@ -102,17 +114,25 @@ public final class RecommendPositionActivity extends AppActivity implements View
     @SuppressLint("SetTextI18n")
     @Override
     protected void initData() {
-        mTabAdapter.addItem("为您推荐");
-        mTabAdapter.addItem("自荐");
-        mTabAdapter.setOnTabListener(this);
 
         GetFirmPositionApi.Bean.ListBean bean = getSerializable("position_bean");
+        int cunt = bean.getCountRecommends();
+        int self = bean.getCountSelfRecommends();
+        mTabAdapter.addItem("为您推荐·" + cunt);
+        mTabAdapter.addItem("自荐·" + self);
+        mTabAdapter.setOnTabListener(this);
+
         if (bean != null) {
             tv_position.setText(bean.getCareerDirection());
-            tv_position_desc.setText(bean.getTrainingMode() + "·" + bean.getEducation() + "·工作经验" + bean.getWorkYears() + "·" + bean.getIndustryName());
-            double startPay = bean.getStartPay() / 1000;
-            double endPay = bean.getEndPay() / 1000;
-            tv_salary.setText((Utils.formatMoney(startPay) + "k") + "-" + (Utils.formatMoney(endPay) + "k"));
+            tv_position_desc.setText(bean.getTrainingMode() + "·" + bean.getEducation() + "·工作经验"
+                    + bean.getWorkYears() + "·" + bean.getIndustryName());
+//            double startPay = bean.getStartPay() / 1000;
+//            double endPay = bean.getEndPay() / 1000;
+//            tv_salary.setText((Utils.formatMoney(startPay) + "k") + "-" + (Utils.formatMoney(endPay) + "k"));
+
+            String startPay = Utils.StripZeros(bean.getStartPay() + "");
+            String endPay = Utils.StripZeros(bean.getEndPay() + "");
+            tv_salary.setText(startPay + "k-" + endPay+ "k");
 
             mPositionId = bean.getId();
             getPositionOriginal(bean.getId());

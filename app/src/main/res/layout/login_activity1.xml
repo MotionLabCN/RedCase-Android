@@ -39,6 +39,17 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/btn_login_commit"
+            android:layout_marginLeft="@dimen/dp_16"
+            android:layout_marginRight="@dimen/dp_16"
+            android:text="远程办公时代，从这里接入未来"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp_28"
+            android:textStyle="bold" />
+
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_login_commit"
             style="@style/ButtonStyle"

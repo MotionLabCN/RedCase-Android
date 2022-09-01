@@ -48,7 +48,7 @@ public final class FirmSettingActivity extends AppActivity {
 
         setOnClickListener(mSettingPhone, mSettingCancelService, mOutLogin);
 
-        mSettingPhone.setVisibility(View.GONE);
+
     }
 
     @Override
@@ -75,7 +75,7 @@ public final class FirmSettingActivity extends AppActivity {
     @Override
     public void onClick(View view) {
         if (view == mSettingPhone) {
-            startActivity(ChangePhoneActivity.class);
+            startActivity(ChangeFirmPhoneActivity.class);
         } else if (view == mSettingCancelService) {
             startActivity(DeleteFirmActivity.class);
         } else if (view == mOutLogin) {

@@ -761,7 +761,11 @@
             android:name="com.tntlinking.tntdev.ui.firm.activity.FirmMessageDetailActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
-
+        <!-- 企业更换手机号页面 -->
+        <activity
+            android:name="com.tntlinking.tntdev.ui.firm.activity.ChangeFirmPhoneActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
 
         <!-- 微信回调（请注意这个 Activity 放置的包名要和当前项目的包名保持一致，否则将不能正常回调） -->
         <activity

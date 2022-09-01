@@ -45,7 +45,7 @@ public final class TreatyOrderSearchActivity extends AppActivity implements OnRe
 
     @Override
     protected int getLayoutId() {
-        return R.layout.position_search_activity;
+        return R.layout.treaty_order_search_activity;
     }
 
     @Override

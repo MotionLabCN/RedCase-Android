@@ -1,6 +1,5 @@
 package com.tntlinking.tntdev.ui.firm.fragment;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -8,17 +7,14 @@ import android.widget.AdapterView;
 import android.widget.LinearLayout;
 
 import com.hjq.http.EasyHttp;
-import com.hjq.http.EasyLog;
 import com.hjq.http.listener.HttpCallback;
 import com.scwang.smart.refresh.layout.SmartRefreshLayout;
 import com.scwang.smart.refresh.layout.api.RefreshLayout;
 import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener;
 import com.tntlinking.tntdev.R;
-import com.tntlinking.tntdev.aop.SingleClick;
 import com.tntlinking.tntdev.app.TitleBarFragment;
 import com.tntlinking.tntdev.http.api.GetFirmOrderListApi;
 import com.tntlinking.tntdev.http.model.HttpData;
-import com.tntlinking.tntdev.other.OnItemClickListener;
 import com.tntlinking.tntdev.other.TimeUtil;
 import com.tntlinking.tntdev.ui.firm.activity.ContractDetailActivity;
 import com.tntlinking.tntdev.ui.firm.activity.ContractPayActivity;
@@ -59,7 +55,7 @@ public final class TreatyOrderFragment extends TitleBarFragment<FirmMainActivity
 
     @Override
     protected int getLayoutId() {
-        return R.layout.firm_position_fragment;
+        return R.layout.treaty_list_fragment;
     }
 
     @Override

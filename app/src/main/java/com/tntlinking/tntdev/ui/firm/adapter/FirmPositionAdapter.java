@@ -89,11 +89,12 @@ public final class FirmPositionAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
         GetFirmPositionApi.Bean.ListBean item = mList.get(position);
-        holder.tv_position.setText(item.getCareerDirection());
+        holder.tv_position.setText(item.getTitle());
 //        holder.tv_salary.setText(item.getStartPay() + "-" + item.getEndPay());
-        String mStart = Utils.formatMoney(item.getStartPay() / 1000) + "k";
-        String mEnd = Utils.formatMoney(item.getEndPay() / 1000) + "k";
-        holder.tv_salary.setText(mStart + "-" + mEnd);
+        String startPay = Utils.StripZeros(item.getStartPay() + "");
+        String endPay = Utils.StripZeros(item.getEndPay() + "");
+        holder.tv_salary.setText(startPay + "k-" + endPay+ "k");
+
         holder.tv_company_name.setText(item.getCompanyName());
         holder.tv_position_desc.setText(item.getWorkDaysMode() + "·" + item.getEducation() + "·工作经验" + item.getWorkYears() + "·" + item.getIndustryName());
 

@@ -171,16 +171,16 @@ public final class ContractDetailActivity extends AppActivity {
                             if (preList.size() == 1) {
                                 PostCalculateApi.Bean.PreListBean bean = preList.get(0);
                                 tv_work_time_1.setText(bean.getWorkStartDate() + "-" + bean.getWorkEndDate());
-                                tv_work_time_money_1.setText("¥ " + Utils.formatMoney(bean.getServiceMoney() + ""));
+                                tv_work_time_money_1.setText("¥ " + Utils.formatMoney(bean.getTotalAmount() + ""));
                                 ll_date_2.setVisibility(View.GONE);
                             } else if (preList.size() == 2) {
                                 PostCalculateApi.Bean.PreListBean bean1 = preList.get(0);
                                 ll_date_2.setVisibility(View.VISIBLE);
                                 tv_work_time_1.setText(bean1.getWorkStartDate() + "-" + bean1.getWorkEndDate());
-                                tv_work_time_money_1.setText("¥ " + Utils.formatMoney(bean1.getServiceMoney() + ""));
+                                tv_work_time_money_1.setText("¥ " + Utils.formatMoney(bean1.getTotalAmount() + ""));
                                 PostCalculateApi.Bean.PreListBean bean2 = preList.get(1);
                                 tv_work_time_2.setText(bean2.getWorkStartDate() + "-" + bean2.getWorkEndDate());
-                                tv_work_time_money_2.setText("¥ " + Utils.formatMoney(bean2.getServiceMoney() + ""));
+                                tv_work_time_money_2.setText("¥ " + Utils.formatMoney(bean2.getTotalAmount() + ""));
 
                             }
                             tv_work_money.setText("¥ " + Utils.formatMoney(data.getData().getTotalAmount() + ""));
@@ -253,16 +253,16 @@ public final class ContractDetailActivity extends AppActivity {
                             if (preOrderList.size() == 1) {
                                 PreOrderInfoApi.Bean.PreOrderListBean preBean0 = preOrderList.get(0);
                                 tv_work_time_1.setText(preBean0.getWorkStartDate() + "-" + preBean0.getWorkEndDate());
-                                tv_work_time_money_1.setText(Utils.formatMoney(preBean0.getServiceMoney() + ""));
+                                tv_work_time_money_1.setText(Utils.formatMoney(preBean0.getTotalAmount() + ""));
                                 ll_date_2.setVisibility(View.GONE);
                             } else if (preOrderList.size() == 2) {
                                 PreOrderInfoApi.Bean.PreOrderListBean preBean0 = preOrderList.get(0);
                                 ll_date_2.setVisibility(View.VISIBLE);
                                 tv_work_time_1.setText(preBean0.getWorkStartDate() + "-" + preBean0.getWorkEndDate());
-                                tv_work_time_money_1.setText(Utils.formatMoney(preBean0.getServiceMoney() + ""));
+                                tv_work_time_money_1.setText(Utils.formatMoney(preBean0.getTotalAmount() + ""));
                                 PreOrderInfoApi.Bean.PreOrderListBean preBean1 = preOrderList.get(1);
                                 tv_work_time_2.setText(preBean1.getWorkStartDate() + "-" + preBean1.getWorkEndDate());
-                                tv_work_time_money_2.setText(Utils.formatMoney(preBean1.getServiceMoney() + ""));
+                                tv_work_time_money_2.setText(Utils.formatMoney(preBean1.getTotalAmount() + ""));
 
                             }
                             tv_work_money.setText(Utils.formatMoney(data.getData().getTotalAmount() + ""));

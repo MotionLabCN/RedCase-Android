@@ -108,7 +108,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_20"
-                app:bar_leftText="全日制"
+                app:bar_leftText="培养方式"
                 app:bar_lineVisible="false"
                 app:bar_rightDrawable="@drawable/icon_arrow_right"
                 app:bar_rightDrawableSize="@dimen/dp_16" />
@@ -152,9 +152,9 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:maxLength="8"
                     android:hint="最低服务价格(元/月)"
                     android:inputType="number"
+                    android:maxLength="8"
                     android:singleLine="true" />
 
                 <TextView
@@ -170,9 +170,9 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:maxLength="8"
                     android:hint="最高服务价格(元/月)"
                     android:inputType="number"
+                    android:maxLength="8"
                     android:singleLine="true" />
             </LinearLayout>
 
@@ -207,8 +207,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_20"
                 android:hint="输入需求数量"
-                android:maxLength="5"
                 android:inputType="number"
+                android:maxLength="5"
                 android:paddingLeft="@dimen/dp_15"
                 android:paddingTop="@dimen/dp_15"
                 android:paddingBottom="@dimen/dp_15"

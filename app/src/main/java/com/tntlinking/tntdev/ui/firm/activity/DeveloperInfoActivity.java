@@ -23,6 +23,7 @@ import com.tntlinking.tntdev.http.api.CollectDeveloperApi;
 import com.tntlinking.tntdev.http.api.CollectDeveloperStatusApi;
 import com.tntlinking.tntdev.http.api.GetFirmDevDetailApi;
 import com.tntlinking.tntdev.http.api.GetFirmPositionApi;
+import com.tntlinking.tntdev.http.api.GetFirmPositionListApi;
 import com.tntlinking.tntdev.http.model.HttpData;
 import com.tntlinking.tntdev.other.GlideUtils;
 import com.tntlinking.tntdev.other.OnItemClickListener;
@@ -70,6 +71,7 @@ public final class DeveloperInfoActivity extends AppActivity {
     private DevProjectAdapter addProjectAdapter;
     private boolean isCollect = false;//是否收藏
     private int mDeveloperId;
+
     @Override
     protected int getLayoutId() {
         return R.layout.developer_info_activity;
@@ -229,13 +231,13 @@ public final class DeveloperInfoActivity extends AppActivity {
      */
     private void getAppList(int pageNum) {
         EasyHttp.get(this)
-                .api(new GetFirmPositionApi().setStatus(1).setPageNum(pageNum))
-                .request(new HttpCallback<HttpData<GetFirmPositionApi.Bean>>(this) {
+                .api(new GetFirmPositionListApi())
+                .request(new HttpCallback<HttpData<List<GetFirmPositionApi.Bean.ListBean>>>(this) {
                     @Override
-                    public void onSucceed(HttpData<GetFirmPositionApi.Bean> data) {
-                        if (data.getData().getList() != null && data.getData().getList().size() >= 0) {
+                    public void onSucceed(HttpData<List<GetFirmPositionApi.Bean.ListBean>> data) {
+                        if (data.getData() != null && data.getData().size() >= 0) {
                             mList.clear();
-                            mList.addAll(data.getData().getList());
+                            mList.addAll(data.getData());
 
                         }
                     }

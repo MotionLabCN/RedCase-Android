@@ -75,10 +75,12 @@ public final class BottomPositionAdapter extends BaseAdapter {
         }
         GetFirmPositionApi.Bean.ListBean item = mList.get(position);
         holder.tv_dev_position.setText(item.getCareerDirection());
-//        holder.tv_salary.setText(item.getStartPay() + "-" + item.getEndPay());
-        String mStart = Utils.formatMoney(item.getStartPay() / 1000) + "k";
-        String mEnd = Utils.formatMoney(item.getEndPay() / 1000) + "k";
-        holder.tv_salary.setText(mStart + "-" + mEnd);
+//        String mStart = Utils.formatMoney(item.getStartPay() / 1000) + "k";
+//        String mEnd = Utils.formatMoney(item.getEndPay() / 1000) + "k";
+//        holder.tv_salary.setText(mStart + "-" + mEnd);
+        String startPay = Utils.StripZeros(item.getStartPay() + "");
+        String endPay = Utils.StripZeros(item.getEndPay() + "");
+        holder.tv_salary.setText(startPay + "k-" + endPay+ "k");
         holder.tv_dev_info.setText(item.getWorkDaysMode() + "·" + item.getEducation()
                 + "·" + item.getWorkYears() + "·" + item.getIndustryName());
 

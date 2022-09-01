@@ -79,16 +79,16 @@ public final class ContractPayActivity extends AppActivity {
                 if (payInfo.getPreOrderList().size() == 1) {
                     CreateOrderApi.Bean.PayInfoBean.PreOrderListBean preBean0 = payInfo.getPreOrderList().get(0);
                     tv_work_time_1.setText(preBean0.getWorkStartDate() + "-" + preBean0.getWorkEndDate());
-                    tv_work_time_money_1.setText("¥ " + Utils.formatMoney(preBean0.getServiceMoney() + ""));
+                    tv_work_time_money_1.setText("¥ " + Utils.formatMoney(preBean0.getTotalAmount() + ""));
                     ll_date_2.setVisibility(View.GONE);
                 } else if (payInfo.getPreOrderList().size() == 2) {
                     ll_date_2.setVisibility(View.VISIBLE);
                     CreateOrderApi.Bean.PayInfoBean.PreOrderListBean preBean0 = payInfo.getPreOrderList().get(0);
                     tv_work_time_1.setText(preBean0.getWorkStartDate() + "-" + preBean0.getWorkEndDate());
-                    tv_work_time_money_1.setText("¥ " + Utils.formatMoney(preBean0.getServiceMoney() + ""));
+                    tv_work_time_money_1.setText("¥ " + Utils.formatMoney(preBean0.getTotalAmount() + ""));
                     CreateOrderApi.Bean.PayInfoBean.PreOrderListBean preBean1 = payInfo.getPreOrderList().get(1);
                     tv_work_time_2.setText(preBean1.getWorkStartDate() + "-" + preBean1.getWorkEndDate());
-                    tv_work_time_money_2.setText("¥ " + Utils.formatMoney(preBean1.getServiceMoney() + ""));
+                    tv_work_time_money_2.setText("¥ " + Utils.formatMoney(preBean1.getTotalAmount() + ""));
 
                 }
 
@@ -98,7 +98,7 @@ public final class ContractPayActivity extends AppActivity {
                 btn_commit.setText("支付¥ " + Utils.formatMoney(payInfo.getFreezeAmount() + ""));
             }
 
-            timeStemp = Integer.valueOf(bean.getTime());
+            timeStemp = Integer.valueOf(bean.getTime()) * 1000;
             getCountDownTime();
         }
 
@@ -160,16 +160,16 @@ public final class ContractPayActivity extends AppActivity {
                             if (preOrderList.size() == 1) {
                                 PreOrderInfoApi.Bean.PreOrderListBean preBean0 = preOrderList.get(0);
                                 tv_work_time_1.setText(preBean0.getWorkStartDate() + "-" + preBean0.getWorkEndDate());
-                                tv_work_time_money_1.setText("¥" + Utils.formatMoney(preBean0.getServiceMoney() + ""));
+                                tv_work_time_money_1.setText("¥" + Utils.formatMoney(preBean0.getTotalAmount() + ""));
                                 ll_date_2.setVisibility(View.GONE);
                             } else if (preOrderList.size() == 2) {
                                 PreOrderInfoApi.Bean.PreOrderListBean preBean0 = preOrderList.get(0);
                                 ll_date_2.setVisibility(View.VISIBLE);
                                 tv_work_time_1.setText(preBean0.getWorkStartDate() + "-" + preBean0.getWorkEndDate());
-                                tv_work_time_money_1.setText("¥" + Utils.formatMoney(preBean0.getServiceMoney() + ""));
+                                tv_work_time_money_1.setText("¥" + Utils.formatMoney(preBean0.getTotalAmount() + ""));
                                 PreOrderInfoApi.Bean.PreOrderListBean preBean1 = preOrderList.get(1);
                                 tv_work_time_2.setText(preBean1.getWorkStartDate() + "-" + preBean1.getWorkEndDate());
-                                tv_work_time_money_2.setText("¥" + Utils.formatMoney(preBean1.getServiceMoney() + ""));
+                                tv_work_time_money_2.setText("¥" + Utils.formatMoney(preBean1.getTotalAmount() + ""));
 
                             }
                             tv_work_money.setText("¥" + Utils.formatMoney(data.getData().getTotalAmount() + ""));
@@ -178,7 +178,7 @@ public final class ContractPayActivity extends AppActivity {
                             btn_commit.setText("支付¥" + Utils.formatMoney(data.getData().getFreezeAmount() + ""));
                         }
 
-                        timeStemp = Integer.valueOf(bean.getTime());
+                        timeStemp = Integer.valueOf(bean.getTime()) * 1000;
                         getCountDownTime();
                     }
                 });
@@ -200,7 +200,11 @@ public final class ContractPayActivity extends AppActivity {
                 long minute = (l - day * (1000 * 24 * 60 * 60) - hour * (1000 * 60 * 60)) / (1000 * 60); //单位分
                 long second = (l - day * (1000 * 24 * 60 * 60) - hour * (1000 * 60 * 60) - minute * (1000 * 60)) / 1000;//单位秒
 
-                tv_count_down_time.setText("支付剩余时间  " + hour + ":" + minute + ":" + second);
+                if (day == 0) {
+                    tv_count_down_time.setText("支付剩余时间  " + hour + ":" + minute + ":" + second);
+                } else {
+                    tv_count_down_time.setText("支付剩余时间  " + day + "天" + hour + ":" + minute + ":" + second);
+                }
             }
 
             @Override

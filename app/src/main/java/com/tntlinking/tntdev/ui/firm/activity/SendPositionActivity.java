@@ -306,7 +306,7 @@ public final class SendPositionActivity extends AppActivity {
                     return;
                 }
                 if (Double.parseDouble(startPay) > Double.parseDouble(endPay)) {
-                    toast("低服务价格不能高于最高服务价格");
+                    toast("最低服务价格不能高于最高服务价格");
                     return;
                 }
                 if (industryMandatory == -1) {

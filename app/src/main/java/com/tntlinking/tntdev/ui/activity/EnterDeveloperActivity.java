@@ -804,7 +804,7 @@ public final class EnterDeveloperActivity extends AppActivity {
         }
         //是否是解析页面过来的
         boolean isResume = SPUtils.getInstance().getBoolean(AppConfig.RESUME_ANALYSIS, false);
-        if (bean.getStatus() == 2) {
+        if (bean.getStatus() == 2) {  // 入驻资料1  待完善 2  待审核 3  审核成功 4  审核失败
             tv_progress.setText("\"审核中，专属顾问将在1-3个工作日内完成审核\"");
             iv_progress.setImageResource(R.drawable.icon_warning);
             progress_bar.setVisibility(View.GONE);
@@ -1014,8 +1014,21 @@ public final class EnterDeveloperActivity extends AppActivity {
                 }
             }
         }
+        if (bean.getStatus() == 3) {//审核成功
 
-        submitDeveloper();
+            new BaseDialog.Builder<>(this)
+                    .setContentView(R.layout.write_daily_delete_dialog)
+                    .setAnimStyle(BaseDialog.ANIM_SCALE)
+                    .setText(R.id.tv_title, "您已审核成功，如要修改入驻信息需要重新审核，是否确定修改？")
+                    .setOnClickListener(R.id.btn_dialog_custom_cancel, (BaseDialog.OnClickListener<Button>) (dialog, button) -> dialog.dismiss())
+                    .setOnClickListener(R.id.btn_dialog_custom_ok, (dialog, views) -> {
+                        submitDeveloper();
+                    })
+                    .show();
+        } else {
+            submitDeveloper();
+        }
+
     }
 
     /**
