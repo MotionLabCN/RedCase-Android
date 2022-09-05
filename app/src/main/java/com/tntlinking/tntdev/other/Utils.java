@@ -534,7 +534,7 @@ public class Utils {
         if (!TextUtils.isEmpty(str)) {
             if (Double.valueOf(str) != 0) {
                 Double aDouble = Double.valueOf(str);
-                DecimalFormat df = new DecimalFormat("###,####,###.00");
+                DecimalFormat df = new DecimalFormat("###,###,###,###.00");
                 String format = df.format(aDouble);
                 return format;
             }

@@ -74,20 +74,28 @@ public final class FirmPositionFragment extends TitleBarFragment<FirmMainActivit
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 GetFirmPositionApi.Bean.ListBean item = mAdapter.getItem(position);
-                Intent intent = new Intent(getActivity(), RecommendPositionActivity.class);
-                intent.putExtra("position_bean", item);
-                startActivity(intent);
+
+                if (item.getAuditStatus() == 1) {//0 是审核中,1 是通过， 2 是未通过
+                    Intent intent = new Intent(getActivity(), RecommendPositionActivity.class);
+                    intent.putExtra("position_bean", item);
+                    startActivity(intent);
+                } else {
+                    Intent intent = new Intent(getActivity(), FirmInfoActivity.class);
+                    intent.putExtra("position_bean", item);
+                    startActivity(intent);
+                }
             }
         });
-        mAdapter.setOnItemClickListener(new OnItemClickListener() {
-            @Override
-            public void onItemClick(int position) {
-                GetFirmPositionApi.Bean.ListBean item = mAdapter.getItem(position);
-                Intent intent = new Intent(getActivity(), FirmInfoActivity.class);
-                intent.putExtra("position_bean", item);
-                startActivity(intent);
-            }
-        });
+//        mAdapter.setOnItemClickListener(new OnItemClickListener() {
+//            @Override
+//            public void onItemClick(int position) {
+//                GetFirmPositionApi.Bean.ListBean item = mAdapter.getItem(position);
+//                Intent intent = new Intent(getActivity(), FirmInfoActivity.class);
+//                intent.putExtra("position_bean", item);
+//                startActivity(intent);
+//            }
+//        });
+
         btn_commit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

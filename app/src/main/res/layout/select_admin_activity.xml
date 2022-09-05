@@ -52,7 +52,7 @@
                 android:layout_marginLeft="@dimen/dp_10"
                 android:layout_weight="1"
                 android:gravity="center|left"
-                android:text="企业登陆"
+                android:text="企业登录"
                 android:textColor="@color/color_444E64"
                 android:textSize="@dimen/sp_15"
                 android:textStyle="bold" />
@@ -85,7 +85,7 @@
                 android:layout_marginLeft="@dimen/dp_10"
                 android:layout_weight="1"
                 android:gravity="center|left"
-                android:text="工作者登陆"
+                android:text="工作者登录"
                 android:textColor="@color/color_444E64"
                 android:textSize="@dimen/sp_15"
                 android:textStyle="bold" />

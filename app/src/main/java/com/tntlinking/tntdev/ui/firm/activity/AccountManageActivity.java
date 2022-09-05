@@ -113,7 +113,7 @@ public final class AccountManageActivity extends AppActivity implements OnRefres
 
                     @Override
                     public void onSucceed(HttpData<GetFirmWalletCurrentApi.Bean> data) {
-                        tv_balance_money.setText("¥" + Utils.formatMoney(data.getData().getBalance()));
+                        tv_balance_money.setText("¥" + Utils.formatMoney(data.getData().getAvailableMoney()));
                         tv_freeze_money.setText("¥" + Utils.formatMoney(data.getData().getFreezeMoney()));
                     }
                 });

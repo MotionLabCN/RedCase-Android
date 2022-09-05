@@ -394,11 +394,11 @@ public final class SendPositionActivity extends AppActivity {
 //                        startActivity(SendPositionSuccessActivity.class);
 //                        finish();
 
-                        int positionId = data.getData();
+//                        int positionId = data.getData();
                         Intent intent = new Intent();
                         intent.setClass(SendPositionActivity.this, SendPositionSuccessActivity.class);
                         intent.putExtra("developerId", mDeveloperId);
-                        intent.putExtra("positionId", positionId);
+//                        intent.putExtra("positionId", positionId);
                         startActivity(intent);
                         finish();
                     }

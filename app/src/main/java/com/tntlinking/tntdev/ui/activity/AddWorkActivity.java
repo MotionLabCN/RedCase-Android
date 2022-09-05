@@ -166,6 +166,7 @@ public final class AddWorkActivity extends AppActivity {
 //        }
         backToDialog();
     }
+
     @Override
     public void onBackPressed() {
         backToDialog();
@@ -290,16 +291,39 @@ public final class AddWorkActivity extends AppActivity {
                     addWork(true);
                 } else {
 
-                    new BaseDialog.Builder<>(this)
-                            .setContentView(R.layout.write_daily_delete_dialog)
-                            .setAnimStyle(BaseDialog.ANIM_SCALE)
-                            .setText(R.id.tv_title, "是否确认删除？")
-                            .setOnClickListener(R.id.btn_dialog_custom_cancel, (BaseDialog.OnClickListener<Button>) (dialog, button) -> dialog.dismiss())
-                            .setOnClickListener(R.id.btn_dialog_custom_ok, (dialog, views) -> {
+//                    new BaseDialog.Builder<>(this)
+//                            .setContentView(R.layout.write_daily_delete_dialog)
+//                            .setAnimStyle(BaseDialog.ANIM_SCALE)
+//                            .setText(R.id.tv_title, "是否确认删除？")
+//                            .setOnClickListener(R.id.btn_dialog_custom_cancel, (BaseDialog.OnClickListener<Button>) (dialog, button) -> dialog.dismiss())
+//                            .setOnClickListener(R.id.btn_dialog_custom_ok, (dialog, views) -> {
+//
+//                                deleteWork(mId, dialog);
+//                            })
+//                            .show();
 
-                                deleteWork(mId, dialog);
-                            })
-                            .show();
+                    if (mBean.getStatus() == 3) {
+                        new BaseDialog.Builder<>(this)
+                                .setContentView(R.layout.write_daily_delete_dialog)
+                                .setAnimStyle(BaseDialog.ANIM_SCALE)
+                                .setText(R.id.tv_title, "修改简历需要重新提交审核")
+                                .setOnClickListener(R.id.btn_dialog_custom_cancel, (BaseDialog.OnClickListener<Button>) (dialog, button) -> dialog.dismiss())
+                                .setOnClickListener(R.id.btn_dialog_custom_ok, (dialog, views) -> {
+                                    deleteWork(mId, dialog);
+                                })
+                                .show();
+                    } else {
+                        new BaseDialog.Builder<>(this)
+                                .setContentView(R.layout.write_daily_delete_dialog)
+                                .setAnimStyle(BaseDialog.ANIM_SCALE)
+                                .setText(R.id.tv_title, "是否确认删除？")
+                                .setOnClickListener(R.id.btn_dialog_custom_cancel, (BaseDialog.OnClickListener<Button>) (dialog, button) -> dialog.dismiss())
+                                .setOnClickListener(R.id.btn_dialog_custom_ok, (dialog, views) -> {
+
+                                    deleteWork(mId, dialog);
+                                })
+                                .show();
+                    }
                 }
                 break;
             case R.id.btn_commit:
@@ -347,7 +371,21 @@ public final class AddWorkActivity extends AppActivity {
                     if (mId == 0) { // 0 添加教育  不等于0 是编辑教育
                         addWork(false);
                     } else {
-                        updateWork(mId);
+//                        updateWork(mId);
+
+                        if (mBean.getStatus() == 3) {
+                            new BaseDialog.Builder<>(this)
+                                    .setContentView(R.layout.write_daily_delete_dialog)
+                                    .setAnimStyle(BaseDialog.ANIM_SCALE)
+                                    .setText(R.id.tv_title, "修改简历需要重新提交审核")
+                                    .setOnClickListener(R.id.btn_dialog_custom_cancel, (BaseDialog.OnClickListener<Button>) (dialog, button) -> dialog.dismiss())
+                                    .setOnClickListener(R.id.btn_dialog_custom_ok, (dialog, views) -> {
+                                        updateWork(mId);
+                                    })
+                                    .show();
+                        } else {
+                            updateWork(mId);
+                        }
                     }
                 }
                 break;

@@ -247,7 +247,7 @@
                         android:id="@+id/tv_work_money"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="xxxxxx"
+                        android:text="0.00"
                         android:textColor="@color/color_202839"
                         android:textSize="@dimen/sp_14"
                         android:textStyle="bold" />
@@ -276,7 +276,7 @@
                         android:id="@+id/tv_work_time_money_1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="xxxxx"
+                        android:text="0.00"
                         android:textColor="@color/color_202839"
                         android:textSize="@dimen/sp_14"
                         android:textStyle="bold" />
@@ -305,7 +305,7 @@
                         android:id="@+id/tv_work_time_money_2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="xxxx"
+                        android:text="0.00"
                         android:textColor="@color/color_202839"
                         android:textSize="@dimen/sp_14"
                         android:textStyle="bold" />
@@ -332,7 +332,7 @@
                         android:id="@+id/tv_work_service_money"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="xxxxx"
+                        android:text="0.00"
                         android:textColor="@color/color_202839"
                         android:textSize="@dimen/sp_14"
                         android:textStyle="bold" />

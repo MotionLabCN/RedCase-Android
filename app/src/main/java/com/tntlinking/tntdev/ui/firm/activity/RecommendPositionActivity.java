@@ -43,6 +43,7 @@ public final class RecommendPositionActivity extends AppActivity implements View
     private LinearLayout ll_tab;
     private TextView tv_refresh;
     private TextView tv_position;
+    private TextView tv_company;
     private TextView tv_salary;
     private TextView tv_position_desc;
     private LinearLayout ll_recommend;
@@ -63,6 +64,7 @@ public final class RecommendPositionActivity extends AppActivity implements View
         ll_tab = findViewById(R.id.ll_tab);
         tv_refresh = findViewById(R.id.tv_refresh);
         tv_position = findViewById(R.id.tv_position);
+        tv_company = findViewById(R.id.tv_company);
         tv_salary = findViewById(R.id.tv_salary);
         tv_position_desc = findViewById(R.id.tv_position_desc);
         ll_recommend = findViewById(R.id.ll_recommend);
@@ -123,16 +125,17 @@ public final class RecommendPositionActivity extends AppActivity implements View
         mTabAdapter.setOnTabListener(this);
 
         if (bean != null) {
-            tv_position.setText(bean.getCareerDirection());
+            tv_position.setText(bean.getTitle());
+            tv_company.setText(bean.getCompanyName());
             tv_position_desc.setText(bean.getTrainingMode() + "·" + bean.getEducation() + "·工作经验"
-                    + bean.getWorkYears() + "·" + bean.getIndustryName());
-//            double startPay = bean.getStartPay() / 1000;
-//            double endPay = bean.getEndPay() / 1000;
-//            tv_salary.setText((Utils.formatMoney(startPay) + "k") + "-" + (Utils.formatMoney(endPay) + "k"));
+                    + bean.getWorkYears() + "·" + bean.getCareerDirection());
+            double startPay = bean.getStartPay() / 1000;
+            double endPay = bean.getEndPay() / 1000;
+            tv_salary.setText((Utils.formatMoney(startPay) + "k") + "-" + (Utils.formatMoney(endPay) + "k"));
 
-            String startPay = Utils.StripZeros(bean.getStartPay() + "");
-            String endPay = Utils.StripZeros(bean.getEndPay() + "");
-            tv_salary.setText(startPay + "k-" + endPay+ "k");
+//            String startPay = Utils.StripZeros(bean.getStartPay() + "");
+//            String endPay = Utils.StripZeros(bean.getEndPay() + "");
+//            tv_salary.setText(startPay + "k-" + endPay+ "k");
 
             mPositionId = bean.getId();
             getPositionOriginal(bean.getId());

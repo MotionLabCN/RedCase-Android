@@ -45,10 +45,10 @@ public final class TreatyOrderListActivity extends AppActivity implements ViewPa
         mTabView = findViewById(R.id.rv_home_tab);
         mViewPager = findViewById(R.id.vp_home_pager);
         mPagerAdapter = new FragmentPagerAdapter<>(this);
-        //0 全部 1待冻结 2服务中 5已完成 4待结算
+        //0 全部 1待冻结 3服务中 5已完成 4待结算
         mPagerAdapter.addFragment(TreatyOrderFragment.newInstance("0"));
         mPagerAdapter.addFragment(TreatyOrderFragment.newInstance("1"));
-        mPagerAdapter.addFragment(TreatyOrderFragment.newInstance("2"));
+        mPagerAdapter.addFragment(TreatyOrderFragment.newInstance("3"));
         mPagerAdapter.addFragment(TreatyOrderFragment.newInstance("5"));
         mPagerAdapter.addFragment(TreatyOrderFragment.newInstance("4"));
 

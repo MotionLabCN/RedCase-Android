@@ -272,7 +272,21 @@ public final class AddCareerActivity extends AppActivity {
                     startActivity(intent);
                     ActivityManager.getInstance().finishAllActivities();
                 } else {
-                    updateCareer();
+//                    updateCareer();
+                    if (mBean.getStatus() == 3) {
+                        new BaseDialog.Builder<>(this)
+                                .setContentView(R.layout.write_daily_delete_dialog)
+                                .setAnimStyle(BaseDialog.ANIM_SCALE)
+                                .setText(R.id.tv_title, "修改简历需要重新提交审核")
+                                .setOnClickListener(R.id.btn_dialog_custom_cancel, (BaseDialog.OnClickListener<Button>) (dialog, button) -> dialog.dismiss())
+                                .setOnClickListener(R.id.btn_dialog_custom_ok, (dialog, views) -> {
+                                    updateCareer();
+                                })
+                                .show();
+                    } else {
+                        updateCareer();
+                    }
+
                 }
                 break;
 

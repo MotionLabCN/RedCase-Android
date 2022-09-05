@@ -163,8 +163,12 @@ public final class FirmMineFragment extends TitleBarFragment<FirmMainActivity> i
             case R.id.ll_mine_contract://合约单
                 startActivity(TreatyOrderListActivity.class);
                 break;
-            case R.id.ll_mine_account://账户管理
-                startActivity(AccountManageActivity.class);
+            case R.id.ll_mine_account://资金账户管理
+                if (isFirmAdmin) {
+                    startActivity(AccountManageActivity.class);
+                } else {
+                    toast("你还不是企业管理员");
+                }
                 break;
             case R.id.ll_mine_firm://企业管理
                 if (isFirmAdmin) {

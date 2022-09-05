@@ -32,6 +32,7 @@ public final class FirmInfoActivity extends AppActivity {
     private TextView tv_company_name;
     private TextView tv_position_desc;
     private TextView tv_reason;
+    private TextView tv_status;
 
     @Override
     protected int getLayoutId() {
@@ -46,6 +47,7 @@ public final class FirmInfoActivity extends AppActivity {
         tv_company_name = findViewById(R.id.tv_company_name);
         tv_position_desc = findViewById(R.id.tv_position_desc);
         tv_reason = findViewById(R.id.tv_reason);
+        tv_status = findViewById(R.id.tv_status);
         btn_modify = findViewById(R.id.btn_modify);
         btn_contact = findViewById(R.id.btn_contact);
 
@@ -60,11 +62,15 @@ public final class FirmInfoActivity extends AppActivity {
         GetFirmPositionApi.Bean.ListBean bean = getSerializable("position_bean");
 
         if (bean != null) {
-            tv_position.setText(bean.getCareerDirection());
+            tv_position.setText(bean.getTitle());
             tv_company_name.setText(bean.getCompanyName());
-            tv_position_desc.setText(bean.getTrainingMode() + "·" + bean.getEducation() + "·" + bean.getWorkYears() + "·" + bean.getIndustryName());
+            tv_position_desc.setText(bean.getTrainingMode() + "·" + bean.getEducation() + "·" + bean.getWorkYears() + "·" + bean.getCareerDirection());
             tv_reason.setText(bean.getAuditFailReason());
-
+            if (bean.getAuditStatus() == 0) {//0 是审核中,1 是通过， 2 是未通过
+                tv_status.setText("审核中");
+            } else {
+                tv_status.setText("审核未通过");
+            }
             getPositionOriginal(bean.getId());
         }
 
@@ -107,7 +113,7 @@ public final class FirmInfoActivity extends AppActivity {
                 .request(new HttpCallback<HttpData<GetPositionOriginalApi.Bean>>(this) {
                     @Override
                     public void onSucceed(HttpData<GetPositionOriginalApi.Bean> data) {
-                         beanIds = data.getData();
+                        beanIds = data.getData();
 
                     }
 

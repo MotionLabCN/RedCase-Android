@@ -109,6 +109,7 @@ public final class PersonSettingActivity extends AppActivity {
                         //退出登录之后重新登录不需要选择角色
                         SPUtils.getInstance().put(AppConfig.HAS_SELECT_ROLE, true);
                         SPUtils.getInstance().put(AppConfig.LOGIN_ROLE, false);
+                        SPUtils.getInstance().put(AppConfig.DEAL_DIALOG, true);
                         //删除极光推送别名
                         JPushInterface.deleteAlias(PersonSettingActivity.this, 1001);
                         // 进行内存优化，销毁除登录页之外的所有界面

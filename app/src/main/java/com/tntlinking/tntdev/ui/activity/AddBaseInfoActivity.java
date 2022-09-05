@@ -266,7 +266,22 @@ public final class AddBaseInfoActivity extends AppActivity {
                     startActivity(intent);
                     ActivityManager.getInstance().finishAllActivities();
                 } else {
-                    updateBasicInfo();
+//                  updateBasicInfo();
+
+                    if (mBean.getStatus() == 3) {
+                        new BaseDialog.Builder<>(this)
+                                .setContentView(R.layout.write_daily_delete_dialog)
+                                .setAnimStyle(BaseDialog.ANIM_SCALE)
+                                .setText(R.id.tv_title, "修改简历需要重新提交审核")
+                                .setOnClickListener(R.id.btn_dialog_custom_cancel, (BaseDialog.OnClickListener<Button>) (dialog, button) -> dialog.dismiss())
+                                .setOnClickListener(R.id.btn_dialog_custom_ok, (dialog, views) -> {
+                                    updateBasicInfo();
+                                })
+                                .show();
+                    } else {
+                        updateBasicInfo();
+                    }
+
                 }
                 break;
         }

@@ -253,11 +253,26 @@ public final class EnterDeveloperActivity extends AppActivity {
         switch (view.getId()) {
             case R.id.ll_add_photo:
             case R.id.fl_add_photo:
+                if (bean.getStatus() == 3) {
+                    new BaseDialog.Builder<>(this)
+                            .setContentView(R.layout.write_daily_delete_dialog)
+                            .setAnimStyle(BaseDialog.ANIM_SCALE)
+                            .setText(R.id.tv_title, "修改简历需要重新提交审核")
+                            .setOnClickListener(R.id.btn_dialog_custom_cancel, (BaseDialog.OnClickListener<Button>) (dialog, button) -> dialog.dismiss())
+                            .setOnClickListener(R.id.btn_dialog_custom_ok, (dialog, views) -> {
+                                ImageSelectActivity.start(this, data -> {
+                                    // 裁剪头像
+                                    cropImageFile(new File(data.get(0)));
+                                });
+                            })
+                            .show();
+                } else {
+                    ImageSelectActivity.start(this, data -> {
+                        // 裁剪头像
+                        cropImageFile(new File(data.get(0)));
+                    });
+                }
 
-                ImageSelectActivity.start(this, data -> {
-                    // 裁剪头像
-                    cropImageFile(new File(data.get(0)));
-                });
                 break;
 
             case R.id.tv_photo_skills: // https://stage-ttchain.tntlinking.com/api/minio/manpower-pages/photography.md
@@ -1014,20 +1029,8 @@ public final class EnterDeveloperActivity extends AppActivity {
                 }
             }
         }
-        if (bean.getStatus() == 3) {//审核成功
 
-            new BaseDialog.Builder<>(this)
-                    .setContentView(R.layout.write_daily_delete_dialog)
-                    .setAnimStyle(BaseDialog.ANIM_SCALE)
-                    .setText(R.id.tv_title, "您已审核成功，如要修改入驻信息需要重新审核，是否确定修改？")
-                    .setOnClickListener(R.id.btn_dialog_custom_cancel, (BaseDialog.OnClickListener<Button>) (dialog, button) -> dialog.dismiss())
-                    .setOnClickListener(R.id.btn_dialog_custom_ok, (dialog, views) -> {
-                        submitDeveloper();
-                    })
-                    .show();
-        } else {
-            submitDeveloper();
-        }
+        submitDeveloper();
 
     }
 

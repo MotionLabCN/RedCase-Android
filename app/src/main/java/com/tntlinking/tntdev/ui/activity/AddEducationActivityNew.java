@@ -308,16 +308,29 @@ public final class AddEducationActivityNew extends AppActivity {
                     }
                     addEducation(true);
                 } else {
-                    new BaseDialog.Builder<>(this)
-                            .setContentView(R.layout.write_daily_delete_dialog)
-                            .setAnimStyle(BaseDialog.ANIM_SCALE)
-                            .setText(R.id.tv_title, "是否确认删除？")
-                            .setOnClickListener(R.id.btn_dialog_custom_cancel, (BaseDialog.OnClickListener<Button>) (dialog, button) -> dialog.dismiss())
-                            .setOnClickListener(R.id.btn_dialog_custom_ok, (dialog, views) -> {
 
-                                deleteEducation(mId, dialog);
-                            })
-                            .show();
+                    if (mBean.getStatus() == 3) {
+                        new BaseDialog.Builder<>(this)
+                                .setContentView(R.layout.write_daily_delete_dialog)
+                                .setAnimStyle(BaseDialog.ANIM_SCALE)
+                                .setText(R.id.tv_title, "修改简历需要重新提交审核")
+                                .setOnClickListener(R.id.btn_dialog_custom_cancel, (BaseDialog.OnClickListener<Button>) (dialog, button) -> dialog.dismiss())
+                                .setOnClickListener(R.id.btn_dialog_custom_ok, (dialog, views) -> {
+                                    deleteEducation(mId, dialog);
+                                })
+                                .show();
+                    } else {
+                        new BaseDialog.Builder<>(this)
+                                .setContentView(R.layout.write_daily_delete_dialog)
+                                .setAnimStyle(BaseDialog.ANIM_SCALE)
+                                .setText(R.id.tv_title, "是否确认删除？")
+                                .setOnClickListener(R.id.btn_dialog_custom_cancel, (BaseDialog.OnClickListener<Button>) (dialog, button) -> dialog.dismiss())
+                                .setOnClickListener(R.id.btn_dialog_custom_ok, (dialog, views) -> {
+
+                                    deleteEducation(mId, dialog);
+                                })
+                                .show();
+                    }
 
                 }
                 break;
@@ -367,7 +380,21 @@ public final class AddEducationActivityNew extends AppActivity {
                     if (mId == 0) { // 0 添加教育  不等于0 是编辑教育
                         addEducation(false);
                     } else {
-                        updateEducation(mId);
+//                        updateEducation(mId);
+
+                        if (mBean.getStatus() == 3) {
+                            new BaseDialog.Builder<>(this)
+                                    .setContentView(R.layout.write_daily_delete_dialog)
+                                    .setAnimStyle(BaseDialog.ANIM_SCALE)
+                                    .setText(R.id.tv_title, "修改简历需要重新提交审核")
+                                    .setOnClickListener(R.id.btn_dialog_custom_cancel, (BaseDialog.OnClickListener<Button>) (dialog, button) -> dialog.dismiss())
+                                    .setOnClickListener(R.id.btn_dialog_custom_ok, (dialog, views) -> {
+                                        updateEducation(mId);
+                                    })
+                                    .show();
+                        } else {
+                            updateEducation(mId);
+                        }
                     }
                 }
                 break;

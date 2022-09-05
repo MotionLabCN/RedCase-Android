@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.tntlinking.tntdev.R;
 import com.tntlinking.tntdev.http.api.AppListApi;
 import com.tntlinking.tntdev.http.api.GetFirmFreezeRecordApi;
+import com.tntlinking.tntdev.other.Utils;
 
 import java.util.List;
 
@@ -71,7 +72,7 @@ public final class FreezeAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
         GetFirmFreezeRecordApi.Bean.ListBean item = mList.get(position);
-        holder.tv_freeze_money.setText("¥ " + item.getMoney());
+        holder.tv_freeze_money.setText("¥ " + Utils.formatMoney(item.getMoney() + ""));
         holder.tv_freeze_num.setText("合约单号：" + item.getOrderNo());
         holder.tv_freeze_time.setText(item.getCreateDate());
 

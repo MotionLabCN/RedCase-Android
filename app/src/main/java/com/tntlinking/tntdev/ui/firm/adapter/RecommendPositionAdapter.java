@@ -76,8 +76,9 @@ public final class RecommendPositionAdapter extends BaseAdapter {
         GetFirmRecommendsApi.Bean.ListBean item = mList.get(position);
         holder.tv_name.setText(item.getRealName());
 //        holder.tv_salary.setText(item.getExpectSalary());
-        double expectSalary = Double.parseDouble(item.getExpectSalary());
-        holder.tv_salary.setText(Utils.formatMoney(expectSalary) + "/月");
+        double expectSalary = Double.parseDouble(item.getExpectSalary())/1000;
+        holder.tv_salary.setText(Utils.formatMoney(expectSalary) + "k/月");
+
         holder.tv_position_desc.setText(item.getCareerDirectionName() + "·" + item.getEducationName() + "·工作经验" + item.getWorkYearsName());
         GlideUtils.loadRoundCorners(mContext, item.getAvatarUrl(), holder.iv_avatar, (int) mContext.getResources().getDimension(R.dimen.dp_8));
         return convertView;
