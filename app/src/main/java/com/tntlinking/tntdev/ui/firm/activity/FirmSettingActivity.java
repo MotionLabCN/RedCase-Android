@@ -65,10 +65,10 @@ public final class FirmSettingActivity extends AppActivity {
     @Override
     protected void onResume() {
         super.onResume();
-//        if (!TextUtils.isEmpty(SPUtils.getInstance().getString(AppConfig.DEVELOP_MOBILE, ""))) {
-//            String mobile = Utils.changPhoneNumber(SPUtils.getInstance().getString(AppConfig.DEVELOP_MOBILE));
-//            mSettingPhone.setRightText(mobile);
-//        }
+        if (!TextUtils.isEmpty(SPUtils.getInstance().getString(AppConfig.DEVELOP_MOBILE, ""))) {
+            String mobile = Utils.changPhoneNumber(SPUtils.getInstance().getString(AppConfig.DEVELOP_MOBILE));
+            mSettingPhone.setRightText(mobile);
+        }
     }
 
     @SingleClick

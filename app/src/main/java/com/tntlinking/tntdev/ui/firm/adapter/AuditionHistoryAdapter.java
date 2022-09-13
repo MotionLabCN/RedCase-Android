@@ -27,6 +27,7 @@ public final class AuditionHistoryAdapter extends AppAdapter<GetFirmInterviewLis
 
     private final class ViewHolder extends AppAdapter<?>.ViewHolder {
 
+        private final TextView tv_create_time;
         private final TextView tv_time;
         private final TextView tv_position;
         private final TextView tv_name;
@@ -34,6 +35,7 @@ public final class AuditionHistoryAdapter extends AppAdapter<GetFirmInterviewLis
 
         private ViewHolder() {
             super(R.layout.item_audition_histroy);
+            tv_create_time = findViewById(R.id.tv_create_time);
             tv_time = findViewById(R.id.tv_time);
             tv_position = findViewById(R.id.tv_position);
             tv_name = findViewById(R.id.tv_name);
@@ -44,9 +46,11 @@ public final class AuditionHistoryAdapter extends AppAdapter<GetFirmInterviewLis
         @Override
         public void onBindView(int position) {
             GetFirmInterviewListApi.Bean.ListBean item = getItem(position);
-            tv_time.setText(Utils.getYearFromDate(item.getInterviewStartDate()));
-            tv_position.setText(Utils.getYearFromDate(item.getTitle()));
-            tv_name.setText(Utils.getYearFromDate(item.getRealName()));
+
+            tv_create_time.setText(Utils.getYearFromDate(item.getInterviewStartDate()));
+            tv_time.setText(item.getInterviewStartDate());
+            tv_position.setText(item.getTitle());
+            tv_name.setText(item.getRealName());
         }
     }
 }

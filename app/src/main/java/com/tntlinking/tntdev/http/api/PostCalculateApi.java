@@ -39,6 +39,7 @@ public final class PostCalculateApi implements IRequestApi, IRequestType {
         private double totalAmount;
         private double serviceAmount;
         private double freezeAmount;
+        private double serviceRatio;
         private List<PreListBean> preOrderList;
 
         public double getTotalAmount() {
@@ -63,6 +64,14 @@ public final class PostCalculateApi implements IRequestApi, IRequestType {
 
         public void setFreezeAmount(double freezeAmount) {
             this.freezeAmount = freezeAmount;
+        }
+
+        public double getServiceRatio() {
+            return serviceRatio;
+        }
+
+        public void setServiceRatio(double serviceRatio) {
+            this.serviceRatio = serviceRatio;
         }
 
         public List<PreListBean> getPreList() {

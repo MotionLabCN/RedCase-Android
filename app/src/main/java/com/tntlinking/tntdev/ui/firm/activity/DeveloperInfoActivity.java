@@ -57,6 +57,7 @@ public final class DeveloperInfoActivity extends AppActivity {
     private TextView tv_dev_name;
     private TextView tv_dev_info;
     private TextView tv_salary;
+    private TextView tv_all_day;
     private FlowTagLayout tag_flow_layout;
     private LinearLayout ll_bottom;
     private LinearLayout ll_to_collect;
@@ -89,6 +90,7 @@ public final class DeveloperInfoActivity extends AppActivity {
         tv_dev_name = findViewById(R.id.tv_dev_name);
         tv_dev_info = findViewById(R.id.tv_dev_info);
         tv_salary = findViewById(R.id.tv_salary);
+        tv_all_day = findViewById(R.id.tv_all_day);
         tag_flow_layout = findViewById(R.id.tag_flow_layout);
         ll_to_collect = findViewById(R.id.ll_to_collect);
         iv_collect = findViewById(R.id.iv_collect);
@@ -326,7 +328,14 @@ public final class DeveloperInfoActivity extends AppActivity {
             double expectSalary = Double.parseDouble(workModeDtoList.get(0).getExpectSalary()) / 1000;
             tv_salary.setText((Utils.formatMoney(expectSalary) + "k/月"));
 //            tv_salary.setText(workModeDtoList.get(0).getExpectSalary());
+            if (workModeDtoList.get(0).getWorkDayMode() == 1) { // 1 全日 2 半日
+                tv_all_day.setText("全日");
+            } else {
+                tv_all_day.setText("半日");
+            }
+
         }
+
         tv_dev_info.setText(careerDto.getCareerDirectionName() + "·工作经验" + careerDto.getWorkYearsName());
 
         TagFirmAdapter adapter = new TagFirmAdapter(getContext(), 2);

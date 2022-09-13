@@ -49,11 +49,12 @@ public final class AuditionManageAdapter extends AppAdapter<GetFirmInterviewList
         @Override
         public void onBindView(int position) {
             GetFirmInterviewListApi.Bean.ListBean item = getItem(position);
-            tv_create_time.setText(item.getDayType());
-            tv_time.setText(Utils.getYearFromDate(item.getInterviewStartDate()));
-            tv_position.setText(Utils.getYearFromDate(item.getTitle()));
-            tv_name.setText(Utils.getYearFromDate(item.getRealName()));
-            tv_link.setText(Utils.getYearFromDate(item.getMeetingUrl()));
+//            tv_create_time.setText(item.getDayType());
+            tv_create_time.setText(Utils.getYearFromDate(item.getInterviewStartDate()));
+            tv_time.setText(item.getInterviewStartDate());
+            tv_position.setText(item.getTitle());
+            tv_name.setText(item.getRealName());
+            tv_link.setText(item.getMeetingUrl());
 
         }
     }

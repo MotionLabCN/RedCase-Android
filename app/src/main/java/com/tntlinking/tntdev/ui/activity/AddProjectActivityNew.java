@@ -366,7 +366,20 @@ public final class AddProjectActivityNew extends AppActivity {
                         toast("没有输入项目描述");
                         return;
                     }
-                    addProject(true);
+//                    addProject(true);
+                    if (getInt("status") == 3) {
+                        new BaseDialog.Builder<>(this)
+                                .setContentView(R.layout.write_daily_delete_dialog)
+                                .setAnimStyle(BaseDialog.ANIM_SCALE)
+                                .setText(R.id.tv_title, "修改简历需要重新提交审核")
+                                .setOnClickListener(R.id.btn_dialog_custom_cancel, (BaseDialog.OnClickListener<Button>) (dialog, button) -> dialog.dismiss())
+                                .setOnClickListener(R.id.btn_dialog_custom_ok, (dialog, views) -> {
+                                    addProject(true);
+                                })
+                                .show();
+                    } else {
+                        addProject(true);
+                    }
                 } else {
 
                     if (mBean.getStatus() == 3) {
@@ -461,7 +474,20 @@ public final class AddProjectActivityNew extends AppActivity {
 //                    }
 //                }
                 if (mId == 0) { // 0 添加教育  不等于0 是编辑教育
-                    addProject(false);
+//                    addProject(false);
+                    if (getInt("status") == 3) {
+                        new BaseDialog.Builder<>(this)
+                                .setContentView(R.layout.write_daily_delete_dialog)
+                                .setAnimStyle(BaseDialog.ANIM_SCALE)
+                                .setText(R.id.tv_title, "修改简历需要重新提交审核")
+                                .setOnClickListener(R.id.btn_dialog_custom_cancel, (BaseDialog.OnClickListener<Button>) (dialog, button) -> dialog.dismiss())
+                                .setOnClickListener(R.id.btn_dialog_custom_ok, (dialog, views) -> {
+                                    addProject(true);
+                                })
+                                .show();
+                    } else {
+                        addProject(true);
+                    }
                 } else {
 //                    updateProject(mId);
 

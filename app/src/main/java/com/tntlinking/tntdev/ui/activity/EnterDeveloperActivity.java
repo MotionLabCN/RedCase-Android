@@ -299,16 +299,19 @@ public final class EnterDeveloperActivity extends AppActivity {
                 }
                 getActivity().startActivityForResult(intent, 10002);
                 break;
-            case R.id.ll_add_education:
+            case R.id.ll_add_education:// 审核状态传过去，只要不是审核通过 status!=3 ，保存的时候需要弹框提示
                 intent.setClass(EnterDeveloperActivity.this, AddEducationActivityNew.class);
+                intent.putExtra("status", bean.getStatus());
                 getActivity().startActivityForResult(intent, 10003);
                 break;
             case R.id.ll_add_work:
                 intent.setClass(EnterDeveloperActivity.this, AddWorkActivity.class);
+                intent.putExtra("status", bean.getStatus());
                 getActivity().startActivityForResult(intent, 10004);
                 break;
             case R.id.ll_add_project:
                 intent.setClass(EnterDeveloperActivity.this, AddProjectActivityNew.class);
+                intent.putExtra("status", bean.getStatus());
                 getActivity().startActivityForResult(intent, 10005);
                 break;
             case R.id.btn_commit:
@@ -337,8 +340,22 @@ public final class EnterDeveloperActivity extends AppActivity {
                 checkCommit(bean);
                 break;
             case R.id.ll_import_resume:
-                startActivity(UploadResumeActivity.class);
-                finish();
+                if (bean.getStatus() == 3) {
+                    new BaseDialog.Builder<>(this)
+                            .setContentView(R.layout.write_daily_delete_dialog)
+                            .setAnimStyle(BaseDialog.ANIM_SCALE)
+                            .setText(R.id.tv_title, "修改简历需要重新提交审核")
+                            .setOnClickListener(R.id.btn_dialog_custom_cancel, (BaseDialog.OnClickListener<Button>) (dialog, button) -> dialog.dismiss())
+                            .setOnClickListener(R.id.btn_dialog_custom_ok, (dialog, views) -> {
+                                startActivity(UploadResumeActivity.class);
+                                finish();
+                            })
+                            .show();
+                } else {
+                    startActivity(UploadResumeActivity.class);
+                    finish();
+                }
+
                 break;
         }
 
@@ -639,7 +656,6 @@ public final class EnterDeveloperActivity extends AppActivity {
             File file = new File(BitmapUtil.compressImage(sourceFile.getAbsolutePath(), 90));
             EasyLog.print("===getSize=222===" + FileUtils.getSize(file));
             updateCropImage(file, false);
-            toast("图片压缩大小==>>>" + FileUtils.getSize(file));
         } else {
             updateCropImage(sourceFile, false);
         }
@@ -685,6 +701,7 @@ public final class EnterDeveloperActivity extends AppActivity {
 
         progress = 0;
         bean = data;
+        EasyLog.print("=====getStatus===" + bean.getStatus());
         String realName = bean.getRealName();
         SPUtils.getInstance().put(AppConfig.DEVELOP_NAME, realName);
         int sex = bean.getSex();
@@ -823,6 +840,12 @@ public final class EnterDeveloperActivity extends AppActivity {
             tv_progress.setText("\"审核中，专属顾问将在1-3个工作日内完成审核\"");
             iv_progress.setImageResource(R.drawable.icon_warning);
             progress_bar.setVisibility(View.GONE);
+
+            if (isResume) {
+                btn_commit.setVisibility(View.VISIBLE);
+            } else {
+                btn_commit.setVisibility(View.GONE);
+            }
         } else if (bean.getStatus() == 3) {
             tv_welcome.setVisibility(View.GONE);
             ll_progress.setVisibility(View.GONE);

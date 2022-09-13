@@ -3,6 +3,8 @@ package com.tntlinking.tntdev.jpush;
 public class ExtraBean {
     private String createTime;
     private String messageType;
+    private String typeId;
+    private String messageStr;
 
     public String getCreateTime() {
         return createTime;
@@ -28,6 +30,11 @@ public class ExtraBean {
         this.typeId = typeId;
     }
 
-    private String typeId;
+    public String getMessageStr() {
+        return messageStr;
+    }
 
+    public void setMessageStr(String messageStr) {
+        this.messageStr = messageStr;
+    }
 }

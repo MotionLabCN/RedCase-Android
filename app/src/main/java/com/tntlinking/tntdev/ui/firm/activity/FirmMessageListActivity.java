@@ -114,6 +114,7 @@ public final class FirmMessageListActivity extends AppActivity implements OnRefr
             case 6:
                 intent.setClass(getActivity(), FirmMessageDetailActivity.class);
                 intent.putExtra("message", item.getMessageStr());
+                intent.putExtra("typeId", item.getTypeId());
                 startActivity(intent);
                 break;
             case 7:

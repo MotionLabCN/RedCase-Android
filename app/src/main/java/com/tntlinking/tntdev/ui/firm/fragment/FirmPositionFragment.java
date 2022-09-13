@@ -75,12 +75,12 @@ public final class FirmPositionFragment extends TitleBarFragment<FirmMainActivit
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 GetFirmPositionApi.Bean.ListBean item = mAdapter.getItem(position);
 
-                if (item.getAuditStatus() == 1) {//0 是审核中,1 是通过， 2 是未通过
-                    Intent intent = new Intent(getActivity(), RecommendPositionActivity.class);
+                if (item.getAuditStatus() == 2) {//0 是审核中,1 是通过， 2 是未通过
+                    Intent intent = new Intent(getActivity(), FirmInfoActivity.class);
                     intent.putExtra("position_bean", item);
                     startActivity(intent);
                 } else {
-                    Intent intent = new Intent(getActivity(), FirmInfoActivity.class);
+                    Intent intent = new Intent(getActivity(), RecommendPositionActivity.class);
                     intent.putExtra("position_bean", item);
                     startActivity(intent);
                 }

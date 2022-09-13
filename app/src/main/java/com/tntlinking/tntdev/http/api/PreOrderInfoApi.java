@@ -29,6 +29,7 @@ public final class PreOrderInfoApi implements IRequestApi, IRequestType {
         private double totalAmount;
         private double serviceAmount;
         private double freezeAmount;
+        private double serviceRatio;
         private List<PreOrderListBean> preOrderList;
         private String avatarUrl;
         private int developerId;
@@ -77,6 +78,14 @@ public final class PreOrderInfoApi implements IRequestApi, IRequestType {
 
         public void setFreezeAmount(double freezeAmount) {
             this.freezeAmount = freezeAmount;
+        }
+
+        public double getServiceRatio() {
+            return serviceRatio;
+        }
+
+        public void setServiceRatio(double serviceRatio) {
+            this.serviceRatio = serviceRatio;
         }
 
         public List<PreOrderListBean> getPreOrderList() {

@@ -52,6 +52,7 @@ public final class ContractDetailActivity extends AppActivity {
     private TextView tv_work_time_money_2;
     private TextView tv_work_service_money;
     private TextView tv_work_freeze_money;
+    private TextView tv_service_percent;
     private LinearLayout ll_date_1;
     private LinearLayout ll_date_2;
     private AppCompatButton btn_create;
@@ -83,6 +84,7 @@ public final class ContractDetailActivity extends AppActivity {
         tv_work_time_money_2 = findViewById(R.id.tv_work_time_money_2);
         tv_work_freeze_money = findViewById(R.id.tv_work_freeze_money);
         tv_work_service_money = findViewById(R.id.tv_work_service_money);
+        tv_service_percent = findViewById(R.id.tv_service_percent);
         ll_date_1 = findViewById(R.id.ll_date_1);
         ll_date_2 = findViewById(R.id.ll_date_2);
         btn_create = findViewById(R.id.btn_create);
@@ -113,11 +115,13 @@ public final class ContractDetailActivity extends AppActivity {
             tv_work_mode.setText("全日8小时");
             double eSalary = Double.parseDouble(expectSalary) / 1000;
             tv_work_salary.setText((Utils.formatMoney(eSalary) + "k/月"));
-            selectTime = TimeUtil.getTimeString("yyyy-MM-dd");
-            tv_work_time.setText(selectTime);
+//            selectTime = TimeUtil.getTimeString("yyyy-MM-dd");
+//            tv_work_time.setText(selectTime);
 
             EasyConfig.getInstance().addHeader("loginRole", "Recruiter");
-            postCalculate(selectTime);
+//            postCalculate(selectTime);
+            ll_date_1.setVisibility(View.GONE);
+            ll_date_2.setVisibility(View.GONE);
         }
     }
 
@@ -172,9 +176,11 @@ public final class ContractDetailActivity extends AppActivity {
                                 PostCalculateApi.Bean.PreListBean bean = preList.get(0);
                                 tv_work_time_1.setText(bean.getWorkStartDate() + "-" + bean.getWorkEndDate());
                                 tv_work_time_money_1.setText("¥ " + Utils.formatMoney(bean.getTotalAmount() + ""));
+                                ll_date_1.setVisibility(View.VISIBLE);
                                 ll_date_2.setVisibility(View.GONE);
                             } else if (preList.size() == 2) {
                                 PostCalculateApi.Bean.PreListBean bean1 = preList.get(0);
+                                ll_date_1.setVisibility(View.VISIBLE);
                                 ll_date_2.setVisibility(View.VISIBLE);
                                 tv_work_time_1.setText(bean1.getWorkStartDate() + "-" + bean1.getWorkEndDate());
                                 tv_work_time_money_1.setText("¥ " + Utils.formatMoney(bean1.getTotalAmount() + ""));
@@ -186,6 +192,9 @@ public final class ContractDetailActivity extends AppActivity {
                             tv_work_money.setText("¥ " + Utils.formatMoney(data.getData().getTotalAmount() + ""));
                             tv_work_service_money.setText("¥ " + Utils.formatMoney(data.getData().getServiceAmount() + ""));
                             tv_work_freeze_money.setText("¥ " + Utils.formatMoney(data.getData().getFreezeAmount() + ""));
+                            String str = data.getData().getServiceRatio() * 100 + "";
+                            String serviceRatio = Utils.StripZeros(str);
+                            tv_service_percent.setText("平台服务费(" + serviceRatio + "%用人服务费)");
                         }
                     }
                 });
@@ -268,6 +277,9 @@ public final class ContractDetailActivity extends AppActivity {
                             tv_work_money.setText(Utils.formatMoney(data.getData().getTotalAmount() + ""));
                             tv_work_service_money.setText(Utils.formatMoney(data.getData().getServiceAmount() + ""));
                             tv_work_freeze_money.setText(Utils.formatMoney(data.getData().getFreezeAmount() + ""));
+                            String str = data.getData().getServiceRatio() * 100 + "";
+                            String serviceRatio = Utils.StripZeros(str);
+                            tv_service_percent.setText("平台服务费(" + serviceRatio + "%用人服务费)");
                         }
                     }
                 });

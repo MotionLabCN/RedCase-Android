@@ -71,7 +71,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="top"
-                    android:text="客服"
+                    android:text="徐佳杰"
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_15"
                     android:textStyle="bold" />

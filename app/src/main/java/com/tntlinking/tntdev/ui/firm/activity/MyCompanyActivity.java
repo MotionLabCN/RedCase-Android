@@ -34,6 +34,7 @@ public final class MyCompanyActivity extends AppActivity {
     private AppCompatButton btn_leave;
     private AppCompatButton btn_change;
     private String mMobile;
+    private String mName;
 
     @Override
     protected int getLayoutId() {
@@ -79,6 +80,7 @@ public final class MyCompanyActivity extends AppActivity {
                 Intent intent = new Intent(MyCompanyActivity.this, FirmCertificationActivity.class);
                 intent.putExtra("isChange", true);
                 intent.putExtra("mobile", mMobile);
+                intent.putExtra("name", mName);
                 startActivity(intent);
                 finish();
 
@@ -91,6 +93,7 @@ public final class MyCompanyActivity extends AppActivity {
     protected void initData() {
         int status = getInt("status");
         mMobile = getString("mobile");
+        mName = getString("name");
         if (status == 2) {// 2  审核中。。
             ll_bottom.setVisibility(View.GONE);
         } else {

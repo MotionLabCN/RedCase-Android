@@ -24,7 +24,7 @@
                 android:id="@+id/tv_dev_position"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="前端开发"
+                android:text="xx"
                 android:textColor="@color/black"
                 android:textSize="@dimen/sp_15"
                 android:textStyle="bold" />
@@ -35,7 +35,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_10"
-                android:text="全日·本科·3-4年·汽车"
+                android:text="xxx"
                 android:textColor="@color/color_hint_color"
                 android:textSize="@dimen/sp_13" />
 
@@ -47,7 +47,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="right"
-            android:text="11k/月"
+            android:text="k/月"
             android:textColor="@color/main_color"
             android:textSize="@dimen/sp_15"
             android:textStyle="bold" />

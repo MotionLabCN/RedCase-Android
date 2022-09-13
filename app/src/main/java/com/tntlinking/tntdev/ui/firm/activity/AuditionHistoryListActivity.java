@@ -133,6 +133,7 @@ public final class AuditionHistoryListActivity extends AppActivity implements On
         intent.putExtra("time", mAdapter.getItem(position).getInterviewStartDate());
         intent.putExtra("position", mAdapter.getItem(position).getTitle());
         intent.putExtra("code", mAdapter.getItem(position).getMeetingCode());
+        intent.putExtra("url", mAdapter.getItem(position).getMeetingUrl());
         startActivity(intent);
 
     }

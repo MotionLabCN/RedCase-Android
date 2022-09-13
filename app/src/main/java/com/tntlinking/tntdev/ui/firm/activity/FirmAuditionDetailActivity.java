@@ -54,6 +54,7 @@ public final class FirmAuditionDetailActivity extends AppActivity {
             String position = getString("position");
             String time = getString("time");
             String code = getString("code");
+            meetingUrl = getString("url");
 
             tv_time.setText(time);
             tv_position.setText(position);

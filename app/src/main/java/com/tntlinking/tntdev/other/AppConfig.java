@@ -231,4 +231,9 @@ public final class AppConfig {
      * 企业端 极光推送前缀
      */
     public static String JPUSH_FIRM = "ttsl_recruiter_app_";
+
+    /**
+     * 企业端 管理员状态//0 未加入 1管理员 2 子账号
+     */
+    public static String ADMIN_TYPE = "admin_type";
 }

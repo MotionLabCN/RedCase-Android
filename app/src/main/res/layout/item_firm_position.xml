@@ -30,7 +30,7 @@
                     android:id="@+id/tv_position"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="xxx开发"
+                    android:text="xx"
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_15"
                     android:textStyle="bold" />
@@ -73,7 +73,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_12"
-                android:text="上海xxx科技有限公司"
+                android:text="xxx公司"
                 android:textColor="@color/color_hint_color"
                 android:textSize="@dimen/sp_13" />
 
@@ -82,7 +82,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_8"
-                android:text="全日·本科·3-4年·汽车"
+                android:text="xx·xx·xx·xx"
                 android:textColor="@color/color_hint_color"
                 android:textSize="@dimen/sp_13" />
 
@@ -107,7 +107,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="right"
-                android:text="11k/月"
+                android:text="k/月"
                 android:textColor="@color/main_color"
                 android:textSize="@dimen/sp_15"
                 android:textStyle="bold" />

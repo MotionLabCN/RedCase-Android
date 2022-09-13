@@ -6,7 +6,7 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * desc   : 获取企业管理员电话号码
+ * desc   : 获取企业管理
  */
 public final class GetPositionOriginalApi implements IRequestApi {
 

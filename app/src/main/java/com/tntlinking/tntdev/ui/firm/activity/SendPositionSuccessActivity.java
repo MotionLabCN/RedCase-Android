@@ -79,11 +79,12 @@ public final class SendPositionSuccessActivity extends AppActivity {
     protected void initData() {
         mDeveloperId = getInt("developerId");
         mPositionId = getInt("positionId");
-        getFirmDevDetail(mDeveloperId);
+
         if (mDeveloperId == 0) {
             btn_commit.setText("完成");
         } else {
             btn_commit.setText("发起签单");
+            getFirmDevDetail(mDeveloperId);
         }
     }
 

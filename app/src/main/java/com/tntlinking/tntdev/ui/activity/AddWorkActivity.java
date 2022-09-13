@@ -288,19 +288,22 @@ public final class AddWorkActivity extends AppActivity {
                         return;
                     }
 
-                    addWork(true);
+//                    addWork(true);
+                    if (getInt("status") == 3) {
+                        new BaseDialog.Builder<>(this)
+                                .setContentView(R.layout.write_daily_delete_dialog)
+                                .setAnimStyle(BaseDialog.ANIM_SCALE)
+                                .setText(R.id.tv_title, "修改简历需要重新提交审核")
+                                .setOnClickListener(R.id.btn_dialog_custom_cancel, (BaseDialog.OnClickListener<Button>) (dialog, button) -> dialog.dismiss())
+                                .setOnClickListener(R.id.btn_dialog_custom_ok, (dialog, views) -> {
+                                    addWork(true);
+                                })
+                                .show();
+                    } else {
+                        addWork(true);
+                    }
                 } else {
 
-//                    new BaseDialog.Builder<>(this)
-//                            .setContentView(R.layout.write_daily_delete_dialog)
-//                            .setAnimStyle(BaseDialog.ANIM_SCALE)
-//                            .setText(R.id.tv_title, "是否确认删除？")
-//                            .setOnClickListener(R.id.btn_dialog_custom_cancel, (BaseDialog.OnClickListener<Button>) (dialog, button) -> dialog.dismiss())
-//                            .setOnClickListener(R.id.btn_dialog_custom_ok, (dialog, views) -> {
-//
-//                                deleteWork(mId, dialog);
-//                            })
-//                            .show();
 
                     if (mBean.getStatus() == 3) {
                         new BaseDialog.Builder<>(this)
@@ -369,7 +372,20 @@ public final class AddWorkActivity extends AppActivity {
                     ActivityManager.getInstance().finishAllActivities(EnterDeveloperActivity.class, MainActivity.class);
                 } else {
                     if (mId == 0) { // 0 添加教育  不等于0 是编辑教育
-                        addWork(false);
+//                        addWork(false);
+                        if (getInt("status") == 3) {
+                            new BaseDialog.Builder<>(this)
+                                    .setContentView(R.layout.write_daily_delete_dialog)
+                                    .setAnimStyle(BaseDialog.ANIM_SCALE)
+                                    .setText(R.id.tv_title, "修改简历需要重新提交审核")
+                                    .setOnClickListener(R.id.btn_dialog_custom_cancel, (BaseDialog.OnClickListener<Button>) (dialog, button) -> dialog.dismiss())
+                                    .setOnClickListener(R.id.btn_dialog_custom_ok, (dialog, views) -> {
+                                        addWork(true);
+                                    })
+                                    .show();
+                        } else {
+                            addWork(true);
+                        }
                     } else {
 //                        updateWork(mId);
 

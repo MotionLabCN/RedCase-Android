@@ -89,7 +89,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_14"
-                    android:text="后端开发 ·工作经验10年"
+                    android:text="xx·xx"
                     android:textColor="@color/gray"
                     android:textSize="@dimen/sp_13" />
 
@@ -116,7 +116,7 @@
                 android:layout_marginLeft="@dimen/dp_6"
                 android:maxLines="1"
                 android:singleLine="true"
-                android:text="11k/月"
+                android:text="k/月"
                 android:textColor="@color/main_color"
                 android:textSize="@dimen/sp_15"
                 android:textStyle="bold" />

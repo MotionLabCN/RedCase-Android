@@ -73,6 +73,8 @@ public final class FirmMineFragment extends TitleBarFragment<FirmMainActivity> i
 
     private int mStatus = 1; //企业认证状态  1待审核 2审核中 3已认证 4审核失败
     private String mMobile;
+    private String mName;
+    private int mTypeId = 0;//0 未加入 1管理员 2 子账号
     private boolean isFirmAdmin;//是否是企业管理员
 
     public static FirmMineFragment newInstance() {
@@ -127,7 +129,7 @@ public final class FirmMineFragment extends TitleBarFragment<FirmMainActivity> i
     @Override
     protected void initData() {
         getFirmInfo();
-        GetJudgeAdmin();
+//        GetJudgeAdmin();
 
     }
 
@@ -155,6 +157,7 @@ public final class FirmMineFragment extends TitleBarFragment<FirmMainActivity> i
                     intent.setClass(getActivity(), FirmCertificationActivity.class);
                 }
                 intent.putExtra("mobile", mMobile);
+                intent.putExtra("name", mName);
                 startActivity(intent);
                 break;
             case R.id.ll_mine_audition://面试管理
@@ -164,14 +167,14 @@ public final class FirmMineFragment extends TitleBarFragment<FirmMainActivity> i
                 startActivity(TreatyOrderListActivity.class);
                 break;
             case R.id.ll_mine_account://资金账户管理
-                if (isFirmAdmin) {
+                if (mTypeId == 1) {
                     startActivity(AccountManageActivity.class);
                 } else {
                     toast("你还不是企业管理员");
                 }
                 break;
             case R.id.ll_mine_firm://企业管理
-                if (isFirmAdmin) {
+                if (mTypeId == 1) {
                     startActivity(FirmManageActivity.class);
                 } else {
                     toast("你还不是企业管理员");
@@ -237,6 +240,9 @@ public final class FirmMineFragment extends TitleBarFragment<FirmMainActivity> i
                             tv_name.setText(data.getData().getRealName());
                         }
                         mMobile = data.getData().getMobile();
+                        mName = data.getData().getRealName();
+                        mTypeId = data.getData().getTypeId();//0 未加入 1管理员 2 子账号
+                        SPUtils.getInstance().put(AppConfig.ADMIN_TYPE, mTypeId);
                         GlideUtils.loadCircle(getActivity(), data.getData().getAvatarUrl(), iv_avatar);
                     }
                 });
@@ -260,9 +266,6 @@ public final class FirmMineFragment extends TitleBarFragment<FirmMainActivity> i
                 });
 
     }
-
-
-
 
 
     @Override

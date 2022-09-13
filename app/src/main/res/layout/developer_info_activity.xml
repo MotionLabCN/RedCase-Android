@@ -82,18 +82,33 @@
                                     android:layout_weight="1"
                                     android:ellipsize="end"
                                     android:singleLine="true"
-                                    android:text="xxx"
+                                    android:text=""
                                     android:textColor="@color/color_text_color"
                                     android:textSize="@dimen/sp_20"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:id="@+id/tv_all_day"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:background="@drawable/bg_blue_radius_3"
+                                    android:paddingLeft="@dimen/dp_3"
+                                    android:paddingTop="@dimen/dp_3"
+                                    android:paddingRight="@dimen/dp_3"
+                                    android:paddingBottom="@dimen/dp_3"
+                                    android:text="全日"
+                                    android:textColor="@color/white"
+                                    android:textSize="@dimen/sp_12"
                                     android:textStyle="bold" />
 
                                 <TextView
                                     android:id="@+id/tv_salary"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/dp_6"
                                     android:maxLines="1"
                                     android:singleLine="true"
-                                    android:text="11k/月"
+                                    android:text="k/月"
                                     android:textColor="@color/main_color"
                                     android:textSize="@dimen/sp_15"
                                     android:textStyle="bold" />
@@ -104,7 +119,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/dp_14"
-                                android:text="后端开发 ·工作经验10年"
+                                android:text=""
                                 android:textColor="@color/color_hint_color"
                                 android:textSize="@dimen/sp_13" />
 

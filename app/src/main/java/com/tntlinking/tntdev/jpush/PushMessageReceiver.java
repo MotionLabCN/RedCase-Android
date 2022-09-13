@@ -7,10 +7,16 @@ import android.content.Intent;
 import android.util.Log;
 
 
+import com.blankj.utilcode.util.SPUtils;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.tntlinking.tntdev.other.AppConfig;
 import com.tntlinking.tntdev.ui.activity.AuditionDetailActivity;
 import com.tntlinking.tntdev.ui.activity.JobDetailsActivity;
+import com.tntlinking.tntdev.ui.activity.MessageListActivity;
+import com.tntlinking.tntdev.ui.firm.activity.FirmManageActivity;
+import com.tntlinking.tntdev.ui.firm.activity.FirmMessageDetailActivity;
+import com.tntlinking.tntdev.ui.firm.activity.FirmMessageListActivity;
 
 
 import org.json.JSONException;
@@ -26,8 +32,9 @@ import cn.jpush.android.service.JPushMessageReceiver;
 
 public class PushMessageReceiver extends JPushMessageReceiver {
     private static final String TAG = "PushMessageReceiver";
-    private String MessageType;
-    private String TypeId;
+    private String mMessageType;
+    private String mTypeId;
+    private String mMessageStr;
 
     @SuppressLint("LogNotTimber")
     @Override
@@ -56,33 +63,65 @@ public class PushMessageReceiver extends JPushMessageReceiver {
             Log.e("extra", ">>" + extra);
             Log.e("extra", ">>" + extraBean.getMessageType());
 
-            MessageType = extraBean.getMessageType();
-            TypeId = extraBean.getTypeId();
+            mMessageType = extraBean.getMessageType();
+            mTypeId = extraBean.getTypeId();
+            mMessageStr = extraBean.getMessageStr();
+
+            if (extra.contains("companyRecruiterId")) { // 企业端
+                switch (mMessageType) {
+//                    case "0"://企业邀请员工
+//                    case "1"://通知企业管理员新增子账号
+//                    case "2"://通知用户加入企业成功
+                    case "3"://通知企业管理员审核成功加入申请
+                        if (SPUtils.getInstance().getInt(AppConfig.ADMIN_TYPE) == 1) {
+                            context.startActivity(new Intent(context, FirmManageActivity.class));
+
+                        }
+                        break;
+//                    case "4"://通知用户加入企业失败
+                    case "5"://职位审核未通过
+                    case "6"://职位审核未通过
+                        Intent intent2 = new Intent(context, FirmMessageDetailActivity.class);
+                        intent2.putExtra("typeId", Integer.valueOf(mTypeId));
+                        intent2.putExtra("message", mMessageStr);
+                        intent2.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        context.startActivity(intent2);
+                        break;
+                }
+            } else {
+                switch (mMessageType) {
+//                    case "0"://打开职位推荐详情页面（目前统一跳转职位推荐详情页面）
+//                    case "1": //打开职位上新页面（目前统一跳转职位推荐详情页面）
+//                        Intent i = new Intent(context, JobDetailsActivity.class);
+//                        i.putExtra("positionId", TypeId);
+//                        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//                        context.startActivity(i);
+//                        break;
+//                    case "2": //打开面试开始前提醒页面（目前没有这个前面需要统一跳转面试详情页面）
+//                    case "3": //打开面试创建提示页面（目前没有这个前面需要统一跳转面试详情页面）
+//                    case "4": //打开面试邀约详情页面（目前没有这个前面需要统一跳转面试详情页面）
+//                        Intent intent2 = new Intent(context, AuditionDetailActivity.class);
+//                        intent2.putExtra("interviewId", TypeId);
+//                        intent2.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//                        context.startActivity(intent2);
+
+                    case "5":
+                    case "6":
+                        context.startActivity(new Intent(context, MessageListActivity.class));
+                        break;
+                    case "7":
+                        Intent intent2 = new Intent(context, AuditionDetailActivity.class);
+                        intent2.putExtra("interviewId", mTypeId);
+                        intent2.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        context.startActivity(intent2);
+                        break;
+                }
+            }
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        switch (MessageType) {
-            case "0":
-            case "1":
-                //打开职位推荐详情页面（目前统一跳转职位推荐详情页面）
-                //打开职位上新页面（目前统一跳转职位推荐详情页面）
-                Intent i = new Intent(context, JobDetailsActivity.class);
-                i.putExtra("positionId", TypeId);
-                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                context.startActivity(i);
-                break;
-            case "2":
-            case "3":
-            case "4":
-                //打开面试开始前提醒页面（目前没有这个前面需要统一跳转面试详情页面）
-                //打开面试创建提示页面（目前没有这个前面需要统一跳转面试详情页面）
-                //打开面试邀约详情页面（目前没有这个前面需要统一跳转面试详情页面）
-                Intent intent2 = new Intent(context, AuditionDetailActivity.class);
-                intent2.putExtra("interviewId", TypeId);
-                intent2.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                context.startActivity(intent2);
-                break;
-        }
+
+
     }
 
     @SuppressLint("LogNotTimber")

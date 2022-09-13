@@ -19,6 +19,7 @@ public final class GetFirmInfoApi implements IRequestApi {
         private String position;
         private String avatarUrl;
         private int status;
+        private int typeId;//0 未加入 1管理员 2 子账号
 
         public int getId() {
             return id;
@@ -66,6 +67,14 @@ public final class GetFirmInfoApi implements IRequestApi {
 
         public void setStatus(int status) {
             this.status = status;
+        }
+
+        public int getTypeId() {
+            return typeId;
+        }
+
+        public void setTypeId(int typeId) {
+            this.typeId = typeId;
         }
     }
 }

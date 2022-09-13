@@ -56,6 +56,7 @@ public final class FirmCertificationActivity extends AppActivity {
     private int mCompanyId;
     private String mPosition = "";
     private String mMobile;
+    private String mName;
     private String mEmail;
     private String mEmailCode;
     private int mProvinceId = 0;
@@ -97,7 +98,9 @@ public final class FirmCertificationActivity extends AppActivity {
         }
         isChange = getBoolean("isChange");
         mMobile = getString("mobile");
+        mName = getString("name");
         tv_mobile.setText(mMobile);
+        et_name.setText(mName);
         if (isChange) {
             title_bar.setTitle("升级企业账户");
         } else {
@@ -163,12 +166,25 @@ public final class FirmCertificationActivity extends AppActivity {
                     toast("你还没有填写所属公司");
                     return;
                 }
-                if (TextUtils.isEmpty(mPosition)) {
-                    toast("你还没有填写当前职位");
-                    return;
-                }
+//                if (TextUtils.isEmpty(mPosition)) {
+//                    toast("你还没有填写当前职位");
+//                    return;
+//                }
                 if (TextUtils.isEmpty(mEmail)) {
                     toast("你还没有填写邮箱");
+                    return;
+                }
+                if (!mEmail.contains("@")) {
+                    toast("你的邮箱格式不正确");
+                    et_email.setText("");
+                    return;
+                }
+                if (mEmail.contains("@qq.com") || mEmail.contains("@163.com") ||
+                        mEmail.contains("@126.com") || mEmail.contains("@sina.com") ||
+                        mEmail.contains("@sina.cn") || mEmail.contains("@foxmail.com")
+                        || mEmail.contains("@gmail.com")) {
+                    toast("你的邮箱后缀不可作为企业邮箱后缀");
+                    et_email.setText("");
                     return;
                 }
                 if (TextUtils.isEmpty(mEmailCode)) {

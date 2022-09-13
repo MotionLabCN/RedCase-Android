@@ -80,9 +80,11 @@ public final class TreatyOrderFragment extends TitleBarFragment<FirmMainActivity
                 if (mAdapter.getItem(position).getOrderStatus() == 1) {
                     String workStartDate = mAdapter.getItem(position).getWorkStartDate();
                     long workTime = TimeUtil.getTimeLong("yyyy-MM-dd", workStartDate);
-                    long nowTime = TimeUtil.getTimeLong();
+//                    long nowTime = TimeUtil.getTimeLong();
+                    String timeString = TimeUtil.getTimeString(TimeUtil.getTimeLong(), "yyyy-MM-dd");
+                    long nowTime = TimeUtil.getTimeLong("yyyy-MM-dd", timeString);
 
-                    if (workTime > nowTime) { // 开始时间大于当前时间跳转到支付页面
+                    if (workTime >= nowTime) { // 开始时间大于当前时间跳转到支付页面
                         Intent intent = new Intent(getActivity(), ContractPayActivity.class);
                         intent.putExtra("orderId", mAdapter.getItem(position).getId());
                         startActivity(intent);

@@ -40,6 +40,7 @@
                 android:layout_marginTop="@dimen/dp_20"
                 android:hint="请输入您的真实姓名"
                 android:paddingLeft="@dimen/dp_15"
+                android:maxLength="5"
                 android:paddingTop="@dimen/dp_15"
                 android:paddingBottom="@dimen/dp_15"
                 android:singleLine="true" />
@@ -99,6 +100,7 @@
                 android:hint="请输入您当前的职位(可选)"
                 android:paddingLeft="@dimen/dp_15"
                 android:paddingTop="@dimen/dp_15"
+                android:maxLength="10"
                 android:paddingBottom="@dimen/dp_15"
                 android:singleLine="true" />
 
@@ -143,6 +145,7 @@
                     android:background="@color/white"
                     android:hint="邮箱"
                     android:imeOptions="actionDone"
+                    android:maxLength="18"
                     android:inputType="textEmailAddress"
                     android:paddingHorizontal="@dimen/dp_18"
                     android:paddingVertical="@dimen/dp_18"
@@ -224,6 +227,7 @@
                 android:hint="请输入详细地址"
                 android:paddingLeft="@dimen/dp_15"
                 android:paddingTop="@dimen/dp_15"
+                android:maxLength="40"
                 android:singleLine="true" />
 
             <View

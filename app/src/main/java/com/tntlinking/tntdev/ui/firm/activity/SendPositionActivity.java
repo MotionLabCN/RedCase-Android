@@ -22,6 +22,7 @@ import com.tntlinking.tntdev.aop.SingleClick;
 import com.tntlinking.tntdev.app.AppActivity;
 import com.tntlinking.tntdev.http.api.GetDictionaryApi;
 import com.tntlinking.tntdev.http.api.GetFirmPositionApi;
+import com.tntlinking.tntdev.http.api.GetPositionInfoApi;
 import com.tntlinking.tntdev.http.api.GetPositionOriginalApi;
 import com.tntlinking.tntdev.http.api.GetProvinceApi;
 import com.tntlinking.tntdev.http.api.GetTagListApi;
@@ -127,7 +128,7 @@ public final class SendPositionActivity extends AppActivity {
         mEducationList = getDictionaryList("5");//学历
         mCareerIdList = getDictionaryList("6");//职业方向
         mTrainingList = getDictionaryList("7");//培养方式
-
+        int typeId = getInt("typeId");
         GetFirmPositionApi.Bean.ListBean bean = getSerializable("position_bean");
         GetPositionOriginalApi.Bean beanIds = getSerializable("position_bean_ids");
         if (bean != null) {
@@ -183,6 +184,8 @@ public final class SendPositionActivity extends AppActivity {
             mDescription = bean.getDescription();
 
             mId = beanIds.getId();
+        } else if (typeId != 0) {
+            getPositionInfo(typeId);
         }
     }
 
@@ -325,7 +328,7 @@ public final class SendPositionActivity extends AppActivity {
                 if (btn_commit.getText().equals("发布职位")) {
                     submitDeveloper();
                 } else {
-                    UpdateDeveloper();
+                    updateDeveloper();
                 }
                 break;
 
@@ -333,6 +336,9 @@ public final class SendPositionActivity extends AppActivity {
 
     }
 
+    /**
+     * 发布职位
+     */
     public void submitDeveloper() {
         EasyHttp.post(this)
                 .api(new SendPositionApi()
@@ -369,7 +375,10 @@ public final class SendPositionActivity extends AppActivity {
                 });
     }
 
-    public void UpdateDeveloper() {
+    /**
+     * 更新职位
+     */
+    public void updateDeveloper() {
         EasyHttp.put(this)
                 .api(new UpdatePositionApi()
                         .setId(mId)
@@ -452,5 +461,73 @@ public final class SendPositionActivity extends AppActivity {
 
             }
         }
+    }
+
+    private void getPositionInfo(int positionId) {
+        EasyHttp.get(this)
+                .api(new GetPositionInfoApi().setPositionId(positionId))
+                .request(new HttpCallback<HttpData<GetPositionInfoApi.Bean>>(this) {
+                    @Override
+                    public void onSucceed(HttpData<GetPositionInfoApi.Bean> data) {
+                        GetPositionInfoApi.Bean bean = data.getData();
+                        title_bar.setTitle("修改职位");
+                        btn_commit.setText("修改职位");
+
+                        position_career_id.setLeftText(bean.getCareerDirection());
+                        et_position_name.setText(bean.getTitle());
+                        position_education_id.setLeftText(bean.getEducation());
+                        position_training_mode_id.setLeftText(bean.getTrainingMode());
+                        position_work_year_id.setLeftText(bean.getWorkYears());
+                        position_industry_id.setLeftText(bean.getIndustryMandatory() ? "是" : "否");
+                        et_expect_salary_low.setText(bean.getStartPay() * 1000 + "");
+                        et_expect_salary_high.setText(bean.getEndPay() * 1000 + "");
+                        et_recruit_count.setText(bean.getRecruitCount() + "");
+                        et_description.setText(bean.getDescription());
+
+                        if (bean.getSkills() != null && bean.getSkills().size() > 0) {
+                            StringBuilder sb = new StringBuilder();
+                            mTagIntList.clear();
+                            mSelectList.clear();
+                            for (String i : bean.getSkills()) {
+                                sb.append(i);
+                                sb.append(",");
+                            }
+                            for (int i = 0; i < bean.getSkillsList().size(); i++) {
+                                GetTagListApi.Bean.ChildrenBean childrenBean = new GetTagListApi.Bean.ChildrenBean();
+                                childrenBean.setId(bean.getSkillsList().get(i).getId());
+                                mSelectList.add(childrenBean);
+                                mTagIntList.add(bean.getSkillsList().get(i).getId());
+                            }
+                            for (int i = 0; i < bean.getSkills().size(); i++) {
+                                mSelectList.get(i).setSkillName(bean.getSkills().get(i));
+                            }
+                            position_skill_id.setLeftText(sb.toString());
+                        }
+
+
+                        careerDirectionName = bean.getCareerDirection();
+                        careerDirectionId = bean.getCareerDirectionId();
+                        workYearsName = bean.getWorkYears();
+                        workYearsId = bean.getWorkYearsId();
+                        educationName = bean.getEducation();
+                        educationId = bean.getEducationId();
+                        trainingName = bean.getTrainingMode();
+                        trainingId = bean.getTrainingModeId();
+
+                        if (bean.getIndustryMandatory()) {
+                            industryMandatory = 1;
+                        } else {
+                            industryMandatory = 0;
+                        }
+
+                        careerPosition = bean.getTitle();
+                        startPay = bean.getStartPay() * 1000 + "";
+                        endPay = bean.getEndPay() * 1000 + "";
+                        mCount = bean.getRecruitCount() + "";
+                        mDescription = bean.getDescription();
+
+                        mId = bean.getId();
+                    }
+                });
     }
 }

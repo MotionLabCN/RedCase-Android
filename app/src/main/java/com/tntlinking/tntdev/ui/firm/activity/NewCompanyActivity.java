@@ -112,13 +112,14 @@ public final class NewCompanyActivity extends AppActivity {
         mDictionaryList = getDictionaryList("2");// 2->人员规模
 
         isChange = getBoolean("isChange");
-        if (isChange) {// 从我的公司页面跳转过来的，
-            title_bar.setTitle("更换公司");
-            btn_commit.setText("更换");
-        } else {// 新建公司过来的，
-            title_bar.setTitle("新建公司");
-            btn_commit.setText("新建");
-        }
+//        if (isChange) {// 从我的公司页面跳转过来的，
+//            title_bar.setTitle("更换公司");
+//            btn_commit.setText("更换");
+//        } else {// 新建公司过来的，
+//            title_bar.setTitle("新建公司");
+//            btn_commit.setText("新建");
+//        }
+
     }
 
 
@@ -217,7 +218,10 @@ public final class NewCompanyActivity extends AppActivity {
                     toast("你还没有选择公司规模");
                     return;
                 }
-
+                if (TextUtils.isEmpty(mAddress)){
+                    toast("公司地址解析错误");
+                    return;
+                }
                 if (isChange) {
                     changeNewCompany();
                 } else {
@@ -285,7 +289,7 @@ public final class NewCompanyActivity extends AppActivity {
             File file = new File(BitmapUtil.compressImage(sourceFile.getAbsolutePath(), 90));
             EasyLog.print("===getSize=222===" + FileUtils.getSize(file));
             updateCropImage(file, false);
-            toast("图片压缩大小==>>>" + FileUtils.getSize(file));
+
         } else {
             updateCropImage(sourceFile, false);
         }

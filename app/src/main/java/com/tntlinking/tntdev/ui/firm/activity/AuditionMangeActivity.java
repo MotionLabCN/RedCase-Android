@@ -1,6 +1,7 @@
 package com.tntlinking.tntdev.ui.firm.activity;
 
 import android.content.Intent;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -22,6 +23,7 @@ import com.tntlinking.tntdev.http.api.CollectDeveloperApi;
 import com.tntlinking.tntdev.http.api.GetFirmInterviewListApi;
 import com.tntlinking.tntdev.http.api.developerBillListApi;
 import com.tntlinking.tntdev.http.model.HttpData;
+import com.tntlinking.tntdev.ui.activity.BrowserActivity;
 import com.tntlinking.tntdev.ui.firm.adapter.AuditionManageAdapter;
 
 import java.util.ArrayList;
@@ -144,6 +146,7 @@ public final class AuditionMangeActivity extends AppActivity implements OnRefres
         intent.putExtra("time", mAdapter.getItem(position).getInterviewStartDate());
         intent.putExtra("position", mAdapter.getItem(position).getTitle());
         intent.putExtra("code", mAdapter.getItem(position).getMeetingCode());
+        intent.putExtra("url", mAdapter.getItem(position).getMeetingUrl());
         startActivity(intent);
 
     }
@@ -172,9 +175,16 @@ public final class AuditionMangeActivity extends AppActivity implements OnRefres
                         cancelInterview(mAdapter.getItem(position).getInterviewId(), dialog);
                     }).show();
         } else if (childView.getId() == R.id.btn_contact) {
-            toast("联系客服");
+            new BaseDialog.Builder<>(this)
+                    .setContentView(R.layout.to_add_service_dialog)
+                    .setAnimStyle(BaseDialog.ANIM_SCALE)
+                    .setOnClickListener(R.id.iv_close, (dialog1, views1) -> {
+                        dialog1.dismiss();
+                    }).show();
         } else if (childView.getId() == R.id.btn_enter) {
-            toast("进入会议");
+            if (!TextUtils.isEmpty(mList.get(position).getMeetingUrl())) {
+                BrowserActivity.start(getActivity(), mList.get(position).getMeetingUrl());
+            }
         }
     }
 

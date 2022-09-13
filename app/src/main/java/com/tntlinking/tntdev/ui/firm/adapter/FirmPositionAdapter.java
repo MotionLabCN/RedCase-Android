@@ -98,7 +98,7 @@ public final class FirmPositionAdapter extends BaseAdapter {
         String mEnd = Utils.formatMoney(item.getEndPay() / 1000) + "k";
         holder.tv_salary.setText(mStart + "-" + mEnd);
         holder.tv_company_name.setText(item.getCompanyName());
-        holder.tv_position_desc.setText(item.getWorkDaysMode() + "·" + item.getEducation() + "·工作经验" + item.getWorkYears() + "·" + item.getCareerDirection());
+        holder.tv_position_desc.setText(item.getTrainingMode() + "·" + item.getEducation() + "·工作经验" + item.getWorkYears() + "·" + item.getCareerDirection());
 
         holder.tv_position_recommend.setText("已有" + item.getCountRecommends() + "人推荐，" + item.getCountSelfRecommends() + "人自荐");
 //        holder.tv_reason.setOnClickListener(new View.OnClickListener() {

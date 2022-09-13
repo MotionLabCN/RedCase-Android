@@ -96,16 +96,21 @@ public final class FirmInfoActivity extends AppActivity {
                         //.setText(id, "我是预设置的文本")
                         .setOnClickListener(R.id.iv_close, (dialog, views) -> dialog.dismiss())
                         .setOnClickListener(R.id.btn_commit, (dialog, views) -> {
-                            Intent intent1 = new Intent();
-                            intent1.setClass(this, SaveQRActivity.class);
-                            intent1.putExtra("contact", "contact");
-                            startActivity(intent1);
+
+                            new BaseDialog.Builder<>(this)
+                                    .setContentView(R.layout.to_add_service_dialog)
+                                    .setAnimStyle(BaseDialog.ANIM_SCALE)
+                                    .setOnClickListener(R.id.iv_close, (dialog1, views1) -> {
+                                        dialog1.dismiss();
+                                    }).show();
                         }).show();
                 break;
         }
 
     }
+
     GetPositionOriginalApi.Bean beanIds;
+
     //获取职位相关id
     private void getPositionOriginal(int positionId) {
         EasyHttp.get(this)

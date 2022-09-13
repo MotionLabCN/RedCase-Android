@@ -36,6 +36,7 @@ public final class ContractPayActivity extends AppActivity {
     private LinearLayout ll_date_2;
     private TextView tv_work_service_money;
     private TextView tv_work_freeze_money;
+    private TextView tv_service_percent;
     private AppCompatButton btn_commit;
     private String orderIds;
 
@@ -58,6 +59,7 @@ public final class ContractPayActivity extends AppActivity {
         ll_date_2 = findViewById(R.id.ll_date_2);
         tv_work_freeze_money = findViewById(R.id.tv_work_freeze_money);
         tv_work_service_money = findViewById(R.id.tv_work_service_money);
+        tv_service_percent = findViewById(R.id.tv_service_percent);
         btn_commit = findViewById(R.id.btn_commit);
 
         setOnClickListener(btn_commit);
@@ -95,6 +97,9 @@ public final class ContractPayActivity extends AppActivity {
                 tv_work_money.setText("¥ " + Utils.formatMoney(payInfo.getTotalAmount() + ""));
                 tv_work_service_money.setText("¥ " + Utils.formatMoney(payInfo.getServiceAmount() + ""));
                 tv_work_freeze_money.setText("¥ " + Utils.formatMoney(payInfo.getFreezeAmount() + ""));
+                String str = payInfo.getServiceRatio() * 100 + "";
+                String serviceRatio = Utils.StripZeros(str);
+                tv_service_percent.setText("平台服务费(" + serviceRatio + "%用人服务费)");
                 btn_commit.setText("支付¥ " + Utils.formatMoney(payInfo.getFreezeAmount() + ""));
             }
 
@@ -175,6 +180,9 @@ public final class ContractPayActivity extends AppActivity {
                             tv_work_money.setText("¥" + Utils.formatMoney(data.getData().getTotalAmount() + ""));
                             tv_work_service_money.setText("¥" + Utils.formatMoney(data.getData().getServiceAmount() + ""));
                             tv_work_freeze_money.setText("¥" + Utils.formatMoney(data.getData().getFreezeAmount() + ""));
+                            String str = data.getData().getServiceRatio() * 100 + "";
+                            String serviceRatio = Utils.StripZeros(str);
+                            tv_service_percent.setText("平台服务费(" + serviceRatio + "%用人服务费)");
                             btn_commit.setText("支付¥" + Utils.formatMoney(data.getData().getFreezeAmount() + ""));
                         }
 
