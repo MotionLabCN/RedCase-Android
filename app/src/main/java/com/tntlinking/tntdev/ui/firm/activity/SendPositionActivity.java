@@ -29,6 +29,7 @@ import com.tntlinking.tntdev.http.api.GetTagListApi;
 import com.tntlinking.tntdev.http.api.SendPositionApi;
 import com.tntlinking.tntdev.http.api.UpdatePositionApi;
 import com.tntlinking.tntdev.http.model.HttpData;
+import com.tntlinking.tntdev.other.Utils;
 import com.tntlinking.tntdev.ui.activity.AddProjectTagActivityNew;
 import com.tntlinking.tntdev.ui.dialog.DictionarySelectDialog;
 import com.tntlinking.tntdev.ui.dialog.GenderSelectDialog;
@@ -141,8 +142,8 @@ public final class SendPositionActivity extends AppActivity {
             position_training_mode_id.setLeftText(bean.getTrainingMode());
             position_work_year_id.setLeftText(bean.getWorkYears());
             position_industry_id.setLeftText(bean.getIndustryMandatory() ? "是" : "否");
-            et_expect_salary_low.setText(bean.getStartPay() + "");
-            et_expect_salary_high.setText(bean.getEndPay() + "");
+            et_expect_salary_low.setText(Utils.StripZeros(bean.getStartPay() + ""));
+            et_expect_salary_high.setText(Utils.StripZeros(bean.getEndPay() + ""));
             et_recruit_count.setText(bean.getRecruitCount() + "");
             et_description.setText(bean.getDescription());
 
@@ -211,7 +212,7 @@ public final class SendPositionActivity extends AppActivity {
                 break;
             case R.id.position_skill_id:
                 Intent intents = new Intent(this, AddProjectTagActivityNew.class);
-
+                intents.putExtra("max_size", 8);
                 if (mSelectList.size() != 0) {
                     intents.putExtra("list", (Serializable) mSelectList);
                 }
@@ -306,6 +307,10 @@ public final class SendPositionActivity extends AppActivity {
                 }
                 if (TextUtils.isEmpty(endPay)) {
                     toast("最高服务价格未填写");
+                    return;
+                }
+                if (startPay.contains(".") || endPay.contains(".")) {
+                    toast("服务价格不能输入小数");
                     return;
                 }
                 if (Double.parseDouble(startPay) > Double.parseDouble(endPay)) {
@@ -479,8 +484,10 @@ public final class SendPositionActivity extends AppActivity {
                         position_training_mode_id.setLeftText(bean.getTrainingMode());
                         position_work_year_id.setLeftText(bean.getWorkYears());
                         position_industry_id.setLeftText(bean.getIndustryMandatory() ? "是" : "否");
-                        et_expect_salary_low.setText(bean.getStartPay() * 1000 + "");
-                        et_expect_salary_high.setText(bean.getEndPay() * 1000 + "");
+//                        et_expect_salary_low.setText(bean.getStartPay() * 1000 + "");
+//                        et_expect_salary_high.setText(bean.getEndPay() * 1000 + "");
+                        et_expect_salary_low.setText(Utils.StripZeros(bean.getStartPay() * 1000 + ""));
+                        et_expect_salary_high.setText(Utils.StripZeros(bean.getEndPay() * 1000 + ""));
                         et_recruit_count.setText(bean.getRecruitCount() + "");
                         et_description.setText(bean.getDescription());
 

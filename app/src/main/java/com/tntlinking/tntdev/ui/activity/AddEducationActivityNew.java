@@ -64,6 +64,14 @@ public final class AddEducationActivityNew extends AppActivity {
     private String end_time = "";//毕业时间
     private String trainingName = "";//培养方式
 
+    //初始填充数据，判断是否对提交自己进行更改 ，没有更改不走接口
+    private String schoolName1 = "";//学校名字
+    private int educationId1 = 1;//学历id
+    private String major1 = "";//专业名字
+    private String in_time1 = "";//入校时间
+    private String end_time1 = "";//毕业时间
+    private int training_methodId1 = 1;//培养方式id
+
     private int position = 0;//传过来教育list 哪个条目的position
     private int mId = 0;// 教育条目 id
     private DeveloperInfoBean mBean;
@@ -152,6 +160,14 @@ public final class AddEducationActivityNew extends AppActivity {
                     trainingName = developerEducation.getTrainingModeName();
                     training_methodId = developerEducation.getTrainingMode();
                     mId = developerEducation.getId();
+
+
+                    schoolName1 = developerEducation.getCollegeName();
+                    educationId1 = developerEducation.getEducationId();
+                    major1 = developerEducation.getMajor();
+                    in_time1 = developerEducation.getInSchoolStartTime();
+                    end_time1 = developerEducation.getInSchoolEndTime();
+                    training_methodId1 = developerEducation.getTrainingMode();
                 }
 
                 if (getBoolean(IS_RESUME)) {
@@ -408,7 +424,12 @@ public final class AddEducationActivityNew extends AppActivity {
                         }
                     } else {
 //                        updateEducation(mId);
+                        if (schoolName.equals(schoolName1) && educationId == educationId1 && major.equals(major1)
+                                && in_time.equals(in_time1) && end_time.equals(end_time1) && training_methodId == training_methodId1) {
 
+                            toast("暂无修改");
+                            return;
+                        }
                         if (mBean.getStatus() == 3) {
                             new BaseDialog.Builder<>(this)
                                     .setContentView(R.layout.write_daily_delete_dialog)

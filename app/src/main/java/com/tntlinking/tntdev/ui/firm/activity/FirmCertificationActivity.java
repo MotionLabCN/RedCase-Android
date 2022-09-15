@@ -129,6 +129,14 @@ public final class FirmCertificationActivity extends AppActivity {
                     toast("你还没有填写邮箱");
                     return;
                 }
+                if (mEmail.contains("@qq.com") || mEmail.contains("@163.com") ||
+                        mEmail.contains("@126.com") || mEmail.contains("@sina.com") ||
+                        mEmail.contains("@sina.cn") || mEmail.contains("@foxmail.com")
+                        || mEmail.contains("@gmail.com")) {
+                    toast("你的邮箱后缀不可作为企业邮箱后缀");
+                    et_email.setText("");
+                    return;
+                }
                 getEmailCode(et_email.getText().toString());
                 cv_countdown.start();
                 break;
@@ -205,7 +213,6 @@ public final class FirmCertificationActivity extends AppActivity {
                     firmCertification();
                 }
                 break;
-
         }
 
     }

@@ -9,7 +9,7 @@ android {
         // 目标适配版本
         targetSdkVersion 30
         versionName '2.0.0'
-        versionCode 23
+        versionCode 24
     }
 
     // 支持 Java JDK 8

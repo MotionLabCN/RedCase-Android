@@ -121,6 +121,15 @@ public final class AuditionMangeActivity extends AppActivity implements OnRefres
                             }
 
                         }
+
+                    }
+
+                    @Override
+                    public void onFail(Exception e) {
+                        super.onFail(e);
+                        mRefreshLayout.finishRefresh();
+                        ll_empty.setVisibility(View.VISIBLE);
+                        mRefreshLayout.setEnableLoadMore(false);
                     }
                 });
     }

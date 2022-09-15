@@ -15,10 +15,8 @@ import com.hjq.widget.view.CountdownView;
 import com.tntlinking.tntdev.R;
 import com.tntlinking.tntdev.aop.SingleClick;
 import com.tntlinking.tntdev.app.AppActivity;
-import com.tntlinking.tntdev.http.api.ChangeFirmPhoneApi;
 import com.tntlinking.tntdev.http.api.ChangePhoneApi;
-import com.tntlinking.tntdev.http.api.GetCodeApi;
-import com.tntlinking.tntdev.http.api.GetCodeNewApi;
+import com.tntlinking.tntdev.http.api.GetSMSCodeApi;
 import com.tntlinking.tntdev.http.model.HttpData;
 import com.tntlinking.tntdev.manager.InputTextManager;
 import com.tntlinking.tntdev.other.AppConfig;
@@ -83,9 +81,11 @@ public final class ChangeFirmPhoneActivity extends AppActivity
             // 隐藏软键盘
             hideKeyboard(getCurrentFocus());
 
+
             // 获取验证码
             EasyHttp.get(this)
-                    .api(new GetCodeNewApi().setMobile(mPhoneView.getText().toString()))
+                    .api(new GetSMSCodeApi()
+                            .setPhone(mPhoneView.getText().toString()))
                     .request(new HttpCallback<HttpData<Void>>(this) {
 
                         @Override
@@ -104,7 +104,7 @@ public final class ChangeFirmPhoneActivity extends AppActivity
                 return;
             }
             EasyHttp.get(this)
-                    .api(new ChangeFirmPhoneApi()
+                    .api(new ChangePhoneApi()
                             .setMobile(mPhoneView.getText().toString())
                             .setCode(mPasswordView.getText().toString()))
                     .request(new HttpCallback<HttpData<Void>>(this) {

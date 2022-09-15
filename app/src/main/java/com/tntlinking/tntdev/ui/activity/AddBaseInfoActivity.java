@@ -64,6 +64,16 @@ public final class AddBaseInfoActivity extends AppActivity {
     private String areaName = "";
     private DeveloperInfoBean mBean;
 
+    //初始填充数据，判断是否对提交自己进行更改 ，没有更改不走接口
+    private String realName1;
+    private int sex1 = -1;
+    private String birthday1 = "";
+    private int provinceId1 = 0;
+    private int cityId1 = 0;
+    private int areaId1 = 0;
+    private int workReasonId1 = 0;
+    private String workReasonName1 = "";
+
     @Override
     protected int getLayoutId() {
         return R.layout.baseinfo_activity;
@@ -112,6 +122,15 @@ public final class AddBaseInfoActivity extends AppActivity {
                 cityId = mBean.getCityId();
                 areaId = mBean.getAreasId();
                 workReasonId = mBean.getRemoteWorkReason();
+
+                realName1 = mBean.getRealName();
+                sex1 = mBean.getSex();
+                birthday1 = mBean.getBirthday();
+                provinceId1 = mBean.getProvinceId();
+                cityId1 = mBean.getCityId();
+                areaId1 = mBean.getAreasId();
+                workReasonId1 = mBean.getRemoteWorkReason();
+
             }
 
             if (getBoolean(IS_RESUME)) {
@@ -268,6 +287,12 @@ public final class AddBaseInfoActivity extends AppActivity {
                 } else {
 //                  updateBasicInfo();
 
+                    if (realName.equals(realName1) && sex == sex1 && birthday.equals(birthday1) && provinceId == provinceId1
+                            && areaId == areaId1 && cityId == cityId1 && workReasonId == workReasonId1) {
+
+                        toast("暂无修改");
+                        return;
+                    }
                     if (mBean.getStatus() == 3) {
                         new BaseDialog.Builder<>(this)
                                 .setContentView(R.layout.write_daily_delete_dialog)

@@ -20,9 +20,9 @@ import com.tntlinking.tntdev.BuildConfig;
 import com.tntlinking.tntdev.R;
 import com.tntlinking.tntdev.aop.SingleClick;
 import com.tntlinking.tntdev.app.AppActivity;
-import com.tntlinking.tntdev.http.api.GetCodeApi;
 import com.tntlinking.tntdev.http.api.GetDeveloperStatusApi;
 import com.tntlinking.tntdev.http.api.GetFirmInfoApi;
+import com.tntlinking.tntdev.http.api.GetSMSCodeApi;
 import com.tntlinking.tntdev.http.api.LoginApi2;
 import com.tntlinking.tntdev.http.model.HttpData;
 import com.tntlinking.tntdev.manager.ActivityManager;
@@ -130,7 +130,7 @@ public final class LoginActivity2 extends AppActivity implements TextView.OnEdit
 
             // 获取验证码
             EasyHttp.get(this)
-                    .api(new GetCodeApi()
+                    .api(new GetSMSCodeApi()
                             .setPhone(mPhoneView.getText().toString()))
                     .request(new HttpCallback<HttpData<Void>>(this) {
 

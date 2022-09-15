@@ -67,6 +67,14 @@ public final class AddWorkActivity extends AppActivity {
     private String companyName = "";
     private String industryName = "";
 
+    //初始填充数据，判断是否对提交自己进行更改 ，没有更改不走接口
+    private String companyName1 = "";
+    private int industryId1;//行业id
+    private String project_position1 = "";
+    private String in_time1 = "";
+    private String end_time1 = "";
+
+
     private int mId = 0;
 
     private DeveloperInfoBean singleton = DeveloperInfoBean.getSingleton();
@@ -143,6 +151,12 @@ public final class AddWorkActivity extends AppActivity {
                     industryName = developerWork.getIndustryName();
                     industryId = developerWork.getIndustryId();
                     mId = developerWork.getId();
+
+                    companyName1 = developerWork.getCompanyName();
+                    project_position1 = developerWork.getPositionName();
+                    in_time1 = developerWork.getWorkStartTime();
+                    end_time1 = developerWork.getWorkEndTime();
+                    industryId1 = developerWork.getIndustryId();
                 }
 
 
@@ -388,7 +402,12 @@ public final class AddWorkActivity extends AppActivity {
                         }
                     } else {
 //                        updateWork(mId);
+                        if (companyName.equals(companyName1) && industryId == industryId1 && project_position.equals(project_position1)
+                                && in_time.equals(in_time1) && end_time.equals(end_time1)) {
 
+                            toast("暂无修改");
+                            return;
+                        }
                         if (mBean.getStatus() == 3) {
                             new BaseDialog.Builder<>(this)
                                     .setContentView(R.layout.write_daily_delete_dialog)

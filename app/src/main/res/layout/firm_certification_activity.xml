@@ -67,8 +67,6 @@
                     android:background="@color/white"
                     android:hint="请选择所属公司"
                     android:imeOptions="actionDone"
-                    android:inputType="number"
-                    android:maxLength="6"
                     android:paddingHorizontal="@dimen/dp_18"
                     android:paddingVertical="@dimen/dp_18"
                     android:singleLine="true" />
@@ -145,7 +143,7 @@
                     android:background="@color/white"
                     android:hint="邮箱"
                     android:imeOptions="actionDone"
-                    android:maxLength="18"
+                    android:maxLength="30"
                     android:inputType="textEmailAddress"
                     android:paddingHorizontal="@dimen/dp_18"
                     android:paddingVertical="@dimen/dp_18"

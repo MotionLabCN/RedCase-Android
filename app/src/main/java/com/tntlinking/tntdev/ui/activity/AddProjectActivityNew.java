@@ -82,6 +82,16 @@ public final class AddProjectActivityNew extends AppActivity {
     private int mId = 0;
     private DeveloperInfoBean singleton = DeveloperInfoBean.getSingleton();
 
+    //初始填充数据，判断是否对提交自己进行更改 ，没有更改不走接口
+    private String projectName1 = "";
+    private String in_time1 = "";
+    private String end_time1 = "";
+    private String companyName1 = "";
+    private String project_position1 = "";
+    private int industryId1;//行业id
+    private String project_skill1 = "";
+    private String description1 = "";
+
     @Override
     protected int getLayoutId() {
         return R.layout.add_project_activity;
@@ -182,6 +192,15 @@ public final class AddProjectActivityNew extends AppActivity {
                     industryId = developerProject.getIndustryId();
                     description = developerProject.getDescription();
                     mId = developerProject.getId();
+
+                    projectName1 = developerProject.getProjectName();
+                    in_time1 = developerProject.getProjectStartDate();
+                    end_time1 = developerProject.getProjectEndDate();
+                    project_position1 = developerProject.getPosition();
+                    companyName1 = developerProject.getCompanyName();
+                    industryId1 = developerProject.getIndustryId();
+                    description1 = developerProject.getDescription();
+                    project_skill1 = info_project_skill.getLeftText().toString();
                 }
 
                 if (getBoolean(IS_RESUME)) {
@@ -490,7 +509,14 @@ public final class AddProjectActivityNew extends AppActivity {
                     }
                 } else {
 //                    updateProject(mId);
+                    if (projectName1.equals(projectName1) && in_time.equals(in_time1) && end_time.equals(end_time1)
+                            && companyName.equals(companyName1) && project_position.equals(project_position1) && industryId == industryId1
+                            && project_skill.equals(project_skill1) && description.equals(description1)) {
 
+
+                        toast("暂无修改");
+                        return;
+                    }
                     if (mBean.getStatus() == 3) {
                         new BaseDialog.Builder<>(this)
                                 .setContentView(R.layout.write_daily_delete_dialog)
@@ -501,6 +527,7 @@ public final class AddProjectActivityNew extends AppActivity {
                                     updateProject(mId);
                                 })
                                 .show();
+
                     } else {
                         updateProject(mId);
                     }

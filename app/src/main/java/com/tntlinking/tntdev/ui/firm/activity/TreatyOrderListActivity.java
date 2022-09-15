@@ -45,16 +45,18 @@ public final class TreatyOrderListActivity extends AppActivity implements ViewPa
         mTabView = findViewById(R.id.rv_home_tab);
         mViewPager = findViewById(R.id.vp_home_pager);
         mPagerAdapter = new FragmentPagerAdapter<>(this);
-        //0 全部 1待冻结 3服务中 5已完成 4待结算
+        //  0“全部”，1"待支付", 2"待服务", 3"服务中", 4"待结算",5"已完成"，6"已取消"
         mPagerAdapter.addFragment(TreatyOrderFragment.newInstance("0"));
         mPagerAdapter.addFragment(TreatyOrderFragment.newInstance("1"));
+        mPagerAdapter.addFragment(TreatyOrderFragment.newInstance("2"));
         mPagerAdapter.addFragment(TreatyOrderFragment.newInstance("3"));
-        mPagerAdapter.addFragment(TreatyOrderFragment.newInstance("5"));
         mPagerAdapter.addFragment(TreatyOrderFragment.newInstance("4"));
+        mPagerAdapter.addFragment(TreatyOrderFragment.newInstance("5"));
+        mPagerAdapter.addFragment(TreatyOrderFragment.newInstance("6"));
 
         mViewPager.setAdapter(mPagerAdapter);
         mViewPager.addOnPageChangeListener(this);
-        mTabAdapter = new TabAdapter(this, TabAdapter.TAB_MODE_SERVICE, true);
+        mTabAdapter = new TabAdapter(this, TabAdapter.TAB_MODE_SERVICE, false);
         mTabView.setAdapter(mTabAdapter);
         EasyConfig.getInstance().addHeader("loginRole", "Recruiter");
         tv_search.setOnClickListener(new View.OnClickListener() {
@@ -69,9 +71,11 @@ public final class TreatyOrderListActivity extends AppActivity implements ViewPa
     protected void initData() {
         mTabAdapter.addItem("全部");
         mTabAdapter.addItem("待支付");
+        mTabAdapter.addItem("待服务");
         mTabAdapter.addItem("服务中");
-        mTabAdapter.addItem("已完成");
         mTabAdapter.addItem("待结算");
+        mTabAdapter.addItem("已完成");
+        mTabAdapter.addItem("已取消");
         mTabAdapter.setOnTabListener(this);
     }
 

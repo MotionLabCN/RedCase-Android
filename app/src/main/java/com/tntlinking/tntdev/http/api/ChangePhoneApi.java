@@ -1,23 +1,21 @@
 package com.tntlinking.tntdev.http.api;
 
 import com.hjq.http.config.IRequestApi;
-import com.hjq.http.config.IRequestType;
-import com.hjq.http.model.BodyType;
 
 
-public final class ChangePhoneApi implements IRequestApi , IRequestType {
+public final class ChangePhoneApi implements IRequestApi  {
 
     @Override
     public String getApi() {
-        return "manpower-rest-api/developer/update/mobile";
+        return "tntlinking-member/sso/member/modifyMobile";
     }
 
-    private String code;
+    private String verificationCode;
     private String mobile;
 
 
     public ChangePhoneApi setCode(String code) {
-        this.code = code;
+        this.verificationCode = code;
         return this;
     }
 
@@ -26,9 +24,4 @@ public final class ChangePhoneApi implements IRequestApi , IRequestType {
         return this;
     }
 
-
-    @Override
-    public BodyType getType() {
-        return BodyType.JSON;
-    }
 }

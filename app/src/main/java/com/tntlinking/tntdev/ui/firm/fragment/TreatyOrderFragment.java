@@ -109,9 +109,8 @@ public final class TreatyOrderFragment extends TitleBarFragment<FirmMainActivity
     }
 
 
-
     /**
-     * 获取职业方向
+     * 取企业订单列表
      */
     public void GetDeveloperList(String orderStatus, int pageNum) {
         EasyHttp.get(this)
@@ -119,12 +118,14 @@ public final class TreatyOrderFragment extends TitleBarFragment<FirmMainActivity
                 .request(new HttpCallback<HttpData<GetFirmOrderListApi.Bean>>(this) {
                     @Override
                     public void onSucceed(HttpData<GetFirmOrderListApi.Bean> data) {
+                        mRefreshLayout.setEnableLoadMore(true);
 
                         if (data.getData().getList().size() >= 0) {
                             ll_empty.setVisibility(View.GONE);
                             if (pageNum == 1) {
                                 if (data.getData().getList().size() == 0) {
                                     ll_empty.setVisibility(View.VISIBLE);
+                                    mRefreshLayout.setEnableLoadMore(false);
                                 } else {
                                     mList.clear();
                                     mList.addAll(data.getData().getList());
@@ -141,6 +142,15 @@ public final class TreatyOrderFragment extends TitleBarFragment<FirmMainActivity
 
                         }
 
+
+                    }
+
+                    @Override
+                    public void onFail(Exception e) {
+                        super.onFail(e);
+                        mRefreshLayout.finishRefresh();
+                        ll_empty.setVisibility(View.VISIBLE);
+                        mRefreshLayout.setEnableLoadMore(false);
                     }
                 });
     }

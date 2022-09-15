@@ -68,6 +68,13 @@ public final class AddCareerActivity extends AppActivity {
 //    private String highestSalary = "";
     private DeveloperInfoBean mBean;
 
+    //初始填充数据，判断是否对提交自己进行更改 ，没有更改不走接口
+    private int careerDirectionId1 = 0; //职业方向id
+    private int workYearsId1 = 0;//工作年限id
+    private String curSalary1 = ""; //当前薪资
+    private int workDayMode1 = 1;// 1 全日 2 半日  //默认全日
+    private String expectSalary1 = "";// 期望薪资
+
     @Override
     protected int getLayoutId() {
         return R.layout.career_activity;
@@ -135,6 +142,13 @@ public final class AddCareerActivity extends AppActivity {
                 expectSalary = workModeDtoList.get(0).getExpectSalary();
 //                lowestSalary = workModeDtoList.get(0).getLowestSalary();
 //                highestSalary = workModeDtoList.get(0).getHighestSalary();
+
+
+                careerDirectionId1 = careerDto.getCareerDirectionId();
+                workYearsId1 = careerDto.getWorkYearsId();
+                curSalary1 =  Utils.StripZeros(careerDto.getCurSalary());
+                workDayMode1 = workModeDtoList.get(0).getWorkDayMode();
+                expectSalary1 =  Utils.StripZeros(workModeDtoList.get(0).getExpectSalary());
             }
 
             if (getBoolean(IS_RESUME)) {
@@ -159,6 +173,7 @@ public final class AddCareerActivity extends AppActivity {
 //        }
         backToDialog();
     }
+
     @Override
     public void onBackPressed() {
         backToDialog();
@@ -273,6 +288,13 @@ public final class AddCareerActivity extends AppActivity {
                     ActivityManager.getInstance().finishAllActivities();
                 } else {
 //                    updateCareer();
+                    if (careerDirectionId == careerDirectionId1 && workYearsId == workYearsId1
+                            && curSalary.equals(curSalary1) && workDayMode == workDayMode1 && expectSalary.equals(expectSalary1)) {
+
+                        toast("暂无修改");
+                        return;
+                    }
+
                     if (mBean.getStatus() == 3) {
                         new BaseDialog.Builder<>(this)
                                 .setContentView(R.layout.write_daily_delete_dialog)
