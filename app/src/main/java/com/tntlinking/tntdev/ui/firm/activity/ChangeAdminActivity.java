@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.blankj.utilcode.util.SPUtils;
 import com.hjq.base.BaseDialog;
@@ -26,10 +27,12 @@ import cn.jpush.android.api.JPushInterface;
  * 角色切换页面
  */
 public final class ChangeAdminActivity extends AppActivity {
+    private TextView tv_firm;
+    private TextView tv_dev;
     private LinearLayout ll_firm;
     private LinearLayout ll_dev;
 
-    private boolean isFirm;
+    private boolean isFirm = false;
 
     @Override
     protected int getLayoutId() {
@@ -39,11 +42,12 @@ public final class ChangeAdminActivity extends AppActivity {
     @Override
     protected void initView() {
 
+        tv_firm = findViewById(R.id.tv_firm);
+        tv_dev = findViewById(R.id.tv_dev);
         ll_firm = findViewById(R.id.ll_firm);
         ll_dev = findViewById(R.id.ll_dev);
         setOnClickListener(ll_firm, ll_dev);
-        ll_firm.setSelected(true);
-        ll_dev.setSelected(false);
+
     }
 
 
@@ -51,9 +55,13 @@ public final class ChangeAdminActivity extends AppActivity {
     protected void initData() {
         isFirm = getBoolean("isFirm");
         if (isFirm) {
+            tv_firm.setText("目前企业角色");
+            tv_dev.setText("开发者账户");
             ll_firm.setSelected(true);
             ll_dev.setSelected(false);
         } else {
+            tv_firm.setText("企业角色");
+            tv_dev.setText("目前开发者角色");
             ll_firm.setSelected(false);
             ll_dev.setSelected(true);
         }

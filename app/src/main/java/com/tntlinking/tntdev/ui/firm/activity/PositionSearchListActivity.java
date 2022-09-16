@@ -1,5 +1,6 @@
 package com.tntlinking.tntdev.ui.firm.activity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.text.TextUtils;
 import android.view.KeyEvent;
@@ -34,7 +35,9 @@ import com.tntlinking.tntdev.widget.FlowTagLayout;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -54,7 +57,7 @@ public final class PositionSearchListActivity extends AppActivity implements OnR
     private List<GetFirmDevApi.Bean.ListBean> mList = new ArrayList<>();
     private int pageNum = 1;
     private String mSearch = "";
-    private  List<String> stringList = new ArrayList<>();
+    private List<String> stringList = new ArrayList<>();
     private TagFirmAdapter tagAdapter;
 
     @Override
@@ -62,6 +65,7 @@ public final class PositionSearchListActivity extends AppActivity implements OnR
         return R.layout.position_search_activity;
     }
 
+    @SuppressLint("NewApi")
     @Override
     protected void initView() {
 
@@ -80,8 +84,13 @@ public final class PositionSearchListActivity extends AppActivity implements OnR
         fl_search.setOnTagClickListener(new FlowTagLayout.OnTagClickListener() {
             @Override
             public void onItemClick(FlowTagLayout parent, View view, int position) {
-                mSearch = stringList.get(position);
+
+                List<String> collectList = stringList.stream().distinct().sorted(Comparator.reverseOrder()).collect(Collectors.toList());
+                mSearch = collectList.get(position);
                 et_search.setText(mSearch);
+
+//                mSearch = stringList.get(position);
+//                et_search.setText(mSearch);
 //                searchDeveloper(mSearch, 1);
             }
         });
@@ -110,14 +119,17 @@ public final class PositionSearchListActivity extends AppActivity implements OnR
 
     }
 
+    @SuppressLint("NewApi")
     @Override
     protected void initData() {
         String position_search = SPUtils.getInstance().getString("position_search");
         if (!TextUtils.isEmpty(position_search)) {
             ll_history.setVisibility(View.VISIBLE);
-            stringList = GsonUtils.fromJson(position_search, new TypeToken<List<String>>() {}.getType());
-            Collections.reverse(stringList);
-            tagAdapter.onlyAddAll(stringList);
+            stringList = GsonUtils.fromJson(position_search, new TypeToken<List<String>>() {
+            }.getType());
+
+            List<String> collectList = stringList.stream().distinct().sorted(Comparator.reverseOrder()).collect(Collectors.toList());
+            tagAdapter.onlyAddAll(collectList);
         } else {
             ll_history.setVisibility(View.GONE);
         }
@@ -135,6 +147,7 @@ public final class PositionSearchListActivity extends AppActivity implements OnR
         EasyHttp.get(this)
                 .api(new SearchDeveloperApi().setSearch(str).setPageNum(pageNum).setPageSize(20))
                 .request(new HttpCallback<HttpData<GetFirmDevApi.Bean>>(this) {
+
                     @Override
                     public void onSucceed(HttpData<GetFirmDevApi.Bean> data) {
                         mRefreshLayout.setEnableLoadMore(true);
@@ -142,6 +155,8 @@ public final class PositionSearchListActivity extends AppActivity implements OnR
                             ll_empty.setVisibility(View.GONE);
                             if (pageNum == 1) {
                                 if (data.getData().getList().size() == 0) {
+                                    mList.clear();
+                                    mAdapter.setData(mList);
                                     ll_empty.setVisibility(View.VISIBLE);
                                     mRefreshLayout.setEnableLoadMore(false);
                                 } else {
@@ -162,14 +177,30 @@ public final class PositionSearchListActivity extends AppActivity implements OnR
 
                         ll_history.setVisibility(View.GONE);
                         stringList.add(str);
-                        String s = GsonUtils.toJson(stringList);
-                        SPUtils.getInstance().put("position_search", s);
-                        Collections.reverse(stringList);
-                        tagAdapter.onlyAddAll(stringList);
+                        SPUtils.getInstance().put("position_search", GsonUtils.toJson(stringList));
+
                     }
                 });
     }
 
+    /**
+     * 自定义去重
+     *
+     * @param list
+     */
+    @SuppressLint("NewApi")
+    public static List<String> deleteSame(List<String> list) {
+        // 新集合
+        List<String> newList = new ArrayList<>(list.size());
+        list.forEach(i -> {
+            if (!newList.contains(i)) { // 如果新集合中不存在则插入
+                newList.add(i);
+            }
+        });
+//        System.out.println("去重集合:" + newList);
+        return newList;
+
+    }
 
     /**
      * {@link BaseAdapter.OnItemClickListener}

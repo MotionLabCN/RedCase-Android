@@ -62,7 +62,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_10"
-                android:text="请创建好职位，在进行签单"
+                android:text="请创建好职位，再进行签单"
                 android:textColor="#7E89A3"
                 android:textSize="@dimen/sp_12" />
 

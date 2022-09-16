@@ -34,23 +34,23 @@ public final class GetFirmDevApi implements IRequestApi {
 
     public final static class Bean {
 
-            private Integer total;
-            private Integer pageNum;
+            private int total;
+            private int pageNum;
             private List<ListBean> list;
 
-            public Integer getTotal() {
+            public int getTotal() {
                 return total;
             }
 
-            public void setTotal(Integer total) {
+            public void setTotal(int total) {
                 this.total = total;
             }
 
-            public Integer getPageNum() {
+            public int getPageNum() {
                 return pageNum;
             }
 
-            public void setPageNum(Integer pageNum) {
+            public void setPageNum(int pageNum) {
                 this.pageNum = pageNum;
             }
 
@@ -63,28 +63,28 @@ public final class GetFirmDevApi implements IRequestApi {
             }
 
             public static class ListBean {
-                private Integer id;
+                private int id;
                 private String realName;
                 private String mobile;
                 private String avatarUrl;
-                private Integer careerDirectionId;
+                private int careerDirectionId;
                 private String careerDirectionName;
                 private String cityName;
-                private Double curSalary;
-                private Integer workYearsId;
+                private double curSalary;
+                private int workYearsId;
                 private String workYearsName;
                 private String skillName;
-                private Double expectSalary;
-                private Integer workDayMode;
+                private double expectSalary;
+                private int workDayMode;
                 private String workDayModeName;
-                private Integer educationId;
+                private int educationId;
                 private String educationName;
 
-                public Integer getId() {
+                public int getId() {
                     return id;
                 }
 
-                public void setId(Integer id) {
+                public void setId(int id) {
                     this.id = id;
                 }
 
@@ -112,11 +112,11 @@ public final class GetFirmDevApi implements IRequestApi {
                     this.avatarUrl = avatarUrl;
                 }
 
-                public Integer getCareerDirectionId() {
+                public int getCareerDirectionId() {
                     return careerDirectionId;
                 }
 
-                public void setCareerDirectionId(Integer careerDirectionId) {
+                public void setCareerDirectionId(int careerDirectionId) {
                     this.careerDirectionId = careerDirectionId;
                 }
 
@@ -136,19 +136,19 @@ public final class GetFirmDevApi implements IRequestApi {
                     this.cityName = cityName;
                 }
 
-                public Double getCurSalary() {
+                public double getCurSalary() {
                     return curSalary;
                 }
 
-                public void setCurSalary(Double curSalary) {
+                public void setCurSalary(double curSalary) {
                     this.curSalary = curSalary;
                 }
 
-                public Integer getWorkYearsId() {
+                public int getWorkYearsId() {
                     return workYearsId;
                 }
 
-                public void setWorkYearsId(Integer workYearsId) {
+                public void setWorkYearsId(int workYearsId) {
                     this.workYearsId = workYearsId;
                 }
 
@@ -168,19 +168,19 @@ public final class GetFirmDevApi implements IRequestApi {
                     this.skillName = skillName;
                 }
 
-                public Double getExpectSalary() {
+                public double getExpectSalary() {
                     return expectSalary;
                 }
 
-                public void setExpectSalary(Double expectSalary) {
+                public void setExpectSalary(double expectSalary) {
                     this.expectSalary = expectSalary;
                 }
 
-                public Integer getWorkDayMode() {
+                public int getWorkDayMode() {
                     return workDayMode;
                 }
 
-                public void setWorkDayMode(Integer workDayMode) {
+                public void setWorkDayMode(int workDayMode) {
                     this.workDayMode = workDayMode;
                 }
 
@@ -192,11 +192,11 @@ public final class GetFirmDevApi implements IRequestApi {
                     this.workDayModeName = workDayModeName;
                 }
 
-                public Integer getEducationId() {
+                public int getEducationId() {
                     return educationId;
                 }
 
-                public void setEducationId(Integer educationId) {
+                public void setEducationId(int educationId) {
                     this.educationId = educationId;
                 }
 

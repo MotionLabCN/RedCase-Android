@@ -55,6 +55,7 @@
                 android:src="@drawable/icon_firm_admin" />
 
             <TextView
+                android:id="@+id/tv_firm"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="@dimen/dp_10"
@@ -91,6 +92,7 @@
                 android:src="@drawable/icon_firm_dev" />
 
             <TextView
+                android:id="@+id/tv_dev"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="@dimen/dp_10"

@@ -29,6 +29,7 @@ import com.tntlinking.tntdev.http.api.GetDeveloperJkStatusApi;
 import com.tntlinking.tntdev.http.api.GetDeveloperStatusApi;
 import com.tntlinking.tntdev.http.api.GetHasRead;
 import com.tntlinking.tntdev.http.api.GetSignContractPDFApi;
+import com.tntlinking.tntdev.http.api.GetTaskStatusApi;
 import com.tntlinking.tntdev.http.model.HttpData;
 import com.tntlinking.tntdev.manager.ActivityManager;
 import com.tntlinking.tntdev.other.AppConfig;
@@ -143,6 +144,7 @@ public final class MineFragment1 extends TitleBarFragment<MainActivity> implemen
     protected void initData() {
         getHasRead();
         getPersonData();
+        getTaskStatus();
     }
 
     private void getDeveloperJkStatus() {
@@ -235,6 +237,25 @@ public final class MineFragment1 extends TitleBarFragment<MainActivity> implemen
                     }
                 });
     }
+
+    /**
+     * 是否显示推荐有礼
+     */
+    public void getTaskStatus() {
+        EasyHttp.get(this)
+                .api(new GetTaskStatusApi())
+                .request(new HttpCallback<HttpData<Boolean>>(this) {
+                    @Override
+                    public void onSucceed(HttpData<Boolean> data) { //返回true代表'推荐有礼'任务是开的，否则是关的
+                        if (data.getData()) {
+                            person_data_recommend.setVisibility(View.VISIBLE);
+                        } else {
+                            person_data_recommend.setVisibility(View.GONE);
+                        }
+                    }
+                });
+    }
+
 
     private String mStatus = "1"; //入驻状态 1  待完善 2  待审核 3  审核成功 4  审核失败
     private int mContractStatus = 0; //签约状态 0, "待签约"，1, "签约中" 2, "签约成功" 3, "签约失败"

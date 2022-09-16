@@ -104,6 +104,8 @@ public final class AuditionMangeActivity extends AppActivity implements OnRefres
                             ll_empty.setVisibility(View.GONE);
                             if (pageNum == 1) {
                                 if (data.getData().getList().size() == 0) {
+                                    mList.clear();
+                                    mAdapter.setData(mList);
                                     ll_empty.setVisibility(View.VISIBLE);
                                     mRefreshLayout.setEnableLoadMore(false);
                                 } else {

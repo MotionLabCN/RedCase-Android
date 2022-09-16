@@ -90,6 +90,8 @@ public final class AuditionHistoryListActivity extends AppActivity implements On
                             ll_empty.setVisibility(View.GONE);
                             if (pageNum == 1) {
                                 if (data.getData().getList().size() == 0) {
+                                    mList.clear();
+                                    mAdapter.setData(mList);
                                     ll_empty.setVisibility(View.VISIBLE);
                                     mRefreshLayout.setEnableLoadMore(false);
                                 } else {
@@ -107,6 +109,13 @@ public final class AuditionHistoryListActivity extends AppActivity implements On
                             }
 
                         }
+                    }
+                    @Override
+                    public void onFail(Exception e) {
+                        super.onFail(e);
+                        mRefreshLayout.finishRefresh();
+                        ll_empty.setVisibility(View.VISIBLE);
+                        mRefreshLayout.setEnableLoadMore(false);
                     }
                 });
     }

@@ -84,6 +84,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_10"
                 android:hint="担任角色"
+                android:maxLines="10"
                 android:paddingLeft="@dimen/dp_15"
                 android:paddingTop="@dimen/dp_15"
                 android:paddingBottom="@dimen/dp_15"
