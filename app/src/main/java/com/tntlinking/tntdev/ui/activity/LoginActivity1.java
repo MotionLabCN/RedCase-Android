@@ -20,6 +20,7 @@ import com.hjq.http.EasyHttp;
 import com.hjq.http.listener.HttpCallback;
 import com.hjq.permissions.Permission;
 import com.hjq.permissions.XXPermissions;
+import com.hjq.umeng.UmengClient;
 import com.tntlinking.tntdev.BuildConfig;
 import com.tntlinking.tntdev.R;
 import com.tntlinking.tntdev.aop.SingleClick;
@@ -338,26 +339,35 @@ public final class LoginActivity1 extends AppActivity {
                 .setCancelable(false)
                 .setCanceledOnTouchOutside(false)
                 .setText(R.id.tv_title, "spannableStringBuilder")
-                .setText(R.id.btn_dialog_custom_ok, "接受")
-                .setText(R.id.btn_dialog_custom_cancel, "拒绝")
+                .setText(R.id.btn_dialog_custom_ok, "同意")
+                .setText(R.id.btn_dialog_custom_cancel, "不同意")
                 .setOnClickListener(R.id.btn_dialog_custom_cancel, (BaseDialog.OnClickListener<Button>) (dialog, button) -> {
                     dialog.dismiss();
                     ActivityManager.getInstance().finishAllActivities();//退出程序
                 })
                 .setOnClickListener(R.id.btn_dialog_custom_ok, (dialog, views) -> {
+                    if (!hasChecked) {
+                        toast("请先勾选，同意后再进行登录");
+                        return;
+                    }
                     dialog.dismiss();
-                    getPermissions();
+//                    getPermissions();
 
                     // 初始化极光推送
                     JPushInterface.setDebugMode(AppConfig.isDebug());
                     JPushInterface.init(this);
                     SPUtils.getInstance().put(AppConfig.DEAL_DIALOG, true);
-
+                    // 友盟统计、登录、分享 SDK
+                    UmengClient.init(getApplication(), AppConfig.isLogEnable());
                 });
 
         TextView viewById = builder.findViewById(R.id.tv_title);
+        AppCompatCheckBox cb_deal = builder.findViewById(R.id.cb_deal);
+        cb_deal.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            hasChecked = isChecked;
+        });
         SpanUtils.with(viewById).append("我已阅读并同意").setForegroundColor(getColor(R.color.color_text_color))
-                .append("《隐私权限》").setClickSpan(new ClickableSpan() {
+                .append("《隐私政策》").setClickSpan(new ClickableSpan() {
 
                     @Override
                     public void onClick(@NonNull View widget) {

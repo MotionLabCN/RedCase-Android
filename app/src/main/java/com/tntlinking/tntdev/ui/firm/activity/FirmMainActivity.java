@@ -96,7 +96,7 @@ public final class FirmMainActivity extends AppActivity
 
         onNewIntent(getIntent());
 
-//        getAppUpdate();
+        getAppUpdate();
     }
 
     @Override
@@ -189,4 +189,46 @@ public final class FirmMainActivity extends AppActivity
     }
 
 
+    /**
+     * 检查更新
+     */
+    public void getAppUpdate() {
+        EasyHttp.get(this)
+                .api(new GetAppUpdateApi()
+                        .setOsType(2)//1 ios   2 android
+                        .setCurrVersion(AppConfig.getVersionName()))
+                .request(new HttpCallback<HttpData<GetAppUpdateApi.Bean>>(this) {
+
+                    @Override
+                    public void onSucceed(HttpData<GetAppUpdateApi.Bean> data) {
+                        if (data.getData() != null) {
+                            GetAppUpdateApi.Bean bean = data.getData();
+                            if (AppConfig.getVersionName().equals(bean.getVersion())) {
+
+                            } else {
+
+                                String description = bean.getDescription();
+                                if (description.contains("\\n")) {
+                                    description = description.replace("\\n", "\n");
+                                }
+                                boolean isForce = bean.getForceUpdate() == 1;
+                                // 升级对话框
+                                new AppUpdateDialog.Builder(getActivity())
+                                        // 版本名
+                                        .setVersionName("最新版本：" + bean.getVersion())
+                                        // 是否强制更新
+                                        .setForceUpdate(isForce)
+                                        // 更新日志
+                                        .setUpdateLog(description)
+                                        // 下载 URL
+                                        .setDownloadUrl(bean.getDownloadUrl())
+                                        // 文件 MD5
+//                                            .setFileMd5("df2f045dfa854d8461d9cefe08b813a8")
+                                        .show();
+                            }
+                        }
+                    }
+                });
+
+    }
 }

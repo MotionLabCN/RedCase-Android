@@ -391,7 +391,7 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity> implemen
 
         getNewbie();
         getInterviewAppList();
-        getAppUpdate();
+//        getAppUpdate();
     }
 
     private void getDeveloper_Recommends() {

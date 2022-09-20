@@ -90,7 +90,7 @@ public final class MainActivity extends AppActivity
 
         onNewIntent(getIntent());
 
-//        getAppUpdate();
+        getAppUpdate();
     }
 
     @Override

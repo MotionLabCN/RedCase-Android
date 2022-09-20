@@ -80,7 +80,7 @@ public final class LoginActivity2 extends AppActivity implements TextView.OnEdit
         mPasswordView.setOnEditorActionListener(this);
         //我已阅读并同意 《隐私权限》和《用户协议》
         SpanUtils.with(tv_deal).append("我已阅读并同意").setForegroundColor(getColor(R.color.color_hint_color)).
-                append("《隐私权限》").setClickSpan(new ClickableSpan() {
+                append("《隐私政策》").setClickSpan(new ClickableSpan() {
 
                     @Override
                     public void onClick(@NonNull View widget) {
