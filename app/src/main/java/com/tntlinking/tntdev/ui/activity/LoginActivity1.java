@@ -351,7 +351,7 @@ public final class LoginActivity1 extends AppActivity {
                         return;
                     }
                     dialog.dismiss();
-//                    getPermissions();
+                    getPermissions();
 
                     // 初始化极光推送
                     JPushInterface.setDebugMode(AppConfig.isDebug());
