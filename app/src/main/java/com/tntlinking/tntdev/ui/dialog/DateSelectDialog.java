@@ -49,11 +49,11 @@ public final class DateSelectDialog {
         private boolean mAutoDismiss = true;
 
         public Builder(Context context) {
-            this(context, Calendar.getInstance(Locale.CHINA).get(Calendar.YEAR) - 30);
+            this(context, Calendar.getInstance(Locale.CHINA).get(Calendar.YEAR) - 65);
         }
 
         public Builder(Context context, int startYear) {
-            this(context, startYear, Calendar.getInstance(Locale.CHINA).get(Calendar.YEAR) + 30);
+            this(context, startYear, Calendar.getInstance(Locale.CHINA).get(Calendar.YEAR) + 35);
         }
 
         public Builder(Context context, int startYear, int endYear) {

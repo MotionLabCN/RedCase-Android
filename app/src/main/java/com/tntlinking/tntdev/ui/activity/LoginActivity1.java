@@ -334,7 +334,7 @@ public final class LoginActivity1 extends AppActivity {
     public void showDealDialog() {
         //进入页面就弹隐私条款，同意 后面的隐私条款默认被勾选
         BaseDialog.Builder<?> builder = new BaseDialog.Builder<>(LoginActivity1.this)
-                .setContentView(R.layout.write_daily_delete_dialog)
+                .setContentView(R.layout.login_check_private_dialog)
                 .setAnimStyle(BaseDialog.ANIM_SCALE)
                 .setCancelable(false)
                 .setCanceledOnTouchOutside(false)

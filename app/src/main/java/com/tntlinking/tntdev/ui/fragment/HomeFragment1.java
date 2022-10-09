@@ -113,7 +113,7 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity> implemen
     private String[] titles = {"职位推荐", "活动任务"};
     private List<Fragment> fragmentList = new ArrayList<>();
 
-    private int mStatus = SPUtils.getInstance().getInt(AppConfig.SERVICE_STATUS, 1); // 接单状态 1 默认可接单 2 不可接单
+    private int mServiceStatus = 1; // 接单状态 1 默认可接单 2 不可接单
 
     private RecommendFragment recommendFragment;
     private ActiveTaskFragment activeTaskFragment;
@@ -368,27 +368,6 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity> implemen
 //        }
         getDeveloperInfo();
 
-        //切换接单模式
-        if (mStatus == 1) {
-            tv_order_switching.setText("可接单");
-            tv_order_switching.setTextColor(getResources().getColor(R.color.main_color));
-            tv_order_switching.setBackground(getResources().getDrawable(R.drawable.bg_blue_stroke));
-            Drawable drawable = getResources().getDrawable(R.drawable.icon_refresh);
-            tv_order_switching.setCompoundDrawablesWithIntrinsicBounds(null, null, drawable, null);
-
-            ll_tab.setVisibility(View.VISIBLE);
-            ll_task.setVisibility(View.GONE);
-        } else {
-            tv_order_switching.setText("不接单");
-            tv_order_switching.setTextColor(getResources().getColor(R.color.color_444E64));
-            tv_order_switching.setBackground(getResources().getDrawable(R.drawable.bg_dark_grey_stroke));
-            Drawable drawable = getResources().getDrawable(R.drawable.icon_change_over);
-            tv_order_switching.setCompoundDrawablesWithIntrinsicBounds(null, null, drawable, null);
-
-            ll_tab.setVisibility(View.GONE);
-            ll_task.setVisibility(View.VISIBLE);
-        }
-
         getNewbie();
         getInterviewAppList();
 //        getAppUpdate();
@@ -400,8 +379,8 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity> implemen
                 .request(new HttpCallback<HttpData<List<GetDeveloperRecommendsApi.Bean>>>(this) {
                     @Override
                     public void onSucceed(HttpData<List<GetDeveloperRecommendsApi.Bean>> data) {
-                        int mStatus = SPUtils.getInstance().getInt(AppConfig.SERVICE_STATUS, 1);
-                        if (mStatus == 1) {
+                        int status = SPUtils.getInstance().getInt(AppConfig.SERVICE_STATUS, 1);
+                        if (status == 1) {
                             if (data.getData() != null && data.getData().size() != 0) {
                                 ll_tab.setVisibility(View.VISIBLE);
                                 ll_task.setVisibility(View.GONE);
@@ -484,7 +463,7 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity> implemen
                 startActivity(intent);
                 break;
             case R.id.tv_order_switching:
-                checkStatus(getActivity(), mStatus);
+                checkStatus(getActivity(), mServiceStatus);
                 break;
             case R.id.layout_interview:
                 if (!TextUtils.isEmpty(interviewId)) {
@@ -518,8 +497,8 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity> implemen
                 .setOnClickListener(R.id.btn_dialog_custom_cancel, (BaseDialog.OnClickListener<Button>) (dialog, button) -> dialog.dismiss())
                 .setOnClickListener(R.id.btn_dialog_custom_ok, (dialog, views) -> {
 
-                    mStatus = (status == 1) ? 2 : 1;
-                    updateServiceStatus(mStatus);
+                    mServiceStatus = (status == 1) ? 2 : 1;
+                    updateServiceStatus(mServiceStatus);
                     dialog.dismiss();
                 }).show();
     }
@@ -537,7 +516,7 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity> implemen
                     @Override
                     public void onSucceed(HttpData<Void> data) {
                         SPUtils.getInstance().put(AppConfig.SERVICE_STATUS, status);
-                        if (mStatus == 1) {
+                        if (mServiceStatus == 1) {
                             tv_order_switching.setText("可接单");
                             tv_order_switching.setTextColor(getResources().getColor(R.color.main_color));
                             tv_order_switching.setBackground(getResources().getDrawable(R.drawable.bg_blue_stroke));
@@ -692,8 +671,9 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity> implemen
                             SPUtils.getInstance().put(AppConfig.DEVELOP_STATUS, data.getData().getStatus());
                             SPUtils.getInstance().put(AppConfig.DEVELOP_NAME, data.getData().getRealName());
                             SPUtils.getInstance().put(AppConfig.DEVELOPER_ID, data.getData().getId());
+                            // 接单状态 1 默认可接单 2 不可接单
                             SPUtils.getInstance().put(AppConfig.SERVICE_STATUS, data.getData().getServiceStatus());
-
+                            mServiceStatus = data.getData().getServiceStatus();
                             String name = SPUtils.getInstance().getString(AppConfig.DEVELOP_NAME, "朋友");
                             tv_avatar.setText(Utils.formatName(name));
                             tv_name.setText("你好," + name);
@@ -704,6 +684,27 @@ public final class HomeFragment1 extends TitleBarFragment<MainActivity> implemen
                             } else {
                                 ll_status.setVisibility(View.VISIBLE); //1、2、4 状态下显示平台介绍和新手任务
                                 tv_status.setVisibility(View.GONE);
+                            }
+
+                            //切换接单模式
+                            if (mServiceStatus == 1) {
+                                tv_order_switching.setText("可接单");
+                                tv_order_switching.setTextColor(getResources().getColor(R.color.main_color));
+                                tv_order_switching.setBackground(getResources().getDrawable(R.drawable.bg_blue_stroke));
+                                Drawable drawable = getResources().getDrawable(R.drawable.icon_refresh);
+                                tv_order_switching.setCompoundDrawablesWithIntrinsicBounds(null, null, drawable, null);
+
+                                ll_tab.setVisibility(View.VISIBLE);
+                                ll_task.setVisibility(View.GONE);
+                            } else {
+                                tv_order_switching.setText("不接单");
+                                tv_order_switching.setTextColor(getResources().getColor(R.color.color_444E64));
+                                tv_order_switching.setBackground(getResources().getDrawable(R.drawable.bg_dark_grey_stroke));
+                                Drawable drawable = getResources().getDrawable(R.drawable.icon_change_over);
+                                tv_order_switching.setCompoundDrawablesWithIntrinsicBounds(null, null, drawable, null);
+
+                                ll_tab.setVisibility(View.GONE);
+                                ll_task.setVisibility(View.VISIBLE);
                             }
 
                         }
