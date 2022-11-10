@@ -40,22 +40,25 @@ import androidx.recyclerview.widget.RecyclerView;
 public final class AddProjectTagActivityNew extends AppActivity {
 
     private TextView tv_skill_tag_1, tv_skill_tag_2, tv_skill_tag_3,
-            tv_skill_tag_4, tv_skill_tag_5, tv_skill_tag_6, tv_skill_tag_7;
+            tv_skill_tag_4, tv_skill_tag_5, tv_skill_tag_6, tv_skill_tag_7,
+            tv_skill_tag_8, tv_skill_tag_9, tv_skill_tag_10;
 
     private FlowTagLayout fl_skill_tag_1, fl_skill_tag_2, fl_skill_tag_3,
-            fl_skill_tag_4, fl_skill_tag_5, fl_skill_tag_6, fl_skill_tag_7;
+            fl_skill_tag_4, fl_skill_tag_5, fl_skill_tag_6, fl_skill_tag_7,
+            fl_skill_tag_8, fl_skill_tag_9, fl_skill_tag_10;
 
     private TagAdapter<String> mTagAdapter1, mTagAdapter2, mTagAdapter3,
-            mTagAdapter4, mTagAdapter5, mTagAdapter6, mTagAdapter7;
+            mTagAdapter4, mTagAdapter5, mTagAdapter6, mTagAdapter7,
+            mTagAdapter8, mTagAdapter9, mTagAdapter10;
 
     private LinearLayout ll_skill_tag_1, ll_skill_tag_2, ll_skill_tag_3,
-            ll_skill_tag_4, ll_skill_tag_5, ll_skill_tag_6, ll_skill_tag_7;
+            ll_skill_tag_4, ll_skill_tag_5, ll_skill_tag_6, ll_skill_tag_7,
+            ll_skill_tag_8, ll_skill_tag_9, ll_skill_tag_10;
 
     private AppCompatButton btn_next;
     private FlowTagLayout fl_skill_tag_select;
     private TagSelectedAdapter<String> mTagAdapterSelect;
     private LinearLayout ll_search;
-
 
 
     private SkillTagAdapter mAdapter;
@@ -78,6 +81,9 @@ public final class AddProjectTagActivityNew extends AppActivity {
         tv_skill_tag_5 = findViewById(R.id.tv_skill_tag_5);
         tv_skill_tag_6 = findViewById(R.id.tv_skill_tag_6);
         tv_skill_tag_7 = findViewById(R.id.tv_skill_tag_7);
+        tv_skill_tag_8 = findViewById(R.id.tv_skill_tag_8);
+        tv_skill_tag_9 = findViewById(R.id.tv_skill_tag_9);
+        tv_skill_tag_10 = findViewById(R.id.tv_skill_tag_10);
 
         fl_skill_tag_select = findViewById(R.id.fl_skill_tag_select);
         fl_skill_tag_1 = findViewById(R.id.fl_skill_tag_1);
@@ -87,6 +93,9 @@ public final class AddProjectTagActivityNew extends AppActivity {
         fl_skill_tag_5 = findViewById(R.id.fl_skill_tag_5);
         fl_skill_tag_6 = findViewById(R.id.fl_skill_tag_6);
         fl_skill_tag_7 = findViewById(R.id.fl_skill_tag_7);
+        fl_skill_tag_8 = findViewById(R.id.fl_skill_tag_8);
+        fl_skill_tag_9 = findViewById(R.id.fl_skill_tag_9);
+        fl_skill_tag_10 = findViewById(R.id.fl_skill_tag_10);
 
         ll_skill_tag_1 = findViewById(R.id.ll_skill_tag_1);
         ll_skill_tag_2 = findViewById(R.id.ll_skill_tag_2);
@@ -95,6 +104,9 @@ public final class AddProjectTagActivityNew extends AppActivity {
         ll_skill_tag_5 = findViewById(R.id.ll_skill_tag_5);
         ll_skill_tag_6 = findViewById(R.id.ll_skill_tag_6);
         ll_skill_tag_7 = findViewById(R.id.ll_skill_tag_7);
+        ll_skill_tag_8 = findViewById(R.id.ll_skill_tag_8);
+        ll_skill_tag_9 = findViewById(R.id.ll_skill_tag_9);
+        ll_skill_tag_10 = findViewById(R.id.ll_skill_tag_10);
         btn_next = findViewById(R.id.btn_next);
 
         setOnClickListener(btn_next, ll_search);
@@ -402,6 +414,99 @@ public final class AddProjectTagActivityNew extends AppActivity {
             }
         });
 
+        mTagAdapter8 = new TagAdapter<>(this);
+        fl_skill_tag_8.setTagCheckedMode(FlowTagLayout.FLOW_TAG_CHECKED_MULTI);
+        fl_skill_tag_8.setAdapter(mTagAdapter8);
+        fl_skill_tag_8.setOnTagClickListener(new FlowTagLayout.OnTagClickListener() {
+            @Override
+            public void onItemClick(FlowTagLayout parent, View view, int position) {
+                if (mSelectList.size() <= mMaxSize) {
+                    GetTagListApi.Bean.ChildrenBean childrenBean = mTagAdapter8.getData().get(position);
+                    childrenBean.setType(8);
+                    int pos = positionList(mSelectList, childrenBean);
+                    if (view.isSelected()) {
+                        if (mSelectList.size() < mMaxSize) {
+                            mSelectList.add(childrenBean);
+                        } else {
+                            fl_skill_tag_8.clearOption(position);
+                            toast("最多只能选取" + mMaxSize + "个标签");
+                        }
+//                        mSelectList.add(childrenBean);
+                    } else {
+//                    mSelectList.remove(childrenBean);
+                        mSelectList.remove(pos);
+                    }
+                    mTagAdapterSelect.onlyAddAll(mSelectList);
+                } else {
+                    fl_skill_tag_8.clearOption(position);
+                    toast("最多只能选取" + mMaxSize + "个标签");
+                }
+
+            }
+        });
+
+        mTagAdapter9 = new TagAdapter<>(this);
+        fl_skill_tag_9.setTagCheckedMode(FlowTagLayout.FLOW_TAG_CHECKED_MULTI);
+        fl_skill_tag_9.setAdapter(mTagAdapter9);
+        fl_skill_tag_9.setOnTagClickListener(new FlowTagLayout.OnTagClickListener() {
+            @Override
+            public void onItemClick(FlowTagLayout parent, View view, int position) {
+                if (mSelectList.size() <= mMaxSize) {
+                    GetTagListApi.Bean.ChildrenBean childrenBean = mTagAdapter9.getData().get(position);
+                    childrenBean.setType(9);
+                    int pos = positionList(mSelectList, childrenBean);
+                    if (view.isSelected()) {
+                        if (mSelectList.size() < mMaxSize) {
+                            mSelectList.add(childrenBean);
+                        } else {
+                            fl_skill_tag_9.clearOption(position);
+                            toast("最多只能选取" + mMaxSize + "个标签");
+                        }
+//                        mSelectList.add(childrenBean);
+                    } else {
+//                    mSelectList.remove(childrenBean);
+                        mSelectList.remove(pos);
+                    }
+                    mTagAdapterSelect.onlyAddAll(mSelectList);
+                } else {
+                    fl_skill_tag_9.clearOption(position);
+                    toast("最多只能选取" + mMaxSize + "个标签");
+                }
+
+            }
+        });
+
+        mTagAdapter10 = new TagAdapter<>(this);
+        fl_skill_tag_10.setTagCheckedMode(FlowTagLayout.FLOW_TAG_CHECKED_MULTI);
+        fl_skill_tag_10.setAdapter(mTagAdapter10);
+        fl_skill_tag_10.setOnTagClickListener(new FlowTagLayout.OnTagClickListener() {
+            @Override
+            public void onItemClick(FlowTagLayout parent, View view, int position) {
+                if (mSelectList.size() <= mMaxSize) {
+                    GetTagListApi.Bean.ChildrenBean childrenBean = mTagAdapter10.getData().get(position);
+                    childrenBean.setType(10);
+                    int pos = positionList(mSelectList, childrenBean);
+                    if (view.isSelected()) {
+                        if (mSelectList.size() < mMaxSize) {
+                            mSelectList.add(childrenBean);
+                        } else {
+                            fl_skill_tag_10.clearOption(position);
+                            toast("最多只能选取" + mMaxSize + "个标签");
+                        }
+//                        mSelectList.add(childrenBean);
+                    } else {
+//                    mSelectList.remove(childrenBean);
+                        mSelectList.remove(pos);
+                    }
+                    mTagAdapterSelect.onlyAddAll(mSelectList);
+                } else {
+                    fl_skill_tag_10.clearOption(position);
+                    toast("最多只能选取" + mMaxSize + "个标签");
+                }
+
+            }
+        });
+
         //清除所有已经被选择的选项
 //        findViewById(R.id.bt_clear_all)
 //                .setOnClickListener(new View.OnClickListener() {
@@ -486,6 +591,9 @@ public final class AddProjectTagActivityNew extends AppActivity {
                             ll_skill_tag_5.setVisibility(View.GONE);
                             ll_skill_tag_6.setVisibility(View.GONE);
                             ll_skill_tag_7.setVisibility(View.GONE);
+                            ll_skill_tag_8.setVisibility(View.GONE);
+                            ll_skill_tag_9.setVisibility(View.GONE);
+                            ll_skill_tag_10.setVisibility(View.GONE);
                             tv_skill_tag_1.setText(dataBean.get(0).getSkillName());
                             mTagAdapter1.onlyAddAll(dataBean.get(0).getChildren());
 
@@ -531,6 +639,9 @@ public final class AddProjectTagActivityNew extends AppActivity {
                             ll_skill_tag_5.setVisibility(View.GONE);
                             ll_skill_tag_6.setVisibility(View.GONE);
                             ll_skill_tag_7.setVisibility(View.GONE);
+                            ll_skill_tag_8.setVisibility(View.GONE);
+                            ll_skill_tag_9.setVisibility(View.GONE);
+                            ll_skill_tag_10.setVisibility(View.GONE);
                             tv_skill_tag_1.setText(dataBean.get(0).getSkillName());
                             tv_skill_tag_2.setText(dataBean.get(1).getSkillName());
                             mTagAdapter1.onlyAddAll(data.getData().get(0).getChildren());
@@ -595,6 +706,9 @@ public final class AddProjectTagActivityNew extends AppActivity {
                             ll_skill_tag_5.setVisibility(View.GONE);
                             ll_skill_tag_6.setVisibility(View.GONE);
                             ll_skill_tag_7.setVisibility(View.GONE);
+                            ll_skill_tag_8.setVisibility(View.GONE);
+                            ll_skill_tag_9.setVisibility(View.GONE);
+                            ll_skill_tag_10.setVisibility(View.GONE);
                             tv_skill_tag_1.setText(dataBean.get(0).getSkillName());
                             tv_skill_tag_2.setText(dataBean.get(1).getSkillName());
                             tv_skill_tag_3.setText(dataBean.get(2).getSkillName());
@@ -677,6 +791,9 @@ public final class AddProjectTagActivityNew extends AppActivity {
                             ll_skill_tag_5.setVisibility(View.GONE);
                             ll_skill_tag_6.setVisibility(View.GONE);
                             ll_skill_tag_7.setVisibility(View.GONE);
+                            ll_skill_tag_8.setVisibility(View.GONE);
+                            ll_skill_tag_9.setVisibility(View.GONE);
+                            ll_skill_tag_10.setVisibility(View.GONE);
                             tv_skill_tag_1.setText(dataBean.get(0).getSkillName());
                             tv_skill_tag_2.setText(dataBean.get(1).getSkillName());
                             tv_skill_tag_3.setText(dataBean.get(2).getSkillName());
@@ -777,6 +894,9 @@ public final class AddProjectTagActivityNew extends AppActivity {
                             ll_skill_tag_5.setVisibility(View.VISIBLE);
                             ll_skill_tag_6.setVisibility(View.GONE);
                             ll_skill_tag_7.setVisibility(View.GONE);
+                            ll_skill_tag_8.setVisibility(View.GONE);
+                            ll_skill_tag_9.setVisibility(View.GONE);
+                            ll_skill_tag_10.setVisibility(View.GONE);
                             tv_skill_tag_1.setText(dataBean.get(0).getSkillName());
                             tv_skill_tag_2.setText(dataBean.get(1).getSkillName());
                             tv_skill_tag_3.setText(dataBean.get(2).getSkillName());
@@ -900,7 +1020,10 @@ public final class AddProjectTagActivityNew extends AppActivity {
                             ll_skill_tag_4.setVisibility(View.VISIBLE);
                             ll_skill_tag_5.setVisibility(View.VISIBLE);
                             ll_skill_tag_6.setVisibility(View.VISIBLE);
-                            ll_skill_tag_7.setVisibility(View.VISIBLE);
+                            ll_skill_tag_7.setVisibility(View.GONE);
+                            ll_skill_tag_8.setVisibility(View.GONE);
+                            ll_skill_tag_9.setVisibility(View.GONE);
+                            ll_skill_tag_10.setVisibility(View.GONE);
                             tv_skill_tag_1.setText(dataBean.get(0).getSkillName());
                             tv_skill_tag_2.setText(dataBean.get(1).getSkillName());
                             tv_skill_tag_3.setText(dataBean.get(2).getSkillName());
@@ -1037,6 +1160,9 @@ public final class AddProjectTagActivityNew extends AppActivity {
                             ll_skill_tag_5.setVisibility(View.VISIBLE);
                             ll_skill_tag_6.setVisibility(View.VISIBLE);
                             ll_skill_tag_7.setVisibility(View.VISIBLE);
+                            ll_skill_tag_8.setVisibility(View.GONE);
+                            ll_skill_tag_9.setVisibility(View.GONE);
+                            ll_skill_tag_10.setVisibility(View.GONE);
                             tv_skill_tag_1.setText(dataBean.get(0).getSkillName());
                             tv_skill_tag_2.setText(dataBean.get(1).getSkillName());
                             tv_skill_tag_3.setText(dataBean.get(2).getSkillName());
@@ -1166,6 +1292,588 @@ public final class AddProjectTagActivityNew extends AppActivity {
                                         if (position7 != -1) {
                                             fl_skill_tag_7.getChildAt(position7).setSelected(true);
                                             mSelectList.get(i).setType(7);
+                                            mList1.add(mSelectList.get(i));
+                                        }
+                                    }
+
+                                }
+
+
+                                for (int i = 0; i < mSelectList.size(); i++) {
+                                    if (!isInList(mallList, mSelectList.get(i))) {
+                                        mList1.add(mSelectList.get(i));
+                                    }
+                                }
+                                mSelectList.clear();
+                                mSelectList.addAll(mList1);
+                                mTagAdapterSelect.onlyAddAll(mSelectList);
+                            }
+
+                        } else if (dataBean.size() == 8) {
+                            ll_skill_tag_1.setVisibility(View.VISIBLE);
+                            ll_skill_tag_2.setVisibility(View.VISIBLE);
+                            ll_skill_tag_3.setVisibility(View.VISIBLE);
+                            ll_skill_tag_4.setVisibility(View.VISIBLE);
+                            ll_skill_tag_5.setVisibility(View.VISIBLE);
+                            ll_skill_tag_6.setVisibility(View.VISIBLE);
+                            ll_skill_tag_7.setVisibility(View.VISIBLE);
+                            ll_skill_tag_8.setVisibility(View.VISIBLE);
+                            ll_skill_tag_9.setVisibility(View.GONE);
+                            ll_skill_tag_10.setVisibility(View.GONE);
+                            tv_skill_tag_1.setText(dataBean.get(0).getSkillName());
+                            tv_skill_tag_2.setText(dataBean.get(1).getSkillName());
+                            tv_skill_tag_3.setText(dataBean.get(2).getSkillName());
+                            tv_skill_tag_4.setText(dataBean.get(3).getSkillName());
+                            tv_skill_tag_5.setText(dataBean.get(4).getSkillName());
+                            tv_skill_tag_6.setText(dataBean.get(5).getSkillName());
+                            tv_skill_tag_7.setText(dataBean.get(6).getSkillName());
+                            tv_skill_tag_8.setText(dataBean.get(7).getSkillName());
+                            mTagAdapter1.onlyAddAll(data.getData().get(0).getChildren());
+                            mTagAdapter2.onlyAddAll(data.getData().get(1).getChildren());
+                            mTagAdapter3.onlyAddAll(data.getData().get(2).getChildren());
+                            mTagAdapter4.onlyAddAll(data.getData().get(3).getChildren());
+                            mTagAdapter5.onlyAddAll(data.getData().get(4).getChildren());
+                            mTagAdapter6.onlyAddAll(data.getData().get(5).getChildren());
+                            mTagAdapter7.onlyAddAll(data.getData().get(6).getChildren());
+                            mTagAdapter8.onlyAddAll(data.getData().get(7).getChildren());
+
+                            if (mSelectList != null) {
+                                for (int i = 0; i < mSelectList.size(); i++) {
+                                    if (mSelectList.get(i).getType() == 1) {
+                                        for (int j = 0; j < dataBean.get(0).getChildren().size(); j++) {
+                                            if (mSelectList.get(i).getSkillName().equals(dataBean.get(0).getChildren().get(j).getSkillName())) {
+                                                fl_skill_tag_1.getChildAt(j).setSelected(true);
+                                                GetTagListApi.Bean.ChildrenBean childrenBean = dataBean.get(0).getChildren().get(j);
+                                                childrenBean.setType(1);
+                                                mList1.add(childrenBean);
+                                                continue;
+                                            }
+                                        }
+                                    } else if (mSelectList.get(i).getType() == 2) {
+                                        for (int j = 0; j < dataBean.get(1).getChildren().size(); j++) {
+                                            if (mSelectList.get(i).getSkillName().equals(dataBean.get(1).getChildren().get(j).getSkillName())) {
+                                                fl_skill_tag_2.getChildAt(j).setSelected(true);
+                                                GetTagListApi.Bean.ChildrenBean childrenBean = dataBean.get(1).getChildren().get(j);
+                                                childrenBean.setType(2);
+                                                mList1.add(childrenBean);
+                                                continue;
+                                            }
+                                        }
+                                    } else if (mSelectList.get(i).getType() == 3) {
+                                        for (int j = 0; j < dataBean.get(2).getChildren().size(); j++) {
+                                            if (mSelectList.get(i).getSkillName().equals(dataBean.get(2).getChildren().get(j).getSkillName())) {
+                                                fl_skill_tag_3.getChildAt(j).setSelected(true);
+                                                GetTagListApi.Bean.ChildrenBean childrenBean = dataBean.get(2).getChildren().get(j);
+                                                childrenBean.setType(3);
+                                                mList1.add(childrenBean);
+                                                continue;
+                                            }
+                                        }
+                                    } else if (mSelectList.get(i).getType() == 4) {
+                                        for (int j = 0; j < dataBean.get(3).getChildren().size(); j++) {
+                                            if (mSelectList.get(i).getSkillName().equals(dataBean.get(3).getChildren().get(j).getSkillName())) {
+                                                fl_skill_tag_4.getChildAt(j).setSelected(true);
+                                                GetTagListApi.Bean.ChildrenBean childrenBean = dataBean.get(3).getChildren().get(j);
+                                                childrenBean.setType(4);
+                                                mList1.add(childrenBean);
+                                                continue;
+                                            }
+                                        }
+                                    } else if (mSelectList.get(i).getType() == 5) {
+                                        for (int j = 0; j < dataBean.get(4).getChildren().size(); j++) {
+                                            if (mSelectList.get(i).getSkillName().equals(dataBean.get(4).getChildren().get(j).getSkillName())) {
+                                                fl_skill_tag_5.getChildAt(j).setSelected(true);
+                                                GetTagListApi.Bean.ChildrenBean childrenBean = dataBean.get(4).getChildren().get(j);
+                                                childrenBean.setType(5);
+                                                mList1.add(childrenBean);
+                                                continue;
+                                            }
+                                        }
+                                    } else if (mSelectList.get(i).getType() == 6) {
+                                        for (int j = 0; j < dataBean.get(5).getChildren().size(); j++) {
+                                            if (mSelectList.get(i).getSkillName().equals(dataBean.get(5).getChildren().get(j).getSkillName())) {
+                                                fl_skill_tag_6.getChildAt(j).setSelected(true);
+                                                GetTagListApi.Bean.ChildrenBean childrenBean = dataBean.get(5).getChildren().get(j);
+                                                childrenBean.setType(6);
+                                                mList1.add(childrenBean);
+                                                continue;
+                                            }
+                                        }
+                                    } else if (mSelectList.get(i).getType() == 7) {
+                                        for (int j = 0; j < dataBean.get(6).getChildren().size(); j++) {
+                                            if (mSelectList.get(i).getSkillName().equals(dataBean.get(6).getChildren().get(j).getSkillName())) {
+                                                fl_skill_tag_7.getChildAt(j).setSelected(true);
+                                                GetTagListApi.Bean.ChildrenBean childrenBean = dataBean.get(6).getChildren().get(j);
+                                                childrenBean.setType(7);
+                                                mList1.add(childrenBean);
+                                                continue;
+                                            }
+                                        }
+                                    } else if (mSelectList.get(i).getType() == 8) {
+                                        for (int j = 0; j < dataBean.get(7).getChildren().size(); j++) {
+                                            if (mSelectList.get(i).getSkillName().equals(dataBean.get(7).getChildren().get(j).getSkillName())) {
+                                                fl_skill_tag_8.getChildAt(j).setSelected(true);
+                                                GetTagListApi.Bean.ChildrenBean childrenBean = dataBean.get(7).getChildren().get(j);
+                                                childrenBean.setType(8);
+                                                mList1.add(childrenBean);
+                                                continue;
+                                            }
+                                        }
+                                    } else if (mSelectList.get(i).getType() == 0) {
+                                        int position1 = positionList(dataBean.get(0).getChildren(), mSelectList.get(i));
+                                        if (position1 != -1) {
+                                            fl_skill_tag_1.getChildAt(position1).setSelected(true);
+                                            mSelectList.get(i).setType(1);
+                                            mList1.add(mSelectList.get(i));
+                                        }
+
+                                        int position2 = positionList(dataBean.get(1).getChildren(), mSelectList.get(i));
+                                        if (position2 != -1) {
+                                            fl_skill_tag_2.getChildAt(position2).setSelected(true);
+                                            mSelectList.get(i).setType(2);
+                                            mList1.add(mSelectList.get(i));
+                                        }
+                                        int position3 = positionList(dataBean.get(2).getChildren(), mSelectList.get(i));
+                                        if (position3 != -1) {
+                                            fl_skill_tag_3.getChildAt(position3).setSelected(true);
+                                            mSelectList.get(i).setType(3);
+                                            mList1.add(mSelectList.get(i));
+                                        }
+                                        int position4 = positionList(dataBean.get(3).getChildren(), mSelectList.get(i));
+                                        if (position4 != -1) {
+                                            fl_skill_tag_4.getChildAt(position4).setSelected(true);
+                                            mSelectList.get(i).setType(4);
+                                            mList1.add(mSelectList.get(i));
+                                        }
+                                        int position5 = positionList(dataBean.get(4).getChildren(), mSelectList.get(i));
+                                        if (position5 != -1) {
+                                            fl_skill_tag_5.getChildAt(position5).setSelected(true);
+                                            mSelectList.get(i).setType(5);
+                                            mList1.add(mSelectList.get(i));
+                                        }
+                                        int position6 = positionList(dataBean.get(5).getChildren(), mSelectList.get(i));
+                                        if (position6 != -1) {
+                                            fl_skill_tag_6.getChildAt(position6).setSelected(true);
+                                            mSelectList.get(i).setType(6);
+                                            mList1.add(mSelectList.get(i));
+                                        }
+                                        int position7 = positionList(dataBean.get(6).getChildren(), mSelectList.get(i));
+                                        if (position7 != -1) {
+                                            fl_skill_tag_7.getChildAt(position7).setSelected(true);
+                                            mSelectList.get(i).setType(7);
+                                            mList1.add(mSelectList.get(i));
+                                        }
+
+                                        int position8 = positionList(dataBean.get(7).getChildren(), mSelectList.get(i));
+                                        if (position8 != -1) {
+                                            fl_skill_tag_7.getChildAt(position8).setSelected(true);
+                                            mSelectList.get(i).setType(8);
+                                            mList1.add(mSelectList.get(i));
+                                        }
+                                    }
+
+                                }
+
+
+                                for (int i = 0; i < mSelectList.size(); i++) {
+                                    if (!isInList(mallList, mSelectList.get(i))) {
+                                        mList1.add(mSelectList.get(i));
+                                    }
+                                }
+                                mSelectList.clear();
+                                mSelectList.addAll(mList1);
+                                mTagAdapterSelect.onlyAddAll(mSelectList);
+                            }
+
+                        } else if (dataBean.size() == 9) {
+                            ll_skill_tag_1.setVisibility(View.VISIBLE);
+                            ll_skill_tag_2.setVisibility(View.VISIBLE);
+                            ll_skill_tag_3.setVisibility(View.VISIBLE);
+                            ll_skill_tag_4.setVisibility(View.VISIBLE);
+                            ll_skill_tag_5.setVisibility(View.VISIBLE);
+                            ll_skill_tag_6.setVisibility(View.VISIBLE);
+                            ll_skill_tag_7.setVisibility(View.VISIBLE);
+                            ll_skill_tag_8.setVisibility(View.VISIBLE);
+                            ll_skill_tag_9.setVisibility(View.VISIBLE);
+                            ll_skill_tag_10.setVisibility(View.GONE);
+                            tv_skill_tag_1.setText(dataBean.get(0).getSkillName());
+                            tv_skill_tag_2.setText(dataBean.get(1).getSkillName());
+                            tv_skill_tag_3.setText(dataBean.get(2).getSkillName());
+                            tv_skill_tag_4.setText(dataBean.get(3).getSkillName());
+                            tv_skill_tag_5.setText(dataBean.get(4).getSkillName());
+                            tv_skill_tag_6.setText(dataBean.get(5).getSkillName());
+                            tv_skill_tag_7.setText(dataBean.get(6).getSkillName());
+                            tv_skill_tag_8.setText(dataBean.get(7).getSkillName());
+                            tv_skill_tag_9.setText(dataBean.get(8).getSkillName());
+                            mTagAdapter1.onlyAddAll(data.getData().get(0).getChildren());
+                            mTagAdapter2.onlyAddAll(data.getData().get(1).getChildren());
+                            mTagAdapter3.onlyAddAll(data.getData().get(2).getChildren());
+                            mTagAdapter4.onlyAddAll(data.getData().get(3).getChildren());
+                            mTagAdapter5.onlyAddAll(data.getData().get(4).getChildren());
+                            mTagAdapter6.onlyAddAll(data.getData().get(5).getChildren());
+                            mTagAdapter7.onlyAddAll(data.getData().get(6).getChildren());
+                            mTagAdapter8.onlyAddAll(data.getData().get(7).getChildren());
+                            mTagAdapter9.onlyAddAll(data.getData().get(8).getChildren());
+
+                            if (mSelectList != null) {
+                                for (int i = 0; i < mSelectList.size(); i++) {
+                                    if (mSelectList.get(i).getType() == 1) {
+                                        for (int j = 0; j < dataBean.get(0).getChildren().size(); j++) {
+                                            if (mSelectList.get(i).getSkillName().equals(dataBean.get(0).getChildren().get(j).getSkillName())) {
+                                                fl_skill_tag_1.getChildAt(j).setSelected(true);
+                                                GetTagListApi.Bean.ChildrenBean childrenBean = dataBean.get(0).getChildren().get(j);
+                                                childrenBean.setType(1);
+                                                mList1.add(childrenBean);
+                                                continue;
+                                            }
+                                        }
+                                    } else if (mSelectList.get(i).getType() == 2) {
+                                        for (int j = 0; j < dataBean.get(1).getChildren().size(); j++) {
+                                            if (mSelectList.get(i).getSkillName().equals(dataBean.get(1).getChildren().get(j).getSkillName())) {
+                                                fl_skill_tag_2.getChildAt(j).setSelected(true);
+                                                GetTagListApi.Bean.ChildrenBean childrenBean = dataBean.get(1).getChildren().get(j);
+                                                childrenBean.setType(2);
+                                                mList1.add(childrenBean);
+                                                continue;
+                                            }
+                                        }
+                                    } else if (mSelectList.get(i).getType() == 3) {
+                                        for (int j = 0; j < dataBean.get(2).getChildren().size(); j++) {
+                                            if (mSelectList.get(i).getSkillName().equals(dataBean.get(2).getChildren().get(j).getSkillName())) {
+                                                fl_skill_tag_3.getChildAt(j).setSelected(true);
+                                                GetTagListApi.Bean.ChildrenBean childrenBean = dataBean.get(2).getChildren().get(j);
+                                                childrenBean.setType(3);
+                                                mList1.add(childrenBean);
+                                                continue;
+                                            }
+                                        }
+                                    } else if (mSelectList.get(i).getType() == 4) {
+                                        for (int j = 0; j < dataBean.get(3).getChildren().size(); j++) {
+                                            if (mSelectList.get(i).getSkillName().equals(dataBean.get(3).getChildren().get(j).getSkillName())) {
+                                                fl_skill_tag_4.getChildAt(j).setSelected(true);
+                                                GetTagListApi.Bean.ChildrenBean childrenBean = dataBean.get(3).getChildren().get(j);
+                                                childrenBean.setType(4);
+                                                mList1.add(childrenBean);
+                                                continue;
+                                            }
+                                        }
+                                    } else if (mSelectList.get(i).getType() == 5) {
+                                        for (int j = 0; j < dataBean.get(4).getChildren().size(); j++) {
+                                            if (mSelectList.get(i).getSkillName().equals(dataBean.get(4).getChildren().get(j).getSkillName())) {
+                                                fl_skill_tag_5.getChildAt(j).setSelected(true);
+                                                GetTagListApi.Bean.ChildrenBean childrenBean = dataBean.get(4).getChildren().get(j);
+                                                childrenBean.setType(5);
+                                                mList1.add(childrenBean);
+                                                continue;
+                                            }
+                                        }
+                                    } else if (mSelectList.get(i).getType() == 6) {
+                                        for (int j = 0; j < dataBean.get(5).getChildren().size(); j++) {
+                                            if (mSelectList.get(i).getSkillName().equals(dataBean.get(5).getChildren().get(j).getSkillName())) {
+                                                fl_skill_tag_6.getChildAt(j).setSelected(true);
+                                                GetTagListApi.Bean.ChildrenBean childrenBean = dataBean.get(5).getChildren().get(j);
+                                                childrenBean.setType(6);
+                                                mList1.add(childrenBean);
+                                                continue;
+                                            }
+                                        }
+                                    } else if (mSelectList.get(i).getType() == 7) {
+                                        for (int j = 0; j < dataBean.get(6).getChildren().size(); j++) {
+                                            if (mSelectList.get(i).getSkillName().equals(dataBean.get(6).getChildren().get(j).getSkillName())) {
+                                                fl_skill_tag_7.getChildAt(j).setSelected(true);
+                                                GetTagListApi.Bean.ChildrenBean childrenBean = dataBean.get(6).getChildren().get(j);
+                                                childrenBean.setType(7);
+                                                mList1.add(childrenBean);
+                                                continue;
+                                            }
+                                        }
+                                    } else if (mSelectList.get(i).getType() == 8) {
+                                        for (int j = 0; j < dataBean.get(7).getChildren().size(); j++) {
+                                            if (mSelectList.get(i).getSkillName().equals(dataBean.get(7).getChildren().get(j).getSkillName())) {
+                                                fl_skill_tag_8.getChildAt(j).setSelected(true);
+                                                GetTagListApi.Bean.ChildrenBean childrenBean = dataBean.get(7).getChildren().get(j);
+                                                childrenBean.setType(8);
+                                                mList1.add(childrenBean);
+                                                continue;
+                                            }
+                                        }
+                                    } else if (mSelectList.get(i).getType() == 9) {
+                                        for (int j = 0; j < dataBean.get(8).getChildren().size(); j++) {
+                                            if (mSelectList.get(i).getSkillName().equals(dataBean.get(8).getChildren().get(j).getSkillName())) {
+                                                fl_skill_tag_9.getChildAt(j).setSelected(true);
+                                                GetTagListApi.Bean.ChildrenBean childrenBean = dataBean.get(8).getChildren().get(j);
+                                                childrenBean.setType(9);
+                                                mList1.add(childrenBean);
+                                                continue;
+                                            }
+                                        }
+                                    } else if (mSelectList.get(i).getType() == 0) {
+                                        int position1 = positionList(dataBean.get(0).getChildren(), mSelectList.get(i));
+                                        if (position1 != -1) {
+                                            fl_skill_tag_1.getChildAt(position1).setSelected(true);
+                                            mSelectList.get(i).setType(1);
+                                            mList1.add(mSelectList.get(i));
+                                        }
+
+                                        int position2 = positionList(dataBean.get(1).getChildren(), mSelectList.get(i));
+                                        if (position2 != -1) {
+                                            fl_skill_tag_2.getChildAt(position2).setSelected(true);
+                                            mSelectList.get(i).setType(2);
+                                            mList1.add(mSelectList.get(i));
+                                        }
+                                        int position3 = positionList(dataBean.get(2).getChildren(), mSelectList.get(i));
+                                        if (position3 != -1) {
+                                            fl_skill_tag_3.getChildAt(position3).setSelected(true);
+                                            mSelectList.get(i).setType(3);
+                                            mList1.add(mSelectList.get(i));
+                                        }
+                                        int position4 = positionList(dataBean.get(3).getChildren(), mSelectList.get(i));
+                                        if (position4 != -1) {
+                                            fl_skill_tag_4.getChildAt(position4).setSelected(true);
+                                            mSelectList.get(i).setType(4);
+                                            mList1.add(mSelectList.get(i));
+                                        }
+                                        int position5 = positionList(dataBean.get(4).getChildren(), mSelectList.get(i));
+                                        if (position5 != -1) {
+                                            fl_skill_tag_5.getChildAt(position5).setSelected(true);
+                                            mSelectList.get(i).setType(5);
+                                            mList1.add(mSelectList.get(i));
+                                        }
+                                        int position6 = positionList(dataBean.get(5).getChildren(), mSelectList.get(i));
+                                        if (position6 != -1) {
+                                            fl_skill_tag_6.getChildAt(position6).setSelected(true);
+                                            mSelectList.get(i).setType(6);
+                                            mList1.add(mSelectList.get(i));
+                                        }
+                                        int position7 = positionList(dataBean.get(6).getChildren(), mSelectList.get(i));
+                                        if (position7 != -1) {
+                                            fl_skill_tag_7.getChildAt(position7).setSelected(true);
+                                            mSelectList.get(i).setType(7);
+                                            mList1.add(mSelectList.get(i));
+                                        }
+
+                                        int position8 = positionList(dataBean.get(7).getChildren(), mSelectList.get(i));
+                                        if (position8 != -1) {
+                                            fl_skill_tag_7.getChildAt(position8).setSelected(true);
+                                            mSelectList.get(i).setType(8);
+                                            mList1.add(mSelectList.get(i));
+                                        }
+                                        int position9 = positionList(dataBean.get(8).getChildren(), mSelectList.get(i));
+                                        if (position9 != -1) {
+                                            fl_skill_tag_7.getChildAt(position9).setSelected(true);
+                                            mSelectList.get(i).setType(9);
+                                            mList1.add(mSelectList.get(i));
+                                        }
+                                    }
+
+                                }
+
+
+                                for (int i = 0; i < mSelectList.size(); i++) {
+                                    if (!isInList(mallList, mSelectList.get(i))) {
+                                        mList1.add(mSelectList.get(i));
+                                    }
+                                }
+                                mSelectList.clear();
+                                mSelectList.addAll(mList1);
+                                mTagAdapterSelect.onlyAddAll(mSelectList);
+                            }
+
+                        } else if (dataBean.size() == 10) {
+                            ll_skill_tag_1.setVisibility(View.VISIBLE);
+                            ll_skill_tag_2.setVisibility(View.VISIBLE);
+                            ll_skill_tag_3.setVisibility(View.VISIBLE);
+                            ll_skill_tag_4.setVisibility(View.VISIBLE);
+                            ll_skill_tag_5.setVisibility(View.VISIBLE);
+                            ll_skill_tag_6.setVisibility(View.VISIBLE);
+                            ll_skill_tag_7.setVisibility(View.VISIBLE);
+                            ll_skill_tag_8.setVisibility(View.VISIBLE);
+                            ll_skill_tag_9.setVisibility(View.VISIBLE);
+                            ll_skill_tag_10.setVisibility(View.VISIBLE);
+                            tv_skill_tag_1.setText(dataBean.get(0).getSkillName());
+                            tv_skill_tag_2.setText(dataBean.get(1).getSkillName());
+                            tv_skill_tag_3.setText(dataBean.get(2).getSkillName());
+                            tv_skill_tag_4.setText(dataBean.get(3).getSkillName());
+                            tv_skill_tag_5.setText(dataBean.get(4).getSkillName());
+                            tv_skill_tag_6.setText(dataBean.get(5).getSkillName());
+                            tv_skill_tag_7.setText(dataBean.get(6).getSkillName());
+                            tv_skill_tag_8.setText(dataBean.get(7).getSkillName());
+                            tv_skill_tag_9.setText(dataBean.get(8).getSkillName());
+                            tv_skill_tag_10.setText(dataBean.get(9).getSkillName());
+                            mTagAdapter1.onlyAddAll(data.getData().get(0).getChildren());
+                            mTagAdapter2.onlyAddAll(data.getData().get(1).getChildren());
+                            mTagAdapter3.onlyAddAll(data.getData().get(2).getChildren());
+                            mTagAdapter4.onlyAddAll(data.getData().get(3).getChildren());
+                            mTagAdapter5.onlyAddAll(data.getData().get(4).getChildren());
+                            mTagAdapter6.onlyAddAll(data.getData().get(5).getChildren());
+                            mTagAdapter7.onlyAddAll(data.getData().get(6).getChildren());
+                            mTagAdapter8.onlyAddAll(data.getData().get(7).getChildren());
+                            mTagAdapter9.onlyAddAll(data.getData().get(8).getChildren());
+                            mTagAdapter10.onlyAddAll(data.getData().get(9).getChildren());
+
+                            if (mSelectList != null) {
+                                for (int i = 0; i < mSelectList.size(); i++) {
+                                    if (mSelectList.get(i).getType() == 1) {
+                                        for (int j = 0; j < dataBean.get(0).getChildren().size(); j++) {
+                                            if (mSelectList.get(i).getSkillName().equals(dataBean.get(0).getChildren().get(j).getSkillName())) {
+                                                fl_skill_tag_1.getChildAt(j).setSelected(true);
+                                                GetTagListApi.Bean.ChildrenBean childrenBean = dataBean.get(0).getChildren().get(j);
+                                                childrenBean.setType(1);
+                                                mList1.add(childrenBean);
+                                                continue;
+                                            }
+                                        }
+                                    } else if (mSelectList.get(i).getType() == 2) {
+                                        for (int j = 0; j < dataBean.get(1).getChildren().size(); j++) {
+                                            if (mSelectList.get(i).getSkillName().equals(dataBean.get(1).getChildren().get(j).getSkillName())) {
+                                                fl_skill_tag_2.getChildAt(j).setSelected(true);
+                                                GetTagListApi.Bean.ChildrenBean childrenBean = dataBean.get(1).getChildren().get(j);
+                                                childrenBean.setType(2);
+                                                mList1.add(childrenBean);
+                                                continue;
+                                            }
+                                        }
+                                    } else if (mSelectList.get(i).getType() == 3) {
+                                        for (int j = 0; j < dataBean.get(2).getChildren().size(); j++) {
+                                            if (mSelectList.get(i).getSkillName().equals(dataBean.get(2).getChildren().get(j).getSkillName())) {
+                                                fl_skill_tag_3.getChildAt(j).setSelected(true);
+                                                GetTagListApi.Bean.ChildrenBean childrenBean = dataBean.get(2).getChildren().get(j);
+                                                childrenBean.setType(3);
+                                                mList1.add(childrenBean);
+                                                continue;
+                                            }
+                                        }
+                                    } else if (mSelectList.get(i).getType() == 4) {
+                                        for (int j = 0; j < dataBean.get(3).getChildren().size(); j++) {
+                                            if (mSelectList.get(i).getSkillName().equals(dataBean.get(3).getChildren().get(j).getSkillName())) {
+                                                fl_skill_tag_4.getChildAt(j).setSelected(true);
+                                                GetTagListApi.Bean.ChildrenBean childrenBean = dataBean.get(3).getChildren().get(j);
+                                                childrenBean.setType(4);
+                                                mList1.add(childrenBean);
+                                                continue;
+                                            }
+                                        }
+                                    } else if (mSelectList.get(i).getType() == 5) {
+                                        for (int j = 0; j < dataBean.get(4).getChildren().size(); j++) {
+                                            if (mSelectList.get(i).getSkillName().equals(dataBean.get(4).getChildren().get(j).getSkillName())) {
+                                                fl_skill_tag_5.getChildAt(j).setSelected(true);
+                                                GetTagListApi.Bean.ChildrenBean childrenBean = dataBean.get(4).getChildren().get(j);
+                                                childrenBean.setType(5);
+                                                mList1.add(childrenBean);
+                                                continue;
+                                            }
+                                        }
+                                    } else if (mSelectList.get(i).getType() == 6) {
+                                        for (int j = 0; j < dataBean.get(5).getChildren().size(); j++) {
+                                            if (mSelectList.get(i).getSkillName().equals(dataBean.get(5).getChildren().get(j).getSkillName())) {
+                                                fl_skill_tag_6.getChildAt(j).setSelected(true);
+                                                GetTagListApi.Bean.ChildrenBean childrenBean = dataBean.get(5).getChildren().get(j);
+                                                childrenBean.setType(6);
+                                                mList1.add(childrenBean);
+                                                continue;
+                                            }
+                                        }
+                                    } else if (mSelectList.get(i).getType() == 7) {
+                                        for (int j = 0; j < dataBean.get(6).getChildren().size(); j++) {
+                                            if (mSelectList.get(i).getSkillName().equals(dataBean.get(6).getChildren().get(j).getSkillName())) {
+                                                fl_skill_tag_7.getChildAt(j).setSelected(true);
+                                                GetTagListApi.Bean.ChildrenBean childrenBean = dataBean.get(6).getChildren().get(j);
+                                                childrenBean.setType(7);
+                                                mList1.add(childrenBean);
+                                                continue;
+                                            }
+                                        }
+                                    } else if (mSelectList.get(i).getType() == 8) {
+                                        for (int j = 0; j < dataBean.get(7).getChildren().size(); j++) {
+                                            if (mSelectList.get(i).getSkillName().equals(dataBean.get(7).getChildren().get(j).getSkillName())) {
+                                                fl_skill_tag_8.getChildAt(j).setSelected(true);
+                                                GetTagListApi.Bean.ChildrenBean childrenBean = dataBean.get(7).getChildren().get(j);
+                                                childrenBean.setType(8);
+                                                mList1.add(childrenBean);
+                                                continue;
+                                            }
+                                        }
+                                    } else if (mSelectList.get(i).getType() == 9) {
+                                        for (int j = 0; j < dataBean.get(8).getChildren().size(); j++) {
+                                            if (mSelectList.get(i).getSkillName().equals(dataBean.get(8).getChildren().get(j).getSkillName())) {
+                                                fl_skill_tag_9.getChildAt(j).setSelected(true);
+                                                GetTagListApi.Bean.ChildrenBean childrenBean = dataBean.get(8).getChildren().get(j);
+                                                childrenBean.setType(9);
+                                                mList1.add(childrenBean);
+                                                continue;
+                                            }
+                                        }
+                                    } else if (mSelectList.get(i).getType() == 10) {
+                                        for (int j = 0; j < dataBean.get(9).getChildren().size(); j++) {
+                                            if (mSelectList.get(i).getSkillName().equals(dataBean.get(9).getChildren().get(j).getSkillName())) {
+                                                fl_skill_tag_10.getChildAt(j).setSelected(true);
+                                                GetTagListApi.Bean.ChildrenBean childrenBean = dataBean.get(9).getChildren().get(j);
+                                                childrenBean.setType(10);
+                                                mList1.add(childrenBean);
+                                                continue;
+                                            }
+                                        }
+                                    } else if (mSelectList.get(i).getType() == 0) {
+                                        int position1 = positionList(dataBean.get(0).getChildren(), mSelectList.get(i));
+                                        if (position1 != -1) {
+                                            fl_skill_tag_1.getChildAt(position1).setSelected(true);
+                                            mSelectList.get(i).setType(1);
+                                            mList1.add(mSelectList.get(i));
+                                        }
+
+                                        int position2 = positionList(dataBean.get(1).getChildren(), mSelectList.get(i));
+                                        if (position2 != -1) {
+                                            fl_skill_tag_2.getChildAt(position2).setSelected(true);
+                                            mSelectList.get(i).setType(2);
+                                            mList1.add(mSelectList.get(i));
+                                        }
+                                        int position3 = positionList(dataBean.get(2).getChildren(), mSelectList.get(i));
+                                        if (position3 != -1) {
+                                            fl_skill_tag_3.getChildAt(position3).setSelected(true);
+                                            mSelectList.get(i).setType(3);
+                                            mList1.add(mSelectList.get(i));
+                                        }
+                                        int position4 = positionList(dataBean.get(3).getChildren(), mSelectList.get(i));
+                                        if (position4 != -1) {
+                                            fl_skill_tag_4.getChildAt(position4).setSelected(true);
+                                            mSelectList.get(i).setType(4);
+                                            mList1.add(mSelectList.get(i));
+                                        }
+                                        int position5 = positionList(dataBean.get(4).getChildren(), mSelectList.get(i));
+                                        if (position5 != -1) {
+                                            fl_skill_tag_5.getChildAt(position5).setSelected(true);
+                                            mSelectList.get(i).setType(5);
+                                            mList1.add(mSelectList.get(i));
+                                        }
+                                        int position6 = positionList(dataBean.get(5).getChildren(), mSelectList.get(i));
+                                        if (position6 != -1) {
+                                            fl_skill_tag_6.getChildAt(position6).setSelected(true);
+                                            mSelectList.get(i).setType(6);
+                                            mList1.add(mSelectList.get(i));
+                                        }
+                                        int position7 = positionList(dataBean.get(6).getChildren(), mSelectList.get(i));
+                                        if (position7 != -1) {
+                                            fl_skill_tag_7.getChildAt(position7).setSelected(true);
+                                            mSelectList.get(i).setType(7);
+                                            mList1.add(mSelectList.get(i));
+                                        }
+
+                                        int position8 = positionList(dataBean.get(7).getChildren(), mSelectList.get(i));
+                                        if (position8 != -1) {
+                                            fl_skill_tag_7.getChildAt(position8).setSelected(true);
+                                            mSelectList.get(i).setType(8);
+                                            mList1.add(mSelectList.get(i));
+                                        }
+                                        int position9 = positionList(dataBean.get(8).getChildren(), mSelectList.get(i));
+                                        if (position9 != -1) {
+                                            fl_skill_tag_7.getChildAt(position9).setSelected(true);
+                                            mSelectList.get(i).setType(9);
+                                            mList1.add(mSelectList.get(i));
+                                        }
+                                        int position10 = positionList(dataBean.get(9).getChildren(), mSelectList.get(i));
+                                        if (position9 != -1) {
+                                            fl_skill_tag_7.getChildAt(position10).setSelected(true);
+                                            mSelectList.get(i).setType(10);
                                             mList1.add(mSelectList.get(i));
                                         }
                                     }
@@ -1455,6 +2163,79 @@ public final class AddProjectTagActivityNew extends AppActivity {
 
                             }
                         }
+                    }
+                } else if (mListSize == 6) {
+                    if (bean.getParentId().equals(mTagAdapter1.getData().get(0).getParentId())) {
+                        for (int j = 0; j < mTagAdapter1.getData().size(); j++) {
+                            if (bean.getSkillName().equals(mTagAdapter1.getData().get(j).getSkillName())) {
+                                if (!fl_skill_tag_1.getChildAt(j).isSelected()) {
+                                    fl_skill_tag_1.getChildAt(j).setSelected(true);
+                                    GetTagListApi.Bean.ChildrenBean childrenBean = mTagAdapter1.getData().get(j);
+                                    childrenBean.setType(1);
+//                            mList1.add(childrenBean);
+                                    mSelectList.add(childrenBean);
+                                    EasyLog.print("4====" + bean.getId());
+                                    break;
+                                }
+                            }
+                        }
+                    } else if (bean.getParentId().equals(mTagAdapter2.getData().get(0).getParentId())) {
+                        for (int j = 0; j < mTagAdapter2.getData().size(); j++) {
+                            if (bean.getSkillName().equals(mTagAdapter2.getData().get(j).getSkillName())) {
+                                if (!fl_skill_tag_2.getChildAt(j).isSelected()) {
+                                    fl_skill_tag_2.getChildAt(j).setSelected(true);
+                                    GetTagListApi.Bean.ChildrenBean childrenBean = mTagAdapter2.getData().get(j);
+                                    childrenBean.setType(2);
+//                            mList1.add(childrenBean);
+                                    mSelectList.add(childrenBean);
+                                    break;
+                                }
+
+                            }
+
+                        }
+
+                    } else if (bean.getParentId().equals(mTagAdapter3.getData().get(0).getParentId())) {
+                        for (int j = 0; j < mTagAdapter3.getData().size(); j++) {
+                            if (bean.getSkillName().equals(mTagAdapter3.getData().get(j).getSkillName())) {
+                                if (!fl_skill_tag_3.getChildAt(j).isSelected()) {
+                                    fl_skill_tag_3.getChildAt(j).setSelected(true);
+                                    GetTagListApi.Bean.ChildrenBean childrenBean = mTagAdapter3.getData().get(j);
+                                    childrenBean.setType(3);
+//                            mList1.add(childrenBean);
+                                    mSelectList.add(childrenBean);
+                                    break;
+                                }
+                            }
+                        }
+                    } else if (bean.getParentId().equals(mTagAdapter4.getData().get(0).getParentId())) {
+                        for (int j = 0; j < mTagAdapter4.getData().size(); j++) {
+                            if (bean.getSkillName().equals(mTagAdapter4.getData().get(j).getSkillName())) {
+                                if (!fl_skill_tag_4.getChildAt(j).isSelected()) {
+                                    fl_skill_tag_4.getChildAt(j).setSelected(true);
+                                    GetTagListApi.Bean.ChildrenBean childrenBean = mTagAdapter4.getData().get(j);
+                                    childrenBean.setType(4);
+//                            mList1.add(childrenBean);
+                                    mSelectList.add(childrenBean);
+                                    break;
+                                }
+
+                            }
+                        }
+                    } else if (bean.getParentId().equals(mTagAdapter5.getData().get(0).getParentId())) {
+                        for (int j = 0; j < mTagAdapter5.getData().size(); j++) {
+                            if (bean.getSkillName().equals(mTagAdapter5.getData().get(j).getSkillName())) {
+                                if (!fl_skill_tag_5.getChildAt(j).isSelected()) {
+                                    fl_skill_tag_5.getChildAt(j).setSelected(true);
+                                    GetTagListApi.Bean.ChildrenBean childrenBean = mTagAdapter5.getData().get(j);
+                                    childrenBean.setType(5);
+//                            mList1.add(childrenBean);
+                                    mSelectList.add(childrenBean);
+                                    break;
+                                }
+
+                            }
+                        }
                     } else if (bean.getParentId().equals(mTagAdapter6.getData().get(0).getParentId())) {
                         for (int j = 0; j < mTagAdapter6.getData().size(); j++) {
                             if (bean.getSkillName().equals(mTagAdapter6.getData().get(j).getSkillName())) {
@@ -1462,6 +2243,494 @@ public final class AddProjectTagActivityNew extends AppActivity {
                                     fl_skill_tag_6.getChildAt(j).setSelected(true);
                                     GetTagListApi.Bean.ChildrenBean childrenBean = mTagAdapter6.getData().get(j);
                                     childrenBean.setType(6);
+//                            mList1.add(childrenBean);
+                                    mSelectList.add(childrenBean);
+                                    break;
+                                }
+
+                            }
+                        }
+                    }
+                } else if (mListSize == 7) {
+                    if (bean.getParentId().equals(mTagAdapter1.getData().get(0).getParentId())) {
+                        for (int j = 0; j < mTagAdapter1.getData().size(); j++) {
+                            if (bean.getSkillName().equals(mTagAdapter1.getData().get(j).getSkillName())) {
+                                if (!fl_skill_tag_1.getChildAt(j).isSelected()) {
+                                    fl_skill_tag_1.getChildAt(j).setSelected(true);
+                                    GetTagListApi.Bean.ChildrenBean childrenBean = mTagAdapter1.getData().get(j);
+                                    childrenBean.setType(1);
+//                            mList1.add(childrenBean);
+                                    mSelectList.add(childrenBean);
+                                    EasyLog.print("4====" + bean.getId());
+                                    break;
+                                }
+                            }
+                        }
+                    } else if (bean.getParentId().equals(mTagAdapter2.getData().get(0).getParentId())) {
+                        for (int j = 0; j < mTagAdapter2.getData().size(); j++) {
+                            if (bean.getSkillName().equals(mTagAdapter2.getData().get(j).getSkillName())) {
+                                if (!fl_skill_tag_2.getChildAt(j).isSelected()) {
+                                    fl_skill_tag_2.getChildAt(j).setSelected(true);
+                                    GetTagListApi.Bean.ChildrenBean childrenBean = mTagAdapter2.getData().get(j);
+                                    childrenBean.setType(2);
+//                            mList1.add(childrenBean);
+                                    mSelectList.add(childrenBean);
+                                    break;
+                                }
+
+                            }
+
+                        }
+
+                    } else if (bean.getParentId().equals(mTagAdapter3.getData().get(0).getParentId())) {
+                        for (int j = 0; j < mTagAdapter3.getData().size(); j++) {
+                            if (bean.getSkillName().equals(mTagAdapter3.getData().get(j).getSkillName())) {
+                                if (!fl_skill_tag_3.getChildAt(j).isSelected()) {
+                                    fl_skill_tag_3.getChildAt(j).setSelected(true);
+                                    GetTagListApi.Bean.ChildrenBean childrenBean = mTagAdapter3.getData().get(j);
+                                    childrenBean.setType(3);
+//                            mList1.add(childrenBean);
+                                    mSelectList.add(childrenBean);
+                                    break;
+                                }
+                            }
+                        }
+                    } else if (bean.getParentId().equals(mTagAdapter4.getData().get(0).getParentId())) {
+                        for (int j = 0; j < mTagAdapter4.getData().size(); j++) {
+                            if (bean.getSkillName().equals(mTagAdapter4.getData().get(j).getSkillName())) {
+                                if (!fl_skill_tag_4.getChildAt(j).isSelected()) {
+                                    fl_skill_tag_4.getChildAt(j).setSelected(true);
+                                    GetTagListApi.Bean.ChildrenBean childrenBean = mTagAdapter4.getData().get(j);
+                                    childrenBean.setType(4);
+//                            mList1.add(childrenBean);
+                                    mSelectList.add(childrenBean);
+                                    break;
+                                }
+
+                            }
+                        }
+                    } else if (bean.getParentId().equals(mTagAdapter5.getData().get(0).getParentId())) {
+                        for (int j = 0; j < mTagAdapter5.getData().size(); j++) {
+                            if (bean.getSkillName().equals(mTagAdapter5.getData().get(j).getSkillName())) {
+                                if (!fl_skill_tag_5.getChildAt(j).isSelected()) {
+                                    fl_skill_tag_5.getChildAt(j).setSelected(true);
+                                    GetTagListApi.Bean.ChildrenBean childrenBean = mTagAdapter5.getData().get(j);
+                                    childrenBean.setType(5);
+//                            mList1.add(childrenBean);
+                                    mSelectList.add(childrenBean);
+                                    break;
+                                }
+
+                            }
+                        }
+                    } else if (bean.getParentId().equals(mTagAdapter6.getData().get(0).getParentId())) {
+                        for (int j = 0; j < mTagAdapter6.getData().size(); j++) {
+                            if (bean.getSkillName().equals(mTagAdapter6.getData().get(j).getSkillName())) {
+                                if (!fl_skill_tag_6.getChildAt(j).isSelected()) {
+                                    fl_skill_tag_6.getChildAt(j).setSelected(true);
+                                    GetTagListApi.Bean.ChildrenBean childrenBean = mTagAdapter6.getData().get(j);
+                                    childrenBean.setType(6);
+//                            mList1.add(childrenBean);
+                                    mSelectList.add(childrenBean);
+                                    break;
+                                }
+
+                            }
+                        }
+                    } else if (bean.getParentId().equals(mTagAdapter7.getData().get(0).getParentId())) {
+                        for (int j = 0; j < mTagAdapter7.getData().size(); j++) {
+                            if (bean.getSkillName().equals(mTagAdapter7.getData().get(j).getSkillName())) {
+                                if (!fl_skill_tag_7.getChildAt(j).isSelected()) {
+                                    fl_skill_tag_7.getChildAt(j).setSelected(true);
+                                    GetTagListApi.Bean.ChildrenBean childrenBean = mTagAdapter7.getData().get(j);
+                                    childrenBean.setType(7);
+//                            mList1.add(childrenBean);
+                                    mSelectList.add(childrenBean);
+                                    break;
+                                }
+
+                            }
+                        }
+                    }
+                } else if (mListSize == 8) {
+                    if (bean.getParentId().equals(mTagAdapter1.getData().get(0).getParentId())) {
+                        for (int j = 0; j < mTagAdapter1.getData().size(); j++) {
+                            if (bean.getSkillName().equals(mTagAdapter1.getData().get(j).getSkillName())) {
+                                if (!fl_skill_tag_1.getChildAt(j).isSelected()) {
+                                    fl_skill_tag_1.getChildAt(j).setSelected(true);
+                                    GetTagListApi.Bean.ChildrenBean childrenBean = mTagAdapter1.getData().get(j);
+                                    childrenBean.setType(1);
+//                            mList1.add(childrenBean);
+                                    mSelectList.add(childrenBean);
+                                    EasyLog.print("4====" + bean.getId());
+                                    break;
+                                }
+                            }
+                        }
+                    } else if (bean.getParentId().equals(mTagAdapter2.getData().get(0).getParentId())) {
+                        for (int j = 0; j < mTagAdapter2.getData().size(); j++) {
+                            if (bean.getSkillName().equals(mTagAdapter2.getData().get(j).getSkillName())) {
+                                if (!fl_skill_tag_2.getChildAt(j).isSelected()) {
+                                    fl_skill_tag_2.getChildAt(j).setSelected(true);
+                                    GetTagListApi.Bean.ChildrenBean childrenBean = mTagAdapter2.getData().get(j);
+                                    childrenBean.setType(2);
+//                            mList1.add(childrenBean);
+                                    mSelectList.add(childrenBean);
+                                    break;
+                                }
+
+                            }
+
+                        }
+
+                    } else if (bean.getParentId().equals(mTagAdapter3.getData().get(0).getParentId())) {
+                        for (int j = 0; j < mTagAdapter3.getData().size(); j++) {
+                            if (bean.getSkillName().equals(mTagAdapter3.getData().get(j).getSkillName())) {
+                                if (!fl_skill_tag_3.getChildAt(j).isSelected()) {
+                                    fl_skill_tag_3.getChildAt(j).setSelected(true);
+                                    GetTagListApi.Bean.ChildrenBean childrenBean = mTagAdapter3.getData().get(j);
+                                    childrenBean.setType(3);
+//                            mList1.add(childrenBean);
+                                    mSelectList.add(childrenBean);
+                                    break;
+                                }
+                            }
+                        }
+                    } else if (bean.getParentId().equals(mTagAdapter4.getData().get(0).getParentId())) {
+                        for (int j = 0; j < mTagAdapter4.getData().size(); j++) {
+                            if (bean.getSkillName().equals(mTagAdapter4.getData().get(j).getSkillName())) {
+                                if (!fl_skill_tag_4.getChildAt(j).isSelected()) {
+                                    fl_skill_tag_4.getChildAt(j).setSelected(true);
+                                    GetTagListApi.Bean.ChildrenBean childrenBean = mTagAdapter4.getData().get(j);
+                                    childrenBean.setType(4);
+//                            mList1.add(childrenBean);
+                                    mSelectList.add(childrenBean);
+                                    break;
+                                }
+
+                            }
+                        }
+                    } else if (bean.getParentId().equals(mTagAdapter5.getData().get(0).getParentId())) {
+                        for (int j = 0; j < mTagAdapter5.getData().size(); j++) {
+                            if (bean.getSkillName().equals(mTagAdapter5.getData().get(j).getSkillName())) {
+                                if (!fl_skill_tag_5.getChildAt(j).isSelected()) {
+                                    fl_skill_tag_5.getChildAt(j).setSelected(true);
+                                    GetTagListApi.Bean.ChildrenBean childrenBean = mTagAdapter5.getData().get(j);
+                                    childrenBean.setType(5);
+//                            mList1.add(childrenBean);
+                                    mSelectList.add(childrenBean);
+                                    break;
+                                }
+
+                            }
+                        }
+                    } else if (bean.getParentId().equals(mTagAdapter6.getData().get(0).getParentId())) {
+                        for (int j = 0; j < mTagAdapter6.getData().size(); j++) {
+                            if (bean.getSkillName().equals(mTagAdapter6.getData().get(j).getSkillName())) {
+                                if (!fl_skill_tag_6.getChildAt(j).isSelected()) {
+                                    fl_skill_tag_6.getChildAt(j).setSelected(true);
+                                    GetTagListApi.Bean.ChildrenBean childrenBean = mTagAdapter6.getData().get(j);
+                                    childrenBean.setType(6);
+//                            mList1.add(childrenBean);
+                                    mSelectList.add(childrenBean);
+                                    break;
+                                }
+
+                            }
+                        }
+                    } else if (bean.getParentId().equals(mTagAdapter7.getData().get(0).getParentId())) {
+                        for (int j = 0; j < mTagAdapter7.getData().size(); j++) {
+                            if (bean.getSkillName().equals(mTagAdapter7.getData().get(j).getSkillName())) {
+                                if (!fl_skill_tag_7.getChildAt(j).isSelected()) {
+                                    fl_skill_tag_7.getChildAt(j).setSelected(true);
+                                    GetTagListApi.Bean.ChildrenBean childrenBean = mTagAdapter7.getData().get(j);
+                                    childrenBean.setType(7);
+//                            mList1.add(childrenBean);
+                                    mSelectList.add(childrenBean);
+                                    break;
+                                }
+
+                            }
+                        }
+                    } else if (bean.getParentId().equals(mTagAdapter8.getData().get(0).getParentId())) {
+                        for (int j = 0; j < mTagAdapter8.getData().size(); j++) {
+                            if (bean.getSkillName().equals(mTagAdapter8.getData().get(j).getSkillName())) {
+                                if (!fl_skill_tag_8.getChildAt(j).isSelected()) {
+                                    fl_skill_tag_8.getChildAt(j).setSelected(true);
+                                    GetTagListApi.Bean.ChildrenBean childrenBean = mTagAdapter8.getData().get(j);
+                                    childrenBean.setType(8);
+//                            mList1.add(childrenBean);
+                                    mSelectList.add(childrenBean);
+                                    break;
+                                }
+
+                            }
+                        }
+                    }
+                } else if (mListSize == 9) {
+                    if (bean.getParentId().equals(mTagAdapter1.getData().get(0).getParentId())) {
+                        for (int j = 0; j < mTagAdapter1.getData().size(); j++) {
+                            if (bean.getSkillName().equals(mTagAdapter1.getData().get(j).getSkillName())) {
+                                if (!fl_skill_tag_1.getChildAt(j).isSelected()) {
+                                    fl_skill_tag_1.getChildAt(j).setSelected(true);
+                                    GetTagListApi.Bean.ChildrenBean childrenBean = mTagAdapter1.getData().get(j);
+                                    childrenBean.setType(1);
+//                            mList1.add(childrenBean);
+                                    mSelectList.add(childrenBean);
+                                    EasyLog.print("4====" + bean.getId());
+                                    break;
+                                }
+                            }
+                        }
+                    } else if (bean.getParentId().equals(mTagAdapter2.getData().get(0).getParentId())) {
+                        for (int j = 0; j < mTagAdapter2.getData().size(); j++) {
+                            if (bean.getSkillName().equals(mTagAdapter2.getData().get(j).getSkillName())) {
+                                if (!fl_skill_tag_2.getChildAt(j).isSelected()) {
+                                    fl_skill_tag_2.getChildAt(j).setSelected(true);
+                                    GetTagListApi.Bean.ChildrenBean childrenBean = mTagAdapter2.getData().get(j);
+                                    childrenBean.setType(2);
+//                            mList1.add(childrenBean);
+                                    mSelectList.add(childrenBean);
+                                    break;
+                                }
+
+                            }
+
+                        }
+
+                    } else if (bean.getParentId().equals(mTagAdapter3.getData().get(0).getParentId())) {
+                        for (int j = 0; j < mTagAdapter3.getData().size(); j++) {
+                            if (bean.getSkillName().equals(mTagAdapter3.getData().get(j).getSkillName())) {
+                                if (!fl_skill_tag_3.getChildAt(j).isSelected()) {
+                                    fl_skill_tag_3.getChildAt(j).setSelected(true);
+                                    GetTagListApi.Bean.ChildrenBean childrenBean = mTagAdapter3.getData().get(j);
+                                    childrenBean.setType(3);
+//                            mList1.add(childrenBean);
+                                    mSelectList.add(childrenBean);
+                                    break;
+                                }
+                            }
+                        }
+                    } else if (bean.getParentId().equals(mTagAdapter4.getData().get(0).getParentId())) {
+                        for (int j = 0; j < mTagAdapter4.getData().size(); j++) {
+                            if (bean.getSkillName().equals(mTagAdapter4.getData().get(j).getSkillName())) {
+                                if (!fl_skill_tag_4.getChildAt(j).isSelected()) {
+                                    fl_skill_tag_4.getChildAt(j).setSelected(true);
+                                    GetTagListApi.Bean.ChildrenBean childrenBean = mTagAdapter4.getData().get(j);
+                                    childrenBean.setType(4);
+//                            mList1.add(childrenBean);
+                                    mSelectList.add(childrenBean);
+                                    break;
+                                }
+
+                            }
+                        }
+                    } else if (bean.getParentId().equals(mTagAdapter5.getData().get(0).getParentId())) {
+                        for (int j = 0; j < mTagAdapter5.getData().size(); j++) {
+                            if (bean.getSkillName().equals(mTagAdapter5.getData().get(j).getSkillName())) {
+                                if (!fl_skill_tag_5.getChildAt(j).isSelected()) {
+                                    fl_skill_tag_5.getChildAt(j).setSelected(true);
+                                    GetTagListApi.Bean.ChildrenBean childrenBean = mTagAdapter5.getData().get(j);
+                                    childrenBean.setType(5);
+//                            mList1.add(childrenBean);
+                                    mSelectList.add(childrenBean);
+                                    break;
+                                }
+
+                            }
+                        }
+                    } else if (bean.getParentId().equals(mTagAdapter6.getData().get(0).getParentId())) {
+                        for (int j = 0; j < mTagAdapter6.getData().size(); j++) {
+                            if (bean.getSkillName().equals(mTagAdapter6.getData().get(j).getSkillName())) {
+                                if (!fl_skill_tag_6.getChildAt(j).isSelected()) {
+                                    fl_skill_tag_6.getChildAt(j).setSelected(true);
+                                    GetTagListApi.Bean.ChildrenBean childrenBean = mTagAdapter6.getData().get(j);
+                                    childrenBean.setType(6);
+//                            mList1.add(childrenBean);
+                                    mSelectList.add(childrenBean);
+                                    break;
+                                }
+
+                            }
+                        }
+                    } else if (bean.getParentId().equals(mTagAdapter7.getData().get(0).getParentId())) {
+                        for (int j = 0; j < mTagAdapter7.getData().size(); j++) {
+                            if (bean.getSkillName().equals(mTagAdapter7.getData().get(j).getSkillName())) {
+                                if (!fl_skill_tag_7.getChildAt(j).isSelected()) {
+                                    fl_skill_tag_7.getChildAt(j).setSelected(true);
+                                    GetTagListApi.Bean.ChildrenBean childrenBean = mTagAdapter7.getData().get(j);
+                                    childrenBean.setType(7);
+//                            mList1.add(childrenBean);
+                                    mSelectList.add(childrenBean);
+                                    break;
+                                }
+
+                            }
+                        }
+                    } else if (bean.getParentId().equals(mTagAdapter8.getData().get(0).getParentId())) {
+                        for (int j = 0; j < mTagAdapter8.getData().size(); j++) {
+                            if (bean.getSkillName().equals(mTagAdapter8.getData().get(j).getSkillName())) {
+                                if (!fl_skill_tag_8.getChildAt(j).isSelected()) {
+                                    fl_skill_tag_8.getChildAt(j).setSelected(true);
+                                    GetTagListApi.Bean.ChildrenBean childrenBean = mTagAdapter8.getData().get(j);
+                                    childrenBean.setType(8);
+//                            mList1.add(childrenBean);
+                                    mSelectList.add(childrenBean);
+                                    break;
+                                }
+
+                            }
+                        }
+                    } else if (bean.getParentId().equals(mTagAdapter9.getData().get(0).getParentId())) {
+                        for (int j = 0; j < mTagAdapter9.getData().size(); j++) {
+                            if (bean.getSkillName().equals(mTagAdapter9.getData().get(j).getSkillName())) {
+                                if (!fl_skill_tag_9.getChildAt(j).isSelected()) {
+                                    fl_skill_tag_9.getChildAt(j).setSelected(true);
+                                    GetTagListApi.Bean.ChildrenBean childrenBean = mTagAdapter9.getData().get(j);
+                                    childrenBean.setType(9);
+//                            mList1.add(childrenBean);
+                                    mSelectList.add(childrenBean);
+                                    break;
+                                }
+
+                            }
+                        }
+                    }
+                } else if (mListSize == 10) {
+                    if (bean.getParentId().equals(mTagAdapter1.getData().get(0).getParentId())) {
+                        for (int j = 0; j < mTagAdapter1.getData().size(); j++) {
+                            if (bean.getSkillName().equals(mTagAdapter1.getData().get(j).getSkillName())) {
+                                if (!fl_skill_tag_1.getChildAt(j).isSelected()) {
+                                    fl_skill_tag_1.getChildAt(j).setSelected(true);
+                                    GetTagListApi.Bean.ChildrenBean childrenBean = mTagAdapter1.getData().get(j);
+                                    childrenBean.setType(1);
+//                            mList1.add(childrenBean);
+                                    mSelectList.add(childrenBean);
+                                    EasyLog.print("4====" + bean.getId());
+                                    break;
+                                }
+                            }
+                        }
+                    } else if (bean.getParentId().equals(mTagAdapter2.getData().get(0).getParentId())) {
+                        for (int j = 0; j < mTagAdapter2.getData().size(); j++) {
+                            if (bean.getSkillName().equals(mTagAdapter2.getData().get(j).getSkillName())) {
+                                if (!fl_skill_tag_2.getChildAt(j).isSelected()) {
+                                    fl_skill_tag_2.getChildAt(j).setSelected(true);
+                                    GetTagListApi.Bean.ChildrenBean childrenBean = mTagAdapter2.getData().get(j);
+                                    childrenBean.setType(2);
+//                            mList1.add(childrenBean);
+                                    mSelectList.add(childrenBean);
+                                    break;
+                                }
+
+                            }
+
+                        }
+
+                    } else if (bean.getParentId().equals(mTagAdapter3.getData().get(0).getParentId())) {
+                        for (int j = 0; j < mTagAdapter3.getData().size(); j++) {
+                            if (bean.getSkillName().equals(mTagAdapter3.getData().get(j).getSkillName())) {
+                                if (!fl_skill_tag_3.getChildAt(j).isSelected()) {
+                                    fl_skill_tag_3.getChildAt(j).setSelected(true);
+                                    GetTagListApi.Bean.ChildrenBean childrenBean = mTagAdapter3.getData().get(j);
+                                    childrenBean.setType(3);
+//                            mList1.add(childrenBean);
+                                    mSelectList.add(childrenBean);
+                                    break;
+                                }
+                            }
+                        }
+                    } else if (bean.getParentId().equals(mTagAdapter4.getData().get(0).getParentId())) {
+                        for (int j = 0; j < mTagAdapter4.getData().size(); j++) {
+                            if (bean.getSkillName().equals(mTagAdapter4.getData().get(j).getSkillName())) {
+                                if (!fl_skill_tag_4.getChildAt(j).isSelected()) {
+                                    fl_skill_tag_4.getChildAt(j).setSelected(true);
+                                    GetTagListApi.Bean.ChildrenBean childrenBean = mTagAdapter4.getData().get(j);
+                                    childrenBean.setType(4);
+//                            mList1.add(childrenBean);
+                                    mSelectList.add(childrenBean);
+                                    break;
+                                }
+
+                            }
+                        }
+                    } else if (bean.getParentId().equals(mTagAdapter5.getData().get(0).getParentId())) {
+                        for (int j = 0; j < mTagAdapter5.getData().size(); j++) {
+                            if (bean.getSkillName().equals(mTagAdapter5.getData().get(j).getSkillName())) {
+                                if (!fl_skill_tag_5.getChildAt(j).isSelected()) {
+                                    fl_skill_tag_5.getChildAt(j).setSelected(true);
+                                    GetTagListApi.Bean.ChildrenBean childrenBean = mTagAdapter5.getData().get(j);
+                                    childrenBean.setType(5);
+//                            mList1.add(childrenBean);
+                                    mSelectList.add(childrenBean);
+                                    break;
+                                }
+
+                            }
+                        }
+                    } else if (bean.getParentId().equals(mTagAdapter6.getData().get(0).getParentId())) {
+                        for (int j = 0; j < mTagAdapter6.getData().size(); j++) {
+                            if (bean.getSkillName().equals(mTagAdapter6.getData().get(j).getSkillName())) {
+                                if (!fl_skill_tag_6.getChildAt(j).isSelected()) {
+                                    fl_skill_tag_6.getChildAt(j).setSelected(true);
+                                    GetTagListApi.Bean.ChildrenBean childrenBean = mTagAdapter6.getData().get(j);
+                                    childrenBean.setType(6);
+//                            mList1.add(childrenBean);
+                                    mSelectList.add(childrenBean);
+                                    break;
+                                }
+
+                            }
+                        }
+                    } else if (bean.getParentId().equals(mTagAdapter7.getData().get(0).getParentId())) {
+                        for (int j = 0; j < mTagAdapter7.getData().size(); j++) {
+                            if (bean.getSkillName().equals(mTagAdapter7.getData().get(j).getSkillName())) {
+                                if (!fl_skill_tag_7.getChildAt(j).isSelected()) {
+                                    fl_skill_tag_7.getChildAt(j).setSelected(true);
+                                    GetTagListApi.Bean.ChildrenBean childrenBean = mTagAdapter7.getData().get(j);
+                                    childrenBean.setType(7);
+//                            mList1.add(childrenBean);
+                                    mSelectList.add(childrenBean);
+                                    break;
+                                }
+
+                            }
+                        }
+                    } else if (bean.getParentId().equals(mTagAdapter8.getData().get(0).getParentId())) {
+                        for (int j = 0; j < mTagAdapter8.getData().size(); j++) {
+                            if (bean.getSkillName().equals(mTagAdapter8.getData().get(j).getSkillName())) {
+                                if (!fl_skill_tag_8.getChildAt(j).isSelected()) {
+                                    fl_skill_tag_8.getChildAt(j).setSelected(true);
+                                    GetTagListApi.Bean.ChildrenBean childrenBean = mTagAdapter8.getData().get(j);
+                                    childrenBean.setType(8);
+//                            mList1.add(childrenBean);
+                                    mSelectList.add(childrenBean);
+                                    break;
+                                }
+
+                            }
+                        }
+                    } else if (bean.getParentId().equals(mTagAdapter9.getData().get(0).getParentId())) {
+                        for (int j = 0; j < mTagAdapter9.getData().size(); j++) {
+                            if (bean.getSkillName().equals(mTagAdapter9.getData().get(j).getSkillName())) {
+                                if (!fl_skill_tag_9.getChildAt(j).isSelected()) {
+                                    fl_skill_tag_9.getChildAt(j).setSelected(true);
+                                    GetTagListApi.Bean.ChildrenBean childrenBean = mTagAdapter9.getData().get(j);
+                                    childrenBean.setType(9);
+//                            mList1.add(childrenBean);
+                                    mSelectList.add(childrenBean);
+                                    break;
+                                }
+
+                            }
+                        }
+                    } else if (bean.getParentId().equals(mTagAdapter10.getData().get(0).getParentId())) {
+                        for (int j = 0; j < mTagAdapter10.getData().size(); j++) {
+                            if (bean.getSkillName().equals(mTagAdapter10.getData().get(j).getSkillName())) {
+                                if (!fl_skill_tag_10.getChildAt(j).isSelected()) {
+                                    fl_skill_tag_10.getChildAt(j).setSelected(true);
+                                    GetTagListApi.Bean.ChildrenBean childrenBean = mTagAdapter10.getData().get(j);
+                                    childrenBean.setType(10);
 //                            mList1.add(childrenBean);
                                     mSelectList.add(childrenBean);
                                     break;

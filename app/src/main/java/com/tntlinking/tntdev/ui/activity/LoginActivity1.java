@@ -17,6 +17,7 @@ import com.gyf.immersionbar.ImmersionBar;
 import com.hjq.base.BaseDialog;
 import com.hjq.http.EasyConfig;
 import com.hjq.http.EasyHttp;
+import com.hjq.http.EasyLog;
 import com.hjq.http.listener.HttpCallback;
 import com.hjq.permissions.Permission;
 import com.hjq.permissions.XXPermissions;
@@ -91,9 +92,12 @@ public final class LoginActivity1 extends AppActivity {
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void initData() {
-        if (!BuildConfig.DEBUG) {
-            sdkInit();
-            mUIConfig = BaseUIConfig.init(this, umVerifyHelper);
+        boolean isPrivacyAccepted = SPUtils.getInstance().getBoolean(AppConfig.DEAL_DIALOG, false);
+        if (isPrivacyAccepted) {
+            if (!BuildConfig.DEBUG) {
+                sdkInit();
+                mUIConfig = BaseUIConfig.init(this, umVerifyHelper);
+            }
         }
 
         new Handler().postDelayed(new Runnable() {
@@ -359,6 +363,9 @@ public final class LoginActivity1 extends AppActivity {
                     SPUtils.getInstance().put(AppConfig.DEAL_DIALOG, true);
                     // 友盟统计、登录、分享 SDK
                     UmengClient.init(getApplication(), AppConfig.isLogEnable());
+
+                    sdkInit();
+                    mUIConfig = BaseUIConfig.init(this, umVerifyHelper);
                 });
 
         TextView viewById = builder.findViewById(R.id.tv_title);
